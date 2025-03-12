@@ -71,13 +71,15 @@ class TestGlossaryEmbeddings(unittest.TestCase):
         total_queries = len(test_queries)
 
         for query, expected_answer in test_queries.items():
-            query_embedding = self.faiss_indexer.search_by_text(query, top_k=3)  # Recupera da FAISS
+            query_embedding = generate_embedding(query)[0]  # Converte a consulta em embedding
+            results = self.faiss_indexer.search(query_embedding, top_k=3)  # Busca no FAISS
+
             logging.info(f"🔎 Consulta: {query}")
             logging.info(f"📌 Definição Esperada: {expected_answer}")
-            logging.info(f"📊 Resultados Recuperados: {query_embedding}")
+            logging.info(f"📊 Resultados Recuperados: {results}")
 
             # Verifica se algum resultado contém a resposta esperada
-            correct_found = any(expected_answer.lower() in result.lower() for result in query_embedding)
+            correct_found = any(expected_answer.lower() in result[0].lower() for result in results)
 
             if correct_found:
                 success_count += 1
@@ -86,6 +88,7 @@ class TestGlossaryEmbeddings(unittest.TestCase):
         logging.info(f"✅ Precisão da recuperação: {accuracy:.2%}")
 
         self.assertGreater(accuracy, 0.5, "⚠️ Precisão abaixo de 50%, recuperação pode estar ruim.")
+
 
 if __name__ == "__main__":
     unittest.main()
