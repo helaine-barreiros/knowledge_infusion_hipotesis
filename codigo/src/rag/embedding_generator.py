@@ -1,5 +1,7 @@
 import torch
+import torch.nn.functional as F
 from transformers import AutoTokenizer, AutoModel
+
 from src.rag.config_loader import CONFIG
 import os
 import json
@@ -42,6 +44,8 @@ def generate_embedding(text):
 
         # Obtendo os embeddings com encode()
         embedding = model.encode([instruction + text], max_length=CONFIG["max_tokens"])
+        embedding = model.encode(text, instruction, max_length=4096)
+
 
         if CONFIG["normalize_embeddings"]:
             logging.info("Normalizando embeddings.")
