@@ -42,6 +42,15 @@ class FaissIndexer:
 
         return results
 
+    def get_stored_embedding(self, text_id):
+        """Recupera um embedding já armazenado no FAISS sem precisar gerá-lo novamente."""
+        if text_id not in self.texts:
+            logging.warning(f"⚠️ O texto '{text_id}' não tem um embedding armazenado.")
+            return None
+
+        idx = self.texts.index(text_id)  # Encontra a posição do texto no índice FAISS
+        return self.index.reconstruct(idx)  # Retorna o embedding armazenado
+
     def save_index(self):
         """Salva o índice FAISS em disco."""
         faiss.write_index(self.index, FAISS_INDEX_PATH)

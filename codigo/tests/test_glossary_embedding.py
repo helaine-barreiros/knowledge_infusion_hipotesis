@@ -71,7 +71,8 @@ class TestGlossaryEmbeddings(unittest.TestCase):
         total_queries = len(test_queries)
 
         for query, expected_answer in test_queries.items():
-            results = self.faiss_indexer.search(query, top_k=3)
+            query_embedding = self.faiss_indexer.get_stored_embedding(query)
+            results = self.faiss_indexer.search(query_embedding, top_k=3)
 
             logging.info(f"🔎 Consulta: {query}")
             logging.info(f"📌 Definição Esperada: {expected_answer}")
