@@ -53,7 +53,7 @@ class TestGlossaryEmbeddings(unittest.TestCase):
         # Adiciona os embeddings no FAISS
         for emb in embeddings:
             vector = np.array(emb, dtype=np.float32)
-            cls.faiss_indexer.add_to_index(vector, GLOSSARY_EMBEDDING_FILE)
+            cls.faiss_indexer.add_embeddings(vector, GLOSSARY_EMBEDDING_FILE)
 
         cls.faiss_indexer.save_index()  # Garante que FAISS salva o índice atualizado
 
