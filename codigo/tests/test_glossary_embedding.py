@@ -54,7 +54,7 @@ class TestGlossaryEmbeddings(unittest.TestCase):
             embeddings = json.load(f)
 
         # Indexar cada parágrafo separadamente
-        for paragraph_text, embedding in embeddings_data.items():
+        for paragraph_text, embedding in embeddings.items():
             vector = np.array(embedding, dtype=np.float32)
             cls.faiss_indexer.add_embeddings(vector, paragraph_text)  # Agora indexamos os parágrafos individualmente!
 
