@@ -17,29 +17,36 @@ class FaissIndexer:
         self.id_map = {}  # Mapeia IDs dos embeddings para nomes dos arquivos
         self.texts = []  # Lista para armazenar textos associados aos embeddings
 
-    def add_embeddings(self, vector, term):
-        """Adiciona um vetor ao índice FAISS e associa a um termo específico."""
+    def add_embeddings(self, vector, paragraph):
+        """Adiciona um embedding ao FAISS associando-o a um parágrafo específico."""
         vector = np.array(vector, dtype=np.float32)
 
         if vector.ndim == 1:
             vector = vector.reshape(1, -1)
 
         self.index.add(vector)  # Adiciona o vetor ao FAISS
-        self.texts.append(term)  # Associa o embedding ao termo específico
-        logging.info(f"✅ Embedding adicionado ao FAISS para o termo: {term}")
+        self.texts.append(paragraph)  # Associa o embedding ao parágrafo
+        logging.info(f"✅ Embedding adicionado ao FAISS para o parágrafo: {paragraph[:50]}...")
 
 
-    def search(self, query_embedding, top_k=5):
-        """Busca os embeddings mais similares no índice FAISS."""
-        query_vector = np.array([query_embedding]).astype('float32')
+
+    def search(self, query, top_k=3):
+        """Busca no FAISS os parágrafos mais similares ao termo/frase consultado."""
+        if not self.index or self.index.ntotal == 0:
+            logging.warning("⚠️ O índice FAISS está vazio. Nenhuma busca pode ser realizada.")
+            return []
+
+        query_embedding = generate_embedding(query)[0]  # Geramos um embedding da consulta
+        query_vector = np.array([query_embedding], dtype=np.float32)
+
         distances, indices = self.index.search(query_vector, top_k)
 
         results = []
         for i, idx in enumerate(indices[0]):
             if idx < 0 or idx >= len(self.texts):
                 continue
-            filename = self.texts[idx]  # Recupera o nome do arquivo associado ao embedding
-            results.append((filename, distances[0][i]))
+            paragraph = self.texts[idx]  # Recupera o parágrafo associado ao embedding
+            results.append((paragraph, distances[0][i]))
 
         return results
 
