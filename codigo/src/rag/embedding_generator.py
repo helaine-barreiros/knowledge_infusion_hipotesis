@@ -49,10 +49,10 @@ def generate_embedding(text):
         logging.error(f"Erro ao gerar embeddings: {e}")
         return None
 
-def save_embeddings(embeddings, filename, chunk_index=None):
-    """Salva embeddings em um arquivo JSON. Cada chunk recebe um nome único."""
+def save_embeddings(embeddings, text, filename, chunk_index=None):
+    """Salva embeddings em um arquivo JSON junto com o texto associado."""
     if embeddings is None:
-        logging.warning(f"Embeddings inválidos para {filename}, não serão salvos.")
+        logging.warning(f"⚠️ Embeddings inválidos para {filename}, não serão salvos.")
         return
 
     try:
@@ -60,12 +60,27 @@ def save_embeddings(embeddings, filename, chunk_index=None):
         filename = f"{filename}_chunk{chunk_index}" if chunk_index is not None else filename
         filepath = os.path.join(CONFIG["embeddings_dir"], f"{filename}.json")
 
+        # Verifica se o arquivo já existe para evitar sobrescrita
+        if os.path.exists(filepath):
+            with open(filepath, "r", encoding="utf-8") as f:
+                embeddings_data = json.load(f)
+        else:
+            embeddings_data = {}
+
+        # Salva o embedding e o parágrafo associado
+        embeddings_data[f"Paragraph_{chunk_index}"] = {
+            "embedding": embeddings[0],  # Vetor de embedding
+            "text": text  # Texto associado
+        }
+
+        # Grava no JSON
         with open(filepath, "w", encoding="utf-8") as f:
-            json.dump(embeddings, f)
+            json.dump(embeddings_data, f, indent=4)
 
         logging.info(f"✅ Embeddings salvos com sucesso: {filepath}")
     except Exception as e:
         logging.error(f"Erro ao salvar embeddings para {filename}: {e}")
+
 
 def process_and_store_embeddings(documents):
     """
