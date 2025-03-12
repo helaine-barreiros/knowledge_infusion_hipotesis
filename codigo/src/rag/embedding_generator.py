@@ -29,8 +29,9 @@ def split_by_newline(text):
     return [chunk.strip() for chunk in chunks if len(chunk.strip()) > 0]
 
 def generate_embedding(text):
-    logging.info(f"Gerando embeddings para o texto: {text}")
-    
+    """Gera embeddings para um texto usando o modelo NV-Embed."""
+    logging.info(f"Gerando embeddings para o texto: {repr(text)}")
+
     if not text or not isinstance(text, str):
         logging.warning("Texto inválido fornecido para embedding.")
         return None
@@ -39,8 +40,8 @@ def generate_embedding(text):
         inputs = tokenizer(text, padding=True, truncation=True, return_tensors="pt", max_length=CONFIG["max_tokens"])
 
         with torch.no_grad():
-            outputs = model(**inputs, output_hidden_states=True, return_dict=True)
-            embedding = outputs.hidden_states[-1][:, 0, :]
+            outputs = model(**inputs)  # Removido 'output_hidden_states=True'
+            embedding = outputs.last_hidden_state[:, 0, :]  # Corrigido para pegar a saída do token [CLS]
         
         if CONFIG["normalize_embeddings"]:
             embedding = torch.nn.functional.normalize(embedding, p=2, dim=1)

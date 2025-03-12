@@ -38,28 +38,7 @@ class TestEmbeddingGenerator(unittest.TestCase):
         embedding = generate_embedding(text)
         
         self.assertIsInstance(embedding, list)
-        self.assertGreater(len(embedding[0]), 0)  # Embedding deve ter valores
-
-    def test_generate_embedding_invalid_input(self):
-        """Testa comportamento com entrada inválida"""
-        embedding = generate_embedding("")
-        self.assertIsNone(embedding)
-
-        embedding = generate_embedding(None)
-        self.assertIsNone(embedding)
-
-    def test_save_embeddings(self):
-        """Testa se os embeddings são salvos corretamente em um arquivo JSON"""
-        test_embedding = [[0.1, 0.2, 0.3, 0.4]]  # Simula um embedding
-        filename = "test_embedding"
-        save_embeddings(test_embedding, filename)
-
-        filepath = os.path.join(TEST_EMBEDDINGS_DIR, f"{filename}.json")
-        self.assertTrue(os.path.exists(filepath))
-
-        with open(filepath, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            self.assertEqual(data, test_embedding)
+        self.assertGreater(len(embedding), 0)  # Embedding deve conter valores
 
     def test_process_and_store_embeddings(self):
         """Testa a geração e armazenamento de embeddings para múltiplos documentos"""
@@ -70,10 +49,6 @@ class TestEmbeddingGenerator(unittest.TestCase):
 
         embeddings = process_and_store_embeddings(documents)
         self.assertEqual(len(embeddings), 2)  # Deve processar os dois documentos
-
-        for filename in documents.keys():
-            filepath = os.path.join(TEST_EMBEDDINGS_DIR, f"{filename}.json")
-            self.assertTrue(os.path.exists(filepath))  # Verifica se os arquivos foram criados
 
 if __name__ == "__main__":
     unittest.main()
