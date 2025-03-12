@@ -79,7 +79,7 @@ class TestGlossaryEmbeddings(unittest.TestCase):
             logging.info(f"📌 Parágrafo Esperado: {expected_paragraph}")
             logging.info(f"📊 Resultados Recuperados: {results}")
 
-            # Verifica se algum resultado contém a resposta esperada
+            # Agora verificamos se o parágrafo recuperado está nos resultados
             correct_found = any(expected_paragraph.lower() in result[0].lower() for result in results)
 
             if correct_found:
@@ -89,6 +89,7 @@ class TestGlossaryEmbeddings(unittest.TestCase):
         logging.info(f"✅ Precisão da recuperação: {accuracy:.2%}")
 
         self.assertGreater(accuracy, 0.5, "⚠️ Precisão abaixo de 50%, recuperação pode estar ruim.")
+
 
 if __name__ == "__main__":
     unittest.main()

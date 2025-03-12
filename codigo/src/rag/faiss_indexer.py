@@ -26,10 +26,8 @@ class FaissIndexer:
             vector = vector.reshape(1, -1)
 
         self.index.add(vector)  # Adiciona o vetor ao FAISS
-        self.texts.append(paragraph)  # Associa o embedding ao parágrafo
+        self.texts.append(paragraph)  # Agora associamos diretamente ao parágrafo!
         logging.info(f"✅ Embedding adicionado ao FAISS para o parágrafo: {paragraph[:50]}...")
-
-
 
     def search(self, query_embedding, top_k=3):
         """Busca no FAISS os parágrafos mais similares ao termo/frase consultado."""
@@ -38,7 +36,6 @@ class FaissIndexer:
             return []
 
         query_vector = np.array([query_embedding], dtype=np.float32)
-
         distances, indices = self.index.search(query_vector, top_k)
 
         results = []
@@ -49,6 +46,7 @@ class FaissIndexer:
             results.append((paragraph, distances[0][i]))
 
         return results
+
 
     def get_stored_embedding(self, term):
         """Recupera um embedding já armazenado no FAISS para um termo específico."""
