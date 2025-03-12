@@ -26,7 +26,7 @@ class FaissIndexer:
             vector = vector.reshape(1, -1)
 
         self.index.add(vector)  # Adiciona o vetor ao FAISS
-        self.texts.append(paragraph)  # Agora associamos diretamente ao parágrafo!
+        self.texts.extend(paragraph)  # Agora associamos diretamente ao parágrafo!
         logging.info(f"✅ Embedding adicionado ao FAISS para o parágrafo: {paragraph[:50]}...")
 
     def search(self, query_embedding, top_k=3):

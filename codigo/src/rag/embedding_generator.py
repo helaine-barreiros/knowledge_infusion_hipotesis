@@ -73,28 +73,47 @@ def process_and_store_embeddings(documents):
     """
     processed_embeddings = {}
     all_embeddings = []
+    all_texts = []  # Alteração: armazenamos os parágrafos diretamente
     all_filenames = []
 
     for filename, text in documents.items():
         logging.info(f"📄 Processando {filename}...")
 
         chunks = split_by_newline(text)
+        embeddings_data = {}  # Dicionário para armazenar embeddings com textos
+
         for idx, chunk in enumerate(chunks):
+            if not chunk.strip():
+                continue  # Pular parágrafos vazios
+
             logging.info(f"Gerando embedding para {filename} - Chunk {idx}...")
             embedding = generate_embedding(chunk)
 
             if embedding is not None:
+                embeddings_data[f"Paragraph_{idx}"] = {
+                    "embedding": embedding[0],  # Garante que o vetor seja armazenado corretamente
+                    "text": chunk  # Associamos o parágrafo correspondente
+                }
+
                 save_embeddings(embedding, filename, chunk_index=idx)
                 processed_embeddings[f"{filename}_chunk{idx}"] = embedding
 
                 all_embeddings.append(embedding[0])  # Convertendo para matriz FAISS
+                all_texts.append(chunk)  # Guardamos o parágrafo real para o FAISS
                 all_filenames.append(f"{filename}_chunk{idx}")
 
             else:
                 logging.warning(f"⚠️ Falha ao gerar embedding para {filename} - Chunk {idx}.")
 
-    # Adiciona embeddings ao FAISS
-    faiss_indexer.add_embeddings(all_embeddings, all_filenames)
-    faiss_indexer.save_index()  # Salva o índice
+        # Salva o JSON no formato correto
+        json_filepath = os.path.join(CONFIG["embeddings_dir"], f"{filename}.json")
+        with open(json_filepath, "w", encoding="utf-8") as f:
+            json.dump(embeddings_data, f, indent=4)
+
+        logging.info(f"✅ Embeddings salvos com sucesso: {json_filepath}")
+
+    # Adiciona embeddings ao FAISS corretamente
+    faiss_indexer.add_embeddings(all_embeddings, all_texts)  # Agora associamos ao texto
+    faiss_indexer.save_index()  # Salva o índice FAISS atualizado
 
     return processed_embeddings

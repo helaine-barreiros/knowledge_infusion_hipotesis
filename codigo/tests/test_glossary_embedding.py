@@ -93,5 +93,6 @@ class TestGlossaryEmbeddings(unittest.TestCase):
         self.assertGreater(accuracy, 0.5, "⚠️ Precisão abaixo de 50%, recuperação pode estar ruim.")
 
 
+
 if __name__ == "__main__":
     unittest.main()
