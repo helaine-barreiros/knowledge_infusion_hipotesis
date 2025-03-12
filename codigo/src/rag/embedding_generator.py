@@ -35,22 +35,19 @@ def generate_embedding(text):
     if not text or not isinstance(text, str):
         logging.warning("Texto inválido fornecido para embedding.")
         return None
-    
+
     try:
-        inputs = tokenizer(text, padding=True, truncation=True, return_tensors="pt", max_length=CONFIG["max_tokens"])
+        # Definição da instrução (prompt) conforme documentado
+        instruction = "Instruct: Encode text for retrieval\nQuery: "
 
-        logging.info(f"inputs: {inputs}")
+        # Obtendo os embeddings com encode()
+        embedding = model.encode([instruction + text], max_length=CONFIG["max_tokens"])
 
-        with torch.no_grad():
-            outputs = model(**inputs)  # Removido 'output_hidden_states=True'
-            logging.info(f"outputs: {outputs}")
-            embedding = outputs.last_hidden_state[:, 0, :]  # Corrigido para pegar a saída do token [CLS]
-        
         if CONFIG["normalize_embeddings"]:
-            logging.info(f"normalizing:")
-            embedding = torch.nn.functional.normalize(embedding, p=2, dim=1)
+            logging.info("Normalizando embeddings.")
+            embedding = F.normalize(torch.tensor(embedding), p=2, dim=1).tolist()
 
-        return embedding.tolist()
+        return embedding
     except Exception as e:
         logging.error(f"Erro ao gerar embeddings: {e}")
         return None
