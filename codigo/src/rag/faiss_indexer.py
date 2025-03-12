@@ -15,9 +15,10 @@ class FaissIndexer:
         """Inicializa o FAISS index."""
         self.index = faiss.IndexFlatL2(embedding_dim)  # Distância Euclidiana (L2)
         self.id_map = {}  # Mapeia IDs dos embeddings para nomes dos arquivos
+        self.texts = []  # Lista para armazenar textos associados aos embeddings
 
     def add_embeddings(self, vector, text_id):
-        """Adiciona um vetor ao índice FAISS."""
+        """Adiciona um vetor ao índice FAISS e armazena a referência ao texto."""
         vector = np.array(vector, dtype=np.float32)  # Converte para float32 (necessário para FAISS)
 
         if vector.ndim == 1:  # Se for um vetor unidimensional, transforma em matriz 1xD
@@ -25,6 +26,7 @@ class FaissIndexer:
 
         self.index.add(vector)  # Adiciona o vetor ao FAISS
         self.texts.append(text_id)  # Armazena a referência do texto associado
+        logging.info(f"✅ Embedding adicionado ao FAISS com ID: {text_id}")
 
     def search(self, query_embedding, top_k=5):
         """Busca os embeddings mais similares no índice FAISS."""
@@ -33,9 +35,9 @@ class FaissIndexer:
 
         results = []
         for i, idx in enumerate(indices[0]):
-            if idx < 0:
+            if idx < 0 or idx >= len(self.texts):
                 continue
-            filename = self.id_map.get(idx, "Desconhecido")
+            filename = self.texts[idx]  # Recupera o nome do arquivo associado ao embedding
             results.append((filename, distances[0][i]))
 
         return results
@@ -44,7 +46,7 @@ class FaissIndexer:
         """Salva o índice FAISS em disco."""
         faiss.write_index(self.index, FAISS_INDEX_PATH)
         with open(FAISS_INDEX_PATH + "_map.json", "w") as f:
-            json.dump(self.id_map, f)
+            json.dump(self.texts, f)  # Salva a lista de textos associados
         logging.info(f"💾 Índice FAISS salvo em {FAISS_INDEX_PATH}!")
 
     def load_index(self):
@@ -52,7 +54,7 @@ class FaissIndexer:
         if os.path.exists(FAISS_INDEX_PATH):
             self.index = faiss.read_index(FAISS_INDEX_PATH)
             with open(FAISS_INDEX_PATH + "_map.json", "r") as f:
-                self.id_map = json.load(f)
+                self.texts = json.load(f)  # Carrega a lista de textos associados
             logging.info("✅ Índice FAISS carregado com sucesso!")
         else:
             logging.warning("⚠️ Nenhum índice FAISS encontrado. Criando novo índice.")
