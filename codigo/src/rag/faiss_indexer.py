@@ -16,20 +16,15 @@ class FaissIndexer:
         self.index = faiss.IndexFlatL2(embedding_dim)  # Distância Euclidiana (L2)
         self.id_map = {}  # Mapeia IDs dos embeddings para nomes dos arquivos
 
-    def add_embeddings(self, embeddings, filenames):
-        """Adiciona embeddings ao índice FAISS."""
-        if len(embeddings) == 0:
-            logging.warning("Nenhum embedding fornecido para indexação.")
-            return
+    def add_embeddings(self, vector, text_id):
+        """Adiciona um vetor ao índice FAISS."""
+        vector = np.array(vector, dtype=np.float32)  # Converte para float32 (necessário para FAISS)
 
-        vectors = np.array(embeddings).astype('float32')
-        self.index.add(vectors)  # Adiciona os vetores ao índice
+        if vector.ndim == 1:  # Se for um vetor unidimensional, transforma em matriz 1xD
+            vector = vector.reshape(1, -1)
 
-        # Mapeia os IDs no índice aos nomes dos arquivos
-        for i, filename in enumerate(filenames):
-            self.id_map[self.index.ntotal - len(filenames) + i] = filename
-
-        logging.info(f"✅ {len(embeddings)} embeddings adicionados ao FAISS!")
+        self.index.add(vector)  # Adiciona o vetor ao FAISS
+        self.texts.append(text_id)  # Armazena a referência do texto associado
 
     def search(self, query_embedding, top_k=5):
         """Busca os embeddings mais similares no índice FAISS."""
