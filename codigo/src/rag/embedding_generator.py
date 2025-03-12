@@ -1,21 +1,18 @@
+from sentence_transformers import SentenceTransformer
 import torch
-import torch.nn.functional as F
-from transformers import AutoTokenizer, AutoModel
-
-from src.rag.config_loader import CONFIG
 import os
 import json
 import logging
+from src.rag.config_loader import CONFIG
 
 # Configuração do logger
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
-# Carrega o modelo e tokenizer com base nas configurações
+# Carrega o modelo de embeddings BGE Large
 try:
-    logging.info("Carregando modelo de embeddings...")
+    logging.info("Carregando modelo de embeddings BGE Large...")
 
-    tokenizer = AutoTokenizer.from_pretrained(CONFIG["embedding_model"])
-    model = AutoModel.from_pretrained(CONFIG["embedding_model"], trust_remote_code=True)
+    model = SentenceTransformer("BAAI/bge-large-en")
 
     logging.info("Modelo carregado com sucesso!")
 except Exception as e:
@@ -31,7 +28,7 @@ def split_by_newline(text):
     return [chunk.strip() for chunk in chunks if len(chunk.strip()) > 0]
 
 def generate_embedding(text):
-    """Gera embeddings para um texto usando o modelo NV-Embed."""
+    """Gera embeddings para um texto usando o modelo BGE Large."""
     logging.info(f"Gerando embeddings para o texto: {repr(text)}")
 
     if not text or not isinstance(text, str):
@@ -39,19 +36,10 @@ def generate_embedding(text):
         return None
 
     try:
-        # Definição da instrução (prompt) conforme documentado
-        instruction = "Instruct: Encode text for retrieval\nQuery: "
+        # Gera embeddings usando a função encode() do SentenceTransformer
+        embedding = model.encode([text], normalize_embeddings=CONFIG["normalize_embeddings"])
 
-        # Obtendo os embeddings com encode()
-        embedding = model.encode([instruction + text], max_length=CONFIG["max_tokens"])
-        embedding = model.encode(text, instruction, max_length=4096)
-
-
-        if CONFIG["normalize_embeddings"]:
-            logging.info("Normalizando embeddings.")
-            embedding = F.normalize(torch.tensor(embedding), p=2, dim=1).tolist()
-
-        return embedding
+        return embedding.tolist()
     except Exception as e:
         logging.error(f"Erro ao gerar embeddings: {e}")
         return None
@@ -61,7 +49,7 @@ def save_embeddings(embeddings, filename, chunk_index=None):
     if embeddings is None:
         logging.warning(f"Embeddings inválidos para {filename}, não serão salvos.")
         return
-    
+
     try:
         os.makedirs(CONFIG["embeddings_dir"], exist_ok=True)
         filename = f"{filename}_chunk{chunk_index}" if chunk_index is not None else filename
@@ -69,7 +57,7 @@ def save_embeddings(embeddings, filename, chunk_index=None):
 
         with open(filepath, "w", encoding="utf-8") as f:
             json.dump(embeddings, f)
-        
+
         logging.info(f"✅ Embeddings salvos com sucesso: {filepath}")
     except Exception as e:
         logging.error(f"Erro ao salvar embeddings para {filename}: {e}")
@@ -90,7 +78,7 @@ def process_and_store_embeddings(documents):
         for idx, chunk in enumerate(chunks):
             logging.info(f"Gerando embedding para {filename} - Chunk {idx}...")
             embedding = generate_embedding(chunk)
-            
+
             if embedding is not None:
                 save_embeddings(embedding, filename, chunk_index=idx)
                 processed_embeddings[f"{filename}_chunk{idx}"] = embedding
