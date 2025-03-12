@@ -5,7 +5,6 @@ import json
 import logging
 
 from src.rag.config_loader import CONFIG
-from src.rag.embedding_generator import generate_embedding
 
 # Configuração do logger
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -32,13 +31,12 @@ class FaissIndexer:
 
 
 
-    def search(self, query, top_k=3):
+    def search(self, query_embedding, top_k=3):
         """Busca no FAISS os parágrafos mais similares ao termo/frase consultado."""
         if not self.index or self.index.ntotal == 0:
             logging.warning("⚠️ O índice FAISS está vazio. Nenhuma busca pode ser realizada.")
             return []
 
-        query_embedding = generate_embedding(query)[0]  # Geramos um embedding da consulta
         query_vector = np.array([query_embedding], dtype=np.float32)
 
         distances, indices = self.index.search(query_vector, top_k)
