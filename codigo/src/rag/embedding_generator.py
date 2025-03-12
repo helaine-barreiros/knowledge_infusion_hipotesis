@@ -1,12 +1,17 @@
 from sentence_transformers import SentenceTransformer
+
 import torch
 import os
 import json
 import logging
+
 from src.rag.config_loader import CONFIG
+from src.rag.faiss_indexer import FaissIndexer
+
 
 # Configuração do logger
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+faiss_indexer = FaissIndexer(embedding_dim=1024)
 
 # Carrega o modelo de embeddings BGE Large
 try:
@@ -64,17 +69,16 @@ def save_embeddings(embeddings, filename, chunk_index=None):
 
 def process_and_store_embeddings(documents):
     """
-    Gera e armazena embeddings para todos os documentos carregados,
-    segmentando-os por quebras de linha dupla.
+    Gera, armazena e indexa embeddings para todos os documentos carregados.
     """
     processed_embeddings = {}
+    all_embeddings = []
+    all_filenames = []
 
     for filename, text in documents.items():
         logging.info(f"📄 Processando {filename}...")
 
-        # Divide o texto em chunks usando \n\n como separador
         chunks = split_by_newline(text)
-
         for idx, chunk in enumerate(chunks):
             logging.info(f"Gerando embedding para {filename} - Chunk {idx}...")
             embedding = generate_embedding(chunk)
@@ -82,7 +86,15 @@ def process_and_store_embeddings(documents):
             if embedding is not None:
                 save_embeddings(embedding, filename, chunk_index=idx)
                 processed_embeddings[f"{filename}_chunk{idx}"] = embedding
-            else:
-                logging.warning(f"Falha ao gerar embedding para {filename} - Chunk {idx}.")
 
-    return processed_embeddings  # Retorna os embeddings para uso posterior
+                all_embeddings.append(embedding[0])  # Convertendo para matriz FAISS
+                all_filenames.append(f"{filename}_chunk{idx}")
+
+            else:
+                logging.warning(f"⚠️ Falha ao gerar embedding para {filename} - Chunk {idx}.")
+
+    # Adiciona embeddings ao FAISS
+    faiss_indexer.add_embeddings(all_embeddings, all_filenames)
+    faiss_indexer.save_index()  # Salva o índice
+
+    return processed_embeddings
