@@ -39,11 +39,15 @@ def generate_embedding(text):
     try:
         inputs = tokenizer(text, padding=True, truncation=True, return_tensors="pt", max_length=CONFIG["max_tokens"])
 
+        logging.info(f"inputs: {inputs}")
+
         with torch.no_grad():
             outputs = model(**inputs)  # Removido 'output_hidden_states=True'
+            logging.info(f"outputs: {outputs}")
             embedding = outputs.last_hidden_state[:, 0, :]  # Corrigido para pegar a saída do token [CLS]
         
         if CONFIG["normalize_embeddings"]:
+            logging.info(f"normalizing:")
             embedding = torch.nn.functional.normalize(embedding, p=2, dim=1)
 
         return embedding.tolist()
