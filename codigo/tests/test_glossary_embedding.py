@@ -27,6 +27,8 @@ class TestGlossaryEmbeddings(unittest.TestCase):
         cls.load_glossary_embedding_into_faiss()  # Carrega apenas o arquivo do Glossário
 
         logging.info(f"📂 FAISS contém {cls.faiss_indexer.index.ntotal} embeddings armazenados.")
+        logging.info(f"📋 Parágrafos Indexados: {cls.faiss_indexer.texts}")
+
 
     @classmethod
     def tearDownClass(cls):
@@ -51,10 +53,10 @@ class TestGlossaryEmbeddings(unittest.TestCase):
         with open(filepath, "r", encoding="utf-8") as f:
             embeddings = json.load(f)
 
-        # Adiciona os embeddings no FAISS
-        for emb in embeddings:
-            vector = np.array(emb, dtype=np.float32)
-            cls.faiss_indexer.add_embeddings(vector, GLOSSARY_EMBEDDING_FILE)
+        # Indexar cada parágrafo separadamente
+        for paragraph_text, embedding in embeddings_data.items():
+            vector = np.array(embedding, dtype=np.float32)
+            cls.faiss_indexer.add_embeddings(vector, paragraph_text)  # Agora indexamos os parágrafos individualmente!
 
         cls.faiss_indexer.save_index()  # Garante que FAISS salva o índice atualizado
 
