@@ -3,8 +3,8 @@ import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "src")))
 
-from document_loader import load_documents
-from embedding_generator import process_and_store_embeddings
+from src.rag.document_loader import load_documents
+from src.rag.embedding_generator import process_and_store_embeddings
 
 def main():
     """Pipeline principal, carrega documentos e gera embeddings."""
