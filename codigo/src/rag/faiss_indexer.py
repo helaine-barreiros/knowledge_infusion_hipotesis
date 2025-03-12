@@ -3,7 +3,9 @@ import numpy as np
 import os
 import json
 import logging
+
 from src.rag.config_loader import CONFIG
+from src.rag.embedding_generator import generate_embedding
 
 # Configuração do logger
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
