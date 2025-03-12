@@ -17,16 +17,17 @@ class FaissIndexer:
         self.id_map = {}  # Mapeia IDs dos embeddings para nomes dos arquivos
         self.texts = []  # Lista para armazenar textos associados aos embeddings
 
-    def add_embeddings(self, vector, text_id):
-        """Adiciona um vetor ao índice FAISS e armazena a referência ao texto."""
-        vector = np.array(vector, dtype=np.float32)  # Converte para float32 (necessário para FAISS)
+    def add_embeddings(self, vector, term):
+        """Adiciona um vetor ao índice FAISS e associa a um termo específico."""
+        vector = np.array(vector, dtype=np.float32)
 
-        if vector.ndim == 1:  # Se for um vetor unidimensional, transforma em matriz 1xD
+        if vector.ndim == 1:
             vector = vector.reshape(1, -1)
 
         self.index.add(vector)  # Adiciona o vetor ao FAISS
-        self.texts.append(text_id)  # Armazena a referência do texto associado
-        logging.info(f"✅ Embedding adicionado ao FAISS com ID: {text_id}")
+        self.texts.append(term)  # Associa o embedding ao termo específico
+        logging.info(f"✅ Embedding adicionado ao FAISS para o termo: {term}")
+
 
     def search(self, query_embedding, top_k=5):
         """Busca os embeddings mais similares no índice FAISS."""
@@ -42,14 +43,22 @@ class FaissIndexer:
 
         return results
 
-    def get_stored_embedding(self, text_id):
-        """Recupera um embedding já armazenado no FAISS sem precisar gerá-lo novamente."""
-        if text_id not in self.texts:
-            logging.warning(f"⚠️ O texto '{text_id}' não tem um embedding armazenado.")
+    def get_stored_embedding(self, term):
+        """Recupera um embedding já armazenado no FAISS para um termo específico."""
+        if term not in self.texts:
+            logging.warning(f"⚠️ O termo '{term}' não foi indexado no FAISS.")
             return None
 
-        idx = self.texts.index(text_id)  # Encontra a posição do texto no índice FAISS
-        return self.index.reconstruct(idx)  # Retorna o embedding armazenado
+        idx = self.texts.index(term)  # Encontra a posição do termo no índice FAISS
+        embedding = self.index.reconstruct(idx)  # Recupera o embedding
+        
+        if embedding is None:
+            logging.error(f"❌ Falha ao recuperar embedding para '{term}'.")
+            return None
+
+        embedding = np.array(embedding, dtype=np.float32).reshape(1, -1)  # Garante formato correto
+        return embedding
+
 
     def save_index(self):
         """Salva o índice FAISS em disco."""

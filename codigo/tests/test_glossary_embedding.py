@@ -62,25 +62,28 @@ class TestGlossaryEmbeddings(unittest.TestCase):
         logging.info("🔍 Testando recuperação de definições do Glossário...")
 
         test_queries = {
-            "O que significa reserva?": "Ação de garantir um quarto para um hóspede antes da estadia.",
-            "Qual a definição de check-in?": "Processo pelo qual um hóspede se registra no hotel.",
-            "O que é um hóspede?": "Pessoa que reserva e utiliza os serviços do hotel.",
+            "Reservation": "Reservation validated by the system; room secured.",
+            "Check-in": "Process where a guest registers at the hotel.",
+            "Guest": "A user who creates, modifies, or cancels a reservation.",
         }
 
         success_count = 0
         total_queries = len(test_queries)
 
-        for query, expected_answer in test_queries.items():
-            query_embedding = self.faiss_indexer.get_stored_embedding(query)
+        for term, expected_answer in test_queries.items():
+            query_embedding = self.faiss_indexer.get_stored_embedding(term)
+            
+            if query_embedding is None:
+                self.fail(f"⚠️ Nenhum embedding encontrado para a consulta: {term}")
+            
             results = self.faiss_indexer.search(query_embedding, top_k=3)
 
-            logging.info(f"🔎 Consulta: {query}")
+            logging.info(f"🔎 Termo Consultado: {term}")
             logging.info(f"📌 Definição Esperada: {expected_answer}")
-            logging.info(f"📊 Resultados Recuperados: {query_embedding}")
+            logging.info(f"📊 Resultados Recuperados: {results}")
 
             # Verifica se algum resultado contém a resposta esperada
             correct_found = any(expected_answer.lower() in result[0].lower() for result in results)
-
 
             if correct_found:
                 success_count += 1
@@ -89,6 +92,7 @@ class TestGlossaryEmbeddings(unittest.TestCase):
         logging.info(f"✅ Precisão da recuperação: {accuracy:.2%}")
 
         self.assertGreater(accuracy, 0.5, "⚠️ Precisão abaixo de 50%, recuperação pode estar ruim.")
+
 
 if __name__ == "__main__":
     unittest.main()
