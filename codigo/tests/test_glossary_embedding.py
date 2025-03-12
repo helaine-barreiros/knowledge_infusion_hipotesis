@@ -92,4 +92,17 @@ class TestGlossaryEmbeddings(unittest.TestCase):
             results = self.faiss_indexer.search(query_embedding, top_k=3)
 
             logging.info(f"🔎 Consulta: {query}")
-            logging.info(f"📌 Definição
+            logging.info(f"📌 Definição Esperada: {expected_answer}")
+            logging.info(f"📊 Top 3 Resultados: {results}")
+
+            if results and expected_answer.lower() in results[0][0].lower():
+                top1_count += 1  # Conta se a resposta correta está no topo
+
+        top1_accuracy = top1_count / total_queries
+
+        logging.info(f"🏆 Taxa de acerto no TOP 1: {top1_accuracy:.2%}")
+
+        self.assertGreater(top1_accuracy, 0.5, "⚠️ Menos de 50% das respostas certas no topo, ranking pode estar ruim.")
+
+if __name__ == "__main__":
+    unittest.main()
