@@ -110,7 +110,7 @@ def process_and_store_embeddings(documents):
                     "text": chunk  # Associamos o parágrafo correspondente
                 }
 
-                save_embeddings(embedding, filename, chunk_index=idx)
+                save_embeddings(embeddings_data, filename, chunk_index=idx)
                 processed_embeddings[f"{filename}_chunk{idx}"] = embedding
 
                 all_embeddings.append(embedding[0])  # Convertendo para matriz FAISS
