@@ -6,6 +6,10 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from src.rag.document_loader import load_documents, read_txt, read_pdf
+import logging
+
+# Configuração do logger
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 # Diretório onde você colocará os arquivos de teste
 TEST_DSK_DIR = "tests/test_dsk"

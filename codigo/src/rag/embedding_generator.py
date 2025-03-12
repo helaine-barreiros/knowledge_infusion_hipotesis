@@ -29,7 +29,8 @@ def split_by_newline(text):
     return [chunk.strip() for chunk in chunks if len(chunk.strip()) > 0]
 
 def generate_embedding(text):
-    """Gera embeddings para um texto usando o modelo NV-Embed."""
+    logging.info(f"Gerando embeddings para o texto: {text}")
+    
     if not text or not isinstance(text, str):
         logging.warning("Texto inválido fornecido para embedding.")
         return None
