@@ -1,5 +1,6 @@
 import os
 import PyPDF2
+import fitz
 
 from src.rag.config_loader import CONFIG
 
@@ -35,8 +36,12 @@ def load_documents(directory=None):
         file_path = os.path.join(directory, filename)
 
         if filename.endswith(".txt"):
-            documents[filename] = read_txt(file_path)
+            #todo: remover este tipo de tratamento por enquanto
+            #documents[filename] = read_txt(file_path)
+            raise "Arquivos txt não são suportados"
         elif filename.endswith(".pdf"):
-            documents[filename] = read_pdf(file_path)
+            #todo: alterei a leitura do pdf para abrir o pdf com a biblioteca fitz
+            #documents[filename] = read_pdf(file_path)
+            documents[filename] = fitz.open(file_path)
 
     return documents
