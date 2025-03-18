@@ -1,3 +1,4 @@
+import ollama
 from ollama import Client
 
 import requests
@@ -20,10 +21,9 @@ messages=[
 ]
 
 try:
-    response = ollama.chat(model, messages, stream)
+    response = ollama.chat(model=model, messages=messages, stream=stream)
     if response.done:
         logging.info(f"Result chat:{response.message.content}")
 
 except ollama.ResponseError as e:
     logging.error('Error in Ollama API call:', e.error)
-  
