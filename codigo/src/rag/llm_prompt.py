@@ -31,24 +31,25 @@ def generate_diagram():
     context_content += content
     logging.info(f"Domain specific knowledge loaded")
 
-  logging.info("✅ {documents.size} Domain Specific Knowledge Files loaded.")
+  #logging.info(f"✅ {documents.size} Domain Specific Knowledge Files loaded.")
 
-  sys_msg_content = f"""Act as a software architect specialized in modeling activity diagrams written in the PlantUML language
-  with extensive experience in modeling systems for the hotel industry. Please always follow and made all 
-  needed inferences using the specifications showed by the client: {content}"""
+  sys_msg_content = f"""You are a software architect specialized in UML modeling, particularly state diagrams implemented in PlantUML. Your role is to create precise and complete diagrams based on business requirements. Return ONLY valid PlantUML code, starting with @startuml and ending with @enduml, without additional explanations or comments in the code."""
 
-  usr_msg_content = """Please follow these steps to create a state machine diagram that presents all the states that need to be handled by the system you need to model:
-  Step 1: Read and reason about the context information presented to you by the client of the system being modeled.
-  Step 2: Identify all the states that a reservation can assume for all the possible possibilities within the reservation flow.
-  Step 3: Now reason about the possible states and the restrictions presented by the client. Based on this, identify all the components (states, transitions, internal activities, internal transitions, self-transitions, choice pseudo-state, join, fork, composite states, input pseudo-state, output pseudo-state, join pseudo-state, sub-machine state, among others) that need to be specified to create a state machine diagram that supports all the possibilities presented in the reservation policy specifications.
-  Step 4: Now write and return only the PlantUML code of the state machine diagram that represents all the reasoning capable of meeting all the constraints imposed by the customer on the reservation system."""
+  usr_msg_content = f"""Model a UML 'State diagram' in PlantUML Language for a hotel reservation system that should represent the complete lifecycle of a reservation.
+The diagram should capture all possible states of a reservation (such as Requested, Confirmed, Canceled, Completed) and the permitted transitions between these states.
+Return ONLY the PlantUML code between the @startuml and @enduml tags, without explanations or additional text.
+Business constraints to consider:
+{context_content}"""
 
   sys_msg = mount_message("system",sys_msg_content)
   user_msg = mount_message("user",usr_msg_content)
 
   messages=[sys_msg,user_msg]
 
-  call_ollama(messages)
+  plantuml_code = call_ollama(messages)
+  logging.info(f"PlantUML CODE: {plantuml_code}")
+  
+  return plantuml_code
 
 def call_ollama(messages, host=HOST, model=MODEL):
   response = None
