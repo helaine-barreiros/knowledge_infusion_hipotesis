@@ -1,0 +1,28 @@
+@startuml
+[*] --> InitialAssessment
+
+state InitialAssessment {
+  [*] --> CheckAirway
+  CheckAirway --> CheckBreathing : Airway Compromised
+  CheckAirway --> CheckBreathing : Airway Clear
+
+  CheckBreathing --> CheckCirculation : Breathing Compromised
+  CheckBreathing --> CheckCirculation : Breathing Normal
+
+  CheckCirculation --> CheckDisability : Circulation Compromised
+  CheckCirculation --> CheckDisability : Circulation Normal
+
+  CheckDisability --> CheckExposure : Disability Compromised
+  CheckDisability --> CheckExposure : Disability Normal
+
+  CheckExposure --> AssignPriority
+}
+
+AssignPriority --> Urgent : Priority 1
+AssignPriority --> SemiUrgent : Priority 2
+AssignPriority --> NonUrgent : Priority 3
+Urgent --> [*]
+SemiUrgent --> [*]
+NonUrgent --> [*]
+
+@enduml

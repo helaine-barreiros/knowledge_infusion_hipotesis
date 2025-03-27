@@ -1,0 +1,58 @@
+@startuml
+state "Reservation Process" as ReservationProcess {
+
+  [*] --> Start
+  Start --> PendingConfirmation : Initial Reservation
+  state PendingConfirmation <<state>> {
+      [*] --> AwaitingPayment
+      AwaitingPayment --> Confirmed : Payment received in 24/72h
+      AwaitingPayment --> Cancelled : Payment failed after retries
+  }
+
+  state Confirmed
+  Confirmed --> CheckedIn : Guest checkin by 2:00 PM
+  Confirmed --> Cancelled : GuestCancellation(<24h: 0%, 24-48h: 50%)
+  Confirmed --> Overbooked : Hotel Initiated (Overbooking)
+  Confirmed --> MaintenanceHold
+  
+  state CheckedIn
+  CheckedIn --> InUse
+  InUse --> NoShow : GuestNoShow(24h:0%, VIP: 25%)
+  InUse --> Extended : ExtensionRequest(24h before checkout)
+
+  state Extended
+  Extended --> InUse : ExtensionConfirmed
+  Extended --> Expired : Extension Declined
+
+  state NoShow
+  NoShow --> Expired
+
+  state Cancelled
+  Cancelled --> [*]
+  
+  state Overbooked
+  Overbooked --> Relocated : ResolutionAccepted
+  Overbooked --> Expired : NoResponse(6h)
+  
+  state MaintenanceHold
+  MaintenanceHold --> RoomReassigned : ReassignmentSuccess
+  MaintenanceHold --> Expired : ReassignmentFailed
+  
+  state RoomReassigned
+  RoomReassigned --> InUse
+
+  state Expired
+  Expired --> [*]
+
+  state Relocated
+  Relocated --> [*]
+
+  state "Payment Policies" as PaymentPolicies {
+      [*] --> Standard
+      Standard --> Retrying : InitialFailure
+      Retrying --> AwaitingPayment : RetryLimited fails
+      Standard --> Confirmed : PaymentSuccess
+  }
+}
+
+@enduml

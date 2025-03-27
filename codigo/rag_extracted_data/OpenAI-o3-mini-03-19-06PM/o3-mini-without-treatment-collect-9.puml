@@ -1,0 +1,40 @@
+@startuml
+
+[*] --> InitialAssessment
+
+state InitialAssessment {
+  [*] --> Arrival
+  Arrival -> Registration : "Provide personal info"
+  Registration -> Triage : "Medical assessment begins"
+  Triage -> CovidScreening : "Checking Covid-19 symptoms"
+  CovidScreening --> RiskAssessment : "If symptoms detected"
+  CovidScreening --> Categorization : "If no symptoms"
+}
+
+state RiskAssessment {
+  [*] --> HighRisk : "Severe symptoms"
+  [*] --> MediumRisk : "Moderate symptoms"
+  [*] --> LowRisk : "Mild symptoms"
+  
+  HighRisk --> Emergency : "Immediate intervention"
+  MediumRisk --> Urgent : "Needs quick attention"
+  LowRisk --> NonUrgent : "Routine care"
+}
+
+state Categorization {
+  [*] --> Emergency : "Life-threatening condition"
+  [*] --> Urgent : "Serious but stable"
+  [*] --> NonUrgent : "Stable condition"
+}
+
+Emergency --> Treatment : "Direct to treatment"
+Urgent --> Waiting : "Short queue"
+NonUrgent --> Waiting : "Regular queue"
+
+Waiting --> Treatment : "When called"
+
+Treatment --> Discharge : "After care given"
+
+Discharge --> [*]
+
+@enduml

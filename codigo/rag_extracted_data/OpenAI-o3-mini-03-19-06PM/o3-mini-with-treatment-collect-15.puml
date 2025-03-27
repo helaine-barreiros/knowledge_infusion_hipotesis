@@ -1,0 +1,56 @@
+@startuml
+state ReservationLifecycle {
+    [*] --> ReservationPendingPayment : Reservation Created
+    ReservationPendingPayment --> Cancelled : Payment not received in 24h (Standard)
+    ReservationPendingPayment --> Cancelled : Payment not received in 72h (VIP)
+    ReservationPendingPayment --> Confirmed : Payment received
+
+    Confirmed --> Cancelled : Guest cancels >48h before checkin
+    Confirmed --> Cancelled : Guest cancels 24–48h before checkin
+    Confirmed --> Cancelled : Guest cancels <24h before checkin
+    Confirmed --> Cancelled : Hotel cancels due to overbooking/maintenance/policy violation
+    Confirmed --> CheckedIn : Guest checks in
+
+    CheckedIn --> InUse : Within 24h of checkin time
+
+    InUse --> ExtensionRequested : Guest requests extension
+    ExtensionRequested --> InUse : Room available
+
+    InUse --> Expired : No show after 24h
+    InUse --> CheckedOut : Guest checks out
+
+    Expired --> Cancelled
+
+    Cancelled --> [*]
+}
+
+state PaymentProcess {
+    [*] --> PaymentAttempt
+    PaymentAttempt --> Confirmed : Payment successful
+    PaymentAttempt --> PaymentFailure : Payment failed
+
+    PaymentFailure --> Cancelled : After 2 retries (Standard)
+    PaymentFailure --> Cancelled : After 3 retries (VIP)
+    PaymentFailure --> PaymentAttempt : Retry Payment
+}
+
+state OverbookingResolution {
+    [*] --> OfferResolution : Overbooking detected
+    OfferResolution --> Confirmed : Guest accepts offer
+    OfferResolution --> Cancelled : Guest does not respond in 6h
+
+    OfferResolution : Guest receives options: Upgrade, Partner Hotel, Compensation
+}
+
+state VIPPolicies {
+    [*] --> DedicatedSupport : Reservation Confirmed
+    DedicatedSupport --> Expired : No show, partial refund
+    DedicatedSupport --> CheckedIn : Guest checks in, 12h alerts before deadlines
+}
+
+PaymentProcess --> ReservationLifecycle
+OverbookingResolution --> ReservationLifecycle
+ReservationLifecycle --> VIPPolicies
+
+[*] --> ReservationLifecycle
+@enduml

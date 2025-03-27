@@ -1,0 +1,41 @@
+@startuml
+[*] --> PatientArrival
+
+state PatientArrival {
+  [*] --> RegisterPatient
+  RegisterPatient --> AssessPatient
+}
+
+state AssessPatient {
+  [*] --> GatherPatientData
+  GatherPatientData --> EvaluateSymptoms
+
+  state EvaluateSymptoms {
+    [*] --> CheckVitalSigns
+    CheckVitalSigns --> DetermineSeverity
+
+    DetermineSeverity --> {ok} InitialAssessmentComplete
+    DetermineSeverity --> {not ok} ReassessPatient
+  }
+  
+  ReassessPatient --> GatherPatientData: FurtherAssessment
+}
+
+InitialAssessmentComplete --> DetermineClinicalPriority
+
+state DetermineClinicalPriority {
+  [*] --> HighUrgency
+  [*] --> MediumUrgency
+  [*] --> LowUrgency
+
+  HighUrgency: Clincial Priority: High
+  MediumUrgency: Clincial Priority: Medium
+  LowUrgency: Clincial Priority: Low
+}
+
+DetermineClinicalPriority --> AssignTriageCategory
+AssignTriageCategory --> CommunicateWithPatient
+CommunicateWithPatient --> AssignTreatmentArea
+
+AssignTreatmentArea --> [*]
+@enduml

@@ -5,7 +5,7 @@ import os
 # Adiciona o diretório raiz do projeto ao path do Python
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from src.rag.document_loader import load_documents, read_txt, read_pdf
+from src.rag.document_loader import load_documents, read_txt, read_pdf_in_pages
 import logging
 
 # Configuração do logger
@@ -29,7 +29,7 @@ class TestDocumentLoader(unittest.TestCase):
         file_path = os.path.join(TEST_DSK_DIR, "test_file.pdf")
         self.assertTrue(os.path.exists(file_path), f"Arquivo {file_path} não encontrado.")
         
-        content = read_pdf(file_path)
+        content = read_pdf_in_pages(file_path)
         self.assertGreater(len(content.strip()), 0, "O arquivo PDF parece estar vazio.")
 
     def test_load_documents(self):

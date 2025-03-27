@@ -1,0 +1,131 @@
+@startuml
+state "Start" as InitialState <<start>>
+
+[*] --> InitialState
+
+InitialState --> ReservationType : Select Reservation Type
+
+state "Reservation Type" as ReservationType {
+  [*] --> StandardReservation
+  StandardReservation : Payment within 24 hours
+  
+  StandardReservation --> AwaitingStandardPayment : Confirmed
+  
+  AwaitingStandardPayment : Awaiting Payment
+  AwaitingStandardPayment --> Cancelled : Payment Failed
+  
+  StandardReservation --> Expired : Pending > 1hr
+
+  [*] --> NonRefundableReservation
+  NonRefundableReservation : No cancellation/refund eligibility
+  
+  NonRefundableReservation --> AwaitingNonRefundPayment : Confirmed
+  
+  AwaitingNonRefundPayment : Awaiting Payment
+  AwaitingNonRefundPayment --> Cancelled : Payment Failed
+  
+  NonRefundableReservation --> Expired : Pending > 1hr
+
+  [*] --> VIPReservation
+  VIPReservation : Custom rules - Section 5
+  
+  VIPReservation --> AwaitingVIPPayment : Confirmed
+  
+  AwaitingVIPPayment : Awaiting Payment
+  AwaitingVIPPayment --> Cancelled : Payment Failed
+  
+  VIPReservation --> Expired : Pending > 1hr
+}
+
+Expired : Reservation Expired
+NoShow : Checkin missed by 24hr post-arrival
+
+state Cancelled
+Cancelled : Reservation Cancelled
+
+state WaitForPaymentRetry
+WaitForPaymentRetry : Wait for payment retries
+
+AwaitingStandardPayment --> WaitForPaymentRetry : Retry
+AwaitingNonRefundPayment --> WaitForPaymentRetry : Retry
+AwaitingVIPPayment --> WaitForPaymentRetry : Retry
+
+WaitForPaymentRetry --> Cancelled : Final Failure
+WaitForPaymentRetry --> Confirmed : Successful Payment
+
+Confirmed : Reservation Confirmed
+Cancelled --> Confirmed : Manual Override
+
+state "Cancellation" as Cancellation
+[*] --> Cancellation
+
+Cancellation --> RefundProcessing : Process Refund
+
+state RefundProcessing {
+  [*] --> FullRefund : Full Refund
+  [*] --> PartialRefund : Partial Refund
+  FullRefund --> Complete : Refund Issued
+  PartialRefund --> Complete : Refund Issued
+}
+
+state Checkin
+Checkin : Guest Checked In
+[*] --> Checkin
+
+Checkin --> ExtensionPolicy : Request Extension
+state ExtensionPolicy {
+  [*] --> EligibilityCheck : Eligibility Check
+  EligibilityCheck --> AvailabilityVerify : Room Availability
+  AvailabilityVerify --> ExtensionGranted : Available
+  AvailabilityVerify --> Declined : Not Available
+}
+
+state OverbookingResolution
+OverbookingResolution : Reassign or Compensate
+[*] --> OverbookingResolution : Initiate
+
+OverbookingResolution --> ReassignRoom : Room Available
+OverbookingResolution --> Cancelled : No Response > 6 hr
+state ReassignRoom {
+  [*] --> UpgradedRoom : Upgrade Offered
+  [*] --> PartnerHotel : Relocate to Partner Hotel
+}
+
+ReassignRoom --> Confirmed : Guest Agrees
+
+state MaintenanceHold
+MaintenanceHold : Room Maintenance Hold
+
+state HotelInitiatedCancellation : Hotel Cancel Initiated
+
+[*] --> HotelInitiatedCancellation
+HotelInitiatedCancellation --> RefundProcessing : Process Full Refund
+
+[*] --> MaintenanceHold
+MaintenanceHold --> ReassignRoom : Reassign Available
+MaintenanceHold --> RefundProcessing : No Reassign
+
+state RefundProcessingComplete
+RefundProcessingComplete : Refund Completed
+
+[*] --> RefundProcessingComplete
+RefundProcessingComplete --> Cancelled
+
+state DynamicPricingPolicy
+DynamicPricingPolicy : Dynamic Adjustments
+state NoShowPolicy
+NoShowPolicy : Checkin Missed
+
+[*] --> NoShowPolicy
+NoShowPolicy --> Expired : > 24hrs
+NoShowPolicy --> RefundProcessing : VIP Partial Refund
+
+state VIPPolicy : VIP Specific Policies
+state CheckinWindow : Checkin Timeframe
+
+[*] --> CheckinWindow
+CheckinWindow --> NoShowPolicy : Checkin Missed
+
+state PolicyEnforcement : Automated Rule Enforcement
+[*] --> PolicyEnforcement
+@enduml

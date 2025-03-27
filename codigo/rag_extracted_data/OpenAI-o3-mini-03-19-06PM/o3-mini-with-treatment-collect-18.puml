@@ -1,0 +1,94 @@
+@startuml
+[*] --> Initial
+state Initial {
+  state "General Reservation Policies" as ReservationPolicies {
+    [*] --> ReservationTypes
+    ReservationTypes --> ReservationValidity : Confirmed
+    ReservationTypes --> Cancelled : Non-refundable
+    ReservationTypes --> VIPPolicies : VIP/Corporate
+    ReservationValidity --> Cancelled : Expired Pending Confirmation
+    ReservationValidity --> Cancelled : Expired Awaiting Payment
+    ReservationValidity --> NoShow : No Checkin
+  }
+  
+  state "Cancellation Policies" as CancellationPolicies {
+    [*] --> GuestInitiatedCancellation
+    state GuestInitiatedCancellation {
+      [*] --> FullRefund : >48h before checkin
+      FullRefund --> PartialRefund : 24-48h before checkin
+      PartialRefund --> NoRefund : <24h before checkin
+      NoRefund --> [*] : Non-refundable Booking
+    }
+    GuestInitiatedCancellation --> HotelInitiatedCancellation : Exceptions
+    state HotelInitiatedCancellation {
+      [*] --> FullRefund : Overbooking
+      FullRefund --> FullRefund : Maintenance Hold
+      FullRefund --> PolicyViolation : Policy Violation
+    }
+  }
+  
+  state "Payment Policies" as PaymentPolicies {
+    [*] --> PaymentDeadlines
+    PaymentDeadlines --> Cancelled : Payment Failure
+    PaymentDeadlines --> [*] : Successful Payment
+    PaymentFailureHandling : Retry and Transition to Cancelled
+  }
+  
+  state "Dynamic Pricing Policy" as DynamicPricing {
+    [*] --> PriceAdjustmentRules
+    PriceAdjustmentRules --> PriceLockGuarantee : Payment Received
+  }
+  
+  state "Overbooking Policies" as Overbooking {
+    [*] --> Resolution
+    Resolution --> Compensation : Prioritization
+    Compensation --> GuestResponse : Notify Guest
+  }
+
+  state "VIP/Corporate Policies" as VIPPolicies {
+    [*] -> KeyExceptions
+    KeyExceptions -> DedicatedSupport : Need Assistance
+  }
+
+  state "NoShow & CheckIn Policies" as NoShowCheckIn {
+    [*] --> NoShowPenalties
+    NoShowPenalties --> [*] : Standard Penalty
+    NoShowPenalties --> [*] : VIP Penalty
+    [*] --> CheckInWindow
+    CheckInWindow --> [*] : Late checkin
+  }
+
+  state "Extension Policies" as ExtensionPolicies {
+    [*] -> RequestRules
+    RequestRules -> AvailabilityCheck : Eligibility
+    AvailabilityCheck -> PriceAdjustment : Available
+    AvailabilityCheck -> [*] : Unavailable
+  }
+
+  state "Maintenance Hold Policies" as MaintenanceHold {
+    [*] -> Reassignment
+    Reassignment -> RefundEligibility : Notify Guest
+  }
+
+  state "Refund Processing" as RefundProcessing {
+    [*] -> RefundTimeline
+    RefundTimeline -> RefundMethod : Completed
+  }
+
+  state "Policy Enforcement" as PolicyEnforcement {
+    [*] -> AutomatedEnforcement
+    AutomatedEnforcement -> [*] : Execute Rules
+    AutomatedEnforcement -> ManualOverride : Exceptional Cases
+  }
+}
+ReservationPolicies --> CancellationPolicies : Invalid Reservation
+CancellationPolicies --> PaymentPolicies : Refund or Payment
+DynamicPricing --> Overbooking : Reservation Prices Locked
+Overbooking --> VIPPolicies : Special Handling
+VIPPolicies --> NoShowCheckIn : Special Rules
+NoShowCheckIn --> ExtensionPolicies : CheckIn/NoShow
+ExtensionPolicies --> MaintenanceHold : Unfulfilled Extension
+MaintenanceHold --> RefundProcessing : Reassignment Failure
+RefundProcessing --> PolicyEnforcement : Finalize Process
+PolicyEnforcement --> [*] : End
+@enduml

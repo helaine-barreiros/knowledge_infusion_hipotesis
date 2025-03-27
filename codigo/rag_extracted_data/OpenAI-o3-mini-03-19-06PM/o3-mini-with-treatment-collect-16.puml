@@ -1,0 +1,91 @@
+@startuml
+state "Reservation System" as RS
+
+[*] --> RS
+
+state "Reservation" as Reservation {
+    [*] --> PendingConfirmation
+    PendingConfirmation --> AwaitingPayment : Confirm
+    PendingConfirmation --> Expired : No action for 1 hour
+
+    state "AwaitingPayment" as AwaitingPayment {
+        AwaitingPayment : Standard: 24h deadline\nVIP: 72h deadline
+        AwaitingPayment --> Expired : No payment by deadline
+        AwaitingPayment --> Confirmed : Payment received
+    }
+
+    state "Confirmed" as Confirmed {
+        [*] --> Active
+        state Active {
+            Active : Eligible for extension\n(see section 8)
+            Active --> Expired : No Show (24h past check-in)
+            Active --> Cancellation : Guest initiates cancellation
+            Active --> MaintenanceHold : Hotel initiates cancellation
+        }
+        
+        Active --> Expired : No Show (24h past check-in)
+        Active --> ExtensionRequested : Extension requested
+        ExtensionRequested --> Active : Extension approved
+
+        Active --> CheckinCompleted : Check-in by deadline
+        CheckinCompleted --> Completed : Checkout completed
+    }
+}
+
+state "Cancellation" as Cancellation {
+    [*] --> GuestInitiated
+
+    state "GuestInitiated" as GuestInitiated {
+        [*] --> Refund100 : >48h before checkin
+        [*] --> Refund50 : 24-48h before checkin
+        [*] --> NoRefund : <24h before checkin
+        [*] --> NoRefund : NonRefundable Booking
+    }
+
+    state "HotelInitiated" as HotelInitiated {
+        [*] --> FullRefund : Overbooking
+        [*] --> FullRefund : Maintenance Hold
+        [*] --> FullRefund : Policy Violation
+    }
+
+    GuestInitiated --> RefundProcessing : Refund amount based on timing and type
+}
+
+state "Expired" as Expired {
+    Expired --> RS : Reservation End
+}
+
+state "RefundProcessing" as RefundProcessing {
+    [*] --> RefundTimeline
+    RefundTimeline --> RefundComplete : 3-7 business days
+}
+
+state "MaintenanceHold" as MaintenanceHold {
+    [*] --> Reassignment : Room Required Maintenance
+    Reassignment --> FullRefund : Reassignment Failed
+    Reassignment --> RS : Guest Reassigned
+}
+
+state "Overbooking" as Overbooking {
+    [*] --> Resolution
+    Resolution --> Compensation : No reassignment available
+}
+
+state "Payments" as Payments {
+    [*] --> PaymentFailure : Payment failed
+    PaymentFailure --> Cancelled : Final retry failed
+
+    state "Pricing" as Pricing {
+        Pricing --> Locked : Payment received
+        Locked --> RS : Reservation End
+    }
+}
+
+state "RS" {
+    [*] --> Reservation
+    Reservation --> Overbooking : Overbooked
+    Reservation --> Payments : Follow payment policies
+    Payments --> Expired : Not recoverable
+}
+
+@enduml

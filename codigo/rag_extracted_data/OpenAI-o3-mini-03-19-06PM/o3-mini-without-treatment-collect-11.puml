@@ -1,0 +1,65 @@
+@startuml
+[*] --> GatherInformation : Start Triage
+
+state GatherInformation {
+  :Collect Patient Details;
+  :Assess Patient's Condition;
+  --> WaitingRoom : Information Complete
+}
+
+state WaitingRoom {
+  note right of WaitingRoom : Evaluate Severity
+  
+  Severity1 : Life Threatening
+  Severity2 : Very Urgent
+  Severity3 : Urgent
+  Severity4 : Standard
+  Severity5 : Non-Urgent
+  
+  WaitingRoom --> Severity1 : Immediate Threat
+  WaitingRoom --> Severity2 : Potentially Serious
+  WaitingRoom --> Severity3 : Moderate Risk
+  WaitingRoom --> Severity4 : Low Risk
+  WaitingRoom --> Severity5 : Very Low Risk
+}
+
+Severity1 --> EmergencyTreatment
+Severity2 --> HighPriorityTreatment
+Severity3 --> ModeratePriorityTreatment
+Severity4 --> LowPriorityTreatment
+Severity5 --> StandardCare
+
+[*] --> EmergencyTreatment
+
+state EmergencyTreatment {
+  :Immediate Stabilization;
+  EmergencyTreatment --> TreatmentRoom : Patient Stabilized
+}
+
+state HighPriorityTreatment {
+  :Rapid Assessment;
+  HighPriorityTreatment --> TreatmentRoom : Assessment Complete
+}
+
+state ModeratePriorityTreatment {
+  :Detailed Evaluation;
+  ModeratePriorityTreatment --> TreatmentRoom : Evaluation Complete
+}
+
+state LowPriorityTreatment {
+  :Routine Procedures;
+  LowPriorityTreatment --> TreatmentRoom : Procedures Scheduled
+}
+
+state StandardCare {
+  :Advice and Reassurance;
+  StandardCare --> TreatmentRoom : Advice Given
+}
+
+state TreatmentRoom {
+  :Assign Treatment Plan;
+  :Provide Care;
+  --> [*]
+}
+
+@enduml

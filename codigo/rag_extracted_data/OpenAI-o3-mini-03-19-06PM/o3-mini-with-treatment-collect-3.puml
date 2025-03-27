@@ -1,0 +1,78 @@
+@startuml
+state "Start" as Start <<start>>
+state "Standard Reservation" as StandardReservation
+state "NonRefundable Reservation" as NonRefundableReservation
+state "VIP/Corporate Reservation" as VIPReservation
+state "Reservation Expired" as ReservationExpired
+state "Guest Initiated Cancellation" as GuestCancellation
+state "Hotel Initiated Cancellation" as HotelCancellation
+state "Payment Successful" as PaymentSuccessful
+state "Payment Failure" as PaymentFailure
+state "Price Locked" as PriceLocked
+state "Overbooked" as Overbooked
+state "NoShow" as NoShow
+state "In Use" as InUse
+state "Extension Requested" as ExtensionRequested
+state "Cancelled" as Cancelled
+state "Expired" as Expired
+state "Refund Processing" as RefundProcessing
+state "Refund Issued" as RefundIssued
+state "Overbooking Resolved" as OverbookingResolved
+state "VIP Support" as VIPSupport
+state "CheckIn" as CheckIn
+
+[*] --> Start
+Start --> StandardReservation : Select Standard
+Start --> NonRefundableReservation : Select NonRefundable
+Start --> VIPReservation : Select VIP
+
+StandardReservation --> PaymentSuccessful : Payment in 24h
+StandardReservation --> ReservationExpired : No Payment in 24h
+NonRefundableReservation --> PaymentSuccessful : Payment in 24h
+NonRefundableReservation --> Cancelled : Payment Failure
+VIPReservation --> PaymentSuccessful : Payment in 72h
+VIPReservation --> ReservationExpired : No Payment in 72h
+
+PaymentSuccessful --> PriceLocked
+PaymentSuccessful --> CheckIn
+
+GuestCancellation --> Cancelled
+HotelCancellation --> RefundProcessing
+
+CheckIn --> InUse
+
+InUse --> ExtensionRequested : Request Extension
+InUse --> NoShow : No Show
+InUse --> Expired : CheckOut Time Passed
+
+ExtensionRequested --> InUse : Approved
+ExtensionRequested --> ReservationExpired : Rejected
+
+Overbooked --> OverbookingResolved : Resolution Offer Accepted
+Overbooked --> Cancelled : No Response in 6h
+
+NoShow --> Expired
+
+PriceLocked --> Overbooked : Overbooking Occurs
+
+RefundProcessing --> RefundIssued
+
+VIPSupport : Policy Exceptions
+VIPSupport --> VIPReservation : Activate
+
+state ReservationExpired {
+  [*] --> Expired : Transition To Expired
+  Expired --> CheckIn : CheckIn or Extend During Expiry
+  Expired --> Cancelled : Past Expiry Date
+}
+
+state OverbookingResolved {
+  [*] --> ReservationExpired : Time Lapse
+  ReservationExpired --> ReservationExpired : Await Response
+}
+
+state Cancelled {
+  [*] --> RefundProcessing : Awaiting Refund
+}
+
+@enduml

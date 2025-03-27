@@ -1,0 +1,34 @@
+@startuml
+[*] --> Start
+Start : Begin Triage Process
+
+Start --> LifeThreatening
+LifeThreatening : Assess if life-threatening condition
+
+LifeThreatening --> {yes} Immediate
+Immediate : Immediate treatment required
+Immediate --> End
+LifeThreatening --> {no} Urgency
+
+Urgency : Determine urgency level
+Urgency --> Critical
+Critical : Is the condition critical?
+
+Critical --> {yes} VeryUrgent
+VeryUrgent : High priority treatment
+VeryUrgent --> End
+Critical --> {no} Moderate
+
+Moderate : Is the condition moderate?
+Moderate --> {yes} Urgent
+Urgent : Urgent but not life-threatening
+Urgent --> End
+Moderate --> {no} Evaluate
+
+Evaluate : Evaluate remaining factors
+Evaluate --> LowPriority
+LowPriority : Non-urgent, routine care
+LowPriority --> End
+
+End : Assign clinical priority and direct care
+@enduml

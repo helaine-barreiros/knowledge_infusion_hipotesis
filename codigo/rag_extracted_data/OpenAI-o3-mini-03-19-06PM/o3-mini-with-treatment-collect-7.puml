@@ -1,0 +1,50 @@
+@startuml
+state Start <<start>>
+state Confirmed
+state PendingConfirmation
+state AwaitingPayment
+state Canceled <<end>>
+state Expired <<end>>
+state CheckedIn
+state Completed <<end>>
+state NoShow <<end>>
+state Overbooked <<end>>
+state MaintenanceHold
+state PaymentFailureHandling
+state RefundProcessing
+
+[*] --> Start
+
+Start --> PendingConfirmation : New Reservation
+
+PendingConfirmation --> Canceled : No action for 1h
+
+PendingConfirmation --> AwaitingPayment : Confirmed
+
+AwaitingPayment --> Canceled : No Payment within 24h (Standard)
+AwaitingPayment --> Canceled : No Payment within 72h (VIP)
+
+Confirmed --> CheckedIn : Checkin by 2:00 PM arrival date
+Confirmed --> NoShow : Missed Checkin + 24h
+
+CheckedIn --> Completed : Checkout
+
+CheckedIn --> ExtensionRequest : Request during InUse state
+
+ExtensionRequest --> CheckedIn : Room available
+ExtensionRequest --> NoShow : Room unavailable
+
+Confirmed --> Overbooked : Room unavailable on arrival
+Overbooked --> Canceled : No response from guest within 6h
+
+Confirmed --> MaintenanceHold : Room unavailable due to repairs
+
+MaintenanceHold --> Canceled : Reassignment impossible
+
+PaymentFailureHandling --> Canceled : Final Payment Failure
+
+Canceled --> RefundProcessing : Payment error or eligibility
+
+RefundProcessing --> [*]
+
+@enduml

@@ -1,0 +1,95 @@
+@startuml
+state "Reservation Management" as R {
+  [*] --> PendingConfirmation
+  PendingConfirmation --> AwaitingPayment : Confirmed
+  PendingConfirmation --> Expired : No action for 1 hour
+  AwaitingPayment --> Confirmed : Payment received
+  AwaitingPayment --> Cancelled : Payment deadline missed
+  Cancelled --> [*]
+  Expired --> [*]
+  Confirmed --> CheckedIn : Guest checks in
+  Confirmed --> Cancelled : Guest cancels
+  Confirmed --> NoShow : Check-in missed by 24h
+}
+
+state "Guest Initiated Cancellations" as GIC {
+  [*] --> FullRefund : >48h before check-in
+  [*] --> PartialRefund : 24-48h before check-in
+  [*] --> NoRefund : <24h or Non-Refundable
+  NoRefund : Exceptions for hotel-initiated
+  FullRefund --> [*]
+  PartialRefund --> [*]
+  NoRefund --> [*]
+}
+
+state "Hotel Initiated Cancellations" as HIC {
+  [*] --> FullRefund : Cause by overbooking, maintenance, or violation
+  FullRefund --> [*]
+}
+
+state "Payment Management" as P {
+  [*] --> PaymentInitiated
+  PaymentInitiated --> PaymentSuccess : Payment within deadline
+  PaymentInitiated --> PaymentFailed : After retries fail
+  PaymentFailed --> Cancelled
+  PaymentSuccess --> R::Confirmed
+  Cancelled --> [*]
+}
+
+state "Pricing & Discounts" as PD {
+  [*] --> StandardPricing
+  StandardPricing --> PeakSurcharge : Peak season
+  StandardPricing --> EarlyBirdDiscount : >30 days in advance
+  StandardPricing --> LastMinuteDiscount : <24h before check-in
+  PeakSurcharge --> [*]
+  EarlyBirdDiscount --> [*]
+  LastMinuteDiscount --> [*]
+}
+
+state "Overbooking Management" as O {
+  [*] --> ResolutionInProgress
+  ResolutionInProgress --> CompensationOffered : Priority determined
+  ResolutionInProgress --> RoomReassigned
+  RoomReassigned --> R::Confirmed
+  CompensationOffered --> O::Cancelled : Guest does not respond in 6h
+}
+
+state "VIP/Corporate Rules" as VIP {
+  [*] --> CustomCancellation : Up to 12h before check-in
+  [*] --> CustomPayment : 72h deadline
+  CustomCancellation --> [*]
+  CustomPayment --> R::Confirmed
+}
+
+state "Check-In Process" as C {
+  [*] --> CheckingIn
+  CheckingIn --> LateCheckIn : After 2:00 PM, before next day 12:00 PM
+  CheckingIn --> R::CheckedIn : Guest checks in within time
+  LateCheckIn --> R::NoShow : Missed by entire window
+}
+
+state "Extension Management" as E {
+  [*] --> ExtensionRequested
+  ExtensionRequested --> ExtensionGranted : Room available
+  ExtensionRequested --> ExtensionDenied : Room unavailable
+  ExtensionDenied --> [*]
+  ExtensionGranted --> R::Confirmed : Follow pricing rules
+}
+
+state "Maintenance Hold" as MH {
+  [*] --> ReassignmentInProgress
+  ReassignmentInProgress --> ReassignmentConfirmed : Room reassigned
+  ReassignmentInProgress --> FullRefund : Impossible to reassign
+  FullRefund --> [*]
+  ReassignmentConfirmed --> R::Confirmed
+}
+
+R::Expired --> [*]
+R::NoShow --> GIC::NoRefund
+R::CheckedIn --> E::ExtensionRequested
+R::CheckedIn --> C::CheckingIn
+R::CheckedIn --> R::NoShow : 24h no show
+R::Cancelled --> HIC::FullRefund : Hotel initiated
+R::Cancelled --> GIC::NoRefund : Standard cancellation
+P::PaymentFailed --> GIC::NoRefund : Transition to Cancelled
+@enduml

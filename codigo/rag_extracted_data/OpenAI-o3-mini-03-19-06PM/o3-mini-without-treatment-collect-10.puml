@@ -1,0 +1,26 @@
+@startuml
+[*] --> StartTriage : Patient Arrival
+StartTriage --> AssessPatientCondition : Gather Initial Information
+AssessPatientCondition --> DetermineCategory : Evaluate Clinical Symptoms
+
+state DetermineCategory {
+  [*] --> RedUrgency : Critical Symptoms
+  [*] --> OrangeUrgency : Serious Symptoms
+  [*] --> YellowUrgency : Moderate Symptoms
+  [*] --> GreenUrgency : Mild Symptoms
+  [*] --> BlueUrgency : Minimal Symptoms
+}
+
+DetermineCategory --> AssignPriority
+
+state AssignPriority {
+  [*] --> ImmediateCare : From RedUrgency
+  [*] --> VeryUrgentCare : From OrangeUrgency
+  [*] --> UrgentCare : From YellowUrgency
+  [*] --> StandardCare : From GreenUrgency
+  [*] --> NonUrgentCare : From BlueUrgency
+}
+
+AssignPriority --> EndTriage : Document and Communicate Priority
+EndTriage --> [*] : Complete Triage Process
+@enduml

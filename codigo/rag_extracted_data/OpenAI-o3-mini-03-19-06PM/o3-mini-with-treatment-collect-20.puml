@@ -1,0 +1,84 @@
+@startuml
+state "Reservation Process" as RP {
+    [*] --> ReservationInitiated
+    ReservationInitiated --> ReservationConfirmed : Payment Made
+    ReservationConfirmed --> ReservationExpired : No Payment within Deadline
+    ReservationExpired --> [*] : Reservation Cancelled
+}
+
+state "Cancellation Policies" as CP {
+    [*] --> GuestInitiatedCancellation : Guest Cancels
+    [*] --> HotelInitiatedCancellation : Hotel Cancels
+    
+    GuestInitiatedCancellation --> RefundIssued : Within Cancellation Window
+    GuestInitiatedCancellation --> NoRefund : Outside Cancellation Window
+    HotelInitiatedCancellation --> RefundIssued : Overbooking or Maintenance
+    
+    RefundIssued --> [*] : Refund Processed
+    NoRefund --> [*] : No Refund
+}
+
+state "Payment Process" as PP {
+    [*] --> PaymentAwaiting
+    PaymentAwaiting --> PaymentComplete : Payment Successful
+    PaymentAwaiting --> PaymentFailed : Payment Unsuccessful
+
+    PaymentFailed --> PaymentAttemptRetry : Retry Attempt
+    PaymentAttemptRetry --> PaymentComplete : Retry Successful
+    PaymentAttemptRetry --> ReservationCancelled : Retry Failed
+    ReservationCancelled --> [*]
+}
+
+state "Dynamic Pricing" as DP {
+    [*] --> BasePriceDetermination
+    BasePriceDetermination --> PriceLocked : Payment Received
+    BasePriceDetermination --> PriceAdjusted : Booking Extended
+    PriceLocked --> [*]
+    PriceAdjusted --> [*]
+}
+
+state "Overbooking Handling" as OH {
+    [*] --> OverbookingDetected
+    OverbookingDetected --> GuestNotified : Offer Options
+    GuestNotified --> Resolved : Guest Responds
+    GuestNotified --> ReservationCancelled : No Response
+    Resolved --> [*]
+    ReservationCancelled --> [*]
+}
+
+state "VIP Corporate" as VIP {
+    [*] --> VIPReservation
+    VIPReservation --> CustomRulesApplied : Follow Special Policies
+    CustomRulesApplied --> [*]
+}
+
+state "NoShow & CheckIn" as NC {
+    [*] --> CheckInWindow
+    CheckInWindow --> NoShow : Miss CheckIn
+    NoShow --> ReservationExpired : 24h Passed
+    CheckInWindow --> ReservationInUse : Successful CheckIn
+    ReservationExpired --> [*]
+    ReservationInUse --> ExtensionRequest : Guest Requests
+    ExtensionRequest --> [*] : Request Processed
+}
+
+state "Refund Processing" as RP {
+    [*] --> RefundInitiated
+    RefundInitiated --> RefundCompleted : Process Timeline
+    RefundCompleted --> [*]
+}
+
+state "Maintenance Hold" as MH {
+    [*] --> MaintenanceDetected
+    MaintenanceDetected --> RoomReassigned : Room Available
+    MaintenanceDetected --> FullRefund : No Room Available
+    RoomReassigned --> [*]
+    FullRefund --> [*] : Refund Processed
+}
+
+state "Policy Enforcement" as PE {
+    [*] --> AutomatedEnforcement
+    AutomatedEnforcement --> ManualOverride : Exceptional Cases
+    ManualOverride --> [*]
+}
+@enduml
