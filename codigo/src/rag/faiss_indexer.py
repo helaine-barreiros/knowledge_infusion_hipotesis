@@ -4,7 +4,7 @@ import os
 import json
 import logging
 
-from src.rag.config_loader import CONFIG
+from utils.config_loader import CONFIG
 
 # Configuração do logger
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")

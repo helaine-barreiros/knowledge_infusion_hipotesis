@@ -1,0 +1,21 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Person(user, "Usuário", "Pessoa que deseja controlar e melhorar sua vida financeira")
+Person(admin, "Administrador", "Equipe responsável pelas regras e suporte")
+
+System_Boundary(c1, "PFM AI-Enhanced System") {
+  System(pfm_api, "API de Gestão Financeira", "Recebe, processa e entrega informações financeiras via REST")
+  System_Ext(auth, "Sistema de Autenticação", "Responsável por login, senha, tokens")
+  System_Ext(open_finance, "Open Finance API", "Fornece dados bancários via integração")
+  System_Ext(ai_engine, "Motor de IA", "Realiza categorização e sugestões de metas")
+  System_Ext(reporting, "Serviço de Exportação", "Gera relatórios financeiros")
+}
+
+Rel(user, pfm_api, "Registra e consulta informações")
+Rel(admin, pfm_api, "Gerencia configurações e categorias")
+Rel(pfm_api, open_finance, "Importa dados bancários", "REST + OAuth2")
+Rel(pfm_api, ai_engine, "Solicita categorização e metas", "REST")
+Rel(pfm_api, auth, "Autentica usuários", "JWT + OAuth2")
+Rel(pfm_api, reporting, "Gera relatórios para o usuário")
+@enduml

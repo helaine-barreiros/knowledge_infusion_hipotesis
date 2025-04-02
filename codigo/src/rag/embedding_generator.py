@@ -5,7 +5,7 @@ import json
 import logging
 import numpy as np
 
-from src.rag.config_loader import CONFIG
+from utils.config_loader import CONFIG
 from src.rag.faiss_indexer import FaissIndexer
 from keybert import KeyBERT
 from sentence_transformers import SentenceTransformer

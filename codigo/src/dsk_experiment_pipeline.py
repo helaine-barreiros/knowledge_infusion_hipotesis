@@ -1,0 +1,50 @@
+from datetime import datetime
+from src.dsk.dsk_experiment_controller import collect_dsk_treatment_samples_to_use_case_artifacts
+from utils.system_parametrization import SYSTEM_CONFIG
+from utils.logger import Logger
+
+LOGGER = Logger
+
+qtd_iteractions = SYSTEM_CONFIG.get("iteractions")
+
+
+def main():
+
+    start_time = datetime.now()
+
+    LOGGER.info("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓")
+    LOGGER.info("┃               🚀 DSK KNOWLEDGE EXPERIMENT PIPELINE STARTED         ┃")
+    LOGGER.info("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛")
+
+    iteractions = 1
+
+    for i in range(1, qtd_iteractions + 1):
+        LOGGER.info(f"STARTING EXPERIMENTAL COLLECTION {iteractions} OF {qtd_iteractions}")
+
+        _print_iteration_log_data_start(qtd_iteractions, i)
+
+        collect_dsk_treatment_samples_to_use_case_artifacts(i, start_time)
+
+        _print_iteration_log_end(i)
+
+    end_time = datetime.now()
+    execution_time = end_time - start_time
+
+    LOGGER.info("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓")
+    LOGGER.info("┃    🎉 DSK KNOWLEDGE EXPERIMENT PIPELINE COMPLETED SUCCESSFULLY   ┃")
+    LOGGER.info(f"┃        ⏱️  Total execution time: {execution_time}                ┃")
+    LOGGER.info("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛")
+
+
+def _print_iteration_log_end(i):
+    LOGGER.info(f"✅ Iteration {i} completed")
+
+
+def _print_iteration_log_data_start(qtd_iteractions, i):
+    progress = int(qtd_iteractions * i / qtd_iteractions)
+    progress_bar = "█" * progress + "░" * (qtd_iteractions - progress)
+    percentage = int(100 * i / qtd_iteractions)
+
+    LOGGER.info("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓")
+    LOGGER.info(f"┃ 🔄 ITERATION {i}{qtd_iteractions} [{progress_bar}] {percentage}%            ┃")
+    LOGGER.info("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛")

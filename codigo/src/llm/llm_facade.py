@@ -6,23 +6,30 @@ import os
 from dotenv import load_dotenv
 from ollama import chat, Client, ResponseError
 from openai import OpenAI
-from src.rag.config_loader import CONFIG
-from src.rag.document_loader import load_documents
+from utils.system_parametrization import SYSTEM_CONFIG
+from utils.document_loader import load_documents
+from llm.document_loader import load_documents
+from utils.logger import Logger
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+from openai.types.beta.threads.message_create_params import (
+    Attachment,
+    AttachmentToolFileSearch,
+)
+
+logging = Logger
 load_dotenv() 
 
 OPENAI_KEY = os.environ.get("OPENAI_API_KEY")
 OPENAI_CLIENT = OpenAI(api_key=OPENAI_KEY)
-OPENAI_MODEL = CONFIG["openai_model"]
+OPENAI_MODEL = SYSTEM_CONFIG.get("openai_model")
 
-SYS_MSG_CONTENT = CONFIG["system_prompt"]
-USR_MSG_CONTENT = CONFIG["user_prompt"]
+SYS_MSG_CONTENT = SYSTEM_CONFIG.get("system_prompt")
+USR_MSG_CONTENT = SYSTEM_CONFIG.get("user_prompt")
 
-OLLAMA_HOST = CONFIG["ollama_url"]
-OLLAMA_MODEL = CONFIG["ollama_model"]
+OLLAMA_HOST = SYSTEM_CONFIG.get("ollama_url")
+OLLAMA_MODEL = SYSTEM_CONFIG.get("ollama_model")
 
-DSK_DIRECTORY = CONFIG.get("dsk_dir")
+DSK_DIRECTORY = SYSTEM_CONFIG.get("dsk_dir")
 
 def generate_diagram(output_directory, filename, llm="Ollama", use_specific_knowledge=False):
   logging.info("Starting diagram generation")
@@ -35,7 +42,7 @@ def generate_diagram(output_directory, filename, llm="Ollama", use_specific_know
   if use_specific_knowledge:
     logging.info("Using domain-specific knowledge for diagram generation")
 
-    if "Ollama" == llm:
+    if llm == "Ollama":
       #fixme: adjust do pdf document upload, mut use only text for now!!!!!
       domain_knowledge_context_content = get_domain_knowledge_content_to_ollama()
       usr_msg_content = f"""{usr_msg_content} Use this Business constraints to generate the diagram: {domain_knowledge_context_content}"""
@@ -43,7 +50,7 @@ def generate_diagram(output_directory, filename, llm="Ollama", use_specific_know
       #filenames, domain_knowledge_context_content = get_domain_knowledge_content_to_openai()
       filenames = atach_domain_knowledge_files_to_openai
       usr_msg_content = f"""{usr_msg_content}. To generate the diagram use the Business Domain Knowledge in the attached files: {", ".join(filenames)}"""
-          
+
     logging.info("Domain-specific knowledge successfully loaded")
 
   else:
@@ -52,7 +59,7 @@ def generate_diagram(output_directory, filename, llm="Ollama", use_specific_know
   plantuml_code = ""
 
   try:
-    if "Ollama" == llm:
+    if llm == "Ollama":
       sys_msg = mount_message("system",sys_msg_content)
       user_msg = mount_message("user",usr_msg_content)
 
@@ -64,12 +71,12 @@ def generate_diagram(output_directory, filename, llm="Ollama", use_specific_know
 
   except Exception as e:
     logging.critical(f"Failed to generate diagram using {llm}: {e}")
-    raise Exception(f"Failed to generate diagram using {llm}: {e}")
+    raise ValueError(f"Failed to generate diagram using {llm}: {e}") from e
 
   logging.info("Diagram successfully generated:{plantuml_code}")
 
   output_file = os.path.join(output_directory, f"{filename}.txt")
-  
+
   try:
     with open(output_file, 'w', encoding='utf-8') as file:
       file.write(plantuml_code)
@@ -181,6 +188,29 @@ def call_openai(instructions, input, file_ids):
       logging.info(f"Calling OpenAI API | Model: {model}")
       logging.debug(f"Instructions: {instructions}")
       logging.debug(f"User Input: {input}")
+
+      file_assistant = OPENAI_CLIENT.beta.assistants.create(
+          model=OPENAI_MODEL,
+          description="An assistant to generate UML Diagrams.",
+          tools=[{"type": "file_search"}],
+          name="File assistant",
+      )
+
+      thread = OPENAI_CLIENT.beta.threads.create()
+
+      OPENAI_CLIENT.beta.threads.messages.create(
+        thread_id=thread.id,
+        messages=[
+          {"role": "developer", "content": instructions},
+          {"role": "user", "content": input, },
+        ]
+        role="user",
+        ,
+        content=prompt,
+      )
+
+
+
 
       messages = [
           {"role": "developer", "content": instructions},

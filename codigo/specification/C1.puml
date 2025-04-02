@@ -1,0 +1,56 @@
+@startuml "AI-Enhanced Personal Finance Management System - Context Diagram"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+'Define SPRITE for custom icons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include FONTAWESOME/users.puml
+!include FONTAWESOME/user_tie.puml
+!include FONTAWESOME/server.puml
+!include FONTAWESOME/brain.puml
+!include FONTAWESOME/newspaper.puml
+!include FONTAWESOME/university.puml
+!include FONTAWESOME/chart_line.puml
+!include FONTAWESOME/lock.puml
+
+'Define custom colors
+!define CUSTOMER_COLOR #08427B
+!define SYSTEM_COLOR #1168BD
+!define EXTERNAL_SYSTEM_COLOR #999999
+
+LAYOUT_WITH_LEGEND()
+
+'Persons / Actors
+Person(individual, "Individual Customer", "A person who wants to manage their personal finances and receive financial insights", $sprite="users")
+Person(advisor, "Financial Advisor", "Professional who provides financial advice based on customer data", $sprite="user_tie")
+
+'Main System
+System(pfm_system, "AI-Enhanced Personal Finance Management System", "Provides financial aggregation, analysis, visualization, and AI-powered recommendations to help users manage their finances effectively", $sprite="server")
+
+'External Systems
+System_Ext(banking_api, "Banking APIs", "External services that provide secure access to users' bank accounts and transactions", $sprite="university")
+System_Ext(investment_api, "Investment APIs", "External services that provide market data and investment portfolio information", $sprite="chart_line")
+System_Ext(credit_service, "Credit Scoring Service", "Provides credit score information and assessment", $sprite="server")
+System_Ext(news_service, "Financial News Service", "Provides relevant financial news and economic indicators", $sprite="newspaper")
+System_Ext(auth_service, "Authentication Service", "Handles user authentication through various methods", $sprite="lock")
+System_Ext(ai_engine, "AI Reasoning Engine", "Provides advanced financial reasoning and predictive capabilities", $sprite="brain")
+
+'Relationships - Individual Customer
+Rel(individual, pfm_system, "Views financial information, receives insights, manages budgets and goals")
+
+'Relationships - Financial Advisor
+Rel(advisor, pfm_system, "Accesses shared customer financial data and provides recommendations")
+
+'Relationships - PFM System to External Systems
+Rel(pfm_system, banking_api, "Retrieves banking transactions, account balances, and account information")
+Rel(pfm_system, investment_api, "Fetches investment data, portfolio performance, and market information")
+Rel(pfm_system, credit_service, "Obtains credit scores and credit-related insights")
+Rel(pfm_system, news_service, "Receives relevant financial news and market updates")
+Rel(pfm_system, auth_service, "Verifies user identities and manages authentication")
+Rel(pfm_system, ai_engine, "Leverages for advanced financial analysis and personalized recommendations")
+
+'Feedback Relationships
+Rel(banking_api, pfm_system, "Sends transaction notifications and account updates")
+Rel(pfm_system, individual, "Sends notifications about financial alerts, insights, and goal progress")
+
+@enduml

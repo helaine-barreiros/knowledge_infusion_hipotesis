@@ -5,7 +5,7 @@ import logging
 import numpy as np
 from src.rag.faiss_indexer import FaissIndexer
 from src.rag.embedding_generator import generate_embedding
-from src.rag.config_loader import CONFIG
+from utils.config_loader import CONFIG
 
 # Configuração do logger
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")

@@ -1,18 +1,18 @@
+from src.rag.embedding_generator import generate_embedding, save_embeddings, process_and_store_embeddings
+from utils.config_loader import CONFIG
+
 import unittest
 import sys
 import os
-import json
-# Adiciona o diretório raiz ao sys.path para permitir importações corretas
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
-from src.rag.embedding_generator import generate_embedding, save_embeddings, process_and_store_embeddings
-from src.rag.config_loader import CONFIG
 import logging
 
-# Configuração do logger
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 TEST_EMBEDDINGS_DIR = "tests/test_embeddings"
+
 
 class TestEmbeddingGenerator(unittest.TestCase):
 
