@@ -89,7 +89,7 @@ class PlantUMLUseCaseController:
             diagram_image = self.PLANTUML_SERVER.processes(extracted_code)
 
         except Exception as e:
-            self.LOGGER.critical(f"Failed to generate diagram image: {e}")
+            self.LOGGER.critical(f"Failed to generate diagram image: {str(e)}")
 
         return diagram_image
 
@@ -118,6 +118,7 @@ class PlantUMLUseCaseController:
                 return None
 
             components = self.parser.parse(extracted_code)
+            self.LOGGER.info(f"Extracted components:{components}")
 
             # Verificar se o parser retornou um valor válido
             if not components or not isinstance(components, dict):
@@ -151,14 +152,14 @@ class PlantUMLUseCaseController:
 
         try:
             components = self.extract_plantuml_use_case_components(plantuml_code)
-            
+            self.LOGGER.info(f"Extracted components:{components}")
             # Verificar se components é None ou vazio antes de tentar acessar
             if not components:
                 self.LOGGER.debug("Not declared components.")
                 return None
                 
             # Obter relações e garantir valor padrão como lista vazia
-            relations = components.get("relations", [])
+            relations = components.get("relationships", [])
 
             # Verificar se componentes é um dicionário vazio ou inválido 
             if not isinstance(components, dict):
@@ -166,7 +167,7 @@ class PlantUMLUseCaseController:
                 return None
 
             # Criar DataFrames
-            df_components = pd.DataFrame(components)
+            df_components = pd.DataFrame(components["actors"])
             df_relations = pd.DataFrame(relations)
 
             # Gerar Excel em memória

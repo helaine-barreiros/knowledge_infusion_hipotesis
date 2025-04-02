@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from src.utils.system_parametrization import SYSTEM_CONFIG
+from src.utils.logger import Logger
 
 
 class LLMStrategy(ABC):
@@ -14,6 +15,7 @@ class OpenAIStrategy(LLMStrategy):
         self.base_url = SYSTEM_CONFIG.get("general.models.default_openai_provider", "http://localhost:11434/api/chat")
         self.default_model = SYSTEM_CONFIG.get("general.models.default_openai_model", "gpt-4o")
         self.temperature = SYSTEM_CONFIG.get("general.models.default_openai_temperature", 0.7)
+        self.logger = Logger
 
     def execute(self, prompt, **params):
         import openai
@@ -45,14 +47,12 @@ class OllamaStrategy(LLMStrategy):
                                                "Qwen2.5-Coder-7B-Instruct:latest")
         self.temperature = SYSTEM_CONFIG.get("general.models.default_ollama_temperature", 0.7)
         self.timeout = SYSTEM_CONFIG.get("general.models.default_ollama_timeout", 60)
+        self.logger = Logger
 
     def execute(self, prompt, **params):
         import requests
-        import json
-        import logging
-        import re
 
-        logger = logging.getLogger(__name__)
+        content = ""
 
         model = params.get("model", self.default_model)
         system_message = params.get("system_prompt", "")
@@ -72,76 +72,23 @@ class OllamaStrategy(LLMStrategy):
         }
 
         try:
-            logger.info(f"Calling Ollama API with model={model}, temp={temperature}, timeout={timeout}")
+            self.logger.info(f"Calling Ollama API with model={model}, temp={temperature}, timeout={timeout}")
             response = requests.post(self.api_url, json=payload, timeout=timeout)
             response.raise_for_status()
 
-            logger.debug(f"API response status: {response.status_code}")
-            logger.debug(f"API response headers: {response.headers}")
-            logger.debug(f"API response raw text: {response.text[:500]}...")
+            # self.logger.debug(f"API response status: {response.status_code}")
+            # self.logger.debug(f"API response headers: {response.headers}")
+            # self.logger.debug(f"API response raw text: {response.text[:500]}...")
 
-            if "}{" in response.text:
-                logger.info("Detected multiple JSON objects in response (streaming format)")
+            content = response.json().get("message", {}).get("content", "")
 
-                content_parts = []
-
-                json_objects = re.findall(r'{[^{]*?}', response.text)
-                logger.debug(f"Found {len(json_objects)} JSON objects")
-
-                for json_str in json_objects:
-                    try:
-                        obj = json.loads(json_str)
-                        if "message" in obj and "content" in obj["message"]:
-                            content = obj["message"]["content"]
-                            if content.strip(): 
-                                content_parts.append(content)
-                    except json.JSONDecodeError:
-                        logger.debug(f"Failed to parse JSON object: {json_str[:100]}...")
-
-                if content_parts:
-                    logger.info(f"Successfully extracted {len(content_parts)} content parts")
-                    return "".join(content_parts)
-                else:
-                    logger.warning("No content found in JSON objects")
-
-            try:
-                result = json.loads(response.text)
-                logger.debug(f"JSON parsed successfully: {str(result)[:100]}...")
-
-                if "message" in result and "content" in result["message"]:
-                    content = result["message"]["content"]
-                    logger.info(f"Extracted content: {content[:100]}...")
-                    return content
-                else:
-                    logger.warning(f"Unexpected JSON structure: {result}")
-
-                    if isinstance(result, dict):
-
-                        for key, value in result.items():
-                            if key == "content" and isinstance(value, str):
-                                return value
-                            elif isinstance(value, dict) and "content" in value:
-                                return value["content"]
-
-                    text_response = str(result)
-                    if len(text_response) > 20:
-                        logger.info("Returning JSON as string")
-                        return text_response
-            except json.JSONDecodeError as e:
-                logger.warning(f"JSON parsing error: {e}")
-
-                if len(response.text) > 20:
-                    logger.info("Returning raw text response")
-                    return response.text.strip()
-
-            logger.warning("No structured content found, returning raw response")
-            return f"Raw response: {response.text[:500]}..."
+            self.logger.info(f"Extracted content: {content[:100]}...")
 
         except Exception as e:
-            logger.error(f"Error calling Ollama API: {e}")
-            logger.error(f"Payload was: {payload}")
+            self.logger.error(f"Error calling Ollama API: {e}")
+            self.logger.error(f"Payload was: {payload}")
 
-            return f"Error occurred: {str(e)}. Unable to get response from model {model}."
+        return content
 
 
 class LLMStrategyFactory:
