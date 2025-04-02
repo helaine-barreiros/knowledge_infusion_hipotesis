@@ -1,0 +1,61 @@
+ The states should be: new, pending, triaged, in progress, complete.
+Certainly! Below is a PlantUML code snippet to create a state machine diagram for managing a patient's prontuary (medical record) status during the clinical priority triaging process. The states included are `new`, `pending`, `triaged`, `in progress`, and `complete`.
+
+```plantuml
+@startuml
+
+title Patient Prontuary State Machine
+
+state new {
+    initial
+    note right: This state represents a new prontuary that has just been initiated.
+}
+
+state pending {
+    note left: The prontuary is in this state while the nurse reviews it for triaging priorities. It may be waiting for additional information or clarification.
+}
+
+state triaged {
+    note top: After assessment, the prontuary is assigned a priority level based on clinical needs. This state indicates that triage has been completed.
+}
+
+state in progress {
+    note bottom: The prontuary is being actively treated or managed by healthcare providers. Progress notes and updates are recorded here.
+}
+
+state complete {
+    note right: The prontuary is finalized, either because the patient's condition is resolved or other disposition actions have been taken (e.g., transfer, discharge).
+}
+
+new --> pending : Review/Assessment
+
+pending --> triaged : Triage Decision
+
+triaged --> in progress : Treatment Initiation
+
+in progress --> complete : Completion of Treatment/Discharge
+
+@enduml
+```
+
+### Explanation:
+1. **States**:
+   - `new`: The starting state where a prontuary is newly created.
+   - `pending`: The prontuary is under review by the nurse for triaging priorities.
+   - `triaged`: After assessment, the prontuary is assigned a priority level (e.g., high, medium, low).
+   - `in progress`: The treatment or management of the patient is ongoing.
+   - `complete`: The prontuary is finalized once treatment is completed or disposition actions are taken.
+
+2. **Transitions**:
+   - From `new` to `pending`: This represents the nurse starting the triaging process by reviewing the prontuary.
+   - From `pending` to `triaged`: Once reviewed, a triage decision is made.
+   - From `triaged` to `in progress`: Treatment or management begins after triage.
+   - From `in progress` to `complete`: The treatment concludes or the patient is discharged.
+
+This diagram outlines the flow of states and transitions for managing a patient's prontuary during clinical prioritization. Each state corresponds to different stages in the triaging process, ensuring clarity on how the status evolves. 
+
+To visualize this, you can copy the PlantUML code into an online PlantUML parser or editor like [PlantUML Online](http://plantuml.com/online). The resulting diagram will help nurses and other healthcare professionals understand the progression of patient prontuary statuses during triaging. 
+
+---
+
+**Note**: Ensure that all states and transitions are consistent with your clinical workflow to avoid confusion in real-world applications. Adjust the notes as needed to better reflect specific operational contexts or terminology used within your organization. For example, if there's a "hold" state where a prontuary is paused awaiting further action, you could add an additional state and transition accordingly. However, based on the provided requirements, the five states are sufficient for this scenario.

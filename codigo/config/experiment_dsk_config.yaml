@@ -1,22 +1,37 @@
-rag:
+general:
   dsk_dir: "./dsk"                 # Diretório onde os documentos estão armazenados
-  embeddings_dir: "./embeddings"    # Diretório onde os embeddings serão salvos
-  embedding_model: "nvidia/NV-Embed-v1"  # Modelo a ser utilizado para embeddings
-  max_tokens: 512                   # Limite de tokens por chunk de texto
-  normalize_embeddings: True         # Normalizar embeddings para tornar a recuperação mais eficiente
-  iteractions: 1
+  iteractions: 3
   log_level: "DEBUG"
-  output_directory: "rag_extracted_data"
+  output_directory: "./output"
+  log_dir: "./log"
+  models:
+    default_openai_provider: "https://api.openai.com/v1"
+    default_openai_model: "gpt-4o"
+    default_openai_temperature: 0.7
+    default_openai_key: ""
+    default_ollama_url: "https://4b51-200-133-1-77.ngrok-free.app/api/chat"
+    default_ollama_model: "Qwen2.5-Coder-7B-Instruct:latest"
+    default_ollama_temperature: 0.7
+    default_ollama_timeout: 60
+    default_provider: "ollama"  #ollama|openai
+artifacts:  
+  output_directory: "experiment_artifacts_collected_data"
   system_prompt: "Act as a business expert in Emergency Patient Triage certified by the Manchester Triage Group third edition, to provide accurate and expert guidance in the domain of emergency triage."
   user_prompt: "generate PlantUML code to model a state machine diagram that manages the patient prontuary status during the clinical priority triaging process by a nurse."
   treatment_model_1: "Qwen2.5-Coder-7B-Instruct:latest"
   treatment_model_2: "Fin-R1:latest"
   treatment_provider_1: "ollama"
   treatment_provider_2: "ollama"
-  ollama_model: "phi4-mini"
+  treatment_model_1_temperature: 0.7
+  treatment_model_2_temperature: 0.7
+  ollama_model: "Qwen2.5-Coder-7B-Instruct:latest"
   ollama_url: "https://4b51-200-133-1-77.ngrok-free.app/api/chat"
   plantuml_png_url: "http://www.plantuml.com/plantuml/png/"
   pipeline_processor: parallel  #treatment1|treatment2|parallel
-
+rag:
+  embeddings_dir: "./embeddings"
+  embedding_model: "nvidia/NV-Embed-v1"
+  max_tokens: 512                   # Limite de tokens por chunk de texto
+  normalize_embeddings: True 
 
 

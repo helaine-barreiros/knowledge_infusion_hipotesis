@@ -1,0 +1,36 @@
+@startuml
+title Exemplo de modelagem
+left to right direction
+skinparam packageStyle rect
+skinparam shadowing false
+
+actor Visitor as visitor
+actor Roommate as roommate
+actor :Shared Room Manager: as respRoommate
+roommate <|-- respRoommate
+
+rectangle application {
+	(Register) as registration
+        (View Roommate) as display
+        (Edit Roommate) as edit
+        (Administer Roommate) as administer
+        (Edit Tasks) as editTasks
+
+	(Create Roommate) .> administer: extends
+        (Delete Roommate) ..> administer: extends
+        (Add Tasks) ..> administer: extends
+        (Delete Tasks) ..> administer: extends
+
+	(Mark Task as Completed) .> edit: extends
+
+	editTasks ..> edit : extends
+	note right of editTasks
+		Example : indicate that a household chore has been completed.
+	end note
+
+	visitor --> registration
+	roommate --> display
+	roommate --> modify
+	respRoommate -> administer
+}
+@enduml

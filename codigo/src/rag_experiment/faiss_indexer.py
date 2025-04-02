@@ -4,12 +4,12 @@ import os
 import json
 import logging
 
-from utils.config_loader import CONFIG
+from src.utils.system_parametrization import CONFIG
 
 # Configuração do logger
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
-FAISS_INDEX_PATH = os.path.join(CONFIG["embeddings_dir"], "faiss_index")
+FAISS_INDEX_PATH = os.path.join(CONFIG["rag.embeddings_dir"], "faiss_index")
 
 class FaissIndexer:
     def __init__(self, embedding_dim=1024):  # Dimensão do modelo BGE Large

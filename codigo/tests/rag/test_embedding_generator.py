@@ -1,4 +1,4 @@
-from src.rag.embedding_generator import generate_embedding, save_embeddings, process_and_store_embeddings
+from src.rag_experiment.embedding_generator import generate_embedding, save_embeddings, process_and_store_embeddings
 from utils.config_loader import CONFIG
 
 import unittest

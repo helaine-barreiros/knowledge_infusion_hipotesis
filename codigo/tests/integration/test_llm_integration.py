@@ -26,11 +26,11 @@ class TestLLMIntegration(unittest.TestCase):
 
         cls.llm_service = LLMService()
 
-        cls.model1 = SYSTEM_CONFIG.get("rag.treatment_model_1")
-        cls.model2 = SYSTEM_CONFIG.get("rag.treatment_model_2")
-        cls.provider1 = SYSTEM_CONFIG.get("rag.treatment_provider_1")
-        cls.provider2 = SYSTEM_CONFIG.get("rag.treatment_provider_2")
-        cls.ollama_url = SYSTEM_CONFIG.get("rag.ollama_url")
+        cls.model1 = SYSTEM_CONFIG.get("artifacts.treatment_model_1")
+        cls.model2 = SYSTEM_CONFIG.get("artifacts.treatment_model_2")
+        cls.provider1 = SYSTEM_CONFIG.get("artifacts.treatment_provider_1")
+        cls.provider2 = SYSTEM_CONFIG.get("artifacts.treatment_provider_2")
+        cls.ollama_url = SYSTEM_CONFIG.get("artifacts.default_ollama_url")
 
         cls.logger.info(f"Using provider1: {cls.provider1}, model1: {cls.model1}")
         cls.logger.info(f"Using provider2: {cls.provider2}, model2: {cls.model2}")
@@ -256,7 +256,7 @@ class TestLLMIntegration(unittest.TestCase):
     def test_experiment_system_prompt(self):
         """Test using the experiment's system prompt with a PlantUML task."""
 
-        system_prompt = SYSTEM_CONFIG.get("rag.system_prompt")
+        system_prompt = SYSTEM_CONFIG.get("artifacts.system_prompt")
         prompt = "Create a simple PlantUML state machine diagram for patient triage with 3-4 states."
 
         try:

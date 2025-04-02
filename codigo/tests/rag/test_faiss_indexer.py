@@ -2,8 +2,8 @@ import unittest
 import os
 import numpy as np
 import logging
-from src.rag.faiss_indexer import FaissIndexer
-from src.rag.embedding_generator import generate_embedding
+from src.rag_experiment.faiss_indexer import FaissIndexer
+from src.rag_experiment.embedding_generator import generate_embedding
 from utils.config_loader import CONFIG
 
 # Configuração do logger

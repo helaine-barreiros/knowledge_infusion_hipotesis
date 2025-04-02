@@ -1,0 +1,32 @@
+ The states should include: "New Patient", "Patient Admitted", "Patient Discharged", and "Inpatient Admission". The transitions between these states should be labeled with actions such as "Admit Patient", "Discharge Patient", and "Transfer to Inpatient Ward". Additionally, the initial state should be set to "New Patient".
+
+Here is a sample PlantUML code for a state machine diagram:
+
+```
+@startuml
+[*] --> NewPatient
+
+state NewPatient {
+    [*] --> AdmitPatient
+    AdmitPatient --> PatientAdmitted
+}
+
+state PatientAdmitted {
+    [*] --> DischargePatient
+    DischargePatient --> PatientDischarged
+}
+
+state PatientDischarged {
+}
+
+state InpatientWard {
+    [*] --> TransferToInpatientWard
+    TransferToInpatientWard --> InpatientAdmission
+}
+
+[*] --> InpatientWard
+
+@enduml
+```
+
+Please note that you may need to adjust the code to fit your specific requirements and ensure that it accurately models the patient prontuary status during the clinical priority triaging process.

@@ -25,8 +25,7 @@ class SystemParametrization:
             self._base_dir = Path(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
             self._config_dir = self._base_dir / "config"
             self._config_file = self._config_dir / "experiment_dsk_config.yaml"
-            
-            # Configure logger with base directory
+
             LOGGER.configure(base_dir=self._base_dir)
 
             self._load_config()
@@ -49,10 +48,10 @@ class SystemParametrization:
 
     def _setup_directories(self) -> None:
         directories = {
-            "dsk_dir": self.get("rag.dsk_dir", "./dsk"),
+            "dsk_dir": self.get("general.dsk_dir", "./dsk"),
             "embeddings_dir": self.get("rag.embeddings_dir", "./embeddings"),
-            "output_dir": self.get("rag.output_directory", "./output"),
-            "log_dir": "./log"
+            "output_dir": self.get("general.output_directory", "./output"),
+            "log_dir": self.get("general.log_dir", "./output")
         }
 
         for name, path in directories.items():
@@ -105,7 +104,6 @@ class SystemParametrization:
 
     def save_config(self) -> None:
         try:
-            # Garantir que o diretório de configuração existe
             self._config_dir.mkdir(exist_ok=True, parents=True)
 
             with open(self._config_file, 'w', encoding='utf-8') as f:
@@ -116,7 +114,7 @@ class SystemParametrization:
             LOGGER.error(f"Error in saving configuration file: {e}")
 
     def get_log_level(self) -> int:
-        log_level_str = self.get("rag.log_level", "INFO").upper()
+        log_level_str = self.get("general.log_level", "INFO").upper()
         log_levels = {
             "DEBUG": logging.DEBUG,
             "INFO": logging.INFO,
@@ -125,10 +123,9 @@ class SystemParametrization:
             "CRITICAL": logging.CRITICAL
         }
         log_level = log_levels.get(log_level_str, logging.INFO)
-        
-        # Configure logger with the loaded log level
+
         LOGGER.configure(log_level=log_level)
-        
+
         return log_level
 
     def get_abs_path(self, config_key: str) -> Path:

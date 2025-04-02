@@ -1,21 +1,19 @@
-import spacy
-import torch
-import os
-import json
-import logging
-import numpy as np
-
-from utils.config_loader import CONFIG
-from src.rag.faiss_indexer import FaissIndexer
+from src.utils.system_parametrization import CONFIG
+from src.rag_experiment.faiss_indexer import FaissIndexer
 from keybert import KeyBERT
 from sentence_transformers import SentenceTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 
-# Configuração do logger
+import spacy
+import os
+import json
+import logging
+import numpy as np
+
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
-#mover para o try
 faiss_indexer = FaissIndexer(embedding_dim=1024)
 
 # Carrega o modelo de embeddings BGE Large
@@ -66,7 +64,7 @@ def generate_embedding(text):
 
     try:
         # Gera embeddings usando a função encode() do SentenceTransformer
-        embedding = model.encode([text], normalize_embeddings=CONFIG["normalize_embeddings"])
+        embedding = model.encode([text], normalize_embeddings=CONFIG["rag.normalize_embeddings"])
 
         return embedding.tolist()
     except Exception as e:
@@ -109,10 +107,10 @@ def save_embeddings_in_json(content, filename, page_number=None):
         return
 
     try:
-        os.makedirs(CONFIG["embeddings_dir"], exist_ok=True)
+        os.makedirs(CONFIG["rag.embeddings_dir"], exist_ok=True)
 
         filename = f"{filename}_page{page_number}" if page_number is not None else filename
-        filepath = os.path.join(CONFIG["embeddings_dir"], f"{filename}.json")
+        filepath = os.path.join(CONFIG["rag.embeddings_dir"], f"{filename}.json")
 
         # Verifica se o arquivo já existe para evitar sobrescrita
         #if os.path.exists(filepath):
@@ -180,10 +178,7 @@ def process_and_store_embeddings(documents):
                 # TODO: agora precisamos salvar no FAISS com a mesma estrutura
                 # PRECISO ADAPTAR O CODIGO DAQUI EM DIANTE
 
-
                 processed_embeddings[f"{filename}_page{idx}"] = embedding
-
-
 
                 all_embeddings.append(embedding[0])  # Convertendo para matriz FAISS
                 all_texts.append(page.getText())  # Guardamos o parágrafo real para o FAISS
@@ -193,7 +188,7 @@ def process_and_store_embeddings(documents):
                 logging.warning(f"⚠️ Falha ao gerar embedding para {filename} - Chunk {idx}.")
 
         # Salva o JSON no formato correto
-        json_filepath = os.path.join(CONFIG["embeddings_dir"], f"{filename}.json")
+        json_filepath = os.path.join(CONFIG["rag.embeddings_dir"], f"{filename}.json")
         with open(json_filepath, "w", encoding="utf-8") as f:
             json.dump(embeddings_data, f, indent=4)
 

@@ -1,0 +1,34 @@
+@startuml
+
+title Patient Prontuary State Machine
+
+state new {
+    initial
+    note right: This state represents a new prontuary that has just been initiated.
+}
+
+state pending {
+    note left: The prontuary is in this state while the nurse reviews it for triaging priorities. It may be waiting for additional information or clarification.
+}
+
+state triaged {
+    note top: After assessment, the prontuary is assigned a priority level based on clinical needs. This state indicates that triage has been completed.
+}
+
+state in progress {
+    note bottom: The prontuary is being actively treated or managed by healthcare providers. Progress notes and updates are recorded here.
+}
+
+state complete {
+    note right: The prontuary is finalized, either because the patient's condition is resolved or other disposition actions have been taken (e.g., transfer, discharge).
+}
+
+new --> pending : Review/Assessment
+
+pending --> triaged : Triage Decision
+
+triaged --> in progress : Treatment Initiation
+
+in progress --> complete : Completion of Treatment/Discharge
+
+@enduml
