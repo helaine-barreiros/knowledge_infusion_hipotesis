@@ -1,114 +1,108 @@
 import re
 from collections import defaultdict
 from typing import Dict, List, Tuple, Optional, Any, Union
+from utils.logger import Logger
 
+LOGGER = Logger
 
 class PlantUMLUseCaseParser:
     """
-    Parser interno para diagramas de casos de uso PlantUML.
-    Esta classe realiza a análise detalhada do código PlantUML.
+    Internal parser for PlantUML use case diagrams.
+    This class performs detailed analysis of PlantUML code.
     """
     def __init__(self):
         self.elements = defaultdict(list)
         self.counts = {
-            'atores': 0,
-            'casos_de_uso': 0,
-            'relacionamentos': 0, 
-            'notas': 0,
-            'retangulos': 0
+            'actors': 0,
+            'use_cases': 0,
+            'relationships': 0, 
+            'notes': 0,
+            'rectangles': 0
         }
         self.title = None
-        
+
     def parse(self, plantuml_code: str) -> Tuple[Dict[str, List[Dict[str, Any]]], Dict[str, int]]:
         """
-        Analisa o código PlantUML e extrai os elementos do diagrama.
-        
+        Analyzes PlantUML code and extracts diagram elements.
+
         Args:
-            plantuml_code (str): Código PlantUML a ser analisado
-            
+            plantuml_code (str): PlantUML code to analyze
+
         Returns:
-            Tuple: (elementos extraídos, contagem de elementos)
+            Tuple: (extracted elements, element counts)
         """
-        # Converte múltiplas linhas para uma única linha se o código estiver compactado
+        # Convert multiple lines to a single line if the code is compacted
         if '\n' not in plantuml_code and len(plantuml_code.strip()) > 100:
             plantuml_code = plantuml_code.replace('@startuml', '@startuml\n')
             plantuml_code = plantuml_code.replace('@enduml', '\n@enduml')
             plantuml_code = re.sub(r'([^\s])\s*rectangle', r'\1\nrectangle', plantuml_code)
             plantuml_code = re.sub(r'}\s*([^\s])', r'}\n\1', plantuml_code)
             plantuml_code = re.sub(r'(actor|usecase|note|rectangle)(\s+)', r'\n\1\2', plantuml_code)
-        
-        # Limpa o código removendo linhas de configuração
+
+        # Clean code by removing configuration lines
         cleaned_lines = []
         for line in plantuml_code.strip().split('\n'):
             line = line.strip()
             if line and not line.startswith('@startuml') and not line.startswith('@enduml'):
                 cleaned_lines.append(line)
-        
-        # Extrai o título se existir
+
+        # Extract title if exists
         self.title = None
         for line in cleaned_lines:
             if line.startswith('title '):
                 self.title = line[6:].strip()
                 break
-        
-        # Reseta os elementos e contagens antes de iniciar a análise
+
+        # Reset elements and counts before starting analysis
         self._reset()
         
-        # Analisa os atores
+        # Parse elements
         self._parse_actors(cleaned_lines)
-        
-        # Analisa casos de uso
         self._parse_use_cases(cleaned_lines)
-        
-        # Analisa retângulos (sistemas/pacotes)
         self._parse_rectangles(cleaned_lines)
-        
-        # Analisa relacionamentos
         self._parse_relationships(cleaned_lines)
-        
-        # Analisa notas
         self._parse_notes(cleaned_lines)
         
         return self.elements, self.counts
     
     def _reset(self) -> None:
-        """Reseta o estado do parser para uma nova análise."""
+        """Resets the parser state for a new analysis."""
         self.elements = defaultdict(list)
         self.counts = {
-            'atores': 0,
-            'casos_de_uso': 0,
-            'relacionamentos': 0, 
-            'notas': 0,
-            'retangulos': 0
+            'actors': 0,
+            'use_cases': 0,
+            'relationships': 0, 
+            'notes': 0,
+            'rectangles': 0
         }
     
     def _parse_actors(self, lines: List[str]) -> None:
         """
-        Extrai atores do diagrama.
+        Extracts actors from diagram.
         
         Args:
-            lines (List[str]): Linhas de código PlantUML limpo
+            lines (List[str]): Cleaned PlantUML code lines
         """
-        # Padrão para atores definidos diretamente
+        # Pattern for directly defined actors
         actor_pattern = re.compile(r'actor\s+:?([^:]+?)(?::\s*as\s+([^\s]+)|$)')
-        # Padrão para atores em relações de herança
+        # Pattern for actors in inheritance relationships
         inheritance_pattern = re.compile(r'([^\s]+)\s+<\|--\s+([^\s]+)')
         
         for line in lines:
-            # Procura definições diretas de atores
+            # Look for direct actor definitions
             match = actor_pattern.search(line)
             if match:
                 actor_name = match.group(1).strip()
                 actor_alias = match.group(2) if match.group(2) else actor_name
                 
-                # Para atores com formato especial como ":Nome:"
+                # For actors with special format like ":Name:"
                 if actor_name.startswith(':') and actor_name.endswith(':'):
                     actor_name = actor_name[1:-1].strip()
                 
-                self.elements['atores'].append({'nome': actor_name, 'alias': actor_alias})
-                self.counts['atores'] += 1
+                self.elements['actors'].append({'name': actor_name, 'alias': actor_alias})
+                self.counts['actors'] += 1
         
-        # Segunda passagem para identificar atores em relações de herança que não foram definidos explicitamente
+        # Second pass to identify actors in inheritance relationships that weren't explicitly defined
         for line in lines:
             if '<|--' in line:
                 match = inheritance_pattern.search(line)
@@ -116,82 +110,82 @@ class PlantUMLUseCaseParser:
                     parent = match.group(1).strip()
                     child = match.group(2).strip()
                     
-                    # Verifica se os atores já estão na lista
+                    # Check if actors are already in the list
                     parent_exists = False
                     child_exists = False
                     
-                    for actor in self.elements['atores']:
+                    for actor in self.elements['actors']:
                         if actor['alias'] == parent:
                             parent_exists = True
                         if actor['alias'] == child:
                             child_exists = True
                     
-                    # Adiciona atores à lista se não estiverem presentes
+                    # Add actors to the list if not present
                     if not parent_exists:
-                        self.elements['atores'].append({'nome': parent, 'alias': parent})
-                        self.counts['atores'] += 1
+                        self.elements['actors'].append({'name': parent, 'alias': parent})
+                        self.counts['actors'] += 1
                     
                     if not child_exists:
-                        self.elements['atores'].append({'nome': child, 'alias': child})
-                        self.counts['atores'] += 1
+                        self.elements['actors'].append({'name': child, 'alias': child})
+                        self.counts['actors'] += 1
     
     def _parse_use_cases(self, lines: List[str]) -> None:
         """
-        Extrai casos de uso do diagrama.
+        Extracts use cases from diagram.
         
         Args:
-            lines (List[str]): Linhas de código PlantUML limpo
+            lines (List[str]): Cleaned PlantUML code lines
         """
-        # Padrão para casos de uso definidos diretamente
+        # Pattern for directly defined use cases
         usecase_pattern1 = re.compile(r'\(([^)]+)\)(?:\s+as\s+([^\s]+))?')
         usecase_pattern2 = re.compile(r'usecase\s+"([^"]+)"(?:\s+as\s+([^\s]+))?')
         
-        # Padrão para casos de uso em relações
+        # Pattern for use cases in relationships
         relation_usecase_pattern = re.compile(r'\(([^)]+)\)\s+\.>\s+')
         
-        # Primeiro, procura casos de uso definidos diretamente
+        # First, look for directly defined use cases
         for line in lines:
-            # Ignora linhas que são claramente relacionamentos
+            # Ignore lines that are clearly relationships
             if ('<|--' in line) or ('-->' in line and '(' not in line) or ('->' in line and '(' not in line):
                 continue
                 
-            # Procura casos de uso em formato (Nome do Caso)
+            # Look for use cases in format (Case Name)
             for match in usecase_pattern1.finditer(line):
                 usecase_name = match.group(1).strip()
                 usecase_alias = match.group(2) if match.group(2) else usecase_name
                 
-                # Verifica se este caso de uso já foi adicionado
-                if not any(uc['nome'] == usecase_name for uc in self.elements['casos_de_uso']):
-                    self.elements['casos_de_uso'].append({'nome': usecase_name, 'alias': usecase_alias})
-                    self.counts['casos_de_uso'] += 1
+                # Check if this use case has already been added
+                if not any(uc['name'] == usecase_name for uc in self.elements['use_cases']):
+                    self.elements['use_cases'].append({'name': usecase_name, 'alias': usecase_alias})
+                    self.counts['use_cases'] += 1
             
-            # Procura casos de uso em formato usecase "Nome do Caso"
+            # Look for use cases in format usecase "Case Name"
             for match in usecase_pattern2.finditer(line):
                 usecase_name = match.group(1).strip()
                 usecase_alias = match.group(2) if match.group(2) else usecase_name
                 
-                if not any(uc['nome'] == usecase_name for uc in self.elements['casos_de_uso']):
-                    self.elements['casos_de_uso'].append({'nome': usecase_name, 'alias': usecase_alias})
-                    self.counts['casos_de_uso'] += 1
+                if not any(uc['name'] == usecase_name for uc in self.elements['use_cases']):
+                    self.elements['use_cases'].append({'name': usecase_name, 'alias': usecase_alias})
+                    self.counts['use_cases'] += 1
         
-        # Agora, procura casos de uso em relações de extensão/inclusão
+        # Now, look for use cases in extension/inclusion relationships
         for line in lines:
             if '.>' in line and '(' in line:
                 match = relation_usecase_pattern.search(line)
                 if match:
                     usecase_name = match.group(1).strip()
                     
-                    # Verifica se este caso de uso já foi adicionado
-                    if not any(uc['nome'] == usecase_name for uc in self.elements['casos_de_uso']):
-                        self.elements['casos_de_uso'].append({'nome': usecase_name, 'alias': usecase_name})
-                        self.counts['casos_de_uso'] += 1
+                    # Check if this use case has already been added
+                    if not any(uc['name'] == usecase_name for uc in self.elements['use_cases']):
+                        self.elements['use_cases'].append({'name': usecase_name, 'alias': usecase_name})
+                        self.counts['use_cases'] += 1
     
     def _parse_rectangles(self, lines: List[str]) -> None:
         """
-        Extrai retângulos (sistemas/pacotes) do diagrama.
+        Extracts rectangles (systems/packages) from diagram.
         
         Args:
-            lines (List[str]): Linhas de código PlantUML limpo
+            lines (List[str]): Cleaned PlantUML code lines
         """
         in_rectangle = False
         rectangle_name = ""
@@ -199,43 +193,43 @@ class PlantUMLUseCaseParser:
         open_braces = 0
         
         for i, line in enumerate(lines):
-            # Detecta o início de um retângulo
+            # Detect the start of a rectangle
             if 'rectangle ' in line and '{' in line:
                 in_rectangle = True
                 open_braces = 1
                 rectangle_name = line.split('rectangle ')[1].split(' {')[0].strip()
                 continue
             
-            # Acompanha abertura e fechamento de chaves para lidar com retângulos aninhados
+            # Track opening and closing braces to handle nested rectangles
             if in_rectangle:
                 if '{' in line:
                     open_braces += line.count('{')
                 if '}' in line:
                     open_braces -= line.count('}')
                 
-                # Quando todas as chaves estão fechadas, termina o retângulo
+                # When all braces are closed, end the rectangle
                 if open_braces == 0:
-                    self.elements['retangulos'].append({
-                        'nome': rectangle_name,
-                        'conteudo': rectangle_content
+                    self.elements['rectangles'].append({
+                        'name': rectangle_name,
+                        'content': rectangle_content
                     })
-                    self.counts['retangulos'] += 1
+                    self.counts['rectangles'] += 1
                     in_rectangle = False
                     rectangle_name = ""
                     rectangle_content = []
                 else:
-                    # Adiciona a linha ao conteúdo do retângulo se não for a linha de fechamento
+                    # Add line to rectangle content if it's not the closing line
                     if not line.strip() == '}':
                         rectangle_content.append(line)
     
     def _parse_relationships(self, lines: List[str]) -> None:
         """
-        Extrai relacionamentos do diagrama.
+        Extracts relationships from diagram.
         
         Args:
-            lines (List[str]): Linhas de código PlantUML limpo
+            lines (List[str]): Cleaned PlantUML code lines
         """
-        # Padrões para diferentes tipos de relacionamentos
+        # Patterns for different types of relationships
         extend_pattern = re.compile(r'\(([^)]+)\)\s+\.+>\s+\(?([^)\s:]+).*?:\s*extends?')
         include_pattern = re.compile(r'\(([^)]+)\)\s+\.+>\s+\(?([^)\s:]+).*?:\s*includes?')
         association_pattern1 = re.compile(r'([^\s(]+)\s+-->\s+\(?([^)\s:]+)')
@@ -247,151 +241,151 @@ class PlantUMLUseCaseParser:
         generalization_pattern = re.compile(r'([^\s]+)\s+<\|--\s+([^\s]+)')
         
         for line in lines:
-            # Processa extensões
+            # Process extensions
             for match in extend_pattern.finditer(line):
                 source = match.group(1).strip()
                 target = match.group(2).strip()
                 
-                # Remove parênteses se houver
+                # Remove parentheses if any
                 if target.startswith('(') and target.endswith(')'):
                     target = target[1:-1].strip()
                 
-                self.elements['relacionamentos'].append({
-                    'origem': source,
-                    'destino': target,
-                    'tipo': 'extensão'
+                self.elements['relationships'].append({
+                    'source': source,
+                    'target': target,
+                    'type': 'extension'
                 })
-                self.counts['relacionamentos'] += 1
+                self.counts['relationships'] += 1
             
-            # Processa inclusões
+            # Process inclusions
             for match in include_pattern.finditer(line):
                 source = match.group(1).strip()
                 target = match.group(2).strip()
                 
-                # Remove parênteses se houver
+                # Remove parentheses if any
                 if target.startswith('(') and target.endswith(')'):
                     target = target[1:-1].strip()
                 
-                self.elements['relacionamentos'].append({
-                    'origem': source,
-                    'destino': target,
-                    'tipo': 'inclusão'
+                self.elements['relationships'].append({
+                    'source': source,
+                    'target': target,
+                    'type': 'inclusion'
                 })
-                self.counts['relacionamentos'] += 1
+                self.counts['relationships'] += 1
             
-            # Processa associações - padrão 1
+            # Process associations - pattern 1
             for match in association_pattern1.finditer(line):
-                if '.>' in line and ':' in line:  # Ignora se for uma relação de extend/include
+                if '.>' in line and ':' in line:  # Ignore if it's an extend/include relationship
                     continue
                 source = match.group(1).strip()
                 target = match.group(2).strip()
                 
-                # Remove parênteses se houver
+                # Remove parentheses if any
                 if target.startswith('(') and target.endswith(')'):
                     target = target[1:-1].strip()
                 
-                self.elements['relacionamentos'].append({
-                    'origem': source,
-                    'destino': target,
-                    'tipo': 'associação'
+                self.elements['relationships'].append({
+                    'source': source,
+                    'target': target,
+                    'type': 'association'
                 })
-                self.counts['relacionamentos'] += 1
+                self.counts['relationships'] += 1
             
-            # Processa associações - padrão 2
+            # Process associations - pattern 2
             for match in association_pattern2.finditer(line):
-                if '.>' in line and ':' in line:  # Ignora se for uma relação de extend/include
+                if '.>' in line and ':' in line:  # Ignore if it's an extend/include relationship
                     continue
                 source = match.group(1).strip()
                 target = match.group(2).strip()
                 
-                # Remove parênteses se houver
+                # Remove parentheses if any
                 if target.startswith('(') and target.endswith(')'):
                     target = target[1:-1].strip()
                 
-                self.elements['relacionamentos'].append({
-                    'origem': source,
-                    'destino': target,
-                    'tipo': 'associação'
+                self.elements['relationships'].append({
+                    'source': source,
+                    'target': target,
+                    'type': 'association'
                 })
-                self.counts['relacionamentos'] += 1
+                self.counts['relationships'] += 1
             
-            # Processa associações - padrão 3
+            # Process associations - pattern 3
             for match in association_pattern3.finditer(line):
                 source = match.group(1).strip()
                 target = match.group(2).strip()
                 
-                # Remove parênteses se houver
+                # Remove parentheses if any
                 if target.startswith('(') and target.endswith(')'):
                     target = target[1:-1].strip()
                 
-                self.elements['relacionamentos'].append({
-                    'origem': source,
-                    'destino': target,
-                    'tipo': 'associação'
+                self.elements['relationships'].append({
+                    'source': source,
+                    'target': target,
+                    'type': 'association'
                 })
-                self.counts['relacionamentos'] += 1
+                self.counts['relationships'] += 1
             
-            # Processa associações - padrão 4
+            # Process associations - pattern 4
             for match in association_pattern4.finditer(line):
                 source = match.group(1).strip()
                 target = match.group(2).strip()
                 
-                self.elements['relacionamentos'].append({
-                    'origem': source,
-                    'destino': target,
-                    'tipo': 'associação'
+                self.elements['relationships'].append({
+                    'source': source,
+                    'target': target,
+                    'type': 'association'
                 })
-                self.counts['relacionamentos'] += 1
+                self.counts['relationships'] += 1
             
-            # Processa associações - padrão 5
+            # Process associations - pattern 5
             for match in association_pattern5.finditer(line):
                 source = match.group(1).strip()
                 target = match.group(2).strip()
                 
-                self.elements['relacionamentos'].append({
-                    'origem': source,
-                    'destino': target,
-                    'tipo': 'associação'
+                self.elements['relationships'].append({
+                    'source': source,
+                    'target': target,
+                    'type': 'association'
                 })
-                self.counts['relacionamentos'] += 1
+                self.counts['relationships'] += 1
             
-            # Processa associações - padrão 6
+            # Process associations - pattern 6
             for match in association_pattern6.finditer(line):
                 source = match.group(1).strip()
                 target = match.group(2).strip()
                 
-                self.elements['relacionamentos'].append({
-                    'origem': source,
-                    'destino': target,
-                    'tipo': 'associação'
+                self.elements['relationships'].append({
+                    'source': source,
+                    'target': target,
+                    'type': 'association'
                 })
-                self.counts['relacionamentos'] += 1
+                self.counts['relationships'] += 1
             
-            # Processa generalizações
+            # Process generalizations
             for match in generalization_pattern.finditer(line):
                 parent = match.group(1).strip()
                 child = match.group(2).strip()
                 
-                self.elements['relacionamentos'].append({
-                    'origem': parent,
-                    'destino': child,
-                    'tipo': 'generalização'
+                self.elements['relationships'].append({
+                    'source': parent,
+                    'target': child,
+                    'type': 'generalization'
                 })
-                self.counts['relacionamentos'] += 1
+                self.counts['relationships'] += 1
     
     def _parse_notes(self, lines: List[str]) -> None:
         """
-        Extrai notas do diagrama.
+        Extracts notes from diagram.
         
         Args:
-            lines (List[str]): Linhas de código PlantUML limpo
+            lines (List[str]): Cleaned PlantUML code lines
         """
         in_note = False
         note_content = []
         note_target = ""
         
         for i, line in enumerate(lines):
-            # Detecta o início de uma nota
+            # Detect the start of a note
             if line.startswith('note ') and 'of ' in line:
                 in_note = True
                 parts = line.split('of ')
@@ -399,38 +393,38 @@ class PlantUMLUseCaseParser:
                     note_target = parts[1].strip()
                 continue
             
-            # Detecta o fim de uma nota
+            # Detect the end of a note
             if in_note and line == 'end note':
-                self.elements['notas'].append({
-                    'alvo': note_target,
-                    'conteudo': '\n'.join(note_content)
+                self.elements['notes'].append({
+                    'target': note_target,
+                    'content': '\n'.join(note_content)
                 })
-                self.counts['notas'] += 1
+                self.counts['notes'] += 1
                 in_note = False
                 note_content = []
                 note_target = ""
                 continue
             
-            # Adiciona conteúdo à nota
+            # Add content to the note
             if in_note:
                 note_content.append(line)
     
     def get_summary_text(self) -> str:
         """
-        Gera um texto resumido dos componentes do diagrama.
+        Generates a text summary of diagram components.
         
         Returns:
-            str: Texto resumido
+            str: Summary text
         """
         total = sum(self.counts.values())
         
         lines = []
-        lines.append("\n=== ANÁLISE DO DIAGRAMA DE CASOS DE USO ===\n")
+        lines.append("\n=== USE CASE DIAGRAM ANALYSIS ===\n")
         
-        # Tabela de contagem
-        lines.append("CONTAGEM DE ELEMENTOS:")
+        # Count table
+        lines.append("ELEMENT COUNT:")
         lines.append("-" * 30)
-        lines.append(f"| {'Elemento':<15} | {'Quantidade':<10} |")
+        lines.append(f"| {'Element':<15} | {'Count':<10} |")
         lines.append("-" * 30)
         for element, count in self.counts.items():
             lines.append(f"| {element.replace('_', ' ').title():<15} | {count:<10} |")
@@ -438,56 +432,56 @@ class PlantUMLUseCaseParser:
         lines.append(f"| {'Total':<15} | {total:<10} |")
         lines.append("-" * 30)
         
-        # Detalhes dos elementos
-        lines.append("\nDETALHES DOS ELEMENTOS:")
+        # Element details
+        lines.append("\nELEMENT DETAILS:")
         
-        if self.elements['atores']:
-            lines.append("\nATORES:")
-            for i, actor in enumerate(self.elements['atores'], 1):
-                if actor['alias'] != actor['nome']:
-                    lines.append(f"  {i}. {actor['nome']} (alias: {actor['alias']})")
+        if self.elements['actors']:
+            lines.append("\nACTORS:")
+            for i, actor in enumerate(self.elements['actors'], 1):
+                if actor['alias'] != actor['name']:
+                    lines.append(f"  {i}. {actor['name']} (alias: {actor['alias']})")
                 else:
-                    lines.append(f"  {i}. {actor['nome']}")
+                    lines.append(f"  {i}. {actor['name']}")
         
-        if self.elements['casos_de_uso']:
-            lines.append("\nCASOS DE USO:")
-            for i, usecase in enumerate(self.elements['casos_de_uso'], 1):
-                if usecase['alias'] != usecase['nome']:
-                    lines.append(f"  {i}. {usecase['nome']} (alias: {usecase['alias']})")
+        if self.elements['use_cases']:
+            lines.append("\nUSE CASES:")
+            for i, usecase in enumerate(self.elements['use_cases'], 1):
+                if usecase['alias'] != usecase['name']:
+                    lines.append(f"  {i}. {usecase['name']} (alias: {usecase['alias']})")
                 else:
-                    lines.append(f"  {i}. {usecase['nome']}")
+                    lines.append(f"  {i}. {usecase['name']}")
         
-        if self.elements['relacionamentos']:
-            lines.append("\nRELACIONAMENTOS:")
-            for i, rel in enumerate(self.elements['relacionamentos'], 1):
-                lines.append(f"  {i}. {rel['origem']} --> {rel['destino']} [{rel['tipo']}]")
+        if self.elements['relationships']:
+            lines.append("\nRELATIONSHIPS:")
+            for i, rel in enumerate(self.elements['relationships'], 1):
+                lines.append(f"  {i}. {rel['source']} --> {rel['target']} [{rel['type']}]")
         
-        if self.elements['notas']:
-            lines.append("\nNOTAS:")
-            for i, note in enumerate(self.elements['notas'], 1):
-                lines.append(f"  {i}. Nota para {note['alvo']}:")
-                for line in note['conteudo'].split('\n'):
+        if self.elements['notes']:
+            lines.append("\nNOTES:")
+            for i, note in enumerate(self.elements['notes'], 1):
+                lines.append(f"  {i}. Note for {note['target']}:")
+                for line in note['content'].split('\n'):
                     lines.append(f"     {line}")
         
-        if self.elements['retangulos']:
-            lines.append("\nSISTEMAS/PACOTES:")
-            for i, rect in enumerate(self.elements['retangulos'], 1):
-                lines.append(f"  {i}. {rect['nome']}")
+        if self.elements['rectangles']:
+            lines.append("\nSYSTEMS/PACKAGES:")
+            for i, rect in enumerate(self.elements['rectangles'], 1):
+                lines.append(f"  {i}. {rect['name']}")
         
         if self.title:
-            lines.append(f"\nTÍTULO DO DIAGRAMA: {self.title}")
+            lines.append(f"\nDIAGRAM TITLE: {self.title}")
             
         return '\n'.join(lines)
     
     def print_summary(self) -> None:
-        """Imprime o resumo do diagrama."""
-        print(self.get_summary_text())
+        """Prints a summary of the diagram."""
+        LOGGER.info(self.get_summary_text())
 
 
 class PlantUMLUseCase:
     """
-    Fachada para extração de componentes de diagramas de casos de uso PlantUML.
-    Fornece uma API simplificada para análise de diagramas.
+    Facade for extracting components from PlantUML use case diagrams.
+    Provides a simplified API for diagram analysis.
     """
     _last_code = None
     _last_elements = None
@@ -496,23 +490,23 @@ class PlantUMLUseCase:
     @classmethod
     def _get_parsed_data(cls, plantuml_code: str) -> Tuple[Dict[str, List[Dict[str, Any]]], Dict[str, int]]:
         """
-        Retorna os dados analisados, usando cache quando possível.
+        Returns parsed data, using cache when possible.
         
         Args:
-            plantuml_code (str): Código PlantUML a ser analisado
+            plantuml_code (str): PlantUML code to analyze
             
         Returns:
-            Tuple: (elementos extraídos, contagem de elementos)
+            Tuple: (extracted elements, element counts)
         """
-        # Usa cache se o código for o mesmo da última vez
+        # Use cache if code is the same as last time
         if cls._last_code == plantuml_code and cls._last_elements and cls._last_counts:
             return cls._last_elements, cls._last_counts
         
-        # Caso contrário, executa o parser
+        # Otherwise, run the parser
         parser = PlantUMLUseCaseParser()
         elements, counts = parser.parse(plantuml_code)
         
-        # Atualiza o cache
+        # Update cache
         cls._last_code = plantuml_code
         cls._last_elements = elements
         cls._last_counts = counts
@@ -522,117 +516,117 @@ class PlantUMLUseCase:
     @classmethod
     def validate_code(cls, plantuml_code: str) -> bool:
         """
-        Valida se o código PlantUML é um diagrama de casos de uso válido.
+        Validates if the PlantUML code is a valid use case diagram.
         
         Args:
-            plantuml_code (str): Código PlantUML a ser validado
+            plantuml_code (str): PlantUML code to validate
             
         Returns:
-            bool: True se o código for válido, False caso contrário
+            bool: True if valid, False otherwise
         """
-        # Verifica se o código tem as marcações obrigatórias
+        # Check if code has mandatory markers
         if '@startuml' not in plantuml_code or '@enduml' not in plantuml_code:
             return False
             
-        # Verifica se há pelo menos um ator ou caso de uso
+        # Check if there's at least one actor or use case
         _, counts = cls._get_parsed_data(plantuml_code)
-        return counts['atores'] > 0 or counts['casos_de_uso'] > 0
+        return counts['actors'] > 0 or counts['use_cases'] > 0
     
     @classmethod
     def extract_components(cls, plantuml_code: str) -> Tuple[Dict[str, List[Dict[str, Any]]], Dict[str, int]]:
         """
-        Extrai todos os componentes do diagrama.
+        Extracts all components from the diagram.
         
         Args:
-            plantuml_code (str): Código PlantUML do diagrama de casos de uso
+            plantuml_code (str): PlantUML use case diagram code
             
         Returns:
-            Tuple: (elementos extraídos, contagem de elementos)
+            Tuple: (extracted elements, element counts)
         """
         return cls._get_parsed_data(plantuml_code)
     
     @classmethod
     def extract_actors(cls, plantuml_code: str) -> List[Dict[str, str]]:
         """
-        Extrai apenas os atores do diagrama.
+        Extracts only the actors from the diagram.
         
         Args:
-            plantuml_code (str): Código PlantUML do diagrama de casos de uso
+            plantuml_code (str): PlantUML use case diagram code
             
         Returns:
-            List[Dict[str, str]]: Lista de atores no formato [{'nome': nome, 'alias': alias}, ...]
+            List[Dict[str, str]]: List of actors in format [{'name': name, 'alias': alias}, ...]
         """
         elements, _ = cls._get_parsed_data(plantuml_code)
-        return elements['atores']
+        return elements['actors']
     
     @classmethod
     def extract_use_cases(cls, plantuml_code: str) -> List[Dict[str, str]]:
         """
-        Extrai apenas os casos de uso do diagrama.
+        Extracts only the use cases from the diagram.
         
         Args:
-            plantuml_code (str): Código PlantUML do diagrama de casos de uso
+            plantuml_code (str): PlantUML use case diagram code
             
         Returns:
-            List[Dict[str, str]]: Lista de casos de uso no formato [{'nome': nome, 'alias': alias}, ...]
+            List[Dict[str, str]]: List of use cases in format [{'name': name, 'alias': alias}, ...]
         """
         elements, _ = cls._get_parsed_data(plantuml_code)
-        return elements['casos_de_uso']
+        return elements['use_cases']
     
     @classmethod
     def extract_relationships(cls, plantuml_code: str) -> List[Dict[str, str]]:
         """
-        Extrai apenas os relacionamentos do diagrama.
+        Extracts only the relationships from the diagram.
         
         Args:
-            plantuml_code (str): Código PlantUML do diagrama de casos de uso
+            plantuml_code (str): PlantUML use case diagram code
             
         Returns:
-            List[Dict[str, str]]: Lista de relacionamentos no formato 
-                                 [{'origem': origem, 'destino': destino, 'tipo': tipo}, ...]
+            List[Dict[str, str]]: List of relationships in format 
+                                 [{'source': source, 'target': target, 'type': type}, ...]
         """
         elements, _ = cls._get_parsed_data(plantuml_code)
-        return elements['relacionamentos']
+        return elements['relationships']
     
     @classmethod
     def extract_systems(cls, plantuml_code: str) -> List[Dict[str, Union[str, List[str]]]]:
         """
-        Extrai apenas os sistemas/pacotes (retângulos) do diagrama.
+        Extracts only the systems/packages (rectangles) from the diagram.
         
         Args:
-            plantuml_code (str): Código PlantUML do diagrama de casos de uso
+            plantuml_code (str): PlantUML use case diagram code
             
         Returns:
-            List[Dict[str, Union[str, List[str]]]]: Lista de sistemas/pacotes no formato 
-                                                  [{'nome': nome, 'conteudo': [conteudo]}, ...]
+            List[Dict[str, Union[str, List[str]]]]: List of systems/packages in format 
+                                                  [{'name': name, 'content': [content]}, ...]
         """
         elements, _ = cls._get_parsed_data(plantuml_code)
-        return elements['retangulos']
+        return elements['rectangles']
     
     @classmethod
     def extract_notes(cls, plantuml_code: str) -> List[Dict[str, str]]:
         """
-        Extrai apenas as notas do diagrama.
+        Extracts only the notes from the diagram.
         
         Args:
-            plantuml_code (str): Código PlantUML do diagrama de casos de uso
+            plantuml_code (str): PlantUML use case diagram code
             
         Returns:
-            List[Dict[str, str]]: Lista de notas no formato [{'alvo': alvo, 'conteudo': conteudo}, ...]
+            List[Dict[str, str]]: List of notes in format [{'target': target, 'content': content}, ...]
         """
         elements, _ = cls._get_parsed_data(plantuml_code)
-        return elements['notas']
+        return elements['notes']
     
     @classmethod
     def extract_title(cls, plantuml_code: str) -> Optional[str]:
         """
-        Extrai o título do diagrama, se houver.
+        Extracts the diagram title, if any.
         
         Args:
-            plantuml_code (str): Código PlantUML do diagrama de casos de uso
+            plantuml_code (str): PlantUML use case diagram code
             
         Returns:
-            Optional[str]: Título do diagrama ou None se não houver
+            Optional[str]: Diagram title or None if none exists
         """
         parser = PlantUMLUseCaseParser()
         parser.parse(plantuml_code)
@@ -641,13 +635,13 @@ class PlantUMLUseCase:
     @classmethod
     def get_summary(cls, plantuml_code: str) -> str:
         """
-        Gera um resumo em texto dos componentes do diagrama.
+        Generates a text summary of diagram components.
         
         Args:
-            plantuml_code (str): Código PlantUML do diagrama de casos de uso
+            plantuml_code (str): PlantUML use case diagram code
             
         Returns:
-            str: Resumo formatado dos componentes do diagrama
+            str: Formatted summary of diagram components
         """
         parser = PlantUMLUseCaseParser()
         parser.parse(plantuml_code)
@@ -656,100 +650,100 @@ class PlantUMLUseCase:
     @classmethod
     def print_summary(cls, plantuml_code: str) -> None:
         """
-        Imprime um resumo dos componentes do diagrama.
+        Prints a summary of diagram components.
         
         Args:
-            plantuml_code (str): Código PlantUML do diagrama de casos de uso
+            plantuml_code (str): PlantUML use case diagram code
         """
-        print(cls.get_summary(plantuml_code))
+        LOGGER.info(cls.get_summary(plantuml_code))
 
 
-# Função legada para compatibilidade com código existente
+# Legacy function for compatibility with existing code
 def analyze_plantuml_use_case(plantuml_code: str) -> Tuple[Dict[str, List[Dict[str, Any]]], Dict[str, int]]:
     """
-    Analisa um diagrama de casos de uso PlantUML e imprime um resumo.
+    Analyzes a PlantUML use case diagram and prints a summary.
     
     Args:
-        plantuml_code (str): Código PlantUML do diagrama de casos de uso
+        plantuml_code (str): PlantUML use case diagram code
         
     Returns:
-        Tuple: (elementos extraídos, contagem de elementos)
+        Tuple: (extracted elements, element counts)
     """
     PlantUMLUseCase.print_summary(plantuml_code)
     return PlantUMLUseCase.extract_components(plantuml_code)
 
 
-# Exemplo de uso
+# Example usage
 if __name__ == "__main__":
-    # Exemplo simples de um diagrama de casos de uso
-    exemplo_plantuml = """
+    # Simple example of a use case diagram
+    example_plantuml = """
 @startuml
 left to right direction
-actor Cliente
-actor Funcionário
-rectangle "Sistema de Reservas" {
-    (Fazer Reserva) as FR
-    (Cancelar Reserva) as CR
-    (Modificar Reserva) as MR
-    (Verificar Disponibilidade) as VD
-    (Emitir Comprovante) as EC
+actor Customer
+actor Employee
+rectangle "Reservation System" {
+    (Make Reservation) as MR
+    (Cancel Reservation) as CR
+    (Modify Reservation) as ModR
+    (Check Availability) as CA
+    (Issue Receipt) as IR
     
-    FR --> VD : include
-    CR --> FR : extends
-    MR --> FR : extends
-    FR --> EC : include
+    MR --> CA : include
+    CR --> MR : extends
+    ModR --> MR : extends
+    MR --> IR : include
 }
 
-Cliente --> FR
-Cliente --> CR
-Cliente --> MR
-Funcionário --> FR
-Funcionário --> CR
-Funcionário --> MR
-Funcionário --> VD
+Customer --> MR
+Customer --> CR
+Customer --> ModR
+Employee --> MR
+Employee --> CR
+Employee --> ModR
+Employee --> CA
 
-note right of Funcionário : Funcionários possuem acesso a todas as funcionalidades
+note right of Employee : Employees have access to all functionalities
 
 @enduml
 """
 
-    # Exemplos de uso da nova API
-    print("\n===== EXEMPLO USANDO A NOVA API =====\n")
+    # Examples of using the new API
+    LOGGER.info("\n===== EXAMPLE USING THE NEW API =====\n")
     
-    # Validar o código
-    if PlantUMLUseCase.validate_code(exemplo_plantuml):
-        print("O código PlantUML é válido.")
+    # Validate the code
+    if PlantUMLUseCase.validate_code(example_plantuml):
+        LOGGER.info("The PlantUML code is valid.")
     else:
-        print("O código PlantUML é inválido.")
+        LOGGER.info("The PlantUML code is invalid.")
     
-    print("\n-- Extraindo atores --")
-    atores = PlantUMLUseCase.extract_actors(exemplo_plantuml)
-    for ator in atores:
-        print(f"Ator: {ator['nome']}")
+    LOGGER.info("\n-- Extracting Actors --")
+    actors = PlantUMLUseCase.extract_actors(example_plantuml)
+    for actor in actors:
+        LOGGER.info(f"Actor: {actor['name']}")
     
-    print("\n-- Extraindo casos de uso --")
-    casos_uso = PlantUMLUseCase.extract_use_cases(exemplo_plantuml)
-    for caso in casos_uso:
-        print(f"Caso de uso: {caso['nome']}")
+    LOGGER.info("\n-- Extracting Use Cases --")
+    use_cases = PlantUMLUseCase.extract_use_cases(example_plantuml)
+    for case in use_cases:
+        LOGGER.info(f"Use Case: {case['name']}")
     
-    print("\n-- Extraindo relacionamentos --")
-    relacionamentos = PlantUMLUseCase.extract_relationships(exemplo_plantuml)
-    for rel in relacionamentos:
-        print(f"Relação: {rel['origem']} -> {rel['destino']} ({rel['tipo']})")
+    LOGGER.info("\n-- Extracting Relationships --")
+    relationships = PlantUMLUseCase.extract_relationships(example_plantuml)
+    for rel in relationships:
+        LOGGER.info(f"Relationship: {rel['source']} -> {rel['target']} ({rel['type']})")
     
-    print("\n-- Extraindo sistemas/pacotes --")
-    sistemas = PlantUMLUseCase.extract_systems(exemplo_plantuml)
-    for sistema in sistemas:
-        print(f"Sistema: {sistema['nome']}")
+    LOGGER.info("\n-- Extracting Systems/Packages --")
+    systems = PlantUMLUseCase.extract_systems(example_plantuml)
+    for system in systems:
+        LOGGER.info(f"System: {system['name']}")
     
-    print("\n-- Extraindo notas --")
-    notas = PlantUMLUseCase.extract_notes(exemplo_plantuml)
-    for nota in notas:
-        print(f"Nota para {nota['alvo']}: {nota['conteudo']}")
+    LOGGER.info("\n-- Extracting Notes --")
+    notes = PlantUMLUseCase.extract_notes(example_plantuml)
+    for note in notes:
+        LOGGER.info(f"Note for {note['target']}: {note['content']}")
     
-    print("\n-- Resumo completo do diagrama --")
-    print(PlantUMLUseCase.get_summary(exemplo_plantuml))
+    LOGGER.info("\n-- Complete Diagram Summary --")
+    LOGGER.info(PlantUMLUseCase.get_summary(example_plantuml))
     
-    # Exemplo usando a função legada para compatibilidade
-    print("\n===== EXEMPLO USANDO A FUNÇÃO LEGADA =====\n")
-    elementos, contagens = analyze_plantuml_use_case(exemplo_plantuml)
+    # Example using the legacy function for compatibility
+    LOGGER.info("\n===== EXAMPLE USING THE LEGACY FUNCTION =====\n")
+    elements, counts = analyze_plantuml_use_case(example_plantuml)
