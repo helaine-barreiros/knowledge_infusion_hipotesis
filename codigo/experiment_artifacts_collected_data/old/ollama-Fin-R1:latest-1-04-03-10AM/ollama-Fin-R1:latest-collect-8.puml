@@ -1,0 +1,105 @@
+@startuml
+!theme plain
+
+skinparam package {
+    BorderColor white
+}
+
+package "Sistema de Gestão Financeira Pessoal Aprimorado por IA" as SGP {
+    skinparam packageStyle roundedRectangle
+    SGP 
+    {
+        skinparam rectangle {
+            borderColor none
+        }
+        
+        package "Autenticação" {
+            skinparam packageStyle roundedRectangle
+            user "Cliente Individual" as UIA
+            actor "Consultor Financeiro" as CFA
+        }
+
+        package "Gerenciamento de Contas e Transações" {
+            skinparam packageStyle roundedRectangle
+            usecase "Conectar contas bancárias" as UCA
+            usecase "Atualizar transações em tempo real" as UTCER
+            usecase "Excluir conta conectada" as UXC
+        }
+
+        package "Análise Financeira e Insights" {
+            skinparam packageStyle roundedRectangle
+            usecase "Gerar relatório de gastos mensal" as GRGMM
+            usecase "Identificar padrões de gastos com IA" as IPIAG
+            usecase "Personalizar recomendações financeiras" as PFR
+            usecase "Criação de orçamentos personalizados" as COP
+        }
+
+        package "Educação Financeira e Metas" {
+            skinparam packageStyle roundedRectangle
+            usecase "Estabelecer metas financeiras" as EFM
+            usecase "Visualizar progresso para metas" as VPM
+            usecase "Receber notificações sobre metas" as RNM
+        }
+
+        package "Compartilhamento e Segurança" {
+            skinparam packageStyle roundedRectangle
+            usecase "Compartilhar dados com consultor financeiro" as CDDC
+            usecase "Gerenciar acesso de terceiros" as GAT
+        }
+        
+        package "Chatbot e Suporte Automatizado" {
+            skinparam packageStyle roundedRectangle
+            usecase "Realizar consultas financeiras através do chatbot" as RFC
+            usecase "Integrar IA para assistência nas decisões financeiras" as IIAFD
+        }
+
+        package "Previsão e Oportunidades de Investimento" {
+            skinparam packageStyle roundedRectangle
+            usecase "Prever posição financeira futura" as PFPF
+            usecase "Sugerir oportunidades de investimentos" as SOI
+        }
+    }
+}
+
+actor "Cliente Individual" as CI
+actor "Consultor Financeiro" as CF
+
+CI -> UCA: Conecta contas bancárias
+UIA -- CFA : Compartilha dados financeiros
+
+CF --> CDDC: Solicita compartilhamento de dados
+
+CI --> UTCER: Atualiza transações em tempo real
+CI --> UXC: Exclui conta conectada
+CI --> GRGMM: Requisita relatório mensal de gastos
+
+CI --> IPIAG: Peça análise de padrões com IA
+CI --> PFR: Solicite recomendações personalizadas
+CI --> COP: Cria orçamentos e verificas
+
+CF -->> VPM: Recebe notificações sobre progresso das metas
+CF --> RNM: Requere notificações sobre metas
+CFA --> CI : Avisa atualizações de metas
+
+CI --> RFC: Realiza consultas via chatbot
+CI --> IIAFD: Solicita assistência financeira
+
+CI --> PFPF: Solicita previsão futura
+CI --> SOI: Busca oportunidades de investimento
+
+CFA -> CDDC: Acessa dados compartilhados
+CFD --> CFA : Gerencia acesso de terceiros
+
+CFA --> GAT: Solicita gerenciamento de acesso
+GAT -->> CFA: Confirma gestão
+
+!package "Motor de Raciocínio de IA" as MRAI {
+    UCA -> IPIAG : <<extend>>
+    PFR -> MRAI : <<extend>>
+}
+
+CFA --> GAT: Solicita gerenciamento de acesso
+GAT -->> CFA: Confirma gestão
+
+!theme dark
+@enduml

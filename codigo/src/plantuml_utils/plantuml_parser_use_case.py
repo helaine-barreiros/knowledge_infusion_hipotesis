@@ -51,7 +51,7 @@ class PlantUMLUseCaseParser:
         # Extract title if exists
         for line in cleaned_lines:
             if line.startswith('title '):
-                diagram.title = line[6:].strip()
+                diagram['title'] = line[6:].strip()
                 break
 
         actors, qtd_actors = self.get_actors(cleaned_lines)
@@ -93,7 +93,7 @@ class PlantUMLUseCaseParser:
         Args:
             lines (List[str]): Cleaned PlantUML code lines
         """
-        actors = defaultdict(list)
+        actors = []
         qtd_actors = 0
         
         # Pattern for directly defined actors
@@ -150,7 +150,7 @@ class PlantUMLUseCaseParser:
         Args:
             lines (List[str]): Cleaned PlantUML code lines
         """
-        use_cases = defaultdict(list)
+        use_cases = []
         qtd_use_cases = 0
 
         # Pattern for directly defined use cases

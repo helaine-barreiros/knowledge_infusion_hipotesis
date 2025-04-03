@@ -38,7 +38,8 @@ class LoggerSingleton:
         
         # Add console handler
         console_formatter = colorlog.ColoredFormatter(
-            "%(log_color)s[%(asctime)s] %(bold)s%(levelname)-8s%(reset)s %(blue)s%(message)s",
+            "%(log_color)s[%(asctime)s] %(bold)s%(levelname)-8s%(reset)s "
+            "%(blue)s%(message)s %(yellow)s(%(filename)s:%(lineno)d)",
             datefmt="%Y-%m-%d %H:%M:%S",
             log_colors={
                 'DEBUG': 'white',
@@ -69,7 +70,7 @@ class LoggerSingleton:
         
         # Configure file handler
         file_formatter = logging.Formatter(
-            "[%(asctime)s] %(levelname)-8s %(message)s",
+            "[%(asctime)s] %(levelname)-8s %(message)s (%(filename)s:%(lineno)d)",
             datefmt="%Y-%m-%d %H:%M:%S"
         )
         
@@ -101,7 +102,7 @@ class Logger:
 
     @staticmethod
     def error(message):
-        LoggerSingleton.get_instance().error(message)
+        LoggerSingleton.get_instance().error(message, exc_info=True)
 
     @staticmethod
     def critical(message):

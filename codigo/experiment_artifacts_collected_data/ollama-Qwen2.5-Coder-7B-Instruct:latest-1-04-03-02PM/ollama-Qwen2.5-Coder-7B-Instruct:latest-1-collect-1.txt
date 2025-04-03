@@ -1,0 +1,168 @@
+9.Analyze your PlantUML code against these criteria before providing it as the final answer.
+
+## 1. Financial Transactions
+
+```plantuml
+@startuml "C4_UC_Transacoes"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestão Financeira Pessoal - Transações Financeiras - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user
+actor "Sistema Bancário" as bank #999999
+
+' Sistema e casos de uso
+rectangle "Sistema de Gestão Financeira Pessoal" {
+    usecase "UC01: Visualizar Lista de Transações" as UC01
+    
+    note right of UC01
+      **Req. ID:** FR03, FR04
+      **Descrição:** Permite ao usuário visualizar todas as transações 
+      financeiras de suas contas conectadas, ordenadas 
+      cronologicamente.
+    end note
+    
+    usecase "UC02: Filtrar Transações" as UC02
+    usecase "UC03: Categorizar Transação Manualmente" as UC03
+    usecase "UC04: Buscar Transações" as UC04
+    usecase "UC05: Visualizar Detalhes da Transação" as UC05
+    usecase "UC06: Exportar Transações" as UC06
+    usecase "UC07: Receber Categorização Automática" as UC07
+    
+    ' Relacionamentos entre casos de uso
+    UC01 ..> UC02 : <<include>>
+    UC01 ..> UC07 : <<include>>
+    UC01 ..> UC05 : <<extend>>
+    UC01 ..> UC06 : <<extend>>
+    UC03 ..> UC05 : <<include>>
+}
+
+' Relacionamentos ator-caso de uso
+user --> UC01
+user --> UC03
+user --> UC04
+bank --> UC07
+
+@enduml
+```
+
+## 2. Financial Health Reports
+
+```plantuml
+@startuml "C4_UC_HealthReports"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestão Financeira Pessoal - Relatórios de Saúde Financeira - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user
+actor "Gerente Financeiro" as advisor #999999
+
+' Sistema e casos de uso
+rectangle "Sistema de Gestão Financeira Pessoal" {
+    usecase "UC01: Gerar Relatório de Saúde Financeira" as UC01
+    
+    note right of UC01
+      **Req. ID:** FR15
+      **Descrição:** Permite ao usuário gerar um relatório detalhado sobre a saúde financeira,
+      incluindo despesas, receitas e indicadores.
+    end note
+    
+    usecase "UC02: Personalizar Relatório" as UC02
+    usecase "UC03: Exportar Relatório" as UC03
+    usecase "UC04: Receber Recomendações Financeiras" as UC04
+    
+    ' Relacionamentos entre casos de uso
+    UC01 ..> UC02 : <<include>>
+    UC01 ..> UC03 : <<extend>>
+    UC01 ..> UC04 : <<extend>>
+}
+
+' Relacionamentos ator-caso de uso
+user --> UC01
+user --> UC02
+advisor --> UC04
+
+@enduml
+```
+
+## 3. Chatbot for Financial Queries
+
+```plantuml
+@startuml "C4_UC_Chatbot"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestão Financeira Pessoal - Chatbot para Consultas Financeiras - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user
+
+' Sistema e casos de uso
+rectangle "Sistema de Gestão Financeira Pessoal" {
+    usecase "UC01: Consultar Dados Financeiros" as UC01
+    
+    note right of UC01
+      **Req. ID:** FR14
+      **Descrição:** Permite ao usuário fazer consultas sobre seus dados financeiros,
+      como extratos de conta, investimentos e dívidas.
+    end note
+    
+    usecase "UC02: Receber Recomendações Financeiras" as UC02
+    usecase "UC03: Buscar Dados Específicos" as UC03
+    
+    ' Relacionamentos entre casos de uso
+    UC01 ..> UC02 : <<include>>
+    UC01 ..> UC03 : <<extend>>
+}
+
+' Relacionamentos ator-caso de uso
+user --> UC01
+user --> UC02
+
+@enduml
+```
+
+## 4. Portfolio Management
+
+```plantuml
+@startuml "C4_UC_Portfolio"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestão Financeira Pessoal - Gerenciamento do Portfólio - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user
+actor "Investidor" as advisor #999999
+
+' Sistema e casos de uso
+rectangle "Sistema de Gestão Financeira Pessoal" {
+    usecase "UC01: Gerenciar Ativos Financeiros" as UC01
+    
+    note right of UC01
+      **Req. ID:** FR08
+      **Descrição:** Permite ao usuário gerenciar seus ativos financeiros, incluindo aquisição,
+      venda e monitoramento de investimentos.
+    end note
+    
+    usecase "UC02: Acompanhar Desempenho do Portfólio" as UC02
+    usecase "UC03: Receber Recomendações Investimentos" as UC03
+    usecase "UC04: Realizar Transações Financeiras" as UC04
+    
+    ' Relacionamentos entre casos de uso
+    UC01 ..> UC02 : <<include>>
+    UC01 ..> UC03 : <<extend>>
+    UC01 ..> UC04 : <<extend>>
+}
+
+' Relacionamentos ator-caso de uso
+user --> UC01
+user --> UC02
+advisor --> UC03
+
+@enduml
+```

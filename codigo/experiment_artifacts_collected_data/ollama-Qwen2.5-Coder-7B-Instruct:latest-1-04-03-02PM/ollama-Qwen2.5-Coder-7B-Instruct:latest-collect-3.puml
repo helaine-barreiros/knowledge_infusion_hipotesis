@@ -1,0 +1,122 @@
+@startuml "C4_UC_GestaoFinanceiraPessoal"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestão Financeira Pessoal - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user
+actor "Sistema Bancário" as bank #999999
+actor "Sistema de Investimentos" as investment
+actor "Sistema Chatbot" as chat
+
+' Sistema e casos de uso
+rectangle "Sistema de Gestão Financeira Pessoal" {
+    usecase "UC01: Visualizar Saldo" as UC01
+    usecase "UC02: Adicionar Conta Bancária" as UC02
+    usecase "UC03: Remover Conta Bancária" as UC03
+    usecase "UC04: Transferir Fundos" as UC04
+    usecase "UC05: Visualizar Extrato" as UC05
+    usecase "UC06: Categorizar Transação Manualmente" as UC06
+    usecase "UC07: Buscar Transações" as UC07
+    usecase "UC08: Receber Alertas Financeiros" as UC08
+    usecase "UC09: Gerenciar Cartões de Crédito" as UC09
+    usecase "UC10: Visualizar Dados do Investimento" as UC10
+    usecase "UC11: Adicionar Fundo ao Portfolio" as UC11
+    usecase "UC12: Remover Fundo do Portfolio" as UC12
+    usecase "UC13: Buscar Posições de Investimentos" as UC13
+    usecase "UC14: Consultar Chatbot Financeiro" as UC14
+    
+    note right of UC01
+      **Req. ID:** FR01
+      **Descrição:** Permite ao usuário visualizar o saldo atual de suas contas bancárias.
+    end note
+    
+    note right of UC02
+      **Req. ID:** FR05
+      **Descrição:** Permite ao usuário adicionar uma nova conta bancária à lista de contas conectadas.
+    end note
+    
+    note right of UC03
+      **Req. ID:** FR06
+      **Descrição:** Permite ao usuário remover uma conta bancária da lista de contas conectadas.
+    end note
+    
+    note right of UC04
+      **Req. ID:** FR07
+      **Descrição:** Permite ao usuário transferir fundos entre suas contas bancárias ou para outra conta bancária.
+    end note
+    
+    note right of UC05
+      **Req. ID:** FR08
+      **Descrição:** Permite ao usuário visualizar o extrato de todas as transações financeiras das suas contas conectadas.
+    end note
+    
+    note right of UC06
+      **Req. ID:** FR13
+      **Descrição:** Permite ao usuário categorizar manualmente uma transação em sua lista de transações financeiras.
+    end note
+    
+    note right of UC07
+      **Req. ID:** FR14
+      **Descrição:** Permite ao usuário buscar uma transação específica em sua lista de transações financeiras.
+    end note
+    
+    note right of UC08
+      **Req. ID:** FR15
+      **Descrição:** Permite ao usuário receber alertas financeiros para eventos específicos relacionados a suas transações ou investimentos.
+    end note
+    
+    note right of UC09
+      **Req. ID:** FR16
+      **Descrição:** Permite ao usuário gerenciar seus cartões de crédito, visualizando informações e recebendo alertas sobre seu limite de gastos.
+    end note
+    
+    note right of UC10
+      **Req. ID:** FR17
+      **Descrição:** Permite ao usuário visualizar todas as posições e rendimentos dos investimentos que possui na plataforma.
+    end note
+    
+    note right of UC11
+      **Req. ID:** FR18
+      **Descrição:** Permite ao usuário adicionar um novo fundo ao seu portfolio de investimentos.
+    end note
+    
+    note right of UC12
+      **Req. ID:** FR19
+      **Descrição:** Permite ao usuário remover um fundo do seu portfolio de investimentos.
+    end note
+    
+    note right of UC13
+      **Req. ID:** FR20
+      **Descrição:** Permite ao usuário buscar informações sobre a posição atual dos fundos que possui em seu portfolio.
+    end note
+    
+    note right of UC14
+      **Req. ID:** FR21
+      **Descrição:** Permite ao usuário consultar o chatbot financeiro, recebendo conselhos e orientações sobre temas relacionados a investimentos ou economia pessoal.
+    end note
+}
+
+' Relacionamentos entre atores e casos de uso
+user --> UC01 : usa
+user --> UC02 : usa
+user --> UC03 : usa
+user --> UC04 : usa
+user --> UC05 : usa
+user --> UC06 : usa
+user --> UC07 : usa
+user --> UC08 : usa
+user --> UC09 : usa
+bank --> UC01 : fornece
+bank --> UC02 : fornece
+bank --> UC03 : fornece
+bank --> UC04 : fornece
+bank --> UC05 : fornece
+investment --> UC10 : fornece
+investment --> UC11 : usa
+investment --> UC12 : usa
+investment --> UC13 : usa
+chat --> UC14 : fornece
+
+@enduml

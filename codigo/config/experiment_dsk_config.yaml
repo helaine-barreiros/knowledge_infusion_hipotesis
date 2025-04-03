@@ -31,111 +31,198 @@ artifacts:
   ollama_model: "Qwen2.5-Coder-7B-Instruct:latest"
   ollama_url: "https://4b51-200-133-1-77.ngrok-free.app"
   plantum_png_url: "http://www.plantuml.com/plantuml/png/"
-  pipeline_processor: treatment2
-  system_prompt: |
-    Você é um arquiteto de software especializado em engenharia de requisitos e modelagem UML, com ênfase em diagramas de casos de uso. Seu trabalho é analisar requisitos de sistema e transformá-los em representações visuais precisas.
-
-    Ao criar diagramas de casos de uso, siga estas diretrizes:
-    1. Identifique todos os atores que interagem com o sistema (primários e secundários)
-    2. Derive casos de uso significativos a partir dos requisitos funcionais
-    3. Mantenha um nível apropriado de granularidade para os casos de uso
-    4. Identifique relacionamentos entre casos de uso (include, extend, generalização)
-    5. Organize casos de uso em pacotes lógicos quando necessário
-    6. Produza código PlantUML válido para o diagrama completo
-
-    A sintaxe PlantUML para diagramas de casos de uso inclui:
-    - `@startuml` e `@enduml` para delimitar o diagrama
-    - `actor "Nome do Ator" as ID` para definir atores
-    - `usecase "Nome do Caso de Uso" as ID` para definir casos de uso
-    - `rectangle "Nome do Sistema" { ... }` para delimitar fronteiras do sistema
-    - `package "Nome do Pacote" { ... }` para agrupar casos de uso relacionados
-    - Relacionamentos:
-      * Associação: `Ator -- CasoDeUso`
-      * Include: `CasoDeUsoA ..> CasoDeUsoB : <<include>>`
-      * Extend: `CasoDeUsoA <.. CasoDeUsoB : <<extend>>`
-      * Generalização: `AtorA <|-- AtorB` ou `CasoDeUsoA <|-- CasoDeUsoB`
-
-    Seu objetivo é analisar cuidadosamente os requisitos, raciocinar passo a passo para identificar atores e casos de uso, e produzir um código PlantUML completo e sintaticamente correto.
-
+  pipeline_processor: treatment1
+  system_prompt: "you are a experiment software architect, proficient in the language PlantUML, use case diagrams and architectural approach 'C4 Modeling'. You are specialist in Financial business and must model a new system: 'AI-Powered Personal Financial Management System'."
   user_prompt: |
-    Desenvolva um diagrama de casos de uso completo em PlantUML para um Sistema de Gestão Financeira Pessoal aprimorado por IA. Use raciocínio passo a passo para criar este diagrama.
+    create a 'use case diagram' in PlantUML,  modeling the "Personal Financial Management System with AI"
+    ## Modeling instructions:
+    1. Analyze and reason about the C1 diagram system written in PlantUML:
+    ```plantuml
+    @startuml "AI-Enhanced Personal Finance Management System - Context Diagram"
+    !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+    'Define SPRITE for custom icons
+    !define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+    !include FONTAWESOME/users.puml
+    !include FONTAWESOME/user_tie.puml
+    !include FONTAWESOME/server.puml
+    !include FONTAWESOME/brain.puml
+    !include FONTAWESOME/newspaper.puml
+    !include FONTAWESOME/university.puml
+    !include FONTAWESOME/chart_line.puml
+    !include FONTAWESOME/lock.puml
 
-    ## Informações do Sistema
+    'Define custom colors
+    !define CUSTOMER_COLOR #08427B
+    !define SYSTEM_COLOR #1168BD
+    !define EXTERNAL_SYSTEM_COLOR #999999
 
-    ### Visão Geral
-    O sistema busca resolver: fragmentação financeira (usuários têm múltiplas contas em diferentes instituições), lacuna de educação financeira, falta de personalização em conselhos financeiros, e complexidade nas decisões financeiras.
+    LAYOUT_WITH_LEGEND()
 
-    ### Funcionalidades Principais
-    - Visão financeira unificada (agregação de contas/transações)
-    - Insights inteligentes por IA sobre padrões de gastos
-    - Recomendações financeiras personalizadas
-    - Planejamento baseado em metas financeiras
-    - Educação financeira contextual
-    - Compartilhamento seguro com consultores financeiros
+    'Persons / Actors
+    Person(individual, "Individual Customer", "A person who wants to manage their personal finances and receive financial insights", $sprite="users")
 
-    ### Requisitos Funcionais
-    1. Autenticação de usuários (senha e OAuth2)
-    2. Conexão segura com contas financeiras via APIs bancárias
-    3. Agregação e categorização de transações financeiras
-    4. Visualização de padrões de gastos e histórico financeiro
-    5. Insights sobre hábitos de gastos usando IA
-    6. Recomendações financeiras personalizadas
-    7. Definição e acompanhamento de metas financeiras
-    8. Criação e monitoramento de orçamentos
-    9. Alertas para padrões de gastos incomuns
-    10. Previsão de posições financeiras futuras
-    11. Sugestões de oportunidades de investimento
-    12. Estratégias de gerenciamento de dívidas
-    13. Compartilhamento seletivo de dados com consultores
-    14. Chatbot para consultas financeiras
-    15. Relatórios periódicos de saúde financeira
-    16. Rastreamento e análise de carteira de criptomoedas
+    Person(advisor, "Financial Advisor", "Professional who provides financial advice based on customer data", $sprite="user_tie")
+    'Main System
+    System(pfm_system, "AI-Enhanced Personal Finance Management System", "Provides financial aggregation, analysis, visualization, and AI-powered recommendations to help users manage their finances effectively", $sprite="server")
 
-    ### Atores e Sistemas
-    - Cliente Individual (usuário primário)
-    - Consultor Financeiro (acessa dados compartilhados)
-    - APIs Bancárias (fontes externas de dados)
-    - APIs de Investimento (dados de mercado)
-    - Serviço de Pontuação de Crédito
-    - Serviço de Notícias Financeiras
-    - Motor de Raciocínio de IA
+    'External Systems
+    System_Ext(banking_api, "Banking APIs", "External services that provide secure access to users' bank accounts and transactions", $sprite="university")
+    System_Ext(investment_api, "Investment APIs", "External services that provide market data and investment portfolio information", $sprite="chart_line")
+    System_Ext(credit_service, "Credit Scoring Service", "Provides credit score information and assessment", $sprite="server")
+    System_Ext(news_service, "Financial News Service", "Provides relevant financial news and economic indicators", $sprite="newspaper")
+    System_Ext(auth_service, "Authentication Service", "Handles user authentication through various methods", $sprite="lock")
 
-    ## Instruções para Desenvolvimento
+    System_Ext(ai_engine, "AI Reasoning Engine", "Provides advanced financial reasoning and predictive capabilities", $sprite="brain")
 
-    Por favor, desenvolva o diagrama seguindo estas etapas:
+    'Relationships - Individual Customer
+    Rel(individual, pfm_system, "Views financial information, receives insights, manages budgets and goals")
 
-    1) **Análise de Atores**: 
-      - Identifique e classifique todos os atores relevantes (primários e secundários)
-      - Determine suas interações principais com o sistema
-      - Considere se há atores adicionais implícitos nos requisitos
+    'Relationships - Financial Advisor
+    Rel(advisor, pfm_system, "Accesses shared customer financial data and provides recommendations")
 
-    2) **Identificação de Casos de Uso**: 
-      - Para cada requisito funcional, identifique os casos de uso correspondentes
-      - Mantenha o nível adequado de granularidade (nem muito gerais nem muito específicos)
-      - Certifique-se que cada caso de uso representa um objetivo completo de um ator
+    'Relationships - PFM System to External Systems
+    Rel(pfm_system, banking_api, "Retrieves banking transactions, account balances, and account information")
+    Rel(pfm_system, investment_api, "Fetches investment data, portfolio performance, and market information")
+    Rel(pfm_system, credit_service, "Obtains credit scores and credit-related insights")
+    Rel(pfm_system, news_service, "Receives relevant financial news and market updates")
+    Rel(pfm_system, auth_service, "Verifies user identities and manages authentication")
+    Rel(pfm_system, ai_engine, "Leverages for advanced financial analysis and personalized recommendations")
 
-    3) **Organização em Pacotes**: 
-      - Agrupe os casos de uso em pacotes lógicos por área funcional
-      - Considere categorias como: Autenticação, Gerenciamento de Contas, Análise Financeira, etc.
-      - Mantenha os pacotes equilibrados em tamanho e escopo
+    'Feedback Relationships
+    Rel(banking_api, pfm_system, "Sends transaction notifications and account updates")
+    Rel(pfm_system, individual, "Sends notifications about financial alerts, insights, and goal progress")
+    @enduml
+    ```
+    2. Understand the  Entities in the Diagram
+    #### Users/Actors:
+    Individual Customer: The primary user of the system who wants to manage their personal finances, track spending, set financial goals, and receive financial insights.
+    Financial Advisor: Professional who can access shared customer financial data (with permission) to provide personalized financial advice.
+    #### Core System:
+    AI-Enhanced Personal Finance Management System: The central system that provides financial aggregation, analysis, visualization, and AI-powered recommendations to help users manage their finances effectively.
+    #### External Systems:
+    Banking APIs: External services that provide secure access to users' bank accounts, transaction data, and account balances.
+    Investment APIs: External services that provide market data, investment portfolio information, and trade execution capabilities.
+    Credit Scoring Service: External service that provides credit score information and creditworthiness assessment.
+    Financial News Service: External service that provides relevant financial news, market updates, and economic indicators.
+    Authentication Service: External identity provider that handles user authentication through various methods including OAuth2.
+    AI Reasoning Engine: Specialized external service that provides advanced financial reasoning, pattern recognition, and predictive capabilities.
+    #### Relationship Description
+    ##### Individual Customer:
+    Interacts with the AI-Enhanced PFM System through web and mobile interfaces to view financial information, receive insights, set goals, and manage budgets.
+    Receives notifications about financial alerts, insights, and goal progress.
+    ##### Financial Advisor:
+    Accesses customer-shared financial data through a specialized portal in the AI-Enhanced PFM System.
+    Provides financial advice and recommendations that are tracked within the system.
+    ##### AI-Enhanced PFM System:
+    Retrieves banking transaction data, account balances, and account information through Banking APIs.
+    Fetches investment data, portfolio performance, and market information through Investment APIs.
+    Obtains credit scores and credit-related insights from the Credit Scoring Service.
+    Receives relevant financial news and market updates from the Financial News Service.
+    Leverages the AI Reasoning Engine for advanced financial analysis, pattern recognition, and personalized recommendations.
+    Verifies user identities and manages authentication through the Authentication Service.
+    #### Business Rationale and Key Capabilities
+    The AI-Enhanced Personal Finance Management System addresses critical needs in the modern financial landscape:
+    **Financial Fragmentation:** Users typically have multiple financial accounts across different institutions, making it difficult to get a comprehensive view of their financial situation.
+    **Financial Literacy Gap:** Many individuals lack the knowledge and tools to make informed financial decisions, leading to suboptimal financial outcomes.
+    **Personalization Need:** Traditional financial advice is often generic and not tailored to individual circumstances, behaviors, and goals.
+    **Decision Complexity:** Financial decisions involve complex trade-offs and considerations that are difficult for most people to analyze effectively.
 
-    4) **Análise de Relacionamentos**: 
-      - Identifique relacionamentos entre casos de uso:
-        * Relacionamentos <<include>> para funcionalidades comuns reutilizáveis
-        * Relacionamentos <<extend>> para comportamentos opcionais ou condicionais
-        * Generalizações para representar especializações de casos de uso
-      - Determine quais casos de uso são pré-requisitos para outros
+    The system delivers value through:
+    **Unified Financial View:** Aggregating all financial accounts and transactions in one place.
+    **Intelligent Insights:** Providing AI-powered analysis of spending patterns, identifying opportunities for improvement.
+    **Proactive Recommendations:** Suggesting specific actions to improve financial health based on individual circumstances.
+    **Goal-Based Planning:** Helping users set and track progress toward financial goals like saving for retirement or paying off debt.
+    **Financial Education:** Delivering contextual learning about financial concepts relevant to the user's situation.
+    **Secure Advisor Collaboration:** Enabling selective sharing of financial information with professional advisors.
+    
+    3. See the initial proposed list of Functional Requirements
+    | ID   | Requirement                                                                           | Priority  |
+    | ---- | ------------------------------------------------------------------------------------- | --------- |
+    | FR01 | The system shall authenticate users via username/password and OAuth2 providers        | Essential |
+    | FR02 | The system shall connect to users' financial accounts through secure banking APIs     | Essential |
+    | FR03 | The system shall aggregate and categorize financial transactions                      | Essential |
+    | FR04 | The system shall visualize spending patterns and financial history                    | Essential |
+    | FR05 | The system shall provide AI-powered insights on spending habits                       | Essential |
+    | FR06 | The system shall generate personalized financial recommendations                      | Essential |
+    | FR07 | The system shall allow users to set and track financial goals                         | Important |
+    | FR08 | The system shall provide budget creation and monitoring capabilities                  | Important |
+    | FR09 | The system shall deliver alerts for unusual spending patterns                         | Important |
+    | FR10 | The system shall forecast future financial positions based on historical data         | Important |
+    | FR11 | The system shall suggest investment opportunities based on user profile               | Important |
+    | FR12 | The system shall provide debt management strategies with repayment simulations        | Important |
+    | FR13 | The system shall allow users to share selected financial data with financial advisors | Desirable |
+    | FR14 | The system shall provide a chatbot for financial queries                              | Desirable |
+    | FR15 | The system shall generate periodic financial health reports                           | Desirable |
+    | FR16 | The system shall offer cryptocurrency portfolio tracking and analysis                 | Desirable |
+    
+    4. Seed the Non-Functional Requirements
+    | ID    | Requirement                                                                       | Priority  |
+    | ----- | --------------------------------------------------------------------------------- | --------- |
+    | NFR01 | The system shall comply with financial data regulations (GDPR, PSD2, etc.)        | Essential |
+    | NFR02 | The system shall secure all financial data with encryption at rest and in transit | Essential |
+    | NFR03 | The system shall maintain 99.9% uptime during business hours                      | Essential |
+    | NFR04 | The system shall respond to user interactions within 1 second                     | Essential |
+    | NFR05 | The system shall scale to handle at least 100,000 concurrent users                | Important |
+    | NFR06 | The system shall provide multi-factor authentication                              | Important |
+    | NFR07 | The system shall recover from failures within 5 minutes                           | Important |
+    | NFR08 | The system shall support internationalization and multiple currencies             | Important |
+    | NFR09 | The AI components shall be explainable and provide reasoning for recommendations  | Important |
+    | NFR10 | The system shall be compatible with major web browsers and mobile devices         | Important |
+    | NFR11 | The system shall maintain an audit trail of all data access                       | Important |
+    | NFR12 | The system shall allow customization of dashboards and reports                    | Desirable |
+    | NFR13 | The system shall support offline mode with limited functionality                  | Desirable |
+    | NFR14 | The system shall be accessible according to WCAG 2.1 level AA standards           | Desirable |
+    
+    5. create a 'use case diagram' for the system and return only the PlantUML code between the @startuml and @enduml tags in the response. 
+    6. Remember that you can use 'include', 'extend' and 'generalization' to refine your modeling. 
+    7. To illustrate the level of detail expected, here is an example for the "Financial Transactions" domain:
+    ```plantuml
+    @startuml "C4_UC_Transacoes"
 
-    5) **Código PlantUML**: 
-      - Produza o código PlantUML completo, incluindo:
-        * Cabeçalho e configurações
-        * Definição de todos os atores
-        * Fronteira do sistema
-        * Todos os casos de uso organizados em pacotes
-        * Todos os relacionamentos identificados
-        * Formatação adequada para legibilidade
+    !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
 
-    O resultado final deve ser código PlantUML válido e bem estruturado, pronto para ser renderizado em um diagrama visual de casos de uso.
+    title "Sistema de Gestão Financeira Pessoal - Transações Financeiras - Casos de Uso"
 
+    ' Atores
+    actor "Cliente Individual" as user
+    actor "Sistema Bancário" as bank #999999
 
+    ' Sistema e casos de uso
+    rectangle "Sistema de Gestão Financeira Pessoal" {
+        usecase "UC01: Visualizar Lista de Transações" as UC01
+        
+        note right of UC01
+          **Req. ID:** FR03, FR04
+          **Descrição:** Permite ao usuário visualizar todas as transações 
+          financeiras de suas contas conectadas, ordenadas 
+          cronologicamente.
+        end note
+        
+        usecase "UC02: Filtrar Transações" as UC02
+        usecase "UC03: Categorizar Transação Manualmente" as UC03
+        usecase "UC04: Buscar Transações" as UC04
+        usecase "UC05: Visualizar Detalhes da Transação" as UC05
+        usecase "UC06: Exportar Transações" as UC06
+        usecase "UC07: Receber Categorização Automática" as UC07
+        
+        ' Relacionamentos entre casos de uso
+        UC01 ..> UC02 : <<include>>
+        UC01 ..> UC07 : <<include>>
+        UC01 ..> UC05 : <<extend>>
+        UC01 ..> UC06 : <<extend>>
+        UC03 ..> UC05 : <<include>>
+    }
 
+    ' Relacionamentos ator-caso de uso
+    user --> UC01
+    user --> UC03
+    user --> UC04
+    bank --> UC07
+
+    @enduml
+    ```
+    8.observe the quality criteria that will be analyzed in the diagram you produce:
+    **Correctness**: The use cases correctly represent the system's functionalities and follow the PlantUML syntax.
+    **Coherence**: The diagrams are consistent with the C1, C2, and C3 artifacts, and maintain uniform terminology.
+    **Completeness**: All functional requirements are covered by the use cases, with adequate detail.
+    **Practical applicability**: The diagrams are clear enough to guide implementation by development teams.
