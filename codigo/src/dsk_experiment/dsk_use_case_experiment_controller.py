@@ -80,12 +80,22 @@ class DskExperimentController:
         self.fileUtil.save_to_file(artifact_name, treatment_output_directory, plantuml_code)
 
         self.LOGGER.info(f"💾 Saving artifact treatment {treatment_number} image")
-        plantuml_image = self.controller.extract_plantuml_use_case_image(treatment_response)
-        artifact_image_name = f"{provider}-{model}-collect-{iterator_number}.png"
-        self.fileUtil.save_to_file_with_error_handling(artifact_image_name, treatment_output_directory, plantuml_image)
 
-        filename = f"{provider}-{model}-collect-{iterator_number}"
-        artifact_excel_report = self.controller.extract_excel_report(plantuml_code, filename)
-        artifact_excel_report = f"{provider}-{model}-collect-{iterator_number}.xlsx"
-        self.fileUtil.save_to_file_with_error_handling(artifact_excel_report, treatment_output_directory,
-                                                       artifact_excel_report)
+        artifact_image_name = f"{provider}-{model}-collect-{iterator_number}.png"
+
+        has_image = False
+        if not plantuml_code:
+            self.fileUtil.generate_png_empty_file(artifact_image_name, treatment_output_directory, artifact_image_name)
+        else:
+            plantuml_image = self.controller.extract_plantuml_use_case_image(treatment_response)
+
+            has_image = self.fileUtil.save_to_file_with_error_handling(artifact_image_name, treatment_output_directory,
+                                                                       plantuml_image)
+
+        artifact_excel_report_name = f"{provider}-{model}-collect-{iterator_number}.xlsx"
+        if not has_image:
+            self.fileUtil.generate_excel_empty_file(treatment_output_directory, artifact_excel_report_name)
+        else:
+            artifact_excel_report = self.controller.extract_excel_report(plantuml_code)
+            self.fileUtil.save_to_file_with_error_handling(artifact_excel_report_name, treatment_output_directory,
+                                                           artifact_excel_report)

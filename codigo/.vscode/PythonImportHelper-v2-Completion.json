@@ -955,7 +955,7 @@
         "kind": 6,
         "importPath": "src.llm.llm_service",
         "description": "src.llm.llm_service",
-        "peekOfCode": "class OllamaStrategy(LLMStrategy):\n    def __init__(self):\n        self.api_url = SYSTEM_CONFIG.get(\"general.models.default_ollama_url\", \"http://localhost:11434/api/chat\")\n        self.default_model = SYSTEM_CONFIG.get(\"general.models.default_.ollama_model\",\n                                               \"Qwen2.5-Coder-7B-Instruct:latest\")\n        self.temperature = SYSTEM_CONFIG.get(\"general.models.default_ollama_temperature\", 0.7)\n        self.timeout = SYSTEM_CONFIG.get(\"general.models.default_ollama_timeout\", 60)\n        self.logger = Logger\n    def execute(self, prompt, **params):\n        import requests",
+        "peekOfCode": "class OllamaStrategy(LLMStrategy):\n    def __init__(self):\n        self.api_url = SYSTEM_CONFIG.get(\"general.models.default_ollama_url\", \"https://4b51-200-133-1-77.ngrok-free.app/api/chat\")\n        self.default_model = SYSTEM_CONFIG.get(\"general.models.default_.ollama_model\",\n                                               \"Qwen2.5-Coder-7B-Instruct:latest\")\n        self.temperature = SYSTEM_CONFIG.get(\"general.models.default_ollama_temperature\", 0.7)\n        self.timeout = SYSTEM_CONFIG.get(\"general.models.default_ollama_timeout\", 60)\n        self.logger = Logger\n    def execute(self, prompt, **params):\n        from ollama import Client",
         "detail": "src.llm.llm_service",
         "documentation": {}
     },
@@ -982,7 +982,7 @@
         "kind": 6,
         "importPath": "src.plantuml_utils.plantuml_parser_use_case",
         "description": "src.plantuml_utils.plantuml_parser_use_case",
-        "peekOfCode": "class PlantUMLUseCaseParser:\n    \"\"\"\n    Parser for PlantUML use case diagrams.\n    This class performs detailed analysis of PlantUML code.\n    \"\"\"\n    def __init__(self):\n        self.elements = defaultdict(list)\n        self.counts = {\n            'actors': 0,\n            'use_cases': 0,",
+        "peekOfCode": "class PlantUMLUseCaseParser:\n    \"\"\"\n    Parser for PlantUML use case diagrams.\n    This class performs detailed analysis of PlantUML code.\n    \"\"\"\n    def __init__(self):\n        self.LOGGER = Logger\n    def parse(self, plantuml_code: str) -> Tuple[Dict[str, List[Dict[str, Any]]], Dict[str, int]]:\n        \"\"\"\n        Analyzes PlantUML code and extracts diagram elements.",
         "detail": "src.plantuml_utils.plantuml_parser_use_case",
         "documentation": {}
     },

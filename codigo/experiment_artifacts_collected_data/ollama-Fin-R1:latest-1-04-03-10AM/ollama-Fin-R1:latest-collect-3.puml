@@ -1,0 +1,83 @@
+@startuml
+!define AUTENTICACAO_AOSS "Autenticação: %1"
+!define CONSULTOR_FISICO "Consultor Financeiro"
+
+skinparam class {
+    ArrowColor Blue
+}
+
+package "Sistema de Gestão Financeira Pessoal" as sistema {
+    
+    package "Autenticação" {
+        actor ClienteIndividual;
+        actor ConsultorFinanceiro;
+        
+        usecase AutenticarComSenha, AutenticarComOAuth2;
+        AUTENTICACAO_AOSS(ClienteIndividual)
+            : Autenticar com senha\n(Conectar/Desconectar)
+            <<extend>>
+            AUTENTICACAO_AOSS(ConsultorFinanceiro)
+                : Autenticar via token de acesso\n(Certificado / Biometria)
+    }
+
+    package "Contas Financeiras" {
+        usecase ConectarContaBancaria, DesconectarContaBancaria, AgregarTransacoes, CategorizarTransacoes;
+        
+        AUTENTICACAO_AOSS(ClienteIndividual)
+            : Conectar conta bancária\n(Carregar dados)
+            >> ConectarContaBancaria
+            AUTENTICACAO_AOSS(ConsultorFinanceiro)
+                : Acessar dados de cliente\n(Aprovar / Denegar)
+    }
+
+    package "Análise e Visualização" {
+        usecase VisualizarHistorico, IdentificarPadroesGastos, ExibirRelatoriosPeriodicos;
+        
+        AUTENTICACAO_AOSS(ClienteIndividual)
+            : Visualizar histórico financeiro\n(Criar relatórios)
+            >> VisualizarHistorico
+    }
+
+    package "Recomendações Financeiras" {
+        usecase ReceberRecomendacoesPersonalizadas, GerarMetasFinanceiras;
+        
+        AUTENTICACAO_AOSS(ClienteIndividual)
+            : Receber recomendações\n(Gerar metas)
+            >> ReceberRecomendacoesPersonalizadas
+            AUTENTICACAO_AOSS(ConsultorFinanceiro)
+                : Avaliar metas e ajustes\n(Aprovar / Negar)
+    }
+
+    package "Comunicação (Chatbot)" {
+        usecase ConsultarChatbot;
+        
+        AUTENTICACAO_AOSS(ClienteIndividual)
+            : Interagir com chatbot\n(Gerar insights)
+            >> ConsultarChatbot
+    }
+
+    package "Segurança e Compartilhamento" {
+        usecase GerenciarPermissoesCompartilhamento, CompartilharDados;
+        
+        AUTENTICACAO_AOSS(ClienteIndividual)
+            : Gerenciar permissões\n(Compartilhar dados)
+            >> GerenciarPermissoesCompartilhamento
+    }
+
+    package "Planejamento e Orçamentos" {
+        usecase DefinirOrçamentosMensais, MonitorarGastosOrçamento, AjustarMetas;
+        
+        AUTENTICACAO_AOSS(ClienteIndividual)
+            : Criar/Alterar orçamento\n(Monitorar progresso)
+            >> DefinirOrçamentosMensais
+    }
+
+    package "Previsão e Projeção" {
+        usecase PreverPosicoesFuturas, AnalisarCenariosInvestimento;
+        
+        AUTENTICACAO_AOSS(ClienteIndividual)
+            : Gerar previsões\n(Avaliar cenários)
+            >> PreverPosicoesFuturas
+    }
+}
+@enduml

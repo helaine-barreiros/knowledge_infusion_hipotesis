@@ -42,7 +42,7 @@ class OpenAIStrategy(LLMStrategy):
 
 class OllamaStrategy(LLMStrategy):
     def __init__(self):
-        self.api_url = SYSTEM_CONFIG.get("general.models.default_ollama_url", "http://localhost:11434/api/chat")
+        self.api_url = SYSTEM_CONFIG.get("general.models.default_ollama_url", "https://4b51-200-133-1-77.ngrok-free.app/api/chat")
         self.default_model = SYSTEM_CONFIG.get("general.models.default_.ollama_model",
                                                "Qwen2.5-Coder-7B-Instruct:latest")
         self.temperature = SYSTEM_CONFIG.get("general.models.default_ollama_temperature", 0.7)
@@ -50,7 +50,7 @@ class OllamaStrategy(LLMStrategy):
         self.logger = Logger
 
     def execute(self, prompt, **params):
-        import requests
+        from ollama import Client
 
         content = ""
 
@@ -58,35 +58,33 @@ class OllamaStrategy(LLMStrategy):
         system_message = params.get("system_prompt", "")
         temperature = params.get("temperature", self.temperature)
         timeout = params.get("timeout", self.timeout)
+        api_url = params.get("api_url", self.api_url)
 
-        payload = {
-            "model": model,
-            "messages": [
-                {"role": "system", "content": system_message},
-                {"role": "user", "content": prompt}
-            ],
-            "options": {
-                "temperature": temperature
-            },
-            "stream": False
-        }
+        client = Client(host=api_url)
 
         try:
+            messages = [
+                {"role": "system", "content": system_message},
+                {"role": "user", "content": prompt}
+            ]
+
+            model_response = client.chat(
+                messages=messages,
+                model=model,
+                options={"temperature": temperature},
+                stream=False
+            )
+
             self.logger.info(f"Calling Ollama API with model={model}, temp={temperature}, timeout={timeout}")
-            response = requests.post(self.api_url, json=payload, timeout=timeout)
-            response.raise_for_status()
 
-            # self.logger.debug(f"API response status: {response.status_code}")
-            # self.logger.debug(f"API response headers: {response.headers}")
-            # self.logger.debug(f"API response raw text: {response.text[:500]}...")
-
-            content = response.json().get("message", {}).get("content", "")
+            if model_response.done:
+                self.logger.info(f"Result chat:{model_response.message.content}")
+                content = model_response.message.content
 
             self.logger.info(f"Extracted content: {content[:100]}...")
 
         except Exception as e:
             self.logger.error(f"Error calling Ollama API: {e}")
-            self.logger.error(f"Payload was: {payload}")
 
         return content
 

@@ -110,27 +110,22 @@ class PlantUMLUseCaseController:
             - The method does not raise exceptions. Instead, it logs error messages
             when issues occur during the parsing process.
         """
-        components = None
+        diagram = []
 
         try:
             extracted_code = self.extract_plantuml_use_case_code(plantuml_code)
             if not extracted_code:
-                return None
+                return diagram
 
-            components = self.parser.parse(extracted_code)
-            self.LOGGER.info(f"Extracted components:{components}")
-
-            # Verificar se o parser retornou um valor válido
-            if not components or not isinstance(components, dict):
-                return None
+            diagram = self.parser.parse(extracted_code)
+            self.LOGGER.info(f"Extracted diagram:{diagram}")
 
         except Exception as e:
-            self.LOGGER.error(f"Error extracting use case components: {str(e)}")
-            return None
+            self.LOGGER.error(f"Error extracting use case diagram: {str(e)}")
 
-        return components
+        return diagram
 
-    def extract_excel_report(self, plantuml_code, output_filename: str):
+    def extract_excel_report(self, plantuml_code):
         """
         Extracts components from PlantUML code and generates an Excel report.
 
@@ -151,30 +146,64 @@ class PlantUMLUseCaseController:
         excel_bytes = None
 
         try:
-            components = self.extract_plantuml_use_case_components(plantuml_code)
-            self.LOGGER.info(f"Extracted components:{components}")
-            # Verificar se components é None ou vazio antes de tentar acessar
-            if not components:
-                self.LOGGER.debug("Not declared components.")
-                return None
-                
-            # Obter relações e garantir valor padrão como lista vazia
-            relations = components.get("relationships", [])
+            diagram = self.extract_plantuml_use_case_components(plantuml_code)
 
-            # Verificar se componentes é um dicionário vazio ou inválido 
-            if not isinstance(components, dict):
-                self.LOGGER.debug("Components is not a valid dictionary.")
-                return None
+            consolidated_data = []
 
-            # Criar DataFrames
-            df_components = pd.DataFrame(components["actors"])
-            df_relations = pd.DataFrame(relations)
+            consolidated_data.extend(
+                {
+                    'Type': 'Actor',
+                    'Name': actor['name'],
+                    'Alias': actor['alias'],
+                    'Details': f"Type: {actor['type']}",
+                }
+                for actor in diagram['actors']
+            )
+            consolidated_data.extend(
+                {
+                    'Type': 'Use Case',
+                    'Name': use_case['name'],
+                    'Alias': use_case['alias'],
+                    'Details': f"Type: {use_case['type']}",
+                }
+                for use_case in diagram['use_cases']
+            )
 
-            # Gerar Excel em memória
+            consolidated_data.extend(
+                {
+                    'Type': 'Relationship',
+                    'Name': f"{rel['source']} --> {rel['target']}",
+                    'Alias': '',
+                    'Details': f"Type: {rel['type']}, Kind: {rel.get('kind', '')}",
+                }
+                for rel in diagram['relationships']
+            )
+
+            consolidated_data.extend(
+                {
+                    'Type': 'Note',
+                    'Name': note['target'],
+                    'Alias': '',
+                    'Details': note['content'],
+                }
+                for note in diagram['notes']
+            )
+
+            consolidated_data.extend(
+                {
+                    'Type': 'Rectangle',
+                    'Name': rect['name'],
+                    'Alias': '',
+                    'Details': '',
+                }
+                for rect in diagram['rectangles']
+            )
+
+            df_consolidated = pd.DataFrame(consolidated_data)
+
             with io.BytesIO() as buffer:
                 with pd.ExcelWriter(buffer, engine="xlsxwriter") as writer:
-                    df_components.to_excel(writer, sheet_name="Components", index=False)
-                    df_relations.to_excel(writer, sheet_name="Relations", index=False)
+                    df_consolidated.to_excel(writer, sheet_name="Use Case Report", index=False)
 
                 buffer.seek(0)
                 excel_bytes = buffer.read()

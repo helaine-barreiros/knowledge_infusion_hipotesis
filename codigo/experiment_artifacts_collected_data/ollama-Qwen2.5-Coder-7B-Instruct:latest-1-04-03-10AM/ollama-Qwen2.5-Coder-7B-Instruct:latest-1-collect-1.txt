@@ -1,0 +1,100 @@
+<|im_start|><|im_start|><|im_start|><|im_start|>
+```
+@startuml
+!define RECTANGLE class
+
+title Sistema de Gestão Financeira Pessoal Aumentada por IA
+
+actor "Cliente Individual" as ClienteIndividual
+participant "Consultor Financeiro" as ConsultorFinanceiro
+participant "APIs Bancárias" as APIsBancarias
+participant "APIs de Investimento" as APIsInvestimento
+participant "Serviço de Pontuação de Crédito" as ServicoPontoCredito
+participant "Serviço de Notícias Financeiras" as ServicoNoticiasFinanceiras
+participant "Motor de Raciocínio de IA" as MotorRaciocinioIA
+
+package "Autenticação" {
+  RECTANGLE Autenticacao {
+    ClienteIndividual --> Autenticacao : autentica (senha, OAuth2)
+  }
+}
+
+package "Gerenciamento de Contas" {
+  RECTANGLE GerenciamentoContas {
+    ClienteIndividual -> GerenciamentoContas: conecta-se à conta bancária
+    APIsBancarias -> GerenciamentoContas: fornece dados financeiros
+    GerenciamentoContas --> ClienteIndividual : exibe transações e resumo da conta
+  }
+}
+
+package "Análise Financeira" {
+  RECTANGLE AnaliseFinanceira {
+    GerenciamentoContas -> AnaliseFinanceira: envia transações
+    APIsInvestimento -> AnaliseFinanceira: fornece dados de mercado
+    MotorRaciocinioIA --> AnaliseFinanceira: analisa padrões de gastos
+    AnaliseFinanceira --> ClienteIndividual : exibe insights inteligentes
+  }
+}
+
+package "Recomendações Financeiras" {
+  RECTANGLE RecomendacoesFinanceiras {
+    AnaliseFinanceira -> RecomendacoesFinanceiras: envia dados para recomendação
+    ServicoPontoCredito --> RecomendacoesFinanceiras: fornece informações de crédito
+    RecomendacoesFinanceiras --> ClienteIndividual : exibe recomendações personalizadas
+  }
+}
+
+package "Planejamento Baseado em Metas" {
+  RECTANGLE PlanejamentoMetas {
+    ClienteIndividual -> PlanejamentoMetas: define metas financeiras
+    AnaliseFinanceira --> PlanejamentoMetas: envia dados para planejamento
+    PlanejamentoMetas --> ClienteIndividual : monitora e ajusta metas
+  }
+}
+
+package "Educação Financeira" {
+  RECTANGLE EduacaoFinanceira {
+    ServicoNoticiasFinanceiras --> EduacaoFinanceira: fornece conteúdo educacional
+    EduacaoFinanceira --> ClienteIndividual : exibe conteúdo contextualizado
+  }
+}
+
+package "Compartilhamento Seguro" {
+  RECTANGLE CompartilhamentoSeguro {
+    ConsultorFinanceiro -> GerenciamentoContas: solicita acesso a dados da conta
+    GerenciamentoContas -> ConsultorFinanceiro : fornece dados seguros
+  }
+}
+
+package "Suporte à Chatbot" {
+  RECTANGLE Chatbot {
+    ClienteIndividual --> Chatbot: consulta financeira
+    Chatbot --> ClienteIndividual : resposta e orientação financeira
+  }
+}
+
+package "Relatórios Financeiros" {
+  RECTANGLE RelatoriosFinanceiros {
+    ClienteIndividual -> AnaliseFinanceira: solicita relatórios
+    AnaliseFinanceira -> RelatoriosFinanceiros: prepara relatórios
+    RelatoriosFinanceiros --> ClienteIndividual : exibe relatórios periódicos
+  }
+}
+
+package "Gerenciamento de Dívidas" {
+  RECTANGLE GerenciamentoDidas {
+    PlanejamentoMetas --> GerenciamentoDidas: envia dados para gestão de dívidas
+    AnaliseFinanceira --> GerenciamentoDidas: envia dados para gestão de dívidas
+    GerenciamentoDidas --> ClienteIndividual : exibe estratégias de gerenciamento de dívidas
+  }
+}
+
+package "Gerenciamento de Criptomoedas" {
+  RECTANGLE GerenciamentoCriptomoedas {
+    ClienteIndividual -> AnaliseFinanceira: consulta dados de carteira de criptomoedas
+    AnaliseFinanceira --> GerenciamentoCriptomoedas: prepara e exibe dados da carteira
+  }
+}
+
+@enduml
+```

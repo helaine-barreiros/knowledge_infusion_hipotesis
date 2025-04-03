@@ -1,38 +1,141 @@
 general:
   dsk_dir: "./dsk"                 # Diretório onde os documentos estão armazenados
-  iteractions: 5
+  iteractions: 10
   log_level: "DEBUG"
   output_directory: "./output"
   log_dir: "./log"
   models:
     default_openai_provider: "https://api.openai.com/v1"
     default_openai_model: "gpt-4o"
-    default_openai_temperature: 0.7
+    default_openai_temperature: 1
     default_openai_key: ""
-    default_ollama_url: "https://4b51-200-133-1-77.ngrok-free.app/api/chat"
+    default_ollama_url: "https://4b51-200-133-1-77.ngrok-free.app"
     default_ollama_model: "Qwen2.5-Coder-7B-Instruct:latest"
-    default_ollama_temperature: 0.7
-    default_ollama_timeout: 180
+    default_ollama_temperature: 1
+    default_ollama_timeout: 60
     default_provider: "ollama"  #ollama|openai
-artifacts:  
-  output_directory: "experiment_artifacts_collected_data"
-  system_prompt: "Act as a business expert in Emergency Patient Triage certified by the Manchester Triage Group third edition, to provide accurate and expert guidance in the domain of emergency triage."
-  user_prompt: "generate PlantUML code to model a state machine diagram that manages the patient prontuary status during the clinical priority triaging process by a nurse."
-  treatment_model_1: "Qwen2.5-Coder-7B-Instruct:latest"
-  #treatment_model_2: "Fin-R1:latest"
-  treatment_model_2: "deepseek-r1:70b"
-  treatment_provider_1: "ollama"
-  treatment_provider_2: "ollama"
-  treatment_model_1_temperature: 0.7
-  treatment_model_2_temperature: 0.7
-  ollama_model: "Qwen2.5-Coder-7B-Instruct:latest"
-  ollama_url: "https://4b51-200-133-1-77.ngrok-free.app/api/chat"
-  plantuml_png_url: "http://www.plantuml.com/plantuml/png/"
-  pipeline_processor: parallel  #treatment1|treatment2|parallel
 rag:
   embeddings_dir: "./embeddings"
   embedding_model: "nvidia/NV-Embed-v1"
   max_tokens: 512                   # Limite de tokens por chunk de texto
   normalize_embeddings: True 
+artifacts:  
+  output_directory: "experiment_artifacts_collected_data"
+  treatment_model_1: "Qwen2.5-Coder-7B-Instruct:latest"
+  treatment_model_2: "Fin-R1:latest"
+  #treatment_model_2: "deepseek-r1:70b"
+  treatment_provider_1: "ollama"
+  treatment_provider_2: "ollama"
+  treatment_model_1_temperature: 1
+  treatment_model_2_temperature: 1
+  ollama_model: "Qwen2.5-Coder-7B-Instruct:latest"
+  ollama_url: "https://4b51-200-133-1-77.ngrok-free.app"
+  plantum_png_url: "http://www.plantuml.com/plantuml/png/"
+  pipeline_processor: treatment2
+  system_prompt: |
+    Você é um arquiteto de software especializado em engenharia de requisitos e modelagem UML, com ênfase em diagramas de casos de uso. Seu trabalho é analisar requisitos de sistema e transformá-los em representações visuais precisas.
+
+    Ao criar diagramas de casos de uso, siga estas diretrizes:
+    1. Identifique todos os atores que interagem com o sistema (primários e secundários)
+    2. Derive casos de uso significativos a partir dos requisitos funcionais
+    3. Mantenha um nível apropriado de granularidade para os casos de uso
+    4. Identifique relacionamentos entre casos de uso (include, extend, generalização)
+    5. Organize casos de uso em pacotes lógicos quando necessário
+    6. Produza código PlantUML válido para o diagrama completo
+
+    A sintaxe PlantUML para diagramas de casos de uso inclui:
+    - `@startuml` e `@enduml` para delimitar o diagrama
+    - `actor "Nome do Ator" as ID` para definir atores
+    - `usecase "Nome do Caso de Uso" as ID` para definir casos de uso
+    - `rectangle "Nome do Sistema" { ... }` para delimitar fronteiras do sistema
+    - `package "Nome do Pacote" { ... }` para agrupar casos de uso relacionados
+    - Relacionamentos:
+      * Associação: `Ator -- CasoDeUso`
+      * Include: `CasoDeUsoA ..> CasoDeUsoB : <<include>>`
+      * Extend: `CasoDeUsoA <.. CasoDeUsoB : <<extend>>`
+      * Generalização: `AtorA <|-- AtorB` ou `CasoDeUsoA <|-- CasoDeUsoB`
+
+    Seu objetivo é analisar cuidadosamente os requisitos, raciocinar passo a passo para identificar atores e casos de uso, e produzir um código PlantUML completo e sintaticamente correto.
+
+  user_prompt: |
+    Desenvolva um diagrama de casos de uso completo em PlantUML para um Sistema de Gestão Financeira Pessoal aprimorado por IA. Use raciocínio passo a passo para criar este diagrama.
+
+    ## Informações do Sistema
+
+    ### Visão Geral
+    O sistema busca resolver: fragmentação financeira (usuários têm múltiplas contas em diferentes instituições), lacuna de educação financeira, falta de personalização em conselhos financeiros, e complexidade nas decisões financeiras.
+
+    ### Funcionalidades Principais
+    - Visão financeira unificada (agregação de contas/transações)
+    - Insights inteligentes por IA sobre padrões de gastos
+    - Recomendações financeiras personalizadas
+    - Planejamento baseado em metas financeiras
+    - Educação financeira contextual
+    - Compartilhamento seguro com consultores financeiros
+
+    ### Requisitos Funcionais
+    1. Autenticação de usuários (senha e OAuth2)
+    2. Conexão segura com contas financeiras via APIs bancárias
+    3. Agregação e categorização de transações financeiras
+    4. Visualização de padrões de gastos e histórico financeiro
+    5. Insights sobre hábitos de gastos usando IA
+    6. Recomendações financeiras personalizadas
+    7. Definição e acompanhamento de metas financeiras
+    8. Criação e monitoramento de orçamentos
+    9. Alertas para padrões de gastos incomuns
+    10. Previsão de posições financeiras futuras
+    11. Sugestões de oportunidades de investimento
+    12. Estratégias de gerenciamento de dívidas
+    13. Compartilhamento seletivo de dados com consultores
+    14. Chatbot para consultas financeiras
+    15. Relatórios periódicos de saúde financeira
+    16. Rastreamento e análise de carteira de criptomoedas
+
+    ### Atores e Sistemas
+    - Cliente Individual (usuário primário)
+    - Consultor Financeiro (acessa dados compartilhados)
+    - APIs Bancárias (fontes externas de dados)
+    - APIs de Investimento (dados de mercado)
+    - Serviço de Pontuação de Crédito
+    - Serviço de Notícias Financeiras
+    - Motor de Raciocínio de IA
+
+    ## Instruções para Desenvolvimento
+
+    Por favor, desenvolva o diagrama seguindo estas etapas:
+
+    1) **Análise de Atores**: 
+      - Identifique e classifique todos os atores relevantes (primários e secundários)
+      - Determine suas interações principais com o sistema
+      - Considere se há atores adicionais implícitos nos requisitos
+
+    2) **Identificação de Casos de Uso**: 
+      - Para cada requisito funcional, identifique os casos de uso correspondentes
+      - Mantenha o nível adequado de granularidade (nem muito gerais nem muito específicos)
+      - Certifique-se que cada caso de uso representa um objetivo completo de um ator
+
+    3) **Organização em Pacotes**: 
+      - Agrupe os casos de uso em pacotes lógicos por área funcional
+      - Considere categorias como: Autenticação, Gerenciamento de Contas, Análise Financeira, etc.
+      - Mantenha os pacotes equilibrados em tamanho e escopo
+
+    4) **Análise de Relacionamentos**: 
+      - Identifique relacionamentos entre casos de uso:
+        * Relacionamentos <<include>> para funcionalidades comuns reutilizáveis
+        * Relacionamentos <<extend>> para comportamentos opcionais ou condicionais
+        * Generalizações para representar especializações de casos de uso
+      - Determine quais casos de uso são pré-requisitos para outros
+
+    5) **Código PlantUML**: 
+      - Produza o código PlantUML completo, incluindo:
+        * Cabeçalho e configurações
+        * Definição de todos os atores
+        * Fronteira do sistema
+        * Todos os casos de uso organizados em pacotes
+        * Todos os relacionamentos identificados
+        * Formatação adequada para legibilidade
+
+    O resultado final deve ser código PlantUML válido e bem estruturado, pronto para ser renderizado em um diagrama visual de casos de uso.
+
 
 

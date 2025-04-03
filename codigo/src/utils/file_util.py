@@ -83,15 +83,26 @@ class FileUtil:
             - Logs a success message if the file is saved successfully.
             - Logs a critical error if the file cannot be saved.
         """
+        success = True
         output_file = os.path.join(output_directory, filename)
 
         try:
-            with open(output_file, 'w', encoding='utf-8') as file:
+            if filename.endswith('.txt') and isinstance(content, str):
+                mode = 'w'
+                encoding = 'utf-8'
+            elif filename.endswith(('.png', '.xlsx')) and isinstance(content, bytes):
+                mode = 'wb'
+                encoding = None
+            else:
+                raise ValueError("Unsupported file type or content type mismatch.")
+
+            with open(output_file, mode, encoding=encoding) as file:
                 file.write(content)
 
             self.LOGGER.info(f"File saved successfully at: {output_file}")
 
         except Exception as e:
+            success = False
             file_extension = os.path.splitext(filename)[1]
 
             self.LOGGER.critical(f"Failed to save file at {output_file}: {e}")
@@ -99,9 +110,11 @@ class FileUtil:
             if file_extension == ".png":
                 self._generate_png_file_error(filename, output_directory, output_file, e)
             elif file_extension == ".xlsx":
-                _generate_excel_file_error(output_directory, filename, e)
+                self._generate_excel_file_error(output_directory, filename, e)
             else:
                 self.LOGGER.critical(f"Failed to save error file at {output_file}: {e}")
+
+        return success
 
     def _generate_png_file_error(self, filename, output_directory, output_file, e):
         """
@@ -136,6 +149,24 @@ class FileUtil:
 
         except Exception as e:
             self.LOGGER.critical(f"Failed to save error image at {output_file}: {e}")
+
+    def generate_png_empty_file(self, filename, output_directory, output_file):
+        try:
+
+            empty_output_file = os.path.join(
+                    output_directory,
+                    f"{filename if filename.endswith('.png') else f'{filename}_empty.png'}"
+                )
+            empty_image = Image.new("RGB", (400, 200), color=(255, 255, 255))
+            draw = ImageDraw.Draw(empty_image)
+            font = ImageFont.load_default()
+            draw.text((10, 90), "No diagram detected", fill=(255, 0, 0), font=font)
+
+            empty_image.save(empty_output_file)
+            self.LOGGER.info(f"No detected image saved:{empty_output_file}")
+
+        except Exception as e:
+            self.LOGGER.critical(f"Failed to save empty image at {output_file}: {e}")
 
     def _generate_excel_file_error(self, output_directory, filename, e):
         """
@@ -172,3 +203,21 @@ class FileUtil:
 
         except Exception as inner_e:
             self.LOGGER.critical(f"Failed to save error Excel file at {filename}: {inner_e}")
+
+    def generate_excel_empty_file(self, output_directory, filename):
+        try:
+
+            empty_message = "Not identified elements"
+
+            # Create DataFrames for the error message
+            df_components = pd.DataFrame([{"Error": empty_message}])
+
+            empty_output_file = os.path.join(output_directory, filename)
+
+            with pd.ExcelWriter(empty_output_file, engine="xlsxwriter") as writer:
+                df_components.to_excel(writer, sheet_name="Components", index=False)
+
+            self.LOGGER.info(f"Empty Excel file saved: {empty_output_file}")
+
+        except Exception as inner_e:
+            self.LOGGER.critical(f"Failed to save empty Excel file at {filename}: {inner_e}")

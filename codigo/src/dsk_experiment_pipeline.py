@@ -28,6 +28,8 @@ def main():
 
         _print_iteration_log_end(i)
 
+        iteractions += iteractions
+
     end_time = datetime.now()
     execution_time = end_time - start_time
 

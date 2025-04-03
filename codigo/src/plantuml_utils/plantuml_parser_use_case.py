@@ -10,15 +10,6 @@ class PlantUMLUseCaseParser:
     This class performs detailed analysis of PlantUML code.
     """
     def __init__(self):
-        self.elements = defaultdict(list)
-        self.counts = {
-            'actors': 0,
-            'use_cases': 0,
-            'relationships': 0,
-            'notes': 0,
-            'rectangles': 0
-        }
-        self.title = None
         self.LOGGER = Logger
 
     def parse(self, plantuml_code: str) -> Tuple[Dict[str, List[Dict[str, Any]]], Dict[str, int]]:
@@ -31,8 +22,16 @@ class PlantUMLUseCaseParser:
         Returns:
             Tuple: (extracted elements, element counts)
         """
+        diagram = {
+            'type': 'use case',
+            'title': "",
+            'elements': [],
+            'count': 0,
+            'detailed_count': {}
+        }
+
         if not plantuml_code:
-            return {}, {}
+            return diagram
 
         # Convert multiple lines to a single line if the code is compacted
         if '\n' not in plantuml_code and len(plantuml_code.strip()) > 100:
@@ -50,41 +49,53 @@ class PlantUMLUseCaseParser:
                 cleaned_lines.append(line)
 
         # Extract title if exists
-        self.title = None
         for line in cleaned_lines:
             if line.startswith('title '):
-                self.title = line[6:].strip()
+                diagram.title = line[6:].strip()
                 break
 
-        # Reset elements and counts before starting analysis
-        self._reset()
+        actors, qtd_actors = self.get_actors(cleaned_lines)
+        use_cases, qtd_use_cases = self.get_use_cases(cleaned_lines)
+        rectangles, qtd_rectangles = self.get_rectangles(cleaned_lines)
+        relationships, qtd_relationships = self.get_relationships(cleaned_lines)
+        notes, qtd_notes = self.get_notes(cleaned_lines)
 
-        # Parse elements
-        self._parse_actors(cleaned_lines)
-        self._parse_use_cases(cleaned_lines)
-        self._parse_rectangles(cleaned_lines)
-        self._parse_relationships(cleaned_lines)
-        self._parse_notes(cleaned_lines)
+        diagram['actors'] = actors
+        diagram['use_cases'] = use_cases
+        diagram['rectangles'] = rectangles
+        diagram['relationships'] = relationships
+        diagram['notes'] = notes
 
-        return self.elements, self.counts
+        elements = []
+        elements.extend(actors)
+        elements.extend(use_cases)
+        elements.extend(rectangles)
+        elements.extend(relationships)
+        elements.extend(notes)
 
-    def _reset(self) -> None:
-        """Resets the parser state for a new analysis."""
-        self.elements = defaultdict(list)
-        self.counts = {
-            'actors': 0,
-            'use_cases': 0,
-            'relationships': 0, 
-            'notes': 0,
-            'rectangles': 0
+        diagram['elements'] = elements
+
+        diagram['count'] = len(elements)
+
+        diagram['detailed_count'] = {
+            'actors': qtd_actors,
+            'use_cases': qtd_use_cases,
+            'relationships': qtd_relationships,
+            'notes': qtd_notes,
+            'rectangles': qtd_rectangles
         }
 
-    def _parse_actors(self, lines: List[str]) -> None:
+        return diagram
+
+    def get_actors(self, lines: List[str]) -> None:
         """
         Extracts actors from diagram.
         Args:
             lines (List[str]): Cleaned PlantUML code lines
         """
+        actors = defaultdict(list)
+        qtd_actors = 0
+        
         # Pattern for directly defined actors
         actor_pattern = re.compile(r'actor\s+:?([^:]+?)(?::\s*as\s+([^\s]+)|$)')
         # Pattern for actors in inheritance relationships
@@ -101,8 +112,8 @@ class PlantUMLUseCaseParser:
                 if actor_name.startswith(':') and actor_name.endswith(':'):
                     actor_name = actor_name[1:-1].strip()
 
-                self.elements['actors'].append({'name': actor_name, 'alias': actor_alias})
-                self.counts['actors'] += 1
+                actors.append({'name': actor_name, 'alias': actor_alias, 'type': 'actor'})
+                qtd_actors += 1
 
         # Second pass to identify actors in inheritance relationships that weren't explicitly defined
         for line in lines:
@@ -116,7 +127,7 @@ class PlantUMLUseCaseParser:
                     parent_exists = False
                     child_exists = False
 
-                    for actor in self.elements['actors']:
+                    for actor in actors:
                         if actor['alias'] == parent:
                             parent_exists = True
                         if actor['alias'] == child:
@@ -124,19 +135,24 @@ class PlantUMLUseCaseParser:
 
                     # Add actors to the list if not present
                     if not parent_exists:
-                        self.elements['actors'].append({'name': parent, 'alias': parent})
-                        self.counts['actors'] += 1
+                        actors.append({'name': parent, 'alias': parent, 'type': 'actor'})
+                        qtd_actors += 1
 
                     if not child_exists:
-                        self.elements['actors'].append({'name': child, 'alias': child})
-                        self.counts['actors'] += 1
+                        actors.append({'name': child, 'alias': child, 'type': 'inherited actor'})
+                        qtd_actors += 1
 
-    def _parse_use_cases(self, lines: List[str]) -> None:
+        return actors, qtd_actors
+
+    def get_use_cases(self, lines: List[str]) -> None:
         """
         Extracts use cases from diagram.
         Args:
             lines (List[str]): Cleaned PlantUML code lines
         """
+        use_cases = defaultdict(list)
+        qtd_use_cases = 0
+
         # Pattern for directly defined use cases
         usecase_pattern1 = re.compile(r'\(([^)]+)\)(?:\s+as\s+([^\s]+))?')
         usecase_pattern2 = re.compile(r'usecase\s+"([^"]+)"(?:\s+as\s+([^\s]+))?')
@@ -156,18 +172,18 @@ class PlantUMLUseCaseParser:
                 usecase_alias = match.group(2) if match.group(2) else usecase_name
 
                 # Check if this use case has already been added
-                if not any(uc['name'] == usecase_name for uc in self.elements['use_cases']):
-                    self.elements['use_cases'].append({'name': usecase_name, 'alias': usecase_alias})
-                    self.counts['use_cases'] += 1
+                if not any(uc['name'] == usecase_name for uc in use_cases):
+                    use_cases.append({'name': usecase_name, 'alias': usecase_alias, 'type': 'use case'})
+                    qtd_use_cases += 1
 
             # Look for use cases in format usecase "Case Name"
             for match in usecase_pattern2.finditer(line):
                 usecase_name = match.group(1).strip()
                 usecase_alias = match.group(2) if match.group(2) else usecase_name
 
-                if not any(uc['name'] == usecase_name for uc in self.elements['use_cases']):
-                    self.elements['use_cases'].append({'name': usecase_name, 'alias': usecase_alias})
-                    self.counts['use_cases'] += 1
+                if not any(uc['name'] == usecase_name for uc in use_cases):
+                    use_cases.append({'name': usecase_name, 'alias': usecase_alias, 'type': 'use case'})
+                    qtd_use_cases += 1
 
         # Now, look for use cases in extension/inclusion relationships
         for line in lines:
@@ -177,16 +193,22 @@ class PlantUMLUseCaseParser:
                     usecase_name = match.group(1).strip()
 
                     # Check if this use case has already been added
-                    if not any(uc['name'] == usecase_name for uc in self.elements['use_cases']):
-                        self.elements['use_cases'].append({'name': usecase_name, 'alias': usecase_name})
-                        self.counts['use_cases'] += 1
+                    if not any(uc['name'] == usecase_name for uc in use_cases):
+                        use_cases.append({'name': usecase_name, 'alias': usecase_name,
+                                          'type': 'extensio/inclusion use case'})
+                        qtd_use_cases += 1
 
-    def _parse_rectangles(self, lines: List[str]) -> None:
+        return use_cases, qtd_use_cases
+
+    def get_rectangles(self, lines: List[str]) -> None:
         """
         Extracts rectangles (systems/packages) from diagram.
         Args:
             lines (List[str]): Cleaned PlantUML code lines
         """
+        rectangles = []
+        qtd_rectangles = 0
+
         in_rectangle = False
         rectangle_name = ""
         rectangle_content = []
@@ -209,11 +231,12 @@ class PlantUMLUseCaseParser:
 
                 # When all braces are closed, end the rectangle
                 if open_braces == 0:
-                    self.elements['rectangles'].append({
+                    rectangles.append({
                         'name': rectangle_name,
-                        'content': rectangle_content
+                        'content': rectangle_content,
+                        'type': 'rectangle'
                     })
-                    self.counts['rectangles'] += 1
+                    qtd_rectangles += 1
                     in_rectangle = False
                     rectangle_name = ""
                     rectangle_content = []
@@ -222,162 +245,86 @@ class PlantUMLUseCaseParser:
                     if not line.strip() == '}':
                         rectangle_content.append(line)
 
-    def _parse_relationships(self, lines: List[str]) -> None:
+        return rectangles, qtd_rectangles
+
+    def get_relationships(self, lines: List[str]) -> None:
         """
         Extracts relationships from diagram.
         Args:
             lines (List[str]): Cleaned PlantUML code lines
         """
+        relationships = []
+        qtd_relationships = 0
+
         # Patterns for different types of relationships
-        extend_pattern = re.compile(r'\(([^)]+)\)\s+\.+>\s+\(?([^)\s:]+).*?:\s*extends?')
-        include_pattern = re.compile(r'\(([^)]+)\)\s+\.+>\s+\(?([^)\s:]+).*?:\s*includes?')
-        association_pattern1 = re.compile(r'([^\s(]+)\s+-->\s+\(?([^)\s:]+)')
-        association_pattern2 = re.compile(r'([^\s(]+)\s+->\s+\(?([^)\s:]+)')
-        association_pattern3 = re.compile(r'([^\s(]+)\s+--\s+\(?([^)\s:]+)')
-        association_pattern4 = re.compile(r'\(([^)]+)\)\s+-->\s+([^\s:]+)')
-        association_pattern5 = re.compile(r'\(([^)]+)\)\s+->\s+([^\s:]+)')
-        association_pattern6 = re.compile(r'\(([^)]+)\)\s+--\s+([^\s:]+)')
-        generalization_pattern = re.compile(r'([^\s]+)\s+<\|--\s+([^\s]+)')
+        relationship_patterns = {
+            'extension': re.compile(r'\(([^)]+)\)\s+\.+>\s+\(?([^)\s:]+).*?:\s*extends?'),
+            'inclusion': re.compile(r'\(([^)]+)\)\s+\.+>\s+\(?([^)\s:]+).*?:\s*includes?'),
+            'generalization': re.compile(r'([^\s]+)\s+<\|--\s+([^\s]+)')
+        }
+
+        # Define association patterns
+        association_patterns = [
+            re.compile(r'([^\s(]+)\s+-->\s+\(?([^)\s:]+)'),
+            re.compile(r'([^\s(]+)\s+->\s+\(?([^)\s:]+)'),
+            re.compile(r'([^\s(]+)\s+--\s+\(?([^)\s:]+)'),
+            re.compile(r'\(([^)]+)\)\s+-->\s+([^\s:]+)'),
+            re.compile(r'\(([^)]+)\)\s+->\s+([^\s:]+)'),
+            re.compile(r'\(([^)]+)\)\s+--\s+([^\s:]+)')
+        ]
 
         for line in lines:
-            # Process extensions
-            for match in extend_pattern.finditer(line):
-                source = match.group(1).strip()
-                target = match.group(2).strip()
+            # Process extensions and inclusions
+            for rel_type, pattern in relationship_patterns.items():
+                for match in pattern.finditer(line):
+                    source = match.group(1).strip()
+                    target = match.group(2).strip()
 
-                # Remove parentheses if any
-                if target.startswith('(') and target.endswith(')'):
-                    target = target[1:-1].strip()
+                    # Remove parentheses if any
+                    if target.startswith('(') and target.endswith(')'):
+                        target = target[1:-1].strip()
 
-                self.elements['relationships'].append({
-                    'source': source,
-                    'target': target,
-                    'type': 'extension'
-                })
-                self.counts['relationships'] += 1
+                    relationships.append({
+                        'source': source,
+                        'target': target,
+                        'type': 'relationship',
+                        'kind': rel_type
+                    })
+                    qtd_relationships += 1
 
-            # Process inclusions
-            for match in include_pattern.finditer(line):
-                source = match.group(1).strip()
-                target = match.group(2).strip()
+            # Process associations using all patterns
+            for pattern in association_patterns:
+                for match in pattern.finditer(line):
+                    # Skip if it's an extend/include relationship
+                    if '.>' in line and ':' in line:
+                        continue
+                        
+                    source = match.group(1).strip()
+                    target = match.group(2).strip()
 
-                # Remove parentheses if any
-                if target.startswith('(') and target.endswith(')'):
-                    target = target[1:-1].strip()
+                    # Remove parentheses if any
+                    if target.startswith('(') and target.endswith(')'):
+                        target = target[1:-1].strip()
 
-                self.elements['relationships'].append({
-                    'source': source,
-                    'target': target,
-                    'type': 'inclusion'
-                })
-                self.counts['relationships'] += 1
+                    relationships.append({
+                        'source': source,
+                        'target': target,
+                        'type': 'relationship',
+                        'kind': 'association'
+                    })
+                    qtd_relationships += 1
 
-            # Process associations - pattern 1
-            for match in association_pattern1.finditer(line):
-                if '.>' in line and ':' in line:  # Ignore if it's an extend/include relationship
-                    continue
-                source = match.group(1).strip()
-                target = match.group(2).strip()
+        return relationships, qtd_relationships
 
-                # Remove parentheses if any
-                if target.startswith('(') and target.endswith(')'):
-                    target = target[1:-1].strip()
-
-                self.elements['relationships'].append({
-                    'source': source,
-                    'target': target,
-                    'type': 'association'
-                })
-                self.counts['relationships'] += 1
-
-            # Process associations - pattern 2
-            for match in association_pattern2.finditer(line):
-                if '.>' in line and ':' in line:  # Ignore if it's an extend/include relationship
-                    continue
-                source = match.group(1).strip()
-                target = match.group(2).strip()
-
-                # Remove parentheses if any
-                if target.startswith('(') and target.endswith(')'):
-                    target = target[1:-1].strip()
-
-                self.elements['relationships'].append({
-                    'source': source,
-                    'target': target,
-                    'type': 'association'
-                })
-                self.counts['relationships'] += 1
-
-            # Process associations - pattern 3
-            for match in association_pattern3.finditer(line):
-                source = match.group(1).strip()
-                target = match.group(2).strip()
-
-                # Remove parentheses if any
-                if target.startswith('(') and target.endswith(')'):
-                    target = target[1:-1].strip()
-
-                self.elements['relationships'].append({
-                    'source': source,
-                    'target': target,
-                    'type': 'association'
-                })
-                self.counts['relationships'] += 1
-
-            # Process associations - pattern 4
-            for match in association_pattern4.finditer(line):
-                source = match.group(1).strip()
-                target = match.group(2).strip()
-
-                self.elements['relationships'].append({
-                    'source': source,
-                    'target': target,
-                    'type': 'association'
-                })
-                self.counts['relationships'] += 1
-
-            # Process associations - pattern 5
-            for match in association_pattern5.finditer(line):
-                source = match.group(1).strip()
-                target = match.group(2).strip()
-
-                self.elements['relationships'].append({
-                    'source': source,
-                    'target': target,
-                    'type': 'association'
-                })
-                self.counts['relationships'] += 1
-
-            # Process associations - pattern 6
-            for match in association_pattern6.finditer(line):
-                source = match.group(1).strip()
-                target = match.group(2).strip()
-
-                self.elements['relationships'].append({
-                    'source': source,
-                    'target': target,
-                    'type': 'association'
-                })
-                self.counts['relationships'] += 1
-
-            # Process generalizations
-            for match in generalization_pattern.finditer(line):
-                parent = match.group(1).strip()
-                child = match.group(2).strip()
-
-                self.elements['relationships'].append({
-                    'source': parent,
-                    'target': child,
-                    'type': 'generalization'
-                })
-                self.counts['relationships'] += 1
-
-    def _parse_notes(self, lines: List[str]) -> None:
+    def get_notes(self, lines: List[str]) -> None:
         """
         Extracts notes from diagram.
         Args:
             lines (List[str]): Cleaned PlantUML code lines
         """
+        notes = []
+        qtd_notes = 0
+        
         in_note = False
         note_content = []
         note_target = ""
@@ -393,11 +340,12 @@ class PlantUMLUseCaseParser:
 
             # Detect the end of a note
             if in_note and line == 'end note':
-                self.elements['notes'].append({
+                notes.append({
                     'target': note_target,
+                    'type': 'note',
                     'content': '\n'.join(note_content)
                 })
-                self.counts['notes'] += 1
+                qtd_notes += 1
                 in_note = False
                 note_content = []
                 note_target = ""
@@ -407,24 +355,33 @@ class PlantUMLUseCaseParser:
             if in_note:
                 note_content.append(line)
 
-    def get_summary_text(self) -> str:
+        return notes, qtd_notes
+
+    def get_summary_text(self, lines: List[str]) -> str:
         """
         Generates a text summary of diagram components.
         Returns:
             str: Summary text
         """
-        total = sum(self.counts.values())
+        diagram = self.parse(lines)
 
-        lines = []
-        lines.append("\n=== USE CASE DIAGRAM ANALYSIS ===\n")
+        total = diagram.count
+
+        lines = ["\n=== USE CASE DIAGRAM ANALYSIS ===\n"]
+
+        if diagram.title:
+            lines.append(f"|DIAGRAM TITLE: {diagram.title:<13}|")
 
         # Count table
         lines.append("ELEMENT COUNT:")
         lines.append("-" * 30)
         lines.append(f"| {'Element':<15} | {'Count':<10} |")
         lines.append("-" * 30)
-        for element, count in self.counts.items():
-            lines.append(f"| {element.replace('_', ' ').title():<15} | {count:<10} |")
+        lines.append(f"| actors: | {diagram.detailed_count['actors']:<10} |")
+        lines.append(f"| use cases: | {diagram.detailed_count['use_cases']:<10} |")
+        lines.append(f"| relationships: | {diagram.detailed_count['relationships']:<10} |")
+        lines.append(f"| notes: | {diagram.detailed_count['notes']:<10} |")
+        lines.append(f"| rectangles: | {diagram.detailed_count['rectangles']:<10} |")
         lines.append("-" * 30)
         lines.append(f"| {'Total':<15} | {total:<10} |")
         lines.append("-" * 30)
@@ -432,44 +389,32 @@ class PlantUMLUseCaseParser:
         # Element details
         lines.append("\nELEMENT DETAILS:")
 
-        if self.elements['actors']:
+        if diagram['actors']:
             lines.append("\nACTORS:")
-            for i, actor in enumerate(self.elements['actors'], 1):
-                if actor['alias'] != actor['name']:
-                    lines.append(f"  {i}. {actor['name']} (alias: {actor['alias']})")
-                else:
-                    lines.append(f"  {i}. {actor['name']}")
+            for i, actor in diagram['actors']:
+                lines.append(f"  {i}. {actor['name']} (alias: {actor['alias']}) (type: {actor['type']})")
 
-        if self.elements['use_cases']:
+        if diagram['use_cases']:
             lines.append("\nUSE CASES:")
-            for i, usecase in enumerate(self.elements['use_cases'], 1):
-                if usecase['alias'] != usecase['name']:
-                    lines.append(f"  {i}. {usecase['name']} (alias: {usecase['alias']})")
-                else:
-                    lines.append(f"  {i}. {usecase['name']}")
+            for i, use_cases in diagram['use_cases']:
+                lines.append(f"  {i}. {use_cases['use_cases']} (alias: {use_cases['use_cases']}) (type: {
+                    use_cases['use_cases']})")
 
-        if self.elements['relationships']:
+        if diagram['relationships']:
             lines.append("\nRELATIONSHIPS:")
-            for i, rel in enumerate(self.elements['relationships'], 1):
-                lines.append(f"  {i}. {rel['source']} --> {rel['target']} [{rel['type']}]")
+            for i, rel in diagram['relationships']:
+                lines.append(f"  {i}. {rel['source']} --> {rel['target']} [{rel['type']}] [{rel['kind']}]")
 
-        if self.elements['notes']:
+        if diagram['notes']:
             lines.append("\nNOTES:")
-            for i, note in enumerate(self.elements['notes'], 1):
+            for i, note in enumerate(diagram['notes'], 1):
                 lines.append(f"  {i}. Note for {note['target']}:")
                 for line in note['content'].split('\n'):
                     lines.append(f"     {line}")
 
-        if self.elements['rectangles']:
+        if diagram['rectangles']:
             lines.append("\nSYSTEMS/PACKAGES:")
-            for i, rect in enumerate(self.elements['rectangles'], 1):
+            for i, rect in enumerate(diagram['rectangles'], 1):
                 lines.append(f"  {i}. {rect['name']}")
 
-        if self.title:
-            lines.append(f"\nDIAGRAM TITLE: {self.title}")
-
         return '\n'.join(lines)
-
-    def print_summary(self) -> None:
-        """Prints a summary of the diagram."""
-        self.LOGGER.info(self.get_summary_text())

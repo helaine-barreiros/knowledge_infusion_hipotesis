@@ -1,0 +1,171 @@
+### Diagrama de Casos de Uso em PlantUML Aprimorado por IA
+
+#### Etapa 1: Análise de Atores
+Os atores relevantes incluem:
+
+- **Cliente Individual**: usuário principal interagindo com o sistema.
+- **Consultor Financeiro**: terceiros que acessam dados compartilhados do cliente (com autorização).
+- **APIs Bancárias**: fonte externa para conexão de contas financeiras.
+- **APIs de Investimento**: fornecedores de dados de mercado e tendências.
+- **Serviço de Pontuação de Crédito**: avaliador de crédito do consumidor.
+- **Serviço de Notícias Financeiras**: provedor de notícias relevantes.
+- **Motor de Raciocínio de IA**: componente que processa insights financeiros.
+
+#### Etapa 2: Identificação de Casos de Uso
+A seguir estão os casos de uso associados aos requisitos:
+
+1. **Autenticação de Usuários**
+   - Autenticar com senha
+   - Autenticar via OAuth2
+
+2. **Gerenciamento de Contas Financeiras**
+   - Conectar e Desconectar conta bancária
+   - Agregar transações financeiras
+   - Categorizar transações
+
+3. **Análise e Visualização Financeira**
+   - Visualizar histórico financeiro
+   - Identificar padrões de gastos
+   - Exibir relatórios periódicos
+
+4. **Recomendações Financeiras**
+   - Receber recomendações personalizadas
+   - Gerar metas financeiras
+
+5. **Chatbot e Suporte Contextual**
+   - Consultar o chatbot sobre finanças
+   - Interagir com assistente de IA
+
+6. **Compartilhamento de Dados Seguro**
+   - Compartilhar dados com consultor
+   - Gerenciar permissões de compartilhamento
+
+7. **Planejamento e Orçamentos**
+   - Definir orçamentos mensais
+   - Monitorar gastos contra orçamento
+   - Ajustar metas financeiras
+
+8. **Previsão e Projeção Financeira**
+   - Prever posições futuras
+   - Analisar cenários de investimento
+
+#### Etapa 3: Organização em Pacotes
+Os casos de uso são agrupados em pacotes lógicos:
+
+- **Autenticação**
+- **Contas Financeiras**
+- **Análise e Visualização**
+- **Recomendações Financeiras**
+- **Comunicação (Chatbot)**
+- **Segurança e Compartilhamento**
+- **Planejamento e Orçamentos**
+- **Previsão e Projeção**
+
+#### Etapa 4: Análise de Relacionamentos
+Relações entre casos de uso:
+
+- **Recomendações Personalizadas** <<extend>> **Metas Financeiras**: Recomendações incluem metas (relação condicional).
+- **Compartilhar Dados** <<include>> **Permissões Gerenciamento**: Compartilhamento depende de gerenciamento de permissões.
+- **Orçamentos Mensais** <<extend>> **Metas Financeiras**: Orçamentos são submetidos para atingir metas.
+
+#### Código PlantUML Final
+
+```plantuml
+@startuml
+!define AUTENTICACAO_AOSS "Autenticação: %1"
+!define CONSULTOR_FISICO "Consultor Financeiro"
+
+skinparam class {
+    ArrowColor Blue
+}
+
+package "Sistema de Gestão Financeira Pessoal" as sistema {
+    
+    package "Autenticação" {
+        actor ClienteIndividual;
+        actor ConsultorFinanceiro;
+        
+        usecase AutenticarComSenha, AutenticarComOAuth2;
+        AUTENTICACAO_AOSS(ClienteIndividual)
+            : Autenticar com senha\n(Conectar/Desconectar)
+            <<extend>>
+            AUTENTICACAO_AOSS(ConsultorFinanceiro)
+                : Autenticar via token de acesso\n(Certificado / Biometria)
+    }
+
+    package "Contas Financeiras" {
+        usecase ConectarContaBancaria, DesconectarContaBancaria, AgregarTransacoes, CategorizarTransacoes;
+        
+        AUTENTICACAO_AOSS(ClienteIndividual)
+            : Conectar conta bancária\n(Carregar dados)
+            >> ConectarContaBancaria
+            AUTENTICACAO_AOSS(ConsultorFinanceiro)
+                : Acessar dados de cliente\n(Aprovar / Denegar)
+    }
+
+    package "Análise e Visualização" {
+        usecase VisualizarHistorico, IdentificarPadroesGastos, ExibirRelatoriosPeriodicos;
+        
+        AUTENTICACAO_AOSS(ClienteIndividual)
+            : Visualizar histórico financeiro\n(Criar relatórios)
+            >> VisualizarHistorico
+    }
+
+    package "Recomendações Financeiras" {
+        usecase ReceberRecomendacoesPersonalizadas, GerarMetasFinanceiras;
+        
+        AUTENTICACAO_AOSS(ClienteIndividual)
+            : Receber recomendações\n(Gerar metas)
+            >> ReceberRecomendacoesPersonalizadas
+            AUTENTICACAO_AOSS(ConsultorFinanceiro)
+                : Avaliar metas e ajustes\n(Aprovar / Negar)
+    }
+
+    package "Comunicação (Chatbot)" {
+        usecase ConsultarChatbot;
+        
+        AUTENTICACAO_AOSS(ClienteIndividual)
+            : Interagir com chatbot\n(Gerar insights)
+            >> ConsultarChatbot
+    }
+
+    package "Segurança e Compartilhamento" {
+        usecase GerenciarPermissoesCompartilhamento, CompartilharDados;
+        
+        AUTENTICACAO_AOSS(ClienteIndividual)
+            : Gerenciar permissões\n(Compartilhar dados)
+            >> GerenciarPermissoesCompartilhamento
+    }
+
+    package "Planejamento e Orçamentos" {
+        usecase DefinirOrçamentosMensais, MonitorarGastosOrçamento, AjustarMetas;
+        
+        AUTENTICACAO_AOSS(ClienteIndividual)
+            : Criar/Alterar orçamento\n(Monitorar progresso)
+            >> DefinirOrçamentosMensais
+    }
+
+    package "Previsão e Projeção" {
+        usecase PreverPosicoesFuturas, AnalisarCenariosInvestimento;
+        
+        AUTENTICACAO_AOSS(ClienteIndividual)
+            : Gerar previsões\n(Avaliar cenários)
+            >> PreverPosicoesFuturas
+    }
+}
+@enduml
+```
+
+### Resumo da Estrutura:
+- **Autenticação**: Processo de verificação para usuários e consultores.
+- **Contas Financeiras**: Integração com bancos, categorização e gestão de transações.
+- **Análise e Visualização**: Exibição histórica e padrões de gastos.
+- **Recomendações Financeiras**: Geração de insights personalizados e metas.
+- **Comunicação (Chatbot)**: Interatividade com assistente de IA.
+- **Segurança e Compartilhamento**: Gerenciamento de permissões para dados compartilhados.
+- **Planejamento e Orçamentos**: Definição, monitoramento e ajuste de orçamentos.
+- **Previsão e Projeção**: Modelagem financeira futura.
+
+---
+
+Esta estrutura de casos de uso reflete a interação de diferentes componentes do sistema com os usuários finais e terceiros (consultores), garantindo segurança, personalização e eficiência na gestão financeira. Cada pacote pode ser desenvolvido isoladamente, mas se integram para oferecer uma experiência completa.
