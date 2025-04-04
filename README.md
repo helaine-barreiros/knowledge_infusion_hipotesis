@@ -6,14 +6,8 @@ This project requires Python 3.12+ and Poetry for dependency management.
 
 ### On macOS/Linux:
 ```bash
-curl -sSL https://install.python-poetry.org | python3 -
+pipx install poetry
 ```
-
-### On Windows (PowerShell):
-```powershell
-(Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
-```
-
 After installation, make sure to add Poetry to your system's PATH. The installer will tell you where Poetry was installed.
 
 To verify the installation:
