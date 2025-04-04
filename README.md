@@ -20,7 +20,7 @@ poetry --version
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd knowledge-infusion-hipotesis-v2
+cd knowledge-infusion-hipotesis
 ```
 
 2. Install dependencies using Poetry:
