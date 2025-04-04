@@ -1,23 +1,95 @@
-# knowledge_infusion_hipotesis
+# Knowledge Infusion Hypothesis V2
 
-Este projeto explora a primeira tentativa em avaliar a hipótese da  infusão de conhecimento em LLMs (Large Language Models) influenciar a geração de artefatos para a engenharia de software. Eta tentativa irá realizar a infusão de conhecimento para a geração de diagrama de máquina de estados utilizando como exemplo cenários de telecomunicações (ITU-T e 3GPP).
+This project requires Python 3.12+ and Poetry for dependency management.
 
-# Objetivos do Experimento
-- Investigar se técnicas como RAG, Prompt Engineering, e Few-shot Learning permitem inserir conhecimentos especializados em LLMs
-- Investigar se o conhecimento adquirido pode ser refletido na geração de artefatos de software
-- Investigar como o conhecimento refletido influencia os artefatos.
+## Installing Poetry
 
-# Estrutura do Repositório
-- codigo/: Scripts e ferramentas para execução do experimento.
-- documentacao/: Descrições, referências e guias para o experimento.
-- dados/: Dados coletados e temporários antes do backup no Zenodo.
-- resultados/: Outputs, análises e gráficos gerados.
+### On macOS/Linux:
+```bash
+curl -sSL https://install.python-poetry.org | python3 -
+```
 
-# Licença
-- Este projeto está licenciado sob a Licença MIT. Consulte o arquivo LICENSE para mais detalhes.
+### On Windows (PowerShell):
+```powershell
+(Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
+```
 
-# Contribuição
-- Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
+After installation, make sure to add Poetry to your system's PATH. The installer will tell you where Poetry was installed.
 
-# Backup e sincronização
-- Os dados serão periodicamente sincronizados com o Zenodo, onde estarão disponíveis para consulta e replicabilidade do experimento.
+To verify the installation:
+```bash
+poetry --version
+```
+
+## Project Setup
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd knowledge-infusion-hipotesis-v2
+```
+
+2. Install dependencies using Poetry:
+```bash
+poetry install
+```
+
+This will create a virtual environment and install all required dependencies specified in the `pyproject.toml` file.
+
+3. Activate the virtual environment:
+```bash
+poetry shell
+```
+
+## Project Dependencies
+
+This project uses the following main dependencies:
+- colorlog: For colored logging output
+- PyPDF2: For PDF manipulation
+- fitz: PDF processing library
+- PyYAML: YAML file handling
+- Pillow: Image processing
+- OpenAI: OpenAI API integration
+- Ollama: Local LLM integration
+- requests: HTTP client
+- XlsxWriter: Excel file creation
+
+## Running the Project
+
+To run the project within the Poetry environment:
+
+```bash
+poetry run python src/app/pipeline.py
+```
+
+## Development
+
+To add new dependencies:
+```bash
+poetry add package-name
+```
+
+To update dependencies:
+```bash
+poetry update
+```
+
+To remove dependencies:
+```bash
+poetry remove package-name
+```
+
+## Contributing
+
+1. Create a new branch for your feature
+2. Make your changes
+3. Submit a pull request
+
+## License
+
+Este projeto está licenciado sob a Licença MIT. Consulte o arquivo LICENSE para mais detalhes.
+
+## Authors
+
+- Gabriel Rodrigues (gabrielrlima@fitec.org.br)
+- Helaine Lins (helaine.lins@upe.br)
