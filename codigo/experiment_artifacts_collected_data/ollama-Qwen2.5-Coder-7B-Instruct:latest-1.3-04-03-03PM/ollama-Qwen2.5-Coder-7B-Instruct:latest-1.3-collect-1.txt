@@ -1,0 +1,93 @@
+Certainly! Below is a PlantUML code for a 'use case diagram' illustrating the key functionalities of the "Sistema de Gestão Financeira Pessoal". This includes a variety of use cases related to financial transactions, account management, and data sharing.
+
+```plantuml
+@startuml "Sistema_Gestao_Financeira_Pessoal"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestão Financeira Pessoal - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user
+actor "Financeiro de Clientes (FIC)" as fic #999999
+
+' Sistema e casos de uso
+rectangle "Sistema de Gestão Financeira Pessoal" {
+    usecase "UC01: Visualizar Contas Bancárias" as UC01
+    usecase "UC02: Realizar Transferência Interna" as UC02
+    usecase "UC03: Efetuar Pagamento com Cartão de Crédito/Debito" as UC03
+    usecase "UC04: Consultar Saldo da Conta" as UC04
+    usecase "UC05: Gerenciar Orçamentos" as UC05
+    usecase "UC06: Monitorar Despesas Recorrentes" as UC06
+    usecase "UC07: Visualizar Extrato de Conta" as UC07
+    usecase "UC08: Compartilhar Dados Financeiros com FIC" as UC08
+    
+    note right of UC01
+      **Req. ID:** FR03, FR04
+      **Descrição:** Permite ao usuário visualizar todas as suas contas bancárias 
+      conectadas.
+    end note
+    
+    note right of UC02
+      **Req. ID:** FR02, FR06
+      **Descrição:** Permite realizar transferências internas entre suas contas.
+    end note
+    
+    note right of UC03
+      **Req. ID:** FR01
+      **Descrição:** Permite ao usuário realizar pagamentos com cartão de crédito ou débito.
+    end note
+    
+    note right of UC04
+      **Req. ID:** FR02, FR07
+      **Descrição:** Permite consultar o saldo da conta escolhida pelo usuário.
+    end note
+    
+    note right of UC05
+      **Req. ID:** FR13
+      **Descrição:** Permite ao usuário gerenciar seus orçamentos e monitorar suas despesas.
+    end note
+    
+    note right of UC06
+      **Req. ID:** FR08, FR09
+      **Descrição:** Permite monitorar despesas recorrentes e visualizar as mesmas em um extrato.
+    end note
+    
+    note right of UC07
+      **Req. ID:** FR04, FR10
+      **Descrição:** Permite ao usuário visualizar o extrato de todas suas contas.
+    end note
+    
+    note right of UC08
+      **Req. ID:** FR12, FR13
+      **Descrição:** Permite ao usuário compartilhar dados financeiros com o Financeiro de Clientes (FIC).
+    end note
+    
+    ' Relacionamentos entre casos de uso
+    UC01 ..> UC04 : <<include>>
+    UC01 ..> UC07 : <<include>>
+    UC02 ..> UC03 : <<include>>
+    UC02 ..> UC08 : <<extend>>
+    UC03 ..> UC04 : <<include>>
+    UC04 ..> UC05 : <<include>>
+    UC05 ..> UC06 : <<include>>
+    UC06 ..> UC07 : <<include>>
+    UC08 ..> UC07 : <<extend>>
+}
+
+' Relacionamentos ator-caso de uso
+user --> UC01
+user --> UC02
+user --> UC03
+user --> UC04
+user --> UC05
+user --> UC06
+user --> UC07
+user --> UC08
+
+@enduml
+```
+
+This diagram includes use cases for basic financial management operations such as viewing accounts, transferring funds, making payments, consulting balances, and managing budgets. It also includes a use case for sharing financial data with an external service, which could be used by FIC or other third-party services.
+
+ThePlantUML code ensures that all functional requirements are covered while maintaining clarity and coherence in the diagrams. Each use case is properly documented with relevant details, ensuring they follow the quality criteria set out for this analysis.

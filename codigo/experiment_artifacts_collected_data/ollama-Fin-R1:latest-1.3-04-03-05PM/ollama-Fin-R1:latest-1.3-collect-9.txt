@@ -1,0 +1,335 @@
+```plantuml
+@startuml "C4_UC"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestão Financeira Pessoal - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user
+actor "Agência Bancária" as bank
+actor "Plataforma de Investimentos" as investments
+actor "Serviço de Assistente Virtual" as assistant
+
+' Sistema e casos de uso
+rectangle "Sistema de Gestão Financeira Pessoal" {
+    usecase "UC01: Cadastro de Usuário" as UC01
+    usecase "UC02: Logon do Cliente" as UC02
+    usecase "UC03: Exibir Saldo Disponível" as UC03
+    usecase "UC04: Consultar Extrato Bancário" as UC04
+    usecase "UC05: Solicitar Transferência Bancária" as UC05
+    usecase "UC06: Realizar Pagamento com Cartão" as UC06
+    usecase "UC07: Gerenciar Contas Correntes" as UC07
+    usecase "UC08: Consultar Cartões Associados" as UC08
+    usecase "UC09: Visualizar Códigos de Segurança" as UC09
+    usecase "UC10: Receber Notificações" as UC10
+    usecase "UC11: Partilhar Transações com Conselheiros Financeiros" as UC11
+
+    ' Relacionamentos entre casos de uso (exemplos)
+    UC01 --> UC02 : <<extend>>
+    UC03 ..> UC04 : <<include>>
+    
+    usecase "UC06: Agendar Pagamento Recorrente" as UC06a
+    usecase "UC07: Editar Contas Correntes" as UC07a
+
+    usecase "UC12: Gerenciar Investimentos" as UC12
+    UC12 --> UC08 : <<extend>>
+    
+    usecase "UC13: Verificar Status de Transferência" as UC13
+    UC14: "Atualizar Senha" as UC14
+
+}
+
+' Relacionamentos ator-caso de uso
+user --> UC01
+user --> UC02
+user --> UC03
+user --> UC05
+user --> UC06
+user --> UC07
+user --> UC08
+user --> UC09
+user --> UC10
+investments --> UC12
+
+bank --> UC04
+bank --> UC05
+assistant --> UC03
+
+@enduml
+```
+
+**Note:** The provided PlantUML code includes multiple use cases related to banking and investment management, adhering to the example given in the requirements. Adjustments may be necessary based on specific functional and non-functional requirements from the original artifacts.
+The generated use case diagram for the "Sistema de Gestão Financeira Pessoal" (SGFP) is designed to encompass a wide range of functionalities, aligning with the provided C1, C2, and C3 artifacts. The diagram includes interactions between actors such as **Cliente Individual**, **Agência Bancária**, **Plataforma de Investimentos**, and **Serviço de Assistente Virtual**. Below is the detailed PlantUML code:
+
+```plantuml
+@startuml "C4_UC"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestão Financeira Pessoal - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user
+actor "Agência Bancária" as bank
+actor "Plataforma de Investimentos" as investments
+actor "Serviço de Assistente Virtual" as assistant
+
+' Sistema e casos de uso
+rectangle "Sistema de Gestão Financeira Pessoal" {
+    usecase "UC01: Cadastro de Usuário" as UC01
+    usecase "UC02: Logon do Cliente" as UC02
+    usecase "UC03: Exibir Saldo Disponível" as UC03
+    usecase "UC04: Consultar Extrato Bancário" as UC04
+    usecase "UC05: Solicitar Transferência Bancária" as UC05
+    usecase "UC06: Realizar Pagamento com Cartão" as UC06
+    usecase "UC07: Gerenciar Contas Correntes" as UC07
+    usecase "UC08: Consultar Cartões Associados" as UC08
+    usecase "UC09: Visualizar Códigos de Segurança" as UC09
+    usecase "UC10: Receber Notificações" as UC10
+    usecase "UC11: Partilhar Transações com Conselheiros Financeiros" as UC11
+    
+    ' Sub-casos para Gerenciar Contas Correntes e Realizar Pagamento com Cartão
+    usecase "UC07a: Editar Contas Correntes" as UC07a extends UC07
+    usecase "UC06a: Agendar Pagamento Recorrente" as UC06a extends UC06
+    
+    ' Inclui a funcionalidade de Investimentos
+    usecase "UC12: Gerenciar Investimentos" as UC12 extends UC08
+    usecase "UC13: Verificar Status de Transferência" as UC13
+    usecase "UC14: Atualizar Senha" as UC14
+
+}
+
+' Relacionamentos ator-caso de uso
+user --> UC01 : Realiza cadastro
+user --> UC02 : Faz logon
+user --> UC03 : Consulta saldo
+user --> UC04 : Exibe extrato bancário
+user --> UC05 : Solicita transferência
+user --> UC06 : Paga com cartão
+user --> UC07: Gerencia contas correntes
+user --> UC08: Consulta cartões associados
+user --> UC09: Visualiza códigos de segurança
+user --> UC10: Recebe notificações
+user --> UC11: Partilha transações com conselheiros
+
+bank --> UC04 : Fornece dados do extrato
+bank --> UC05 : Efetua transferência bancária
+assistant --> UC03 : Assiste ao cliente
+investments --> UC12 : Gera operações de investimentos
+assistant --> UC14 : Atualiza senha via assistente virtual
+
+' Exemplos de relacionamentos entre casos de uso (excluindo extensões)
+UC01 --> UC02 : <<extend>> -> Cadastro inclui logon automático
+UC03 ..> UC04 : <<include>> -> Consulta saldo disponível para extrato
+
+@enduml
+```
+
+### Key Observations:
+1. **Structure**: The diagram categorizes use cases into primary functional areas such as customer management (cadastro, logon), banking operations (transferências, pagamentos), account management (contas correntes, cartões), investment management, and notification services.
+2. **Extensions & Inclusions**:
+   - **Gerenciar Contas Correntes**: Includes both basic management (`UC07`) and advanced editing (`UC07a`).
+   - **Realizar Pagamento com Cartão**: Adds the sub-case `UC06a` for recurring payments.
+   - **Investimentos**: Extends account management (`UC12`), which itself extends card consultation (`UC08`), to handle investment-specific operations like trading and status checks.
+3. **Actors**:
+   - **Cliente Individual**: Central actor interacting with all services.
+   - **Agência Bancária**, **Plataforma de Investimentos**, and **Serviço de Assistente Virtual**: Serve as external systems or entities the SGFP needs to interface with.
+4. **Non-functional Requirements (NFR)**:
+   - The inclusion of an assistant (`UC14`) reflects a need for customer support, possibly via chatbots or AI assistants for updating passwords.
+5. **Extensions vs Inclusions**:
+   - Extensions (`extends`) are used where a sub-use case adds to the main use case’s functionality (e.g., editing accounts extends managing them).
+   - Inclusions (`<<include>>`) indicate a main use case encompasses another without adding additional steps (e.g., extrato includes saldo disponivel).
+6. **Notifications** (`UC10`): This highlights the system’s ability to handle push notifications, crucial for financial applications.
+
+### Future Adjustments:
+- The diagram assumes that all card-related operations are managed by the bank. If more detailed interactions (like transaction approval flows) were required, additional use cases could be added.
+- Incorporating multi-party transactions (e.g., transfer approval from both sender and receiver) might extend `UC05` further.
+
+This structure ensures compliance with the provided C1-C3 artifacts while maintaining clarity and modularity in the use case model. Adjustments can be made based on specific business rules or additional requirements not explicitly listed here. 
+
+---
+
+\boxed{Sistema de Gestão Financeira Pessoal}
+```plantuml
+@startuml "C4_UC"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML-Cards/v1.0.2/c4m.card
+
+title C4 Model - Sistema de Gestão Financeira Pessoal (SGFP)
+
+package "Entidades" as ent {
+  entity Customer : cliente | inclui detalhes pessoais e preferências
+  entity Account : conta bancária | dados da conta, movimentações
+  entity Transaction : transação | histórico de pagamentos/transfers
+  entity Investment : investimento | opções de trading, status
+}
+
+package "Sub-sistemas" as ss {
+  sub-system Banking : serviços bancários | transferências, extrato, cartões
+    entity BankAccount : conta do banco | detalhes operacionais
+    operation checkBalance(Customer, Account) : consultar saldo
+    operation performTransfer(Customer, Account, Amount) : transferir fundos
+  end
+
+  sub-system Investments : gestão de investimentos | operações financeiras
+    operation buyAsset(Customer, Investment) : comprar ativos
+    operation verifyStatus(Transaction) : verificar status de transação
+  end
+
+  sub-system Notifications : notificações automáticas | alertas bancários
+    operation sendAlert(Customer, Event) : enviar notificação por SMS ou email
+  end
+}
+
+package "Relações" as rel {
+  Customer --> Account : possui 
+  Account --> Transaction : realiza
+  Investment --> Transaction : vinculado
+  BankAccount --> Transaction : relacionado
+
+  Banking <|-- Banking :: sub-system (ss.Banking)
+  Investments <|-- Investments :: sub-system (ss.Investments)
+  Notifications <|-- Notifications :: sub-system (ss.Notifications)
+}
+
+@enduml
+```plantuml
+The provided C4 model visualization for the Sistema de Gestão Financeira Pessoal (SGFP) outlines key entities, sub-systems, and their interactions. Here's a detailed breakdown:
+
+### Entities:
+1. **Customer**: Represents individual users, including personal details and preferences.
+2. **Account**: Holds bank account information with transaction history.
+3. **Transaction**: Records financial activities like payments or transfers.
+4. **Investment**: Manages investment options and operational statuses.
+
+### Sub-Systems:
+1. **Banking**:
+   - **Operations**:
+     - `checkBalance(Customer, Account)`: Checks the balance of a specific account.
+     - `performTransfer(Customer, Account, Amount)`: Executes a transfer between accounts.
+2. **Investments**:
+   - Operations include buying assets (`buyAsset`) and verifying transaction status (`verifyStatus`).
+3. **Notifications**:
+   - Sends automated alerts (e.g., via SMS/email) for significant events.
+
+### Relationships:
+- **Customer** owns multiple **Accounts**, which in turn link to **Transactions**.
+- Transactions can be associated with either bank accounts or investments, depending on the context.
+- Sub-systems (`Banking`, `Investments`, `Notifications`) encapsulate their respective functionalities and are aggregated under the main system.
+
+This model ensures clarity in identifying key components, their attributes, and interactions. Adjustments for future features (e.g., AI assistance) could involve expanding the sub-systems or introducing new entities as needed.
+\boxed{Sistema de Gestão Financeira Pessoal}
+```plantuml
+@startuml "C4 Model - Sistema de Gestão Financeira Pessoal"
+
+title C4 Model - Sistema de Gestão Financeira Pessoal (SGFP)
+
+!c4mcard Customer
+- name : String
+- preferences : Preferences
++ getPreferences() : Preferences
+
+!c4mcard Account
+- id : UUID
+- customer_id : UUID
+- balance : Float
+- transactions : List[Transaction]
++ deposit(amount: Float) : Transaction
++ withdraw(amount: Float) : Transaction
+
+!c4mcard Transaction
+- id : UUID
+- account_id : UUID
+- amount : Float
+- type : String (e.g., "transfer", "purchase")
++ formatDate() : String
+
+!c4mcard Investment
+- portfolio_id : UUID
+- asset_type : String
+- value : Float
+- transactions : List[Transaction]
++ purchaseAsset(asset: Asset) : Transaction
+
+package "Entidades" as ent {
+  Customer *1 "--" Account *0..*
+  Account "*"- Transaction *1
+}
+
+package "Sub-sistemas" as ss {
+  sub-system Banking : serviços bancários | transferências, extrato, cartões
+    + checkBalance(account: Account) : Float
+    + performTransfer(sender: Account, recipient: Account, amount: Float) : Transaction
+    - validateAccount(account: Account) : Boolean
+
+  sub-system Investments : gestão de investimentos | operações financeiras
+    + buyAsset(customer: Customer, asset_type: String, amount: Float) : Investment
+    + calculateReturn(asset: Investment) : Float
+
+  sub-system Notifications : notificações automáticas | alertas bancários
+    + sendAlert(customer: Customer, message: String) : None
+}
+
+subsystem Banking as banking {
+  entity BankAccount : conta do banco | detalhes operacionais
+  operation checkBalance(Customer, Account) : consultar saldo
+  operation performTransfer(Customer, Account, Amount) : transferir fundos
+
+  customer owns bankAccount *1
+}
+
+subsystem Investments as investments {
+  entity Portfolio : carteira de investimentos | grupo de ativos
+  operation buyAsset(Customer, AssetType) : comprar ativos
+  operation verifyStatus(Transaction) : verificar status de transação
+
+  customer owns portfolio *0..*
+}
+
+subsystem Notifications as notifications {
+  entity Alert : notificação | evento bancário
+  operation sendAlert(Customer, Event) : enviar alerta
+
+  customer owns alert *0..1
+}
+
+endpackage
+
+relation "Comanda" banking - Customer
+relation "Comanda" investments - Customer
+relation "Comanda" notifications - Customer
+
+@enduml
+```
+The final C4 model includes detailed representations of entities and sub-systems within the Sistema de Gestão Financeira Pessoal (SGFP). Here's a comprehensive overview:
+
+### Entities:
+1. **Customer**  
+   - Attributes: name, preferences.
+   - Operations: `getPreferences()`.
+2. **Account**  
+   - Attributes: ID, customer ID, balance, transactions.
+   - Operations: `deposit(amount)`, `withdraw(amount)`, tracking transactions.
+3. **Transaction**  
+   - Attributes: ID, account ID, amount, type (e.g., "transfer", "purchase").
+   - Operation: formatting (`formatDate()`).
+4. **Investment**  
+   - Attributes: portfolio ID, asset type, value, transactions.
+   - Operations: `buyAsset(customer, asset_type, amount)`, return calculation.
+
+### Sub-Systems:
+1. **Banking**: Handles banking operations like balance checks and transfers.  
+   - Operations: `checkBalance(account)`, `performTransfer(sender, recipient, amount)`.
+2. **Investments**: Manages investment transactions.  
+   - Operations: `buyAsset(customer, asset_type, amount)`, `calculateReturn(asset)`.
+3. **Notifications**: Sends alerts to customers.  
+   - Operation: `sendAlert(customer, message)`.
+
+### Relationships:
+- **Customer** owns multiple **Accounts**.
+- Each **Account** has a list of related **Transactions**.
+- Sub-systems are aggregated under the main SGFP system, with explicit "commands" linking them to Customer entities.
+
+This model provides a structured view of the SGFP components and their interactions. Future enhancements can extend sub-system functionalities (e.g., integrating AI in Investments) or refine entity attributes as needed.  
+\boxed{Sistema de Gestão Financeira Pessoal}

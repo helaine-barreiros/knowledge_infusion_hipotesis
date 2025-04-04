@@ -1,0 +1,107 @@
+9.remember that the main focus is on representing the system's core functionalities through the use of actors, use cases, and relationships between them.
+
+Assistant```plantuml
+@startuml "C4_UC_Proyecto"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestión Financeira Pessoal - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user
+actor "Sistema Bancario" as bank #999999
+actor "Finanzas Externas" as externalFinance #999999
+
+' Sistema y casos de uso
+rectangle "Sistema de Gestión Financeira Pessoal" {
+    usecase "UC01: Registrar Transacción" as UC01
+    
+    note right of UC01
+      **Req. ID:** FR03
+      **Descripción:** Permite al usuario registrar transacciones 
+      manuales, importar datos de bancos, etc.
+    end note
+    
+    usecase "UC02: Visualizar Transacciones" as UC02
+    
+    note right of UC02
+      **Req. ID:** FR04
+      **Descripción:** Permite al usuario visualizar todas las transacciones 
+      financeiras de sus contas conectadas, ordenadas 
+      cronologicamente.
+    end note
+    
+    usecase "UC03: Categorizar Transacción" as UC03
+    
+    note right of UC03
+      **Req. ID:** FR07
+      **Descripción:** Permite al usuario categorizar manualmente o recibir 
+      una categorización automática de transacciones.
+    end note
+    
+    usecase "UC04: Filtrar Transacciones" as UC04
+    
+    note right of UC04
+      **Req. ID:** FR08
+      **Descripción:** Permite al usuario filtrar las transacciones 
+      por cuenta, fecha, estado de la categoría, etc.
+    end note
+    
+    usecase "UC05: Buscar Transacción" as UC05
+    
+    note right of UC05
+      **Req. ID:** FR12
+      **Descripción:** Permite al usuario buscar una transacción específica 
+      por número de transacción, descripción o otras características.
+    end note
+    
+    usecase "UC06: Exportar Transacciones" as UC06
+    
+    note right of UC06
+      **Req. ID:** FR13
+      **Descripción:** Permite al usuario exportar la lista de transacciones 
+      a un archivo CSV o PDF.
+    end note
+    
+    usecase "UC07: Aprobar Transacción" as UC07
+    
+    note right of UC07
+      **Req. ID:** FR21
+      **Descripción:** Permite al usuario aprobar manualmente transacciones 
+      de finanzas externas o importadas.
+    end note
+    
+    usecase "UC08: Rechazar Transacción" as UC08
+    
+    note right of UC08
+      **Req. ID:** FR21
+      **Descripción:** Permite al usuario rechazar manualmente transacciones 
+      de finanzas externas o importadas.
+    end note
+    
+    usecase "UC09: Notificar Aprobación/Rechazo" as UC09
+    
+    note right of UC09
+      **Req. ID:** FR21, FR23
+      **Descripción:** Envía notificaciones por correo electrónico o SMS 
+      al usuario y a finanzas externas sobre el aprobación o rechazo de transacciones.
+    end note
+    
+}
+
+' Relacionamientos ator-caso de uso
+user --> UC01 : "Registrar"
+user --> UC02 : "Visualizar"
+user --> UC03 : "Categorizar"
+user --> UC04 : "Filtrar"
+user --> UC05 : "Buscar"
+user --> UC06 : "Exportar"
+user --> UC07 : "Aprobar"
+user --> UC08 : "Rechazar"
+
+bank --> UC01 : "Enviar datos de transacción"
+externalFinance --> UC01 : "Enviar transacciones externas"
+user --> externalFinance : "Compartir transacciones seleccionadas"
+
+@enduml
+```

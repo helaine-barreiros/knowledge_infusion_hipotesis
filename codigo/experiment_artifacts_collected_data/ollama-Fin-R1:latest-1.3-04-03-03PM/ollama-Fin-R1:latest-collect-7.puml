@@ -1,0 +1,50 @@
+@startuml "C4_UC_RecomendacoesInvestimento"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Recomendações de Investimento - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user #0088ff
+actor "Plataforma de Investimento" as investmentPlatform #26b9f5
+actor "Banco Central" as centralBank #34b7eb
+actor "Bolsa de Valores" as stockExchange #f1e2c8
+actor "Sistema Bancário" as bank #999999
+
+' Sistema e casos de uso
+rectangle "Sistema de Recomendações de Investimento" {
+    usecase "UC01: Registrar Cliente" as UC01
+    usecase "UC02: Avaliar Risco do Cliente" as UC02
+    usecase "UC03: Propor Produtos de Investimento" as UC03
+    usecase "UC04: Monitorar Desempenho de Investimentos" as UC04
+    usecase "UC05: Gerar Relatórios de Desempenho" as UC05
+}
+
+' Atores e casos de uso relacionados (exemplos)
+user --> UC01 : Incluir informações pessoais  
+investmentPlatform --> UC03 : Divulgar produtos  
+stockExchange --> UC04 : Fornecer dados de desempenho  
+centralBank --> UC02 : Informar normas  
+bank --> UC05 : Agregar dados bancários  
+
+' Relações entre casos de uso
+UC01 --|> UC02 : <<depend>>
+UC02 ..> UC03 : <<include>>
+UC03 --> UC04 : Informar escolha  
+UC04 --> UC05 : Gerar relatórios  
+UC03 --> UC04 : Feedback sobre desempenho  
+
+' Notas de uso
+note right of UC03
+  **Req. ID:** FR10, FR16\n
+  **Descrição:** Sistema analisa perfil do cliente e produto selecionado.\n
+  Baseado em algoritmos preditivos, faz recomendações.\n
+end note
+
+' Outros detalhes (opcional)
+note right of UC04  
+  **Descrição:** Plataforma coleta dados de mercado via Bolsa de Valores.\n
+  Utiliza esses dados para calcular o desempenho dos investimentos.\n
+end note  
+
+@enduml

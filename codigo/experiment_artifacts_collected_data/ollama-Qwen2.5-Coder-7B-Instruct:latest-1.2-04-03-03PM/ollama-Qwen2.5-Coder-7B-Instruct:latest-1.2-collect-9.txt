@@ -1,0 +1,40 @@
+9. Based on the feedback you receive from reviewing the first iteration of the use case diagram, iterate on the second version to address any issues that were identified and make further refinements as necessary.
+
+Here is an example for the "Financial Health" domain:
+```plantuml
+@startuml "C4_UC_Health"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestão Financeira Pessoal - Saúde Financeira - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user
+
+' Sistema e casos de uso
+rectangle "Sistema de Gestão Financeira Pessoal" {
+    usecase "UC01: Gerar Relatório de Saúde Financeira" as UC01
+    
+    note right of UC01
+      **Req. ID:** FR07, FR15
+      **Descrição:** Permite ao usuário gerar um relatório 
+      detalhado sobre a saúde financeira, incluindo 
+      indicadores como balanço geral, fluxo de caixa e 
+      recomendations de ações.
+    end note
+    
+    usecase "UC02: Ver Indicadores Financeiros" as UC02
+    usecase "UC03: Configurar Ajustes Pessoais para Relatório" as UC03
+    usecase "UC04: Receber Recomendação Personalizada" as UC04
+    
+    ' Relacionamentos entre casos de uso
+    UC01 ..> UC02 : <<include>>
+    UC01 ..> UC03 : <<include>>
+    UC01 ..> UC04 : <<extend>>
+}
+
+' Relacionamentos ator-caso de uso
+user --> UC01
+
+@enduml
+```

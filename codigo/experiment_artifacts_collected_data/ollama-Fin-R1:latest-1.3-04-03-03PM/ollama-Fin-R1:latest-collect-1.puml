@@ -1,0 +1,56 @@
+@startuml "C4_UC_Transacoes"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestão Financeira Pessoal - Transações Financeiras - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user #808080
+actor "Servidor Bancário" as bank #0000FF
+actor "Categorizador Automático" as autoCateg #F0E68C
+
+' Sistema e casos de uso
+rectangle "Sistema de Gestão Financeira Pessoal" {
+    usecase "UC01: Visualizar Lista de Transações" as UC01
+    
+    note right of UC01
+      **Req. ID:** FR03, FR04
+      **Descrição:** Permite ao usuário visualizar todas as transações 
+      financeiras de suas contas conectadas, ordenadas cronologicamente.
+    end note
+    
+    usecase "UC02: Categorizar Transação Manualmente" as UC02
+    usecase "UC03: Receber Categorização Automática" as UC03
+    usecase "UC04: Filtrar Transações" as UC04
+    usecase "UC05: Buscar Transações" as UC05
+    usecase "UC06: Exportar Transações" as UC06
+    usecase "UC07: Excluir Transação" as UC07
+    
+    ' Relacionamentos entre casos de uso
+    UC01 ..> UC02 : <<extend>>
+    UC01 ..> UC03 : <<include>>
+    UC01 ..> UC04 : <<include>>
+    UC01 ..> UC05 : <<include>>
+    UC01 ..> UC06 : <<extend>>
+    UC01 ..> UC07 : <<include>>
+    
+    ' Subcategorizações
+    UC02 .-|> UC01 : <<include>>   # Manual categorization is a subset of viewing transactions
+}
+
+' Relacionamentos ator-caso de uso
+user --> UC01
+user --> UC03
+user --> UC04
+user --> UC05
+user --> UC06
+user --> UC07
+
+bank --> UC01
+bank --> UC02
+
+autoCateg --> UC03
+
+'transitions and rules to be defined based on requirements'
+
+@enduml

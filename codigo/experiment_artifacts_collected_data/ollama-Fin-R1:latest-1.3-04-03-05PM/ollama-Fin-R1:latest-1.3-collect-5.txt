@@ -1,0 +1,163 @@
+```plantuml
+@startuml "Sistema de Gestão Financeira Pessoal - Casos de Uso"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestão Financeira Pessoal - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user #008BFF
+actor "Serviço de Autenticação" as auth_svc
+actor "Fornecedores de Contas Bancárias" as bank_svc #E4C2C3
+
+' Sistema e casos de uso principal
+rectangle "Sistema de Gestão Financeira Pessoal" {
+    usecase "UC01: Cadastro de Novo Usuário" as UC01
+    usecase "UC02: Autenticação do Usuário" as UC02
+    usecase "UC03: Configuração de Contas Bancárias" as UC03
+    usecase "UC04: Visualização de Relatórios Financeiros" as UC04
+    usecase "UC05: Compartilhamento de Dados com Fornecedores de Conteúdo" as UC05
+
+    ' Relacionamentos entre casos de uso
+    UC01 --> UC02 : <<include>>
+    
+    UC03 ..> UC04 : <<extend>>
+    UC04 --> UC05 : <<include>>
+
+    ' Observações gerais sobre o sistema
+    note right of rectangle
+      **Sistema composto por:**  
+      - **UI/UX**: Para interação do usuário.  
+      - **Backend**: Gerencia a autenticação, contas bancárias e relatórios.  
+      - **Integrações Externas**: Fornecedores de dados bancários e chatbot.  
+
+      **Funcionalidades Essenciais:**  
+      - Autenticação segura com multifator (NFR06).  
+      - Uptime garantido (NFR03).  
+      - Resposta rápida (NFR04).  
+    end note
+}
+
+' Relacionamentos ator-caso de uso
+user --> UC01
+user --> UC02
+user --> UC03
+user --> UC04
+bank_svc --> UC05
+
+@enduml
+```
+The provided PlantUML code defines a use case diagram for the "Sistema de Gestão Financeira Pessoal" (Personal Finance Management System). The system includes actors such as "Cliente Individual" (Individual User), "Serviço de Autenticação" (Authentication Service), and "Fornecedores de Contas Bancárias" (Bank Services Provider). The main cases of use are structured into a series of interactions for user registration, authentication, configuring bank accounts, viewing financial reports, and sharing data with content providers.
+
+Key aspects of the diagram include:
+- **UC01: Cadastro de Novo Usuário** ensures that new users can sign up. This is foundational as it includes autenticação through UC02.
+- **UC03: Configuração de Contas Bancárias** allows users to link and manage their bank accounts, which in turn supports more detailed financial reporting (UC04).
+- **UC05: Compartilhamento de Dados com Fornecedores de Conteúdo** represents the ability to share selected data with financial advisors or content providers.
+  
+The relationships between use cases are defined using `include` and `extend`. For example, user registration (`UC01`) is included in the authentication process (`UC02`), indicating that UC02 relies on the success of UC01. Similarly, adding bank accounts (UC03) enhances reporting capabilities (UC04). 
+
+The diagram also reflects non-functional requirements like secure data handling and multi-factor authentication via NFRs embedded in the notes, ensuring alignment with the project's technical standards.
+
+This structure provides a clear framework for understanding how different components of the system interact to deliver essential features. The use case diagram is coherent with the C1-C3 artifacts (context, logical, physical) and adheres to practical implementation guidelines. 
+
+\boxed{Done}
+``` To create a high-quality use case diagram for the Personal Finance Management System based on the provided requirements, we will follow these steps:
+
+### Step 1: Identify Key Actors
+From the functional and non-functional requirements, the key actors are:
+- **Cliente Individual** (Individual User): Interacts with the system through the user interface.
+- **Serviço de Autenticação** (Authentication Service): Handles user login and security.
+- **Fornecedores de Contas Bancárias** (Bank Services Providers): Interfaces for connecting bank accounts.
+
+### Step 2: Define Main Use Cases
+The main use cases that align with the functional requirements include:
+1. **UC01 - Cadastro de Novo Usuário**: New user registration.
+2. **UC02 - Autenticação do Usuário**: User login and authentication.
+3. **UC03 - Configuração de Contas Bancárias**: Linking bank accounts.
+4. **UC04 - Visualização de Relatórios Financeiros**: Generating financial reports.
+5. **UC05 - Compartilhamento de Dados com Fornecedores de Conteúdo**: Sharing data with third-party services.
+
+### Step 3: Structure Relationships Between Use Cases
+- **UC01** (Cadastro) is a prerequisite for **UC02** (Autenticação), as new users must register before logging in.
+- **UC03** (Contas Bancárias) builds on **UC04**, as linked bank accounts are necessary for generating detailed reports.
+- **UC05** (Compartilhamento de Dados) depends on both **UC03** and **UC04**, requiring that a user has set up bank accounts and viewed reports to share data.
+
+### Step 4: Include Additional Components
+The diagram also incorporates technical components like the **Backend** and **Integrações Externas** (External Integrations) for clarity. These are represented in notes within the rectangle containing the use cases.
+
+### Final Diagram
+
+```plantuml
+@startuml "Sistema de Gestão Financeira Pessoal - Casos de Uso"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestão Financeira Pessoal - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user #008BFF
+actor "Serviço de Autenticação" as auth_svc
+actor "Fornecedores de Contas Bancárias" as bank_svc #E4C2C3
+
+' Sistema e casos de uso principal
+rectangle "Sistema de Gestão Financeira Pessoal" {
+    usecase UC01 Cadastro de Novo Usuário {
+        note right: *Inclui autenticação básica.*  
+    }
+    
+    usecase UC02 Autenticação do Usuário {
+        note left: *Requer cadastro prévio (UC01).*  
+    }
+
+    usecase UC03 Configuração de Contas Bancárias {
+        note bottom: *Permite ligar e gerenciar contas bancárias.*  
+    }
+
+    usecase UC04 Visualização de Relatórios Financeiros {
+        note top: *Depende de configuração de contas (UC03).*
+    }
+
+    usecase UC05 Compartilhamento de Dados com Fornecedores de Conteúdo {
+        note bottom: *Requer autenticação e configuração bancária.*  
+    }
+    
+    ' Relacionamentos entre casos de uso
+    UC01 --> UC02 : <<include>>
+    
+    UC03 ..> UC04 : <<extend>>
+    UC04 --> UC05 : <<include>>
+
+    ' Observações gerais sobre o sistema
+    note right of rectangle
+      **Sistema composto por:**  
+      - **UI/UX**: Para interação do usuário.  
+      - **Backend**: Gerencia a autenticação, contas bancárias e relatórios.  
+      - **Integrações Externas**: Fornecedores de dados bancários e chatbot.  
+
+      **Funcionalidades Essenciais:**  
+      - Autenticação segura com multifator (NFR06).  
+      - Uptime garantido (NFR03).  
+      - Resposta rápida (NFR04).  
+    end note
+}
+
+' Relacionamentos ator-caso de uso
+user --> UC01
+user --> UC02
+user --> UC03
+user --> UC04
+bank_svc --> UC05
+
+@enduml
+```
+
+### Explanation:
+- **UC01** (Cadastro) includes basic authentication.
+- **UC02** depends on **UC01**, ensuring that all users are verified.
+- **UC03** allows linking bank accounts, which is a prerequisite for **UC04**.
+- **UC05** combines elements of prior use cases to enable data sharing.
+
+This structure ensures that the system’s flow and dependencies are clearly defined, aligning with both functional and non-functional requirements. The final diagram is comprehensive and adheres to the provided standards. 
+
+\boxed{Done}
+```

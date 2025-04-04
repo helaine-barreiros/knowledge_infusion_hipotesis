@@ -1,0 +1,78 @@
+```plantuml
+@startuml "C4_UC_UseCaseDiagram"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestão Financeira Pessoal - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user
+actor "Sistema Bancário" as bank #999999
+actor "Analista de Dados" as analyst #999999
+
+' Sistema e casos de uso
+rectangle "Sistema de Gestão Financeira Pessoal" {
+    usecase "UC01: Visualizar Lista de Transações" as UC01
+    usecase "UC02: Filtrar Transações" as UC02
+    usecase "UC03: Categorizar Transação Manualmente" as UC03
+    usecase "UC04: Buscar Transações" as UC04
+    usecase "UC05: Visualizar Detalhes da Transação" as UC05
+    usecase "UC06: Exportar Transações" as UC06
+    usecase "UC07: Receber Categorização Automática" as UC07
+    usecase "UC08: Visualizar Balanço" as UC08
+    usecase "UC09: Realizar Transferência" as UC09
+    usecase "UC10: Realizar Pagamento" as UC10
+    usecase "UC11: Receber Notificação de Transação" as UC11
+    usecase "UC12: Gerar Relatório Financeiro" as UC12
+    
+    note right of UC08
+      **Req. ID:** FR03, FR04
+      **Descrição:** Permite ao usuário visualizar o balanço financeiro 
+      atual do sistema, incluindo receitas e despesas.
+    end note
+    
+    note right of UC09
+      **Req. ID:** FR09
+      **Descrição:** Permite ao usuário realizar transferências de dinheiro 
+      entre contas.
+    end note
+    
+    note right of UC10
+      **Req. ID:** FR10
+      **Descrição:** Permite ao usuário realizar pagamentos online, 
+      como por exemplo, para faturas e serviços.
+    end note
+    
+    note right of UC11
+      **Req. ID:** FR11
+      **Descrição:** Permite ao usuário receber notificações em tempo real 
+      sobre transações financeiras relevantes.
+    end note
+    
+    note right of UC12
+      **Req. ID:** FR15
+      **Descrição:** Permite ao usuário gerar relatórios financeiros periódicos, 
+      como balanços mensais e despesas anuais.
+    end note
+    
+    ' Relacionamentos entre casos de uso
+    UC01 ..> UC02 : <<include>>
+    UC01 ..> UC07 : <<include>>
+    UC01 ..> UC05 : <<extend>>
+    UC01 ..> UC06 : <<extend>>
+    UC03 ..> UC05 : <<include>>
+    UC04 ..> UC08 : <<include>>
+    UC09 ..> UC11 : <<include>>
+    UC10 ..> UC11 : <<include>>
+    UC12 ..> UC11 : <<include>>
+}
+
+' Relacionamentos ator-caso de uso
+user --> UC01
+user --> UC03
+user --> UC04
+bank --> UC07
+analyst --> UC12
+
+@enduml
+```

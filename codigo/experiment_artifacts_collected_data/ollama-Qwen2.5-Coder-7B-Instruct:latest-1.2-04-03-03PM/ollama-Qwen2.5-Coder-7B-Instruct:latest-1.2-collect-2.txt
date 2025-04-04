@@ -1,0 +1,68 @@
+```plantuml
+@startuml "C4_UC_SistemaGestaoFinanceira"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestão Financeira Pessoal - Casos de Uso Gerais"
+
+' Atores
+actor "Cliente Individual" as user
+actor "Sistema Bancário" as bank #999999
+actor "Sistema de Notificações" as notifications #ffcccc
+actor "Financeiro (SaaS)" as finance #dddddd
+
+' Sistema e casos de uso
+rectangle "Sistema de Gestão Financeira Pessoal" {
+    usecase "UC01: Visualizar Saldo" as UC01
+    usecase "UC02: Gerenciar Cartões" as UC02
+    usecase "UC03: Gerenciar Contas Bancárias" as UC03
+    usecase "UC04: Transferências Interbancárias" as UC04
+    usecase "UC05: Solicitar Credito" as UC05
+    usecase "UC06: Gerenciar Finanças Pessoais" as UC06
+
+    note right of UC01
+        **Req. ID:** FR03, FR04
+        **Descrição:** Permite ao usuário visualizar o saldo atual de suas contas.
+    end note
+
+    note right of UC02
+        **Req. ID:** FR05, FR06
+        **Descrição:** Permite ao usuário gerenciar os cartões associados às suas contas bancárias.
+    end note
+
+    note right of UC03
+        **Req. ID:** FR07, FR08
+        **Descrição:** Permite ao usuário adicionar, remover ou atualizar informações de contas bancárias.
+    end note
+
+    note right of UC04
+        **Req. ID:** FR09, FR10
+        **Descrição:** Permite ao usuário realizar transferências interbancárias usando as suas contas conectadas.
+    end note
+
+    note right of UC05
+        **Req. ID:** FR11, FR12
+        **Descrição:** Permite ao usuário solicitar um crédito ou empréstimo, com base na sua renda e historial financeiro.
+    end note
+
+    note right of UC06
+        **Req. ID:** FR13, FR14
+        **Descrição:** Permite ao usuário visualizar e gerenciar suas finanças pessoais de forma integrada e estratégica.
+    end note
+
+    ' Relacionamentos entre casos de uso
+    UC02 ..> UC03 : <<include>>
+    UC04 ..> UC05 : <<extend>>
+    UC06 ..> UC07 : <<include>>
+}
+
+' Relacionamentos ator-caso de uso
+user --> UC01
+user --> UC02
+user --> UC03
+user --> UC04
+bank --> UC05
+notifications --> UC05
+
+@enduml
+```

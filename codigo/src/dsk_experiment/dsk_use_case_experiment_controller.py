@@ -58,8 +58,10 @@ class DskExperimentController:
                                                            temperature=self.TREATMENT_MODEL_1_TEMPERATURE,
                                                            iterator_number=iterator_number, start_time=start_time)
 
-    def _apply_dsk_treatment_to_use_case_artifact(self, treatment_number, provider, model, temperature, iterator_number, start_time):
-        self.LOGGER.info(f"🧠 Generating diagram for treatment {treatment_number}: provider={provider} model:{model}.")
+    def _apply_dsk_treatment_to_use_case_artifact(self, treatment_number, provider, model, temperature, iterator_number,
+                                                  start_time):
+        
+        self.LOGGER.info(f"🧠 Generating diagram for treatment {treatment_number}: provider={provider} model:{model} temperature:{temperature}.")
 
         treatment_response = self.LLM.executeLLM(prompt=self.USER_PROMPT, provider=provider, model=model,
                                                  temperature=temperature,

@@ -1,0 +1,67 @@
+@startuml "C4_UC_Budgeting"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestão Financeira Pessoal - Orçamento e Planejamento - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user #0000FF
+actor "Serviço de Cálculo Automático" as calculator #87CEEB
+actor "Plataforma Bancária" as bank
+
+' Sistema e casos de uso
+rectangle "Sistema de Gestão Financeira Pessoal" {
+    usecase "UC01: Definir Orçamento Mensal" as UC01
+    
+    note right of UC01
+      **Req. ID:** FR08, FR09, FR10
+      **Descrição:** Permite ao usuário estabelecer um orçamento mensal para suas despesas e metas de poupança. Inclui categorização das transações, definição de limites financeiros, e geração automática de planos de pagamento baseados em histórico de movimentação bancária.
+    end note
+    
+    usecase "UC02: Visualizar Rastreamento Financeiro" as UC02
+    usecase "UC03: Ajustar Orçamento Em Tempo Real" as UC03
+    usecase "UC04: Criar Metas de Poupança" as UC04
+    usecase "UC05: Receber Sugestões de Economias" as UC05
+    usecase "UC06: Gerenciar Contas e Saldos" as UC06
+    
+    ' Relacionamentos entre casos de uso
+    UC01 ..> UC03 : <<include>>
+    UC02 ..> UC04 : <<extend>>
+    UC02 ..> UC05 : <<include>>
+    UC01 ..> UC06 : <<extend>>
+
+' Sub-casos para "Definir Orçamento Mensal" (UC01)
+usecase "UC01a: Categorizar Despesas Manualmente" as UC01a
+usecase "UC01b: Importar Histórico Bancário" as UC01b
+usecase "UC01c: Receber Recomendações de Orçamento" as UC01c
+
+note right of UC01a
+  **Req. ID:** FR13, FR14  
+  **Descrição:** Permite ao usuário categorizar transações financeiras individualmente para melhor alinhar o orçamento mensal.  
+end note  
+
+note right of UC01b
+  **Req. ID:** FR06, FR15  
+  **Descrição:** Importa dados de movimentação bancária recente para atualização automática das categorias e previsão de gastos.  
+end note  
+
+note right of UC01c
+  **Req. ID:** FR07  
+  **Descrição:** O sistema analisa o histórico do cliente e sugere categorizações de despesas, ajudando a otimizar o orçamento.  
+end note  
+
+UC01a -> UC01
+UC01b -> UC01
+UC01c -> UC01
+
+' Relacionamentos ator-caso de uso
+user --> UC01
+user --> UC02
+user --> UC03
+user --> UC04
+user --> UC05
+user --> UC06
+calculator --> UC05  
+bank --> UC06  
+
+@enduml

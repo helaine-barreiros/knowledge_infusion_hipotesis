@@ -1,0 +1,127 @@
+**Readability**: The diagrams are visually appealing, using appropriate colors, fonts, and symbols.
+9. Here is a detailed description of how you approach the creation of this diagram:
+
+* Identify the primary actors: User, Bank, Chatbot (if applicable).
+* For each functional requirement identified in FR01 to FR05, create a corresponding use case.
+* Use includes for cases that extend another functionality.
+* Use extends for cases where optional features can be added without altering the core functionality.
+* Ensure each use case is linked back to its respective requirement.
+
+**PlantUML Syntax:**
+- `actor "Name" as alias`: Defines an actor with a specific name and alias.
+- `rectangle "System Name"`: Groups related use cases under a rectangle.
+- `usecase "Use Case Description" as alias`: Creates a use case with a specific description and alias.
+- `UC01 ..> UC02 : <<include>>`: Establishes an 'includes' relationship between two use cases.
+- `user --> UC01`: Links an actor to a specific use case.
+
+**Example for UC03 (Categorize Transactions Manually):**
+
+```plantuml
+usecase "UC03: Categorizar Transação Manualmente" as UC03
+
+note right of UC03
+  **Req. ID:** FR07
+  **Descrição:** Permite ao usuário categorizar manualmente uma transação 
+  financeira específica em suas contas conectadas.
+end note
+```
+
+**Example for UC05 (View Transaction Details):**
+
+```plantuml
+usecase "UC05: Visualizar Detalhes da Transação" as UC05
+
+note right of UC05
+  **Req. ID:** FR16
+  **Descrição:** Permite ao usuário visualizar todos os detalhes 
+  de uma transação financeira específica em suas contas conectadas.
+end note
+
+UC01 ..> UC05 : <<extend>>
+```
+
+**Example for UC07 (Receive Automatic Categorization):**
+
+```plantuml
+usecase "UC07: Receber Categorização Automática" as UC07
+
+note right of UC07
+  **Req. ID:** FR08
+  **Descrição:** Permite ao usuário receber categorização automática 
+  para todas as transações financeiras em suas contas conectadas.
+end note
+
+UC01 ..> UC07 : <<include>>
+```
+
+10. Finally, compile all the use cases into a single diagram and ensure it meets the quality criteria outlined above.
+
+**PlantUML Code:**
+```plantuml
+@startuml "C4_UC_GestaoFinanceira"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestão Financeira Pessoal - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user
+actor "Sistema Bancário" as bank #999999
+actor "Chatbot Finaceiro" as chatbot #007FFF
+
+' Sistema e casos de uso
+rectangle "Sistema de Gestão Financeira Pessoal" {
+    usecase "UC01: Visualizar Lista de Transações" as UC01
+    note right of UC01
+      **Req. ID:** FR03, FR04
+      **Descrição:** Permite ao usuário visualizar todas as transações 
+      financeiras de suas contas conectadas, ordenadas 
+      cronologicamente.
+    end note
+    
+    usecase "UC02: Filtrar Transações" as UC02
+    usecase "UC03: Categorizar Transação Manualmente" as UC03
+    usecase "UC04: Buscar Transações" as UC04
+    usecase "UC05: Visualizar Detalhes da Transação" as UC05
+    usecase "UC06: Exportar Transações" as UC06
+    
+    usecase "UC07: Receber Categorização Automática" as UC07
+
+    ' Relacionamentos entre casos de uso
+    UC01 ..> UC02 : <<include>>
+    UC01 ..> UC03 : <<include>>
+    UC01 ..> UC04 : <<extend>>
+    UC01 ..> UC05 : <<extend>>
+    UC01 ..> UC06 : <<extend>>
+    UC01 ..> UC07 : <<include>>
+
+    ' Atores com casos de uso
+    user --> UC01
+    user --> UC03
+    user --> UC04
+    bank --> UC07
+}
+
+' Chatbot Finaceiro e seus casos de uso
+rectangle "Chatbot Financeiro" {
+    usecase "UC08: Respondente Questões Financeiras" as UC08
+    note right of UC08
+      **Req. ID:** FR13
+      **Descrição:** Permite ao chatbot responder perguntas 
+      financeiras do usuário.
+    end note
+    
+    ' Relacionamento entre caso de uso e ator
+    user --> UC08
+}
+
+@enduml
+```
+
+**Explanation of the Diagram:**
+- The diagram includes primary actors such as User, Bank, and Chatbot Financeiro.
+- Each functional requirement is represented by a use case, grouped under their respective system.
+- Use cases are linked back to their respective requirements, ensuring clarity and traceability.
+- Includes and extends relationships help in understanding how functionalities extend or build upon each other.
+
+By following this approach, you can create a comprehensive and readable use case diagram that aligns with the functional requirements of your system.

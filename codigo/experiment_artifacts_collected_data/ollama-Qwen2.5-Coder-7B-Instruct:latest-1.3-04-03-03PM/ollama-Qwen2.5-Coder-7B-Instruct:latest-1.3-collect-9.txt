@@ -1,0 +1,55 @@
+**Simplicity**: Diagrams are not overly complex, and the level of detail is appropriate for the stakeholders' needs.
+
+Assistant ```plantuml
+@startuml "C4_UC_SistemaGestaoFinanceiraPessoal"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestão Financeira Pessoal - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user
+actor "Sistema Bancário" as bank #999999
+actor "Fornecedor de Dados Externos" as provider #999999
+
+' Sistema e casos de uso
+rectangle "Sistema de Gestão Financeira Pessoal" {
+    usecase "UC01: Visualizar Balanço Financeiro" as UC01
+    
+    note right of UC01
+      **Req. ID:** FR03, FR04
+      **Descrição:** Permite ao usuário visualizar o balanço 
+      financeiro com suas transações categorizadas.
+    end note
+    
+    usecase "UC02: Adicionar Nova Transação" as UC02
+    usecase "UC03: Editar Transação Existente" as UC03
+    usecase "UC04: Excluir Transação" as UC04
+    usecase "UC05: Receber Categorização Automática" as UC05
+    usecase "UC06: Exportar Balanço" as UC06
+    usecase "UC07: Visualizar Gráficos Financeiros" as UC07
+    
+    ' Relacionamentos entre casos de uso
+    UC01 ..> UC02 : <<include>>
+    UC01 ..> UC03 : <<include>>
+    UC01 ..> UC04 : <<include>>
+    UC01 ..> UC05 : <<include>>
+    UC01 ..> UC06 : <<extend>>
+    UC01 ..> UC07 : <<include>>
+}
+
+' Casos de uso relacionados aos fornecedores de dados externos
+usecase "UC08: Integrar Dados Externos" as UC08
+usecase "UC09: Atualizar Dados Internos com Dados Externos" as UC09
+
+note right of UC08
+  **Req. ID:** FR13
+  **Descrição:** Permite ao usuário integrar dados de fontes 
+  externas, como investimentos ou receitas de outras apps.
+end note
+
+' Relacionamentos entre casos de uso e fornecedores de dados
+provider --> UC09 : <<include>>
+
+@enduml
+```

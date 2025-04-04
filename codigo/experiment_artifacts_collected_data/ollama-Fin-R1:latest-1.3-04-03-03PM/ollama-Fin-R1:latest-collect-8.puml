@@ -1,0 +1,44 @@
+@startuml "C4_UC_Transacoes"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestão Financeira Pessoal - Transações Financeiras - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user #51C369
+
+' Sistema e casos de uso
+rectangle "Sistema de Gestão Financeira Pessoal" {
+    usecase "UC01: Consultar Transações da Conta" as UC01
+    
+    note right of UC01
+      **Req. ID:** FR03, FR04  
+      **Descrição:** Permite ao cliente visualizar todas as transações financeiras de suas contas conectadas em um período específico.
+    end note
+
+    usecase "UC02: Filtrar Transações por Critério" as UC02
+    usecase "UC03: Categorizar Manualmente" as UC03
+    usecase "UC04: Editar Descrição de Transação" as UC04
+    usecase "UC05: Importar Novas Transações" as UC05
+    usecase "UC06: Excluir Transação Selecionada" as UC06
+    usecase "UC07: Exportar Transações para Excel" as UC07
+
+    ' Relacionamentos entre casos de uso
+    UC01 ..> UC02 : <<include>>
+    UC01 ..> UC03 : <<extend>>
+    UC01 ..> UC04 : <<extend>>
+    UC01 ..> UC05 : <<include>>
+    UC01 ..> UC06 : <<include>>
+    UC01 ..> UC07 : <<extend>>
+
+}
+
+' Relacionamentos ator-caso de uso
+user --> UC01
+user --> UC03
+user --> UC04
+user --> UC05
+user --> UC06
+user --> UC07
+
+@enduml
