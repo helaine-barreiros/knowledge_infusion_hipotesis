@@ -1,5 +1,5 @@
 from re import search, DOTALL
-from src.utils.plantuml.plantuml import PlantUML
+from plantuml import PlantUML
 from src.utils.system_parametrization import SYSTEM_CONFIG
 from src.utils.logger import Logger
 from src.utils.plantuml.plantuml_parser import PlantUMLUseCaseParser

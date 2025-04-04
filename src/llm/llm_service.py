@@ -68,6 +68,7 @@ class OllamaStrategy(LLMStrategy):
                 {"role": "user", "content": prompt}
             ]
 
+            print(f"Calling Ollama API with model={model}, temp={temperature}, timeout={timeout}")
             model_response = client.chat(
                 messages=messages,
                 model=model,
