@@ -69,7 +69,7 @@ class DskExperimentController:
                                                  system_prompt=self.SYSTEM_PROMPT)
 
         treatment_filename = f"{provider}-{model}-{temperature}-collect-{iterator_number}.txt"
-        treatment_output_directory = f"{self.OUTPUT_DIRECTORY}/{provider}-{model}-{temperature}-{start_time.strftime('%m-%d-%I%p')}"
+        treatment_output_directory = f"{self.OUTPUT_DIRECTORY}/{provider}-{model}-{temperature}-{start_time.strftime('%m-%d-%H-%M-%S')}"
 
         if not os.path.exists(treatment_output_directory):
             os.makedirs(treatment_output_directory)
