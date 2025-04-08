@@ -1,0 +1,23 @@
+@startuml "API Gateway - Component Diagram"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(api_gateway, "API Gateway") {
+    Component(routing_handlers, "Routing Handlers", "Spring Cloud Gateway Routes", "Configures routing of requests to appropriate services")
+    Component(auth_filter, "Authentication Filter", "Spring Cloud Gateway Filter", "Validates JWT tokens and enforces authentication")
+    Component(rate_limiter, "Rate Limiter", "Spring Cloud Gateway Filter", "Applies rate limiting to API requests")
+    Component(circuit_breaker, "Circuit Breaker", "Resilience4j", "Prevents cascade failures when downstream services fail")
+    Component(request_logger, "Request Logger", "Spring Cloud Gateway Filter", "Logs API requests for monitoring and debugging")
+    Component(response_transformer, "Response Transformer", "Spring Cloud Gateway Filter", "Transforms and standardizes API responses")
+    Component(cors_config, "CORS Configuration", "Spring Cloud Gateway Config", "Configures Cross-Origin Resource Sharing")
+    Component(load_balancer, "Load Balancer", "Spring Cloud LoadBalancer", "Distributes requests across service instances")
+}
+
+Rel(routing_handlers, load_balancer, "Uses")
+Rel(auth_filter, routing_handlers, "Precedes")
+Rel(rate_limiter, auth_filter, "Precedes")
+Rel(request_logger, rate_limiter, "Precedes")
+Rel(response_transformer, circuit_breaker, "Uses")
+Rel(circuit_breaker, load_balancer, "Protects")
+
+@enduml

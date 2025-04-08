@@ -1,0 +1,56 @@
+9. Finally, present a PlantUML code that meets the above quality criteria. The resulting diagram should include all necessary elements such as actors, use cases, relationships, and additional notes if required.
+
+```plantuml
+@startuml "C4_UC_SistemaGestaoFinanceira"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title "Sistema de Gestão Financeira Pessoal - Casos de Uso"
+
+' Atores
+actor "Cliente Individual" as user
+actor "Sistema Bancário" as bank #999999
+actor "Sistema de Chatbot" as chatbot #AAAAAA
+actor "Sistema de Auditoria" as auditor #CCCCCC
+
+' Sistema e casos de uso
+rectangle "Sistema de Gestão Financeira Pessoal" {
+    usecase "UC01: Visualizar Lista de Transações" as UC01
+    usecase "UC02: Filtrar Transações" as UC02
+    usecase "UC03: Categorizar Transação Manualmente" as UC03
+    usecase "UC04: Buscar Transações" as UC04
+    usecase "UC05: Visualizar Detalhes da Transação" as UC05
+    usecase "UC06: Exportar Transações" as UC06
+    usecase "UC07: Receber Categorização Automática" as UC07
+    usecase "UC08: Realizar Pagamento" as UC08
+    usecase "UC09: Solicitar Financiamento" as UC09
+    usecase "UC10: Gerenciar Conta Corrente" as UC10
+    usecase "UC11: Receber Recomendações de Investimento" as UC11
+    usecase "UC12: Gerenciar Criptomoedas" as UC12
+    usecase "UC13: Interagir com Chatbot Financeiro" as UC13
+    usecase "UC14: Receber Relatórios Financeiros" as UC14
+    
+    ' Relacionamentos entre casos de uso
+    UC01 ..> UC02 : <<include>>
+    UC01 ..> UC07 : <<include>>
+    UC01 ..> UC05 : <<extend>>
+    UC01 ..> UC06 : <<extend>>
+    UC03 ..> UC05 : <<include>>
+    UC08 ..> UC10 : <<include>>
+    UC09 ..> UC10 : <<include>>
+    UC10 ..> UC14 : <<include>>
+    UC11 ..> UC12 : <<include>>
+    UC13 ..> UC12 : <<include>>
+    UC13 ..> UC14 : <<include>>
+}
+
+' Relacionamentos ator-caso de uso
+user --> UC01
+user --> UC03
+user --> UC04
+bank --> UC07
+chatbot --> UC13
+auditor --> UC14
+
+@enduml
+```

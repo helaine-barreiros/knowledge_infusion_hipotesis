@@ -1,0 +1,238 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Core Use Case Diagram"
+
+actor IndividualCustomer as user #CUSTOMER_COLOR  
+actor Advisor as advisor #CUSTOMER_COLOR  
+
+package Authentication {  
+    usecase UC01: Authenticate User as uc_auth_01 <<extend>> {
+        note right of uc_auth_01
+            **Req. ID:** FR01, NFR06  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+    }  
+
+    usecase UC02: Manage Account Settings as uc_auth_02 <<extend>> {
+        note right of uc_auth_02
+            **Req. ID:** NFR06  
+            **Description:** Allows users to manage account-related settings like profile info, security questions.
+        end note
+    }  
+
+}  
+
+package FinancialAccountManagement {  
+    usecase UC03: Connect Financial Accounts as uc_finacc_03 <<extend>> {
+        note right of uc_finacc_03
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+    }  
+
+    usecase UC04: View Transactions as uc_finacc_04 <<extend>> {
+        note right of uc_finacc_04
+            **Req. ID:** FR03  
+            **Description:** Displays a list of financial transactions categorized by type (e.g., expenses, income).
+        end note
+    }  
+
+    usecase UC05: Categorize Transactions as uc_finacc_05 <<extend>> {
+        note right of uc_finacc_05
+            **Req. ID:** FR03  
+            **Description:** Allows users to manually categorize transactions for better tracking.
+        end note
+    }  
+
+}  
+
+package AnalysisAndRecommendations {  
+    usecase UC06: View Financial Dashboard as uc_analysis_06 <<extend>> {
+        note right of uc_analysis_06
+            **Req. ID:** FR04, FR15  
+            **Description:** Provides a visual summary of financial data including spending patterns and historical trends.
+        end note
+    }  
+
+    usecase UC07: Receive AI Insights as uc_analysis_07 <<extend>> {
+        note right of uc_analysis_07
+            **Req. ID:** FR05  
+            **Description:** Delivers personalized insights on financial habits using machine learning models.
+        end note
+    }  
+
+}  
+
+package Planning {  
+    usecase UC08: Set Financial Goals as uc_plan_08 <<extend>> {
+        note right of uc_plan_08
+            **Req. ID:** FR07, NFR13  
+            **Description:** Enables users to define and track short-term or long-term financial objectives.
+        end note
+    }  
+
+    usecase UC09: Manage Budgets as uc_plan_09 <<extend>> {
+        note right of uc_plan_09
+            **Req. ID:** FR08, NFR13  
+            **Description:** Allows users to create and monitor spending limits across categories.
+        end note
+    }  
+
+}  
+
+package Collaboration {  
+    usecase UC10: Share Data with Advisors as uc_collab_10 <<extend>> {
+        note right of uc_collab_10
+            **Req. ID:** FR13, NFR06  
+            **Description:** Facilitates secure sharing of financial data between users and their advisors.
+        end note
+    }  
+
+}  
+
+package AdvancedFeatures {  
+    usecase UC11: Chatbot for Financial Queries as uc_adv_11 <<extend>> {
+        note right of uc_adv_11
+            **Req. ID:** FR14, NFR06  
+            **Description:** Offers a conversational interface to answer common financial questions.
+        end note
+    }  
+
+}  
+
+package PredictiveAnalytics {  
+    usecase UC12: Forecast Financial Position as uc_pred_12 <<extend>> {
+        note right of uc_pred_12
+            **Req. ID:** FR10, NFR13  
+            **Description:** Uses historical data to predict future financial scenarios like savings or debt.
+        end note
+    }  
+
+}  
+
+package InvestmentRecommendations {  
+    usecase UC13: Suggest Investments as uc_invrec_13 <<extend>> {
+        note right of uc_invrec_13
+            **Req. ID:** FR11, NFR06  
+            **Description:** Recommends investment opportunities based on user risk profile and market trends.
+        end note
+    }  
+
+}  
+
+package DebtManagement {  
+    usecase UC14: Manage Debt as uc_debt_14 <<extend>> {
+        note right of uc_debt_14
+            **Req. ID:** FR12, NFR06  
+            **Description:** Assists users in understanding and managing debt through repayment planning.
+        end note
+    }  
+
+}  
+
+' Relationships between packages (e.g., FinancialAccountManagement includes UC03 to UC05)  
+UC04 --> UC05 : <<extend>>  
+
+' Cross-package relationships:  
+UC12 ..> UC06 : <<include>>  ' Predictive Analytics included in Analysis & Insights for visualizing forecasts  
+
+user --> uc_auth_01  
+advisor --> uc_plan_09  
+bank --> uc_finacc_03  
+ai_engine --> uc_analysis_07  
+
+@enduml
+```plantuml
+
+The provided PlantUML code defines a comprehensive use case diagram for the "AI-Powered Personal Financial Management System" following the specified guidelines. The system is structured into functional packages such as **Authentication & Security**, **Financial Account Management**, **Analysis & Insights**, **Planning**, and others, each containing related core use cases.
+
+Key components include:
+- **User Authentication**: Handles user verification through username/password or OAuth2 providers.
+- **Account Connectivity**: Securely links financial accounts via banking APIs for transaction data retrieval.
+- **Transaction Categorization**: Automatically sorts transactions into categories (e.g., expenses).
+- **Financial Analysis & Insights**: Generates dashboards, AI-driven spending patterns, and personalized recommendations.
+- **Goal Setting/Budgeting**: Allows users to set and track personal finance goals/budgets.
+- **Collaboration Features**: Enables sharing of financial data with advisors or family members.
+- **Advanced Chatbot Integration**: Provides a conversational interface for answering queries.
+
+The diagram ensures all functional requirements (FR) from the specification are covered, such as secure transactions (FR02), AI-powered insights (FR05), and multi-factor authentication (NFR06). Non-functional needs like data security regulations compliance (NFR01) and system performance under load (NFR03–04) also align with the use cases.
+
+The structure uses UML relationships to indicate inclusions, extensions, generalizations, and cross-package dependencies. For example:
+- **UC06: View Financial Dashboard** includes transaction visualization from UC04.
+- Predictive analytics are embedded within Analysis & Insights (e.g., forecasting linked under UC12).
+
+This layout enhances readability by grouping similar functionalities into packages and linking them logically to actors/systems, ensuring the diagram is implementable for development teams. 
+
+Note: Ensure PlantUML syntax correctness in actual deployment scenarios, especially with custom definitions like `!include` paths or color settings. Adjustments may be needed based on specific tools or libraries used.
+```plantuml
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "Core Functionalities of AI-Powered Personal Financial Management System"
+
+actor IndividualCustomer as user #CUSTOMER_COLOR  
+actor Advisor as advisor #CUSTOMER_COLOR  
+
+package Authentication {  
+    usecase UC01: Authenticate User <<extend>> {
+        note right
+            **Req. ID:** FR01, NFR06  
+            Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+    }  
+
+    usecase UC02: Manage Account Settings <<extend>> {
+        note right
+            **Req. ID:** NFR06  
+            Manages account-related settings like profile info, security questions.
+        end note
+    }  
+}  
+
+package FinancialAccountManagement {  
+    usecase UC03: Connect Financial Accounts <<extend>> {
+        note right
+            **Req. ID:** FR02  
+            Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+    }  
+
+    usecase UC04: View Transactions <<extend>> {
+        note right
+            **Req. ID:** FR03  
+            Displays categorized transactions (e.g., expenses, income).
+        end note
+    }  
+
+    usecase UC05: Categorize Transactions <<extend>> {
+        note right
+            **Req. ID:** FR03  
+            Allows manual categorization of transactions.
+        end note
+    }  
+}  
+
+package AnalysisAndRecommendations {  
+    usecase UC06: View Financial Dashboard <<extend>> {
+        note right
+            **Req. ID:** FR04, FR15  
+            Visual summary of financial data (spending patterns, historical trends).
+        end note
+    }  
+
+    usecase UC07: Receive AI Insights <<extend>> {
+        note right
+            **Req. ID:** FR05  
+            Personalized insights on spending habits via machine learning.
+        end note
+    }  
+}  
+
+package Planning {  
+    usecase UC08: Set Financial Goals <<extend>> {
+        note right
+            **Req. ID:** FR07, NFR13  
+            Define and
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

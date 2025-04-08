@@ -1,0 +1,167 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Enhanced Personal Finance Management System - Use Cases"
+
+actor IndividualCustomer as user
+actor FinancialAdvisor as advisor
+
+package Authentication & Security {
+    usecase UC01: Authenticate User as UC01
+        note right of UC01
+            **Req. ID:** FR01, NFR06  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+        
+    usecase UC02: Manage Account Settings as UC02
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Financial Accounts as UC03
+        note right of UC03
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+        
+    usecase UC04: View Transactions as UC04
+    usecase UC05: Categorize Transactions as UC05
+    
+    UC03 ..> UC04 : <<include>>
+    
+    UC04 ..> UC05 : <<extend>>  
+}
+
+package Analysis & Insights {
+    usecase UC06: View Financial Dashboard as UC06
+    usecase UC07: Receive AI Insights as UC07
+
+    usecase UC08: View Basic Reports as UC08
+    usecase UC09: View Advanced Analytics as UC09  
+    UC09 --|> UC08  : Generalization relationship (UC09 is a specialized version of UC08)
+}
+
+package FinancialGoalManagement {
+    usecase UC10: Set Financial Goals as UC10
+    usecase UC11: Track Financial Goals as UC11
+    
+    note right of UC10 
+        **Req. ID:** FR07  
+        **Description:** Allows users to set specific financial goals and track their progress.
+    end note
+}
+
+package Budgeting {
+    usecase UC12: Create Budgets as UC12
+    usecase UC13: Monitor Budgets as UC13
+    
+    note right of UC12 
+        **Req. ID:** FR08  
+        **Description:** Helps users create and monitor budgets for better financial control.
+    end note
+}
+
+package Alerting {
+    usecase UC14: Receive Financial Alerts as UC14
+    usecase UC15: Customize Notification Preferences as UC15
+    
+    note right of UC14 
+        **Req. ID:** FR09  
+        **Description:** Sends alerts for unusual spending patterns or other financial events.
+    end note
+}
+
+package Forecasting {
+    usecase UC16: View Financial Forecasts as UC16
+    usecase UC17: Analyze Future Scenarios as UC17
+    
+    note right of UC16 
+        **Req. ID:** FR10  
+        **Description:** Uses historical data to predict future financial positions.
+    end note
+}
+
+package InvestmentRecommendations {
+    usecase UC18: Get Personalized Investment Advice as UC18
+    usecase UC19: View Portfolio Performance as UC19
+    
+    note right of UC18 
+        **Req. ID:** FR06, FR11  
+        **Description:** Provides AI-generated investment recommendations based on user profile and market data.
+    end note
+}
+
+package DebtManagement {
+    usecase UC20: Plan Repayments for Debts as UC20
+    usecase UC21: Monitor Debt Progress as UC21
+    
+    note right of UC20 
+        **Req. ID:** FR12  
+        **Description:** Offers strategies to manage debts with repayment simulations.
+    end note
+}
+
+package Sharing {
+    usecase UC22: Share Financial Data with Advisors as UC22
+}
+
+package ChatbotInteraction {
+    usecase UC23: Engage in Financial Queries via Chatbot as UC23
+    
+    note right of UC23 
+        **Req. ID:** FR14  
+        **Description:** Allows users to ask financial questions and receive quick answers through a chatbot.
+    end note
+}
+
+package Reporting {
+    usecase UC24: Generate Periodic Financial Reports as UC24
+}
+
+package Internationalization {
+    usecase UC25: Support Multiple Currencies as UC25  
+        note right of UC25 
+            **Req. ID:** NFR08  
+            **Description:** Ensures the system can handle transactions and reports in various currencies.
+        end note    
+}
+
+package SecurityAndPrivacy {
+    usecase UC26: Ensure Data Protection as UC26
+        note right of UC26
+            **Req. ID:** NFR01, NFR02  
+            **Description:** Complies with financial data regulations (e.g., GDPR) and uses encryption for security.
+        end note    
+}
+
+package SystemScalability {
+    usecase UC27: Scale to Handle Concurrent Users as UC27
+        note right of UC27 
+            **Req. ID:** NFR05  
+            **Description:** Design ensures system can handle at least 100,000 concurrent users.
+        end note    
+}
+
+package Performance {
+    usecase UC28: Respond Quickly to User Interactions as UC28
+        note right of UC28 
+            **Req. ID:** NFR04  
+            **Description:** Ensures responses are delivered within 1 second for user interactions.
+        end note
+}
+
+' Actor-Use Case Relationships
+
+user --> UC01 : Authentication & Security
+user --> UC03 : FinancialAccountManagement
+user --> UC06, UC24: Analysis & Insights / Reporting  
+advisor --> UC09, UC18: Advanced Analytics / InvestmentRecommendations  
+
+bank --> UC03 : Connects to external financial accounts
+
+ai_engine --> UC07 : AI Insights (Analysis & Insights)
+ai_engine --> UC18, UC16: Forecasting, Recommendations 
+
+' Cross-Package Relationships
+UC24 ..> UC05 : <<extend>>  
+(Include other cross-package relationships as needed)
+
+@enduml

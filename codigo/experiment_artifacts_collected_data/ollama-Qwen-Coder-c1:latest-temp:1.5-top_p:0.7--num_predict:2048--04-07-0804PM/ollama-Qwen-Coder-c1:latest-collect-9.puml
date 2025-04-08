@@ -1,0 +1,142 @@
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+' ACTOR DEFINITION
+actor "Individual Customer" as user [#lightblue]
+actor "Financial Advisor" as advisor [#orange]
+
+package "Authentication & Security" {
+    usecase "UC01: Authenticate User" as UC01
+    
+    note right of UC01
+      **Req. ID:** FR01, NFR06
+      **Description:** Allows users to authenticate via 
+      username/password or OAuth2 providers.
+    end note
+
+    usecase "UC02: Manage Account Settings" as UC02
+}
+
+package "Financial Management" {
+    usecase "UC03: Connect Financial Accounts" as UC03
+    
+    note right of UC03
+      **Req. ID:** FR02, NFR14
+      **Description:** Securely links external financial accounts 
+      using banking APIs to retrieve transaction data.
+    end note
+
+    usecase "UC04: View Transactions" as UC04
+    usecase "UC05: Categorize Transactions" as UC05
+    
+    UC03 ..> UC04 : <<include>>
+    
+    UC04 ..> UC05 : <<extend>>
+
+    usecase "UC06: Manage Budgets and Goals" as UC06
+    
+    note right of UC06
+      **Req. ID:** FR07, NFR12
+      **Description:** Allows users to set and track financial goals.
+    end note
+
+    usecase "UC07: Create Financial Reports" as UC07
+    
+    note right of UC07
+      **Req. ID:** FR15
+      **Description:** Generates periodic financial health reports.
+    end note
+
+}
+
+package "Analysis & Recommendations" {
+    usecase "UC08: View Financial Insights" as UC08
+    
+    note right of UC08
+      **Req. ID:** FR05, NFR09
+      **Description:** Provides AI-powered insights on spending habits and market trends.
+    end note
+
+    usecase "UC09: Receive Personalized Recommendations" as UC09
+    
+    note right of UC09
+      **Req. ID:** FR06
+      **Description:** Generates personalized financial recommendations based on user data.
+    end note
+
+}
+
+package "Planning & Forecasting" {
+    usecase "UC10: Forecast Future Financial Positions" as UC10
+    
+    note right of UC10
+      **Req. ID:** FR10, NFR13
+      **Description:** Forecasts future financial positions based on historical data.
+    end note
+
+}
+
+package "Collaboration & Sharing" {
+    usecase "UC11: Share Financial Data with Advisors" as UC11
+    
+    note right of UC11
+      **Req. ID:** FR13, NFR08
+      **Description:** Allows users to share selected financial data with financial advisors.
+    end note
+
+}
+
+package "AI-Driven Features" {
+    usecase "UC12: Analyze Cryptocurrency Portfolio" as UC12
+    
+    note right of UC12
+      **Req. ID:** FR14, NFR09
+      **Description:** Provides analysis and insights for cryptocurrency portfolio.
+    end note
+
+}
+
+package "Support & Assistance" {
+    usecase "UC13: Access Chatbot Support" as UC13
+    
+    note right of UC13
+      **Req. ID:** FR14, NFR08
+      **Description:** Offers a chatbot for financial queries and assistance.
+    end note
+
+}
+
+package "User Interface & Experience" {
+    usecase "UC14: Visualize Spending Patterns" as UC14
+    
+    note right of UC14
+      **Req. ID:** FR03, NFR12
+      **Description:** Visualizes spending patterns and financial history.
+    end note
+
+}
+
+package "Data Security & Compliance" {
+    usecase "UC15: Ensure Data Encryption" as UC15
+    
+    note right of UC15
+      **Req. ID:** NFR02, NFR07
+      **Description:** Encrypts all data at rest and in transit.
+    end note
+
+}
+
+' CROSS-PACKAGE RELATIONSHIPS
+user --> UC01
+user --> UC03
+user --> UC04
+user --> UC05
+user --> UC06
+user --> UC07
+user --> UC08
+user --> UC09
+advisor --> UC09
+bank --> UC03
+
+@enduml

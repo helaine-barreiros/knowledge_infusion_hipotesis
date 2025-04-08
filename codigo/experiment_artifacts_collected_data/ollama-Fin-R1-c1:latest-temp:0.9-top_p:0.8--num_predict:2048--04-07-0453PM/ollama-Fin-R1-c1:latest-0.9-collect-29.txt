@@ -1,0 +1,111 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Case Diagram"
+
+actor IndividualCustomer as user 
+actor FinancialAdvisor as advisor 
+
+package Authentication & Security {
+    usecase UC01: Authenticate User <<essential>>
+        note right of UC01
+            **Req. ID:** FR01, NFR06  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Financial Accounts <<essential>>
+        note right of UC03 
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+
+    usecase UC04: View Transactions as <<include>> from UC03
+    usecase UC05: Categorize Transactions as <<extend>> from UC04
+    
+    UC03 ..> UC04 : <<include>>
+}
+
+package Analysis & Insights {
+    usecase UC06: View Financial Dashboard <<essential>>
+        note right of UC06 
+            **Req. ID:** FR03, FR04  
+            **Description:** Visualizes spending patterns and financial history.
+        end note
+
+    usecase UC07: Receive AI Insights as <<include>> from UC06
+        note right of UC07
+            **Req. ID:** FR05  
+            **Description:** Provides personalized financial insights using advanced analysis.
+        end note
+        
+    usecase UC08: View Basic Reports 
+    usecase UC09: View Advanced Analytics --|> UC08
+    
+}
+
+package FinancialGoalManagement {
+    usecase UC10: Set and Track Goals <<essential>>
+        note right of UC10
+            **Req. ID:** FR07  
+            **Description:** Enables users to set, adjust, and track financial goals.
+        end note
+
+    usecase UC11: Manage Budgets as <<include>> from UC10
+}
+
+package RecommendationEngine {
+    usecase UC12: Generate Personalized Recommendations 
+        note right of UC12
+            **Req. ID:** FR06  
+            **Description:** AI-powered financial recommendations tailored to user needs.
+        end note
+
+    usecase UC13: Offer Investment Opportunities as <<extend>> from UC12
+}
+
+package Collaboration {
+    usecase UC14: Share Data with Advisors 
+        note right of UC14
+            **Req. ID:** FR13  
+            **Description:** Allows users to share selected financial data with advisors for review.
+        end note
+
+    usecase UC15: Use Chatbot for Financial Queries as <<desirable>>  
+}
+
+package Forecasting {
+    usecase UC16: Forecast Future Finances 
+        note right of UC16
+            **Req. ID:** FR09, FR10  
+            **Description:** Predicts future financial positions based on historical data and trends.
+        end note
+
+    usecase UC17: Simulate Debt Repayments as <<extend>> from UC16
+}
+
+package ExternalServices {
+    usecase UC18: Leverage Banking APIs 
+        note right of UC18  
+            **Req. ID:** FR02, NFR04  
+            **Description:** Ensures real-time transaction updates and security.
+        end note
+
+    usecase UC19: Fetch Investment Data as <<include>> from UC18
+}
+
+// Relationships between packages and actors
+user --> UC03 
+advisor --> UC14 
+
+UC06 ..> UC05 : <<extend>>
+UC07 >> UC05 : 
+UC02 >> UC01 :
+UC19 ..> banking_api:
+UC06 ..> investment_api:
+
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 801]

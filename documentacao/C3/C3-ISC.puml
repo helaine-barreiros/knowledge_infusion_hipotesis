@@ -1,0 +1,30 @@
+@startuml "AI Inference Service - Component Diagram"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(ai_inference_service, "AI Inference Service") {
+    Component(api_controller, "API Controller", "FastAPI Router", "Exposes REST endpoints for AI inference")
+    Component(model_manager, "Model Manager", "Python Module", "Loads, manages, and applies ML models")
+    Component(feature_processor, "Feature Processor", "Python Module", "Processes raw data into features for model input")
+    Component(recommendation_engine, "Recommendation Engine", "Python Module", "Generates personalized financial recommendations")
+    Component(anomaly_detector, "Anomaly Detector", "Python Module", "Detects unusual financial patterns")
+    Component(insight_generator, "Insight Generator", "Python Module", "Produces actionable financial insights")
+    Component(explanation_service, "Explanation Service", "Python Module", "Provides human-readable explanations for AI decisions")
+    Component(model_repository, "Model Repository", "Python Module", "Accesses and manages model artifacts")
+    Component(data_access_layer, "Data Access Layer", "Python Module", "Retrieves financial data for analysis")
+    Component(cache_service, "Cache Service", "Python Module", "Caches frequent inference results")
+}
+
+Rel(api_controller, model_manager, "Uses")
+Rel(api_controller, recommendation_engine, "Uses")
+Rel(api_controller, anomaly_detector, "Uses")
+Rel(api_controller, insight_generator, "Uses")
+Rel(model_manager, model_repository, "Uses")
+Rel(recommendation_engine, feature_processor, "Uses")
+Rel(recommendation_engine, explanation_service, "Uses")
+Rel(anomaly_detector, feature_processor, "Uses")
+Rel(insight_generator, feature_processor, "Uses")
+Rel(feature_processor, data_access_layer, "Uses")
+Rel(data_access_layer, cache_service, "Uses")
+
+@enduml

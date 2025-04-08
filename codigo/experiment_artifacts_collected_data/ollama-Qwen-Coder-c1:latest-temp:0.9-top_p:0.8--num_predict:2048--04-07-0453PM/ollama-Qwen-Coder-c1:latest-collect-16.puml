@@ -1,0 +1,142 @@
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+' ACTOR DEFINITION
+actor "Individual Customer" as user #lightblue
+actor "Financial Advisor" as advisor #lightgreen
+
+' PACKAGE DEFINITION
+package "Authentication & Security" {
+    usecase "UC01: Authenticate User" as UC01
+    
+    note right of UC01
+      **Req. ID:** FR01, NFR06
+      **Description:** Allows users to authenticate via 
+      username/password or OAuth2 providers, with 
+      optional multi-factor authentication.
+    end note
+
+    usecase "UC02: Manage Account Settings" as UC02
+}
+
+package "Financial Management" {
+    usecase "UC03: Connect Financial Accounts" as UC03
+    
+    note right of UC03
+      **Req. ID:** FR02, NFR10
+      **Description:** Securely links external financial accounts 
+      using banking APIs to retrieve transaction data.
+    end note
+
+    usecase "UC04: View Transactions" as UC04
+    usecase "UC05: Categorize Transactions" as UC05
+    
+    UC03 ..> UC04 : <<include>>
+}
+
+package "Analysis & Recommendations" {
+    usecase "UC06: Receive AI Insights" as UC06
+
+    note right of UC06
+      **Req. ID:** FR05, NFR12
+      **Description:** Provides personalized financial insights 
+      based on user spending habits and market data.
+    end note
+    
+    usecase "UC07: Generate Recommendations" as UC07
+}
+
+package "Budgeting & Goal Tracking" {
+    usecase "UC08: Set Financial Goals" as UC08
+
+    note right of UC08
+      **Req. ID:** FR07, NFR14
+      **Description:** Allows users to set and track financial goals 
+      for spending, saving, investing, and debt repayment.
+    end note
+    
+    usecase "UC09: Monitor Budget Compliance" as UC09
+}
+
+package "Forecasting & Planning" {
+    usecase "UC10: Forecast Future Financial Positions" as UC10
+
+    note right of UC10
+      **Req. ID:** FR10, NFR15
+      **Description:** Generates forecasts for future financial positions 
+      based on historical data and market trends.
+    end note
+    
+    usecase "UC11: Plan Long-term Financial Goals" as UC11
+}
+
+package "Collaboration & Sharing" {
+    usecase "UC12: Share Selected Data with Advisors" as UC12
+
+    note right of UC12
+      **Req. ID:** FR13, NFR08
+      **Description:** Enables users to share selected financial data 
+      and insights with financial advisors for personalized advice.
+    end note
+    
+    usecase "UC13: Collaborate on Financial Goals" as UC13
+}
+
+package "Education & Resources" {
+    usecase "UC14: Access Financial Education Content" as UC14
+
+    note right of UC14
+      **Req. ID:** NFR08, NFR16
+      **Description:** Provides access to financial education content 
+      and resources on various topics such as budgeting, investing, 
+      saving, and debt management.
+    end note
+    
+    usecase "UC15: Subscribe to Financial News" as UC15
+}
+
+package "Advanced Features & Customization" {
+    usecase "UC16: Customize Dashboard Layouts" as UC16
+
+    note right of UC16
+      **Req. ID:** FR08, NFR12
+      **Description:** Allows users to customize dashboard layouts 
+      and reports based on their preferences.
+    end note
+    
+    usecase "UC17: Enable Offline Mode" as UC17
+}
+
+package "AI & Automation" {
+    usecase "UC18: Automate Financial Transactions" as UC18
+
+    note right of UC18
+      **Req. ID:** NFR04, FR05
+      **Description:** Provides automation capabilities for 
+      financial transactions based on user preferences and AI recommendations.
+    end note
+    
+    usecase "UC19: Implement Predictive Analytics" as UC19
+}
+
+package "Integration & Interoperability" {
+    usecase "UC20: Integrate with External Services" as UC20
+
+    note right of UC20
+      **Req. ID:** FR15, NFR04
+      **Description:** Integrates the system with external financial 
+      services such as investment APIs and credit scoring services to enhance functionality.
+    end note
+    
+    usecase "UC21: Support Multiple Currencies" as UC21
+}
+
+' CROSS-PACKAGE RELATIONSHIPS
+user --> UC01
+user --> UC03
+user --> UC04
+advisor --> UC16
+banking_api --> UC03
+
+@enduml

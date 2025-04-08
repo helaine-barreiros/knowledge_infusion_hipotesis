@@ -1,0 +1,139 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Case Diagram"
+
+actor IndividualCustomer as user
+actor FinancialAdvisor as advisor
+actor BankingSystem as bank #lightblue
+actor InvestmentSystem as invest #lightblue
+
+package Authentication {
+    usecase UC01: Authenticate User 
+        note right of UC01
+            **Req. ID:** FR01, NFR06  
+            **Description:** Authenticates users via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Financial Accounts 
+        note right of UC03
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+
+    usecase UC04: View Transactions 
+        note right of UC04
+            **Req. ID:** FR03, FR19  
+            **Description:** Displays aggregated and categorized transactions from connected accounts.
+        end note
+    
+    usecase UC05: Categorize Transactions <<extend>> UC04
+        note left of UC05
+            Optional categorization step for refined transaction data analysis.
+        end note
+
+    include UC03 --> UC04  
+}
+
+package AnalysisAndInsights {
+    usecase UC06: View Financial Dashboard 
+        note right of UC06
+            **Req. ID:** FR04, FR19  
+            **Description:** Visualizes spending patterns and financial history for user review.
+        end note
+
+    usecase UC07: Receive AI Insights <<extend>> UC06
+        note left of UC07
+            Optional integration with AI engine for personalized insights.
+        end note
+    
+    generalization UC13 --|> UC12  
+}
+
+package GoalSetting {
+    usecase UC08: Set Financial Goals 
+        note right of UC08
+            **Req. ID:** FR07, NFR09  
+            **Description:** Allows users to establish and track personal financial goals.
+        end note
+
+    usecase UC09: Monitor Progress Towards Goals <<extend>> UC08
+        note left of UC09
+            Tracks real-time progress against set objectives.
+        end note
+}
+
+package Recommendations {
+    usecase UC10: Generate Budget Plans 
+        note right of UC10
+            **Req. ID:** FR05, NFR07  
+            **Description:** Creates personalized budget proposals based on spending habits and financial data.
+        end note
+
+    usecase UC11: Provide Financial Recommendations <<extend>> UC10
+        note left of UC11
+            Includes AI-generated advice for optimizing finances.
+        end note
+    
+    include UC11 --> UC09  
+}
+
+package Investment {
+    usecase UC12: View Investment Portfolios 
+        note right of UC12
+            **Req. ID:** FR11, NFR14  
+            **Description:** Displays investment data and performance metrics from external APIs.
+        end note
+
+    generalization UC13 --|> UC09  
+}
+
+package Collaboration {
+    usecase UC15: Share Data with Advisors <<extend>> UC08
+        note left of UC15
+            Optional feature allowing users to share selected financial information with advisors for review.
+        end note
+}
+
+package AlertsAndReminders {
+    usecase UC16: Receive Financial Alerts 
+        note right of UC16
+            **Req. ID:** FR09, NFR08  
+            **Description:** Notifies customers about significant spending or other critical financial events.
+        end note
+
+    usecase UC17: Schedule Reminders for Bills and Payments <<extend>> UC16
+        note left of UC17
+            Adds context-specific reminders tied to user data (e.g., due dates).
+        end note
+}
+
+package FutureForecasting {
+    usecase UC18: Forecast Financial Position 
+        note right of UC18
+            **Req. ID:** FR10, NFR03  
+            **Description:** Estimates future financial status based on historical trends and user inputs.
+        end note
+
+    include UC19 --> UC18 : <<extend>>  
+}
+
+package AdvancedAnalysis {
+    usecase UC20: Analyze Spending Patterns 
+        note right of UC20
+            **Req. ID:** FR05, NFR07  
+            **Description:** Breaks down spending categories and trends for deeper understanding.
+        end note
+
+    generalization UC19 --|> UC20  
+}
+
+' Actor-Use Case Relationships
+user --> UC01 : Authentication
+user --> UC03 : FinancialAccountManagement
+user --> UC06, UC18 : AnalysisAndInsights
+advisor --> UC17, UC15 : Collaboration
+bank --> UC03 : FinancialAccountManagement
+
+@enduml

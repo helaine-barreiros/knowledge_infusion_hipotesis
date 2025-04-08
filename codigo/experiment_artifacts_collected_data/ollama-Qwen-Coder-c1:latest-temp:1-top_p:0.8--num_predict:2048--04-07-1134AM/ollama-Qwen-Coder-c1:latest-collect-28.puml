@@ -1,0 +1,78 @@
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+actor "Individual Customer" as user
+actor "Financial Advisor" as advisor
+
+package "Authentication & Security" {
+    usecase "UC01: Authenticate User" as UC01 <<include>>
+}
+
+package "Financial Account Management" {
+    usecase "UC02: Connect Financial Accounts" as UC02 <<extend>> 
+    usecase "UC03: View Transactions" as UC03
+    usecase "UC04: Categorize Transactions" as UC04
+    
+    UC02 ..> UC03 : <<include>>
+}
+
+package "Analysis & Insights" {
+    usecase "UC05: Receive AI Insights" as UC05 
+    usecase "UC06: View Financial Dashboard" as UC06
+    usecase "UC07: Generate Recommendations" as UC07
+    
+    UC03 ..> UC04 : <<extend>>
+}
+
+package "Budgeting & Goal Setting" {
+    usecase "UC08: Set Financial Goals" as UC08 
+    usecase "UC09: Track Budget Progress" as UC09
+}
+
+package "Debt Management" {
+    usecase "UC10: Assess Debt Status" as UC10 
+    usecase "UC11: Generate Repayment Simulations" as UC11
+}
+
+package "Investment & Portfolio Analysis" {
+    usecase "UC12: Suggest Investment Opportunities" as UC12 
+    usecase "UC13: Monitor Cryptocurrency Portfolio" as UC13
+}
+
+package "News and Market Updates" {
+    usecase "UC14: Receive Financial News Alerts" as UC14 
+    usecase "UC15: Stay Updated with Economic Indicators" as UC15
+}
+
+package "Notifications & Alerts" {
+    usecase "UC16: Get Notifications for Unusual Spending Patterns" as UC16 
+    usecase "UC17: Receive Forecasted Financial Positions" as UC17
+}
+
+package "Chatbot and Support" {
+    usecase "UC18: Interact with Chatbot" as UC18 
+    usecase "UC19: Get Help from Support Team" as UC19
+}
+
+package "Reporting & Analytics" {
+    usecase "UC20: Generate Periodic Financial Health Reports" as UC20 
+    usecase "UC21: Customize Dashboards and Reports" as UC21
+}
+
+user --> UC01 : <<include>>
+user --> UC03 : <<extend>> 
+user --> UC06
+user --> UC08
+user --> UC14
+user --> UC17
+
+advisor --> UC05 : <<include>>
+advisor --> UC12
+advisor --> UC19
+
+bank --> UC03
+ai --> UC05
+```
+
+@enduml

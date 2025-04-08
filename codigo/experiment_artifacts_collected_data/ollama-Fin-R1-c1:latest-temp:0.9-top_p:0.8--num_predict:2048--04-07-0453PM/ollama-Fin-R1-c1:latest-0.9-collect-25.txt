@@ -1,0 +1,114 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Enhanced Personal Financial Management System - Use Cases"
+
+actor IndividualCustomer as user [#08427B]
+actor Advisor as advisor [#08427B]
+
+package Authentication & Security {
+    usecase UC01: Authenticate User
+        note right of UC01
+            **Req. ID:** FR01, NFR06  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Financial Accounts as <<extend>>
+    usecase UC04: View Transactions as <<include>> of UC03
+    usecase UC05: Categorize Transactions as <<extend>> of UC04
+
+    UC03 ..> UC04 : <<include>>
+}
+
+package Analysis & Insights {
+    usecase UC06: View Financial Dashboard
+    usecase UC07: Receive AI Insights
+    
+    note right of UC07
+        **Req. ID:** FR05  
+        **Description:** Provides AI-powered insights on spending habits.
+    end note
+
+    usecase UC13: Generate Personalized Recommendations as <<extend>> of UC06,UC07  
+
+}
+
+package FinancialGoalManagement {
+    usecase UC08: Set Financial Goals
+    usecase UC09: Track Financial Progress as <<include>> of UC08
+    
+    UC08 ..> UC09 : <<include>>
+}
+
+package Budgeting & Alerts {
+    usecase UC10: Create and Monitor Budgets
+    usecase UC12: Receive Spending Alerts
+
+    note right of UC10  
+        **Req. ID:** FR07,FR09  
+        **Description:** Allows users to create budgets with limits and receive alerts for spending over budget.
+    end note
+}
+
+package Investment & PortfolioManagement {
+    usecase UC14: Analyze Investments as <<extend>> 
+    usecase UC15: Recommend Investments as <<include>>
+    
+    note right of UC15  
+        **Req. ID:** FR06,FR11  
+        **Description:** Generates personalized investment recommendations based on user profile and market data.
+    end note
+}
+
+package Credit & DebtManagement {
+    usecase UC17: Check Credit Score
+    usecase UC23: Simulate Repayment Plans as <<extend>>
+    
+    note right of UC17  
+        **Req. ID:** FR04,FR12  
+        **Description:** Provides credit score information and debt management strategies.
+    end note
+}
+
+package Sharing & Collaboration {
+    usecase UC25: Share Financial Data with Advisors
+
+    note right of UC25  
+        **Req. ID:** FR13  
+        **Description:** Allows users to share selected data with financial advisors for consultation.
+    end note
+}
+
+package NewsAndUpdates {
+    usecase UC07: Receive AI Insights as <<extend>>
+    usecase UC16: Get Financial News
+
+    note right of UC16 
+        **Req. ID:** FR03,FR04  
+        **Description:** Delivers relevant financial news and market updates.
+    end note
+}
+
+package SystemOperations {
+    usecase UC28: Maintain Data Integrity as <<extend>>
+    
+    note right of UC28 
+        **Req. ID:** NFR11  
+        **Description:** Ensures data accuracy through audit trails.
+    end note
+}
+
+' Relationships across packages
+UC06 ..> UC04 : <<include>>  
+UC07 ..> UC05 : <<extend>>
+UC09 --|> UC08  
+
+user --> UC01  
+advisor --> UC09, UC23
+
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 794]

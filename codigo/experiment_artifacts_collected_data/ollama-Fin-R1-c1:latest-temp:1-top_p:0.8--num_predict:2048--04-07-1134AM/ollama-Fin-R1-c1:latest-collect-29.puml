@@ -1,0 +1,90 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Enhanced Personal Finance Management System - Functional Use Case Diagram"
+
+actor IndividualCustomer as user, $sprite="users"
+actor FinancialAdvisor as advisor, $sprite="user_tie"
+system AIEnhancedPFMSystem as pfm_system
+
+package Authentication {
+    usecase UC01: Authenticate User
+        note right of UC01 : **Req. ID:** FR01\n**Description**: Allows users to authenticate via username/password or OAuth2 providers, with optional multi-factor authentication.
+    
+    usecase UC02: Manage Account Settings <<extend>> UC01
+    
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Financial Accounts
+        note right of UC03 : **Req. ID:** FR02\n**Description**: Securely links external financial accounts using banking APIs to retrieve transaction data.
+    
+    usecase UC04: View Transactions <<include>> UC03
+    
+    usecase UC05: Categorize Transactions 
+}
+
+package Analysis {
+    usecase UC06: Financial Dashboard
+        note right of UC06 : **Req. ID:** FR03, FR04\n**Description**: Visualizes spending patterns and financial history.
+    
+    usecase UC07: AI Insights <<extend>> UC06
+    
+    usecase UC08: Basic Reports
+    usecase UC09: Advanced Analytics --|> UC08
+
+}
+
+package Recommendations {
+    usecase UC10: Personalized Recommendations 
+        note right of UC10 : **Req. ID:** FR05, FR06\n**Description**: Generates financial recommendations based on user data and AI analysis.
+    
+    usecase UC11: Debt Management Strategies
+    usecase UC12: Investment Opportunities <<extend>> UC10
+
+}
+
+package GoalSetting {
+    usecase UC13: Set Financial Goals 
+        note right of UC13 : **Req. ID:** FR07\n**Description**: Allows users to define and track financial goals.
+    
+    usecase UC14: Track Progress <<include>> UC13
+}
+
+package Alerts {
+    usecase UC15: Unusual Spending Alerts 
+        note right of UC15 : **Req. ID:** FR09\n**Description**: Sends alerts for unusual spending patterns detected by the system.
+
+}
+
+package Planning {
+    usecase UC16: Budget Creation <<extend>> UC03
+    usecase UC17: Monitor Expenses <<include>> UC16
+    
+    usecase UC18: Forecast Financial Positions 
+        note right of UC18 : **Req. ID:** FR10\n**Description**: Predicts future financial scenarios based on historical data.
+}
+
+package Collaboration {
+    usecase UC19: Share Data with Advisors
+        note right of UC19 : **Req. ID:** FR13\n**Description**: Allows users to share selected financial data with advisors for review.
+
+}
+
+package AIComponents {
+    system AiEngine as ai_engine, $sprite="brain"
+    
+    usecase UC20: Advanced Financial Analysis <<extend>> UC06
+    usecase UC21: Explainable Recommendations --|> UC20
+
+}
+
+actor user --> UC01 : Authenticates via username/password/OAuth providers.
+user --> UC03 : Connects financial accounts through banking APIs.
+
+UC04 ..> UC05 : <<extend>>
+UC06 ..> UC07 : <<include>>
+
+advisor --> UC19
+pfm_system --> ai_engine
+
+@enduml

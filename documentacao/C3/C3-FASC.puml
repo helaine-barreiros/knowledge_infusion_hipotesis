@@ -1,0 +1,28 @@
+@startuml "Financial Aggregation Service (FAS) - Component Diagram"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(financial_aggregation_service, "Financial Aggregation Service") {
+    Component(aggregation_controller, "Aggregation Controller", "Spring MVC REST Controller", "Exposes REST APIs for financial aggregation operations")
+    Component(account_service, "Account Service", "Spring Service", "Business logic for account management and data consolidation")
+    Component(institution_service, "Institution Service", "Spring Service", "Manages connections to financial institutions")
+    Component(aggregation_processor, "Aggregation Processor", "Spring Service", "Processes and normalizes aggregated financial data")
+    Component(analytics_engine, "Analytics Engine", "Spring Service", "Performs financial analysis on aggregated data")
+    Component(account_repository, "Account Repository", "Spring Data JPA", "Data access for accounts")
+    Component(institution_repository, "Institution Repository", "Spring Data JPA", "Data access for financial institutions")
+    Component(transaction_repository, "Transaction Repository", "Spring Data JPA", "Data access for linked transactions")
+    Component(event_publisher, "Event Publisher", "Spring Integration", "Publishes domain events to the event bus")
+    Component(cache_manager, "Cache Manager", "Spring Cache", "Manages caching of frequently accessed financial data")
+}
+
+Rel(aggregation_controller, account_service, "Uses")
+Rel(aggregation_controller, institution_service, "Uses")
+Rel(account_service, account_repository, "Uses")
+Rel(account_service, aggregation_processor, "Uses")
+Rel(account_service, event_publisher, "Uses")
+Rel(institution_service, institution_repository, "Uses")
+Rel(aggregation_processor, transaction_repository, "Uses")
+Rel(aggregation_processor, analytics_engine, "Uses")
+Rel(analytics_engine, cache_manager, "Uses")
+
+@enduml

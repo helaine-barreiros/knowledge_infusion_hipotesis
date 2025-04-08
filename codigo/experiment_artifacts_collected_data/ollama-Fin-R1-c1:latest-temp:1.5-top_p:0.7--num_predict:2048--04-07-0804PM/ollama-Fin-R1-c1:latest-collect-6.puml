@@ -1,0 +1,108 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Enhanced Personal Financial Management System - Use Cases"
+
+actor IndividualCustomer as user #CUSTOMER_COLOR  
+actor Advisor as advisor #CUSTOMER_COLOR  
+
+package Authentication & Security {  
+    usecase UC01: Authenticate User as auth_user  
+        note right of auth_user  
+            **Req. ID:** FR01, NFR06  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.  
+        end note  
+}  
+
+package Financial Account Management {  
+    usecase UC03: Connect Financial Accounts as connect_accounts  
+        note right of connect_accounts  
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.  
+        end note  
+    usecase UC04: View Transactions as view_transactions  
+    usecase UC05: Categorize Transactions as categorize_transactions  
+
+    connect_accounts ..> view_transactions : <<include>>  
+    view_transactions ..> categorize_transactions : <<extend>>  
+}  
+
+package Analysis & Insights {  
+    usecase UC06: View Financial Dashboard as dashboard_view  
+    usecase UC07: Receive AI Insights as ai_insights  
+        note right of ai_insights  
+            **Req. ID:** FR05, NFR12  
+            **Description:** Provides personalized financial insights using AI.  
+        end note  
+
+    usecase UC08: View Basic Reports as basic_reports  
+    usecase UC09: View Advanced Analytics as advanced_analytics  
+        UC09 --|> UC08 : generalization  
+}  
+
+package Planning & Goals {  
+    usecase UC10: Set Financial Goals as set_goals  
+    usecase UC11: Track Progress Towards Goals as track_progress  
+    usecase UC12: Adjust Budgets as adjust_budgets  
+    usecase UC13: Monitor Spending Habits as monitor_spending  
+
+    note right of UC10  
+        **Req. ID:** FR07, NFR08  
+        **Description:** Allows users to set and track financial goals with AI assistance for optimization.  
+    end note  
+
+}  
+
+package Recommendations & Advice {  
+    usecase UC14: Generate Personalized Financial Plans as plan_generation  
+    usecase UC15: Suggest Investment Opportunities as invest_suggestions  
+    usecase UC16: Recommend Debt Management Strategies as debt_management  
+        note right of UC15  
+            **Req. ID:** FR09, NFR02  
+            **Description:** Uses AI to suggest investment opportunities based on user profile and market data.  
+        end note  
+
+}  
+
+package Collaboration & Sharing {  
+    usecase UC17: Share Data with Advisors as share_data  
+    usecase UC18: Invite Collaborators via Chatbot as invite_collaborator  
+        note right of UC18  
+            **Req. ID:** FR13, NFR04  
+            **Description:** Facilitates communication and data sharing between users and advisors through a chatbot interface.  
+        end note  
+
+}  
+
+package System Management {  
+    usecase UC19: Update Account Settings as update_settings  
+    usecase UC20: Manage Notifications as manage_notifications  
+        note right of UC20  
+            **Req. ID:** FR08, NFR03  
+            **Description:** Allows users to customize notification preferences for financial alerts and updates.  
+        end note  
+
+}  
+
+package Advanced Features {  
+    usecase UC21: Forecast Future Financial Positions as forecast_positions  
+    usecase UC22: Analyze Cryptocurrency Portfolios as crypto_analysis  
+        note right of UC22  
+            **Req. ID:** FR09, NFR13  
+            **Description:** Tracks and analyzes cryptocurrency holdings for risk management and investment planning.  
+        end note  
+
+}  
+
+' Cross-package relationships
+UC06 ..> UC04 : <<include>>  
+dashboard_view --> ai_insights : <<extend>>  
+plan_generation --|> advanced_analytics : generalization  
+
+user --> auth_user  
+user --> connect_accounts  
+user --> view_transactions  
+advisor --> plan_generation  
+bank --> connect_accounts  
+ai --> ai_insights, forecast_positions  
+
+@enduml

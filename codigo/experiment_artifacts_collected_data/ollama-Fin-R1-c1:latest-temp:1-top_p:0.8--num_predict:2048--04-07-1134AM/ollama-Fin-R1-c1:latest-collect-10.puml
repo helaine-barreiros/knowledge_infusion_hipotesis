@@ -1,0 +1,94 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Enhanced Personal Financial Management System - Use Cases"
+
+actor IndividualCustomer as user
+actor FinancialAdvisor as advisor
+actor BankingSystem as bank #lightblue
+actor InvestmentSystem as invest #lightblue
+actor AIEngine as ai #lightgreen
+
+package Authentication & Security {
+    usecase UC01: Authenticate User as UC01 { note right of UC01 **Req. ID:** FR01, NFR06; **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication. }
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Financial Accounts as UC03 { note right of UC03 **Req. ID:** FR02; **Description:** Securely links external financial accounts using banking APIs. }
+    usecase UC04: View Transactions as UC04
+    usecase UC05: Categorize Transactions as UC05
+    
+    UC03 ..> UC04 : <<include>>
+}
+
+package Analysis & Insights {
+    usecase UC06: View Financial Dashboard as UC06 { note right of UC06 **Req. ID:** FR04; **Description:** Visualizes spending patterns and financial history. }
+    
+    package AdvancedAnalytics extends Analysis & Insights {
+        usecase UC08: View Basic Reports as UC08
+        usecase UC09: View Advanced Analytics as UC09 { note right of UC09 **Req. ID:** FR13; **Description:** Provides detailed analysis and recommendations based on AI insights. }
+    }
+
+    UC06 ..> UC04 : <<include>>
+}
+
+package GoalSetting {
+    usecase UC10: Set Financial Goals as UC10
+    usecase UC11: Track Progress Towards Goals as UC11
+    
+    note right of UC10 **Req. ID:** FR07; **Description:** Allows users to create and monitor their financial goals.
+}
+
+package Budgeting {
+    usecase UC12: Create Budgets as UC12
+    usecase UC13: Monitor Budget Compliance as UC13
+
+    note right of UC12 **Req. ID:** FR08; **Description:** Enables budget creation, tracking, and adjustments.
+}
+
+package Alerts & Notifications {
+    usecase UC14: Receive Financial Alerts as UC14 { note right of UC14 **Req. ID:** FR09; **Description:** Sends notifications for unusual spending patterns or critical financial events. }
+    
+    usecase UC15: Set Alert Preferences as UC15
+}
+
+package Forecasting & Recommendations {
+    usecase UC16: Generate Financial Forecasts as UC16 { note right of UC16 **Req. ID:** FR10; **Description:** Predicts future financial positions based on historical data and AI analysis. }
+    
+    usecase UC17: Receive Investment Recommendations as UC17
+}
+
+package Collaboration {
+    usecase UC18: Share Data with Advisors as UC18 { note right of UC18 **Req. ID:** FR13; **Description:** Allows users to share selected financial data and reports with advisors for collaborative decision-making. }
+    
+    usecase UC19: Receive Recommendations from Advisors as UC19
+}
+
+package AIEngagement {
+    usecase UC20: Engage with Chatbot as UC20 { note right of UC20 **Req. ID:** FR14; **Description:** Interacts via a chatbot for financial queries and support. }
+    
+    usecase UC21: Access Periodic Reports as UC21
+}
+
+package ExternalServices {
+    usecase UC22: Integrate with Banking APIs as UC22 { note right of UC22 **Req. ID:** FR03; **Description:** Aggregates transactions and categorizes financial data from connected accounts. }
+    
+    usecase UC23: Fetch Market Data for Investments as UC23
+}
+
+package SystemManagement {
+    usecase UC24: Perform Maintenance Tasks as UC24 { note right of UC24 **Req. ID:** NFR05; **Description:** Ensures system reliability and performance by handling maintenance tasks. }
+    
+    usecase UC25: Recover from Failures as UC25
+}
+
+actor user --> UC01, UC03, UC06
+
+advisor --> UC09, UC18
+
+bank --> UC03, UC22
+
+invest --> UC23
+
+ai --> UC07, UC16, UC17, UC21
+
+@enduml

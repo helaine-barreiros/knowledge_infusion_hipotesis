@@ -1,0 +1,80 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Enhanced Personal Financial Management System - Use Cases"
+
+actor IndividualCustomer as user [#08427B]
+actor FinancialAdvisor as advisor [#08427B]
+
+package Authentication {
+    usecase UC1: Authenticate User as uc1
+        note right of uc1
+            **Req. ID:** FR01, NFR06  
+            Allows users to authenticate via username/password or OAuth providers with optional MFA.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC2: Connect Financial Accounts as uc2 [<<include>>]
+        note right of uc2
+            **Req. ID:** FR02  
+            Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+
+    usecase UC3: View Transactions extends UC2
+    usecase UC4: Categorize Transactions <<extend>>
+}
+
+package AnalysisAndRecommendations {
+    usecase UC5: View Financial Dashboard as uc5 [<<include>>]
+    
+    usecase UC6: Receive AI Insights as uc6 
+        note right of uc6
+            **Req. ID:** FR05  
+            Delivers personalized financial insights using advanced reasoning.
+        end note
+        
+    usecase UC7: Generate Personalized Recommendations <<extend>>
+}
+
+package Planning {
+    usecase UC8: Set Financial Goals [<<include>>]
+    
+    usecase UC9: Monitor Budgets extends UC8
+        note right of uc9
+            **Req. ID:** FR04, FR08  
+            Helps users track spending against their budget plans.
+        end note
+        
+    usecase UC10: Forecast Future Positions <<extend>>
+}
+
+package Collaboration {
+    usecase UC11: Share Data with Advisors [<<include>>]
+    
+    usecase UC12: Chatbot Interactions <<extend>>
+        note right of uc12
+            **Req. ID:** FR14  
+            Offers automated responses to financial queries.
+        end note
+}
+
+package ExternalSystems {
+    usecase UC13: BankAPI Integration [<<include>>]
+    
+    usecase UC14: InvestmentAPI Fetch Data <<extend>>
+        
+    usecase UC15: CreditService Check Scores extends UC2
+    usecase UC16: NewsService Alerts <<extend>>
+}
+ 
+' Cross-package relationships
+UC5 ..> UC3 : <<include>>
+uc9 --|> uc8
+
+user --> uc1 [<<extend>>]
+advisor --> uc7 | uc9 [<<extend>>]
+
+bank --> uc2  
+investment_api --> uc4  
+
+@enduml

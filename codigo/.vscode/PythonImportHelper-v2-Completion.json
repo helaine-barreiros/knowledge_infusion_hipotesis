@@ -955,7 +955,7 @@
         "kind": 6,
         "importPath": "src.llm.llm_service",
         "description": "src.llm.llm_service",
-        "peekOfCode": "class OllamaStrategy(LLMStrategy):\n    def __init__(self):\n        self.api_url = SYSTEM_CONFIG.get(\"general.models.default_ollama_url\", \"https://4b51-200-133-1-77.ngrok-free.app/api/chat\")\n        self.default_model = SYSTEM_CONFIG.get(\"general.models.default_.ollama_model\",\n                                               \"Qwen2.5-Coder-7B-Instruct:latest\")\n        self.temperature = SYSTEM_CONFIG.get(\"general.models.default_ollama_temperature\", 0.7)\n        self.timeout = SYSTEM_CONFIG.get(\"general.models.default_ollama_timeout\", 60)\n        self.logger = Logger\n    def execute(self, prompt, **params):\n        from ollama import Client",
+        "peekOfCode": "class OllamaStrategy(LLMStrategy):\n    def __init__(self):\n        self.api_url = SYSTEM_CONFIG.get(\"general.models.default_ollama_url\", \"https://faa2-200-133-1-77.ngrok-free.app/api/generate\")\n        self.default_model = SYSTEM_CONFIG.get(\"general.models.default_.ollama_model\",\n                                               \"Qwen2.5-Coder-7B-Instruct:latest\")\n        self.temperature = SYSTEM_CONFIG.get(\"general.models.default_ollama_temperature\", 0.7)\n        self.default_ollama_top_p = SYSTEM_CONFIG.get(\"general.models.default_ollama_top_p\", 0.8)\n        self.default_ollama_num_predict = SYSTEM_CONFIG.get(\"general.models.default_ollama_num_predict\", 1024)\n        self.timeout = SYSTEM_CONFIG.get(\"general.models.default_ollama_timeout\", 60)\n        self.logger = Logger",
         "detail": "src.llm.llm_service",
         "documentation": {}
     },
@@ -1171,7 +1171,7 @@
         "kind": 2,
         "importPath": "src.dsk_experiment_pipeline",
         "description": "src.dsk_experiment_pipeline",
-        "peekOfCode": "def main():\n    start_time = datetime.now()\n    use_case_experiment_controller = DskExperimentController()\n    LOGGER.info(\"┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\")\n    LOGGER.info(\"┃               🚀 DSK KNOWLEDGE EXPERIMENT PIPELINE STARTED         ┃\")\n    LOGGER.info(\"┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\")\n    iteractions = 1\n    for i in range(1, qtd_iteractions + 1):\n        LOGGER.info(f\"STARTING EXPERIMENTAL COLLECTION {iteractions} OF {qtd_iteractions}\")\n        _print_iteration_log_data_start(qtd_iteractions, i)",
+        "peekOfCode": "def main():\n    start_time = datetime.now()\n    use_case_experiment_controller = DskExperimentController()\n    LOGGER.info(\"┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\")\n    LOGGER.info(\"┃               🚀 DSK KNOWLEDGE EXPERIMENT PIPELINE STARTED         ┃\")\n    LOGGER.info(\"┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\")\n    for i in range(1, qtd_iteractions + 1):\n        LOGGER.info(f\"STARTING EXPERIMENTAL COLLECTION {i} OF {qtd_iteractions}\")\n        _print_iteration_log_data_start(qtd_iteractions, i)\n        use_case_experiment_controller.collect_dsk_treatment_samples_to_use_case_artifacts(i, start_time)",
         "detail": "src.dsk_experiment_pipeline",
         "documentation": {}
     },
@@ -1180,7 +1180,7 @@
         "kind": 5,
         "importPath": "src.dsk_experiment_pipeline",
         "description": "src.dsk_experiment_pipeline",
-        "peekOfCode": "LOGGER = Logger\nqtd_iteractions = SYSTEM_CONFIG.get(\"general.iteractions\")\ndef main():\n    start_time = datetime.now()\n    use_case_experiment_controller = DskExperimentController()\n    LOGGER.info(\"┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\")\n    LOGGER.info(\"┃               🚀 DSK KNOWLEDGE EXPERIMENT PIPELINE STARTED         ┃\")\n    LOGGER.info(\"┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\")\n    iteractions = 1\n    for i in range(1, qtd_iteractions + 1):",
+        "peekOfCode": "LOGGER = Logger\nqtd_iteractions = SYSTEM_CONFIG.get(\"general.iteractions\")\ndef main():\n    start_time = datetime.now()\n    use_case_experiment_controller = DskExperimentController()\n    LOGGER.info(\"┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\")\n    LOGGER.info(\"┃               🚀 DSK KNOWLEDGE EXPERIMENT PIPELINE STARTED         ┃\")\n    LOGGER.info(\"┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\")\n    for i in range(1, qtd_iteractions + 1):\n        LOGGER.info(f\"STARTING EXPERIMENTAL COLLECTION {i} OF {qtd_iteractions}\")",
         "detail": "src.dsk_experiment_pipeline",
         "documentation": {}
     },
@@ -1189,7 +1189,7 @@
         "kind": 5,
         "importPath": "src.dsk_experiment_pipeline",
         "description": "src.dsk_experiment_pipeline",
-        "peekOfCode": "qtd_iteractions = SYSTEM_CONFIG.get(\"general.iteractions\")\ndef main():\n    start_time = datetime.now()\n    use_case_experiment_controller = DskExperimentController()\n    LOGGER.info(\"┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\")\n    LOGGER.info(\"┃               🚀 DSK KNOWLEDGE EXPERIMENT PIPELINE STARTED         ┃\")\n    LOGGER.info(\"┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\")\n    iteractions = 1\n    for i in range(1, qtd_iteractions + 1):\n        LOGGER.info(f\"STARTING EXPERIMENTAL COLLECTION {iteractions} OF {qtd_iteractions}\")",
+        "peekOfCode": "qtd_iteractions = SYSTEM_CONFIG.get(\"general.iteractions\")\ndef main():\n    start_time = datetime.now()\n    use_case_experiment_controller = DskExperimentController()\n    LOGGER.info(\"┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\")\n    LOGGER.info(\"┃               🚀 DSK KNOWLEDGE EXPERIMENT PIPELINE STARTED         ┃\")\n    LOGGER.info(\"┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\")\n    for i in range(1, qtd_iteractions + 1):\n        LOGGER.info(f\"STARTING EXPERIMENTAL COLLECTION {i} OF {qtd_iteractions}\")\n        _print_iteration_log_data_start(qtd_iteractions, i)",
         "detail": "src.dsk_experiment_pipeline",
         "documentation": {}
     },

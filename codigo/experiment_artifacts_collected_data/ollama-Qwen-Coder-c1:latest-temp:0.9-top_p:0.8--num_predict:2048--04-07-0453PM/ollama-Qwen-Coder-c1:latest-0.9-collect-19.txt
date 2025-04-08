@@ -1,0 +1,84 @@
+```plantuml
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+' ACTOR DEFINITION
+actor "Individual Customer" as user
+actor "Financial Advisor" as advisor
+actor "Third-Party Bank" as bank #lightblue
+actor "Investment Platform" as invest #lightgreen
+
+' PACKAGE DEFINITION
+package "Authentication & Security" {
+    usecase "UC01: Authenticate User" as UC01
+    
+    note right of UC01
+      **Req. ID:** FR01, NFR06
+      **Description:** Allows users to authenticate via 
+      username/password or OAuth2 providers.
+    end note
+    
+    usecase "UC02: Manage Account Settings" as UC02
+    
+}
+
+package "Financial Management & Data Aggregation" {
+    usecase "UC03: Connect Financial Accounts" as UC03
+    usecase "UC04: View Transactions" as UC04
+    usecase "UC05: Categorize Transactions" as UC05
+    
+    UC03 ..> UC04 : <<include>>
+    
+}
+
+package "Analysis & Recommendations" {
+    usecase "UC06: Receive AI Insights and Recommendations" as UC06
+    note right of UC06
+      **Req. ID:** FR05, FR06
+      **Description:** Provides personalized financial recommendations based on user data.
+    end note
+    
+}
+
+package "Planning & Goal Setting" {
+    usecase "UC07: Set Financial Goals and Track Progress" as UC07
+    usecase "UC08: Create Budgets and Monitor Spending" as UC08
+    
+    UC07 ..> UC08 : <<include>>
+    
+}
+
+package "Collaboration & Sharing" {
+    usecase "UC09: Share Selected Data with Advisors" as UC09
+    note right of UC09
+      **Req. ID:** FR13
+      **Description:** Enables users to share financial data and insights with advisors.
+    end note
+    
+}
+
+package "Notifications & Alerts" {
+    usecase "UC10: Receive Financial Alerts for Unusual Spending Patterns" as UC10
+    usecase "UC11: Forecast Future Financial Positions" as UC11
+    
+    UC10 ..> UC11 : <<extend>>
+    
+}
+
+' CROSS-PACKAGE RELATIONSHIPS
+
+user --> UC03
+user --> UC04
+user --> UC05
+user --> UC06
+advisor --> UC09
+bank --> UC03
+invest --> UC05
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 560]

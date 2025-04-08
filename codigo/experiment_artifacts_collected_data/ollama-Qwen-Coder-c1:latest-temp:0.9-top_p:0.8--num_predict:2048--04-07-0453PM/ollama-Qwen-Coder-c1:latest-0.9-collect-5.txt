@@ -1,0 +1,152 @@
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+actor "Individual Customer" as user [#CUSTOMER_COLOR]
+actor "Financial Advisor" as advisor [#CUSTOMER_COLOR]
+
+package "Authentication & Security" {
+    usecase "UC01: Authenticate User" as UC01
+    note right of UC01
+      **Req. ID:** FR01, NFR06
+      Allows users to authenticate via username/password or OAuth2 providers.
+    end note
+    
+    usecase "UC02: Manage Account Settings" as UC02
+}
+
+package "Financial Management" {
+    usecase "UC03: Connect Financial Accounts" as UC03
+    note right of UC03
+      **Req. ID:** FR02
+      Securely links external financial accounts using banking APIs to retrieve transaction data.
+    end note
+    
+    usecase "UC04: View Transactions" as UC04
+    usecase "UC05: Categorize Transactions" as UC05
+
+    UC03 ..> UC04 : <<include>>
+    
+    UC04 ..> UC05 : <<extend>>
+}
+
+package "Analysis & Recommendations" {
+    usecase "UC06: View Financial Dashboard" as UC06
+    note right of UC06
+      **Req. ID:** FR04, FR05
+      Displays financial history and provides AI-powered insights on spending habits.
+    end note
+    
+    usecase "UC07: Receive Recommendations" as UC07
+
+    UC09 --|> UC08 : <<extend>>
+}
+
+package "Planning & Budgeting" {
+    usecase "UC13: Set Financial Goals" as UC13
+    note right of UC13
+      **Req. ID:** FR07, NFR12
+      Allows users to set and track financial goals.
+    end note
+    
+    usecase "UC14: Create Budgets" as UC14
+
+    UC13 ..> UC14 : <<include>>
+}
+
+package "Alerts & Notifications" {
+    usecase "UC09: Set Alerts" as UC09
+    note right of UC09
+      **Req. ID:** FR08, NFR02
+      Delivers alerts for unusual spending patterns.
+    end note
+    
+    usecase "UC15: View Alert History" as UC15
+
+    UC09 ..> UC15 : <<extend>>
+}
+
+package "AI-Enhanced Analysis & Forecasting" {
+    usecase "UC16: Generate Financial Forecasts" as UC16
+    note right of UC16
+      **Req. ID:** FR09, NFR02
+      Provides forecasted financial positions based on historical data.
+    end note
+    
+    usecase "UC17: Predict Debt Repayment" as UC17
+
+    UC16 ..> UC17 : <<extend>>
+}
+
+package "Investment Opportunities & Strategies" {
+    usecase "UC18: Suggest Investments" as UC18
+    note right of UC18
+      **Req. ID:** FR10, NFR02
+      Recommends investment opportunities based on user profile.
+    end note
+    
+    usecase "UC19: Analyze Cryptocurrency Portfolio" as UC19
+
+    UC18 ..> UC19 : <<extend>>
+}
+
+package "Debt Management & Repayment Simulation" {
+    usecase "UC20: Assess Debt Load" as UC20
+    note right of UC20
+      **Req. ID:** FR12, NFR04
+      Provides debt management strategies with repayment simulations.
+    end note
+    
+    usecase "UC21: Simulate Repayment Plans" as UC21
+
+    UC20 ..> UC21 : <<extend>>
+}
+
+package "Collaboration & Sharing" {
+    usecase "UC23: Share Financial Data" as UC23
+    note right of UC23
+      **Req. ID:** FR13, NFR14
+      Allows users to share selected financial data with financial advisors.
+    end note
+    
+    usecase "UC24: Chatbot for Queries" as UC24
+
+    UC23 ..> UC24 : <<extend>>
+}
+
+package "Reporting & Analytics" {
+    usecase "UC25: Generate Reports" as UC25
+    note right of UC25
+      **Req. ID:** FR15, NFR07
+      Provides periodic financial health reports.
+    end note
+    
+    usecase "UC26: Customize Dashboards" as UC26
+
+    UC25 ..> UC26 : <<extend>>
+}
+
+package "System Management & Compliance" {
+    usecase "UC27: Manage System Settings" as UC27
+    note right of UC27
+      **Req. ID:** NFR01, NFR03
+      Ensures system compliance with financial regulations and maintains uptime.
+    end note
+    
+    usecase "UC28: Update Regulatory Compliance" as UC28
+
+    UC27 ..> UC28 : <<extend>>
+}
+
+user --> UC01
+user --> UC03
+user --> UC04
+user --> UC16
+advisor --> UC25
+bank --> UC03
+ai --> UC07
+advisor --> UC23
+
+[Done: True
+Done Reason: stop
+Eval Count: 1155]

@@ -1,0 +1,97 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Case Diagram"
+
+actor IndividualCustomer as user #CUSTOMER_COLOR
+actor Advisor as advisor #SYSTEM_COLOR
+actor BankingAPI as bank_api #EXTERNAL_SYSTEM_COLOR
+actor InvestmentAPI as invest_api #EXTERNAL_SYSTEM_COLOR
+actor CreditService as credit_service #EXTERNAL_SYSTEM_COLOR
+actor NewsService as news_service #EXTERNAL_SYSTEM_COLOR
+actor AuthService as auth_service #EXTERNAL_SYSTEM_COLOR
+actor AIEngine as ai_engine #EXTERNAL_SYSTEM_COLOR
+
+package "Authentication & Security" {
+    usecase UC01: Authenticate User as uc01
+        note right of uc01
+            **Req. ID:** FR01, NFR06  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+
+    usecase UC02: Manage Account Settings as uc02
+}
+
+package "Financial Data Management" {
+    usecase UC03: Connect Financial Accounts as uc03
+        note right of uc03
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+
+    usecase UC04: View Transactions as uc04  
+
+    usecase UC05: Categorize Transactions as uc05  
+
+    base_case_uc03 ..> included_base_case_uc04 : <<include>>
+}
+
+package "Analysis & Recommendations" {
+    usecase UC06: View Financial Dashboard as uc06
+
+    usecase UC07: Receive AI Insights as uc07
+        note right of uc07  
+            **Req. ID:** FR05, NFR12  
+            **Description:** Provides financial insights and recommendations based on historical data using an AI engine.
+        end note  
+
+    specific_case_uc08 --|> general_case_uc09: <<generalization>>
+}
+
+package "Goal Setting & Budgeting" {
+    usecase UC08: Set Financial Goals as uc08
+
+    usecase UC09: Monitor Progress Toward Goals as uc09
+        base_case_uc08 ..> included_base_case_uc09 : <<include>>  
+
+    usecase UC10: Create Budgets as uc10  
+}
+
+package "Alerting & Forecasting" {
+    usecase UC11: Track Unusual Spending Patterns as uc11
+
+    usecase UC12: Generate Financial Forecasts as uc12
+        note right of uc12  
+            **Req. ID:** FR10, NFR03  
+            **Description:** Uses historical data to predict future financial positions and trigger alerts for significant changes.
+        end note  
+
+    base_case_uc11 ..> included_base_case_uc12 : <<include>>
+}
+
+package "Collaboration" {
+    usecase UC13: Share Data with Financial Advisors as uc13
+        note right of uc13  
+            **Req. ID:** FR13, NFR04  
+            **Description:** Enables users to share specific financial data or reports with their advisors for review.
+        end note  
+
+}
+
+package "Advanced AI Reasoning" {
+    usecase UC14: Leverage AI Engine for Financial Analysis as uc14
+        base_case_uc07 ..> included_base_case_ai : <<include>>
+}
+
+' ACTOR-USE CASE RELATIONSHIPS  
+user --> uc01  
+user --> uc03  
+advisor --> uc09  
+
+bank_api --> uc03  
+invest_api --> uc06, uc12  
+credit_service --> uc07  
+news_service --> uc08, uc14  
+auth_service --> uc01, uc02  
+ai_engine --> uc07, uc14  
+
+@enduml

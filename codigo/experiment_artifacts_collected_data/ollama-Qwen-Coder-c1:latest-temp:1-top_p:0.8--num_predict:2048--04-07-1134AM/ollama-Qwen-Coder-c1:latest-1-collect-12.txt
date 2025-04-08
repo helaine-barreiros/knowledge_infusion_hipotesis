@@ -1,0 +1,143 @@
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+actor "Individual Customer" as user
+actor "Financial Advisor" as advisor
+
+package "Authentication & Security" {
+    usecase "UC01: Authenticate User" as UC01 <<include>>
+    note right of UC01
+      **Req. ID:** FR01, NFR06
+      **Description:** Allows users to authenticate via 
+      username/password or OAuth2 providers, with optional multi-factor authentication.
+    end note
+    
+    usecase "UC02: Manage Account Settings" as UC02 <<include>>
+}
+
+package "Financial Data Management" {
+    usecase "UC03: Connect Financial Accounts" as UC03
+    note right of UC03
+      **Req. ID:** FR02
+      **Description:** Securely links external financial accounts using banking APIs.
+    end note
+    
+    usecase "UC04: Retrieve Transactions" as UC04 <<include>>
+    
+    usecase "UC05: Categorize and Analyze Transactions" as UC05
+    UC03 ..> UC04 : <<include>>
+}
+
+package "Visualization & Insights" {
+    usecase "UC06: View Financial Dashboard" as UC06 <<extend>> UC05
+    note right of UC06
+      **Req. ID:** FR04, FR05
+      **Description:** Displays financial history and provides AI-powered insights on spending habits.
+    end note
+    
+    usecase "UC07: Generate Financial Recommendations" as UC07 <<extend>> UC05
+}
+
+package "Goal & Budget Management" {
+    usecase "UC08: Set and Track Goals" as UC08
+    note right of UC08
+      **Req. ID:** FR07, FR09
+      **Description:** Allows users to set financial goals and track progress.
+    end note
+    
+    usecase "UC09: Create and Monitor Budgets" as UC09
+}
+
+package "Forecasting & Prediction" {
+    usecase "UC10: Forecast Future Financial Positions" as UC10 <<extend>> UC05
+    note right of UC10
+      **Req. ID:** FR10, NFR02
+      **Description:** Predicts future financial positions based on historical data.
+    end note
+    
+}
+
+package "Investment & Retirement Planning" {
+    usecase "UC11: Suggest Investment Opportunities" as UC11 <<extend>> UC05
+    note right of UC11
+      **Req. ID:** FR11, NFR02
+      **Description:** Recommends investment opportunities based on user profiles.
+    end note
+    
+}
+
+package "Debt Management & Analysis" {
+    usecase "UC12: Provide Debt Management Strategies" as UC12 <<extend>> UC05
+    note right of UC12
+      **Req. ID:** FR12, NFR02
+      **Description:** Offers strategies for debt repayment and provides simulations.
+    end note
+    
+}
+
+package "Reporting & Compliance" {
+    usecase "UC13: Generate Financial Health Reports" as UC13 <<extend>> UC05
+    note right of UC13
+      **Req. ID:** FR15, NFR01, NFR14
+      **Description:** Creates periodic financial health reports and supports compliance.
+    end note
+    
+}
+
+package "AI & Chatbot Support" {
+    usecase "UC14: Utilize AI for Advanced Analysis" as UC14 <<extend>> UC05
+    note right of UC14
+      **Req. ID:** FR06, NFR09
+      **Description:** Provides advanced financial analysis and personalized recommendations.
+    end note
+    
+}
+
+package "Collaboration & Sharing" {
+    usecase "UC15: Share Selected Data with Advisors" as UC15 <<extend>> UC03
+    note right of UC15
+      **Req. ID:** FR13, NFR02
+      **Description:** Enables users to share selected financial data with financial advisors.
+    end note
+    
+}
+
+package "User Interface & Experience" {
+    usecase "UC16: Customize Dashboards and Reports" as UC16 <<extend>> UC05
+    note right of UC16
+      **Req. ID:** FR12, NFR18
+      **Description:** Allows users to customize dashboards and reports.
+    end note
+    
+}
+
+package "Offline & Accessibility Features" {
+    usecase "UC17: Support Offline Mode with Limited Functionality" as UC17 <<extend>> UC05
+    note right of UC17
+      **Req. ID:** FR13, NFR20
+      **Description:** Provides limited functionality in offline mode.
+    end note
+    
+}
+
+package "Advanced Features & Integration" {
+    usecase "UC18: Track Cryptocurrency Portfolio" as UC18 <<extend>> UC05
+    note right of UC18
+      **Req. ID:** FR14, NFR02
+      **Description:** Tracks and analyzes cryptocurrency portfolios.
+    end note
+    
+}
+
+user --> UC01
+user --> UC03
+user --> UC06
+user --> UC07
+advisor --> UC09
+
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 1138]

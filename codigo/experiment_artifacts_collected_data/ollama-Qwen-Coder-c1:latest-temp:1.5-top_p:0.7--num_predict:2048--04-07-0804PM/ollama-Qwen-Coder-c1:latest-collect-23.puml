@@ -1,0 +1,131 @@
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+actor "Individual Customer" as user
+actor "Financial Advisor" as advisor
+actor "Banking API Service" as banking_api #lightblue
+actor "Investment API Service" as investment_api #lightblue
+actor "Credit Scoring Service" as credit_service #lightgreen
+actor "News and Analysis Service" as news_service #orange
+actor "AI Reasoning Engine" as ai_engine #cyan
+
+package "Authentication & Security" {
+    usecase "UC01: Register New User" as UC01 <<include>>
+    note right of UC01
+      **Req. ID:** FR01, NFR06
+      **Description:** Allows users to register with a username/password or via OAuth2 providers.
+    end note
+    
+    usecase "UC02: Authenticate User" as UC02 <<extend>>
+}
+
+package "Financial Data Management" {
+    usecase "UC03: Connect Financial Accounts" as UC03
+    usecase "UC04: Retrieve Transaction Details" as UC04
+
+    UC03 ..> UC04 : <<include>>
+
+    usecase "UC05: Aggregate and Categorize Transactions" as UC05
+}
+
+package "Visualization & Insights" {
+    usecase "UC06: View Financial Dashboard" as UC06
+    note right of UC06
+      **Req. ID:** FR04, FR05
+      **Description:** Displays financial history and insights using AI-powered analysis.
+    end note
+
+    usecase "UC07: Generate Personalized Recommendations" as UC07 <<include>>
+}
+
+package "Goal & Budget Management" {
+    usecase "UC08: Set Financial Goals" as UC08
+    usecase "UC09: Track and Monitor Budgets" as UC09
+
+    UC08 ..> UC09 : <<extend>>
+
+    usecase "UC10: Create Monthly/Annual Budgets" as UC10
+}
+
+package "Notifications & Alerts" {
+    usecase "UC11: Set Spending Alerts" as UC11
+    note right of UC11
+      **Req. ID:** FR09, NFR04
+      **Description:** Sends notifications for unusual spending patterns.
+    end note
+
+    usecase "UC12: Forecast Future Financial Positions" as UC12 <<include>>
+}
+
+package "Investment & Debt Management" {
+    usecase "UC13: Suggest Investment Opportunities" as UC13
+    usecase "UC14: Manage and Repay Debts" as UC14
+
+    UC13 ..> UC14 : <<extend>>
+
+    usecase "UC15: Monitor Cryptocurrency Portfolio" as UC15
+}
+
+package "Collaboration & Chatbot Support" {
+    usecase "UC16: Share Financial Data with Advisors" as UC16
+    note right of UC16
+      **Req. ID:** FR13, NFR08
+      **Description:** Allows users to share financial data securely.
+    end note
+
+    usecase "UC17: Use Chatbot for Queries" as UC17 <<include>>
+}
+
+package "Reporting & Analytics" {
+    usecase "UC18: Generate Periodic Financial Reports" as UC18
+    note right of UC18
+      **Req. ID:** FR15, NFR09
+      **Description:** Provides customizable financial health reports.
+    end note
+
+    usecase "UC19: Access Detailed Analytics and Insights" as UC19 <<include>>
+}
+
+package "AI-Driven Recommendations & Predictions" {
+    usecase "UC20: Generate Advanced AI-Based Recommendations" as UC20
+    usecase "UC21: Forecast Investment Returns with Precision" as UC21
+
+    UC20 ..> UC21 : <<extend>>
+
+    usecase "UC22: Explainable AI for Recommendation Insights" as UC22
+}
+
+package "System Maintenance & Compatibility" {
+    usecase "UC23: System Health Check and Monitoring" as UC23
+    note right of UC23
+      **Req. ID:** NFR05, NFR10
+      **Description:** Ensures system stability and cross-platform compatibility.
+    end note
+
+    usecase "UC24: Offline Mode with Limited Functionality" as UC24 <<include>>
+}
+
+user --> UC01
+user --> UC03
+user --> UC06
+user --> UC08
+user --> UC11
+user --> UC15
+user --> UC17
+
+advisor --> UC09
+advisor --> UC16
+advisor --> UC19
+
+banking_api --> UC04
+investment_api --> UC20
+credit_service --> UC23
+news_service --> UC07
+ai_engine --> UC07
+ai_engine --> UC12
+ai_engine --> UC15
+ai_engine --> UC18
+ai_engine --> UC22
+
+@enduml

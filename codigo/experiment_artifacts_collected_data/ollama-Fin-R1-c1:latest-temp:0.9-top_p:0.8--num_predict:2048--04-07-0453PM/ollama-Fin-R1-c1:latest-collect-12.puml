@@ -1,0 +1,120 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System Use Case Diagram"
+
+actor IndividualCustomer as user1
+actor Advisor as advisor2
+system PFMSystem as pfm_system3
+
+package "Authentication & Security" {
+    usecase UC01_AuthenticateUser as uc_auth
+        note right of uc_auth: **Req. ID:** FR01, NFR06  
+        Description: Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+    end note
+
+    usecase UC02_ManageAccountSettings as uc_settings
+}
+
+package "Financial Account Management" {
+    usecase UC03_ConnectAccounts as uc_connect
+        note right of uc_connect: **Req. ID:** FR02  
+        Description: Securely links external financial accounts using banking APIs to retrieve transaction data.
+    end note
+
+    usecase UC04_ViewTransactions as uc_view_trans 
+    usecase UC05_CategorizeTransactions as uc_cat_trans
+    
+    uc_connect ..> uc_view_trans : <<include>>
+}
+
+package "Analysis & Recommendations" {
+    usecase UC06_VisualizeSpendingPatterns as uc_vis_spends
+        note right of uc_vis_spends: **Req. ID:** FR04  
+        Description: Displays spending patterns and financial history via charts.
+    end note
+
+    usecase UC07_ReceiveAIInsights as uc_ai_insights
+        note right of uc_ai_insights: **Req. ID:** FR05, NFR13  
+        Description: Provides AI-generated insights on spending habits based on aggregated data.
+    end note
+    
+    usecase UC08_GenerateRecommendations as uc_rec
+}
+
+package "Goal Setting & Budgeting" {
+    usecase UC09_SetFinancialGoals as uc_goals
+        note right of uc_goals: **Req. ID:** FR07  
+        Description: Enables users to create and track personalized financial goals.
+    end note
+
+    usecase UC10_ManageBudgets as uc_budget
+}
+
+package "Collaboration & Sharing" {
+    usecase UC11_ShareDataWithAdvisors as uc_share_data
+        note right of uc_share_data: **Req. ID:** FR13  
+        Description: Allows users to share selected financial data with advisors for review.
+    end note
+
+    usecase UC12_ChatbotInteractions as uc_chatbot
+}
+
+package "Advanced Analysis & Forecasting" {
+    usecase UC13_ForecastFinancialPositions as uc_forecast_pos
+        note right of uc_forecast_pos: **Req. ID:** FR09, NFR14  
+        Description: Predicts future financial positions based on historical transactions and market data.
+    end note
+
+    usecase UC14_SuggestInvestments as uc_inv_sugg 
+}
+
+package "Debt Management" {
+    usecase UC15_ManageDebts as uc_debit
+        note right of uc_debit: **Req. ID:** FR12  
+        Description: Offers strategies for debt repayment with simulation tools.
+    end note
+
+    usecase UC16_CryptoPortfolioTracking as uc_crypto_track 
+}
+
+package "System Notifications" {
+    usecase UC17_SendFinancialAlerts as uc_alerts
+        note right of uc_alerts: **Req. ID:** FR09  
+        Description: Alerts users about significant or unusual spending activities.
+    end note
+
+    usecase UC18_PeriodicReports as uc_reports 
+}
+
+package "AI-Engine Interactions" {
+    usecase UC19_UseAIEngineForAnalysis as uc_ai_analysis
+}
+
+package "Multi-System Integrations" {
+    usecase UC20_IntegrateWithExternalServices as uc_integrate_ext
+
+    pfm_system3 ..> banking_api4 : <<include>>
+    pfm_system3 ..> investment_api5 : <<include>>
+
+    note right of pfm_system3: **Req. ID:** FR08, NFR10  
+}
+
+package "User Interaction" {
+    usecase UC21_InteractWithUI as uc_ui
+        note right of uc_ui: **Req. ID:** FR04, FR05, FR06, FR07, FR09, FR13  
+}
+    
+user1 --> UC01_AuthenticateUser 
+advisor2 --> UC08_GenerateRecommendations
+
+pfm_system3 --> UC03_ConnectAccounts
+pfm_system3 --> UC04_ViewTransactions
+pfm_system3 --> UC05_CategorizeTransactions
+pfm_system3 --> UC06_VisualizeSpendingPatterns
+pfm_system3 --> UC07_ReceiveAIInsights
+pfm_system3 --> UC19_UseAIEngineForAnalysis
+
+banking_api4 --> UC20_IntegrateWithExternalServices : <<include>>
+investment_api5 --> UC20_IntegrateWithExternalServices : <<include>>
+
+@enduml

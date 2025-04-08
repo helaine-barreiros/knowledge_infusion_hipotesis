@@ -1,0 +1,94 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Core Functionalities"
+
+actor IndividualCustomer as user [#08427B]
+actor FinancialAdvisor as advisor [#08427B]
+
+package Authentication {
+    usecase UC01: Authenticate User
+        note right of UC01
+            **Req. ID:** FR01, NFR06  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Financial Accounts as <<include>>
+    usecase UC04: View Transactions [as <<extend>>]
+    usecase UC05: Categorize Transactions
+
+    UC03 --> UC04 : <<include>>
+
+    user --> UC03
+}
+
+package AnalysisAndInsights {
+    usecase UC06: View Financial Dashboard 
+    usecase UC07: Receive AI Insights [as <<extend>>]
+    
+    note right of UC07
+        **Req. ID:** FR05, FR14  
+        **Description:** Provides personalized financial insights and recommendations using AI.
+    end note
+
+    user --> UC06
+}
+
+package Planning {
+    usecase UC08: Set Financial Goals 
+    usecase UC09: Track Progress [as <<extend>>]
+    
+    UC08 --> UC09 : <<include>>
+    advisor --> UC09
+}
+
+package Collaboration {
+    usecase UC10: Share Data with Advisor  
+        note right of UC10
+            **Req. ID:** FR13, NFR06  
+            **Description:** Enables users to share selected financial data securely.
+        end note
+}
+    
+user --> UC10
+
+advisor --> UC09 
+
+bank --> UC04 [as <<extend>>]
+invest_api --> UC07 as <<include>>
+
+' Cross-package relationships
+UC08 ..> UC06 : <<extend>>
+UC03 ..> UC05 : <<extend>>
+UC07 ..> UC12 : <<extend>>
+
+'ai_engine' --> 'UC07' [as <<use>>]
+ai_engine --> 'UC09'
+
+endpackage
+
+@enduml
+```plantuml
+```
+
+### Explanation of the Diagram:
+- **Authentication**: Users can authenticate using standard methods (username/password) or OAuth2 providers. This includes optional multi-factor authentication.
+- **Financial Account Management**: Connects external financial accounts via banking APIs, views transactions, and categorizes them into expense categories.
+- **Analysis & Insights**: Provides a financial dashboard with basic reports and advanced AI-driven insights for spending habits and recommendations. The latter can be extended to include chatbot interactions or other forms of personalization.
+- **Planning**: Helps users set and track financial goals over time. Advisors are involved in tracking progress, which may involve more detailed analysis provided by the system.
+- **Collaboration**: Allows sharing selected data with advisors for professional oversight.
+
+### Key Relationships:
+1. **User Interactions** (e.g., connecting accounts or viewing dashboards) link to specific use cases through direct relationships (`-->`).
+2. **Inclusion** (`<<include>>`) indicates functionality that is always part of the base case.
+3. **Extension** (`<<extend>>`) denotes optional features added conditionally based on user actions.
+
+### Next Steps:
+1. Refine each use case with more detailed requirements and scenarios.
+2. Incorporate external systems (e.g., banking APIs) into relationships where necessary.
+3. Ensure all functional and non-functional requirements from the specification are covered in the use cases.
+
+[Done: True
+Done Reason: stop
+Eval Count: 763]

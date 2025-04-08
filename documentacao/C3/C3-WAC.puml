@@ -1,0 +1,60 @@
+@startuml "Web Application - Component Diagram"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(web_application, "Web Application") {
+    Component(app_module, "App Module", "Angular Module", "Root application module")
+    
+    Component(core_module, "Core Module", "Angular Module", "Core functionality, services, and guards")
+    Component(shared_module, "Shared Module", "Angular Module", "Shared components, pipes, and directives")
+    
+    Component(auth_module, "Auth Module", "Angular Feature Module", "User authentication and authorization")
+    Component(dashboard_module, "Dashboard Module", "Angular Feature Module", "Financial dashboard and overview")
+    Component(transactions_module, "Transactions Module", "Angular Feature Module", "Transaction management and categorization")
+    Component(goals_module, "Goals Module", "Angular Feature Module", "Financial goals and tracking")
+    Component(insights_module, "Insights Module", "Angular Feature Module", "AI-generated insights and recommendations")
+    Component(advisor_module, "Advisor Module", "Angular Feature Module", "Financial advisor collaboration")
+    Component(settings_module, "Settings Module", "Angular Feature Module", "User preferences and settings")
+    
+    Component(http_service, "HTTP Service", "Angular Service", "Handles API communication")
+    Component(auth_service, "Auth Service", "Angular Service", "Manages authentication state")
+    Component(store_service, "Store Service", "NgRx Store", "Centralized state management")
+}
+
+Rel(app_module, core_module, "Imports")
+Rel(app_module, shared_module, "Imports")
+Rel(app_module, auth_module, "Imports")
+Rel(app_module, dashboard_module, "Imports")
+Rel(app_module, transactions_module, "Imports")
+Rel(app_module, goals_module, "Imports")
+Rel(app_module, insights_module, "Imports")
+Rel(app_module, advisor_module, "Imports")
+Rel(app_module, settings_module, "Imports")
+
+Rel(core_module, http_service, "Contains")
+Rel(core_module, auth_service, "Contains")
+Rel(core_module, store_service, "Contains")
+
+Rel(auth_module, http_service, "Uses")
+Rel(auth_module, auth_service, "Uses")
+Rel(auth_module, store_service, "Uses")
+
+Rel(dashboard_module, http_service, "Uses")
+Rel(dashboard_module, store_service, "Uses")
+
+Rel(transactions_module, http_service, "Uses")
+Rel(transactions_module, store_service, "Uses")
+
+Rel(goals_module, http_service, "Uses")
+Rel(goals_module, store_service, "Uses")
+
+Rel(insights_module, http_service, "Uses")
+Rel(insights_module, store_service, "Uses")
+
+Rel(advisor_module, http_service, "Uses")
+Rel(advisor_module, store_service, "Uses")
+
+Rel(settings_module, http_service, "Uses")
+Rel(settings_module, store_service, "Uses")
+
+@enduml

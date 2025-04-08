@@ -1,0 +1,144 @@
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+actor "Individual Customer" as user [#CUSTOMER_COLOR]
+actor "Financial Advisor" as advisor [#CUSTOMER_COLOR]
+
+package "Authentication & Security" {
+    usecase "UC01: Register New User" as UC01
+    note right of UC01
+      **Req. ID:** FR01, NFR06
+      **Description:** Allows users to create an account using 
+      username/password or OAuth2 providers.
+    end note
+    
+    usecase "UC02: Login User" as UC02
+
+    UC01 ..> UC02 : <<include>>
+}
+
+package "Financial Management" {
+    usecase "UC03: Connect Financial Accounts" as UC03
+    note right of UC03
+      **Req. ID:** FR02, NFR05
+      **Description:** Securely links external financial accounts 
+      using banking APIs to retrieve transaction data.
+    end note
+    
+    usecase "UC04: View Transactions" as UC04
+    usecase "UC05: Categorize Transactions" as UC05
+    usecase "UC06: Edit Transaction Categories" as UC06
+
+    UC03 ..> UC04 : <<include>>
+}
+
+package "Analysis & Recommendations" {
+    usecase "UC07: Receive Financial Insights" as UC07
+    note right of UC07
+      **Req. ID:** FR05, NFR12
+      **Description:** Provides AI-powered insights on spending habits 
+      and personalized financial recommendations.
+    end note
+    
+    usecase "UC08: Generate Recommendations" as UC08
+
+    UC07 ..> UC08 : <<include>>
+}
+
+package "Planning & Goal Setting" {
+    usecase "UC09: Set Financial Goals" as UC09
+    usecase "UC10: Track Budgets and Spending" as UC10
+    
+    note right of UC09
+      **Req. ID:** FR07, NFR08
+      **Description:** Allows users to set financial goals and track 
+      their spending against these objectives.
+    end note
+
+}
+
+package "Collaboration & Sharing" {
+    usecase "UC11: Share Selected Data with Advisors" as UC11
+    
+    note right of UC11
+      **Req. ID:** FR13, NFR09
+      **Description:** Enables users to share selected financial data 
+      and insights with their financial advisors for collaborative advice.
+    end note
+
+}
+
+package "AI-Powered Services & Analytics" {
+    usecase "UC12: Forecast Future Financial Positions" as UC12
+    usecase "UC13: Suggest Investment Opportunities" as UC13
+    usecase "UC14: Provide Debt Management Strategies" as UC14
+    
+    note right of UC12
+      **Req. ID:** FR10, NFR15
+      **Description:** Uses AI to forecast future financial positions 
+      based on historical data and suggest investment opportunities tailored 
+      for each user.
+    end note
+
+}
+
+package "Reporting & Notifications" {
+    usecase "UC15: Generate Financial Health Reports" as UC15
+    usecase "UC16: Send Alerts for Unusual Spending Patterns" as UC16
+    
+    note right of UC15
+      **Req. ID:** FR15, NFR07
+      **Description:** Provides periodic financial health reports and 
+      alerts users to unusual spending patterns.
+    end note
+
+}
+
+package "Integration & External Systems" {
+    usecase "UC17: Connect with Investment APIs" as UC17
+    usecase "UC18: Retrieve Credit Scores" as UC18
+    
+    note right of UC17
+      **Req. ID:** FR09, NFR12
+      **Description:** Integrates with external investment platforms 
+      and credit scoring services to provide users comprehensive financial insights.
+    end note
+
+}
+
+package "User Interface & Experience" {
+    usecase "UC19: Access Dashboards and Reports" as UC19
+    
+    note right of UC19
+      **Req. ID:** FR03, NFR12
+      **Description:** Allows users to access various dashboards 
+      and reports that provide a visual representation of their financial health.
+    end note
+
+}
+
+package "Chatbot & Support" {
+    usecase "UC20: Use Chatbot for Financial Queries" as UC20
+    
+    note right of UC20
+      **Req. ID:** FR14, NFR15
+      **Description:** Offers a chatbot to assist users with their financial queries and provide personalized advice.
+    end note
+
+}
+
+user --> UC01
+user --> UC03
+user --> UC07
+user --> UC09
+advisor --> UC20
+banking_api --> UC03 : <<include>>
+investment_api --> UC17 : <<extend>>
+ai_engine --> UC08 : <<include>>
+
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 1085]

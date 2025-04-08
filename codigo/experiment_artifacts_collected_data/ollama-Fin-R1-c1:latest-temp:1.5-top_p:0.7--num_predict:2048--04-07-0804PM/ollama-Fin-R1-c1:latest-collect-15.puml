@@ -1,0 +1,88 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Enhanced Personal Financial Management System - Use Cases"
+
+actor IndividualCustomer as user1
+actor Advisor as advisor2
+
+package AuthenticationAndSecurity {
+    usecase UC01: Authenticate User as uc_auth
+        note right of uc_auth
+            **Req. ID:** FR01, NFR06  
+            Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+    
+    usecase UC02: Manage Account Settings as uc_settings
+
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Financial Accounts as uc_connect
+        note right of uc_connect
+            **Req. ID:** FR02  
+            Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+    
+    usecase UC04: View Transactions as uc_view_trans 
+        note left of uc_view_trans
+            **Included By**: UC03 (viewing transactions requires connecting an account first)
+        end note
+
+    usecase UC05: Categorize Transactions as uc_category_extends
+        
+        uc_view_trans ..> uc_category_extends : <<extend>>
+    
+}
+
+package AnalysisAndInsights {
+    usecase UC06: View Financial Dashboard as uc_dashboard
+    usecase UC07: Receive AI Insights as uc_ai_insights
+    
+    note right of uc_ai_insights
+            **Req. ID:** FR05  
+            Provides personalized financial insights using AI.
+        end note
+        
+}
+
+package Planning {
+    usecase UC08: Set Financial Goals as uc_goals
+    usecase UC09: Monitor Budgets and Expenses as uc_budget_monitor
+    
+    uc_goals ..> uc_ai_insights : <<include>>
+    
+    usecase UC10: Track Progress Toward Goals as uc_track_progress
+    
+}
+
+package Collaboration {
+    usecase UC11: Share Financial Data with Advisor as uc_share_data
+        note right of uc_share_data
+            **Req. ID:** FR13  
+            Allows users to share selected financial data with their advisors.
+        end note
+
+}
+
+package AdvancedAnalysis {
+    usecase UC12: Forecast Future Finances as uc_forecast_future
+    
+    note left of uc_ai_insights
+        <<extend>>
+        |->| UC06 (includes advanced analysis features)
+    end note
+    
+}
+
+' Cross-package relationships and actor-use case links:
+user1 --> uc_auth : "User authenticates"
+user1 --> uc_connect : "Connects financial accounts"
+advisor2 --> uc_share_data : "Shares data with advisor"
+
+uc_ai_insights <<include>> UC06
+
+' Layout hints
+left to right direction
+top to bottom direction
+
+@enduml

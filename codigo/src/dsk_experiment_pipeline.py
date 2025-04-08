@@ -17,18 +17,14 @@ def main():
     LOGGER.info("┃               🚀 DSK KNOWLEDGE EXPERIMENT PIPELINE STARTED         ┃")
     LOGGER.info("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛")
 
-    iteractions = 1
-
     for i in range(1, qtd_iteractions + 1):
-        LOGGER.info(f"STARTING EXPERIMENTAL COLLECTION {iteractions} OF {qtd_iteractions}")
+        LOGGER.info(f"STARTING EXPERIMENTAL COLLECTION {i} OF {qtd_iteractions}")
 
         _print_iteration_log_data_start(qtd_iteractions, i)
 
         use_case_experiment_controller.collect_dsk_treatment_samples_to_use_case_artifacts(i, start_time)
 
         _print_iteration_log_end(i)
-
-        iteractions += iteractions
 
     end_time = datetime.now()
     execution_time = end_time - start_time

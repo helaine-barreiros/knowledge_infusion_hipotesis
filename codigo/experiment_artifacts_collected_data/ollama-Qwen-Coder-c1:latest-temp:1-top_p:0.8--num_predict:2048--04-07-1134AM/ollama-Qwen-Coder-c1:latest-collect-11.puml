@@ -1,0 +1,60 @@
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+actor "Individual Customer" as user
+actor "Financial Advisor" as advisor
+
+package "Authentication & Security" {
+    usecase "UC01: Authenticate User" as UC01 <<include>>
+    
+    note right of UC01
+      **Req. ID:** FR01, NFR06
+      **Description:** Allows users to authenticate via 
+      username/password or OAuth2 providers, with optional multi-factor authentication.
+    end note
+    
+    usecase "UC02: Manage Account Settings" as UC02 <<include>>
+}
+
+package "Financial Data Management" {
+    usecase "UC03: Connect Financial Accounts" as UC03
+    usecase "UC04: View Transactions" as UC04 <<extend>> 
+    usecase "UC05: Categorize Transactions" as UC05
+    
+    UC03 ..> UC04 : <<include>>
+}
+
+package "Financial Analysis & Recommendations" {
+    usecase "UC06: Receive AI Insights" as UC06
+    usecase "UC07: Generate Financial Reports" as UC07 <<extend>> 
+    usecase "UC08: View Basic Analytics" as UC08
+    
+    UC09 --|> UC08 : Generalization relationship
+}
+
+package "Budgeting & Planning" {
+    usecase "UC09: Set Financial Goals" as UC09
+    usecase "UC10: Monitor Budget Compliance" as UC10 <<extend>> 
+    usecase "UC11: Forecast Future Positions" as UC11
+    
+    UC12 --|> UC10 : Generalization relationship
+}
+
+package "Collaboration & Sharing" {
+    usecase "UC12: Share Financial Data with Advisors" as UC12
+    usecase "UC13: Chatbot for Financial Queries" as UC13 <<include>> 
+}
+
+user --> UC01
+user --> UC03
+user --> UC04
+user --> UC06
+advisor --> UC09
+
+bank ..> UC03 : <<include>>
+investment_api ..> UC05 : <<include>>
+
+ai_engine ..> UC07 : <<include>>
+
+@enduml

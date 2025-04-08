@@ -1,0 +1,150 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Case Diagram"
+
+actor IndividualCustomer as user [#08427B]
+actor Advisor as advisor [#08427B]
+
+package Authentication {
+    usecase UC01: Authenticate User
+        note right of UC01
+            **Req. ID:** FR01, NFR06  
+            Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Accounts through Banking APIs 
+        note right of UC03
+            **Req. ID:** FR02  
+            Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+        
+    usecase UC04: View Transactions : <<include>> from UC03  
+        
+    usecase UC05: Categorize Transactions 
+        note right of UC05
+            **Description:** Subsequent step after viewing transactions for categorization. Optional extension of base view.
+        end note
+}
+
+package Analysis {
+    usecase UC06: View Financial Dashboard : <<include>> from UC04  
+        
+    usecase UC07: Receive AI Insights 
+        note right of UC07
+            **Req. ID:** FR05, FR13  
+            Delivers personalized financial insights and recommendations based on user data.
+        end note
+        
+    usecase UC08: Set Financial Goals : <<extend>> from UC06  
+        
+    usecase UC09: Create Budgets 
+        note right of UC09
+            **Description:** Includes budget creation, tracking, and adjustments. Optional extension to financial goals management.
+        end note
+    
+    usecase UC10: Track Spending Patterns : <<include>> from UC04  
+}
+
+package Recommendations {
+    usecase UC11: Personalized Investment Advice 
+        note right of UC11
+            **Req. ID:** FR06, FR11  
+            Generates tailored investment recommendations based on user profile and market data.
+        end note
+        
+    usecase UC12: Debt Management Plan : <<extend>> from UC08  
+}
+
+package Alerts {
+    usecase UC13: Set Up Financial Alerts 
+        note right of UC13
+            **Req. ID:** FR09, NFR07  
+            Allows users to configure alerts for unusual spending or account activity.
+        end note
+        
+    usecase UC14: Receive Notifications : <<extend>> from UC13  
+}
+
+package Forecasting {
+    usecase UC15: Predict Future Financial Positions 
+        note right of UC15
+            **Req. ID:** FR10, NFR08  
+            Analyzes historical data to forecast future financial scenarios.
+        end note
+        
+    usecase UC16: Simulate Repayment Plans : <<extend>> from UC12  
+}
+
+package Collaboration {
+    usecase UC17: Share Financial Data with Advisors 
+        note right of UC17
+            **Req. ID:** FR08, NFR13  
+            Facilitates secure sharing of selected financial data between users and advisors.
+        end note
+        
+    usecase UC18: Use Advisor's Recommendations : <<extend>> from UC09  
+}
+
+package AI {
+    usecase UC20: Leverage AI Engine 
+        note right of UC20
+            **Description:** Core system component for advanced analysis, recommendations, and personalization.
+        end note
+        
+    usecase UC19: Explainable Reasoning : <<extend>> from UC20  
+}
+
+package ExternalServices {
+    usecase UC23: Fetch Investment Data 
+        note right of UC23
+            **Req. ID:** FR04  
+            Retrieves market data and portfolio information via investment APIs.
+        end note
+        
+    usecase UC21: Credit Score Inquiry : <<extend>> from UC20  
+}
+
+package Reporting {
+    usecase UC25: Generate Financial Health Reports 
+        note right of UC25
+            **Req. ID:** FR14, NFR13  
+            Produces periodic reports summarizing financial health and performance.
+        end note
+        
+    usecase UC26: Customize Dashboards : <<extend>> from UC09  
+}
+
+package Cryptocurrency {
+    usecase UC27: Track Crypto Portfolios 
+        note right of UC27
+            **Req. ID:** FR15, NFR14  
+            Monitors and analyzes cryptocurrency holdings.
+        end note
+        
+    usecase UC28: Analyze Market Trends : <<extend>> from UC09  
+}
+
+' Cross-package relationships
+
+UC06 ..> UC03 : <<include>>
+UC07 ..> UC05 : <<extend>>
+
+UC14 ..> UC13 : <<extend>>
+UC16 ..> UC12 : <<extend>>
+UC18 ..> UC09 : <<extend>>
+UC19 ..> UC20 : <<extend>>
+UC21 ..> UC20 : <<extend>>
+UC25 ..> UC04 : <<include>>
+UC26 ..> UC03 : <<extend>>
+
+' Actor-use case relationships
+
+user --> UC01
+advisor --> UC17, UC18
+bank --> UC03
+invest --> UC23
+ai --> UC07, UC19, UC21, UC25
+
+@enduml

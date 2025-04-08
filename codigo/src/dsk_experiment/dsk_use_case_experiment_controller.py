@@ -33,6 +33,10 @@ class DskExperimentController:
             self.TREATMENT_PROVIDER_2 = SYSTEM_CONFIG.get("artifacts.treatment_provider_2")
             self.TREATMENT_MODEL_1_TEMPERATURE = SYSTEM_CONFIG.get("artifacts.treatment_model_1_temperature")
             self.TREATMENT_MODEL_2_TEMPERATURE = SYSTEM_CONFIG.get("artifacts.treatment_model_2_temperature")
+            self.TREATMENT_MODEL_1_TOP_P = SYSTEM_CONFIG.get("artifacts.treatment_model_1_top_p")
+            self.TREATMENT_MODEL_2_TOP_P = SYSTEM_CONFIG.get("artifacts.treatment_model_2_top_p")
+            self.TREATMENT_MODEL_1_NUM_PREDICT = SYSTEM_CONFIG.get("artifacts.treatment_model_1_num_predict")
+            self.TREATMENT_MODEL_2_NUM_PREDICT = SYSTEM_CONFIG.get("artifacts.treatment_model_2_num_predict")
             self.OUTPUT_DIRECTORY = SYSTEM_CONFIG.get("artifacts.output_directory")
             self.PIPELINE_PROCESSOR = SYSTEM_CONFIG.get("artifacts.pipeline_processor")
             self.initialized = True
@@ -50,25 +54,31 @@ class DskExperimentController:
             self._apply_dsk_treatment_to_use_case_artifact(treatment_number=1, provider=self.TREATMENT_PROVIDER_1,
                                                            model=self.TREATMENT_MODEL_1,
                                                            temperature=self.TREATMENT_MODEL_1_TEMPERATURE,
+                                                           top_p=self.TREATMENT_MODEL_1_TOP_P,
+                                                           num_predict=self.TREATMENT_MODEL_1_NUM_PREDICT,
                                                            iterator_number=iterator_number, start_time=start_time)
 
         if self.PIPELINE_PROCESSOR in ["parallel", "treatment2"]:
             self._apply_dsk_treatment_to_use_case_artifact(treatment_number=2, provider=self.TREATMENT_PROVIDER_2,
                                                            model=self.TREATMENT_MODEL_2,
                                                            temperature=self.TREATMENT_MODEL_1_TEMPERATURE,
+                                                           top_p=self.TREATMENT_MODEL_2_TOP_P,
+                                                           num_predict=self.TREATMENT_MODEL_2_NUM_PREDICT,
                                                            iterator_number=iterator_number, start_time=start_time)
 
-    def _apply_dsk_treatment_to_use_case_artifact(self, treatment_number, provider, model, temperature, iterator_number,
-                                                  start_time):
+    def _apply_dsk_treatment_to_use_case_artifact(self, treatment_number, provider, model, temperature, top_p,
+                                                  num_predict, iterator_number, start_time):
         
-        self.LOGGER.info(f"🧠 Generating diagram for treatment {treatment_number}: provider={provider} model:{model} temperature:{temperature}.")
+        self.LOGGER.info(f"🧠 Generating diagram for treatment {treatment_number}: provider={provider} model:{model} temperature:{temperature} top_p:{top_p}.")
 
         treatment_response = self.LLM.executeLLM(prompt=self.USER_PROMPT, provider=provider, model=model,
                                                  temperature=temperature,
+                                                 top_p=top_p,
+                                                 num_predict=num_predict,
                                                  system_prompt=self.SYSTEM_PROMPT)
 
         treatment_filename = f"{provider}-{model}-{temperature}-collect-{iterator_number}.txt"
-        treatment_output_directory = f"{self.OUTPUT_DIRECTORY}/{provider}-{model}-{temperature}-{start_time.strftime('%m-%d-%I%p')}"
+        treatment_output_directory = f"{self.OUTPUT_DIRECTORY}/{provider}-{model}-temp:{temperature}-top_p:{top_p}--num_predict:{num_predict}--{start_time.strftime('%m-%d-%I%M%p')}"
 
         if not os.path.exists(treatment_output_directory):
             os.makedirs(treatment_output_directory)

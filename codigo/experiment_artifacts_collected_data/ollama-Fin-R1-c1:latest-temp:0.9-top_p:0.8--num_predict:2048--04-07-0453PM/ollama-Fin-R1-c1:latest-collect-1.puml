@@ -1,0 +1,214 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Enhanced Personal Financial Management System - Use Cases"
+
+actor IndividualCustomer as user
+actor Advisor as advisor
+
+package Authentication {
+    usecase UC01: Authenticate User as authenticateUser
+        note right of authenticateUser
+            **Req. ID:** FR01, NFR06  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC03: ConnectFinancialAccounts as connectAccounts
+        note right of connectAccounts
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+        
+    usecase UC04: ViewTransactions as viewTransactions
+        note right of viewTransactions
+            **Req. ID:** FR03, NFR14  
+            **Description:** Displays aggregated and categorized transactions for the user.
+        end note
+        
+    usecase UC05: CategorizeTransactions as categorizeTransactions
+        note right of categorizeTransactions
+            **Req. ID:** FR03  
+            **Description:** Allows users to categorize their financial transactions manually or automatically based on AI recommendations.
+        end note
+        
+    base case viewTransactions <<include>> connectAccounts
+}
+
+package Visualization {
+    usecase UC06: ViewFinancialDashboard as dashboardView
+        note right of dashboardView
+            **Req. ID:** FR04, NFR12  
+            **Description:** Provides a visual representation of spending patterns and financial history.
+        end note
+        
+    extend case categorizeTransactions <<extend>> viewTransactions
+}
+
+package Analysis {
+    usecase UC07: ReceiveAIInsights as aiInsights
+        note right of aiInsights
+            **Req. ID:** FR05, NFR13  
+            **Description:** Delivers AI-powered financial insights based on spending habits and patterns.
+        end note
+        
+    usecase UC08: ViewBasicReports as basicReports
+        note right of basicReports
+            **Req. ID:** -  
+            **Description:** Basic reports like monthly expense summaries.
+        end note
+        
+    generalization case advancedAnalysis --|> basicReports : <<generalize>>
+}
+
+package Recommendations {
+    usecase UC09: GeneratePersonalizedRecommendations as recsGen
+        note right of recsGen
+            **Req. ID:** FR06, NFR13  
+            **Description:** Creates tailored financial recommendations based on user data and AI analysis.
+        end note
+        
+    extend case recsGen <<extend>> aiInsights : <<include>>
+}
+
+package GoalSetting {
+    usecase UC10: SetFinancialGoals as goalsSet
+        note right of goalsSet
+            **Req. ID:** FR07, NFR13  
+            **Description:** Enables users to establish and track financial objectives.
+        end note
+        
+    extend case goalsSet <<extend>> viewTransactions : <<include>>
+}
+
+package Budgeting {
+    usecase UC11: CreateBudget as budgetCreate
+        note right of budgetCreate
+            **Req. ID:** FR08, NFR13  
+            **Description:** Allows users to create and monitor budgets.
+        end note
+        
+    extend case budgetCreate <<extend>> viewTransactions : <<include>>
+}
+
+package Alerts {
+    usecase UC12: SetUpAlerts as alertsSetup
+        note right of alertsSetup
+            **Req. ID:** FR09, NFR13  
+            **Description:** Configures notifications for unusual spending activities.
+        end note
+        
+    extend case alertsSetup <<extend>> viewTransactions : <<include>>
+}
+
+package Forecasting {
+    usecase UC13: PredictFuturePositions as forecast
+        note right of forecast
+            **Req. ID:** FR10, NFR14  
+            **Description:** Estimates future financial positions based on historical data and trends.
+        end note
+        
+    extend case forecast <<extend>> aiInsights : <<include>>
+}
+
+package Investment {
+    usecase UC14: SuggestInvestmentOpportunities as invSugg
+        note right of invSugg
+            **Req. ID:** FR11, NFR13  
+            **Description:** Recommends investment options aligned with user profiles and financial goals.
+        end note
+        
+    extend case invSugg <<extend>> aiInsights : <<include>>
+}
+
+package DebtManagement {
+    usecase UC15: ManageDebt as debtManage
+        note right of debtManage
+            **Req. ID:** FR12, NFR03  
+            **Description:** Offers strategies for managing debts with repayment simulations.
+        end note
+        
+    extend case debtManage <<extend>> viewTransactions : <<include>>
+}
+
+package Sharing {
+    usecase UC16: ShareWithAdvisor as shareData
+        note right of shareData
+            **Req. ID:** FR13, NFR04  
+            **Description:** Allows users to share selected financial data with their advisors.
+        end note
+        
+    extend case shareData <<extend>> viewTransactions : <<include>>
+}
+
+package Chatbot {
+    usecase UC17: UseChatBot as chatUse
+        note right of chatUse
+            **Req. ID:** FR14, NFR03  
+            **Description:** Engages in financial queries through a conversational interface.
+        end note
+        
+    extend case chatUse <<extend>> aiInsights : <<include>>
+}
+
+package Reporting {
+    usecase UC18: GenerateReports as reportGen
+        note right of reportGen
+            **Req. ID:** FR07, NFR13  
+            **Description:** Produces periodic financial health reports for users.
+        end note
+        
+    extend case reportGen <<extend>> viewTransactions : <<include>>
+}
+
+package Cryptocurrency {
+    usecase UC19: TrackCryptocurrency as cryptoTrack
+        note right of cryptoTrack
+            **Req. ID:** FR07, NFR13  
+            **Description:** Monitors and analyzes cryptocurrency portfolios.
+        end note
+        
+    extend case cryptoTrack <<extend>> viewTransactions : <<include>>
+}
+
+package Accessibility {
+    usecase UC20: SupportWCAG as wcagSupport
+        note right of wcagSupport
+            **Req. ID:** NFR14  
+            **Description:** Ensures compliance with WCAG 2.1 level AA standards.
+        end note
+}
+
+actor user --> authenticateUser : log in
+
+user --> connectAccounts : link accounts  
+
+viewTransactions ..> categorizeTransactions : <<extend>>
+
+dashboardView -- viewTransactions : include 
+
+aiInsights >> uc07: provide insights
+
+goalsSet -- viewTransactions : include
+
+budgetCreate -- viewTransactions : include
+
+alertsSetup -- viewTransactions : include
+
+forecast -- aiInsights : include
+
+invSugg -- aiInsights : include
+
+debtManage -- viewTransactions : include
+
+shareData -- viewTransactions : include  
+
+chatUse -- aiInsights : include 
+
+reportGen -- viewTransactions : include  
+
+cryptoTrack -- viewTransactions : include  
+
+wcagSupport -- reportGen : ensure compliance
+
+@enduml

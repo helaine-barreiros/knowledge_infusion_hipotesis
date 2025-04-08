@@ -1,0 +1,101 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Core Functionalities and Interactions"
+
+actor IndividualCustomer as user [CUSTOMER_COLOR]
+actor Advisor as advisor [SYSTEM_COLOR]
+
+package AuthenticationAndSecurity {
+    usecase UC01: Authenticate User
+        note right of UC01
+            **Req. ID:** FR01, NFR06  
+            Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+
+    usecase UC02: Manage Account Settings
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Financial Accounts [EXTERNAL_SYSTEM_COLOR]
+        note right of UC03
+            **Req. ID:** FR02  
+            Securely links external financial accounts using banking APIs.
+        end note
+
+    usecase UC04: View Transactions
+    usecase UC05: Categorize Transactions
+    
+    UC03 ..> UC04 : <<include>>  % Always includes transaction viewing after account connection.
+
+    UC04 ..> UC05 : <<extend>>   % Optional categorization of transactions.
+}
+
+package AnalysisAndRecommendations {
+    usecase UC06: View Financial Dashboard
+    usecase UC07: Receive AI Insights [SYSTEM_COLOR]
+        note right of UC07
+            **Req. ID:** FR03, FR05  
+            Provides financial insights based on aggregated data and AI analysis.
+        end note
+
+    usecase UC08: Set Financial Goals [CUSTOMER_COLOR] : <<extend>> from UC12
+}
+
+package PlanningAndBudgeting {
+    usecase UC09: Create Budgets
+    usecase UC10: Track Spending 
+    usecase UC11: Generate Alerts for Overspending  
+        note right of UC11
+            **Req. ID:** FR04, FR09  
+            Monitors spending against budget and sends alerts when thresholds are exceeded.
+        end note
+
+    UC10 ..> UC11 : <<extend>>
+}
+
+package Collaboration {
+    usecase UC12: Share Financial Data with Advisors [SYSTEM_COLOR] 
+}
+
+package AdvancedAnalysisAndInvestment {
+    usecase UC13: Analyze Investment Portfolios
+    usecase UC14: Suggest Investments Based on Profile
+
+    note right of UC14
+        **Req. ID:** FR06, FR11  
+        Uses AI to generate personalized investment recommendations.
+    end note
+
+    UC12 ..> UC13 : <<include>>
+}
+
+package FutureProjections {
+    usecase UC15: Forecast Financial Position [SYSTEM_COLOR] 
+        note right of UC15
+            **Req. ID:** FR07, FR10  
+            Predicts future financial states using historical data.
+        end note
+
+    UC16: Optimize Debt Management Plans : <<extend>> from UC14
+}
+
+package SystemOperations {
+    usecase UC17: Maintain Data Security [SYSTEM_COLOR] 
+    usecase UC18: Ensure High Availability [SYSTEM_COLOR]
+}
+
+' Cross-package relationships and interactions between actors
+
+user --> UC01  
+user --> UC03  
+advisor --> UC12  
+
+UC06 ..> UC04 : <<include>>  % Dashboard includes transaction data.
+
+UC07 >> UC05 : <<extend>>
+
+UC08 --|> UC09: generalization % Advanced analytics is a specialized version of basic reports.
+
+UC10 ..> UC13 : <<extend>>
+  
+@enduml

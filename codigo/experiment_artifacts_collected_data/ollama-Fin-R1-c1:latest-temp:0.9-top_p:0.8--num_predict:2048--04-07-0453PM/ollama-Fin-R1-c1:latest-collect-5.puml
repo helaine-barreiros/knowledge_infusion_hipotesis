@@ -1,0 +1,137 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Case Diagram"
+
+actor IndividualCustomer as user
+actor FinancialAdvisor as advisor
+
+package Authentication {
+    usecase UC01: Authenticate User
+        note right of UC01
+            **Req. ID:** FR01, NFR06  
+            Description: Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Financial Accounts 
+        note right of UC03
+            **Req. ID:** FR02  
+            Description: Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+        
+    usecase UC04: View Transactions 
+        note right of UC04
+            **Req. ID:** FR03, NFR13  
+            Description: Displays a list of transactions from connected bank accounts.
+        end note
+    
+    usecase UC05: Categorize Transactions <<extend>> UC04  
+}
+
+package FinancialAnalysis {
+    usecase UC06: View Spending Patterns
+        note right of UC06
+            **Req. ID:** FR03, FR04  
+            Description: Visualizes spending trends over time and categorizes expenses.
+        end note
+        
+    usecase UC07: Receive AI Insights <<extend>> UC05  
+}
+
+package Recommendations {
+    usecase UC08: Personalized Financial Tips
+        note right of UC08
+            **Req. ID:** FR03, FR06  
+            Description: Provides tailored financial advice based on user spending habits.
+        end note
+        
+    usecase UC09: Investment Portfolio Advice <<extend>> UC08  
+}
+
+package GoalSetting {
+    usecase UC10: Set Financial Goals 
+        note right of UC10
+            **Req. ID:** FR07, NFR12  
+            Description: Allows users to define and track short-term and long-term financial objectives.
+        end note
+        
+    usecase UC11: Monitor Progress <<extend>> UC10  
+}
+
+package Budgeting {
+    usecase UC12: Create Monthly Budget
+        note right of UC12
+            **Req. ID:** FR08, NFR04  
+            Description: Helps users plan and allocate funds across categories.
+        end note
+        
+    usecase UC13: Track Expenses <<extend>> UC12  
+}
+
+package Alerts {
+    usecase UC14: Unusual Spending Notifications 
+        note right of UC14
+            **Req. ID:** FR09, NFR10  
+            Description: Sends alerts when spending exceeds pre-set limits or trends.
+        end note
+        
+    usecase UC15: Debt Alerting <<extend>> UC14  
+}
+
+package Forecasting {
+    usecase UC16: Future Financial Projections
+        note right of UC16
+            **Req. ID:** FR03, FR10  
+            Description: Estimates future financial positions based on historical data.
+        end note
+        
+    usecase UC17: Retirement Planning Suggestions <<extend>> UC16  
+}
+
+package Collaboration {
+    usecase UC18: Share Data with Advisor 
+        note right of UC18
+            **Req. ID:** FR03, NFR14  
+            Description: Enables users to share selected financial data and insights with their advisors.
+        end note
+        
+    usecase UC19: Receive Recommendations from Advisor <<extend>> UC18  
+}
+
+package AIEngine {
+    usecase UC20: Leverage Advanced Analytics
+        note right of UC20
+            **Req. ID:** FR05, NFR07  
+            Description: Utilizes machine learning to provide in-depth financial analysis and recommendations.
+        end note
+        
+    usecase UC21: Personalized Savings Plans <<extend>> UC20  
+}
+
+package Notifications {
+    usecase UC22: Financial Alerts 
+        note right of UC22
+            **Req. ID:** FR09, NFR13  
+            Description: Sends timely notifications about financial activities.
+        end note
+        
+    usecase UC23: Periodic Reports <<extend>> UC22  
+}
+
+' Cross-package relationships:
+UC06 ..> UC04 : <<include>>
+UC07 ..> UC05 : <<extend>>
+UC10 --> UC11
+UC12 --> UC13
+UC14 --> UC15
+UC16 --> UC17
+UC18 --> UC19
+
+' Actor-use case relationships:
+user --> UC01 
+user --> UC03  
+user --> UC06  
+advisor --> UC17, UC19  
+
+@enduml

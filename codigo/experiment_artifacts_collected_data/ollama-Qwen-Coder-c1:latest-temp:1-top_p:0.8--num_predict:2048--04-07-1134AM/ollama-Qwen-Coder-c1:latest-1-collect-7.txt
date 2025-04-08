@@ -1,0 +1,218 @@
+```plantuml
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+' ACTOR DEFINITION
+actor "Individual Customer" as user [#lightblue]
+actor "Financial Advisor" as advisor [#lightgreen]
+
+package "Authentication & Security" {
+    usecase "UC01: Register New User" as UC01 <<include>>
+    usecase "UC02: Authenticate User via Password" as UC02
+    usecase "UC03: Manage Account Settings" as UC03
+    
+    note right of UC01
+      **Req. ID:** FR01, NFR06
+      **Description:** Allows users to register with a new account and manage settings.
+    end note
+
+    note right of UC02
+      **Req. ID:** FR01
+      **Description:** Authenticates user using password-based authentication.
+    end note
+    
+    usecase "UC04: Authenticate User via OAuth" as UC04 <<include>>
+    
+    note right of UC04
+      **Req. ID:** FR01, NFR06
+      **Description:** Supports OAuth2 providers for secure and convenient user login.
+    end note
+
+}
+
+package "Financial Account Management" {
+    usecase "UC05: Connect Financial Accounts via APIs" as UC05 <<include>>
+    
+    note right of UC05
+      **Req. ID:** FR02, NFR07
+      **Description:** Securely links external financial accounts using banking APIs.
+    end note
+
+    usecase "UC06: View Transactions" as UC06
+    
+    note right of UC06
+      **Req. ID:** FR04
+      **Description:** Displays all transactions categorized for easy review and analysis.
+    end note
+
+    usecase "UC07: Manage Budgets and Goals" as UC07 <<include>>
+    
+    note right of UC07
+      **Req. ID:** FR07, NFR12
+      **Description:** Allows users to create budgets and track financial goals over time.
+    end note
+
+}
+
+package "Analysis & Insights" {
+    usecase "UC08: View Financial Dashboard" as UC08
+    
+    note right of UC08
+      **Req. ID:** FR04, NFR12
+      **Description:** Provides a comprehensive view of financial data with charts and visualizations.
+    end note
+
+    usecase "UC09: Receive AI Insights on Spending Habits" as UC09
+    
+    note right of UC09
+      **Req. ID:** FR05, NFR12
+      **Description:** Offers personalized insights into spending habits based on user data and AI analysis.
+    end note
+
+}
+
+package "Recommendations & Planning" {
+    usecase "UC10: Generate Personalized Financial Recommendations" as UC10
+    
+    note right of UC10
+      **Req. ID:** FR06, NFR12
+      **Description:** Provides tailored financial advice based on user profile and market data.
+    end note
+
+    usecase "UC11: Forecast Future Financial Positions" as UC11 <<include>>
+    
+    note right of UC11
+      **Req. ID:** FR10, NFR12
+      **Description:** Predicts future financial positions using historical data for better planning and decision-making.
+    end note
+
+}
+
+package "Investment & Portfolio Management" {
+    usecase "UC12: Suggest Investment Opportunities" as UC12
+    
+    note right of UC12
+      **Req. ID:** FR11, NFR12
+      **Description:** Recommends investment opportunities based on user profile and current market conditions.
+    end note
+
+}
+
+package "Debt Management & Analysis" {
+    usecase "UC13: Manage Debt with Repayment Simulations" as UC13
+    
+    note right of UC13
+      **Req. ID:** FR12, NFR12
+      **Description:** Provides strategies for debt management and simulations to help users understand repayment options.
+    end note
+
+}
+
+package "Sharing & Collaboration" {
+    usecase "UC14: Share Financial Data with Advisors" as UC14 <<include>>
+    
+    note right of UC14
+      **Req. ID:** FR13, NFR12
+      **Description:** Allows users to share selected financial data securely and in real-time with their advisors.
+    end note
+
+}
+
+package "Support & Accessibility" {
+    usecase "UC15: Access Chatbot for Financial Queries" as UC15
+    
+    note right of UC15
+      **Req. ID:** FR14, NFR09
+      **Description:** Offers a chatbot to provide real-time financial assistance and answers.
+    end note
+
+}
+
+package "Reporting & Analytics" {
+    usecase "UC16: Generate Financial Health Reports" as UC16
+    
+    note right of UC16
+      **Req. ID:** FR09, NFR12
+      **Description:** Creates periodic reports highlighting financial health and progress towards goals.
+    end note
+
+}
+
+package "Internationalization & Localization" {
+    usecase "UC17: Support Multiple Currencies" as UC17
+    
+    note right of UC17
+      **Req. ID:** NFR08, NFR12
+      **Description:** Supports multiple currencies and locales to cater to a global user base.
+    end note
+
+}
+
+package "Explainable AI & Transparency" {
+    usecase "UC18: Explain Recommendations with Reasoning" as UC18
+    
+    note right of UC18
+      **Req. ID:** NFR09, NFR12
+      **Description:** Provides detailed reasoning and explanations for financial recommendations to enhance transparency.
+    end note
+
+}
+
+package "Offline Mode & Accessibility" {
+    usecase "UC19: Access Offline Features with Limited Functionality" as UC19
+    
+    note right of UC19
+      **Req. ID:** NFR13, NFR08
+      **Description:** Allows users to access essential features in offline mode for convenience and accessibility.
+    end note
+
+}
+
+package "Usability & User Experience" {
+    usecase "UC20: Access Customizable Dashboards" as UC20
+    
+    note right of UC20
+      **Req. ID:** NFR14, NFR12
+      **Description:** Allows users to customize their dashboards and reports for a more personalized experience.
+    end note
+
+}
+
+' CROSS-PACKAGE RELATIONSHIPS
+user --> UC01 : <<include>>
+user --> UC03
+user --> UC05
+user --> UC06
+user --> UC07
+user --> UC08
+user --> UC09
+user --> UC10
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14 : <<include>>
+user --> UC15
+user --> UC16
+user --> UC17
+user --> UC18
+user --> UC19
+user --> UC20
+
+advisor --> UC10
+advisor --> UC14
+advisor --> UC18
+
+bank --> UC03
+
+ai --> UC07
+ai --> UC09
+ai --> UC10
+ai --> UC12
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1563]

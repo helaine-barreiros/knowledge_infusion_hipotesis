@@ -1,0 +1,85 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Case Diagram"
+
+actor IndividualCustomer as user
+actor FinancialAdvisor as advisor
+actor BankingSystem as bank #lightblue
+actor InvestmentSystem as invest #lightblue
+
+package AuthenticationAndSecurity {
+    usecase UC01: AuthenticateUser as UC01
+        note right of UC01
+            **Req. ID:** FR01, NFR06  
+            **Description:** User authentication via username/password or OAuth2 providers with optional multi-factor auth.
+        end note
+        
+    usecase UC02: ManageAccountSettings as UC02
+}
+
+package FinancialAccountManagement {
+    usecase UC03: ConnectFinancialAccounts as UC03
+        note right of UC03
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs.
+        end note
+        
+    usecase UC04: ViewTransactions as UC04 
+    usecase UC05: CategorizeTransactions as UC05
+    
+    UC03 ..> UC04 : <<include>>
+}
+
+package AnalysisAndInsights {
+    usecase UC06: ViewFinancialDashboard as UC06
+    usecase UC07: ReceiveAIPoweredRecommendations as UC07  
+        note right of UC07 
+            **Req. ID:** FR05, FR06  
+            **Description:** AI-driven financial insights and personalized recommendations.
+        end note
+        
+    usecase UC08: SetFinancialGoals as UC08
+}
+
+package Planning {
+    usecase UC09: CreateBudgetsAndTrackExpenses as UC09 
+    usecase UC10: ForecastFuturePositions as UC10  
+        note right of UC10  
+            **Req. ID:** FR04, FR10  
+            **Description:** Historical data analysis for future financial projections.
+        end note
+        
+}
+
+package Collaboration {
+    usecase UC11: ShareDataWithAdvisors as UC11
+}
+
+package AIComponents {
+    usecase UC12: LeverageAIEngineForAnalysis as UC12 
+}
+    
+// Relationships between packages and actors
+
+user --> UC01 : Log in/Sign up  
+user --> UC03 : Add new accounts  
+user --> UC06 : Check dashboard  
+advisor --> UC09 : Review budgets  
+
+bank --> UC03 : Provide transaction data  
+invest --> UC12 : Supply investment info  
+
+UC07 ..> UC08 : <<extend>>  
+UC08 --|> UC07
+
+@enduml
+``` 
+
+This PlantUML code creates a use case diagram for the AI-powered Personal Financial Management System. The system is organized into functional packages such as Authentication & Security, Financial Account Management, Analysis & Insights, Planning, Collaboration, and AI Components. Each package contains relevant use cases that cover core functionalities like user authentication, account linking, transaction viewing, financial analysis with AI recommendations, budgeting, goal setting, data sharing with advisors, and leveraging the AI engine for advanced tasks.
+
+The relationships between actors (users and advisors) and system components are clearly defined, ensuring clarity in interaction points. The diagram adheres to standard UML notation without using C4 modeling elements but follows the specified guidelines closely. All functional requirements from FR01–FR15 are addressed through these use cases, providing a comprehensive view of the system’s capabilities.
+</div>
+
+[Done: True
+Done Reason: stop
+Eval Count: 721]

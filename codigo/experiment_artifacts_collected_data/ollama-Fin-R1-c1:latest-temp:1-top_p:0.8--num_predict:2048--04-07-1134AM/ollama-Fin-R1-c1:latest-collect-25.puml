@@ -1,0 +1,85 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Enhanced Personal Finance Management System - Use Case Diagram"
+
+actor IndividualCustomer as user #CUSTOMER_COLOR
+actor Advisor as advisor #CUSTOMER_COLOR
+
+package Authentication {
+    usecase UC01: Authenticate User
+        note right of UC01
+            **Req. ID:** FR01, NFR06  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Financial Accounts <<include>> BankingAPI
+    usecase UC04: View Transactions <<extend>> UC03 
+    usecase UC05: Categorize Transactions <<extend>> UC04
+    
+    note right of UC03
+        **Req. ID:** FR02  
+        **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+    end note
+
+    UC03 ..> BankingAPI : <<include>>
+}
+
+package Analysis {
+    usecase UC06: View Financial Dashboard 
+    usecase UC07: Receive AI Insights <<extend>> UC06
+    usecase UC08: View Basic Reports --|> UC06
+    
+    note right of UC06
+        **Req. ID:** FR03, FR04  
+        **Description:** Visualizes spending patterns and financial history.
+    end note
+
+    UC07 ..> AIEngine : <<include>>
+}
+
+package Planning {
+    usecase UC12: Set Financial Goals 
+    usecase UC13: Track Progress <<extend>> UC12
+    usecase UC14: Create Budgets <<extend>> UC12
+    usecase UC15: Monitor Budgets <<extend>> UC14
+    
+    note right of UC12
+        **Req. ID:** FR07, FR08  
+        **Description:** Allows users to set and track financial goals.
+    end note
+
+    Rel(UC13, UC12) : <<extend>>
+}
+
+package Collaboration {
+    usecase UC16: Share Data with Advisor 
+}
+
+package AIComponents {
+    system AIEngine as ai #SYSTEM_COLOR
+    usecase UC07: Receive AI Insights  
+    usecase UC09: Generate Recommendations
+    
+    note right of UC07
+        **Req. ID:** FR05, FR06  
+        **Description:** Provides personalized financial recommendations based on analysis.
+    end note
+
+    Rel(UC09, UC13) : <<extend>>
+}
+
+package Security {
+    usecase UC20: Ensure Data Privacy <<include>> Authentication
+}
+
+' Cross-package relationships:
+user --> UC01 (Authentication)
+user --> UC03 (FinancialAccountManagement)
+advisor --> UC08 | UC09 | UC16
+
+UC04 ..> BankingAPI : <<include>>
+UC07 ..> AIEngine : <<include>>
+
+@enduml

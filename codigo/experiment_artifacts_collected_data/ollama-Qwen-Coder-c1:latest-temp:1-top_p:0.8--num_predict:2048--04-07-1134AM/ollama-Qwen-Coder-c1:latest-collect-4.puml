@@ -1,0 +1,178 @@
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+actor "Individual Customer" as user [#CUSTOMER_COLOR]
+actor "Financial Advisor" as advisor [#CUSTOMER_COLOR]
+
+package "Authentication & Security" {
+    usecase "UC01: Authenticate User" as UC01
+    note right of UC01
+        **Req. ID:** FR01, NFR06
+        **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+    end note
+    
+    usecase "UC02: Manage Account Settings" as UC02
+}
+
+package "Financial Management & Tracking" {
+    usecase "UC03: Connect Financial Accounts" as UC03
+    
+    note right of UC03
+        **Req. ID:** FR02, NFR14
+        **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+    end note
+    
+    usecase "UC04: View Transactions" as UC04
+    usecase "UC05: Categorize Transactions" as UC05
+    
+    UC03 ..> UC04 : <<include>>
+    UC04 ..> UC05 : <<extend>>
+    
+    usecase "UC06: Set Financial Goals" as UC06
+    usecase "UC07: Track Budgets and Expenses" as UC07
+}
+
+package "Analysis & Recommendations" {
+    usecase "UC08: View Financial Dashboard" as UC08
+    
+    note right of UC08
+        **Req. ID:** FR04, NFR12
+        **Description:** Displays financial data in a visually appealing manner.
+    end note
+    
+    usecase "UC09: Receive AI Insights" as UC09
+    
+    note right of UC09
+        **Req. ID:** FR05
+        **Description:** Provides personalized insights based on spending habits and market trends.
+    end note
+    
+    usecase "UC10: Generate Recommendations" as UC10
+    
+    note right of UC10
+        **Req. ID:** FR06, NFR09
+        **Description:** Offers tailored financial recommendations based on user data and AI reasoning.
+    end note
+    
+    usecase "UC11: Forecast Future Financial Positions" as UC11
+    
+    note right of UC11
+        **Req. ID:** FR10
+        **Description:** Predicts future financial positions using historical data and advanced analytics.
+    end note
+    
+    UC08 ..> UC04 : <<include>>
+}
+
+package "Investment & Wealth Management" {
+    usecase "UC12: View Investment Portfolio" as UC12
+    
+    note right of UC12
+        **Req. ID:** FR11, NFR13
+        **Description:** Displays current investment portfolio details and performance.
+    end note
+    
+    usecase "UC13: Suggest Investment Opportunities" as UC13
+    
+    UC08 ..> UC12 : <<include>>
+}
+
+package "Debt Management & Analytics" {
+    usecase "UC14: Manage Debt" as UC14
+    usecase "UC15: Repayment Simulation" as UC15
+    
+    note right of UC14
+        **Req. ID:** FR12, NFR08
+        **Description:** Provides tools to manage debt and simulate repayment scenarios.
+    end note
+    
+    UC06 ..> UC14 : <<include>>
+}
+
+package "Collaboration & Sharing" {
+    usecase "UC16: Share Financial Data with Advisors" as UC16
+    
+    note right of UC16
+        **Req. ID:** FR13, NFR05
+        **Description:** Allows users to share selected financial data and insights with financial advisors.
+    end note
+    
+    advisor --> UC16
+}
+
+package "AI & Machine Learning Integration" {
+    usecase "UC17: Utilize AI for Enhanced Analysis" as UC17
+    
+    note right of UC17
+        **Req. ID:** FR05, NFR09
+        **Description:** Leverages advanced algorithms and machine learning to provide deeper insights.
+    end note
+    
+    advisor --> UC17
+}
+
+package "Notifications & Alerts" {
+    usecase "UC18: Set Up Notifications" as UC18
+    usecase "UC19: Receive Financial Alerts" as UC19
+    
+    note right of UC18
+        **Req. ID:** FR09, NFR04
+        **Description:** Enables users to set up alerts for unusual spending patterns or financial events.
+    end note
+    
+    user --> UC18
+}
+
+package "Reporting & Analytics Tools" {
+    usecase "UC20: Generate Periodic Reports" as UC20
+    usecase "UC21: Create Custom Dashboards" as UC21
+    
+    note right of UC20
+        **Req. ID:** FR15, NFR14
+        **Description:** Allows users to generate reports and customize their dashboard for personalization.
+    end note
+    
+    user --> UC20
+}
+
+package "Cross-Functional Use Cases" {
+    usecase "UC22: Monitor Financial Health Over Time" as UC22
+    
+    note right of UC22
+        **Req. ID:** FR16, NFR18
+        **Description:** Provides an overview of financial health and trends over a specified period.
+    end note
+    
+    user --> UC04
+}
+
+' ACTOR-USE CASE RELATIONSHIPS
+user --> UC01
+user --> UC03
+user --> UC05
+user --> UC06
+user --> UC08
+user --> UC12
+user --> UC17
+user --> UC19
+user --> UC20
+
+advisor --> UC04
+advisor --> UC09
+advisor --> UC10
+advisor --> UC13
+advisor --> UC15
+advisor --> UC16
+advisor --> UC18
+
+bank --> UC03
+invest --> UC12
+ai_engine --> UC07
+news_service --> UC18
+credit_service --> UC14
+auth_service --> UC01
+system_externals ..> UC04 : <<include>>
+system_externals ..> UC19 : <<extend>>
+
+@enduml

@@ -1,0 +1,130 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Enhanced Personal Financial Management System - Use Cases"
+
+actor IndividualCustomer as user [#08427B]
+actor Advisor as advisor [#3D9970]
+
+package Authentication {
+    usecase UC01: Authenticate User
+        note right of UC01
+            **Req. ID:** FR01, NFR06  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Financial Accounts
+        note right of UC03
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+        
+    usecase UC04: View Transactions
+        usecase UC05: Categorize Transactions <<extend>>
+        
+        ' Include relationship from Connect Accounts (UC03) to View Transactions (UC04)
+        UC03 --> UC04 : <<include>>  
+}
+
+package Analysis {
+    usecase UC06: Financial Dashboard
+    usecase UC07: AI Insights
+
+    note right of UC06
+        **Req. ID:** FR05, FR10  
+        **Description:** Displays spending patterns and visualizes financial history.
+    end note
+    
+    note right of UC07
+        **Req. ID:** FR03, FR04  
+        **Description:** Provides AI-driven insights on spending habits and generates recommendations based on analysis.
+    end note
+
+    usecase UC12: Advanced Analytics <<extend>> UC06  
+}
+
+package Planning {
+    usecase UC08: Set Financial Goals
+    usecase UC09: Track Progress
+
+    ' Generalization from Basic to Advanced planning scenarios
+    usecase UC14: Create Budgets <<generalize>>
+    
+    note right of UC08
+        **Req. ID:** FR07, FR08  
+        **Description:** Users can set and track specific financial goals.
+    end note
+    
+    note right of UC09
+        **Req. ID:** FR13  
+        **Description:** Monitors progress towards established financial goals.
+    end note
+
+    usecase UC26: Review Budgets <<extend>> UC08  
+}
+
+package Collaboration {
+    usecase UC15: Share Data with Advisor
+
+    ' Relationship from User to Sharing data
+    user --> UC15 : <<include>>
+    
+    note right of UC15
+        **Req. ID:** FR13  
+        **Description:** Allows users to share selected financial information with advisors.
+    end note
+}
+
+package Notifications {
+    usecase UC20: Financial Alerts
+
+    ' Include relationship from AI Insights (UC07) for relevant alerts
+    UC07 --> UC20 : <<include>>
+    
+    note right of UC20
+        **Req. ID:** FR09  
+        **Description:** Sends notifications about financial irregularities or goal progress.
+    end note
+}
+
+package AI {
+    usecase UC18: Leverage AI Engine
+
+    ' Relationship from Financial Dashboard (UC06) to AI reasoning
+    UC06 --> UC18 : <<include>>
+    
+    usecase UC27: Forecast Future Positions  
+        note right of UC27
+            **Req. ID:** FR10, NFR04  
+            **Description:** Predicts future financial scenarios based on historical data.
+        end note
+}
+
+package Security {
+    usecase UC35: Secure Transactions
+
+    ' Include relationship from Banking API (bank) to secure transactions
+    bank --> UC35 : <<include>>
+    
+    note right of UC35
+        **Req. ID:** NFR02, NFR04  
+        **Description:** Ensures all financial data is encrypted at rest and in transit.
+    end note
+
+}
+
+' Cross-package relationships:
+UC18 ..> UC06 : <<extend>>   ' AI Engine enhances the Financial Dashboard analysis
+UC27 --> UC35          ' Forecasting depends on secure transaction history
+UC14 --> UC09           ' Budget tracking includes progress monitoring
+UC08 --> UC26         
+
+user --> UC01  
+advisor --> UC09, UC15  
+
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 914]

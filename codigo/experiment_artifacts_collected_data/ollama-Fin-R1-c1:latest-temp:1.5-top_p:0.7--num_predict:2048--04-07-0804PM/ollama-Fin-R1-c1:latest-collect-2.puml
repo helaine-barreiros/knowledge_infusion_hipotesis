@@ -1,0 +1,142 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Core Use Cases"
+
+actor IndividualCustomer as user [#08427B]
+actor Advisor as advisor [#3F51B5]
+
+package AuthenticationAndSecurity {
+    usecase UC01: Authenticate User
+        note right of UC01
+            **Req. ID:** FR01, NFR06  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Accounts
+        note right of UC03
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+
+    usecase UC04: View Transactions
+        note right of UC04
+            **Req. ID:** FR03, FR19  
+            **Description:** Displays aggregated and categorized transactions from connected accounts.
+        end note
+        
+    usecase UC05: Categorize Transactions
+        note right of UC05
+            **Req. ID:** FR03  
+            **Description:** Classifies financial transactions into categories for easier analysis.
+        end note
+
+    base_case UC04 --> included_case UC05 : <<include>>
+}
+
+package FinancialAnalysis {
+    usecase UC10: View Budgets
+        note right of UC10
+            **Req. ID:** FR08  
+            **Description:** Enables users to create and monitor personal budgets.
+        end note
+
+    usecase UC11: Track Goals
+        note right of UC11
+            **Req. ID:** FR07, FR23  
+            **Description:** Helps users set financial goals and track their progress over time.
+        end note
+
+    base_case UC11 --> included_case UC10 : <<include>>
+}
+
+package InsightsAndRecommendations {
+    usecase UC12: Receive AI-Driven Financial Advice
+        note right of UC12
+            **Req. ID:** FR05, FR06  
+            **Description:** Delivers personalized financial insights and recommendations based on user data.
+        end note
+
+    usecase UC13: Generate Predictive Forecasts
+        note right of UC13
+            **Req. ID:** FR10  
+            **Description:** Uses historical data to forecast future financial positions (e.g., net worth, cash flow).
+        end note
+
+    usecase UC14: Suggest Investment Opportunities
+        note right of UC14
+            **Req. ID:** FR11  
+            **Description:** Recommends investment options tailored to the user’s profile and risk tolerance.
+        end note
+        
+    base_case UC12 --> included_cases [UC13, UC14] : <<include>>
+}
+
+package AlertsAndNotifications {
+    usecase UC15: Receive Financial Alerts
+        note right of UC15
+            **Req. ID:** FR09  
+            **Description:** Sends alerts for unusual spending patterns or other critical financial events.
+        end note
+
+    usecase UC16: Customize Alert Settings
+        note right of UC16
+            **Req. ID:** FR24, FR37  
+            **Description:** Allows users to configure the types and thresholds of notifications they receive.
+        end note
+        
+    base_case UC15 --> included_case UC16 : <<include>>
+}
+
+package CollaborationAndSharing {
+    usecase UC17: Share Financial Data with Advisors
+        note right of UC17
+            **Req. ID:** FR13  
+            **Description:** Enables users to selectively share financial data and insights with their advisors.
+        end note
+
+    usecase UC18: Use Chatbot for Queries
+        note right of UC18
+            **Req. ID:** FR14, NFR06  
+            **Description:** Interacts via a conversational interface to answer financial questions or provide guidance.
+        end note
+        
+    base_case UC17 --> included_case UC18 : <<include>>
+}
+
+package AdvancedAnalytics {
+    usecase UC20: View Financial Dashboards
+        note right of UC20
+            **Req. ID:** FR04, FR39  
+            **Description:** Provides visual representations of financial data for quick understanding.
+        end note
+
+    usecase UC21: Perform Complex Analysis
+        note right of UC21
+            **Req. ID:** FR05, NFR06  
+            **Description:** Offers in-depth analysis and reporting features to identify trends or anomalies.
+        end note
+        
+    base_case UC20 --> included_case UC21 : <<include>>
+}
+
+package ExternalSystemInteractions {
+    usecase UC30: Fetch Market Data
+        note right of UC30
+            **Req. ID:** FR08, NFR06  
+            **Description:** Retrieves real-time or historical market data from external investment APIs.
+        end note
+
+    base_case UC12 --> included_cases [UC30] : <<include>>
+}
+
+actor Bank as bank_system [#lightblue]
+actor InvestmentAPI as invest_api [#lightgreen]
+
+user --> UC01
+user --> UC03
+advisor --> UC14, UC17, UC18
+bank_system --> UC03
+
+@enduml

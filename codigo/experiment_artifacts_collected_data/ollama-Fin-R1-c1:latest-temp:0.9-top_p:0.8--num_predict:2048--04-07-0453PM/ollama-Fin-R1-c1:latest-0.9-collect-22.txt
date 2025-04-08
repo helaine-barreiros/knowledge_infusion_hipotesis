@@ -1,0 +1,94 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Enhanced Personal Financial Management System - Use Cases"
+
+actor IndividualCustomer as user
+actor FinancialAdvisor as advisor
+system PFMSystem as pfm #lightgreen
+package AuthenticationAndSecurity {
+    usecase UC01_AuthenticateUser as UC01 <<include>>
+        note right of UC01
+            **Req. ID:** FR01, NFR06  
+            **Description:** Authenticates users via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC03_ConnectAccounts as UC03 <<include>>
+        note right of UC03
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+
+    usecase UC04_ViewTransactions as UC04 
+    usecase UC05_CategorizeTransactions as UC05 <<extend>>
+    
+    UC03 ..> UC04 : <<include>>
+}
+
+package AnalysisAndInsights {
+    usecase UC06_VisualizeSpendingPatterns as UC06
+    usecase UC07_ReceiveAIInsights as UC07  
+        note right of UC07
+            **Req. ID:** FR05, NFR12  
+            **Description:** Receives AI-generated insights on spending habits and provides reasoning.
+        end note
+    
+    usecase UC08_ViewBasicReports 
+    usecase UC09_ViewAdvancedAnalytics <<generalize>>
+    
+    UC09 --|> UC08
+}
+
+package FinancialGoalManagement {
+    usecase UC10_SetFinancialGoals as UC10  
+    usecase UC11_ManageBudgetsAndTrackExpenses as UC11
+        note right of UC11 
+            **Req. ID:** FR07, NFR02  
+            **Description:** Allows creation and monitoring of budgets with transaction categorization.
+        end note
+    
+}
+
+package Collaboration {
+    usecase UC13_ShareDataWithAdvisors as UC13 <<extend>>
+    
+    advisor --> UC13 : <<include>>
+}
+
+package AIEngineInteractions {
+    usecase UC07_ReceiveAIInsights  
+    usecase UC14_GeneratePersonalizedRecomendations
+        note right of UC14 
+            **Req. ID:** FR06, NFR02  
+            **Description:** Generates personalized financial recommendations based on user data and market trends.
+        end note
+    
+}
+
+package SystemManagement {
+    usecase UC15_Utility as UC15 <<include>>
+    
+    pfm --> UC15 : <<include>>
+}
+
+actor BankingSystem as bank #lightblue
+actor InvestmentSystem as invest #lightgreen
+actor AIEngine as ai #lightcyan
+
+user --> UC01  
+advisor --> UC13  
+
+UC03 ..> bank : <<extend>>
+
+PFMSystem --> banking_api: Retrieves transaction data, balances
+PFMSystem --> investment_api: Fetches portfolio info, market data 
+PFMSystem --> credit_service: Obtains credit scores
+PFMSystem --> news_service: Receives financial updates  
+PFMSystem --> auth_service: Verifies identities
+
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 688]

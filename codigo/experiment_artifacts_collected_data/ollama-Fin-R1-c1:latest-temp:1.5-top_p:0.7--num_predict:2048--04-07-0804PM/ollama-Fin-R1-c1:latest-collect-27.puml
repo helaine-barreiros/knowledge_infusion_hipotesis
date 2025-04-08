@@ -1,0 +1,97 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Case Diagram"
+
+actor IndividualCustomer as user [#08427B]
+actor Advisor as advisor [#08427B]
+
+package AuthenticationAndSecurity {
+    usecase UC1: AuthenticateUser
+        note right of UC1 
+            **Req. ID:** FR01, NFR06  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC3: ConnectFinancialAccounts
+        note right of UC3 
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+
+    usecase UC4: ViewTransactions : <<include>> from UC3
+    usecase UC5: CategorizeTransactions : <<extend>> from UC4
+}
+
+package AnalysisAndRecommendations {
+    usecase UC6: ViewFinancialDashboard 
+        note right of UC6  
+            **Req. ID:** FR03, FR04  
+            **Description:** Visualizes spending patterns and financial history.
+        end note
+
+    usecase UC7: ReceiveAIPoweredInsights
+        note right of UC7  
+            **Req. ID:** FR05  
+            **Description:** Provides AI-generated insights on spending habits.
+        end note
+        
+    usecase UC8: GeneratePersonalizedRecommendations : <<extend>> from UC6
+}
+
+package Planning {
+    usecase UC9: SetFinancialGoals 
+        note right of UC9  
+            **Req. ID:** FR07, FR14  
+            **Description:** Allows users to set and track financial goals.
+        end note
+
+    usecase UC10: CreateBudget : <<extend>> from UC6
+}
+
+package Collaboration {
+    usecase UC13: ShareDataWithAdvisor 
+        note right of UC13  
+            **Req. ID:** FR13, NFR07  
+            **Description:** Enables users to share selected financial data with advisors.
+        end note
+
+    usecase UC14: UseChatbotForQueries : <<extend>> from Advisor
+}
+
+package AIComponents {
+    usecase UC15: LeverageAIEngine 
+        note right of UC15  
+            **Req. ID:** FR06, NFR09  
+            **Description:** Uses the AI reasoning engine for advanced financial analysis and recommendations.
+        end note
+
+    usecase UC17: ForecastFuturePositions : <<extend>> from UC8
+}
+
+package ExternalServices {
+    usecase UC23: RetrieveBankingTransactions 
+        note right of UC23  
+            **Req. ID:** FR02, NFR06  
+            **Description:** Retrieves transaction data through banking APIs.
+        end note
+
+    usecase UC24: FetchInvestmentData : <<extend>> from Advisor
+}
+
+user --> UC1
+user --> UC3
+advisor --> UC9
+advisor --> UC13
+UC3 --> UC4 : <<include>>
+UC4 --> UC5 : <<extend>>
+UC6 --> UC8 : <<extend>>
+UC7 --> UC8 : <<extend>>
+UC9 --> UC10 : <<extend>>
+Advisor --> UC14 : <<extend>>
+UC23 --> BankingSystem : <<include>> 
+BankingSystem --> UC4, UC5
+InvestmentSystem --> Advisor
+
+@enduml

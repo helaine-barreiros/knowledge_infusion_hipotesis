@@ -1,0 +1,187 @@
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+' ACTOR DEFINITION
+actor "Individual Customer" as user
+actor "Financial Advisor" as advisor
+actor "Banking API Provider" as bankapi #lightblue
+actor "Investment API Provider" as investapi #lightblue
+actor "Credit Scoring Service" as creditservice #lightgreen
+actor "AI Reasoning Engine" as aientry #orange
+
+' PACKAGE DEFINITION
+package "Authentication & Security" {
+    usecase "UC01: Register New User" as UC01
+    note right of UC01
+      **Req. ID:** FR01, NFR06
+      **Description:** Allows users to register with 
+      username/password or OAuth2 providers.
+    end note
+    
+    usecase "UC02: Login User" as UC02
+}
+
+package "Financial Account Management" {
+    usecase "UC03: Connect Financial Accounts" as UC03
+    note right of UC03
+      **Req. ID:** FR02, NFR08
+      **Description:** Securely links external financial accounts 
+      using banking APIs to retrieve transaction data.
+    end note
+    
+    usecase "UC04: View Transactions" as UC04
+    usecase "UC05: Categorize Transactions" as UC05
+    
+    UC03 ..> UC04 : <<include>>
+}
+
+package "Analysis & Recommendations" {
+    usecase "UC06: Analyze Spending Patterns" as UC06
+    note right of UC06
+      **Req. ID:** FR05, NFR12
+      **Description:** Provides AI-powered insights on 
+      spending habits and generates personalized recommendations.
+    end note
+    
+    usecase "UC07: Generate Recommendations" as UC07
+}
+
+package "Planning & Goal Setting" {
+    usecase "UC08: Set Financial Goals" as UC08
+    usecase "UC09: Track Budgets" as UC09
+}
+
+package "Collaboration with Advisors" {
+    usecase "UC10: Share Data with Advisor" as UC10
+    
+    note right of UC10
+      **Req. ID:** FR13, NFR18
+      **Description:** Allows users to share selected financial data 
+      with their advisors for expert analysis.
+    end note
+}
+
+package "Additional Features" {
+    usecase "UC11: Forecast Financial Positions" as UC11
+    
+    note right of UC11
+      **Req. ID:** FR09, NFR13
+      **Description:** Predicts future financial positions 
+      based on historical data.
+    end note
+    
+    usecase "UC12: Suggest Investment Opportunities" as UC12
+}
+
+package "Debt Management & Cryptocurrency Tracking" {
+    usecase "UC13: Manage Debt Repayment" as UC13
+    usecase "UC14: Track Cryptocurrency Portfolio" as UC14
+    
+    note right of UC14
+      **Req. ID:** FR07, NFR25
+      **Description:** Provides tracking and analysis 
+      for cryptocurrency portfolios.
+    end note
+}
+
+package "Notifications & Alerts" {
+    usecase "UC15: Set Spending Alerts" as UC15
+    
+    note right of UC15
+      **Req. ID:** FR09, NFR26
+      **Description:** Delivers alerts for unusual spending patterns 
+      and goal progress.
+    end note
+}
+
+package "Reports & Dashboards" {
+    usecase "UC16: Generate Financial Reports" as UC16
+    
+    note right of UC16
+      **Req. ID:** FR05, NFR27
+      **Description:** Produces periodic financial health reports 
+      based on user data.
+    end note
+    
+    usecase "UC17: Customize Dashboards" as UC17
+    
+    note right of UC17
+      **Req. ID:** FR14, NFR28
+      **Description:** Allows users to customize dashboards and 
+      reports for better visibility.
+    end note
+}
+
+package "Multi-Channel Support & Offline Mode" {
+    usecase "UC18: Access System via Mobile App" as UC18
+    usecase "UC19: Access System via Chatbot" as UC19
+    
+    note right of UC18
+      **Req. ID:** NFR20, NFR24
+      **Description:** Supports mobile access and chatbot 
+      for financial queries.
+    end note
+    
+    usecase "UC20: Functionality in Offline Mode" as UC20
+    
+    note right of UC20
+      **Req. ID:** FR15, NFR23
+      **Description:** Offers limited functionality in offline mode.
+    end note
+}
+
+package "AI Explanations & Accessibility" {
+    usecase "UC21: Request AI Explanation" as UC21
+    
+    note right of UC21
+      **Req. ID:** FR09, NFR35
+      **Description:** Provides explanations for AI recommendations 
+      to ensure transparency.
+    end note
+    
+    usecase "UC22: Ensure Accessibility Compliance" as UC22
+    
+    note right of UC22
+      **Req. ID:** NFR17, NFR40
+      **Description:** Meets accessibility standards based on WCAG 2.1 
+      level AA.
+    end note
+}
+
+' CROSS-PACKAGE RELATIONSHIPS
+UC03 ..> bankapi : <<include>>
+UC06 ..> UC04 : <<extend>>
+UC07 ..> aientry : <<include>>
+
+# Actor-Use Case Relationships
+
+user --> UC01
+user --> UC02
+user --> UC03
+user --> UC05
+user --> UC06
+user --> UC08
+user --> UC09
+user --> UC10
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+user --> UC16
+user --> UC17
+user --> UC18
+user --> UC19
+user --> UC20
+user --> UC21
+
+advisor --> UC09
+advisor --> UC10
+
+bankapi --> UC03
+investapi --> UC12
+creditservice --> UC05
+aientry --> UC07
+
+@enduml

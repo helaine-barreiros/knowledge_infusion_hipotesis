@@ -1,0 +1,130 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Case Diagram"
+
+actor IndividualCustomer as user
+actor Advisor as advisor
+
+package Authentication {
+    usecase UC01: Authenticate User as uc_auth #none
+        note right of uc_auth
+            **Req. ID:** FR01, NFR06  
+            **Description:** Authenticates users via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Accounts as uc_connect #none
+        note right of uc_connect
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+    
+    usecase UC04: View Transactions as uc_view_txns #none
+        note right of uc_view_txns
+            **Req. ID:** FR03, FR05  
+            **Description:** Displays categorized and aggregated transactions from connected financial accounts.
+        end note
+
+    usecase UC06: Categorize Transactions as uc_cat_txns #none {
+        note top of uc_cat_txns 
+            Extends from <uc_view_txns>
+        end note
+    }
+}
+
+package AnalysisAndRecommendations {
+    usecase UC13: Receive AI Insights as uc_ai_insights #none
+        note right of uc_ai_insights  
+            **Req. ID:** FR05, NFR09  
+            **Description:** Provides personalized financial insights using AI analysis on transaction data.
+        end note
+
+    usecase UC24: Generate Recommendations as uc_gen_recos #none {
+        extends UC13
+        note right of uc_gen_recos 
+            **Req. ID:** FR06, NFR09  
+            **Description:** Offers tailored financial recommendations based on user spending habits and goals.
+        end note
+    }
+}
+
+package GoalManagement {
+    usecase UC28: Set Financial Goals as uc_set_goals #none
+
+    usecase UC31: Track Progress Towards Goals as uc_track_goals #none
+    note right of uc_track_goals  
+        **Req. ID:** FR07, NFR06  
+        **Description:** Monitors user progress toward defined financial goals and provides alerts.
+    end note
+    
+    usecase UC42: Adjust Goals Based on Performance as uc_adj_goals #none {
+        extends UC31
+        note right of uc_adj_goals 
+            **Req. ID:** FR07, NFR06  
+            **Description:** Allows users to adjust their financial goals based on performance reviews or changes in circumstances.
+        end note
+    }
+}
+
+package Budgeting {
+    usecase UC45: Create Monthly Budget as uc_create_budget #none
+
+    usecase UC48: Monitor Spending Against Budget as uc_monitor_spending #none
+    note right of uc_monitor_spending  
+        **Req. ID:** FR08, NFR06  
+        **Description:** Compares actual spending against the budget to track adherence and provide insights.
+    end note
+
+    usecase UC57: Adjust Budget Based on Financial Alerts as uc_adj_budget #none {
+        extends UC48
+        note right of uc_adj_budget 
+            **Req. ID:** FR09, NFR06  
+            **Description:** Automatically adjusts the budget when unusual spending patterns are detected.
+        end note
+    }
+}
+
+package ForecastingAndProjections {
+    usecase UC58: Predict Future Financial Positions as uc_pred_fin_pos #none
+
+    usecase UC71: Suggest Investment Opportunities as uc_sug_inv_opps #none  
+        note right of uc_sug_inv_opps 
+            **Req. ID:** FR10, NFR06  
+            **Description:** Recommends investment opportunities based on user financial data and market trends.
+        end note
+}
+
+package Collaboration {
+    usecase UC72: Share Financial Data with Advisors as uc_share_data #none
+
+    usecase UC83: Receive Personalized Advice from Advisor as uc_advise_by_advisor #none  
+        extends UC06, UC72 
+        note right of uc_advise_by_advisor
+            **Req. ID:** FR13, NFR06  
+            **Description:** Allows users to share selected financial data with advisors for personalized guidance.
+        end note
+}
+
+package NewsAndUpdates {
+    usecase UC84: Receive Financial News and Market Updates as uc_fin_news #none  
+
+    usecase UC97: Customize Subscription Preferences as uc_sub_prefs #none
+}
+
+package SystemMaintenance {
+    usecase UC106: Scale System to Handle Concurrent Users as uc_scale_system #none  
+        note right of uc_scale_system 
+            **Req. ID:** NFR05, FR12  
+            **Description:** Ensures the system can handle a large number of simultaneous users without performance degradation.
+        end note
+}
+
+' Relationships between packages and use cases
+
+uc_auth --> user : Authenticated User
+user --> uc_connect: Connected Accounts
+uc_view_txns --> user: View Transactions
+advisor --> uc_advise_by_advisor: Financial Advice
+
+@enduml

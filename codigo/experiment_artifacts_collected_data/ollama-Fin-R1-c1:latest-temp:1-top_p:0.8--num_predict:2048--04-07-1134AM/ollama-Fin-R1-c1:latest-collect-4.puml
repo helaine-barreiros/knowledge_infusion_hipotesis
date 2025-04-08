@@ -1,0 +1,199 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Enhanced Personal Financial Management System - Use Cases"
+
+actor IndividualCustomer as user  
+actor Advisor  
+
+package Authentication {  
+  usecase UC01: Authenticate User as uc_authenticate_user  
+    note right of uc_authenticate_user
+      **Req. ID:** FR01, NFR06  
+      Description: Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+    end note  
+}
+
+package FinancialAccountManagement {  
+  usecase UC03: Connect Financial Accounts as uc_connect_accounts  
+    note right of uc_connect_accounts
+      **Req. ID:** FR02  
+      Description: Securely links external financial accounts using banking APIs to retrieve transaction data.
+    end note  
+
+  usecase UC04: View Transactions as uc_view_transactions  
+    note right of uc_view_transactions
+      **Req. ID:** FR03, NFR13  
+      Description: Displays aggregated and categorized transactions from connected accounts.
+    end note  
+
+  usecase UC05: Categorize Transactions as uc_categorize_transactions  
+    note left of uc_categorize_transactions
+      <<extend>>  
+      Description: Optional functionality to categorize existing transactions.  
+    end note  
+}
+
+package Visualization {  
+  usecase UC06: View Financial Dashboard as uc_view_dashboard  
+    note right of uc_view_dashboard
+      **Req. ID:** FR04, NFR13  
+      Description: Presents visual representations of spending patterns and financial history.
+    end note  
+
+  usecase UC07: Receive AI Insights as uc_ai_insights  
+    note left of uc_ai_insights
+      <<extend>>  
+      Description: Optional insights based on transaction analysis.  
+    end note  
+}
+
+package Recommendations {  
+  usecase UC08: Generate Personalized Financial Advice as uc_generate_advice  
+    note right of uc_generate_advice
+      **Req. ID:** FR06, NFR13  
+      Description: Provides tailored financial recommendations using AI and transaction data.
+    end note  
+
+  usecase UC09: Set & Track Goals as uc_set_goals  
+    note left of uc_set_goals
+      <<extend>>  
+      Description: Optional goal-setting feature.  
+    end note  
+
+  usecase UC10: Manage Budgets as uc_manage_budgets  
+    note right of uc_manage_budgets
+      **Req. ID:** FR08, NFR13  
+      Description: Creates and monitors budgets based on transaction data.
+    end note  
+
+  usecase UC11: Receive Alerts for Anomalies as uc_alert_anomalous_spending  
+    note left of uc_alert_anomalous_spending
+      <<extend>>  
+      Description: Optional spending alerts.  
+    end note  
+}
+
+package AIAnalysis {  
+  usecase UC12: Forecast Future Financial Position as uc_forecast_position  
+    note right of uc_forecast_position
+      **Req. ID:** FR05, NFR9  
+      Description: Predicts future financial states using historical data and AI reasoning.
+    end note  
+
+  usecase UC13: Suggest Investment Opportunities as uc_suggest_investments  
+    note left of uc_suggest_investments
+      <<extend>>  
+      Description: Optional investment suggestions based on user profile.  
+    end note  
+}
+
+package Collaboration {  
+  usecase UC14: Share Financial Data with Advisor as uc_share_data_with_advisor  
+    note right of uc_share_data_with_advisor
+      **Req. ID:** FR07, NFR9  
+      Description: Allows users to share selected financial data for advisor review.
+    end note  
+
+  usecase UC15: Communicate via Chatbot as uc_chatbot_communication  
+    note left of uc_chatbot_communication
+      <<extend>>  
+      Description: Optional interaction with a chatbot for financial queries.  
+    end note  
+}
+
+package Reporting {  
+  usecase UC16: Generate Periodic Financial Health Reports as uc_generate_reports  
+    note right of uc_generate_reports
+      **Req. ID:** FR09, NFR8  
+      Description: Produces detailed reports on user's financial health and progress.  
+    end note  
+
+  usecase UC17: Offer Cryptocurrency Tracking (if desired) as uc_cryptocurrency_tracking  
+    note left of uc_cryptocurrency_tracking
+      <<extend>>  
+      Description: Optional tracking for cryptocurrency portfolios.  
+    end note  
+}
+
+package Security {  
+  usecase UC02: Manage Account Settings as uc_manage_settings  
+    note right of uc_manage_accountsettings
+      **Req. ID:** FR14, NFR6  
+      Description: Adjusts account settings such as security preferences and notifications.
+    end note  
+
+  usecase UC18: Ensure Data Encryption & Compliance as uc_data_encryption_compliance  
+    note left of uc_data_encryption_compliance
+      <<extend>>  
+      Description: Ensures compliance with financial regulations (GDPR, PSD2) through encryption.  
+    end note  
+}
+
+package Scaling {  
+  usecase UC19: Handle High Concurrent Users as uc_handle_concurrent_users  
+    note right of uc_handle_concurrent_users
+      **Req. ID:** NFR05  
+      Description: Ensures the system can scale to handle at least 100,000 concurrent users without performance degradation.
+    end note  
+
+  usecase UC20: Recover from Failures Quickly as uc_recover_failures  
+    note left of uc_recover_failures
+      <<extend>>  
+      Description: Reduces downtime by automatically recovering within 5 minutes.  
+    end note  
+}
+
+package UserInteraction {  
+  usecase UC21: Respond to Interactions Within SLA as uc_response_sla  
+    note right of uc_response_interactions
+      **Req. ID:** NFR04, FR13  
+      Description: Ensures all user interactions (e.g., transactions) are responded to within a second.  
+    end note  
+
+  usecase UC22: Support Internationalization as uc_internationalization  
+    note left of uc_internationalization
+      <<extend>>  
+      Description: Provides multi-language support and currency handling for global users.  
+    end note  
+}
+
+package Accessibility {  
+  usecase UC23: Meet WCAG AA Standards as uc_meet_wcaaa  
+    note right of uc_meet_wcaaa
+      **Req. ID:** NFR14, FR07  
+      Description: Ensures the system meets Web Content Accessibility Guidelines (WCAG) Level AAA standards for accessibility.  
+    end note  
+
+  usecase UC24: Allow Offline Mode with Limited Functionality as uc_offline_mode  
+    note left of uc_offline_mode
+      <<extend>>  
+      Description: Provides a basic offline experience when internet connectivity is unavailable, but updates data on reconnecting.  
+    end note  
+}
+
+package SystemManagement {  
+  usecase UC25: Maintain Audit Trail for Data Access as uc_audit_trail  
+    note right of uc_audit_trail
+      **Req. ID:** NFR11, FR07  
+      Description: Tracks all instances where data is accessed or modified within the system.  
+    end note  
+
+  usecase UC26: Customize Dashboards and Reports (if desired) as uc_customization  
+    note left of uc_customization
+      <<extend>>  
+      Description: Optional feature to personalize dashboards and reports according to user preferences.  
+    end note  
+}
+
+' ACTOR-USE CASE RELATIONSHIPS  
+user --> UC01  
+advisor --> UC14, UC26  
+
+UC03 ..> UC04 : <<include>>  ' Financial Accounts Management includes Viewing Transactions  
+
+UC08 --|> UC09: <<generalize>>  ' Advanced Analytics generalizes Basic Reports  
+
+' CROSS-PACKAGE RELATIONSHIPS  
+uc_ai_insights --> uc_view_dashboard : <<extend>>   ' AI insights can enhance the financial dashboard view  
+
+@enduml

@@ -1,0 +1,107 @@
+@startuml "AI-Enhanced Personal Finance Management System - Container Diagram"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include DEVICONS/angular.puml
+!include DEVICONS/java.puml
+!include DEVICONS/python.puml
+!include DEVICONS/mongodb.puml
+!include DEVICONS/postgresql.puml
+!include DEVICONS/redis.puml
+!include FONTAWESOME/users.puml
+!include FONTAWESOME/user_tie.puml
+
+LAYOUT_WITH_LEGEND()
+
+Person(individual_customer, "Individual Customer", "User who wants to manage their personal finances")
+Person(financial_advisor, "Financial Advisor", "Professional who provides financial guidance")
+
+System_Boundary(pfm_system, "AI-Enhanced Personal Finance Management System") {
+    Container(web_application, "Web Application", "Angular, TypeScript", "Provides financial management functionality to customers via web browsers", "angular")
+    Container(mobile_application, "Mobile Application", "Ionic Angular", "Provides financial management functionality to customers via mobile devices", "angular")
+    
+    Container(api_gateway, "API Gateway", "Spring Cloud Gateway", "Handles routing, load balancing, and API management", "java")
+    
+    Container(identity_service, "Identity Service", "Spring Boot, Spring Security", "Handles authentication, authorization, and user profile management", "java")
+    
+    Container(financial_aggregation_service, "Financial Aggregation Service", "Spring Boot", "Aggregates data from multiple financial institutions", "java")
+    Container(transaction_service, "Transaction Service", "Spring Boot", "Manages financial transactions, categories, and budgets", "java")
+    Container(goal_service, "Goal Service", "Spring Boot", "Manages financial goals and tracks progress", "java")
+    Container(notification_service, "Notification Service", "Spring Boot", "Manages alerts, reminders, and notifications", "java")
+    Container(advisor_portal_service, "Advisor Portal Service", "Spring Boot", "Manages advisor access to shared financial data", "java")
+    
+    Container(ai_inference_service, "AI Inference Service", "Python, FastAPI", "Provides real-time AI predictions and recommendations", "python")
+    Container(ai_training_service, "AI Training Service", "Python, TensorFlow/PyTorch", "Trains and updates AI models for financial insights", "python")
+    Container(nlp_service, "NLP Service", "Python, Hugging Face Transformers", "Processes natural language queries for the chatbot", "python")
+    
+    Container(event_bus, "Event Bus", "RabbitMQ", "Handles asynchronous messaging between services")
+    
+    ContainerDb(operational_db, "Operational Database", "PostgreSQL", "Stores user data, transactions, goals, and operational data", "postgresql")
+    ContainerDb(analytical_db, "Analytical Database", "MongoDB", "Stores processed financial data for analytics", "mongodb")
+    ContainerDb(cache, "Distributed Cache", "Redis", "Caches frequently accessed data and handles session state", "redis")
+    
+    Container(finance_data_collector, "Financial Data Collector", "Spring Boot", "Connects to external financial APIs and collects data", "java")
+}
+
+System_Ext(banking_apis, "Banking APIs", "External financial institution APIs")
+System_Ext(investment_apis, "Investment APIs", "External investment platform APIs")
+System_Ext(credit_service, "Credit Scoring Service", "External credit information provider")
+System_Ext(financial_news, "Financial News Service", "External financial news and market data")
+System_Ext(education_content, "Financial Education Content", "External financial education resources")
+
+Rel(individual_customer, web_application, "Uses", "HTTPS")
+Rel(individual_customer, mobile_application, "Uses", "HTTPS")
+Rel(financial_advisor, web_application, "Uses advisor portal", "HTTPS")
+
+Rel(web_application, api_gateway, "Makes API calls to", "HTTPS, JSON/REST")
+Rel(mobile_application, api_gateway, "Makes API calls to", "HTTPS, JSON/REST")
+
+Rel(api_gateway, identity_service, "Authenticates via", "HTTPS, JWT")
+Rel(api_gateway, financial_aggregation_service, "Routes to", "HTTPS, JSON/REST")
+Rel(api_gateway, transaction_service, "Routes to", "HTTPS, JSON/REST")
+Rel(api_gateway, goal_service, "Routes to", "HTTPS, JSON/REST")
+Rel(api_gateway, notification_service, "Routes to", "HTTPS, JSON/REST")
+Rel(api_gateway, advisor_portal_service, "Routes to", "HTTPS, JSON/REST")
+Rel(api_gateway, ai_inference_service, "Routes to", "HTTPS, JSON/REST")
+Rel(api_gateway, nlp_service, "Routes to", "HTTPS, JSON/REST")
+
+Rel(financial_aggregation_service, operational_db, "Reads from and writes to", "JDBC")
+Rel(transaction_service, operational_db, "Reads from and writes to", "JDBC")
+Rel(goal_service, operational_db, "Reads from and writes to", "JDBC")
+Rel(notification_service, operational_db, "Reads from", "JDBC")
+Rel(advisor_portal_service, operational_db, "Reads from", "JDBC")
+Rel(identity_service, operational_db, "Reads from and writes to", "JDBC")
+
+Rel(financial_aggregation_service, analytical_db, "Writes processed data to", "MongoDB Driver")
+Rel(transaction_service, analytical_db, "Writes processed data to", "MongoDB Driver")
+Rel(ai_inference_service, analytical_db, "Reads from", "MongoDB Driver")
+Rel(ai_training_service, analytical_db, "Reads from", "MongoDB Driver")
+
+Rel(financial_aggregation_service, event_bus, "Publishes events to", "AMQP")
+Rel(transaction_service, event_bus, "Publishes events to", "AMQP")
+Rel(goal_service, event_bus, "Publishes events to", "AMQP")
+Rel(notification_service, event_bus, "Subscribes to", "AMQP")
+Rel(ai_training_service, event_bus, "Subscribes to", "AMQP")
+
+Rel(financial_aggregation_service, cache, "Caches data in", "Redis Protocol")
+Rel(transaction_service, cache, "Caches data in", "Redis Protocol")
+Rel(goal_service, cache, "Caches data in", "Redis Protocol")
+Rel(ai_inference_service, cache, "Reads cached data from", "Redis Protocol")
+
+Rel(finance_data_collector, banking_apis, "Collects data from", "HTTPS, OAuth2")
+Rel(finance_data_collector, investment_apis, "Collects data from", "HTTPS, OAuth2")
+Rel(finance_data_collector, credit_service, "Collects data from", "HTTPS, API Key")
+Rel(finance_data_collector, financial_news, "Collects data from", "HTTPS, API Key")
+Rel(finance_data_collector, education_content, "Collects data from", "HTTPS, API Key")
+
+Rel(finance_data_collector, event_bus, "Publishes collected data to", "AMQP")
+Rel(financial_aggregation_service, finance_data_collector, "Triggers data collection", "Internal API")
+
+Rel(ai_inference_service, ai_training_service, "Uses models from", "Model artifacts")
+Rel(nlp_service, ai_inference_service, "Forwards processed queries to", "Internal API")
+
+Rel(identity_service, cache, "Stores sessions in", "Redis Protocol")
+
+@enduml

@@ -1,0 +1,105 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Core Use Case Diagram"
+
+actor IndividualCustomer as user [#08427B]
+actor FinancialAdvisor as advisor [#08427B]
+
+package Authentication {
+    usecase UC01: Authenticate User
+        note right of UC01
+            **Req. ID:** FR01, NFR06  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Accounts through Banking APIs
+        note right of UC03
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+        
+    usecase UC04: View Transactions 
+        note right of UC04
+            **Req. ID:** FR03, FR19  
+            **Description:** Displays categorized and aggregated transactions for the user's view.
+        end note
+    
+    usecase UC05: Categorize Transactions
+        extend UC04
+        
+    usecase UC06: Create Budgets 
+        note right of UC06
+            **Req. ID:** FR08  
+            **Description:** Allows users to set and track financial goals, including creating budgets.
+        end note
+    
+    usecase UC07: Monitor Goals Progression
+        extend UC06
+        
+    usecase UC09: Set Financial Goals 
+        generalize UC06
+        
+}
+
+package Analysis {
+    usecase UC13: Analyze Spending Patterns  
+        note right of UC13
+            **Req. ID:** FR04, FR25  
+            **Description:** Visualizes spending trends and financial history for insights.
+        end note
+    
+    usecase UC17: AI-Generated Insights 
+        note right of UC17
+            **Req. ID:** FR05  
+            **Description:** Provides personalized financial recommendations based on user data, using advanced algorithms.
+        end note
+        
+    usecase UC23: Receive Financial News Updates 
+        extend UC17
+    
+}
+
+package Recommendations {
+    usecase UC24: Personalized Investment Advice
+        note right of UC24
+            **Req. ID:** FR06  
+            **Description:** Suggests investment opportunities tailored to the user's profile and financial goals.
+        end note
+        
+    usecase UC31: Debt Management Strategies 
+        extend UC24
+    
+}
+
+package Planning {
+    usecase UC28: Forecast Financial Projections
+        note right of UC28
+            **Req. ID:** FR07, FR10  
+            **Description:** Generates forecasts based on historical data and user input.
+        end note
+        
+    usecase UC35: Plan for Retirement 
+        generalize UC28
+    
+}
+
+package Collaboration {
+    usecase UC46: Share Data with Advisors
+        extend UC09
+}
+
+' Cross-package relationships
+UC17 ..> UC13 : <<extend>>
+UC24 ..> UC17 : <<include>>
+
+user --> UC01
+advisor --> UC05, UC08, UC09
+
+banking_api --> UC03 
+investment_api --> UC06 
+
+ai_engine --> UC17  
+
+@enduml

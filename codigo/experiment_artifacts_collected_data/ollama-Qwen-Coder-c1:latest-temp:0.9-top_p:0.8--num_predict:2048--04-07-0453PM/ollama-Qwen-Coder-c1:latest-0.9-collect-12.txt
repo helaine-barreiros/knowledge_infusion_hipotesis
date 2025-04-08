@@ -1,0 +1,205 @@
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+' ACTOR DEFINITION
+actor "Individual Customer" as user
+actor "Financial Advisor" as advisor
+actor "Banking API Service" as banking_api #lightblue
+actor "Investment API Service" as investment_api #lightblue
+actor "Credit Scoring Service" as credit_service #lightgreen
+
+' PACKAGE DEFINITION
+package "Authentication & Security" {
+    usecase "UC01: Authenticate User" as UC01
+}
+
+package "Financial Account Management" {
+    usecase "UC02: Connect Financial Accounts" as UC02
+    
+    note right of UC02
+      **Req. ID:** FR02
+      **Description:** Securely connects to users' financial accounts 
+      using banking APIs.
+    end note
+
+    usecase "UC03: View Transactions" as UC03
+}
+
+package "Analysis & Insights" {
+    usecase "UC04: Receive AI-Enhanced Financial Recommendations" as UC04
+    
+    note right of UC04
+      **Req. ID:** FR05, FR06, NFR19
+      **Description:** Provides personalized financial insights and 
+      recommendations based on historical data.
+    end note
+
+    usecase "UC05: Analyze Spending Patterns" as UC05
+    
+    note right of UC05
+      **Req. ID:** FR04, FR07
+      **Description:** Visualizes spending patterns and allows users to set 
+      financial goals.
+    end note
+}
+
+package "Planning & Budgeting" {
+    usecase "UC06: Create and Track Budgets" as UC06
+    
+    note right of UC06
+      **Req. ID:** FR08, FR12
+      **Description:** Allows users to create budgets and track progress.
+    end note
+
+    usecase "UC07: Forecast Financial Positions" as UC07
+    
+    note right of UC07
+      **Req. ID:** FR10
+      **Description:** Forecasts future financial positions based on historical data.
+    end note
+}
+
+package "Collaboration & Sharing" {
+    usecase "UC08: Share Selected Data with Advisors" as UC08
+    
+    note right of UC08
+      **Req. ID:** FR13, NFR24
+      **Description:** Enables users to share selected financial data 
+      and insights with financial advisors.
+    end note
+
+    usecase "UC09: View Advisor Insights & Recommendations" as UC09
+    
+    note right of UC09
+      **Req. ID:** FR13, NFR24
+      **Description:** Allows users to view insights and recommendations from 
+      their financial advisor.
+    end note
+}
+
+package "Investment Management" {
+    usecase "UC10: Suggest Investment Opportunities" as UC10
+    
+    note right of UC10
+      **Req. ID:** FR11, NFR24
+      **Description:** Provides investment opportunities based on user profile 
+      and financial data.
+    end note
+
+    usecase "UC11: Track Cryptocurrency Portfolio" as UC11
+    
+    note right of UC11
+      **Req. ID:** FR15, NFR24
+      **Description:** Tracks cryptocurrency portfolio and provides analysis.
+    end note
+}
+
+package "Debt Management & Alerts" {
+    usecase "UC12: Generate Debt Repayment Simulations" as UC12
+    
+    note right of UC12
+      **Req. ID:** FR10, NFR24
+      **Description:** Provides debt management strategies and repayment simulations.
+    end note
+
+    usecase "UC13: Set Up Alerts for Unusual Spending Patterns" as UC13
+    
+    note right of UC13
+      **Req. ID:** FR09
+      **Description:** Delivers alerts for unusual spending patterns to users.
+    end note
+}
+
+package "Reporting & Analytics" {
+    usecase "UC14: Generate Financial Health Reports" as UC14
+    
+    note right of UC14
+      **Req. ID:** FR15, NFR24
+      **Description:** Generates periodic financial health reports for users.
+    end note
+
+    usecase "UC15: Access Customized Dashboards & Reports" as UC15
+    
+    note right of UC15
+      **Req. ID:** NFR09, FR13
+      **Description:** Allows customization and access to customized dashboards 
+      and reports.
+    end note
+}
+
+package "General Features" {
+    usecase "UC16: Access Chatbot for Financial Queries" as UC16
+    
+    note right of UC16
+      **Req. ID:** FR14, NFR23
+      **Description:** Provides a chatbot interface for users to ask financial 
+      questions.
+    end note
+
+    usecase "UC17: Offline Mode with Limited Functionality" as UC17
+    
+    note right of UC17
+      **Req. ID:** FR14, NFR23
+      **Description:** Offers limited functionality in offline mode.
+    end note
+
+    usecase "UC18: Support Internationalization and Multiple Currencies" as UC18
+    
+    note right of UC18
+      **Req. ID:** NFR08, NFR25
+      **Description:** Supports multiple currencies and internationalization 
+      standards (e.g., WCAG 2.1).
+    end note
+
+    usecase "UC19: Provide Explanations for AI Recommendations" as UC19
+    
+    note right of UC19
+      **Req. ID:** NFR07, FR14, FR15
+      **Description:** Provides explanations and reasoning behind AI-generated 
+      recommendations.
+    end note
+
+    usecase "UC20: Maintain Audit Trail of Data Access" as UC20
+    
+    note right of UC20
+      **Req. ID:** NFR11, NFR24
+      **Description:** Maintains an audit trail for all data access and 
+      modifications.
+    end note
+
+}
+
+' CROSS-PACKAGE RELATIONSHIPS
+UC06 ..> UC03 : <<include>>
+UC07 ..> UC05 : <<extend>>
+
+' ACTOR-USE CASE RELATIONSHIPS
+user --> UC01
+user --> UC02
+user --> UC04
+user --> UC05
+user --> UC06
+user --> UC07
+user --> UC08
+user --> UC09
+user --> UC10
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+user --> UC16
+user --> UC17
+user --> UC18
+user --> UC19
+user --> UC20
+
+advisor --> UC09
+banking_api --> UC02
+investment_api --> UC10
+credit_service --> UC03
+
+[Done: True
+Done Reason: stop
+Eval Count: 1506]

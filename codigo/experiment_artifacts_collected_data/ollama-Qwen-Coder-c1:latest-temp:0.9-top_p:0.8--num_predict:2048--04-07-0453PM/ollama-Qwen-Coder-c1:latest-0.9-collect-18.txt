@@ -1,0 +1,117 @@
+```plantuml
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+' ACTOR DEFINITION
+actor "Individual Customer" as user
+actor "Financial Advisor" as advisor
+
+' PACKAGE DEFINITION
+package "Authentication & Security" {
+    usecase "UC01: Authenticate User" as UC01
+    note right of UC01
+      **Req. ID:** FR01, NFR06
+      Allows users to authenticate via username/password or OAuth2 providers.
+    end note
+    
+    usecase "UC02: Manage Account Settings" as UC02
+}
+
+package "Financial Management & Aggregation" {
+    usecase "UC03: Connect Financial Accounts" as UC03
+    usecase "UC04: Retrieve Transactions" as UC04
+    usecase "UC05: Categorize Transactions" as UC05
+    
+    UC03 ..> UC04 : <<include>>
+}
+
+package "Analysis & Recommendations" {
+    usecase "UC06: View Financial Dashboard" as UC06
+    usecase "UC07: Receive AI Insights" as UC07
+    
+    note right of UC07
+      **Req. ID:** FR05, FR06
+      Provides personalized financial recommendations based on spending habits.
+    end note
+
+    usecase "UC08: Generate Personalized Recommendations" as UC08
+    UC09 --|> UC08
+    
+    usecase "UC09: Forecast Future Financial Positions" as UC09
+}
+
+package "Goal Setting & Budgeting" {
+    usecase "UC10: Set and Track Goals" as UC10
+    usecase "UC11: Create and Monitor Budgets" as UC11
+    
+    note right of UC11
+      **Req. ID:** FR07, FR08
+      Allows users to set financial goals and monitor their progress.
+    end note
+
+    usecase "UC12: Receive Alerts for Unusual Spending" as UC12
+}
+
+package "Collaboration & Sharing" {
+    usecase "UC13: Share Financial Data with Advisors" as UC13
+    
+    note right of UC13
+      **Req. ID:** FR13
+      Enables users to share financial data with trusted advisors.
+    end note
+
+    usecase "UC14: Chatbot for Financial Queries" as UC14
+}
+
+package "Reporting & Analytics" {
+    usecase "UC15: Generate Periodic Reports" as UC15
+    
+    note right of UC15
+      **Req. ID:** FR12, NFR08
+      Produces comprehensive financial health reports.
+    end note
+
+    usecase "UC16: View Custom Dashboards and Reports" as UC16
+}
+
+package "Advanced Features & Investments" {
+    usecase "UC17: Suggest Investment Opportunities" as UC17
+    
+    note right of UC17
+      **Req. ID:** FR11, NFR09
+      Recommends suitable investment options based on user profile.
+    end note
+
+    usecase "UC18: Manage Cryptocurrency Portfolio" as UC18
+}
+
+package "Debt Management & Simulations" {
+    usecase "UC19: Debt Management Strategies" as UC19
+    
+    note right of UC19
+      **Req. ID:** FR12, NFR06
+      Provides strategies for debt repayment with simulation.
+    end note
+
+    usecase "UC20: Repayment Simulation and Analysis" as UC20
+}
+
+' CROSS-PACKAGE RELATIONSHIPS
+user --> UC03
+user --> UC04
+user --> UC05
+user --> UC06
+user --> UC07
+user --> UC10
+user --> UC11
+user --> UC12
+advisor --> UC09
+bank --> UC03
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 847]

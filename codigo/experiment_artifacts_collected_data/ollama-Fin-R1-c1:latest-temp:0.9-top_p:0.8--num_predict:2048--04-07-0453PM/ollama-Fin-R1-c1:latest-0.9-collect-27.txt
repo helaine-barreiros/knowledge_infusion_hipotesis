@@ -1,0 +1,111 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Enhanced Personal Finance Management System - Use Case Diagram"
+
+actor IndividualCustomer as user
+actor FinancialAdvisor as advisor
+system PFMSystem as pfm #SYSTEM_COLOR
+system BankingAPI as bankapi #EXTERNAL_SYSTEM_COLOR
+system InvestmentAPI as investmentapi #EXTERNAL_SYSTEM_COLOR
+system CreditService as creditservice #EXTERNAL_SYSTEM_COLOR
+system NewsService as news_service #EXTERNAL_SYSTEM_COLOR
+
+package "Authentication & Security" {
+    usecase UC01: Authenticate User
+        note right of UC01
+            **Req. ID:** FR01, NFR06  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+
+}
+
+package "Financial Account Management" {
+    usecase UC03: Connect Financial Accounts <<<<include>> BankingAPI
+        note right of UC03
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+
+    usecase UC04: View Transactions 
+    usecase UC05: Categorize Transactions <<<<extend>> UC04
+    
+    UC03 --> UC04 : <<include>>
+}
+
+package "Analysis & Insights" {
+    usecase UC06: View Financial Dashboard
+    usecase UC07: Receive AI Insights
+
+    usecase UC08: View Basic Reports  
+    usecase UC09: View Advanced Analytics ----> UC08
+    
+    note right of UC09
+        **Description:** Advanced analytics extend basic reports with more detailed metrics.
+    end note
+
+}
+
+package "Goal Setting & Budgeting" {
+    usecase UC10: Set Financial Goals 
+    usecase UC11: Track Progress  
+    usecase UC12: Adjust Goals  
+
+    UC10 --> UC11 : <<include>>
+    UC11 --> UC12 : <<extend>>
+}
+
+package "Recommendations & Alerts" {
+    usecase UC13: Get Personalized Recommendations 
+    usecase UC14: Set Spending Limits  
+    usecase UC15: Receive Financial Alerts
+
+    note right of UC14
+        **Description:** Allows users to set limits for specific categories or total spending.
+    end note
+    
+}
+
+package "Collaboration" {
+    usecase UC16: Share Data with Advisors <<<<include>> CreditService, NewsService  
+    usecase UC17: Receive Advisor Feedback  
+
+    UC16 --> UC17 : <<extend>>
+    
+}
+
+package "AI & Machine Learning" {
+    usecase UC18: Run Financial Simulations
+    usecase UC19: Analyze Market Trends  
+    usecase UC20: Provide Investment Advice
+
+    note right of UC19
+        **Description:** Uses AI to interpret market data and make predictions.
+    end note
+    
+}
+
+package "Reporting & Analysis" {
+    usecase UC21: Generate Financial Reports 
+    usecase UC22: Export Data  
+
+    note right of UC21
+        **Description:** Periodic reports summarizing financial health, with options for export.
+    end note
+
+}
+
+user --> {UC01, UC03, UC04}
+advisor --> {UC09, UC17}
+bankapi --> UC03  
+investmentapi --> UC08  
+news_service --> UC22  
+
+Rel(pfm_system, ai_engine) <<<<include>>
+ai_engine --> UC06
+ai_engine --> UC19
+
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 746]

@@ -1,0 +1,95 @@
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+actor "Individual Customer" as user
+actor "Financial Advisor" as advisor
+
+package "Authentication & Security" {
+    usecase "UC01: Authenticate User" as UC01 <<include>>
+}
+
+package "Financial Account Management" {
+    usecase "UC02: Connect Financial Accounts" as UC02
+    usecase "UC03: Retrieve Transactions" as UC03 <<extend>>
+
+    note right of UC02
+      **Req. ID:** FR02, NFR06
+      **Description:** Securely links external financial accounts 
+      using banking APIs to retrieve transaction data.
+    end note
+    
+}
+
+package "Analysis & Recommendations" {
+    usecase "UC04: Generate Insights and Recommendations" as UC04 <<include>>
+    usecase "UC05: View Financial Dashboard" as UC05
+    usecase "UC06: Create Budgets and Goals" as UC06
+    usecase "UC07: Forecast Future Positions" as UC07
+}
+
+package "Planning & Management" {
+    usecase "UC08: Set Debt Repayment Strategies" as UC08 <<extend>>
+    usecase "UC09: Manage Cryptocurrency Portfolio" as UC09
+    
+    note right of UC08
+      **Req. ID:** FR12, NFR04
+      **Description:** Allows users to create repayment plans and 
+      simulate the impact on their financial health.
+    end note
+
+}
+
+package "Collaboration & Support" {
+    usecase "UC10: Share Financial Data with Advisors" as UC10 <<extend>>
+    usecase "UC11: Chatbot for Financial Queries" as UC11
+}
+
+user --> UC01
+user --> UC02
+user --> UC03
+
+advisor --> UC10
+advisor --> UC11
+
+package "Financial Insights & Recommendations"
+  package "Insights Generation"
+    usecase "UC12: Receive AI-Enhanced Financial Insights" as UC12 <<include>>
+  package "Recommendation Engine"
+    usecase "UC13: Suggest Investment Opportunities" as UC13
+    usecase "UC14: Generate Personalized Debt Management Strategies" as UC14
+
+user --> UC12
+advisor --> UC13
+
+package "Reporting & Analytics"
+  usecase "UC15: View Financial Health Reports" as UC15 <<extend>>
+  usecase "UC16: Track Cryptocurrency Portfolio Performance" as UC16
+  
+note right of UC15
+      **Req. ID:** FR09, NFR03
+      **Description:** Provides detailed reports and visualizations 
+      to help users understand their financial health.
+    end note
+
+user --> UC15
+advisor --> UC16
+
+package "Utility & Support"
+  usecase "UC17: Manage Account Settings" as UC17 <<extend>>
+  usecase "UC18: Enable Offline Mode" as UC18
+  
+note right of UC17
+      **Req. ID:** FR02, NFR05
+      **Description:** Allows users to manage their account settings 
+      and enable offline mode for limited functionality.
+    end note
+
+user --> UC17
+advisor --> UC18
+
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 717]

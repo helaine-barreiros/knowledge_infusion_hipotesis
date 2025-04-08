@@ -1,0 +1,113 @@
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+' ACTOR DEFINITION
+actor "Individual Customer" as user
+actor "Financial Advisor" as advisor
+
+package "Authentication & Security" {
+    usecase "UC01: Authenticate User" as UC01 <<include>>
+    
+    note right of UC01
+      **Req. ID:** FR01, NFR06
+      Allows users to authenticate via username/password or OAuth2 providers.
+    end note
+    
+    usecase "UC02: Manage Account Settings" as UC02
+}
+
+package "Financial Management & Data Aggregation" {
+    usecase "UC03: Connect Financial Accounts" as UC03 <<include>>
+    
+    note right of UC03
+      **Req. ID:** FR02, NFR05
+      Securely links external financial accounts using banking APIs to retrieve transaction data.
+    end note
+    
+    usecase "UC04: View Transactions" as UC04 <<extend>> UC03
+    
+    usecase "UC05: Categorize Transactions" as UC05 <<include>>
+    
+    usecase "UC06: Aggregate Financial Data" as UC06
+}
+
+package "Analysis & Recommendations" {
+    usecase "UC07: View Financial Dashboard" as UC07 <<include>> UC04
+    
+    note right of UC07
+      **Req. ID:** FR03, FR05, FR12
+      Provides financial aggregation and visualization with AI-powered insights.
+    end note
+    
+    usecase "UC08: Receive Recommendations" as UC08 <<extend>> UC07
+    
+    usecase "UC09: Generate Financial Health Reports" as UC09
+}
+
+package "Goal Setting & Budgeting" {
+    usecase "UC10: Set Financial Goals" as UC10
+    
+    note right of UC10
+      **Req. ID:** FR07, NFR08
+      Allows users to set and track financial goals with visualizations.
+    end note
+    
+    usecase "UC11: Create Budgets" as UC11 <<extend>> UC10
+    
+    usecase "UC12: Monitor Budget Compliance" as UC12
+}
+
+package "Debt Management & Investment Suggestion" {
+    usecase "UC13: View Debt Overview" as UC13
+    
+    note right of UC13
+      **Req. ID:** FR12, NFR09
+      Provides debt management strategies and repayment simulations.
+    end note
+    
+    usecase "UC14: Suggest Investment Opportunities" as UC14 <<extend>> UC15
+    
+    usecase "UC15: Monitor Investments" as UC15
+}
+
+package "Notifications & Alerts" {
+    usecase "UC16: Set Notifications" as UC16
+    
+    note right of UC16
+      **Req. ID:** FR09, NFR10
+      Delivers alerts for unusual spending patterns and supports internationalization.
+    end note
+    
+    usecase "UC17: Receive Alerts" as UC17 <<include>> UC16
+}
+
+package "Advanced Features & Accessibility" {
+    usecase "UC18: Use AI Chatbot" as UC18
+    
+    note right of UC18
+      **Req. ID:** FR04, NFR12
+      Provides a chatbot for financial queries and accessibility features.
+    end note
+    
+    usecase "UC19: Customize Dashboards & Reports" as UC19 <<include>> UC06
+    
+    usecase "UC20: Support Offline Mode" as UC20
+}
+
+' CROSS-PACKAGE RELATIONSHIPS
+
+user --> UC01
+user --> UC03
+user --> UC04
+user --> UC07
+user --> UC10
+user --> UC12
+user --> UC16
+user --> UC18
+advisor --> UC09
+bank --> UC03
+investment_api --> UC05
+ai_engine --> UC07
+
+@enduml

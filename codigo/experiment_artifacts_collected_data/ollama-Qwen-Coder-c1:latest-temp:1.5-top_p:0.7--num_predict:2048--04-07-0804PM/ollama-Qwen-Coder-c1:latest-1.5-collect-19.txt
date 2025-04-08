@@ -1,0 +1,233 @@
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+' ACTOR DEFINITION
+actor "Individual Customer" as user [#CUSTOMER_COLOR]
+actor "Financial Advisor" as advisor [#SYSTEM_COLOR]
+
+package "Authentication & Security" {
+    usecase "UC01: Authenticate User" as UC01 <<include>>
+    
+    note right of UC01
+      **Req. ID:** FR01, NFR06
+      **Description:** Allows users to authenticate via 
+      username/password or OAuth2 providers, with 
+      optional multi-factor authentication.
+    end note
+    
+    usecase "UC02: Manage Account Settings" as UC02 <<include>>
+}
+
+package "Financial Data Management" {
+    usecase "UC03: Connect Financial Accounts" as UC03 <<extend>> UC01
+    usecase "UC04: View Transactions" as UC04
+    
+    note right of UC03
+      **Req. ID:** FR02
+      **Description:** Securely links external financial accounts 
+      using banking APIs to retrieve transaction data.
+    end note
+    
+    note right of UC04
+      **Req. ID:** FR03, NFR07
+      **Description:** Displays and categorizes user transactions for analysis.
+    end note
+    
+    usecase "UC05: Categorize Transactions" as UC05 <<extend>> UC04
+}
+
+package "Analysis & Insights" {
+    usecase "UC06: View Financial Dashboard" as UC06 <<include>>
+    
+    note right of UC06
+      **Req. ID:** FR04, NFR12
+      **Description:** Provides a visual representation of user spending patterns and financial history.
+    end note
+    
+    usecase "UC07: Receive AI Insights" as UC07
+    
+    note right of UC07
+      **Req. ID:** FR05, NFR09
+      **Description:** Offers personalized financial insights based on historical data using the AI engine.
+    end note
+    
+    usecase "UC08: View Basic Reports" as UC08 <<include>>
+    
+    note right of UC08
+      **Req. ID:** FR16
+      **Description:** Generates basic reports such as spending summaries and account balances.
+    end note
+    
+    usecase "UC09: View Advanced Analytics" as UC09 <<extend>> UC08
+    
+    note right of UC09
+      **Req. ID:** NFR12, FR15
+      **Description:** Provides advanced analytics like predictive forecasting and trend analysis for comprehensive financial health reports.
+    end note
+}
+
+package "Budgeting & Goal Setting" {
+    usecase "UC10: Set Financial Goals" as UC10 <<include>>
+    
+    note right of UC10
+      **Req. ID:** FR07, NFR12
+      **Description:** Allows users to define and track financial goals such as savings targets or debt repayment.
+    end note
+    
+    usecase "UC11: Monitor Budget Compliance" as UC11 <<include>>
+    
+    note right of UC11
+      **Req. ID:** FR08, NFR12
+      **Description:** Tracks budget adherence and provides alerts for deviations from set budgets.
+    end note
+}
+
+package "Financial Recommendations & Planning" {
+    usecase "UC12: Generate Personalized Recommendations" as UC12 <<include>>
+    
+    note right of UC12
+      **Req. ID:** FR06, NFR09
+      **Description:** Provides AI-driven financial recommendations tailored to the user's situation.
+    end note
+    
+    usecase "UC13: Forecast Future Financial Positions" as UC13
+    
+    note right of UC13
+      **Req. ID:** FR10, NFR04
+      **Description:** Utilizes historical data and AI models to forecast future financial positions for better planning.
+    end note
+    
+    usecase "UC14: Create Investment Portfolios" as UC14 <<include>>
+    
+    note right of UC14
+      **Req. ID:** FR11, NFR09
+      **Description:** Recommends investment opportunities based on user risk tolerance and financial goals.
+    end note
+    
+    usecase "UC15: Manage Debt Repayment Strategies" as UC15 <<include>>
+    
+    note right of UC15
+      **Req. ID:** FR12, NFR09
+      **Description:** Offers strategies for managing debt repayment with simulations and recommendations.
+    end note
+}
+
+package "Collaboration & Sharing" {
+    usecase "UC16: Share Financial Data with Advisors" as UC16 <<include>>
+    
+    note right of UC16
+      **Req. ID:** FR13, NFR07
+      **Description:** Enables users to share selected financial data and insights with financial advisors for collaborative advice.
+    end note
+    
+    usecase "UC17: Receive Advice from Advisors" as UC17 <<include>>
+    
+    note right of UC17
+      **Req. ID:** FR02, NFR04
+      **Description:** Allows users to access shared customer data and receive personalized financial advice.
+    end note
+    
+    usecase "UC18: Collaborate on Budgets & Goals" as UC18 <<include>>
+    
+    note right of UC18
+      **Req. ID:** FR07, NFR04
+      **Description:** Facilitates collaboration between users and financial advisors in setting and tracking joint budgets and goals.
+    end note
+}
+
+package "Additional Features & Services" {
+    usecase "UC19: Access Financial News" as UC19 <<include>>
+    
+    note right of UC19
+      **Req. ID:** FR09, NFR08
+      **Description:** Provides up-to-date financial news and market indicators to help users make informed decisions.
+    end note
+    
+    usecase "UC20: Use Chatbot for Queries" as UC20 <<include>>
+    
+    note right of UC20
+      **Req. ID:** FR14, NFR08
+      **Description:** Offers a chatbot interface for quick financial queries and support.
+    end note
+    
+    usecase "UC21: Generate Financial Health Reports" as UC21 <<extend>> UC06
+    
+    note right of UC21
+      **Req. ID:** FR15, NFR04
+      **Description:** Generates comprehensive reports that provide a detailed overview of the user's financial health and status.
+    end note
+    
+    usecase "UC22: Track Cryptocurrency Portfolio" as UC22 <<include>>
+    
+    note right of UC22
+      **Req. ID:** FR13, NFR08
+      **Description:** Allows users to monitor their cryptocurrency holdings for analysis and management.
+    end note
+    
+    usecase "UC23: Manage Offline Mode" as UC23 <<include>>
+    
+    note right of UC23
+      **Req. ID:** FR17, NFR04
+      **Description:** Provides limited functionality in offline mode to support users without internet access.
+    end note
+    
+    usecase "UC24: Ensure Accessibility" as UC24 <<include>>
+    
+    note right of UC24
+      **Req. ID:** NFR13, NFR08
+      **Description:** Ensures the system is accessible according to WCAG 2.1 level AA standards for all users.
+    end note
+    
+    usecase "UC25: Maintain Audit Trail" as UC25 <<include>>
+    
+    note right of UC25
+      **Req. ID:** NFR08, NFR11
+      **Description:** Keeps an audit trail of data access and actions performed by users for compliance and security purposes.
+    end note
+    
+    usecase "UC26: Allow Customization" as UC26 <<include>>
+    
+    note right of UC26
+      **Req. ID:** NFR08, FR14
+      **Description:** Allows users to customize dashboards and reports based on their preferences and needs.
+    end note
+    
+    usecase "UC27: Provide Multi-Language Support" as UC27 <<include>>
+    
+    note right of UC27
+      **Req. ID:** NFR08, FR13
+      **Description:** Supports multiple languages to cater to a global user base and accommodate different linguistic preferences.
+    end note
+    
+    usecase "UC28: Ensure Compliance with Regulations" as UC28 <<include>>
+    
+    note right of UC28
+      **Req. ID:** NFR01, FR04
+      **Description:** Ensures the system complies with financial regulations such as GDPR and PSD2 to protect user data.
+    end note
+    
+    usecase "UC29: Secure Data Storage" as UC29 <<include>>
+    
+    note right of UC29
+      **Req. ID:** NFR03, FR18
+      **Description:** Implements encryption for all financial data stored both at rest and in transit to ensure secure access.
+    end note
+    
+    usecase "UC30: Monitor System Performance" as UC30 <<include>>
+    
+    note right of UC30
+      **Req. ID:** NFR14, FR25
+      **Description:** Monitors system performance metrics such as response times and availability to ensure high uptime.
+    end note
+    
+}
+
+' CROSS-PACKAGE RELATIONSHIPS
+user --> UC06 : <<include>>
+user --> UC07 : <<include>>
+user --> UC1
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

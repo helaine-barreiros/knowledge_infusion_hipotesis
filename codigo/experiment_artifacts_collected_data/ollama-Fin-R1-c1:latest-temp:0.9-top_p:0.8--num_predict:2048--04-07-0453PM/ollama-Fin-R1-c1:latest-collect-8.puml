@@ -1,0 +1,89 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Enhanced Personal Finance Management System: Core Functionalities"
+
+actor IndividualCustomer as user #CUSTOMER_COLOR  
+actor Advisor as advisor #CUSTOMER_COLOR  
+
+package "Authentication & Security" {  
+    usecase UC01: Authenticate User <<<< include FR01, NFR06 >>>>  
+        note right of UC01  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers. Supports multi-factor authentication (MFA) as an optional feature.  
+        end note  
+}  
+
+package "Financial Account Management" {  
+    usecase UC03: Connect Financial Accounts <<<< include FR02 >>>>  
+        note right of UC03  
+            **Description:** Securely links external financial accounts using banking APIs to fetch transaction data.  
+        end note  
+    usecase UC04: View Transactions  
+    usecase UC05: Categorize Transactions  
+        
+    UC03 ..> UC04 : <<include>>  -- Transaction history aggregation  
+    UC04 ..> UC05 : <<extend>>   -- Optional categorization by user preference  
+}  
+
+package "Analysis & Insights" {  
+    usecase UC06: View Financial Dashboard <<<< include FR04 >>>>  
+        note right of UC06  
+            **Description:** Visualizes spending patterns, income sources, and financial history.  
+        end note  
+    usecase UC07: Receive AI-Driven Recommendations <<<< extend FR05,FR06 >>>
+        note right of UC07
+            **Description**: Delivers personalized financial advice based on historical data and user goals.
+        end note  
+
+}  
+
+package "Goal Setting & Budgeting" {  
+    usecase UC10: Set Financial Goals <<<< include FR07 >>>>  
+    usecase UC11: Monitor Savings Progress  
+        note right of UC11
+            **Description**: Tracks progress towards set financial goals.  
+        end note  
+}  
+
+package "Risk Management & Alerts" {  
+    usecase UC12: Configure Spending Limits <<<< include FR09 >>>>  
+        note right of UC12
+            **Description**: Users can define thresholds for alerts on spending patterns or transaction amounts.  
+        end note  
+    usecase UC13: Receive Transaction Notifications  
+}  
+
+package "Investment & Retirement" {  
+    usecase UC14: Explore Investment Opportunities <<<< include FR10,FR11 >>>>  
+        note right of UC14
+            **Description**: Recommends investment strategies based on user risk tolerance and financial goals.  
+        end note  
+}  
+
+package "Collaboration & Sharing" {  
+    usecase UC15: Share Financial Data with Advisors <<<< include FR13 >>>>  
+        note right of UC15
+            **Description**: Enables users to share specific data segments with advisors for review or analysis.  
+        end note  
+}  
+
+package "Advanced Analytics" {  
+    usecase UC08: Basic Reports (Generalized)  
+    usecase UC09: Advanced Financial Analysis --|> UC08  -- Generalization relationship  
+        note right of UC09
+            **Description**: Provides more detailed and technical financial analysis.  
+        end note  
+}  
+
+' Cross-package relationships  
+UC14 ..> UC03 : <<extend>>   -- Investment tracking depends on account data  
+UC06 ..> UC05 : <<include>>  -- Dashboards can include categorized transactions  
+
+' Actor-use case relationships  
+user --> UC01  
+user --> UC03  
+advisor --> UC09  
+bank --> UC03  
+investment_api --> UC04  
+ai_engine --> UC07,UC14  
+
+@enduml

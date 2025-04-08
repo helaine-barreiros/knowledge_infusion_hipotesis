@@ -1,0 +1,146 @@
+```plantuml
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+actor "Individual Customer" as user
+actor "Financial Advisor" as advisor
+
+package "Authentication & Security" {
+    usecase "UC01: Authenticate User" as UC01 <<include>>
+    note right of UC01
+      **Req. ID:** FR01, NFR06
+      **Description:** Allows users to authenticate via 
+      username/password or OAuth2 providers.
+    end note
+    
+    usecase "UC02: Manage Account Settings" as UC02
+}
+
+package "Financial Management & Data Aggregation" {
+    usecase "UC03: Connect Financial Accounts" as UC03 <<include>>
+    note right of UC03
+      **Req. ID:** FR02
+      **Description:** Securely links external financial accounts 
+      using banking APIs to retrieve transaction data.
+    end note
+    
+    usecase "UC04: View Transactions" as UC04
+    usecase "UC05: Categorize Transactions" as UC05 <<extend>>
+    
+    UC03 ..> UC04 : <<include>>
+}
+
+package "Analysis & Recommendations" {
+    usecase "UC06: Receive AI Insights" as UC06 <<include>>
+    note right of UC06
+      **Req. ID:** FR05, FR08, NFR12
+      **Description:** Provides personalized financial recommendations 
+      based on spending habits and user goals.
+    end note
+    
+    usecase "UC07: Generate Personalized Recommendations" as UC07 <<extend>>
+    
+    UC06 ..> UC07 : <<include>>
+}
+
+package "Goal Management & Budgeting" {
+    usecase "UC08: Set Financial Goals" as UC08
+    usecase "UC09: Track Goal Progress" as UC09
+    
+    UC08 --|> UC09
+}
+
+package "Reporting and Notifications" {
+    usecase "UC10: View Financial Reports" as UC10
+    note right of UC10
+      **Req. ID:** FR15, NFR02
+      **Description:** Generates periodic financial health reports 
+      with insights.
+    end note
+    
+    usecase "UC11: Receive Alerts for Unusual Spending Patterns" as UC11
+    
+    UC06 ..> UC11 : <<include>>
+}
+
+package "Investment and Financial Planning" {
+    usecase "UC12: Suggest Investment Opportunities" as UC12
+    note right of UC12
+      **Req. ID:** FR11, NFR08
+      **Description:** Provides investment advice based on user profile 
+      and market trends.
+    end note
+    
+    usecase "UC13: Forecast Future Financial Positions" as UC13
+    
+    UC06 ..> UC13 : <<include>>
+}
+
+package "Debt Management & Analytics" {
+    usecase "UC14: Manage Debt Repayment Strategies" as UC14
+    note right of UC14
+      **Req. ID:** FR12, NFR18
+      **Description:** Offers strategies for debt repayment 
+      with simulations.
+    end note
+    
+    usecase "UC15: Analyze Debt Health" as UC15
+    
+    UC06 ..> UC15 : <<include>>
+}
+
+package "Collaboration & Sharing" {
+    usecase "UC16: Share Financial Data With Advisors" as UC16
+    note right of UC16
+      **Req. ID:** FR13, NFR20
+      **Description:** Enables users to share selected financial data 
+      with their advisors.
+    end note
+    
+    usecase "UC17: Collaborate on Goals and Recommendations" as UC17
+    
+    advisor --> UC16 : <<include>>
+}
+
+package "AI Chatbot & Support" {
+    usecase "UC18: Access AI Chatbot for Financial Queries" as UC18
+    note right of UC18
+      **Req. ID:** FR14, NFR20
+      **Description:** Provides users with support through an AI-powered chatbot 
+      for financial queries.
+    end note
+    
+    usecase "UC19: Provide Multi-Factor Authentication" as UC19 <<include>>
+    
+    advisor --> UC18 : <<extend>>
+}
+
+package "Performance and Usability" {
+    usecase "UC20: View Financial Dashboard" as UC20
+    note right of UC20
+      **Req. ID:** FR04, NFR07
+      **Description:** Provides a customizable financial dashboard 
+      with visualizations.
+    end note
+    
+    usecase "UC21: Enhance User Experience" as UC21 <<extend>>
+    
+    UC20 ..> UC21 : <<include>>
+}
+
+user --> UC01
+user --> UC03
+user --> UC06
+advisor --> UC09
+
+banking_api --> UC03
+investment_api --> UC06
+ai_engine --> UC07
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1093]

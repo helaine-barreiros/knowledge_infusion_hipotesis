@@ -1,0 +1,182 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Case Diagram"
+
+actor IndividualCustomer as user
+actor FinancialAdvisor as advisor
+system PFMSystem as pfm #SYSTEM_COLOR
+system BankingAPI as bankapi #EXTERNAL_SYSTEM_COLOR
+system InvestmentAPI as investapi #EXTERNAL_SYSTEM_COLOR
+system CreditService as creditservice #EXTERNAL_SYSTEM_COLOR
+system NewsService as newsservice #EXTERNAL_SYSTEM_COLOR
+system AuthService as authservice #EXTERNAL_SYSTEM_COLOR
+
+package "Authentication & Security" {
+    usecase UC01: Authenticate User
+        note right of UC01
+            **Req. ID:** FR01, NFR06  
+            Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package "Financial Account Management" {
+    usecase UC03: Connect Financial Accounts : <<include>>
+        note right of UC03
+            **Req. ID:** FR02  
+            Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+    
+    usecase UC04: View Transactions 
+        note right of UC04
+            **Req. ID:** FR03, NFR14  
+            Displays recent transactions for the connected accounts.
+        end note
+        
+    usecase UC05: Categorize Transactions : <<extend>>
+        note right of UC05
+            **Description:** Subsequent step after viewing transactions to categorize them into expense categories.  
+        end note
+    
+    UC03 --> UC04 : <<include>>  
+}
+
+package "Analysis & Recommendations" {
+    usecase UC06: View Financial Dashboard 
+        note right of UC06
+            **Req. ID:** FR04, NFR12  
+            Provides a summary view with spending patterns and financial history.
+        end note
+    
+    usecase UC07: Receive AI Insights : <<include>>
+        note right of UC07
+            **Description:** Receives real-time or scheduled AI-generated insights on spending habits.  
+        end note
+        
+    usecase UC08: Set Financial Goals 
+        note right of UC08
+            **Req. ID:** FR07, NFR13  
+            Allows users to set short-term and long-term financial goals.
+        end note
+    
+    usecase UC09: Generate Recommendations : <<extend>>
+        note right of UC09
+            **Description:** Personalized recommendations based on AI analysis are provided when the user actively seeks them.  
+        end note
+        
+    UC06 --> UC08 : <<include>>  
+}
+
+package "Budgeting & Monitoring" {
+    usecase UC10: Create Budgets 
+        note right of UC10
+            **Req. ID:** FR05, NFR03  
+            Helps users plan their monthly expenses and track adherence to budgets.
+        end note
+    
+    usecase UC11: Monitor Spending : <<include>>
+        note right of UC11
+            **Description:** Tracks actual spending against budgeted amounts in real-time or periodically.  
+        end note
+        
+}
+
+package "Collaboration" {
+    usecase UC12: Share Data with Advisors 
+        note right of UC12
+            **Req. ID:** FR08, NFR05  
+            Enables users to share specific financial data segments with their advisors for review and discussion.
+        end note
+    
+    usecase UC13: Chatbot Interactions : <<include>>
+        note right of UC13
+            **Description:** Users can ask the chatbot questions about finance or get real-time updates.  
+        end note
+        
+}
+
+package "Forecasting & Projections" {
+    usecase UC14: Forecast Future Positions 
+        note right of UC14
+            **Req. ID:** FR09, NFR12  
+            Uses historical data to predict future financial outcomes like net worth or debt levels.
+        end note
+    
+    usecase UC15: Simulate Investment Portfolios : <<include>>
+        note right of UC15
+            **Description:** Allows users to explore different investment scenarios and their potential impacts.  
+        end note
+        
+}
+
+package "Investment Management" {
+    usecase UC16: Suggest Investments 
+        note right of UC16
+            **Req. ID:** FR09, NFR12  
+            Based on user profiles and market data from APIs.
+        end note
+    
+    usecase UC17: Track Cryptocurrency Portfolios : <<include>>
+        note right of UC17
+            **Description:** Monitors performance of crypto holdings alongside traditional investments.  
+        end note
+        
+}
+
+package "Debt Management" {
+    usecase UC18: Manage Debt Repayments 
+        note right of UC18
+            **Req. ID:** FR09, NFR12  
+            Offers strategies and tools to reduce debt obligations.
+        end note
+    
+    usecase UC19: Calculate Interest Savings : <<include>>
+        note right of UC19
+            **Description:** Helps users understand the benefits of paying off debts faster or choosing different repayment plans.  
+        end note
+        
+}
+
+package "Advanced Analytics" {
+    usecase UC20: Advanced Financial Reporting 
+        note right of UC20
+            **Req. ID:** FR15, NFR14  
+            Generates detailed reports with deep dives into financial performance.
+        end note
+    
+    usecase UC21: Economic Indicators Integration : <<include>>
+        note right of UC21
+            **Description:** Incorporates macroeconomic data to contextualize personal finance trends.  
+        end note
+        
+}
+
+package "System Management" {
+    usecase UC22: System Updates & Maintenance 
+        note right of UC22
+            **Req. ID:** NFR03, NFR04  
+            Ensures the system remains operational and performs efficiently.
+        end note
+    
+    usecase UC23: Data Security Audits : <<include>>
+        note right of UC23
+            **Description:** Regular checks to confirm compliance with data security standards like GDPR.  
+        end note
+        
+}
+
+' Actor-Use Case Relationships
+user --> UC01 : Log in/Sign up
+user --> UC04 : View Transactions 
+advisor --> UC09, UC12
+
+pfm --> bankapi : <<include>>
+pfm --> investapi : <<extend>>
+pfm --> creditservice : <<include>>
+pfm --> newsservice : <<include>>
+pfm --> authservice : <<include>>
+
+' Cross-Package Relationships
+UC06 ..> UC04 : Include  
+UC15 ..> investapi : Extend  
+
+@enduml

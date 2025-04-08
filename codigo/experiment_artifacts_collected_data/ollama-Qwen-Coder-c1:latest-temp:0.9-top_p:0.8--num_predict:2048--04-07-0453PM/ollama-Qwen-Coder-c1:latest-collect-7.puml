@@ -1,0 +1,205 @@
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+actor "Individual Customer" as user
+actor "Financial Advisor" as advisor
+
+package "Authentication & Security" {
+    usecase "UC01: Authenticate User" as UC01 <<include>>
+    
+    note right of UC01
+      **Req. ID:** FR01, NFR06
+      **Description:** Allows users to authenticate via 
+      username/password or OAuth2 providers.
+    end note
+    
+    usecase "UC02: Manage Account Settings" as UC02 <<extend>>
+}
+
+package "Financial Data Management" {
+    usecase "UC03: Connect Financial Accounts" as UC03 <<include>>
+
+    note right of UC03
+      **Req. ID:** FR02
+      **Description:** Securely links external financial accounts 
+      using banking APIs to retrieve transaction data.
+    end note
+    
+    usecase "UC04: View Transactions" as UC04
+    usecase "UC05: Categorize Transactions" as UC05 <<extend>>
+    
+    UC03 ..> UC04 : <<include>>
+}
+
+package "Analysis & Insights" {
+    usecase "UC06: View Financial Dashboard" as UC06
+    
+    note right of UC06
+      **Req. ID:** FR04, FR08, FR12
+      **Description:** Provides a visual summary of financial data 
+      and allows users to create customized reports.
+    end note
+    
+    usecase "UC07: Receive AI Insights" as UC07 <<include>>
+    
+    note right of UC07
+      **Req. ID:** FR05, FR12
+      **Description:** Generates personalized recommendations based on 
+      spending habits and financial goals using advanced analytics.
+    end note
+    
+    usecase "UC08: View Basic Reports" as UC08 <<extend>>
+    
+    note right of UC08
+      **Req. ID:** NFR12
+      **Description:** Allows users to customize dashboards for 
+      better data visualization and reporting.
+    end note
+    
+    usecase "UC09: Analyze Credit Score" as UC09
+    
+    note right of UC09
+      **Req. ID:** FR07, FR14
+      **Description:** Provides credit score analysis and management strategies.
+    end note
+
+    UC06 ..> UC08 : <<include>>
+}
+
+package "Budgeting & Goal Setting" {
+    usecase "UC10: Set Financial Goals" as UC10
+    
+    note right of UC10
+      **Req. ID:** FR07, NFR12
+      **Description:** Allows users to define and track personal financial goals.
+    end note
+    
+    usecase "UC11: Monitor Budget Compliance" as UC11 <<include>>
+    
+    note right of UC11
+      **Req. ID:** FR08, NFR14
+      **Description:** Monitors budget adherence and provides alerts for any deviations.
+    end note
+
+    UC10 ..> UC11 : <<include>>
+
+}
+
+package "Investment & Recommendations" {
+    usecase "UC12: View Investment Opportunities" as UC12
+    
+    note right of UC12
+      **Req. ID:** FR11, NFR13
+      **Description:** Suggests investment opportunities based on user profile and market data.
+    end note
+
+    usecase "UC13: Receive AI Recommendations" as UC13 <<include>>
+    
+    note right of UC13
+      **Req. ID:** FR06, FR12, NFR09
+      **Description:** Provides personalized investment recommendations based on user's financial situation.
+    end note
+
+    UC12 ..> UC13 : <<include>>
+
+}
+
+package "Debt Management & Planning" {
+    usecase "UC14: View Debt Status" as UC14
+    
+    note right of UC14
+      **Req. ID:** FR10, NFR09
+      **Description:** Displays user's current debt status and provides repayment simulations.
+    end note
+
+    usecase "UC15: Plan for Financial Security" as UC15 <<include>>
+    
+    note right of UC15
+      **Req. ID:** FR12, NFR14
+      **Description:** Assists users in planning their financial future through customized strategies and scenarios.
+    end note
+
+    UC14 ..> UC15 : <<include>>
+
+}
+
+package "Collaboration & Sharing" {
+    usecase "UC16: Share Financial Data with Advisors" as UC16
+    
+    note right of UC16
+      **Req. ID:** FR13, NFR09
+      **Description:** Allows users to share selected financial data securely and in compliance with regulations.
+    end note
+
+}
+
+package "AI Components & Services" {
+    usecase "UC17: Leverage AI Engine for Analysis" as UC17 <<include>>
+    
+    note right of UC17
+      **Req. ID:** FR05, NFR12, NFR09
+      **Description:** Uses advanced algorithms and reasoning to provide intelligent financial insights.
+    end note
+
+}
+
+package "Notifications & Alerts" {
+    usecase "UC18: Receive Financial Alerts" as UC18
+    
+    note right of UC18
+      **Req. ID:** FR09, NFR07
+      **Description:** Sends real-time alerts for unusual spending patterns and other financial events.
+    end note
+
+}
+
+package "Reporting & Analytics Tools" {
+    usecase "UC19: Generate Financial Health Reports" as UC19
+    
+    note right of UC19
+      **Req. ID:** FR07, NFR12, NFR13
+      **Description:** Produces periodic reports to assess financial health and progress towards goals.
+    end note
+
+}
+
+package "Multi-Factor Authentication & Security" {
+    usecase "UC20: Enable Multi-Factor Auth" as UC20
+    
+    note right of UC20
+      **Req. ID:** NFR06, NFR13
+      **Description:** Offers an additional layer of security through multi-factor authentication.
+    end note
+
+}
+
+user --> UC01
+user --> UC03
+user --> UC04
+user --> UC05
+user --> UC06
+user --> UC07
+user --> UC08
+user --> UC09
+user --> UC10
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+user --> UC16
+user --> UC17
+user --> UC18
+user --> UC19
+user --> UC20
+
+advisor --> UC09
+advisor --> UC13
+
+bank ..> UC03
+invest ..> UC03
+ai ..> UC07
+ai ..> UC13
+
+@enduml

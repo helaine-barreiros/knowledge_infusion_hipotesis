@@ -1,0 +1,249 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Core Use Case Diagram"
+
+actor IndividualCustomer as user [color CUSTOMER_COLOR]
+actor FinancialAdvisor as advisor [color CUSTOMER_COLOR]
+
+package Authentication {
+    usecase UC01: Authenticate User
+        note right of UC01 
+            **Req. ID:** FR01, NFR06  
+            **Description:** Enables users to log in using username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Accounts [color CUSTOMER_COLOR]
+        note right of UC03 
+            **Req. ID:** FR02  
+            **Description:** Securely links user accounts via banking APIs to aggregate transaction data.
+        end note
+        
+    usecase UC04: View Transactions
+        note right of UC04 
+            **Req. ID:** FR03, FR19  
+            **Description:** Displays aggregated financial transactions for the user's accounts.
+        end note
+    
+    usecase UC05: Categorize Transactions [color CUSTOMER_COLOR]
+        extend UC04 <<extend>>
+        
+        note right of UC05 
+            **Req. ID:** FR03, FR19  
+            **Description:** Further classifies transactions into categories (e.g., groceries, entertainment).
+        end note
+}
+
+package AnalysisAndInsights {
+    usecase UC06: View Financial Dashboard [color CUSTOMER_COLOR]
+        note right of UC06 
+            **Req. ID:** FR04, FR19  
+            **Description:** Provides visual representations of spending patterns and financial history.
+        end note
+    
+    usecase UC07: Receive AI Insights
+        note right of UC07 
+            **Req. ID:** FR05, FR23  
+            **Description:** Delivers personalized financial insights using machine learning models to analyze transaction data.
+        end note
+        
+    usecase UC08: Personalized Recommendations [color CUSTOMER_COLOR]
+        extend UC06 <<extend>>
+        
+        note right of UC08 
+            **Req. ID:** FR05, FR23  
+            **Description:** Offers tailored financial recommendations based on user spending patterns and goals.
+        end note
+}
+
+package GoalSetting {
+    usecase UC10: Set Financial Goals [color CUSTOMER_COLOR]
+        note right of UC10 
+            **Req. ID:** FR07, NFR05  
+            **Description:** Allows users to define short-term and long-term financial objectives with tracking features.
+        end note
+        
+    usecase UC12: Track Progress
+        extend UC10 <<extend>>
+        
+        note right of UC12 
+            **Req. ID:** FR07, NFR05  
+            **Description:** Monitors progress towards set goals and provides alerts for underperformance or achievement.
+        end note
+        
+    usecase UC13: Adjust Goals
+        extend UC10 <<extend>>
+        
+        note right of UC13 
+            **Req. ID:** FR07, NFR05  
+            **Description:** Enables users to modify existing goals as needed based on changing circumstances.
+        end note
+}
+
+package Budgeting {
+    usecase UC14: Create Budget [color CUSTOMER_COLOR]
+        note right of UC14 
+            **Req. ID:** FR08, NFR03  
+            **Description:** Assists users in setting up a monthly or annual budget with spending limits.
+        end note
+        
+    usecase UC15: Monitor Budget
+        extend UC14 <<extend>>
+        
+        note right of UC15 
+            **Req. ID:** FR08, NFR03  
+            **Description:** Tracks actual expenditures against the planned budget and provides variance analysis.
+        end note
+        
+    usecase UC16: Adjust Budgets [color CUSTOMER_COLOR]
+        extend UC14 <<extend>>
+        
+        note right of UC16 
+            **Req. ID:** FR08, NFR03  
+            **Description:** Allows users to make real-time changes to their budget allocations.
+        end note
+}
+
+package Alerts {
+    usecase UC20: Receive Financial Alerts [color CUSTOMER_COLOR]
+        note right of UC20 
+            **Req. ID:** FR19, NFR04  
+            **Description:** Notifies the user about significant financial events (e.g., high spending alerts).
+        end note
+}
+
+package Forecasting {
+    usecase UC23: Predict Future Financials [color CUSTOMER_COLOR]
+        note right of UC23 
+            **Req. ID:** FR10, NFR04  
+            **Description:** Generates projections for future financial positions based on historical data and trends.
+        end note
+}
+
+package Investment {
+    usecase UC26: Suggest Investments [color CUSTOMER_COLOR]
+        note right of UC26 
+            **Req. ID:** FR11, NFR05  
+            **Description:** Recommends investment opportunities aligned with the user’s risk profile and financial goals.
+        end note
+}
+
+package DebtManagement {
+    usecase UC30: Plan Repayments [color CUSTOMER_COLOR]
+        note right of UC30 
+            **Req. ID:** FR12, NFR05  
+            **Description:** Helps users develop repayment strategies for debts using various simulation tools.
+        end note
+}
+
+package Collaboration {
+    usecase UC40: Share Data with Advisors [color CUSTOMER_COLOR]
+        note right of UC40 
+            **Req. ID:** FR13, NFR07  
+            **Description:** Facilitates the secure sharing of financial data between users and their advisors.
+        end note
+}
+
+package Chatbot {
+    usecase UC50: Engage with Financial Assistant [color CUSTOMER_COLOR]
+        note right of UC50 
+            **Req. ID:** FR14, NFR06  
+            **Description:** Allows users to ask financial questions via a conversational interface.
+        end note
+}
+
+package Reporting {
+    usecase UC70: Generate Periodic Reports [color CUSTOMER_COLOR]
+        note right of UC70 
+            **Req. ID:** FR15, NFR03  
+            **Description:** Creates detailed reports summarizing financial performance over specified periods.
+        end note
+}
+
+package AdvancedAnalysis {
+    usecase UC80: View Detailed Analytics [color CUSTOMER_COLOR]
+        extend UC60 <<extend>>
+        
+        note right of UC80 
+            **Req. ID:** FR23, NFR04  
+            **Description:** Delivers in-depth financial analysis with customizable metrics and visualizations.
+        end note
+}
+
+package AIComponents {
+    usecase UC90: Leverage AI Engine [color CUSTOMER_COLOR]
+        extend UC70 <<extend>>
+        
+        note right of UC90 
+            **Req. ID:** FR23, NFR11  
+            **Description:** Utilizes the AI reasoning engine for enhanced predictive modeling and recommendation accuracy.
+        end note
+}
+
+package Extensions {
+    usecase UC100: Expand System Capabilities [color CUSTOMER_COLOR]
+        extend UC90 <<extend>>
+        
+        note right of UC100 
+            **Req. ID:** FR24, NFR13  
+            **Description:** Supports future updates and expansions by integrating new AI models or features.
+        end note
+}
+
+' Relationships between packages (e.g., cross-package)
+UC06 ..> UC05 : <<include>> [color CUSTOMER_COLOR]
+UC07 ..> UC20 : <<extend>>
+UC14 ..> UC13 : <<extend>>
+
+user --> UC01 
+advisor --> UC90 
+
+@enduml
+```
+
+This PlantUML code represents the core use case diagram for an AI-powered personal financial management system. The diagram organizes functionality into packages such as Authentication, Financial Account Management, Analysis and Insights, Goal Setting, Budgeting, Alerts, Forecasting, Investment, Debt Management, Collaboration, Chatbot, Reporting, Advanced Analysis, AI Components, Extensions, etc., ensuring clarity in the architecture's complexity. Each use case is linked to specific functional requirements (FR) from the provided list for alignment with project goals and non-functional requirements like security and performance.
+```uml
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Core Use Case Diagram"
+
+actor IndividualCustomer as user [color CUSTOMER_COLOR]
+actor FinancialAdvisor as advisor [color CUSTOMER_COLOR]
+
+package Authentication {
+    usecase UC01: Authenticate User
+        note right of UC01 
+            **Req. ID:** FR01, NFR06  
+            **Description:** Enables users to log in using username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Accounts [color CUSTOMER_COLOR]
+        note right of UC03 
+            **Req. ID:** FR02  
+            **Description:** Securely links user accounts via banking APIs to aggregate transaction data.
+        end note
+        
+    usecase UC04: View Transactions
+        note right of UC04 
+            **Req. ID:** FR03, FR19  
+            **Description:** Displays aggregated financial transactions for the user's accounts.
+        end note
+    
+    usecase UC05: Categorize Transactions [color CUSTOMER_COLOR]
+        extend UC04 <<extend>>
+        
+        note right of UC05 
+            **Req. ID:** FR03, FR19  
+            **Description:** Further classifies transactions into categories (e.g., groceries, entertainment).
+        end note
+}
+
+package AnalysisAndInsights {
+    usecase UC0
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

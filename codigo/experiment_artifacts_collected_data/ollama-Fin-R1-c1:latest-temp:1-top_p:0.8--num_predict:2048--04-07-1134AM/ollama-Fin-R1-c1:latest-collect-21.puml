@@ -1,0 +1,79 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Case Diagram"
+
+actor IndividualCustomer as user 
+actor Advisor as advisor 
+
+package Authentication {
+    usecase UC01: Authenticate User <<include>>
+        note right of UC01
+            **Req. ID:** FR01, NFR06  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note    
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Accounts <<include>>
+        note right of UC03
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note    
+    usecase UC04: View Transactions 
+    usecase UC05: Categorize Transactions <<extend>>UC04
+}
+
+package AnalysisAndRecommendations {
+    usecase UC06: View Financial Dashboard  
+    usecase UC07: Receive AI Insights 
+        note right of UC07
+            **Req. ID:** FR05, NFR12  
+            **Description:** Delivers personalized financial insights based on historical data and user preferences.
+        end note    
+}
+
+package Planning {
+    usecase UC08: Set Financial Goals <<include>>
+    usecase UC09: Track Progress 
+    usecase UC10: Generate Budgets
+    usecase UC11: Monitor Expenses  
+        
+    usecase UC08 --|> UC10  
+        note right of UC08
+            **Req. ID:** FR07, NFR04  
+            **Description:** Helps users define and track their financial goals.
+        end note    
+}
+
+package Collaboration {
+    usecase UC12: Share Data with Advisors <<include>>
+        note right of UC12 
+            **Req. ID:** FR13
+            **Description:** Enables customers to share selected data with advisors for personalized consultations.
+        end note   
+}  
+
+package ForecastingAndRecommendations {
+    usecase UC07 ..> UC13: <<extend>>  
+        note right of UC13
+            **Req. ID:** FR14, NFR05  
+            **Description:** Predicts future financial trends using advanced algorithms and market data.
+        end note    
+}
+
+package AIComponents {
+    usecase UC14: Leverage AI Engine <<include>>
+    usecase UC15: Analyze Data 
+    usecase UC16: Generate Reports  
+
+    uc14 --|> uc15  
+}  
+
+' Relationships between packages
+UC03 --> Authentication : <<extend>>  
+UC07 --> AnalysisAndRecommendations : <<extend>>
+
+user --> UC01; user --> UC03; user --> UC06; 
+advisor --> UC09; bank --> UC03; 
+
+@enduml

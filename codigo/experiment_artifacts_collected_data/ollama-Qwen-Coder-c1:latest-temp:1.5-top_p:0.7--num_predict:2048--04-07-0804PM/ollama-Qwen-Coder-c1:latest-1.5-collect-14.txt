@@ -1,0 +1,92 @@
+```plantuml
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+' ACTOR DEFINITION
+actor "Individual Customer" as user
+actor "Financial Advisor" as advisor
+
+' PACKAGE DEFINITION
+package "Authentication & Security" {
+    usecase "UC01: Authenticate User" as UC01
+    note right of UC01
+      **Req. ID:** FR01, NFR06
+      **Description:** Allows users to authenticate via 
+      username/password or OAuth2 providers, with 
+      optional multi-factor authentication.
+    end note
+    
+    usecase "UC02: Manage Account Settings" as UC02
+}
+
+package "Financial Management & Reporting" {
+    usecase "UC03: Connect Financial Accounts" as UC03
+    note right of UC03
+      **Req. ID:** FR02
+      **Description:** Securely links external financial accounts 
+      using banking APIs to retrieve transaction data.
+    end note
+    
+    usecase "UC04: View Transactions" as UC04
+    usecase "UC05: Categorize Transactions" as UC05
+    UC03 ..> UC04 : <<include>>
+    UC04 ..> UC05 : <<extend>>
+
+    usecase "UC06: Generate Financial Reports" as UC06
+}
+
+package "Analysis & Recommendations" {
+    usecase "UC07: View Financial Dashboard" as UC07
+    note right of UC07
+      **Req. ID:** FR04, FR05, FR08, FR12
+      **Description:** Provides visualizations and AI-powered insights on spending habits.
+    end note
+    
+    usecase "UC09: Receive Financial Recommendations" as UC09
+
+    usecase "UC10: Forecast Future Financial Positions" as UC10
+}
+
+package "Planning & Goals" {
+    usecase "UC11: Set Financial Goals" as UC11
+    usecase "UC12: Track Goal Progress" as UC12
+    
+    UC11 ..> UC12 : <<include>>
+}
+
+package "Collaboration & Sharing" {
+    usecase "UC13: Share Selected Data with Advisors" as UC13
+    note right of UC13
+      **Req. ID:** FR07, FR15
+      **Description:** Allows users to share financial data and insights.
+    end note
+    
+    usecase "UC14: Use Chatbot for Financial Queries" as UC14
+
+}
+
+package "AI & Machine Learning" {
+    usecase "UC15: Leverage AI Reasoning Engine" as UC15
+    note right of UC15
+      **Req. ID:** FR06, NFR09
+      **Description:** Provides advanced financial analysis and personalized recommendations.
+    end note
+    
+}
+
+' CROSS-PACKAGE RELATIONSHIPS
+
+UC07 ..> UC04 : <<include>>
+UC13 ..> UC02 : <<extend>>
+
+user --> UC01
+user --> UC03
+user --> UC06
+advisor --> UC09, UC15
+bank --> UC03
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 688]

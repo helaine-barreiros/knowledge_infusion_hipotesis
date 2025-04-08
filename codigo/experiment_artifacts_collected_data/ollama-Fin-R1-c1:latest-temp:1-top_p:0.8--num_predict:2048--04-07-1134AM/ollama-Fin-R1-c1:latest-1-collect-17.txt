@@ -1,0 +1,100 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Case Diagram"
+actor IndividualCustomer as user [fontawesome:user]
+actor Advisor as advisor [fontawesome:user_tie]
+actor BankingAPI as bank_api [fontawesome:university, #lightblue]
+actor InvestmentAPI as inv_api [fontawesome:chart_line, #lightblue]
+actor CreditService as credit_svc [fontawesome:server, #lightgreen]
+actor NewsService as news_svc [fontawesome:newspaper, #lightgreen]
+actor AIEngine as ai_engine [fontawesome:brain]
+
+package "Authentication & Security" {
+    usecase UC01_AuthenticateUser as uc_auth
+        note right of uc_auth
+            **Req. ID:** FR01  
+            Description: Allow users to authenticate via username/password or OAuth2 providers with optional MFA.
+        end note
+
+    usecase UC02_ManageAccountSettings as uc_settings [style=bold]
+}
+
+package "Financial Account Management" {
+    usecase UC03_ConnectAccounts as uc_connect
+        note right of uc_connect
+            **Req. ID:** FR02  
+            Description: Securely link external accounts using banking APIs.
+        end note
+
+    usecase UC04_ViewTransactions [style=bold]
+    usecase UC05_CategorizeTransactions 
+        UC03_ConnectAccounts --> UC04_ViewTransactions : <<include>>
+}
+
+package "Analysis & Insights" {
+    usecase UC06_ViewDashboard as uc_dashboard
+    usecase UC07_GetAIInsights
+
+    usecase UC08_BasicReports --|> UC09_AdvancedAnalytics [generalization]
+        note right of uc_09
+            **Req. ID:** FR05  
+            Description: Generate AI-powered financial insights and recommendations.
+        end note
+}
+
+package "Goal Setting & Planning" {
+    usecase UC10_SetGoals as uc_goals
+
+    usecase UC11_ManageBudgets [style=bold]
+}
+
+package "Collaboration" {
+    usecase UC12_ShareDataWithAdvisors 
+}
+
+package "Risk Management" {
+    usecase UC13_ForecastFinances
+        note right of uc_13
+            **Req. ID:** FR04  
+            Description: Forecast future financial positions based on historical data.
+        end note
+
+    usecase UC14_ManageDebtRepayments 
+}
+
+package "Investment Management" {
+    usecase UC15_Investopedia as uc_investment_opedia [style=bold]
+}
+
+package "Support & Services" {
+    usecase UC16_Chobot [style=bold] 
+
+    usecase UC17_PeriodicReports
+        note right of uc_17
+            **Req. ID:** FR05  
+            Description: Deliver periodic financial health reports.
+        end note
+
+    usecase UC18_CryptocurrencyTracking 
+}
+
+package "System Administration" {
+    usecase UC19_DataPrivacy [style=bold] 
+
+    usecase UC20_SecurityAudits
+}
+
+' Cross-package relationships
+UC06_ViewDashboard --> UC04_ViewTransactions : <<include>>
+UC07_GetAIInsights --> ai_engine
+
+user -->> uc_auth
+advisor -->> uc_goals | "Access customer goals and plans"
+bank_api -->> uc_connect  
+news_svc -->> uc_dashboard  
+
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 721]

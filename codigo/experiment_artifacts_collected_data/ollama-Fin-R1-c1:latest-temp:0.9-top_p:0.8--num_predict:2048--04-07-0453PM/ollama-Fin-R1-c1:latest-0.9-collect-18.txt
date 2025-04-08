@@ -1,0 +1,179 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Case Diagram"
+
+actor IndividualCustomer as user
+actor FinancialAdvisor as advisor
+actor BankingAPI as bank #lightblue
+actor InvestmentAPI as invest #lightblue
+actor CreditService as credit #lightgreen
+actor NewsService as news #orange
+actor AuthSystem as auth #magenta
+
+package "Authentication & Security" {
+    usecase UC01: Authenticate User as uc_auth
+        note right of uc_auth
+            **Req. ID:** FR01, NFR06  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package "Financial Account Management" {
+    usecase UC03: Connect Financial Accounts as uc_conn_acc
+        note right of uc_conn_acc
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+
+    usecase UC04: View Transactions as uc_view_trans 
+        note right of uc_view_trans
+            **Req. ID:** FR03, NFR12  
+            **Description:** Displays categorized transactions for the user's view and analysis.
+        end note
+
+    usecase UC05: Categorize Transactions as uc_cat_trans
+        note right of uc_cat_trans
+            **Req. ID:** FR04  
+            **Description:** Classifies financial transactions into predefined categories (e.g., groceries, utilities).
+        end note
+
+    UC03 ..> UC04 : <<include>>
+}
+
+package "Analysis & Insights" {
+    usecase UC06: View Financial Dashboard as uc_fin_dashboard
+        note right of uc_fin_dashboard
+            **Req. ID:** FR05  
+            **Description:** Presents visual representations of spending patterns and financial history.
+        end note
+
+    usecase UC07: Receive AI-Driven Insights as uc_ai_insights 
+        note right of uc_ai_insights
+            **Req. ID:** FR05, NFR13  
+            **Description:** Delivers personalized insights using machine learning algorithms to identify spending trends and anomalies.
+        end note
+
+    usecase UC08: Generate Recommendations as uc_rec_gen
+        note right of uc_rec_gen
+            **Req. ID:** FR06  
+            **Description:** Produces tailored financial recommendations (e.g., savings strategies, investment opportunities).
+        end note
+}
+
+package "Goal Setting & Budgeting" {
+    usecase UC13: Set Financial Goals as uc_set_goals 
+        note right of uc_set_goals
+            **Req. ID:** FR07  
+            **Description:** Allows users to establish and track specific financial objectives (e.g., saving for a vacation, paying off debt).
+        end note
+
+    usecase UC14: Monitor Budgets as uc_monitor_budget 
+        note right of uc_monitor_budget
+            **Req. ID:** FR08  
+            **Description:** Tracks user-defined budgets to ensure adherence and provides alerts when spending exceeds limits.
+        end note
+
+    usecase UC15: Track Progress Towards Goals as uc_track_progress 
+        note right of uc_track_progress
+            **Req. ID:** N/A (derived from goals)  
+            **Description:** Visualizes the progress made toward each financial goal over time.
+        end note
+
+    UC06 ..> UC13 : <<include>>
+}
+
+package "Collaboration & Sharing" {
+    usecase UC24: Share Financial Data with Advisors as uc_share_data 
+        note right of uc_share_data
+            **Req. ID:** FR13  
+            **Description:** Facilitates secure sharing of selected financial data between users and their advisors.
+        end note
+
+    advisor --> uc_share_data : <<extend>>
+}
+
+package "Advanced Analytics & Predictions" {
+    usecase UC20: Forecast Future Financial Positions as uc_forecast 
+        note right of uc_forecast
+            **Req. ID:** FR10  
+            **Description:** Uses historical data to predict future financial outcomes (e.g., net worth, debt levels).
+        end note
+
+    usecase UC25: Simulate Investment Scenarios as uc_sim_invest 
+        note right of uc_sim_invest
+            **Req. ID:** N/A (derived from FR10 and investment_api)  
+            **Description:** Allows users to test the performance of different investment strategies using real-time market data.
+        end note
+
+    UC25 --|> UC20 : <<generalize>>
+}
+
+package "News & Market Updates" {
+    usecase UC34: Receive Financial News as uc_news 
+        note right of uc_news
+            **Req. ID:** FR16  
+            **Description:** Delivers relevant financial news and economic indicators to keep users informed.
+        end note
+
+    pfm_system --> news : <<include>>
+}
+
+package "Security & Compliance" {
+    usecase UC40: Ensure Data Integrity as uc_data_integrity 
+        note right of uc_data_integrity
+            **Req. ID:** NFR12  
+            **Description:** Maintains an audit trail and validates data consistency across all systems.
+        end note
+
+    pfm_system --> uc_data_integrity : <<extend>>
+}
+
+actor user -- UC01, UC03, UC06, UC14
+advisor -- UC09 (derived from UC25)
+bank -- UC03 
+invest -- UC25  
+credit -- UC07  
+news -- UC34
+
+@enduml
+```
+
+### Explanation of Key Use Cases and Relationships:
+
+#### **Authentication & Security**
+- **UC01: Authenticate User** – Ensures secure user access via username/password or OAuth providers, with optional MFA.
+
+#### **Financial Account Management**
+- **UC03: Connect Financial Accounts** – Links external bank accounts to the system using Banking APIs.
+- **UC04: View Transactions** – Displays categorized transactions for analysis (includes categorization as an extension).
+  
+#### **Analysis & Insights**
+- **UC06: View Financial Dashboard** – Visualizes spending patterns and financial history.
+- **UC07: Receive AI-Driven Insights** – Delivers personalized financial recommendations using machine learning.
+
+#### **Goal Setting & Budgeting**
+- **UC13: Set Financial Goals** – Allows users to establish specific objectives (e.g., savings, debt repayment).
+- **UC14: Monitor Budgets** – Tracks adherence to user-defined budgets and provides alerts for overspending.
+  
+#### **Collaboration & Sharing**
+- **UC24: Share Financial Data with Advisors** – Securely shares selected financial data between users and advisors.
+
+#### **Advanced Analytics & Predictions**
+- **UC20: Forecast Future Financial Positions** – Uses historical data to predict future financial outcomes (e.g., net worth).
+- **UC25: Simulate Investment Scenarios** – Tests performance of investment strategies using real-time market data. This extends UC20’s predictive capabilities.
+
+#### **News & Market Updates**
+- **UC34: Receive Financial News** – Keeps users informed about relevant financial news and economic indicators.
+
+### Key Relationships:
+1. **User Interactions**: Directly interacts with multiple use cases (e.g., authentication, transaction viewing).
+2. **System Components**: PFM System connects to external APIs for data retrieval and processing.
+3. **Advanced Use Cases**: UC07 extends insights from UC04’s categorized transactions; UC25 generalizes predictions based on forecasts.
+
+### Conclusion:
+The diagram provides a comprehensive view of the AI-Powered Personal Financial Management System, ensuring all core functionalities are covered while adhering to C1 requirements and PlantUML standards. The use cases are organized into functional packages for clarity, with clear relationships between actors and system components.
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1629]

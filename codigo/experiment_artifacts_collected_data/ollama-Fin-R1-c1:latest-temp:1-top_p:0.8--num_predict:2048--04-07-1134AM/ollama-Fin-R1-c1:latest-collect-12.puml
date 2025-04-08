@@ -1,0 +1,101 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Case Diagram"
+skinparam personStyle Circle
+!define CUSTOMER_COLOR #08427B
+!define SYSTEM_COLOR #1168BD
+
+' Define actors and system
+actor IndividualCustomer as user [$CUSTOMER_COLOR]
+actor FinancialAdvisor as advisor [$CUSTOMER_COLOR]
+
+system "AI-Enhanced Personal Finance Management System" as pfm_system [$SYSTEM_COLOR]
+
+package "Authentication & Security" {
+    usecase UC01: Authenticate User
+        note right of UC01 
+            **Req. ID:** FR01, NFR06  
+            Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package "Financial Account Management" {
+    usecase UC03: Connect Financial Accounts [fr]
+        note right of UC03 
+            **Req. ID:** FR02  
+            Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+
+    usecase UC04: View Transactions
+    usecase UC05: Categorize Transactions
+    
+    UC03 ..> UC04 : <<include>>  % Connects to view transactions always includes categorization if needed.
+}
+
+package "Analysis & Insights" {
+    usecase UC06: View Financial Dashboard 
+        note right of UC06
+            **Req. ID:** FR04  
+            Visualizes spending patterns and financial history for the user.
+        end note
+
+    usecase UC07: Receive AI-Driven Insights [fr]
+        note right of UC07
+            **Req. ID:** FR05, NFR13  
+            Provides personalized financial insights using advanced reasoning from the AI engine.
+        end note
+    
+    generalization UC09: View Advanced Analytics 
+        extends UC08: Basic Reports
+}
+
+package "Planning & Goals" {
+    usecase UC12: Set Financial Goals [fr]
+        note right of UC12  
+            **Req. ID:** FR07, NFR14  
+            Enables users to establish and track financial goals.
+        end note
+
+    usecase UC13: Track Progress Toward Goals
+}
+
+package "Collaboration" {
+    usecase UC15: Share Data with Financial Advisor [fr]
+        note right of UC15 
+            **Req. ID:** FR13  
+            Allows customers to share selected financial data securely.
+        end note
+
+    usecase UC16: Chatbot Interactions
+}
+
+package "Investment & Advice" {
+    usecase UC18: Get Investment Recommendations [fr]
+        note right of UC18 
+            **Req. ID:** FR06, NFR15  
+            Generates personalized investment advice based on user data and market analysis.
+        end note
+
+    usecase UC20: View Portfolio Performance
+}
+
+package "Security & Compliance" {
+    usecase UC30: Ensure Data Privacy [fr]
+        note right of UC30 
+            **Req. ID:** NFR01, NFR02  
+            Guarantees compliance with financial regulations and data security standards.
+        end note
+
+    usecase UC35: Monitor System Uptime
+}
+
+' Actor-Use Case Relationships
+user --> UC01 : Authenticate\nUser logs in or signs up.\n
+user --> UC03 : Connects bank accounts.\n
+user --> UC06 : Views financial dashboard.\n
+advisor --> UC18 : Gets investment recommendations from system.\n
+
+pfm_system ..> banking_api : <<include>>\nRetrieves transaction data securely via APIs.
+pfm_system ..> ai_engine : <<extend>>\nLeverages AI for advanced analysis and insights.
+
+@enduml

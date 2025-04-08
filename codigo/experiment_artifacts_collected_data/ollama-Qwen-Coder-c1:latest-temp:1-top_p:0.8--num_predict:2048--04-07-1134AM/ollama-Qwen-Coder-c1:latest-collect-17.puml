@@ -1,0 +1,135 @@
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+actor "Individual Customer" as user [#CUSTOMER_COLOR]
+actor "Financial Advisor" as advisor [#CUSTOMER_COLOR]
+
+package "Authentication & Security" {
+    usecase "UC01: Authenticate User" as UC01
+    note right of UC01
+        **Req. ID:** FR01, NFR06
+        **Description:** Allows users to authenticate via 
+        username/password or OAuth2 providers, with 
+        optional multi-factor authentication.
+    end note
+    
+    usecase "UC02: Manage Account Settings" as UC02
+}
+
+package "Financial Management & Aggregation" {
+    usecase "UC03: Connect Financial Accounts" as UC03
+    usecase "UC04: Retrieve and Aggregate Transactions" as UC04
+    note right of UC03
+        **Req. ID:** FR02, NFR10
+        **Description:** Securely links external financial accounts 
+        using banking APIs to retrieve transaction data.
+    end note
+    
+    usecase "UC05: Categorize Transactions" as UC05
+    usecase "UC06: View Financial History and Trends" as UC06
+
+    UC03 ..> UC04 : <<include>>
+    UC04 ..> UC05 : <<extend>>
+}
+
+package "Analysis & Recommendations" {
+    usecase "UC07: Receive AI Insights" as UC07
+    note right of UC07
+        **Req. ID:** FR05, NFR12
+        **Description:** Provides AI-powered insights on spending habits 
+        and generates personalized financial recommendations.
+    end note
+    
+    usecase "UC08: Generate Financial Recommendations" as UC08
+
+    UC07 ..> UC08 : <<include>>
+}
+
+package "Planning & Goal Management" {
+    usecase "UC09: Set Financial Goals" as UC09
+    usecase "UC10: Track and Monitor Budgets" as UC10
+    
+    note right of UC09
+        **Req. ID:** FR07, NFR05
+        **Description:** Allows users to set and track financial goals 
+        with budget creation and monitoring capabilities.
+    end note
+
+}
+
+package "Alert & Notifications" {
+    usecase "UC11: Receive Alerts for Unusual Spending Patterns" as UC11
+    
+    note right of UC11
+        **Req. ID:** FR09, NFR04
+        **Description:** Delivers alerts for unusual spending patterns 
+        and forecast future financial positions.
+    end note
+
+}
+
+package "Investment & Debt Management" {
+    usecase "UC12: Suggest Investment Opportunities Based on User Profile" as UC12
+    usecase "UC13: Provide Debt Management Strategies with Repayment Simulations" as UC13
+    
+    note right of UC12
+        **Req. ID:** FR11, NFR07
+        **Description:** Offers investment recommendations based on user profiles 
+        and provides debt management strategies.
+    end note
+
+}
+
+package "Data Sharing & Collaboration" {
+    usecase "UC14: Share Selected Financial Data with Financial Advisors" as UC14
+    
+    note right of UC14
+        **Req. ID:** FR13, NFR08
+        **Description:** Allows users to share selected financial data 
+        for collaboration with financial advisors.
+    end note
+
+}
+
+package "Support & Accessibility" {
+    usecase "UC15: Provide a Chatbot for Financial Queries" as UC15
+    
+    note right of UC15
+        **Req. ID:** FR14, NFR09
+        **Description:** Offers chatbot support and is accessible 
+        according to WCAG 2.1 level AA standards.
+    end note
+
+}
+
+package "Reporting & Compliance" {
+    usecase "UC16: Generate Periodic Financial Health Reports" as UC16
+    
+    note right of UC16
+        **Req. ID:** FR08, NFR13
+        **Description:** Provides periodic financial health reports 
+        and maintains an audit trail.
+    end note
+
+}
+
+package "Internationalization & Compatibility" {
+    usecase "UC17: Support Multiple Currencies and International Users" as UC17
+    
+    note right of UC17
+        **Req. ID:** NFR08, NFR10
+        **Description:** Supports multiple currencies and international users 
+        with multi-factor authentication.
+    end note
+
+}
+
+user --> UC01
+user --> UC03
+user --> UC06
+advisor --> UC09
+banking_api --> UC04 : <<include>>
+investment_api --> UC07 : <<include>>
+
+@enduml

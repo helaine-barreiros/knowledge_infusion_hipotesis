@@ -1,0 +1,155 @@
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+actor "Individual Customer" as user [#CUSTOMER_COLOR]
+actor "Financial Advisor" as advisor [#CUSTOMER_COLOR]
+
+package "Authentication & Security" {
+    usecase "UC01: Authenticate User" as UC01
+    note right of UC01
+        **Req. ID:** FR01, NFR06
+        **Description:** Allows users to authenticate via 
+        username/password or OAuth2 providers, with optional multi-factor authentication.
+    end note
+    
+    usecase "UC02: Manage Account Settings" as UC02
+}
+
+package "Financial Management" {
+    usecase "UC03: Connect Financial Accounts" as UC03
+    note right of UC03
+        **Req. ID:** FR02, NFR10
+        **Description:** Securely links external financial accounts 
+        using banking APIs to retrieve transaction data.
+    end note
+    
+    usecase "UC04: View Transactions" as UC04
+    usecase "UC05: Categorize Transactions" as UC05
+    UC03 ..> UC04 : <<include>>
+    UC04 ..> UC05 : <<extend>>
+
+}
+
+package "Analysis & Recommendations" {
+    usecase "UC06: View Financial Dashboard" as UC06
+    note right of UC06
+        **Req. ID:** FR04, NFR12
+        **Description:** Visualizes spending patterns and financial history.
+    end note
+    
+    usecase "UC07: Receive AI Insights" as UC07
+    usecase "UC08: Generate Recommendations" as UC08
+
+    UC06 ..> UC04 : <<include>>
+    UC08 --|> UC05
+    
+}
+
+package "Planning & Goal Management" {
+    usecase "UC09: Set Financial Goals" as UC09
+    note right of UC09
+        **Req. ID:** FR07, NFR13
+        **Description:** Allows users to set and track financial goals.
+    end note
+    
+    usecase "UC10: Monitor Budgets" as UC10
+
+}
+
+package "Collaboration & Sharing" {
+    usecase "UC11: Share Financial Data" as UC11
+    note right of UC11
+        **Req. ID:** FR13, NFR07
+        **Description:** Enables users to share selected financial data with advisors.
+    end note
+    
+}
+
+package "AI-Driven Features & Insights" {
+    usecase "UC12: Predict Future Financial Positions" as UC12
+    note right of UC12
+        **Req. ID:** FR09, NFR08
+        **Description:** Forecasts future financial positions based on historical data.
+    end note
+    
+}
+
+package "Investment & Portfolio Management" {
+    usecase "UC13: Suggest Investment Opportunities" as UC13
+    note right of UC13
+        **Req. ID:** FR11, NFR04
+        **Description:** Provides investment suggestions based on user profile.
+    end note
+    
+}
+
+package "Debt Management & Repayment Simulation" {
+    usecase "UC14: Debt Management Strategies" as UC14
+    note right of UC14
+        **Req. ID:** FR12, NFR03
+        **Description:** Offers debt management strategies with repayment simulations.
+    end note
+    
+}
+
+package "AI-Enhanced Insights & Recommendations" {
+    usecase "UC15: Advanced Financial Analysis" as UC15
+    note right of UC15
+        **Req. ID:** FR06, NFR09
+        **Description:** Provides advanced financial analysis and personalized recommendations.
+    end note
+    
+}
+
+package "Chatbot & Support" {
+    usecase "UC16: Chatbot for Financial Queries" as UC16
+    note right of UC16
+        **Req. ID:** FR14, NFR02
+        **Description:** Offers a chatbot to assist with financial queries.
+    end note
+    
+}
+
+package "Reporting & Health Checks" {
+    usecase "UC17: Generate Financial Reports" as UC17
+    note right of UC17
+        **Req. ID:** FR15, NFR08
+        **Description:** Generates periodic financial health reports.
+    end note
+    
+}
+
+package "Cryptocurrency Portfolio Tracking" {
+    usecase "UC18: Track Cryptocurrencies" as UC18
+    note right of UC18
+        **Req. ID:** FR16, NFR05
+        **Description:** Provides cryptocurrency portfolio tracking and analysis.
+    end note
+    
+}
+
+package "Offline Mode & Accessibility" {
+    usecase "UC19: Offline Mode" as UC19
+    note right of UC19
+        **Req. ID:** FR17, NFR14
+        **Description:** Supports offline mode with limited functionality and WCAG 2.1 compliance.
+    end note
+    
+}
+
+package "Advanced Analytics & Reporting" {
+    usecase "UC20: Advanced Analytics Reports" as UC20
+
+}
+
+user --> UC01
+user --> UC03
+user --> UC06
+user --> UC09
+advisor --> UC15
+bank --> UC03
+ai_engine --> UC07, UC08, UC12, UC14, UC15, UC20
+
+
+@enduml

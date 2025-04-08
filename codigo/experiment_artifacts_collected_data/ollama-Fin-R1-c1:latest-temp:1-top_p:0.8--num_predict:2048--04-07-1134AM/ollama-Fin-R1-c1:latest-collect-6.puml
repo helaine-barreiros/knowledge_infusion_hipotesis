@@ -1,0 +1,91 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Core Functionalities and User Interactions"
+
+actor IndividualCustomer as user #CUSTOMER_COLOR
+actor FinancialAdvisor as advisor #CUSTOMER_COLOR
+actor BankingAPIs as bankApi #EXTERNAL_SYSTEM_COLOR
+actor InvestmentAPIs as investmentApi #EXTERNAL_SYSTEM_COLOR
+actor CreditService as creditService #EXTERNAL_SYSTEM_COLOR
+actor NewsService as newsService #EXTERNAL_SYSTEM_COLOR
+actor AuthService as authService #EXTERNAL_SYSTEM_COLOR
+actor AIEngine as aiEngine #SYSTEM_COLOR
+
+package "Authentication & Security" {
+    usecase UC01: Authenticate User <<<< include FR01, NFR06 >>>
+        note right of UC01
+            **Description:** Authenticates users via username/password or OAuth2 providers. Supports multi-factor authentication.
+        end note
+}
+
+package "Financial Account Management" {
+    usecase UC03: Connect Financial Accounts <<<< include FR02 >>
+        note right of UC03
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+        
+    usecase UC04: View Transactions 
+        usecase UC05: Categorize Transactions <<<< extend UC04 >>
+
+    UC03 ..> UC04 : <<include>>
+}
+
+package "Data Aggregation & Analysis" {
+    usecase UC06: Aggregate Financial Data
+        note right of UC06
+            **Description:** Collates transactions, categorizes expenses, and visualizes financial history.
+        end note
+        
+    usecase UC07: Receive AI-Driven Insights <<<< include FR05 >>
+        
+    uc UC13: Forecast Future Positions <<<< include FR10 >>
+    
+}
+
+package "Recommendations & Planning" {
+    usecase UC08: Generate Financial Recommendations 
+        note right of UC08
+            **Description:** Provides personalized financial advice, including investment opportunities and debt management.
+        end note
+        
+    uc UC09: Set and Track Goals <<<< include FR07 >>
+    
+}
+
+package "Collaboration & Sharing" {
+    usecase UC14: Share Data with Advisor 
+        
+}
+
+package "System Services" {
+    usecase UC15: AI Engine Interactions
+        note right of UC15
+            **Description:** Interfaces with the reasoning engine for analysis.
+        end note
+        
+    uc UC16: News and Market Updates <<<< include FR04, FR09 >>
+}
+
+package "User Interface" {
+    usecase UC23: Access Dashboard 
+        note right of UC23
+            **Description:** Displays aggregated data through a user-friendly interface. Includes AI-driven visualizations.
+        end note
+        
+    uc UC18: Personalized Alerts <<<< include FR09 >>
+}
+
+user --> UC01
+advisor --> UC08
+
+bankApi, investmentApi, creditService, newsService, authService, aiEngine --> UC03 : <<include>>
+
+UC06 ..> UC04 : <<extend>>
+UC07 ..> UC05 : <<extend>>
+
+UC08 ..> UC23 : <<extend>>
+
+advisor --> UC14
+user --> UC18
+
+@enduml

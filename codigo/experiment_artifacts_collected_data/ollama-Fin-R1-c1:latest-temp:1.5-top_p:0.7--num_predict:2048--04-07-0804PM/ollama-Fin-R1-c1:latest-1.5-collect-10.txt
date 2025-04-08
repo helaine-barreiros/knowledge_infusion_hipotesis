@@ -1,0 +1,77 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Case Diagram"
+
+actor IndividualCustomer as user [color CUSTOMER_COLOR]
+actor Advisor as advisor [color CUSTOMER_COLOR]
+
+package Authentication {
+    usecase UC01: Authenticate User as uc_authenticate
+        note right of uc_authenticate
+            **Req. ID:** FR01, NFR06  
+            Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Accounts as uc_connect [color SYSTEM_COLOR]
+        note right of uc_connect
+            **Req. ID:** FR02  
+            Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+
+    usecase UC04: View Transactions as uc_view_trans [color SYSTEM_COLOR]
+    usecase UC05: Categorize Transactions as uc_categorize [color SYSTEM_COLOR]
+
+    uc_connect ..> uc_view_trans : <<include>>  
+}
+
+package AnalysisAndRecommendations {
+    usecase UC06: View Financial Dashboard as uc_dashboard
+    usecase UC07: Receive AI Insights as uc_ai_insights
+
+    note right of uc_ai_insights
+        **Req. ID:** FR05, NFR13  
+        Provides personalized financial recommendations and insights using advanced reasoning.
+    end note  
+
+    usecase UC08: View Basic Reports [color SYSTEM_COLOR]
+    usecase UC09: Advanced Analytics as uc_advanced_analytics --|> UC08
+
+    uc_dashboard ..> uc_view_trans : <<include>>
+}
+
+package Planning {
+    usecase UC10: Set Financial Goals as uc_goals
+    usecase UC11: Monitor Budgets [color SYSTEM_COLOR]
+    
+    note right of uc_goals
+        **Req. ID:** FR07, NFR08  
+        Helps users create and track financial goals with alerts for progress.
+    end note  
+
+}
+
+package Collaboration {
+    usecase UC12: Share Data as uc_share_data
+
+    note right of uc_share_data
+        **Req. ID:** FR13  
+        Allows customers to share selected data with advisors through secure channels.
+    end note  
+}
+
+// Cross-package relationships
+uc_ai_insights ..> uc_advanced_analytics : <<extend>>
+uc_dashboard ..> uc_view_trans : <<include>>
+
+// Actor-use case interactions
+user --> UC01 [color CUSTOMER_COLOR]
+user --> UC03 [color CUSTOMER_COLOR]
+advisor --> UC09 [color SYSTEM_COLOR]
+
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 546]

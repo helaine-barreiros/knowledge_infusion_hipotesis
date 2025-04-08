@@ -1,0 +1,100 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Core Use Cases"
+
+actor IndividualCustomer as user [users]
+actor FinancialAdvisor as advisor [user_tie]
+
+package AuthenticationAndSecurity {
+    usecase UC01: Authenticate User [lock] <<include>> FR01, NFR06
+        note right of UC01
+            **Description:** Enables login via username/password or OAuth2 providers with optional MFA.
+        end note
+
+    usecase UC02: Manage Account Settings [user_tie]
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Accounts to Banking APIs [university] <<include>> FR02
+        note right of UC03
+            **Description:** Securely links external accounts for transaction data retrieval.
+        end note
+
+    usecase UC04: View Transactions [chart_line]
+    
+    usecase UC05: Categorize Transactions [lock]
+
+    UC03 ..> UC04 : <<include>>
+}
+
+package AnalysisAndRecommendations {
+    usecase UC06: Generate Financial Insights [newspaper] <<extend>> FR05
+        note right of UC06
+            **Description:** Delivers AI-driven spending insights.
+        end note
+
+    usecase UC07: Receive Personalized Recommendations [brain]
+    
+    usecase UC08: View Basic Reports [chart_line]
+
+    usecase UC09: Perform Advanced Analysis [newspaper] <<extend>> FR10
+}
+
+package Planning {
+    usecase UC10: Set Financial Goals [lock] <<include>> FR07, NFR03
+
+    usecase UC11: Monitor Progress Toward Goals [chart_line]
+    
+    usecase UC12: Create and Track Budgets [university]
+
+    note right of UC11
+        **Description:** Tracks goal progress with alerts for underperformance.
+    end note
+}
+
+package Collaboration {
+    usecase UC13: Share Financial Data With Advisors [user_tie] <<include>> FR13
+
+    usecase UC14: Communicate via Chatbot [chart_line]
+    
+    note right of UC07
+        **Description:** Allows users to ask financial questions.
+    end note
+}
+
+package AIComponents {
+    usecase UC15: Leverage AI for Advanced Analysis [brain] <<extend>> FR03, FR06
+
+    note right of UC15
+        **Description:** Analyzes data and generates recommendations.
+    end note
+    
+    usecase UC16: Forecast Future Financial Positions [chart_line]
+}
+
+package ExternalData {
+    usecase UC17: Fetch Investment Data from APIs [chart_line] <<include>> FR04
+
+    usecase UC18: Obtain Credit Scores [lock]
+
+    usecase UC19: Access Market News and Updates [newspaper]
+    
+    note right of UC17
+        **Description:** Retrieves investment performance, market info.
+    end note
+}
+
+' Cross-package relationships:
+UC06 ..> UC04 : <<include>>
+UC08 --|> UC09
+
+user --> UC01
+user --> UC03
+advisor --> UC09
+bank --> UC03
+ai --> UC07, UC15, UC16
+invest_api --> UC17
+credit_service --> UC18
+news_service --> UC19
+
+@enduml

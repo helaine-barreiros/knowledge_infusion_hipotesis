@@ -1,0 +1,102 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Core Functionalities and Relationships"
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+' Define custom colors for consistency with the system's theme.
+!define CUSTOMER_COLOR #08427B  % Dark Teal Blue (for individual customers)
+!define SYSTEM_COLOR #1168BD   % Lighter version of above, used for main systems and services
+
+LAYOUT_WITH_LEGEND()
+
+' PERSON / ACTORS
+actor "Individual Customer" as user [shape=person] $fillColor=CUSTOMER_COLOR 
+actor "Financial Advisor" as advisor [shape=person]
+
+' SYSTEMS AND SERVICES
+system "AI-Enhanced Personal Finance Management System" as pfm_system
+system_Ext "Banking API Service" as banking_api [shape=server, fillColor=#lightblue]
+system_Ext "Investment API Service" as investment_api [shape=server, fillColor=#lightblue]
+system_Ext "Credit Scoring Service" as credit_service [shape=server, fillColor=#964B00]  % Dark Brown (for financial stability)
+system_Ext "News Service" as news_service [shape=newspaper, fillColor=#F7DC6F]          % Light Beige
+system_Ext "Authentication Service" as auth_service [shape=lock, fillColor=#5DADE2]     % Sky Blue for security
+system_Ext "AI Reasoning Engine" as ai_engine [shape=brain, fillColor=#0C9EDD]
+
+' RELATIONSHIPS BETWEEN SYSTEMS AND SERVICES
+pfm_system ..> banking_api : Retrives data via secure API calls (<<include>>)
+pfm_system ..> investment_api : Fetches market and portfolio info (<<include>>
+pfm_system ..> credit_service : Obtains credit scores/insights (<<include>>
+pfm_system ..> news_service : Receives financial updates (<<include>>
+pfm_system ..> auth_service : Manages user authentication (<<include>>)
+pfm_system ..> ai_engine : Utilizes for advanced analysis and recommendations (<<extend>>
+
+' ACTOR-USE CASE RELATIONSHIPS
+user --> "UC01: Authenticate User" [shape=usecase] $fillColor=SYSTEM_COLOR 
+advisor --> "UC26: Share Data with Advisor" 
+
+note right of user
+**Description**: The individual customer interacts directly with the system to perform core financial management tasks.
+end note
+
+' Core Use Cases under Authentication & Security Package (Pkg1)
+package "Authentication & Security" as pkg1 {
+    usecase "UC01: Authenticate User" [shape=usecase] $fillColor=SYSTEM_COLOR 
+        note right of UC01
+          **Req. ID:** FR01, NFR06  
+          **Description**: Verifies user identity via username/password or OAuth2 providers with optional MFA.
+        end note
+}
+
+' Core Use Cases under Financial Account Management (Pkg2)
+package "Financial Account Management" as pkg2 {
+    usecase "UC03: Connect Accounts" [shape=usecase] $fillColor=SYSTEM_COLOR 
+        note right of UC03  
+          **Req. ID:** FR02
+          **Description**: Securely links bank accounts using APIs for transaction data retrieval.
+        end note
+        
+    usecase "UC04: View Transactions" [shape=usecase] $fillColor=SYSTEM_COLOR 
+}
+
+pkg1.UC01 ..> pkg2.UC03 : <<include>>  % Base case includes account connection after authentication.
+
+' Analysis & Insights Package (Pkg3)
+package "Analysis and Recommendations" as pkg3 {
+    usecase "UC06: View Financial Dashboard" [shape=usecase] $fillColor=SYSTEM_COLOR 
+        note right of UC06
+          **Req. ID:** FR04  
+          **Description**: Visualizes spending patterns, budget adherence, etc.
+        end note
+        
+    usecase "UC07: Receive AI Insights" [shape=usecase] $fillColor=SYSTEM_COLOR 
+}
+
+pkg3.UC06 ..> pkg2.UC04 : <<include>>  % Includes transaction data view for analysis.
+
+' Personalization and Planning Package (Pkg4)
+package "Personalized Financial Management" as pkg4 {
+    usecase "UC10: Set Goals" [shape=usecase] $fillColor=SYSTEM_COLOR 
+        note right of UC10
+          **Req. ID:** FR07  
+          **Description**: Allows users to define and track financial goals.
+        end note
+        
+    usecase "UC11: Create Budgets" [shape=usecase] $fillColor=SYSTEM_COLOR 
+}
+
+' Collaboration Package (Pkg5)
+package "Collaboration with Advisors" as pkg5 {
+    usecase "UC26: Share Data with Advisor" [shape=usecase] $fillColor=SYSTEM_COLOR
+        note right of UC26  
+          **Req. ID:** FR13 
+          **Description**: Enables users to share financial data securely with advisors.
+        end note
+}
+
+' Cross-package relationships and dependencies
+UC07 --|> pkg4.UC10 : <<extend>>  % AI insights can help in goal setting.
+
+'display the actors using a different color (teal)
+user --> UC03 [color=CUSTOMER_COLOR]
+advisor --> "UC26" 
+
+@enduml

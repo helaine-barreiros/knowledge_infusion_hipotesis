@@ -1,0 +1,74 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Enhanced Personal Financial Management System - Use Cases"
+
+actor IndividualCustomer as user [#08427B]
+actor FinancialAdvisor as advisor [#19A3D5]
+
+package AuthenticationAndSecurity {
+    usecase UC01: AuthenticateUser as uc01
+        note right of uc01
+            **Req. ID:** FR01, NFR06  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+
+    usecase UC02: ManageAccountSettings as uc02
+}
+
+package FinancialAccountManagement {
+    usecase UC03: ConnectFinancialAccounts as uc03
+        note right of uc03
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+
+    usecase UC04: ViewTransactions as uc04
+    usecase UC05: CategorizeTransactions as uc05
+    
+    uc03 --> uc04 : <<include>>  
+    uc04 --> uc05 : <<extend>>
+}
+
+package AnalysisAndInsights {
+    usecase UC06: ViewFinancialDashboard as uc06
+
+    usecase UC07: ReceiveAISuggestions as uc07
+        note right of uc07
+            **Req. ID:** FR03, FR04, FR05  
+            **Description:** AI-powered insights on spending habits and personalized financial recommendations.
+        end note
+    
+    usecase UC08: ViewBasicReports 
+    usecase UC09: AnalyzeFinancialData --|> UC08
+}
+
+package Planning {
+    usecase UC10: SetFinancialGoals as uc10
+
+    usecase UC11: CreateBudgets as uc11  
+    usecase UC12: MonitorBudgets --> uc11 : <<extend>>
+
+    note right of uc10
+        **Req. ID:** FR07, FR08  
+        **Description:** Allows users to set and track financial goals.
+    end note
+
+}
+
+package Collaboration {
+    usecase UC13: ShareDataWithAdvisor as uc13
+
+    note right of uc13
+        **Req. ID:** FR13  
+        **Description:** Enables sharing selected data with a financial advisor for collaborative management.
+    end note
+}
+
+uc06 --> uc04 : <<include>>  
+
+user --> uc01
+user --> uc02
+user --> uc03
+advisor --> uc09
+
+@enduml

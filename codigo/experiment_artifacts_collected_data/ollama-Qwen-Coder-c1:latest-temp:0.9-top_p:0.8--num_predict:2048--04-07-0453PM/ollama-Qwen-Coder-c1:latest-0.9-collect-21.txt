@@ -1,0 +1,98 @@
+```plantuml
+@startuml "AI-Powered Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Cases"
+
+actor "Individual Customer" as individual
+actor "Financial Advisor" as advisor
+actor "Banking API" as banking_api
+actor "Investment API" as investment_api
+actor "Credit Scoring Service" as credit_service
+actor "News Service" as news_service
+actor "Authentication Service" as auth_service
+actor "AI Reasoning Engine" as ai_engine
+
+package "Authentication & Security" {
+    usecase "UC01: Authenticate User" as UC01 <<include>>
+}
+
+package "Financial Management" {
+    usecase "UC02: Connect Financial Accounts" as UC02
+    usecase "UC03: Retrieve Account Balance" as UC03
+    usecase "UC04: View Transactions" as UC04
+    usecase "UC05: Categorize Transactions" as UC05
+    
+    UC02 ..> UC03 : <<include>>
+    UC03 ..> UC04 : <<extend>>
+}
+
+package "Analysis & Recommendations" {
+    usecase "UC06: View Financial Dashboard" as UC06
+    usecase "UC07: Receive AI Insights" as UC07
+    
+    note right of UC06
+      **Req. ID:** FR05, NFR12
+      **Description:** Provides a visual overview of financial 
+      health and receives personalized recommendations.
+    end note
+    
+    note right of UC07
+      **Req. ID:** FR06
+      **Description:** Uses AI to analyze spending habits and 
+      generate tailored advice for users.
+    end note
+    
+    usecase "UC08: View Advanced Analytics" as UC08 <<include>>
+}
+
+package "Planning & Goal Setting" {
+    usecase "UC09: Set Financial Goals" as UC09
+    usecase "UC10: Track Budgets and Spending" as UC10
+    
+    note right of UC09
+      **Req. ID:** FR07, NFR12
+      **Description:** Allows users to set long-term goals 
+      and monitor their progress.
+    end note
+    
+    note right of UC10
+      **Req. ID:** FR08
+      **Description:** Helps users create budget plans and keep track 
+      of spending against these budgets in real-time.
+    end note
+    
+    usecase "UC11: Create Savings Plan" as UC11 <<include>>
+}
+
+package "Collaboration & Sharing" {
+    usecase "UC12: Share Financial Data with Advisors" as UC12
+    usecase "UC13: Receive Advice from Advisors" as UC13
+    
+    note right of UC12
+      **Req. ID:** FR13, NFR05
+      **Description:** Facilitates collaboration between users and financial 
+      advisors by sharing selected data.
+    end note
+    
+    note right of UC13
+      **Req. ID:** FR07
+      **Description:** Allows advisors to access and provide recommendations 
+      based on shared customer financial information.
+    end note
+}
+
+individual --> UC01
+advisor --> UC06
+
+UC02 ..> banking_api : <<include>>
+UC04 ..> investment_api : <<include>>
+
+UC03 ..|> UC09 : <<extend>>
+UC07 ..> ai_engine : <<include>>
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 735]

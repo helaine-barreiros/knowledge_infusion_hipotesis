@@ -1,0 +1,127 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Case Diagram"
+
+actor IndividualCustomer as user #CUSTOMER_COLOR  
+actor Advisor as advisor #SYSTEM_COLOR  
+
+package Authentication {  
+    usecase UC01: Authenticate User as uc_auth_01  
+        note right of uc_auth_01  
+            **Req. ID:** FR01, NFR06  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.  
+        end note  
+    usecase UC02: Manage Account Settings as uc_account_settings  
+}
+
+package FinancialAccountManagement {  
+    usecase UC03: Connect Accounts as uc_connect_accounts  
+        note right of uc_connect_accounts  
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.  
+        end note  
+    usecase UC04: View Transactions as uc_view_transactions  
+    usecase UC05: Categorize Transactions as uc_category_transactions  
+
+    UC03 ..> UC04 : <<include>>  <!-- Always include viewing transactions after connecting accounts -->  
+    UC04 ..> UC05 : <<extend>>   <!-- Optional categorization of transactions -->
+}
+
+package FinancialAnalysis {  
+    usecase UC06: View Financial Dashboard as uc_dashboard  
+        note right of uc_dashboard  
+            **Req. ID:** FR03, FR04  
+            **Description:** Visualizes spending patterns and financial history with aggregated data from connected accounts.  
+        end note  
+    usecase UC07: Receive AI Insights as uc_ai_insights  
+        note right of uc_ai_insights  
+            **Req. ID:** FR05  
+            **Description:** Provides AI-driven insights on spending habits based on transactional and demographic data.  
+        end note  
+
+    UC06 ..> UC04 : <<include>>  <!-- Include transactions in dashboard view -->  
+}
+
+package FinancialRecommendations {  
+    usecase UC08: Generate Recommendations as uc_recommendations  
+        note right of uc_recommendations  
+            **Req. ID:** FR06, FR13  
+            **Description:** Personalized financial recommendations based on user behavior and goals.  
+        end note  
+
+    usecase UC09: Set Financial Goals as uc_set_goals  
+        note right of uc_set_goals  
+            **Req. ID:** FR07, NFR02  
+            **Description:** Allows users to set and track short-term or long-term financial objectives.  
+        end note  
+
+    usecase UC10: Track Budgets as uc_track_budgets  
+        note right of uc_track_budgets  
+            **Req. ID:** FR08  
+            **Description:** Creates, monitors, adjusts, and tracks monthly budgets.  
+        end note  
+
+    UC09 --|> UC06 : <<generalize>>  <!-- Specific to recommendations based on goals -->  
+}
+
+package AlertsAndNotifications {  
+    usecase UC11: Receive Financial Alerts as uc_alerts  
+        note right of uc_alerts  
+            **Req. ID:** FR09, NFR02  
+            **Description:** Sends notifications for unusual spending patterns or other critical financial events.  
+        end note  
+
+    usecase UC12: Manage Subscription Preferences as uc_subscription_preferences  
+}
+
+package ForecastingAndProjections {  
+    usecase UC13: View Future Financial Projections as uc_projections  
+        note right of uc_projections  
+            **Req. ID:** FR10, NFR06  
+            **Description:** Generates forecasts for future cash flows based on historical spending and saving data.  
+        end note  
+
+    usecase UC14: Perform Investment Scenarios as uc_investment_scenarios  
+}
+
+package Collaboration {  
+    usecase UC15: Share Financial Data with Advisors as uc_share_data  
+        note right of uc_share_data  
+            **Req. ID:** FR13, NFR02  
+            **Description:** Enables users to share selected financial data securely with their advisors for review and advice.  
+        end note  
+
+    usecase UC16: Communicate via Chatbot as uc_chatbot  
+}
+
+package AdvancedAnalysis {  
+    usecase UC17: View Advanced Financial Reports as uc_advanced_reports  
+        note right of uc_advanced_reports  
+            **Req. ID:** FR04, NFR02  
+            **Description:** Provides detailed financial reports and charts beyond basic transactional data.  
+        end note  
+
+    usecase UC18: Analyze Historical Data as uc_historical_analysis  
+}
+
+package AIComponents {  
+    usecase UC19: Leverage AI Reasoning Engine for Analysis as uc_ai_reasoning  
+        note right of uc_ai_reasoning  
+            **Req. ID:** FR05, NFR03  
+            **Description:** Utilizes an advanced AI engine to perform financial analysis and generate recommendations.  
+        end note  
+
+    usecase UC20: Explain Recommendations with Reasoning as uc_explain_recommendations  
+}
+
+' ACTOR-USE CASE RELATIONSHIPS
+user --> UC01  
+advisor --> UC09, UC15  
+bank --> UC03  
+ai_engine --> UC07, UC08, UC14  
+
+' CROSSES-PACKAGE RELATIONS
+UC06 ..> UC04 : <<include>>  <!-- Dashboard includes transaction details -->
+uc_ai_insights ..> uc_recommendations : <<extend>>  <!-- AI insights can be part of recommendations -->
+
+@enduml

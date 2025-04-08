@@ -1,0 +1,83 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Enhanced Personal Financial Management System - Use Cases"
+
+actor IndividualCustomer as user
+actor FinancialAdvisor as advisor
+actor BankingSystem as bank #lightblue
+actor InvestmentSystem as invest #lightblue
+
+package Authentication {
+    usecase UC01: Authenticate User as authUser <<<<FR01, NFR06>>
+        note right of UC01
+            **Description:** The system authenticates users using username/password or OAuth2 providers. Multi-factor authentication is optional.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC03: Connect Financial Accounts as connectAccounts <<<<FR02>
+        note right of UC03
+            **Description:** Securely links external financial accounts via banking APIs to retrieve transaction data.
+        end note
+    usecase UC04: View Transactions as viewTransactions <<<<FR03, FR04>>
+        note right of UC04
+            **Description:** Displays aggregated and categorized transactions. Includes visualizations for spending patterns.
+        end note
+    usecase UC05: Categorize Transactions as categorizeTransactions <<<<FR03>
+        extend UC04
+        note left of UC05
+            **Description:** Further breaks down transaction categories to provide deeper analysis.
+        end note
+}
+
+package AnalysisAndRecommendations {
+    usecase UC06: View Financial Dashboard as viewDashboard <<<<FR04, FR12>>
+        note right of UC06
+            **Description:** Presents an overview of financial health with AI-generated insights. Includes market data from investment APIs.
+        end note
+
+    usecase UC07: Receive AI Insights as receiveInsights <<<<FR05, NFR13>
+        note left of UC07
+            **Description:** Delivers personalized spending habits and portfolio recommendations using advanced analysis.
+        end note
+
+    usecase UC08: Set Financial Goals as setGoals <<<<FR06>>
+        note right of UC08
+            **Description:** Allows users to define short-term and long-term financial objectives, track progress.
+        end note
+
+    usecase UC09: Create Budgets as createBudgets <<<<FR07>>
+        note left of UC09
+            **Description:** Helps users plan their expenses by creating detailed budgets. Monitors adherence via real-time data.
+        end note
+        
+    generalization UC08 --|> UC10: View Basic Goals
+
+}
+
+package Planning {
+    usecase UC12: Forecast Financial Position as forecastPosition <<<<FR10, FR13>>
+        note right of UC12
+            **Description:** Predicts future financial scenarios based on historical data and user input.
+        end note
+        
+    usecase UC13: Suggest Investments as suggestInvestments <<<<FR11>
+        extend UC13
+        note left of UC13
+            **Description:** Recommends investment opportunities tailored to the user's risk profile and goals. Utilizes market trends from APIs.
+        end note
+}
+
+package Collaboration {
+    usecase UC02: Share Data with Advisors as shareData <<<<FR13>
+        note right of UC02
+            **Description:** Facilitates secure sharing of financial data between users and their advisors for collaborative planning.
+        end note
+}
+
+actor user --> authUser
+user --> connectAccounts
+user --> viewDashboard
+advisor --> receiveInsights
+
+@enduml

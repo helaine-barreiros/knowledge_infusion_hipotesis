@@ -1,0 +1,135 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Powered Personal Financial Management System - Use Case Diagram"
+
+actor IndividualCustomer as user1
+actor FinancialAdvisor as advisor2
+system PFMSystem as pfm3
+system BankingAPI as bank4
+system InvestmentAPI as invest5
+system CreditService as credit6
+system NewsService as news7
+
+package "Authentication & Security" {
+    usecase UC01: Authenticate User as uc01
+        note right of uc01 
+            **Req. ID:** FR01, NFR02  
+            **Description:** Authenticates users via username/password or OAuth providers with optional multi-factor authentication.
+        end note
+}
+
+package "Account Management" {
+    usecase UC03: Connect Financial Accounts as uc03
+        note right of uc03 
+            **Req. ID:** FR02, NFR05  
+            **Description:** Securely links bank accounts and investment portfolios using external APIs.
+        end note
+        
+    usecase UC04: View Transactions as uc04
+    usecase UC05: Categorize Transactions as uc05
+
+    uc03 ..> uc04 : <<include>>
+}
+
+package "Analysis & Recommendations" {
+    usecase UC06: Analyze Spending Patterns as uc06  
+        note right of uc06 
+            **Req. ID:** FR04, FR05, NFR01  
+            **Description:** Generates visual reports and AI-driven insights on spending habits.
+        end note
+
+    usecase UC07: Receive Personalized Recommendations as uc07
+        note right of uc07 
+            **Req. ID:** FR06, NFR04  
+            **Description:** Provides tailored financial advice based on user data using the AI engine.
+        end note
+        
+    usecase UC08: Set Financial Goals as uc08
+
+    generalization UC13 --|> UC08
+}
+
+package "Goal Tracking" {
+    usecase UC12: Track Progress Toward Goals as uc12  
+        note right of uc12 
+            **Req. ID:** FR07, NFR06  
+            **Description:** Monitors goal achievement and sends alerts for off-track activities.
+        end note
+}
+
+package "Budgeting" {
+    usecase UC14: Create Budgets as uc14  
+        note right of uc14 
+            **Req. ID:** FR08, NFR05  
+            **Description:** Allows users to set and manage monthly budgets with real-time tracking.
+        end note
+}
+
+package "Alerting" {
+    usecase UC16: Receive Alerts for Anomalies as uc16  
+        note right of uc16 
+            **Req. ID:** FR09, NFR05  
+            **Description:** Sends notifications about unusual transactions or deviations from budgets.
+        end note
+}
+
+package "Forecasting" {
+    usecase UC23: Predict Future Financial Outcomes as uc23  
+        note right of uc16 
+            **Req. ID:** FR10, NFR04  
+            **Description:** Estimates future financial positions using historical data and trends.
+        end note
+}
+
+package "Investment Management" {
+    usecase UC17: Discover Investment Opportunities as uc17  
+        note right of uc17 
+            **Req. ID:** FR11, NFR05  
+            **Description:** Suggests investment options based on user risk profile and market data.
+        end note
+}
+
+package "Collaboration" {
+    usecase UC24: Share Data with Advisors as uc24  
+        note right of uc24 
+            **Req. ID:** FR13, NFR05  
+            **Description:** Enables users to share specific financial details with their advisors.
+        end note
+}
+
+package "Reporting & Analytics" {
+    usecase UC26: Generate Financial Health Reports as uc26  
+        note right of uc24 
+            **Req. ID:** FR15, NFR04  
+            **Description:** Produces periodic health reports summarizing financial status.
+        end note
+}
+
+package "Multi-User Features" {
+    usecase UC37: Invite Co-Managers as uc37  
+        note right of uc26 
+            **Req. ID:** FR15, NFR04  
+            **Description:** Allows primary account holders to add secondary users for joint management.
+        end note
+}
+
+' Cross-package relationships
+
+uc06 ..> uc04 : <<include>>  ' Analysis includes transaction data view
+uc23 ..> uc07 : <<extend>>   ' Forecasting extends recommendation scope
+uc12 --|> uc08            ' Goal tracking generalizes from basic to advanced goals
+uc17 -x> pfm3             ' Investment management uses the system for analysis
+
+' Actor-UseCase relationships
+
+user1 --> UC01  
+advisor2 --> UC06, UC24  
+
+pfm3 --> UC03, uc05, uc06, uc08, uc12, uc17, uc23  
+bank4 -x> UC03  ' Bank API extends account connection
+invest5 -x> UC03 
+credit6 -x> UC03 
+
+news7 --> UC06  
+
+@enduml

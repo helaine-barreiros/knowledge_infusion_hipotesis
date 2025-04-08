@@ -1,0 +1,70 @@
+@startuml "AI-Enhanced Personal Financial Management System - Use Cases"
+
+title "AI-Enhanced Personal Financial Management System - Use Cases"
+
+actor IndividualCustomer as user #CUSTOMER_COLOR
+actor FinancialAdvisor as advisor #CUSTOMER_COLOR
+actor BankingSystem as bank #EXTERNAL_SYSTEM_COLOR
+actor InvestmentSystem as invest #EXTERNAL_SYSTEM_COLOR
+actor AISystem as ai #SYSTEM_COLOR
+
+package Authentication {
+    usecase UC01: "User Authentication" <<include>> 
+        note right of UC01
+            **Req. ID:** FR01, NFR06  
+            **Description:** Allows users to authenticate via username/password or OAuth2 providers with optional multi-factor authentication.
+        end note
+}
+
+package FinancialAccountManagement {
+    usecase UC03: "Connect Accounts" <<include>>
+        note right of UC03
+            **Req. ID:** FR02  
+            **Description:** Securely links external financial accounts using banking APIs to retrieve transaction data.
+        end note
+    
+    usecase UC04: "View Transactions"
+    
+    usecase UC05: "Categorize Transactions" <<extend>>
+        UC04 --> UC05 : Optional
+}
+
+package AnalysisAndInsights {
+    usecase UC06: "Financial Dashboard"  
+    usecase UC07: "AI Insights" <<include>> 
+    
+    note right of UC07 
+        **Req. ID:** FR03, FR05  
+        **Description:** AI-powered analysis to identify spending habits and trends.
+    end note
+    
+    generalization UC12: BasicReports --|> UC08: AdvancedAnalytics
+}
+
+package Planning {
+    usecase UC09: "Set Financial Goals" <<include>>
+    
+    usecase UC10: "Create Budgets"
+        UC03 --> UC10 : Always included
+}
+
+package Collaboration {
+    usecase UC14: "Share Data with Advisor" 
+    note right of UC14  
+        **Req. ID:** FR13  
+        **Description:** Allows customers to share selected financial data with their advisors.
+    end note
+}
+
+user --> UC01 : Authenticate  
+user --> UC03 : Connect Accounts  
+user --> UC06 : View Dashboard  
+
+advisor --> UC09 : Set Goals for Advisor
+
+bank --> UC03 : Provide Account Data  
+invest --> UC04: Supply Investment Info  
+
+UC07 --> ai : Leverage AI for Insights  
+
+@enduml
