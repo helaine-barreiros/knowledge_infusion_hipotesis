@@ -1,0 +1,79 @@
+@startuml
+left to right direction
+' Definição dos atores
+actor "Cliente HTTP" as cliente
+actor "Servidor HTTP" as servidor
+
+' Definição do retângulo do sistema
+rectangle "Sistema de Comunicação HTTP" {
+  ' Casos de uso de métodos HTTP
+  usecase "Realizar requisição GET\n(Recuperar recursos)" as UC1
+  usecase "Realizar requisição POST\n(Enviar dados para processamento)" as UC2
+  usecase "Realizar requisição PUT\n(Atualizar recursos existentes)" as UC3
+  usecase "Realizar requisição DELETE\n(Remover recursos)" as UC4
+  usecase "Realizar requisição HEAD\n(Obter metadados sem corpo)" as UC5
+  usecase "Realizar requisição OPTIONS\n(Verificar operações permitidas)" as UC6
+  usecase "Realizar requisição PATCH\n(Atualizar parcialmente recursos)" as UC7
+  usecase "Realizar requisição TRACE\n(Diagnóstico de requisições)" as UC8
+  
+  ' Casos de uso de funcionalidades HTTP
+  usecase "Autenticação HTTP\n(Basic, Digest, Bearer)" as UC9
+  usecase "Gerenciar Cache\n(ETag, If-Modified-Since)" as UC10
+  usecase "Compressão de dados\n(gzip, deflate)" as UC11
+  usecase "Gerenciar Cookies e Sessões" as UC12
+  usecase "Processar Redirecionamentos\n(301, 302, 307, 308)" as UC13
+  usecase "Negociação de conteúdo\n(Accept, Content-Type)" as UC14
+  usecase "Responder com códigos de status\n(1xx, 2xx, 3xx, 4xx, 5xx)" as UC15
+  usecase "Processar cabeçalhos HTTP" as UC16
+  usecase "Estabelecer conexão persistente\n(Keep-Alive)" as UC17
+  usecase "Gerenciar conexões seguras\n(HTTPS - TLS/SSL)" as UC18
+}
+
+' Relacionamentos entre atores e casos de uso
+' Cliente inicia os métodos HTTP
+cliente --> UC1
+cliente --> UC2
+cliente --> UC3
+cliente --> UC4
+cliente --> UC5
+cliente --> UC6
+cliente --> UC7
+cliente --> UC8
+
+' Cliente participa de funcionalidades
+cliente --> UC9
+cliente --> UC10
+cliente --> UC12
+cliente --> UC13
+cliente --> UC14
+cliente --> UC16
+cliente --> UC17
+cliente --> UC18
+
+' Servidor responde e processa
+servidor --> UC1
+servidor --> UC2
+servidor --> UC3
+servidor --> UC4
+servidor --> UC5
+servidor --> UC6
+servidor --> UC7
+servidor --> UC8
+servidor --> UC9
+servidor --> UC10
+servidor --> UC11
+servidor --> UC12
+servidor --> UC13
+servidor --> UC14
+servidor --> UC15
+servidor --> UC16
+servidor --> UC17
+servidor --> UC18
+
+' Notas explicativas
+note "Inicia comunicação\nEnvia cabeçalhos\nEnvia dados quando aplicável" as N1
+note "Processa requisições\nRetorna códigos de status\nEnvia dados de resposta" as N2
+
+N1 .. cliente
+N2 .. servidor
+@enduml

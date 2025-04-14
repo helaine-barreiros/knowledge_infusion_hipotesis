@@ -1,5 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 from src.utils.logger import Logger
+from openpyxl import load_workbook
+from openpyxl.utils.dataframe import dataframe_to_rows
 
 import os
 import pandas as pd
@@ -221,3 +223,21 @@ class FileUtil:
 
         except Exception as inner_e:
             self.LOGGER.critical(f"Failed to save empty Excel file at {filename}: {inner_e}")
+
+    def generate_data_collection_instrument(self, filename, output_directory, content):
+        success = True
+        output_file = os.path.join(output_directory, filename)
+
+        try:
+
+            with open(output_file, 'wb', encoding=None) as file:
+                file.write(content)
+
+            self.LOGGER.info(f"File saved successfully at: {output_file}")
+
+        except Exception as e:
+            success = False
+            self.LOGGER.critical(f"Failed to save data collection instrument at {output_file}: {e}")
+
+        return success
+

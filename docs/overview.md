@@ -1,9 +1,9 @@
 
-Overview do Experimento: Avaliação da Infusão de Conhecimento em LLMs para Geração de Diagramas de Máquina de Estados
+Overview da Pesquisa: Avaliar a Relação de Causa e Efeito entre a Infusão de Conhecimento Específico em LLMs E q qualidade de artefatos de software
 
 # 1 Introdução
 
-O experimento investiga o impacto da infusão de conhecimento em modelos de linguagem (LLMs) na geração de artefatos (diagramas UML de máquina de estados). O cenário utilizado será o da norma técnica que define os padrões ITU-T e 3GPP (GSM, LTE, 5G).
+Realizar uma serie de experimentos para investigar o a relação de causa e efeito entre a especializacao de conhecimento espeifico de dominio e a qualidade da especificacao tecnica de artegatos gerados por modelos de linguagem (LLMs).  A perspectiva será sempre do engenheiro de software com o foco na adocao desta tecnologia no processo de desenvolvimento de software. Mais especificamente no desenvolvimento orientado ao modelo C4 Model para especificacao, modelagem e implementacao das funcionalidades do sistema.
 
 
 # 4  Metodologia
@@ -12,11 +12,11 @@ O experimento investiga o impacto da infusão de conhecimento em modelos de ling
 
 ### Definições
 
-Investigar e quantificar a correlação entre a infusão de conhecimento e a qualidade técnica dos diagramas UML de máquina de estados gerados por Large Language Models (LLMs).
+Investigar e quantificar a relação  entre a infusão de conhecimento e a qualidade técnica dos artefatos de software gerados por Large Language Models (LLMs).
 
 **1. Infusão de conhecimento e estratégias associadas ao LLM**
-- Infusão de conhecimento: processo de incorporar informações específicas do domínio através de prompts ou base de conhecimento com o objetivo de melhorar o conhecimento de domínio.
-- Técnicas: Retrieval-Augmented Generation (RAG), Prompt Engineering, Few-shot Learning
+- Infusão de conhecimento: processo de incorporar conhecimento explicito sobre domínio de negócio.
+- Técnicas: Fine Tunning, Retrieval-Augmented Generation (RAG), Prompt Engineering, Few-shot Learning
 
 **2. Análise do diagrama de Máquina de Estados** 
 - Qualidade técnica: a qualidade técnica será discutida com base na precisão, completude, conformidade e interpretação das restrições apresentadas nos diagramas em gerados em função do conhecimento de domínio fusionado.

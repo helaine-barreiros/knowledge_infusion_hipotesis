@@ -1,0 +1,67 @@
+@startuml
+left to right direction
+' Define actors
+actor "HTTP Client" as client
+actor "HTTP Server" as server
+
+' Define system boundary
+rectangle "HTTP Protocol Communication System" {
+  ' Request Management Module
+  package "Request Management" {
+    usecase "Process HTTP Methods" as UC01
+    usecase "Validate Request Headers" as UC02
+    usecase "Manage Content Negotiation" as UC03
+    usecase "Support Compression" as UC04
+  }
+  
+  ' Response Management Module
+  package "Response Management" {
+    usecase "Generate Status Codes" as UC05
+    usecase "Manage Content Types" as UC06
+  }
+  
+  ' Security and Session Module
+  package "Security and Session" {
+    usecase "Manage TLS/SSL Connections" as UC07
+    usecase "Handle Authentication" as UC08
+    usecase "Manage Cookies" as UC09
+    usecase "Manage Sessions" as UC10
+  }
+  
+  ' Cache and Optimization Module
+  package "Cache and Optimization" {
+    usecase "Process Cache Headers" as UC11
+    usecase "Support Persistent Connections" as UC12
+  }
+}
+
+' Define relationships between actors and use cases
+client --> UC01
+client --> UC02
+client --> UC03
+client --> UC04
+client --> UC07
+client --> UC08
+client --> UC09
+client --> UC10
+client --> UC11
+client --> UC12
+
+server --> UC01
+server --> UC02
+server --> UC03
+server --> UC04
+server --> UC05
+server --> UC06
+server --> UC07
+server --> UC08
+server --> UC09
+server --> UC10
+server --> UC11
+server --> UC12
+
+' Define include/extend relationships
+UC01 <.. UC02 : <<include>>
+UC03 ..> UC06 : <<extend>>
+UC10 <.. UC09 : <<include>>
+@enduml
