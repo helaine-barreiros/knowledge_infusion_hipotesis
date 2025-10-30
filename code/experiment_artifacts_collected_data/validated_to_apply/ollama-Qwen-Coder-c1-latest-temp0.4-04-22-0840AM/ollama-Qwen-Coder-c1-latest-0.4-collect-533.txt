@@ -1,0 +1,74 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+}
+
+package SystemAdministrator {
+  actor "System Administrator" as SAFR001
+  
+  usecase "SAFR002: Manage Client Mentoring Sessions Based on System-Generated Insights" as SAFR002
+  usecase "SAFR003: View Predictive Interventions About My Clients' Financial Situations" as SAFR003
+}
+
+package User {
+  actor "User (Client, Financial Advisor, or System Administrator)" as CFR011
+  
+  usecase "CFR011: Send Feedback about the System's Recommendations and Insights to Help Improve Future Outputs" as CFR011
+}
+
+rectangle "System" {
+  usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR002
+  
+  rectangle "AI Component" {
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users by Evaluating Potential Investments Against Their Risk Profiles, Time Horizons, and Financial Goals" as AIFR004
+    usecase "AIFR005: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations from Established Spending Patterns" as AIFR005
+    
+  }
+  
+  rectangle "News Component" {
+    usecase "SFR013: Request Contextualized News Insights From the AI Component to Identify Potential Impacts on Users' Investments" as SFR013
+    usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as AIFR007
+    
+  }
+  
+  rectangle "Dashboard Component" {
+    usecase "SFR12: Generate Client Dashboards That Present Financial Information in an Intuitive and Actionable Format" as SFR12
+  }
+
+}
+
+CFR001 --> (View Financial Insights Dashboard)
+CFR001 --> (Receive Alerts About Anomalous Transactions)
+CFR003 --> (View Financial Predictions Based on Historical Data and Current Market Trends)
+CFR004 --> (Receive Personalized Recommendations Aligned with My Financial Profile and Goals)
+CFR005 --> (Manage Personalized Recommendations Preferences)
+CFR006 --> (View Spending Limit Alerts When Exceed Predefined Thresholds in Specific Expense Categories)
+CFR007 --> (View Investment Opportunities Suitable to My Risk Profile)
+CFR008 --> (View News Related to My Investment Portfolio)
+CFR010 --> (Manage Relationship with Financial Advisors Including Permissions for Sharing Data)
+
+FAFR002 --> FAFR003
+FAFR004 --> AIFR005
+
+SAFR001 --> SAFR002
+SAFR001 --> SAFR003
+
+CFR011 --> CFR011
+
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 718]

@@ -1,0 +1,108 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "CFR003: Access Historical Data Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Adjust Recommendation Settings" as CFR005
+  usecase "CFR006: Monitor Spending Limits" as CFR006
+  usecase "CFR007: Explore Investment Opportunities" as CFR007
+  usecase "CFR008: Stay Informed with News" as CFR008
+  usecase "CFR009: Consolidate Financial Views" as CFR009
+  usecase "CFR010: Manage Data Sharing Permissions" as CFR010
+  
+  usecase "FAFR001: Schedule Mentoring Sessions" as FAFR001
+  usecase "FAFR002: Review Intervention Alerts" as FAFR002
+  usecase "FAFR003: Analyze Client Data" as FAFR003
+  usecase "SAFR004: Configure Analysis Parameters" as SAFR004
+  
+  usecase "SFR001: Notify Users of Alerts" as SFR001
+  usecase "SFR002: Provide Personalized Recs" as SFR002
+  usecase "SFR003: Request Predictions" as SFR003
+  usecase "SFR004: Request Recommendations" as SFR004
+  usecase "SFR005: Monitor Spending Limits" as SFR005
+  usecase "SFR006: Analyze Investment Opportunities" as SFR006
+  usecase "SFR007: Filter Investments by ESG" as SFR007
+  usecase "SFR008: Detect Anomalies" as SFR008
+  usecase "SFR009: Extract News Context" as SFR009
+  usecase "SFR010: Generate Dashboards" as SFR010
+  usecase "SFR011: Manage Alerts Based on Conditions" as SFR011
+  usecase "SFR012: Analyze Client Behavior" as SFR012
+  usecase "SFR013: Generate Health Reports" as SFR013
+  usecase "SFR014: Track Goals Progress" as SFR014
+  usecase "SFR015: Request Intervention Analyses" as SFR015
+  usecase "SFR016: Enhance Advisor Guidance" as SFR016
+  usecase "SFR017: Assess Financial Health" as SFR017
+  usecase "SFR018: Maintain Insight History" as SFR018
+  usecase "SFR019: Handle User Feedback" as SFR019
+  
+  usecase "AIFR001: Predict Future Transactions" as AIFR001
+  usecase "AIFR002: Offer Personalized Advice" as AIFR002
+  usecase "AIFR003: Alert on Spending Anomalies" as AIFR003
+  usecase "AIFR004: Suggest Investment Options" as AIFR004
+  usecase "AIFR005: Identify Aligning Investments" as AIFR005
+  usecase "AIFR006: Spot Fraudulent Activity" as AIFR006
+  usecase "AIFR007: Correlate News with Portfolios" as AIFR007
+  usecase "AIFR008: Recommend Intervention Timing" as AIFR008
+  usecase "AIFR009: Provide Forward-Looking Insights" as AIFR009
+  
+  usecase "CFR011: Submit Feedback" as CFR011
+
+  
+actor Client as C
+actor FinancialAdvisor as FA
+actor SystemAdmin as SA
+actor User as U
+
+C --> CFR001 : View financial insights dashboard
+C --> SAFR002 : Manage alert preferences
+C --> CFR003 : Access historical data predictions
+C --> CFR004 : Receive personalized recommendations
+C --> CFR005 : Adjust recommendation settings
+C --> CFR006 : Monitor spending limits
+C --> CFR007 : Explore investment opportunities
+C --> CFR008 : Stay informed with news
+C --> CFR009 : Consolidate financial views
+C --> CFR010 : Manage data sharing permissions
+
+FA --> FAFR001 : Schedule mentoring sessions
+FA --> FAFR002 : Review intervention alerts
+FA --> FAFR003 : Analyze client data
+SA --> SAFR004 : Configure analysis parameters
+
+SFR001 <|-- (C, FA) : Notify users of alerts through channels like email or app notifications.
+SFR002 <|-- C : Provide personalized recommendations based on financial profiles and goals.
+SFR003 <|-- AIFR001 : Request predictions from AI for future transactions.
+SFR004 <|-- (C, FA) : Request recommendations from the system using user data.
+SFR005 <|-- (AIFR003: Alert on spending anomalies)
+SFR006 <|-- (AIFR004: Suggest investment options based on risk profile and market trends.)
+SFR007 <|-- AIFR005 : Filter investments by ESG criteria.
+SFR008 <|-- AIFR006 : Detect potential fraud using anomaly detection models.
+SFR009 <|-- (AIFR007: Correlate news with portfolios)
+SFR010 <|-- C : Generate dashboards for clients to visualize their financial data.
+SFR011 <|-- SFR008, SFR006 : Manage alerts based on specific conditions like thresholds or patterns detected by AI components.
+SFR012 <|-- (AIFR009: Provide forward-looking insights) : Analyze client behavior to predict future financial actions.
+SFR013 <|-- AIFR008 : Generate health reports assessing users' financial wellbeing using standard metrics like debt-to-income ratio, savings rate etc.
+SFR014 <|-- C : Track progress towards financial goals set by clients and provide updates as needed.
+SFR015 <|-- (AIFR008: Recommend intervention timing) : Identify when advisors should reach out to clients based on system-generated analytics indicating potential issues or opportunities.
+SFR016 <|-- AIFR009 : Enhance the value of financial guidance provided by advisors through data-driven recommendations from AI.
+SFR017 <|-- (AIFR008: Assess health) : Generate comprehensive reports evaluating users' overall financial health using a combination of quantitative and qualitative factors derived from their transaction history, asset allocation, debt levels etc.
+SFR018 <|-- C : Maintain historical records of all insights provided to clients for trend analysis over time. This includes tracking how often certain recommendations were made versus actual outcomes, which helps improve future accuracy through machine learning feedback loops.
+SFR019 <|-- (AIFR002: Offer advice) : Collect user interactions with the system’s outputs and use this data as input to refine its algorithms via reinforcement learning techniques. For example, if a client consistently ignores certain types of alerts or recommendations, the AI could adjust future communications accordingly.
+SFR020 <|-- C : Handle feedback from users about their experiences using the system so that improvements can be made iteratively.
+
+AIFR001 --> SFR003 : Generate financial predictions for use in personalized recommendations and dashboards. These are based on historical transactions, market trends, economic indicators, etc.
+AIFR002 --> (SFR004: Request recommendations) : Offer tailored investment strategies aligned with each user’s risk profile as defined during KYC verification or subsequent updates.
+AIFR003 --> SFR005 : Create spending limit alerts when detected deviations from established budgets occur, ensuring clients stay within their allocated funds for specific categories like groceries, entertainment etc., without exceeding pre-set thresholds. These can be adjusted by users via CFR005.
+AIFR004 --> (SFR006: Analyze opportunities) : Identify potential investments that match the user’s risk tolerance and time horizon using Modern Portfolio Theory principles to optimize returns while managing volatility.
+AIFR005 --> SFR007 : Filter investment options by ESG standards, allowing clients who prioritize environmental sustainability or social responsibility to align their portfolios with these values. This could involve weighting factors like carbon footprint reduction, fair labor practices etc., in the AI’s decision-making process for generating recommendations.
+AIFR006 --> (SFR008: Detect anomalies) : Employ advanced pattern recognition techniques to identify transactions that deviate
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

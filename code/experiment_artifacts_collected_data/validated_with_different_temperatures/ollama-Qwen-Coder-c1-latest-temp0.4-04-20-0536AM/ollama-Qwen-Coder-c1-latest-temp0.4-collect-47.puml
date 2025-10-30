@@ -1,0 +1,79 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Preferences for Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Investments" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+
+  Client --> (SFR02)
+  Client --> (SAFR004)
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as FAFR004
+
+  FinancialAdvisor --> (SFR16)
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SystemAdmin --> (FAFR004)
+  SystemAdmin --> (AIFR002)
+}
+
+package "Notifications and Alerts" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+}
+
+package "Recommendations" {
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+
+  rectangle "AI System" {
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  }
+}
+
+package "Predictive Analytics and Insights" {
+  usecase "SFR014: Generate Client Analytics" as SFR014
+
+  rectangle "AI System" {
+    usecase "AIFR009: Generate Predictive Insights for Users" as AIFR009
+  }
+}
+
+package "Investment Opportunities and News" {
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+
+  rectangle "AI System" {
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities Based on User Profiles and Strategies" as AIFR005
+  }
+
+  usecase "SFR012: Request Client Dashboards from AI Component" as SFR012
+
+  rectangle "AI System" {
+    usecase "AIFR012: Generate Financial Health Reports for Users" as AIFR012
+  }
+}
+
+package "Feedback and Improvement" {
+  usecase "CFR11: Send Feedback about Recommendations and Insights" as CFR11
+
+  Client --> (SFR020)
+}
+
+@enduml

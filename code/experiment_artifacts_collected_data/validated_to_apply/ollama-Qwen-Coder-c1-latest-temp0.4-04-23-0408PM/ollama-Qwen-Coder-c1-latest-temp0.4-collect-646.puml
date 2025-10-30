@@ -1,0 +1,77 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  
+  FAFR002 --> (FAFR004)
+}
+
+package SystemAdmin {
+  actor "System Administrator" as SAFR001
+}
+
+rectangle "Financial Insights Dashboard" {
+  rectangle "Client Dashboards" {
+    usecase "CFR009: Access Personalized Dashboard" as CFR009
+    usecase "SFR012: Generate Client Dashboards" as SFR012
+    
+    CFR001 --> (CFR009)
+    
+    SAFR001 --> (SFR012)
+  }
+  
+  rectangle "Alerts & Notifications" {
+    usecase "SFR005: Request Spending Limit Alerts" as SFR005
+    usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+    
+    CFR001 --> (SFR005)
+    SAFR001 --> (SFR005)
+    
+    CFR001 --> (SFR008)
+    SAFR001 --> (SFR008)
+  }
+  
+  rectangle "Predictive Insights" {
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "FAFR002: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR002
+    
+    CFR001 --> (CFR003)
+    
+    SAFR001 --> (SFR016)
+  }
+  
+  rectangle "Personalized Recommendations & Preferences Management" {
+    usecase "CFR004: Receive Personalized Recommendations Aligned with Financial Profile and Goals" as CFR004
+    usecase "SAFR005: Manage Analysis Parameters Preferences for Relevant Insights" as SAFR005
+    
+    CFR001 --> (CFR004)
+    
+    SAFR001 --> (SFR20)
+  }
+  
+  rectangle "Investment Opportunities & News" {
+    usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as CFR007
+    usecase "FAFR003: Configure Analysis Parameters for Specific Client Segments Based on Regulatory Requirements" as FAFR003
+    
+    CFR001 --> (CFR007)
+    
+    SAFR001 --> (SFR26)
+  }
+  
+  rectangle "Feedback & Improvement" {
+    usecase "SAFR005: Manage Analysis Parameters Preferences for Relevant Insights" as SAFR005
+    usecase "AIFR009: Generate Client Predictive Intervention Recommendations by Identifying Patterns That Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR009
+    
+    CFR011 --> (SAFR020)
+  }
+}
+
+@enduml

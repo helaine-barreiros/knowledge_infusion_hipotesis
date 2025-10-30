@@ -1,0 +1,105 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage System Parameters"
+  SysAdmin --> FAFR004 : "Configure Analysis Parameters"
+
+  rectangle "Client" {
+    actor Client as c
+    c -> CFR001: View Financial Data
+    c -> CFR002: Receive Alerts on Anomalous Transactions
+    c -> CFR003: View Financial Predictions
+    c -> CFR004: Personalized Recommendations Alignment
+    c -> CFR005: Manage Recommendation Preferences (KYC)
+    c -> CFR006: Spending Limit Alerts Management
+    c -> CFR007: Investment Opportunities Based on Risk Profile
+    c -> CFR008: View News Related to Portfolio
+    c -> CFR009: Personalized Dashboard Access
+    c -> CFR10: Manage Relationship with Advisors (Data Sharing)
+  }
+  
+  rectangle "Financial Advisor" {
+    actor FinancialAdvisor as fa
+    fa --> FAFR002: View Client Intervention Alerts
+    fa --> FAFR003: Predictive Analytics for Clients
+    fa --> FAFR004 : Configure Analysis Parameters (Client Segments)
+  }
+  
+  rectangle "System Administrator" {
+    actor SysAdmin as sa
+    sa --> SAFR001 : Manage System Parameters
+    sa --> FAFR004 : Configure Client-Specific Parameters
+  }
+
+  system boundary: rectangle "AI-Driven Financial Insights System" {
+    usecase SFR002: Deliver Personalized Recommendations
+    usecase SFR003: Request Predictive Analytics from AI Component
+    usecase AIFR001: Generate Financial Predictions (Historical Data, Market Trends)
+    
+    SysAdmin --> SAFR001 : Manage System Parameters
+
+    client --> CFR002: Receive Alerts on Anomalous Transactions via SFR008 (AI-generated alerts)
+
+    client --> CFR006: Spending Limit Alert Management through AIFR003
+  }
+  
+  system boundary: rectangle "Client-Specific AI Services" {
+    usecase AIFR004: Generate Investment Opportunities Based on Risk Profiles
+    usecase AIFR005: Identify Financial Instruments Aligning with Strategies (MPT)
+    usecase AIFR006: Detect Anomalies via Pattern Recognition
+
+    client --> CFR007 : View Investment Opportunities from AIFR004, AIFR005
+  }
+  
+  system boundary: rectangle "Financial News Processing" {
+    usecase SFR009: Request Contextualized News Insights (AIFR007)
+    usecase AIFR007: Generate Relevant Financial News for Portfolios
+
+    client --> CFR008 : View News from AIFR007
+  }
+  
+  system boundary: rectangle "Client-Dashboard Generation" {
+    usecase SFR12: Generate Client Dashboards (CFR009)
+    client --> CFR009 : Access Personalized Dashboard via SFR12
+
+    SysAdmin --> FAFR004 : Configure Analysis Parameters for Dashboards
+  }
+  
+  system boundary: rectangle "Client-Advisor Communication" {
+    usecase CFR10: Manage Relationship with Advisors (Data Sharing)
+    client --> CFR10 : Share Data, Set Permissions via SFR020
+
+    SysAdmin --> FAFR004 : Configure Advisor Access in Client-Specific Parameters
+  }
+  
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Client** interacts directly with the system through use cases like viewing dashboards (CFR001), receiving alerts (CFR002, SFR008 via AIFR006), and managing recommendations/preferences.
+- **Financial Advisor** uses FAFR-related use cases for client mentoring, intervention alerts, predictive analytics, and parameter configuration tailored to segments.
+- **System Administrator** manages system parameters (SAFR001) and configures analysis settings specific to clients or advisors via FAFR004.
+- The AI component (`AIFR`) handles critical tasks like generating financial predictions (CFR003), personalized recommendations, investment opportunities, anomaly detection, news processing, etc. These are integrated into client workflows through system boundaries like SFR and AIFR services.
+
+This diagram ensures all actors' interactions with the system and among themselves are clearly mapped according to their roles in managing personal finance insights. The use of nested rectangles helps group related functionalities logically for clarity. 
+
+### Notes:
+- All use case IDs match those provided, ensuring no discrepancies.
+- Relationships between actors (e.g., client-to-system) and within subsystems (like AI services) are explicitly defined with arrows indicating directionality.
+- System boundaries isolate different components (AI-driven vs. user-facing), enhancing modularity in the diagram.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1138]

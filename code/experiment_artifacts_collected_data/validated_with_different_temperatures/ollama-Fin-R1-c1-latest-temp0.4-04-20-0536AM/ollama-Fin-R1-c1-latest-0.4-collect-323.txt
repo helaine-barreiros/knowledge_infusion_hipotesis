@@ -1,0 +1,91 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions from AI" as SFR003
+  usecase "SFR004: Request Personalized Recommendations" as SFR004
+  usecase "SFR015: Request Intervention Analyses" as SFR015
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+}
+
+actor Client as C
+actor FinancialAdvisor as FA
+actor SystemAdmin as SA
+
+C --> CFR001 : View financial insights dashboard
+C --> SAFR002 : Manage alert preferences (e.g., transaction alerts)
+C --> SFR003 : Request financial predictions from AI
+C --> AIFR002 : Receive personalized recommendations
+FA --> FAFR002 : View client intervention alerts
+SA --> SAFR001 : Manage analysis parameters
+
+package Professional {
+  actor FinancialAdvisor as FA
+}
+
+rectangle "System" {
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities" as SFR007
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+}
+
+C --> SFR005 : Receive spending limit alerts
+FA --> SFR006 : View investment opportunities based on risk profile
+SA --> AIFR003 : Manage system parameters for anomaly detection
+
+rectangle "System Boundary" {
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+}
+
+C --> AIFR007 : View contextualized news related to investments
+FA --> AIFR008 : Receive predictive intervention recommendations
+
+package RegulatoryCompliance {
+  usecase "SFR013: Manage Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+}
+
+C --> SFR013 : Receive system-generated alerts based on conditions
+FA --> AIFR006 : View anomaly transaction alerts
+
+package DataManagement {
+  actor SystemAdmin as SA
+}
+
+SA --> SAFR004: Configure analysis parameters for client segments  
+SA --> AIFR009: Manage user feedback to improve insights  
+
+@enduml
+```
+
+### Explanation:
+1. **Actors**: The diagram includes three main actors—`Client`, `FinancialAdvisor`, and `SystemAdmin`. These are represented as aliases within the PlantUML code.
+2. **Use Cases**:
+   - Client-related use cases (e.g., viewing dashboards, receiving recommendations).
+   - System Administrator tasks like managing analysis parameters.
+   - Financial Advisor-specific actions such as viewing alerts or generating reports.
+3. **System Boundaries**: The "System" boundary groups related use cases and components. Subpackages are used to categorize different functionalities:
+   - `Professional` for financial advisor-related activities.
+   - `RegulatoryCompliance` for compliance checks (e.g., AML, GDPR).
+   - `DataManagement` for administrative tasks like configuring parameters or managing feedback.
+4. **Relationships**: Arrows indicate interactions between actors and use cases. For example:
+   - Clients interact with the system to view dashboards (`CFR001`) or receive recommendations (`AIFR002`).
+   - Financial Advisors check client alerts (`FAFR002`) or view investment opportunities (`SFR006`).
+5. **Inheritance and Grouping**: Packages like `Professional` group financial advisor activities, while subcomponents (e.g., `RegulatoryCompliance.AIFR006`) handle specific regulatory requirements.
+
+This structure ensures clarity in mapping the functional requirements to their corresponding use cases and actors within the system. Adjustments can be made based on further analysis or additional requirements not explicitly listed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1041]

@@ -1,0 +1,98 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as fa
+actor SysAdmin as sa
+system "System" as sys
+
+package Professional {
+  actor Chef as chef
+  
+  rectangle "Professional Subsystem" {
+    usecase "CFR001: View Financial Insights Dashboard" as CFR001
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+    
+    c1 --> CFR001 : "Client requests financial insights"
+    sa --> SAFR001 : "SysAdmin manages analysis parameters"
+  }
+}
+
+package ClientSubsystem {
+  actor ClientUser as cu
+  
+  rectangle "Client Subsystem" {
+    usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004
+    usecase "CFR005: Manage Recommendation Preferences" as CFR005
+    usecase "CFR006: View Spending Limit Alerts" as CFR006
+    usecase "CFR007: View Investment Opportunities" as CFR007
+    usecase "CFR008: Access Personalized Dashboard" as CFR008
+    usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+    
+    cu --> CFR002 : "Client views alerts"
+    cu --> CFR003 : "Client views predictions"
+    cu --> CFR004 : "Client receives recommendations"
+    cu --> CFR005 : "Client manages preferences"
+    cu --> CFR006 : "Client checks spending limits"
+    cu --> CFR007 : "Client explores investment options"
+    cu --> CFR008 : "Client uses consolidated dashboard"
+    cu --> CFR010 : "Client handles advisor permissions"
+  }
+}
+
+package AdvisorSubsystem {
+  actor FinancialAdvisorUser as fau
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  
+  rectangle "Advisor Subsystem" {
+    fau --> FAFR001 : "Advisors manage mentoring sessions"
+    fau --> FAFR002 : "Advisors view client alerts"
+    fau --> FAFR003 : "Advisors access predictive analytics"
+  }
+}
+
+package SystemSubsystem {
+  usecase "SFR009: Request Contextualized News" as SFR009
+  usecase "SFR17: Generate Financial Health Reports" as SFR17
+  
+  rectangle "System Subsystem" {
+    sys --> SFR002 : "System delivers recommendations"
+    sys --> SFR003 : "System requests predictions"
+    sys --> SFR004 : "System requests recommendations"
+    sys --> SFR005 : "System requests spending limit alerts"
+    sys --> SFR006 : "System requests investment opportunities"
+    sys --> SFR007 : "System requests specific investments"
+    sys --> SFR008 : "System requests anomaly transaction alerts"
+    sys --> SFR12:  "System generates client dashboards"
+    sys --> SFR13:  "System handles client alerts"
+    sys --> SFR14:  "System provides client analytics"
+    sys --> SFR15:  "System requests predictive interventions"
+    sys --> SFR16:  "System requests predictive insights"
+    sys --> SFR020: "System manages user feedback"
+    
+    sys --> AIFR001 : "AI generates predictions"
+    sys --> AIFR002 : "AI provides recommendations"
+    sys --> AIFR003 : "AI issues spending limit alerts"
+    sys --> AIFR004 : "AI evaluates investment opportunities"
+    sys --> AIFR005:  "AI identifies investments aligning with strategies"
+    sys --> AIFR006:  "AI detects anomalies in transactions"
+    sys --> AIFR007:  "AI correlates news to portfolios"
+    sys --> AIFR008:  "AI recommends actions based on patterns"
+    
+    SFR13 <|-- (sys) : "System generates alerts for clients and advisors"
+    SFR14 <|-- (sys) : "System provides analytics for dashboards"
+    SFR15 <|-- (sys) : "System requests interventions from AI"
+  }
+}
+
+package FeedbackLoop {
+  usecase "CFR011: Send User Feedback" as CFR011
+  rectangle "Feedback Loop Subsystem" {
+    sys --> CFR011 : "System collects user feedback for improvement"
+  }
+}
+@enduml

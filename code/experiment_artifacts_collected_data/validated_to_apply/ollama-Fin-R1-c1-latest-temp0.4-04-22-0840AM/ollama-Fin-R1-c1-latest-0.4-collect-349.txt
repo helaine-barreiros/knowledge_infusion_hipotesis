@@ -1,0 +1,83 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor FinancialAdvisor as fa
+actor SysAdmin as sysadmin
+system ProfessionalSystem as system
+
+rectangle "ProfessionalSystem" {
+  usecase "CFR001: View Financial Insights Dashboard" as cfr001
+  usecase "SAFR001: Manage Analysis Parameters" as safr001
+  usecase "FAFR004: Configure Analysis Params for Segments" as fafr004
+
+  client --> cfr001 : "Client wants to view financial insights."
+  
+  sysadmin -> safr001 : "SysAdmin manages analysis parameters."
+  fa <- safr001 : "FA requests system settings."
+
+  usecase "CFR002: View Alerts" as cfr002
+  client --> cfr002 : "Client wants alerts for anomalous transactions."
+  
+  usecase "CFR003: View Financial Predictions" as cfr003
+  system -> aifr001 : "System requests predictions from AI."
+
+  usecase "CFR004: Receive Personalized Recommendations" as cfr004
+  client --> safr002 : "Client wants personalized recommendations."
+  
+  usecase "SAFR002: Deliver Recs Based on Profiles" as safr002
+  system -> aifr002 : "System requests AI-generated recs."
+
+  usecase "CFR005: Manage Recommendation Preferences" as cfr005
+  client --> safr003 : "Client adjusts preferences for recommendations."
+  
+  usecase "SAFR003: Adjust Recs Based on KYC" as safr003
+  
+  usecase "CFR006: View Spending Limit Alerts" as cfr006
+  system -> aifr003 : "System requests spending limit alerts."
+
+  usecase "CFR007: View Investment Opportunities" as cfr007
+  client --> safr004 : "Client wants investment opportunities."
+  
+  usecase "SAFR005: Analyze Inv Ops Based on Profiles" as safr005
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as fafr001
+  fa --> safr006 : "FA requests client intervention alerts."
+  
+  usecase "SAFR006: Deliver Alerts to Clients" as safr006
+
+  usecase "SFR008: Request Anomaly Transaction Alerts" as sfr008
+  system -> aifr006 : "System requests anomaly transaction alerts."
+
+  usecase "CFR009: View Consolidated Dashboard" as cfr009
+  
+  usecase "FAFR002: View Client Intervention Alerts" as fafr002
+
+  usecase "SFR013: Generate Client Alerts Based on Conditions" as sfr013
+}
+
+@enduml
+```
+
+**Key Observations and Explanations:**
+- **Actors:** The diagram includes four main actors: `Client`, `FinancialAdvisor (FA)`, `SysAdmin`, and the system itself (`ProfessionalSystem`).
+- **Use Cases Grouping by Actor/Functionality:**
+  - **Clients' Use Cases** (CFR series): Viewing dashboards, alerts, predictions, recommendations, managing preferences.
+  - **AI System's Use Cases** (AIFR series): Generating insights like financial predictions, personalized recs, spending limit alerts, investment opportunities, anomaly detection, etc.
+  - **SysAdmin/FA Specific:** Managing analysis parameters and client-related activities.
+- **Relationships:**
+  - Clients interact directly with the system through use cases like viewing dashboards (`cfr001`), receiving recommendations (`cfrr004`), or adjusting preferences (`cfr005`).
+  - SysAdmin manages system settings via `safr001`, while FAs handle client mentoring and alerts (`fafr001`).
+- **System-to-AI Communication:** The Professional System requests data from the AI components (e.g., financial predictions, anomaly detection) to fulfill client needs.
+- **Inheritance/Delegation Notation:** Relationships are established using arrows (`->`) for system interactions with clients and AIs. For example, `system -> aifr001` denotes the system requesting financial predictions from the AI.
+
+This structure ensures clarity in how different actors use the system and its components to achieve their goals. The grouping by actor/functionality helps visualize distinct workflows within the application domain. 
+
+**Note:** Ensure all IDs match exactly as per requirements, avoiding typos or discrepancies. Adjustments may be needed based on further analysis of dependencies not explicitly listed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1040]

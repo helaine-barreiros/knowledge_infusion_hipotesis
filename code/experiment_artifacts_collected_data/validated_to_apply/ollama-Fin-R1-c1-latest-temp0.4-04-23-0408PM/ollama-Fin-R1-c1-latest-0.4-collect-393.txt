@@ -1,0 +1,185 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Preferences" as SAFR002
+  
+  Client --> CFR001 : "View"
+  
+  SysAdmin <|-- (SAFR002)
+}
+
+rectangle "System - AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  
+  System --> (CFR001) : "Request"
+  
+  CFR003 <|-- (AIFR002)
+  SAFR005 <|-- (AIFR004)
+}
+
+rectangle "System - Notification Component" {
+  usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+  usecase "SFR013: Generate Client Alerts" as SFR013
+  
+  System --> (CFR002) : "Request"
+  
+  SysAdmin <|-- (AIFR006)
+}
+
+rectangle "System - News Component" {
+  usecase "SFR009: Request Contextualized News Insights" as SFR009
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  
+  System --> (CFR008) : "Request"
+  
+}
+
+rectangle "System - Relationship Management Component" {
+  usecase "SFR015: Request Predictive Intervention Analyses" as SFR015
+  usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+  
+  System --> (CFR010) : "Request"
+}
+
+rectangle "System - Historical Record Component" {
+  usecase "SFR018: Manage Financial Goals Tracking" as SFR018
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  
+  System --> (CFR020) : "Request"
+}
+
+rectangle "System - Feedback Component" {
+  usecase "SFR019: Manage User Feedback" as SFR019
+  usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+  
+  System --> (CFR011) : "Request"
+}
+
+@enduml
+```
+
+**Description of the Diagram Structure:**
+- The system is divided into multiple components, each with its own use cases. These include:
+  - **Client Interaction Component**: Handles user-facing features like viewing dashboards and receiving alerts.
+    - Use case `CFR001` (View Financial Insights Dashboard) directly relates to clients.
+    - Use case `SAFR002` (Manage User Preferences) is managed by system administrators but affects client experience indirectly through preferences.
+  - **AI Component**: Processes data for generating predictions, recommendations, and alerts.
+    - AI generates financial predictions (`AIFR001`), investment analyses (`AIFR004`), and anomaly transaction alerts (`AIFR006`). These are requested by the system to support client interactions.
+  - **Notification Component**: Manages alert generation for clients, including transactional and predictive alerts.
+    - Alerts related to financial health (`SFR013`) and anomaly transactions (`SFR008`).
+  - **News Component**: Fetches and contextualizes news relevant to the user's portfolio.
+    - Includes generating client analytics (`SFR014`) based on AI-generated insights.
+  - **Relationship Management Component**: Tracks financial goals, interventions, etc., for clients or advisors.
+    - Predictive analyses like `AIFR009` (Client Predictive Insights) are part of this component.
+  - **Historical Record Component**: Manages tracking and analysis over time, such as adjusting user feedback (`SFR018`) to improve future recommendations.
+  - **Feedback Component**: Collects client input on system outputs for continuous improvement.
+
+**Key Relationships:**
+- Clients interact with the system via use cases like `CFR001` (viewing dashboards) and receive alerts through components like `AIFR006`.
+- System administrators manage parameters (`SAFR002`) which influence how AI operates.
+- The AI component drives much of the predictive and analytical work, with its outputs being requested by various system components to ensure data-driven decision-making.
+
+This structure ensures that all functional requirements are represented accurately within their respective contexts. Each use case is linked logically based on dependencies and interactions described in the requirements. Actors (e.g., Client, System Administrator) connect directly or indirectly through these relationships. The separation into distinct components helps visualize how different parts of the system work together to deliver value to users.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001  
+  usecase "SAFR002: Manage User Preferences" as SAFR002
+  
+  Client --> CFR001 : "View"
+  
+  SysAdmin <|-- (SAFR002)
+}
+
+rectangle "System - AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004  
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  
+  System --> (CFR001) : "Request"
+  
+  CFR003 <|-- (AIFR002)
+  SAFR005 <|-- (AIFR004)
+}
+
+rectangle "System - Notification Component" {
+  usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+  usecase "SFR013: Generate Client Alerts" as SFR013
+  
+  System --> (CFR002) : "Request"
+  
+  SysAdmin <|-- (AIFR006)
+}
+
+rectangle "System - News Component" {
+  usecase "SFR009: Request Contextualized News Insights" as SFR009
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  
+  System --> (CFR008) : "Request"
+  
+}
+
+rectangle "System - Relationship Management Component" {
+  usecase "SFR015: Request Predictive Intervention Analyses" as SFR015
+  usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+  
+  System --> (CFR010) : "Request"
+}
+
+rectangle "System - Historical Record Component" {
+  usecase "SFR018: Manage Financial Goals Tracking" as SFR018
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  
+  System --> (CFR020) : "Request"
+}
+
+rectangle "System - Feedback Component" {
+  usecase "SFR019: Manage User Feedback" as SFR019
+  usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+  
+  System --> (CFR011) : "Request"
+}
+
+@enduml
+```
+
+**Description of the Diagram Structure:**  
+The system is structured into multiple components, each with its own set of use cases. These include:
+
+- **Client Interaction Component**: Handles user-facing features like viewing dashboards and receiving alerts.
+  - Use case `CFR001` (View Financial Insights Dashboard) directly relates to clients.
+  - Use case `SAFR002` (Manage User Preferences) is managed by system administrators but affects client experience indirectly through preferences.
+
+- **AI Component**: Processes data for generating predictions, recommendations, and alerts.
+  - AI generates financial predictions (`AIFR001`), investment analyses (`AIFR004`), and anomaly transaction alerts (`AIFR006`). These are requested by the system to support client interactions.
+
+- **Notification Component**: Manages alert generation for clients, including transactional and predictive alerts.
+  - Alerts related to financial health (`SFR013`) and anomaly transactions (`SFR008`).
+
+- **News Component**: Fetches and contextualizes news relevant to the user's portfolio.
+  - Includes generating client analytics (`SFR014`) based on AI-generated insights.
+
+- **Relationship Management Component**: Tracks financial goals, interventions, etc., for clients or advisors.
+  - Predictive analyses like `AIFR009` (Client Predictive Insights) are part of this component.
+
+- **Historical Record Component**: Manages tracking and analysis over time, such as adjusting user feedback (`SFR018`) to improve future recommendations.
+
+- **Feedback Component**: Collects client input on system outputs for continuous improvement.
+  - Includes generating predictive intervention recommendations (`AIFR008`).
+
+**Key Relationships
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

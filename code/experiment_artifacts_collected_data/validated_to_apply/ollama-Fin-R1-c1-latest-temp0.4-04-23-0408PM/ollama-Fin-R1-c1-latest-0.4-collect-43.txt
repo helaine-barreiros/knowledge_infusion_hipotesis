@@ -1,0 +1,88 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities" as CFR007
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Advisors" as CFR009
+  
+  SysAdmin --> SAFR001 : (Manage Analysis Parameters)
+  
+  Client --> CFR001, CFR002, CFR003, CFR004, CFR005, CFR006, CFR007, CFR008, CFR009
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Segment" as FAFR004
+  
+  SysAdmin --> FAFR001, FAFR002, FAFR003, FAFR004 : (Manage Client Data)
+}
+
+rectangle "System" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  usecase "SFR002: Provide Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts from AI" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from AI" as SFR006
+  usecase "SFR007: Find Specific Investment Opportunities for Client Segments" as SFR007
+  usecase "SFR008: Generate Contextualized News Insights Based on Portfolio" as SFR008
+  usecase "SFR009: Process Contextualized News to Extract Relevant Info" as SFR009
+  usecase "SFR010: Request Client Dashboards from AI" as SFR010
+  usecase "SFR011: Generate Client Alerts Based on Predefined Conditions" as SFR011
+  usecase "SFR012: Generate Client Analytics for Financial Behavior/Performance" as SFR012
+  usecase "SFR013: Request Predictive Intervention Analyses from AI" as SFR013
+  usecase "SFR014: Track Users' Progress on Financial Goals" as SFR014
+  usecase "SFR015: Manage Historical Record of Insights for Trend Analysis" as SFR015
+  usecase "SFR016: Request Predictive Insights from AI to Enhance Client Guidance" as SFR016
+  
+  SysAdmin --> SFR001, SFR002 : (Manage System Notifications)
+  
+  AIFR001 <|-- SFR003
+  AIFR002 <|-- SFR004
+  AIFR005 <|-- SFR007
+  
+}
+
+rectangle "AI" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Analyze Investment Opportunities Based on Risk Profiles" as AIFR004
+  usecase "AIFR005: Identify Suitable Investments for Users" as AIFR005
+  usecase "AIFR006: Detect Anomaly Transactions via Pattern Recognition" as AIFR006
+  usecase "AIFR007: Correlate News with User Portfolios" as AIFR007
+  usecase "AIFR008: Recommend Predictive Interventions for Advisors" as AIFR008
+  usecase "AIFR009: Provide Forward-Looking Analysis of Financial Situations" as AIFR009
+  
+}
+
+Client --> SFR016 : (Request AI-generated insights)
+SysAdmin --> SAFR002, FAFR004 : (Manage System Parameters)
+
+@enduml
+```
+
+### Explanation:
+- **System** actors include clients, financial advisors, and system administrators. Each use case is linked to the appropriate actor based on their role.
+- The "AI" component handles all predictive analyses such as generating recommendations, predictions, spending alerts, etc., which are requested by various parts of the system (e.g., SFR003 requests AI-generated financial predictions).
+- Relationships between actors and systems are established using arrows. For example, clients request personalized recommendations from the system, while advisors manage client data through specific use cases.
+- Inheritance relationships like `<|--` indicate that certain components extend or relate to others logically (e.g., AIFR001 extends SFR003 by generating financial predictions).
+- The structure groups related use cases under their respective actors and systems for clarity. 
+
+This diagram ensures all functional requirements are represented accurately, with proper relationships between actors, system components, and AI functionalities. Adjustments can be made based on further analysis or specific implementation details not covered here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1390]

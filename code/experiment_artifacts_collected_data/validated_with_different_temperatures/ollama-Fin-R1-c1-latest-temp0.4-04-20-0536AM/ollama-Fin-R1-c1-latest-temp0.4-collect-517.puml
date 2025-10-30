@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor FinancialAdvisor as advisor
+actor SysAdmin as sysadmin
+system SFR012: GenerateClientDashboards as dashboardsystem
+system AIFR007: ContextualizedNewsInsights as newsinsightssystem
+
+rectangle "System" {
+  usecase CFR001: ViewFinancialInsightsDashboard as viewdashboard
+  usecase CFR002: ReceiveAlertsForAnomalousTransactions as receivealerts
+  usecase CFR003: ViewFinancialPredictionsBasedOnDataTrends as viewpredictions
+  usecase CFR004: PersonalizedRecommendationsAsPerProfile as recprofile
+  usecase CFR005: ManagePersonalizedRecPreferences as manageprefs
+  usecase CFR006: SpendingLimitAlertsWhenExceedingThresholds as spendalert
+  usecase CFR007: ViewInvestmentOpportunitiesBasedOnRiskProfile as viewinvestments
+  usecase CFR008: AccessNewsRelatedToPortfolio as accessnews
+  usecase CFR010: ManageRelationshipWithFinancialAdvisors as manageadvisors
+
+  usecase SAFR001: ManageAnalysisParametersForAI as manparams
+  usecase FAFR003: ViewPredictiveAnalyticsAboutClientSituations as viewpredanalytics
+  usecase FAFR004: ConfigureParamsForSpecificClientSegments as configclientseg
+  
+  client --> viewdashboard : "View Financial Insights Dashboard"
+  sysadmin --> manparams : "Manage Analysis Parameters For AI"
+
+  dashboardsystem <|-- viewdashboard : "Delivers consolidated financial info via dashboard"
+  
+  newsinsightssystem <|-- receivealerts : "Sends alerts for anomalous transactions"
+}
+
+@enduml

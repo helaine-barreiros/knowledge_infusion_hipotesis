@@ -1,0 +1,80 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Alerts Preferences" as SAFR002
+  usecase "SFR003: Request Predictive Interventions from AI" as SFR003
+  
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin -> SAFR002 : "Manage Analysis Parameters for Alerts"
+  SysAdmin -> SAFR001 : "Manage System-Wide Analysis Parameters (Basel III)"
+  
+  FAFR004 -> SFR003 : "Configure Client-Specific Analysis Parameters"
+  FAFR004 --> AIFR009 : "Generate Predictive Intervention Recommendations"
+  
+  SysAdmin -->> CFR001 : "Update System Settings for Dashboards"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: Analyze Predictive Analytics on Clients' Financial Situations" as FAFR003
+  
+  SysAdmin -> FAFR004 : "Set Up Analysis Parameters for Advisors"
+  
+  User -->> AIFR006 : "Trigger Anomaly Transaction Alerts via System"
+}
+
+rectangle "Client" {
+  usecase "CFR002: View Alerts on Anomalous Transactions" as CFR002
+  usecase "SFR001: Manage Spending Limit Alerts Preferences" as SFR001
+  
+  Client --> AIFR006 : "Receive Spending Limit Alerts"
+  
+  User -->> SAFR003 : "Request Predictive Interventions for Financial Advice"
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage System-Wide Analysis Parameters (Basel III)" as SAFR001
+  usecase "CFR005: Adjust Client Recommendation Preferences" as CFR005
+  
+  SysAdmin -->> AIFR002 : "Set Personalized Recommendations Based on KYC"
+}
+
+rectangle "AI Component" {
+  usecase "AIFR007: Generate Contextual News Insights for Users" as AIFR007
+  usecase "CFR010: Manage User-Advisor Relationships via System" as CFR010
+  
+  SysAdmin --> SFR020 : "Track and Improve Feedback Loop"
+  
+  Client -->> AIFR008 : "Request Investment Opportunity Analysis"
+}
+
+@enduml
+```
+
+### Key Observations:
+1. **System Actor**: The system is represented by a rectangle containing various use cases (e.g., `CFR001`, `SAFR002`).
+2. **Client Actors**: Clients can view dashboards (`CFR001`), manage alerts (`SFR001`), and receive recommendations.
+3. **Financial Advisor Actors**: Advisors handle client-specific interventions, predictive analytics, and system configuration via analysis parameters (`FAFR004`, `SAFR002`).
+4. **System Administrator Actor**: Manages global settings (e.g., Basel III compliance) and user preferences across the board (`CFR005`, `SAFR001`).
+5. **AI Component Actors**: AI generates predictions, recommendations, alerts, and contextual news insights.
+6. **Use Case Relationships**:
+   - Clients interact directly with system use cases (e.g., viewing dashboards or receiving alerts).
+   - Advisors rely on the system for predictive analyses and client-specific parameters.
+   - Administrators configure global settings affecting all components.
+
+### Diagram Structure:
+- The diagram is partitioned into four main sections: **System**, **Financial Advisor**, **Client**, and **AI Component**. Each section groups related use cases under their respective actors (e.g., `CFR001` for Clients, `SAFR002` for System Admin).
+- Arrows denote direct interactions between actors/use cases or system components.
+- Inheritance relationships are implied by the hierarchical structure of requirements but not explicitly drawn here. For example, all clients share common interaction points with the system.
+
+This diagram adheres strictly to the provided functional requirements and ensures clarity in actor-use case mappings while maintaining logical groupings within subsystems. Adjustments can be made if additional nuances or dependencies arise from further analysis.
+
+[Done: True
+Done Reason: stop
+Eval Count: 966]

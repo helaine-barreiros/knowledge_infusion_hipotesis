@@ -1,0 +1,71 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+system "System" as S
+
+rectangle Professional {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Trends" as CFR003
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences in KYC Profile" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile (MiFID II)" as CFR007
+  usecase "CFR008: Receive News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: Consolidated Personalized Dashboard for Financial Monitoring" as CFR009
+  usecase "CFR010: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as CFR010
+
+  S --> CFR001 : Display dashboard
+  S --> CFR002 : Send alerts
+  S --> CFR003 : Provide predictions
+  S --> CFR004 : Offer recommendations
+  S --> CFR005 : Adjust preferences
+  S --> CFR006 : Notify on spending limits
+  S --> CFR007 : Present investment opportunities
+  S --> CFR008 : Share news
+  S --> CFR009 : Generate dashboard
+  S --> CFR010 : Manage access
+
+}
+
+rectangle Administrative {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Schedule Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+  usecase "FAFR003: Review Predictive Analytics About Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+
+  SA --> SAFR001 : Adjust parameters
+  FA --> (FAFR001, FAFR002, FAFR003) : Use cases for Financial Advisors
+}
+
+rectangle AI {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Personalized Recommendations Based on Profiles and Goals" as AIFR002
+  usecase "AIFR003: Spending Limit Alerts for Unusual Activity" as AIFR003
+  usecase "AIFR004: Investment Opportunity Analyses Matching Risk Profile" as AIFR004
+  usecase "AIFR005: Align Investments with Modern Portfolio Theory Principles" as AIFR005
+  usecase "AIFR006: Anomaly Transaction Alerts for Fraud Detection" as AIFR006
+  usecase "AIFR007: Contextualized News Insights Based on Portfolios" as AIFR007
+  usecase "AIFR008: Predictive Intervention Recommendations" as AIFR008
+  usecase "AIFR009: Client-Specific Financial Analysis for Advisors" as AIFR009
+
+  S --> (AIFR001, AIFR002, AIFR003, AIFR004, AIFR005, AIFR006, AIFR007, AIFR008, AIFR009) : Request services
+}
+
+S --> (CFR001, CFR002, ..., CFR010) : Delivers to clients
+SA --> SAFR001 : Admin controls parameters
+
+' Relationship between system components and actors
+C -> S : Use cases for Clients
+FA -> S : Use cases for Financial Advisors
+SA -> S : System admin interactions
+S <|-- (CFR001, ..., CFR010) : Realizes use cases through the system
+S <|-- SAFR001 : Manages analysis parameters via SysAdmin
+
+@enduml

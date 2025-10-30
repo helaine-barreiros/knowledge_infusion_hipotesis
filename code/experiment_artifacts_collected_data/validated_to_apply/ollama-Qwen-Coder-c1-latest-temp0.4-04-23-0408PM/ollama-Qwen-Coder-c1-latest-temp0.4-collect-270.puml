@@ -1,0 +1,95 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  Client --> (SFR012) : (Generate client dashboards)
+  SysAdmin --> (SAFR001) : (Manage analysis parameters)
+  
+  rectangle "Client Use Cases" {
+    Client --> CFR001
+    Client --> (CFR019) : (Maintain historical record of users' insights)
+    Client --> (SFR020) : (Manage user feedback)
+    
+    rectangle "Financial Insights" {
+      CFRR003: View financial predictions based on historical data and current market trends as CFR003
+      CFRR017: Access a personalized dashboard that consolidates my financial information in a single view as CFR009
+      
+      Client --> (CFR003) : "View Financial Predictions"
+      Client --> (CFR009) : "Access Personalized Dashboard"
+    }
+    
+    rectangle "Recommendations" {
+      CFRR018: Receive personalized recommendations aligned with my financial profile and goals as CFR004
+      CFRR020: Manage my relationship with Financial Advisors, including permissions for sharing my financial data
+      
+      Client --> (CFR004) : "Receive Personalized Recommendations"
+      Client --> (SFR018) : "Manage users' financial goals"
+    }
+    
+    rectangle "Alerts" {
+      CFRR002: Receive alerts about anomalous transactions in my accounts as CFR002
+      CFRR006: View spending limit alerts when I exceed predefined thresholds in specific expense categories as CFR006
+      
+      Client --> (CFR002) : "Receive Alerts"
+      Client --> (SFR013) : "Generate client alerts based on predefined conditions"
+    }
+    
+    rectangle "Investment Opportunities" {
+      CFRR007: View investment opportunities suitable to my risk profile as CFR007
+      
+      Client --> (CFR007) : "View Investment Opportunities"
+    }
+  }
+
+  rectangle "Financial Advisor Use Cases" {
+    FAFD --> (FAFR001) : Manage client mentoring sessions based on system-generated insights
+    FAFD --> (SFR023) : Generate financial health reports that assess users' overall financial wellbeing
+    
+    rectangle "Client Interaction" {
+      FAFD --> (CFR019) : Maintain historical record of users' insights
+      
+      FAFD --> (FAFR002) : View client intervention alerts when the system detects patterns requiring professional attention
+      FAFD --> (SFR024) : Generate predictive intervention analyses from the AI component to identify when financial advisors should engage with clients
+      
+      rectangle "Recommendations" {
+        FAFD --> (CFR018) : Manage users' financial goals
+        
+        FAFD --> (FAFR003) : View predictive analytics about my clients' financial situations
+        FAFD --> (SFR025) : Generate client predictive insights that provide forward-looking analysis of financial situations to support more effective financial planning
+      
+      }
+      
+      rectangle "Investment Opportunities" {
+        FAFD --> (FAFR016) : View predictive insights from the AI component to enhance the value of financial guidance provided to clients
+        FAFD --> (SFR027) : Generate investment opportunity analyses for users by evaluating potential investments against their risk profiles, time horizons, and financial goals
+      
+      }
+      
+    }
+
+  rectangle "System Use Cases" {
+    
+    SFR013: Deliver alerts to users through appropriate notification channels as SAFR005
+    SFR026: Generate client analytics that provide meaningful insights into financial behavior and performance
+    
+    System Admin --> (SFR014) : Request financial predictions from the AI component
+    System Admin --> (SFR018) : Request personalized recommendations from the AI component based on each user's financial data and preferences
+    System Admin --> (SAFR026) : Generate client analytics
+    
+  }
+
+}
+
+Client --> (CFR011) : "Send feedback about system's recommendations"
+FAFD --> (FAFR011) : "Send feedback about system's recommendations"
+
+@enduml

@@ -1,0 +1,153 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as fa
+actor SysAdmin as sa
+system SFR021
+
+rectangle "System" {
+  usecase CFR001: View Financial Insights Dashboard as vfd
+  usecase CFR002: Receive Alerts for Anomalous Transactions as rat
+  usecase CFR003: View Financial Predictions based on Historical Data and Market Trends as fpr
+  usecase CFR004: Personalized Recommendations aligned with financial profile and goals as prg
+  usecase CFR005: Manage Preferences for Personalized Recommendations as mprp
+  usecase CFR006: Spending Limit Alerts when exceeding thresholds in expense categories as sla
+  usecase CFR007: View Investment Opportunities suitable to risk profile (e.g., MiFID II) as iop
+  usecase CFR008: Access News related to investment portfolio as nprp
+  usecase CFR009: Personalized Dashboard consolidating financial info in single view as pdv
+  usecase CFR010: Manage Relationship with Financial Advisors, including data sharing permissions as mra
+
+  usecase SAFR001: Manage Analysis Parameters for AI system compliance (e.g., Basel III) as map
+  usecase FAFR001: Manage Client Mentoring Sessions based on insights as csmi
+  usecase FAFR002: View Client Intervention Alerts when patterns require professional attention as vcai
+  usecase FAFR003: Predictive Analytics about clients' financial situations for recommendations during consultations as pafrg
+  usecase FAFR004: Configure Analysis Parameters by client segment (e.g., GDPR, CCPA) as cap
+
+  usecase SFR001: Deliver Alerts through appropriate channels as dac
+  usecase SFR002: Personalized Recommendations based on financial profiles as prds
+  usecase SFR003: Request Financial Predictions from AI component as rfpaii
+  usecase SFR004: Request Personalized Recommendations from AI component as rprii
+  usecase SFR005: Spending Limit Alerts when exceeding thresholds as slaeii
+  usecase SFR006: Investment Opportunity Analysis based on risk profile as iopaii
+  usecase SFR007: Specific Investment Opportunities matching criteria and ESG preferences as sieg
+  usecase SFR008: Anomaly Transaction Alerts for AML compliance as aatii
+  usecase SFR009: Contextualized News relevant to portfolio from sources as cnsi
+  usecase SFR010: Process Contextualized News insights as pcni
+  usecase SFR011: Request AI-generated Insights on contextualized news for users' portfolios as riancnp
+  usecase SFR012: Generate Client Dashboards in intuitive format as gcdnf
+  usecase SFR013: Generate Client Alerts based on conditions as gaocn
+  usecase SFR014: Generate Client Analytics providing meaningful insights into financial behavior and performance as gcfapbpi
+  usecase SFR015: Predictive Intervention Analyses for advisor engagement timing as piaaei
+  usecase SFR016: Enhance Value of Financial Guidance with predictive insights as evfgpwi
+  usecase SFR017: Generate Financial Health Reports using standard metrics as gfrhsm
+  usecase SFR018: Manage Users' Financial Goals tracking progress and recommendations as mugtrprr
+  usecase SFR019: Maintain Historical Record of Insights for trend analysis as mhiratm
+  usecase SFR020: Manage User Feedback to improve system outputs as mufti
+
+  usecase AIFR001: Generate Financial Predictions by analyzing data and trends as gfdtaiii
+  usecase AIFR002: Personalized Recommendations based on financial profiles, goals, risk tolerance (e.g., FINRA) as prfrgrti
+  usecase AIFR003: Spending Limit Alerts for unusual deviations in spending patterns as sladupi
+  usecase AIFR004: Investment Opportunity Analyses matching user's risk profile and strategies as ioamrps
+  usecase AIFR005: Generate Investment Opportunities aligned with investment strategies and Modern Portfolio Theory (MPT) principles as giomptp
+  usecase AIFR006: Anomaly Transaction Alerts using pattern recognition for compliance (e.g., FinCEN) as atacprc
+  usecase AIFR007: Contextualized News Insights by correlating news with portfolios as cncnp
+  usecase AIFR008: Predictive Intervention Recommendations based on patterns indicating financial difficulties or opportunities as pirpfioc
+  usecase AIFR009: Client Predictive Insights for forward-looking analysis of financial situations (e.g., MPT) as cpifaf
+
+  c1 --> vfd : "View Financial Insights Dashboard"
+  sa --> map : "Manage Analysis Parameters"
+
+  fa --> rat : "Receive Alerts" <<label: FATF>>
+  csmi <|-- rat
+  vcai <|-- rat
+
+  c1 --> fpr : "View Predictions"
+  prg <|-- fpr
+
+  c1 --> prg : "Personalized Recommendations"
+  mprp <|-- prg
+
+  c1 --> sla : "Spending Limit Alerts" <<label: Threshold Exceeded>>
+  
+  fa --> iop : "Investment Opportunities (e.g., MiFID II)" 
+  sieg <|-- iop
+  
+
+  c1 --> nprp : "View News"
+  c2 --> nprp : "Financial Advisor Access"
+
+  c1 --> pdv : "Personalized Dashboard" <<label: Consolidated>>
+  
+  fa --> mra : "Manage Relationship with Advisors" 
+  mugtrprr <|-- mra
+
+  sa --> cap : "Configure Analysis Params by Segment"
+  cap <|-- map
+  
+  dac <|-- rat
+  prds <|-- rat
+  
+  rfpaii <|-- fpr
+  rprii <|-- prg
+  slaeii <|-- sla
+  iopaii <|-- iop
+
+  cnsi <|-- nprp : "Contextualized News"
+  
+  gcdnf <|-- pdv
+  gaocn <|-- rat
+  
+  gcfapbpi <|-- fpr
+  gcfapbpi <|-- prg
+  gcfapbpi <|-- sla
+
+  piaaei <|-- vcai : "Client Intervention Alerts"
+  
+  evfgpwi <|-- pafrg: "Predictive Analytics"
+
+  gfdtaiii <|-- rat
+  
+  prfrgrti <|-- prg  
+
+  sladupi <|-- sla
+  iomptp <|-- iop
+
+  atacprc <|-- rat : "AML Compliance"
+  
+  cncnp <|-- nprp: "Contextualized News Insights"
+
+  pirpfioc <|-- vcai
+  
+  cpifaf <|-- prg: "Client Predictive Insights (e.g., MPT)"
+
+}
+
+@enduml
+```
+
+### Explanation:
+- **Actors**: The diagram includes three main actors: `Client`, `FinancialAdvisor`, and `SysAdmin`. Each corresponds to the functional requirements listed.
+  
+- **Use Cases**:
+  - Most use cases are labeled with their respective CFR, SAFR, FAFR, SFR, AIFR IDs. For example, `CFR001` for viewing a financial insights dashboard.
+  - Inheritance relationships (e.g., `<|--`) and aggregation/extension (`<<label>>`) are used where applicable to reflect dependencies or contextual labels.
+
+- **Relationships**:
+  - Arrows denote direct interactions between actors and use cases. For example, `Client --> CFR001` indicates the client requests access to a financial insights dashboard.
+  
+- **System Boundaries**: The system is represented within a rectangle labeled "System" containing all internal components (use cases). This helps isolate external entities from internal operations.
+
+### Key Observations:
+- Each use case corresponds precisely to its functional requirement ID, ensuring alignment with the provided specifications. 
+- Inheritance and aggregation are used minimally but effectively where required by relationships or labels.
+- The structure follows a logical grouping of related functionalities under their respective actors (e.g., client-related use cases grouped together). 
+
+This diagram provides a comprehensive overview of all interactions within the system as defined in the functional requirements. Adjustments may be needed based on further analysis, but this serves as an accurate starting point.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1882]

@@ -1,0 +1,154 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  C --> (CFR001)
+  C --> (CFR002)
+  C --> (CFR003)
+  C --> (CFR004)
+  C --> (CFR005)
+  C --> (CFR006)
+  C --> (CFR007)
+  C --> (CFR008)
+  C --> (CFR009)
+  C --> (CFR10)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  FA --> (FAFR001)
+  FA --> (FAFR002)
+  FA --> (FAFR003)
+  FA --> (FAFR004)
+}
+
+package "System Administrator" {
+  actor SysAdmin as SA
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SA --> (SAFR001)
+}
+
+rectangle System {
+  package "User Interface" {
+    usecase "SFR012: Generate Client Dashboards" as SFR012
+    usecase "SFR013: Generate Client Alerts" as SFR013
+    usecase "SFR014: Generate Client Analytics" as SFR014
+    
+    C --> (SFR012)
+    FA --> (SFR012)
+    SA --> (SFR012)
+    
+    C --> (SFR013)
+    FA --> (SFR013)
+    SA --> (SFR013)
+    
+    C --> (SFR014)
+    FA --> (SFR014)
+    SA --> (SFR014)
+  }
+  
+  package "Notification" {
+    usecase "SFR001: Deliver Alerts to Users" as SFR001
+    
+    C --> (SFR001)
+    FA --> (SFR001)
+    SA --> (SFR001)
+  }
+  
+  package "Recommendations" {
+    usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+    
+    C --> (SFR002)
+    FA --> (SFR002)
+    SA --> (SFR002)
+    
+    C --> (AIFR002)
+    FA --> (AIFR002)
+  }
+  
+  package "Predictions" {
+    usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+    usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+    
+    C --> (SFR003)
+    FA --> (SFR003)
+    SA --> (SFR003)
+    
+    C --> (AIFR001)
+    FA --> (AIFR001)
+  }
+  
+  package "Spending Limits" {
+    usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+    usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+    
+    C --> (SFR005)
+    FA --> (SFR005)
+    SA --> (SFR005)
+    
+    C --> (AIFR003)
+    FA --> (AIFR003)
+  }
+  
+  package "Investment Opportunities" {
+    usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+    usecase "SFR015: Generate Predictive Intervention Analyses for Users" as SFR015
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+    
+    C --> (SFR006)
+    FA --> (SFR006)
+    SA --> (SFR006)
+    
+    C --> (SFR015)
+    FA --> (SFR015)
+    SA --> (SFR015)
+    
+    C --> (AIFR004)
+    FA --> (AIFR004)
+  }
+  
+  package "News" {
+    usecase "SFR008: Request Contextualized News from AI Component" as SFR008
+    usecase "AIFR007: Generate Contextualized News Insights for Users" as AIFR007
+    
+    C --> (SFR008)
+    FA --> (SFR008)
+    SA --> (SFR008)
+    
+    C --> (AIFR007)
+    FA --> (AIFR007)
+  }
+  
+  package "Feedback" {
+    usecase "CFR11: Send Feedback about System Recommendations and Insights" as CFR11
+    
+    C --> (CFR11)
+    FA --> (CFR11)
+    SA --> (CFR11)
+  }
+}
+
+@enduml

@@ -1,0 +1,156 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sas
+actor FinancialAdvisor as faa
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Predictive Analytics from AI" as SFR003
+  usecase "SFR004: Manage Recommendation Preferences" as SFR004
+  usecase "CFR011: Send Feedback to System" as CFR011
+
+  c1 --> CFR001 : view dashboard
+  sas --> SAFR001 : manage parameters
+  faa --> SFR002 : receive recommendations
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+
+  SFR003 --> AIFR002 : request recommendations
+}
+
+rectangle "Contextual News Component" {
+  usecase "SFR009: Request Contextualized News Insights" as SFR009
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+  SFR009 --> AIFR007 : request insights
+}
+
+rectangle "Spending Limit Alerts Component" {
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "AIFR003: Generate Spelling Limit Alerts" as AIFR003
+
+  SFR005 --> AIFR003 : request alerts
+}
+
+rectangle "Investment Opportunity Component" {
+  usecase "SFR006: Request Investment Opportunities Analysis" as SFR006
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+  SFR006 --> AIFR004 : request analysis
+}
+
+rectangle "Anomaly Transaction Alerts Component" {
+  usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  SFR008 --> AIFR006 : request alerts
+}
+
+@enduml
+```
+
+**Explanation of the Diagram Structure:**
+1. **Actors:** The diagram includes three main actors: `Client`, `SysAdmin`, and `FinancialAdvisor`. These are represented outside the system boundary.
+2. **System Boundary:** All use cases related to client interactions, administrative management, and AI components are grouped within a single rectangle labeled "System".
+3. **AI Component:** A separate rectangle groups all use cases associated with generating insights (e.g., financial predictions, recommendations) using an AI system (`AIFR001`, `AIFR002`).
+4. **Contextual News Component:** Another rectangle contains the news-related use cases and their interaction with the AI component.
+5. **Spending Limit Alerts Component:** This group handles alerts related to spending limits, including interactions between the user (via system) and the AI for alert generation (`AIFR003`).
+6. **Investment Opportunity Component:** Manages requests for investment analyses from users and their corresponding AI-generated outputs.
+7. **Anomaly Transaction Alerts Component:** Deals with transaction anomaly detection alerts through user interaction and AI processing.
+
+**Key Relationships:**
+- Users (Client, SysAdmin) interact directly with the system via use cases like viewing dashboards or managing parameters (`CFR001`, `SAFR001`).
+- The "System" uses other components (AI, News, etc.) to fulfill requests. For example:
+  - `SFR003: Request Predictive Analytics from AI` connects the system with the AI component for generating recommendations.
+  - Similarly, news-related use cases (`SFR009`) link to the contextual news component and its AI sub-component.
+
+This structure ensures clarity in how different parts of the system (actors & components) collaborate to deliver financial insights. Each rectangle represents a subsystem or category of functionality, making it easier to understand complex interactions within the diagram. 
+
+**Note:** The use case "CFR011: Send Feedback" is included as per requirements but does not directly link to any specific component outside the system boundary in this version since feedback handling might involve internal processing rather than external actors. Adjustments could be made if further details on its implementation are provided.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sas
+actor FinancialAdvisor as faa
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Predictive Analytics from AI" as SFR003
+  usecase "SFR004: Manage Recommendation Preferences" as SFR004
+  usecase "CFR011: Send Feedback to System" as CFR011
+
+  c1 --> CFR001 : view dashboard
+  sas --> SAFR001 : manage parameters
+  faa --> SFR002 : receive recommendations
+  
+  SysAdmin <|-- (System) 
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+
+  SFR003 --> AIFR002 : request recommendations
+}
+
+rectangle "Contextual News Component" {
+  usecase "SFR009: Request Contextualized News Insights" as SFR009
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+  SFR009 --> AIFR007 : request insights
+}
+
+rectangle "Spending Limit Alerts Component" {
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "AIFR003: Generate Spelling Limit Alerts" as AIFR003
+
+  SFR005 --> AIFR003 : request alerts
+}
+
+rectangle "Investment Opportunity Component" {
+  usecase "SFR006: Request Investment Opportunities Analysis" as SFR006
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+  SFR006 --> AIFR004 : request analysis
+}
+
+rectangle "Anomaly Transaction Alerts Component" {
+  usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  SFR008 --> AIFR006 : request alerts
+}
+
+@enduml
+```
+
+**Clarifications on Relationships:**
+- The `SysAdmin` has an inheritance relationship with the system (`<|--`). This implies that SysAdmin is a role within the broader context of the system, possibly granting administrative privileges.
+- Each use case in the "System" rectangle (e.g., `CFR001`, `SAFR001`) directly relates to specific actors. For example:
+  - Client (`c1`) interacts with the financial insights dashboard via `CFR001`.
+  - SysAdmin uses `SAFR001` for parameter management.
+- The AI component and other sub-components are linked through their respective use cases, ensuring that requests from the system (via user interactions) trigger appropriate processing within these components. For instance:
+  - When a client requests personalized recommendations (`SFR002`), it triggers `AIFR002` to generate them.
+- The "Contextual News Component" and its AI sub-component handle news-related requests, ensuring that relevant insights are delivered based on user portfolios.
+
+This structure adheres strictly to the provided functional requirements while maintaining clarity in actor-use case relationships. Adjustments can be made if additional details or dependencies become apparent during further analysis.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1905]

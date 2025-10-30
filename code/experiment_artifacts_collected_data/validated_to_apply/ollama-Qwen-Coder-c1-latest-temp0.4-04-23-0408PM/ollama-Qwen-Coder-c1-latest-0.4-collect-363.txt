@@ -1,0 +1,79 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor "Client" as Client
+actor "Financial Advisor" as FAdvisor
+actor "System Administrator" as SysAdmin
+system "AI Component" as AIFR
+system "Notification System" as SFR001
+package "User Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR005: Manage Analysis Parameters Preferences" as SAFR005
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  Client --> (CFR001)
+  FAdvisor --> (SAFR005)
+}
+package "Alerts and Notifications" {
+  usecase "CFR002: View Alerts about Anomalous Transactions" as CFR002
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  
+  Client --> (CFR002)
+  FAdvisor --> (FAFR002)
+}
+package "Predictive Analytics and Recommendations" {
+  usecase "CFR003: View Financial Predictions Based on Historical Data" as CFR003
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  Client --> (CFR003)
+  SysAdmin --> (SAFR001)
+  FAdvisor --> (FAFR004)
+}
+package "Personalized Recommendations and Insights" {
+  usecase "CFR004: Receive Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+  
+  Client --> (CFR004)
+}
+package "Investment Opportunities and News" {
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as CFR007
+  usecase "CFR008: View News Related to Investment Portfolio" as CFR008
+  
+  Client --> (CFR007)
+  Client --> (CFR008)
+}
+package "Spending Limit Alerts and Relationship Management" {
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  Client --> (CFR006)
+  Client --> (CFR10)
+}
+package "System Functionality and Maintenance" {
+  usecase "SFR020: Manage User Feedback to Improve System Accuracy" as SFR020
+}
+
+Client -> AIFR : Request Financial Predictions
+Client -> AIFR : Request Personalized Recommendations
+AIFR --> Client : Deliver Financial Predictions
+AIFR --> Client : Deliver Personalized Recommendations
+
+FAdvisor -> AIFR : Configure Analysis Parameters for Specific Segments
+AIFR --> FAdvisor : Provide Configured Insights
+
+SysAdmin -> SAFR001 : Manage AI System Analysis Parameters
+SAFR001 --> SysAdmin : Update Analysis Parameters
+
+Client -> SFR020 : Send Feedback about Recommendations and Insights
+SFR020 --> Client : Acknowledge Received Feedback
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 753]

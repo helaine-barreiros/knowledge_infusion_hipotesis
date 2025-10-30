@@ -1,0 +1,66 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "SFR002: Deliver Personalized Recommendations Based on Financial Profiles" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations Using AI" as AIFR002
+
+  Client --> CFR001 : View dashboard, receive recommendations, manage preferences
+  SysAdmin --> SAFR001 : Manage system parameters for accuracy and compliance
+  FinancialAdvisor --> FAFR004 : Customize analysis settings per client segment
+  System --> SFR002 : Request personalized recommendations from AI
+  Client --> AIFR002 : Receive personalized financial predictions, investment opportunities, etc.
+}
+
+rectangle "Client" {
+  actor "User (Client)" as UserClient
+
+  UserClient -> CFR001 : View dashboard and alerts
+  UserClient -> SFR003 : Request financial predictions from AI
+  UserClient -> SFR004 : Request personalized recommendations
+  UserClient -> SFR005 : Monitor spending limit alerts
+  UserClient -> SFR006 : Explore investment opportunities
+  UserClient -> SFR007 : Find ESG-aligned investments
+  UserClient -> SFR008 : Detect AML-related anomalies
+  UserClient -> SFR013 : Receive client-specific alerts
+}
+
+rectangle "FinancialAdvisor" {
+  actor "User (Financial Advisor)" as UserFA
+
+  UserFA --> FAFR002: View client mentoring insights
+  UserFA --> FAFR003: Monitor client intervention alerts
+  UserFA --> FAFR004 : Configure analysis parameters for segments
+}
+
+rectangle "SysAdmin" {
+  actor "User (System Administrator)" as SysAdmin
+
+  SysAdmin --> SAFR001 : Manage system-wide analysis settings
+  SysAdmin --> AIFR002: Adjust AI model configurations if needed
+}
+@enduml
+```
+
+### Key Observations:
+- **Client**: Represents the end-users, including clients and financial advisors. They interact with various use cases like viewing dashboards, receiving recommendations, managing preferences, etc.
+- **SysAdmin**: Manages system parameters to ensure compliance and accuracy (e.g., `SAFR001`).
+- **FinancialAdvisor**: Customizes analysis settings for specific client segments (`FAFR004`) but does not directly manage the system’s core functionalities like parameter management or AI model adjustments.
+- **System**: Acts as a central entity that requests data from components, processes it via AI (e.g., `AIFR002`), and delivers results to clients. It also handles alerts (`SFR013`) and other services.
+
+### Relationships:
+- Clients use cases are directly linked to the system for actions like viewing dashboards or receiving recommendations.
+- SysAdmins manage parameters via `SAFR001`.
+- Financial Advisors configure segment-specific analysis settings through `FAFR004`.
+
+This structure ensures all actors and their interactions with specific use cases are clearly represented. Adjustments can be made based on further requirements, but the current model covers all provided functional needs accurately.
+
+[Done: True
+Done Reason: stop
+Eval Count: 750]

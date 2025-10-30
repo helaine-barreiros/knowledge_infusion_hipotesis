@@ -1,0 +1,52 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR009: Request Contextualized News Insights from AI Component" as SFR009
+  
+  Client --> CFR001 : "View Financial Dashboard"
+  
+  SysAdmin -> SAFR001 : "Manage Analysis Parameters for System"
+  
+  FAFR003 <|-- (CFR002) : "Client receives alerts on anomalies via advisor or system"
+  
+  SFR009 <|-- AIFR007 : "Generate contextualized news insights based on user portfolio"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts from AI Component" as FAFR002
+  SysAdmin -> SAFR004 : "Configure analysis parameters for client segments"
+  
+  FAFR001 <|-- (CFR003) : "Use predictive analytics to guide mentoring sessions"
+  FAFR002 --> AIFR008 : "View alerts when system detects patterns requiring advisor attention"
+}
+
+rectangle "Client" {
+  usecase "CFR004: Receive Personalized Recommendations from AI Component" as CFR004
+  SysAdmin -> SAFR005 : "Request spending limit alerts based on user thresholds"
+  
+  Client --> SFR013 : "Receive client analytics (e.g., financial health reports)"
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR006: Manage Users' Financial Goals in System" as SAFR006
+  SysAdmin -> SAFR020 : "Maintain historical record of user insights"
+  
+  SysAdmin --> SFR018 : "Manage financial goals for tracking progress and recommendations"
+}
+
+rectangle "AI Component" {
+  usecase "AIFR003: Generate Spending Limit Alerts Based on User Data" as AIFR003
+  usecase "AIFR004: Identify Suitable Investment Opportunities Matching Risk Profiles" as AIFR004
+  SysAdmin -> SAFR016 : "Request predictive insights from AI component"
+  
+  Client --> SFR020 : "Provide feedback to system for improvement (CFR011)"
+}
+
+@enduml

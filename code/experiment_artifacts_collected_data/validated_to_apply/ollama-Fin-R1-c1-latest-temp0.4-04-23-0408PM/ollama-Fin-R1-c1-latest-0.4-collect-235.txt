@@ -1,0 +1,83 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+
+  CFR002 --> (Client)
+  SAFR001 <|-- SysAdmin : label="Manage"
+  
+  rectangle "Clients" {
+    client "Client" as C
+    user "User" as U
+    actor "Financial Advisor" as FA
+    actor "System Administrator" as SA
+
+    C -> CFR001 : View Financial Insights Dashboard
+    C --> SAFR001 : Manage Analysis Parameters (via System)
+    
+    FAFR003 <|-- FA: label="View"
+  }
+
+  rectangle "Advisors & Admins" {
+    actor SysAdmin as SA
+    actor FinancialAdvisor as FA
+
+    SA --> SAFR001 : Manage Analysis Parameters
+    FA --> FAFR002 : View Intervention Alerts
+    FA --> FAFR003 : View Predictive Analytics
+  }
+
+  rectangle "System Functions" {
+    system SFR008: Deliver Anomaly Transaction Alerts
+    system AIFR006: Generate Investment Opportunity Analyses
+    system AIFR007: Generate Contextualized News Insights
+
+    SFR008 --> Client : Notify of Fraudulent Activity
+  }
+
+  rectangle "AI System" {
+    ai AIFR001: Predict Financial Trends
+    ai AIFR002: Personalize Recommendations
+    ai AIFR003: Generate Spending Limit Alerts
+    ai AIFR004: Find Investment Opportunities
+    ai AIFR005: Align with Portfolio Theory
+    ai AIFR006: Detect Anomalies
+    ai AIFR007: Correlate News to Portfolios
+    ai AIFR008: Recommend Interventions
+
+    AIFR001 --> SFR034 : Provide Predictions
+  }
+
+  rectangle "Client Feedback" {
+    usecase CFR011: Send User Feedback as C or U
+  }
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire system is enclosed within a `rectangle` to represent the scope.
+- **Use Cases**:
+  - Client-related use cases (CFR001, SAFR001) are grouped under "Clients".
+  - Financial Advisor and System Administrator interactions (FAFR002–4, SAFR001) are in their respective groups.
+  - AI-generated services (AIFR series) handle data analysis and recommendations.
+- **Actors**:
+  - Clients (`Client`, `User`), Advisors (`FinancialAdvisor`), and Admins (`SystemAdministrator`) interact with the system through defined use cases.
+- **Relationships**:
+  - Direct interactions between actors and use cases (e.g., Client viewing dashboards).
+  - Inheritance relationships where applicable (e.g., SysAdmin managing parameters via SAFR001).
+
+This structure ensures clarity in how different entities within the system interact, adhering to the provided functional requirements. Adjustments can be made based on further analysis or additional details from the requirements list.
+
+[Done: True
+Done Reason: stop
+Eval Count: 785]

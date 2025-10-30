@@ -1,0 +1,56 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+    actor Client as CFR001
+}
+
+package "Financial Advisor" {
+    actor FinancialAdvisor as FAFR002
+}
+
+package "System Administrator" {
+    actor SysAdmin as SAFR003
+}
+
+rectangle "System" {
+    usecase "SFR012: Generate client dashboards" as SFR012
+    usecase "SFR015: Request predictive intervention analyses from the AI component" as SFR015
+    usecase "AIFR004: Generate investment opportunity analyses for users by evaluating potential investments against their risk profiles, time horizons, and financial goals." as AIFR004
+
+    CFR001 --> (SFR012)
+    FAFR002 --> (SFR015)
+    SAFR003 --> (AIFR004)
+
+    CFR001 --> "CFR006: View spending limit alerts when I exceed predefined thresholds in specific expense categories to maintain better control over my budget."
+    CFR001 --> "CFR007: View investment opportunities suitable to my risk profile (as defined under MiFID II or equivalent standards) to diversify my portfolio and maximize returns."
+    CFR001 --> "CFR008: View news related to my investment portfolio to stay informed about market events that might affect my assets."
+    CFR001 --> "SAFR005: Manage analysis parameters for the AI system to ensure the algorithms remain accurate, relevant, and compliant with financial regulations such as Basel III for risk management."
+
+    FAFR002 --> (FAFR003)
+    FAFR002 --> (AIFR004)
+
+    SAFR003 --> "SAFR019: Maintain a historical record of users' insights to enable trend analysis and effectiveness measurement."
+}
+
+rectangle "AI System" {
+    usecase "AIFR001: Generate financial predictions for users by analyzing historical transaction data, market trends, and economic indicators." as AIFR001
+    usecase "AIFR002: Generate personalized recommendations for users based on their financial profiles, goals, and risk tolerance as defined by industry standards like FINRA guidelines." as AIFR002
+    usecase "AIFR003: Generate spending limit alerts for users by identifying unusual deviations from established spending patterns." as AIFR003
+
+    CFR001 --> (AIFR001)
+    FAFR002 --> (AIFR002)
+    SAFR003 --> (AIFR003)
+
+    CFR001 --> "CFR011: As a User, I want to send feedback about the system's recommendations and insights to help improve the accuracy and relevance of future outputs."
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 641]

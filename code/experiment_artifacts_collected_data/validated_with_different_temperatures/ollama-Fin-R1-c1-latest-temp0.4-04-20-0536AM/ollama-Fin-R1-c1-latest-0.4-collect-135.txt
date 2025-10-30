@@ -1,0 +1,63 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Preferences (Client)" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "SAFR005: Manage Recommendation Preferences (Client)" as SAFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Personalized Dashboard" as CFR008
+  usecase "SAFR013: Manage User Permissions (Client)" as SAFR013
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+
+  package Professional {
+    actor FinancialAdvisor as FA
+  }
+
+  package SystemAdmin {
+    actor SysAdmin as SA
+  }
+
+  client --> CFR001 : View financial insights dashboard  
+  client --> SAFR002 : Manage user preferences (client)
+  client --> CFR003 : View financial predictions
+  client --> CFR004 : Receive personalized recommendations
+  client --> SAFR005 : Manage recommendation preferences (client)
+  client --> CFR006 : View spending limit alerts  
+  client --> CFR007 : View investment opportunities 
+  client --> CFR008 : Access personalized dashboard
+  client --> SAFR013 : Manage user permissions (client)
+  client --> SFR019 : Maintain historical record of insights
+
+  SA --> SAFR002 : Configure system parameters  
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire diagram is enclosed within a rectangle labeled "System" to represent the AI-Powered Analysis & Insights System.
+- **Use Cases** (CFR): These are all client-related use cases, grouped under the main system boundary. Each CFR corresponds directly to one of the listed functional requirements for clients.
+- **Subsystems**: 
+  - `Professional` package includes a single actor: FinancialAdvisor (`FA`). This represents interactions specific to financial advisors within the system.
+  - `SystemAdmin` package includes SysAdmin as an actor, responsible for managing analysis parameters and other administrative tasks.
+  
+### Key Relationships:
+1. **Client-to-UseCases**: All client-related use cases (CFR001–CFR008) are linked to the "client" alias within the system boundary. These interactions cover viewing dashboards, alerts, predictions, recommendations, etc., as per CFR requirements.
+2. **SystemAdmin-to-SAFR UseCase**: SysAdmin is associated with `SAFR002` (Manage User Preferences for Clients), which allows administrative control over client preferences under the System Administrator role.
+3. **Professional Package Actors**:
+   - FinancialAdvisor (`FA`) has no direct use cases in this diagram but could be linked to other professional-specific interactions not detailed here.
+
+### Notes:
+- The system boundary strictly separates user (client, advisor) and administrator actions from internal system management tasks handled by SysAdmin.
+- All actors are represented with their exact names as per the requirements. No assumptions were made about additional actors beyond those explicitly listed in the functional requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 758]

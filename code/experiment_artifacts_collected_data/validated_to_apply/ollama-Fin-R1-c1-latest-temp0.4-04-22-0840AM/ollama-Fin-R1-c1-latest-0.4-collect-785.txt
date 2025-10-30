@@ -1,0 +1,79 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR009: Request Contextualized News Insights from AI Component" as SFR009
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+
+  // Clients (as Users)
+  actor "Client" as ClientUser {
+    --> CFR001 : View Financial Dashboard
+    --> FAFR003 : View Predictive Analytics for Self
+    --> SFR009 : Request Contextualized News Insights
+    --> AIFR008 : Receive Intervention Recommendations
+  }
+
+  // Financial Advisors (as Users)
+  actor "Financial Advisor" as FAUser {
+    --> CFR010: Manage Relationship with Clients, Share Data
+    --> FAFR003: View Predictive Analytics for Clients
+    --> FAFR002: View Client Intervention Alerts
+    --> AIFR008: Receive Intervention Recommendations
+  }
+
+  // System Administrator (as User)
+  actor "System Admin" as SysAdmin {
+    --> SAFR001 : Manage Analysis Parameters
+    --> CFR010: Manage Relationship with Clients, Share Data
+  }
+
+  // AI Component (not directly an actor but a system component)
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001 {
+    <|-- SFR003 : Request Financial Predictions
+  }
+  
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002 {
+    <|-- SFR004 : Request Personalized Recommendations
+  }
+
+  usecase "AIFR005: Generate Investment Opportunity Analyses" as AIFR005 {
+    <|-- SFR006 : Request Investment Opportunities
+  }
+  
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007 {
+    <|-- SFR009 : Request Contextualized News Insights
+  }
+
+  // System (as a component)
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Actors**: The diagram includes three main actors based on the requirements—`Client`, `Financial Advisor`, and `System Admin`. Each actor is linked to specific use cases.
+  
+- **Use Cases**:
+  - Clients can view financial dashboards, receive alerts, make predictions, etc. (e.g., CFR001).
+  - Financial Advisors manage client relationships, view predictive analytics, and get intervention recommendations (e.g., FAFR003, FAFR002).
+  - System Admins focus on managing analysis parameters.
+
+- **System Components**: The AI component is represented through use cases like generating predictions or personalized recommendations. These are linked to system requests via the `<<|-->>` relationship.
+  
+### Inheritance and Relationships:
+- Use cases like AIFR001, AIFR002, etc., inherit from their respective system components (e.g., SFR003 for financial predictions).
+- Actors extend use cases where applicable. For example, clients extending dashboards or recommendations.
+
+This structure ensures all functional requirements are mapped accurately to the corresponding actors and use cases while adhering strictly to PlantUML syntax rules. Adjustments can be made based on further analysis of requirement nuances if needed.
+
+[Done: True
+Done Reason: stop
+Eval Count: 827]

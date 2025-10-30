@@ -1,0 +1,71 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "CFR003: Receive Personalized Predictions" as CFR003
+  usecase "CFR004: Access Recommendations Alignment" as CFR004
+  usecase "CFR005: Adjust Recommendation Preferences" as CFR005
+  usecase "CFR006: Monitor Spending Limits" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Stay Informed with News" as CFR008
+  usecase "CFR009: Consolidate Financial Views" as CFR009
+  usecase "CFR010: Manage Data Sharing Permissions" as CFR010
+
+  rectangle "Client Actors" {
+    actor Client as client
+    client --> CFR001 : View financial insights dashboard
+    client --> SAFR002 : Adjust alert preferences
+    client --> CFR003 : Receive personalized predictions
+    client --> CFR004 : Access recommendations alignment
+    client --> CFR005 : Adjust recommendation preferences
+    client --> CFR006 : Monitor spending limits
+    client --> CFR007 : View investment opportunities
+    client --> CFR008 : Stay informed with news
+    client --> CFR009 : Consolidate financial views
+    client --> CFR010 : Manage data sharing permissions
+  }
+
+  rectangle "System Administrator Actors" {
+    actor SysAdmin as sysadmin
+    sysadmin --> SAFR002 : Configure system parameters for alerts and recommendations
+  }
+  
+  rectangle "Financial Advisor Actors" {
+    actor FAFR001 as financialAdvisor
+    financialAdvisor --> CFR007: View investment opportunities suitable to risk profile
+    financialAdvisor --> FAFAFR003: Review predictive analytics about clients' situations
+    financialAdvisor --> SAFR004: Configure analysis parameters for client segments
+  }
+
+  rectangle "System Components" {
+    usecase "SFR012: Generate Client Dashboards" as SFR012
+    usecase "SFR013: Send Alerts Based on Conditions" as SFR013
+    sysadmin --> SAFR001 : Manage system parameters for compliance and accuracy
+
+    client <|-- CFR001, SAFR002, CFR003, CFR004, CFR005, CFR006, CFR007, CFR008, CFR009, CFR010
+  }
+  
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Client Actors**: All client-related use cases (CFR IDs) are grouped under the "Client Actors" rectangle. Each client can perform actions like viewing dashboards, adjusting preferences, etc.
+- **System Administrator Actor**: Manages system parameters via SAFR002 and SAFR001.
+- **Financial Advisor Actor**: Interacts with specific use cases (CFR007, FAFAFR003) to align recommendations and view client-specific analytics.
+- **Inheritance Relationships**:
+  - Client actors extend multiple use cases directly. For example, `client <|-- CFR001` indicates the relationship between a client actor performing that use case.
+  
+### Notes for Improvement:
+- Ensure all IDs match exactly as per requirements (e.g., SAFR002 vs SAFAFR003).
+- Verify relationships and ensure no redundant or missing links.
+
+[Done: True
+Done Reason: stop
+Eval Count: 813]

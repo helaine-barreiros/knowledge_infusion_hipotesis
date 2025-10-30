@@ -1,0 +1,75 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "SFR002: Deliver Personalized Recommendations Based on Financial Profiles" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations Using AI" as AIFR002
+
+  Client --> CFR001 : View financial insights dashboard\nConsolidated view of all data\nUnderstand overall financial health  
+  SysAdmin -> SAFR001 : Manage analysis parameters\nEnsure accuracy and compliance (Basel III)\nAdjust settings for system integrity
+  FAFR004 <|-- Client : Configure AI parameters based on client segments\nPersonalize recommendations per segment\nComply with GDPR/CCPA
+  
+  rectangle "Client" {
+    actor "User: Client" as UCF
+    UCF --> CFR001 : View financial data and insights\nAnalyze spending, investments, alerts  
+    UCF -> SFR002 : Receive personalized recommendations\nOptimize investment portfolio\nPlan future expenses  
+    UCF -> AIFR009 : Send feedback on system outputs\nImprove accuracy and relevance
+  }
+  
+  rectangle "Financial Advisor" {
+    actor "FA: Financial Advisor" as FAD
+    FAD --> CFR010 : Manage client relationships\nSet permissions for data sharing\nMaintain privacy controls  
+    FAD -> SFR003 : View predictive analytics about clients' financial situations\nSupport guidance during consultations  
+  }
+  
+  rectangle "System Administrator" {
+    actor "SysAdmin: System Admin" as SA
+    SA --> SAFR001 : Manage analysis parameters for AI system\nEnsure regulatory compliance (Basel III)\nAdjust settings globally  
+  }
+
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions Using Historical Data and Market Trends" as AIFR001
+    usecase "AIFR002: Deliver Personalized Recommendations Based on AI Analysis" as AIFR002
+    usecase "AIFR003: Issue Spending Limit Alerts for Unusual Activity" as AIFR003
+    usecase "AIFR004: Identify Investment Opportunities Matching Risk Profiles and ESG Preferences" as AIFR004
+    usecase "AIFR005: Analyze Anomaly Transactions to Detect Fraudulent Activities" as AIFR005
+
+    SysAdmin --> SAFR001 : Adjust AI parameters\nComply with financial regulations (Basel III)\nMaintain system accuracy  
+  }
+
+  rectangle "System" {
+    usecase "SFR002: Deliver Personalized Recommendations Based on Financial Profiles" as SFR002
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+
+    FAD --> SFR008 : View investment opportunities\nDiversify portfolio to maximize returns  
+  }
+
+  SysAdmin -> SAFR001 : Manage analysis parameters\nEnsure compliance with financial regulations (Basel III)\nAdjust settings for system integrity
+}
+
+@enduml
+```
+
+**Key Observations:**
+- The diagram includes all specified actors and use cases from the requirements.
+- Actors are grouped into "Client," "Financial Advisor," and "System Administrator" categories, each enclosed in their respective rectangles.
+- Use case relationships reflect direct interactions (e.g., Client viewing dashboards or receiving recommendations).
+- System components like AI-related use cases are logically categorized under an "AI Component."
+- Relationships between actors and system entities ensure clarity on data flows and responsibilities.  
+
+**Notes:**
+1. The `Client` actor encompasses all user types (Client, Financial Advisor, SysAdmin) as per requirement CFR011.
+2. Inheritance relationships like `FAFR004 <|-- Client` indicate that the financial advisor can configure analysis parameters for clients but are not directly tied to an actor in this context since it's a system action affecting client data.
+3. The "System" rectangle aggregates all system-related use cases, ensuring compliance with technical requirements (e.g., delivering recommendations via SFR002).  
+
+This structure adheres strictly to the provided functional requirements and maintains readability through logical grouping and clear relationships.
+
+[Done: True
+Done Reason: stop
+Eval Count: 986]

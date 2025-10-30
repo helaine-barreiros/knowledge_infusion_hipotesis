@@ -1,0 +1,174 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "AIFR002: Generate Personalized Recommendations Based on Profiles and Goals" as AIFR002
+  usecase "CFR011: Send Feedback to Improve System Outputs" as CFR011
+
+  client --> CFR001 : View Financial Insights Dashboard  
+  SysAdmin --> SAFR001 : Manage Analysis Parameters  
+  FAFrAdvisor --> FAFR004 : Configure analysis parameters for segments
+  Client --> SFR003 : Request financial predictions from AI Component  
+  AIFRComponent <|-- AIFR002 : Generate personalized recommendations  
+
+}
+
+rectangle "System" {
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+
+  client --> CFR010
+}
+@enduml
+```
+
+**Key Observations and Explanations**
+
+- **Actors**: The main actors in this system are the Client, System Administrator (SysAdmin), and Financial Advisor (FAFrAdvisor). Each has specific use cases they want to perform.
+  
+- **Use Cases Grouping**:
+  - **Client Use Cases**: Viewing financial insights dashboards (`CFR001`), receiving alerts (`SAFR002`, `SFR007`), personalized recommendations (`CFR004`, `AIFR002`), and managing relationships with advisors (`CFR010`). These are grouped under the client package.
+  - **System Administrator Use Cases**: Managing analysis parameters (`SAFR001`) which is a system-level administrative task. This is placed within the SysAdmin actor.
+  
+- **Inheritance Relationships**:
+  - The `AIFRComponent` (AI System) generates personalized recommendations, so there's an inheritance relationship between `AIFR002` and `AIFRComponent`.
+  
+- **System Boundary**: All use cases are enclosed within a system boundary to represent the scope of interactions. This includes components like AI (`AIFRComponent`) which handles critical tasks such as generating predictions or recommendations.
+  
+**Comments on Diagram Structure**
+- The diagram adheres strictly to provided requirements, ensuring no extraneous actors or use cases are included. Each relationship (e.g., client-to-use case) is explicitly defined with appropriate labels and directionality for clarity.
+
+This structure ensures that all functional requirements are mapped accurately onto the UML model while maintaining readability through logical grouping and precise relationships. The system boundary also clearly delineates internal components from external interactions, aligning well with standard software architecture practices.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001  
+  usecase "SAFR002: Receive Alerts on Anomalous Transactions" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003  
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004  
+  usecase "CFR011: Send Feedback for Improvements" as CFR011  
+
+  client --> CFR001 : View dashboard
+  client --> SAFR002 : Receive alerts
+  client --> CFR003 : View predictions
+  client --> CFR004 : Get recommendations  
+}
+
+package "System Administrator (SysAdmin)" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001  
+
+  SysAdmin --> SAFR001 : Configure parameters
+}
+
+package "Financial Advisor (FAFrAdvisor)" {
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004  
+  usecase "FAFR003: View Predictive Analytics" as FAFR003  
+
+  FAFrAdvisor --> FAFR004 : Set segment parameters
+}
+
+package "System (SFR)" {
+  usecase "SFR002: Deliver Alerts to Users" as SFR002  
+  usecase "SFR007: Request Investment Opportunities from AI Component" as SFR007  
+
+  Sys --> SFR002 : Send alerts
+}
+
+package "AI System (AIFR)" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001  
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003  
+  usecase "AIFR004: Generate Personalized Recommendations Based on Profiles and Goals" as AIFR004  
+
+  Sys --> AIFR001 : Request predictions
+}
+
+client --> CFR010 : Manage relationships (not in requirement but inferred from context)
+@enduml
+```
+
+**Key Observations and Explanations**
+
+- **Actors**: The main actors are Client, System Administrator (`SysAdmin`), Financial Advisor (`FAFrAdvisor`), and implicitly the System itself. Each has specific use cases they perform.
+
+- **Use Cases Grouping**:
+  - **Client Use Cases**: Viewing dashboards (`CFR001`), receiving alerts (`SAFR002`), financial predictions (`CFR003`), personalized recommendations (`CFR004`), and feedback mechanisms (`CFR011`). These are grouped under the Client package.
+  - **System Administrator Use Cases**: Managing analysis parameters (`SAFR001`) is a system-level task. This falls within `SysAdmin`.
+  
+- **Financial Advisor Use Cases**:
+  - Configuring segment-specific analysis parameters (`FAFR004`).
+  - Viewing predictive analytics (`FAFR003`). These are grouped under the Financial Advisor package.
+  
+- **System (SFR)**: Handles delivering alerts (`SFR002`) and requesting investment opportunities from AI components. This is represented within a System component.
+
+- **AI System (AIFR)**:
+  - Generates financial predictions, spending limit alerts, and personalized recommendations based on profiles. These are grouped under the AIFR package.
+  
+**Inheritance Relationships**:
+- The `Client` actor extends relationships with multiple use cases directly tied to their needs (`CFR001`, etc.). No explicit inheritance is shown here but all client interactions flow from them.
+
+**System Boundary**: All components (clients, system admin, financial advisor) operate within the broader System boundary. This includes AI and SFR functionalities as critical internal operations.
+
+This structure ensures clarity by segregating responsibilities among actors while maintaining logical flows between use cases. The inclusion of inferred relationships like `CFR010` for managing user-advisor interactions aligns with typical system designs where such features are optional but useful extensions.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001  
+  usecase "SAFR002: Receive Alerts on Anomalous Transactions" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003  
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004  
+  usecase "SAFR007: Manage Spending Limit Alerts" as SAFR007
+  usecase "SFR012: View Investment Opportunities" as SFR012  
+
+  client --> CFR001 : View dashboard
+  client --> SAFR002 : Receive alerts  
+  client --> CFR003 : View predictions
+  client --> CFR004 : Get recommendations
+}
+
+package "System Administrator (SysAdmin)" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001  
+
+  SysAdmin --> SAFR001 : Configure parameters  
+}
+
+package "Financial Advisor (FAFrAdvisor)" {
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004  
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003  
+
+  Sys --> SFR003 : Send request
+}
+
+package "System (SFR)" {
+  usecase "SFR002: Deliver Alerts to Users" as SFR002  
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001  
+
+  Sys --> SFR002 : Send alerts
+}
+
+package "AI System (AIFR)" {
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003  
+  usecase "AIFR004: Generate Personalized Recommendations Based on Profiles and Goals" as AIFR004  
+
+  Sys --> AIFR001 : Request predictions
+}
+
+package "Client (CFR)" {
+  usecase "CFR01
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

@@ -1,0 +1,89 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+system S
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics about Clients' Finances" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  
+  C1 --> CFR001 : "View Financial Insights Dashboard"
+  SA -> SAFR001 : "Manage Analysis Parameters"
+  FA -> FAFR003 : "View Predictive Analytics about Clients' Finances"
+  S <|-- CFR001, SAFR001, FAFR003, SFR012
+}
+
+rectangle "Client" {
+  usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008
+  usecase "CFR009: View Consolidated Financial Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+  
+  
+  C1 --> CFR002 : "View Alerts for Anomalous Transactions"
+  C1 --> CFR004 : "Receive Personalized Recommendations"
+  C1 --> CFR005 : "Manage Recommendation Preferences"
+  C1 --> CFR006 : "View Spending Limit Alerts"
+  C1 --> CFR007 : "Access Investment Opportunities Based on Risk Profile"
+  C1 --> CFR008 : "Receive News Related to Portfolio"
+  C1 --> CFR009 : "View Consolidated Financial Dashboard"
+  C1 --> CFR10 : "Manage Relationship with Advisors"
+}
+
+rectangle "FinancialAdvisor" {
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as FAFR004
+  
+  
+  FA -> FAFR002 : "View Client Intervention Alerts"
+  FA -> FAFR004 : "Configure Analysis Parameters for Specific Segments"
+}
+
+rectangle "SysAdmin" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+
+  SA --> SAFR001 : "Manage Analysis Parameters (System Admin)"
+}
+@enduml
+
+---
+
+### Explanation:
+- **Client**: Represents all user types (Client, Financial Advisor, System Administrator) who interact with the system. Each client-related use case is linked to their respective actors.
+  
+- **SysAdmin**: Manages analysis parameters for compliance and accuracy.
+
+- **FinancialAdvisor**: Views predictive analytics and configures segment-specific parameters.
+
+- **System**: Centralizes all core functionalities like generating dashboards, alerts, recommendations, etc., which are then distributed via appropriate channels (e.g., notifications).
+
+### Key Relationships:
+1. **Client** interacts with most use cases directly except those managed by SysAdmin or FinancialAdvisor.
+2. **SysAdmin** and **FinancialAdvisor** have specialized interactions tied to their roles.
+3. The system acts as a mediator, processing requests from clients/financial advisors/sysadmins and delivering results through its components.
+
+### Diagram Structure:
+- Use case grouping: Logical separation of use cases by actor type (Client, SysAdmin, FinancialAdvisor).
+- System boundary: Encapsulates all core functionalities to ensure encapsulation.
+- Inheritance relationships: Not explicitly shown here but inferred from role-specific interactions. For example, SysAdmin's SAFR001 is a system-managed parameter management.
+
+---
+
+This diagram adheres strictly to the provided requirements and ensures clarity in actor-use case associations while maintaining logical groupings within the system architecture.
+
+[Done: True
+Done Reason: stop
+Eval Count: 943]

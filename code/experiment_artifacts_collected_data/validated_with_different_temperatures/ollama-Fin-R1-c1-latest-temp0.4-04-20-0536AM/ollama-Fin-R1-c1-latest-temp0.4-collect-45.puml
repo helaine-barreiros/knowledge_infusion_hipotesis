@@ -1,0 +1,72 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sadmin
+actor FinancialAdvisor as fa
+system :System
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Spending Limit Alerts for Budget Control" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access Portfolio News" as CFR008
+  usecase "CFR009: Consolidated Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+
+  c1 --> CFR001 : View Insights
+  c1 --> CFR002 : Receive Alerts
+  c1 --> CFR003 : Predictions
+  c1 --> CFR004 : Recommendations
+  c1 --> CFR005 : Manage Preferences
+  c1 --> CFR006 : Spending Limits
+  c1 --> CFR007 : Investment Opportunities
+  c1 --> CFR008 : News Access
+  c1 --> CFR009 : Consolidated Dashboard
+  c1 --> CFR10 : Relationship Management
+
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Segment" as FAFR004
+
+  fa --> FAFR001 : Mentoring Sessions
+  fa --> FAFR002 : Intervention Alerts
+  fa --> FAFR003 : Predictive Analytics
+  fa --> FAFR004 : Config Analysis Params
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage AI Parameters for Accuracy and Compliance" as SAFR001
+
+  sadmin --> SAFR001 : Administer Parameters
+}
+
+system :System <<-- (CFR001) : Delivers Insights
+system :System <<-- (CFR002, CFR006, CFR008, CFR009) : Sends Alerts/Notifications
+system :System <<-- (CFR003, CFR004, CFR007) : Provides Predictions and Recommendations
+system :System <<-- (CFR10) : Manages User Permissions
+
+system :System <<-- (FAFR002, FAFR003) : Proactively Assists Clients
+system :System <<-- (SAFR001) : Ensures Regulatory Compliance for AI Algorithms
+
+system :System <<-- (AIFR001: Generate Predictions)
+system :System <<-- (AIFR002: Personalized Recs)
+system :System <<-- (AIFR003: Spending Alerts)
+system :System <<-- (AIFR004: Investment Opportunities)
+system :System <<-- (AIFR005: Align with MPT)
+system :System <<-- (AIFR006: Anomaly Detection)
+system :System <<-- (AIFR007: Contextual News)
+system :System <<-- (AIFR008: Predictive Interventions)
+system :System <<-- (AIFR009: Forward-Looking Analysis)
+
+@enduml

@@ -1,0 +1,98 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR003: View Financial Predictions" as SAFR004
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR005
+  usecase "CFR005: Manage Recommendation Preferences" as SAFR006
+  usecase "CFR006: View Spending Limit Alerts" as SAFR007
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as SAFR008
+  usecase "CFR008: View News Related to My Investment Portfolio" as SAFR012
+  usecase "CFR009: Access Personalized Dashboard" as SFR012
+  
+  CFR001 --> SAFR003 : "View Alerts"
+  CFR001 --> SAFR004 : "View Predictions"
+  CFR001 --> SAFR005 : "Receive Recommendations"
+  CFR001 --> SAFR006 : "Manage Preferences"
+  CFR001 --> SAFR007 : "View Spending Limits"
+  CFR001 --> SAFR008 : "View Opportunities"
+  CFR001 --> SAFR012 : "View News"
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts" as SAFR009
+  usecase "FAFR003: View Predictive Analytics for Clients" as SFR016
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as AIFR004
+  
+  FinancialAdvisor --> SAFR002 : "View Alerts"
+  FinancialAdvisor --> SAFR003 : "View Predictive Analytics"
+  FinancialAdvisor --> AIFR004 : "Configure Parameters"
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR001
+  
+  usecase "SAFR007: Manage Analysis Parameters for AI System" as SAFR001
+  usecase "SFR020: Manage User Feedback to Improve Recommendations" as AIFR009
+  
+  SystemAdministrator --> SAFR001 : "Manage Parameters"
+}
+
+package "System Components" {
+  rectangle "Notification Channel" {
+    usecase "SFR003: Deliver Alerts to Users" as SFR003
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    
+    SAFR001 --> SFR003 : "Deliver"
+  }
+  
+  rectangle "Recommendation Engine" {
+    usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+    
+    SAFR005 --> SFR002 : "Deliver"
+  }
+  
+  rectangle "Prediction Engine" {
+    usecase "SFR003: Request Financial Predictions from AI Component" as SFR007
+    usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+    
+    SAFR004 --> SFR007 : "Request"
+  }
+  
+  rectangle "Investment Engine" {
+    usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR008
+    usecase "AIFR005: Generate Investment Opportunities for Users" as AIFR005
+    
+    SAFR007 --> SFR008 : "Request"
+  }
+  
+  rectangle "News Engine" {
+    usecase "SFR012: Request Contextualized News from AI Component" as SFR013
+    usecase "AIFR007: Generate Contextualized News Insights for Users" as AIFR007
+    
+    SAFR012 --> SFR013 : "Request"
+  }
+}
+
+package "User (Client, Financial Advisor, or System Administrator)" {
+  actor User as CFR011
+  
+  usecase "CFR011: Send Feedback about Recommendations and Insights" as AIFR009
+  
+  User --> AIFR009 : "Send Feedback"
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1018]

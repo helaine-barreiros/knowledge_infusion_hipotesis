@@ -1,0 +1,120 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Clients" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Anomalous Transaction Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  C --> (CFR001)
+  C --> (CFR002)
+  C --> (CFR003)
+  C --> (CFR004)
+  C --> (CFR005)
+  C --> (CFR006)
+  C --> (CFR007)
+  C --> (CFR008)
+  C --> (CFR009)
+  C --> (CFR10)
+}
+
+package "Financial Advisors" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  FA --> (FAFR001)
+  FA --> (FAFR002)
+  FA --> (FAFR003)
+  FA --> (FAFR004)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SA
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  
+  SA --> (SAFR001)
+  SA --> (SFR019)
+}
+
+package "System Components" {
+  rectangle "Alerts System" {
+    usecase "SFR002: Deliver Alerts to Users" as SFR002
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  }
+  
+  rectangle "Recommendations System" {
+    usecase "SFR001: Deliver Personalized Recommendations" as SFR001
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  }
+  
+  rectangle "Predictive Analytics System" {
+    usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+  }
+  
+  rectangle "Spending Limit Alerts System" {
+    usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+    usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+  }
+  
+  rectangle "Investment Opportunities Analysis System" {
+    usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+  }
+  
+  rectangle "News Insights System" {
+    usecase "SFR008: Find Contextualized News Relevant to User's Portfolio" as SFR008
+    usecase "AIFR007: Generate Client Predictive Intervention Recommendations by Identifying Patterns that Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR007
+  }
+}
+
+package "System" {
+  actor System as Sys
+  
+  usecase "SFR12: Generate Client Dashboards" as SFR12
+  usecase "SFR13: Request Contextualized News Insights from AI Component to Identify Potential Impacts on Users' Investments" as SFR13
+  usecase "AIFR07: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as AIFR07
+  
+  Sys --> (SFR12)
+  Sys --> (SFR13)
+  Sys --> (AIFR07)
+}
+
+package "AI System" {
+  actor AI as AI
+  
+  usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+  usecase "AIFR005: Generate Investment Opportunities for Users by Identifying Financial Instruments that Align with Their Investment Strategies and Modern Portfolio Theory Principles" as AIFR005
+  
+  AI --> (AIFR001)
+  AI --> (AIFR005)
+}
+
+package "User Feedback System" {
+  actor UserFeedbackSystem as UFS
+  
+  usecase "CFR11: Send Feedback about Recommendations and Insights" as CFR11
+  
+  C --> (UFS : CFR11)
+  FA --> (UFS : CFR11)
+  SA --> (UFS : CFR11)
+}
+
+@enduml

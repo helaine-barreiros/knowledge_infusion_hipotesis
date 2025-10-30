@@ -1,0 +1,65 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sa
+actor FinancialAdvisor as fa
+system SFR021: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "SFR020: Maintain Historical Record of Insights" as SFR020
+
+  c1 --> CFR001 : "View Financial Dashboard"
+  sa --> SAFR001 : "Manage System Parameters"
+  fa --> FAFR004 : "Configure Client Segments"
+}
+
+rectangle "Client-Specific Use Cases" {
+  usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008
+  usecase "CFR009: View Consolidated Financial Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+
+  c1 --> CFR002 : "View Alerts"
+  c1 --> CFR003 : "Predictions"
+  c1 --> CFR004 : "Recommendations"
+  c1 --> CFR005 : "Manage Preferences"
+  c1 --> CFR006 : "Spending Limit Alerts"
+  c1 --> CFR007 : "Investment Opportunities"
+  c1 --> CFR008 : "News for Portfolio"
+  c1 --> CFR009 : "Consolidated Dashboard"
+  c1 --> CFR10 : "Manage Relationship with Advisors"
+
+}
+
+rectangle "System-Specific Use Cases" {
+  usecase "SFR021: Deliver Alerts Through Notification Channels" as SFR021
+  usecase "SFR022: Generate Personalized Recommendations Based on Profiles" as SFR022
+  usecase "SFR023: Request Financial Predictions from AI Component" as SFR023
+  usecase "SFR024: Request Specific Investment Opportunities" as SFR024
+  usecase "SFR018: Manage User Feedback for Improvements" as SFR018
+
+  Sys --> SFR021 : "Deliver Alerts"
+  Sys --> SFR022 : "Generate Recommendations"
+  Sys --> SFR023 : "Request Predictions"
+  Sys --> SFR024 : "Request Investment Opportunities"
+}
+
+rectangle "AI-Specific Use Cases" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR007: Contextualize News for Portfolios" as AIFR007
+
+  Sys --> AIFR001 : "Generate Predictions"
+}
+
+@enduml

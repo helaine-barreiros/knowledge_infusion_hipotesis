@@ -31,7 +31,7 @@ class TestPlantUMLUseCaseParser(unittest.TestCase):
 
     def test_parse_method(self):
         """Test the parse method to ensure it correctly extracts all elements."""
-        elements, counts = self.parser.parse(self.diagram_content)
+        elements, counts = self.parser.get_use_case_diagram(self.diagram_content)
 
         # Verify the elements dictionary has the right structure
         self.assertIsInstance(elements, dict)
@@ -68,7 +68,7 @@ class TestPlantUMLUseCaseParser(unittest.TestCase):
 
     def test_actor_extraction(self):    # sourcery skip: class-extract-method
         """Test specific actor extraction functionality."""
-        elements, _ = self.parser.parse(self.diagram_content)
+        elements, _ = self.parser.get_use_case_diagram(self.diagram_content)
 
         # Check that all actors are extracted correctly
         actors = elements['actors']
@@ -94,7 +94,7 @@ class TestPlantUMLUseCaseParser(unittest.TestCase):
 
     def test_use_case_extraction(self):
         """Test specific use case extraction functionality."""
-        elements, _ = self.parser.parse(self.diagram_content)
+        elements, _ = self.parser.get_use_case_diagram(self.diagram_content)
 
         # Check that all use cases are extracted correctly
         use_cases = elements['use_cases']
@@ -114,7 +114,7 @@ class TestPlantUMLUseCaseParser(unittest.TestCase):
 
     def test_relationship_extraction(self):
         """Test relationship extraction functionality."""
-        elements, _ = self.parser.parse(self.diagram_content)
+        elements, _ = self.parser.get_use_case_diagram(self.diagram_content)
 
         # Check that all relationships are extracted correctly - accounting for the modify issue
         relationships = elements['relationships']

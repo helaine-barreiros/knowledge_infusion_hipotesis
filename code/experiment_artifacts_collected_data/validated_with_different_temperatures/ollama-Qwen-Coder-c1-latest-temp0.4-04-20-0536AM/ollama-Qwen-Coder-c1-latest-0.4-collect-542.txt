@@ -1,0 +1,105 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:User: as User
+:System: as Sys
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR005: Manage Recommendations Preferences" as SAFR005
+  
+  User --> CFR001
+  User --> SAFR005
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  
+  FinancialAdvisor --> FAFR002
+  FinancialAdvisor --> FAFR003
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SysAdmin --> SAFR001
+}
+
+package "Notifications" {
+  usecase "SFR001: Deliver Alerts" as SFR001
+  User --> SFR001 : "Receive alerts"
+}
+
+package "Recommendations" {
+  usecase "SFR002: Personalized Recommendations" as SFR002
+  
+  User --> SFR002 : "View personalized recommendations"
+  
+  FinancialAdvisor --> SFR002 : "Provide guidance based on insights"
+}
+
+package "Predictions and Insights" {
+  usecase "SFR003: Request Predictive Analytics" as SFR003
+  usecase "AIFR001: Generate Predictions" as AIFR001
+  
+  User --> SFR003 : "Request financial predictions"
+  FinancialAdvisor --> SFR003 : "Consult predictive analytics during consultations"
+  
+  System --> AIFR001
+}
+
+package "Spending Limits and Alerts" {
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  
+  User --> SFR005 : "Receive spending limit alerts"
+  
+  FinancialAdvisor --> SFR005 : "Monitor client spending patterns"
+  
+  System --> AIFR003
+}
+
+package "Investment Opportunities and Insights" {
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+  
+  User --> SFR006 : "View investment opportunities"
+  
+  FinancialAdvisor --> SFR006 : "Identify suitable investments for clients based on risk profiles"
+  
+  System --> AIFR004
+}
+
+package "News and Insights" {
+  usecase "SFR007: Request News Insights" as SFR007
+  
+  User --> SFR007 : "View news related to investment portfolio"
+  
+  FinancialAdvisor --> SFR007 : "Stay informed about market events affecting assets"
+  
+  System --> AIFR005
+}
+
+package "Dashboards and Analytics" {
+  usecase "SFR12: Generate Client Dashboards" as SFR12
+  
+  User --> SFR12 : "View personalized dashboards"
+  
+  FinancialAdvisor --> SFR12 : "Monitor client financial information in a single view"
+  
+  System --> AIFR06
+}
+
+package "Feedback and Continuous Improvement" {
+  usecase "CFR011: Send Feedback" as CFR011
+  
+  User --> CFR011 : "Provide feedback about system's recommendations and insights"
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 765]

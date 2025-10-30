@@ -1,0 +1,51 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  sysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  financialAdvisor --> FAFR002 : "View Client Intervention Alerts"
+  
+  SysAdmin <|-- (CFR001) : manages system
+  SysAdmin <|-- (SAFR001) : configures parameters
+
+  client -> CFR001 : "Access Financial Data"
+  client -> SFR013 : "Request Alerts Based on Conditions"
+
+  financialAdvisor --> AIFR006 : "Monitor Anomaly Transactions for Clients"
+
+}
+
+@enduml
+```
+
+### Explanation:
+- **Client**: Represents the end-user (e.g., Client, Financial Advisor) interacting with the system.
+- **SysAdmin**: System Administrator who manages analysis parameters and overall system configuration.
+- **FinancialAdvisor**: A role that can view specific alerts or generate recommendations.
+
+#### Use Cases:
+1. **CFR001: View Financial Insights Dashboard** - Clients want to see their financial data in a consolidated dashboard.
+2. **SAFR001: Manage Analysis Parameters** - SysAdmins adjust parameters for the AI system (e.g., risk thresholds).
+3. **FAFR002: View Client Intervention Alerts** - Financial Advisors check alerts about clients needing attention.
+4. **SFR013: Generate Client Alerts Based on Predefined Conditions** - The system proactively sends alerts to users based on set rules.
+5. **AIFR006: Generate Anomaly Transaction Alerts** - AI detects unusual transactions and notifies the system.
+
+#### Relationships:
+- Clients use `CFR001` directly, while SysAdmins manage parameters through `SAFR001`.
+- Financial Advisors can view specific alerts (`FAFR002`) or rely on generated ones via `AIFR006`.
+
+This structure ensures all requirements are represented accurately with precise IDs and relationships. Adjustments may be needed based on further clarification of role overlaps or additional use cases not listed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 573]

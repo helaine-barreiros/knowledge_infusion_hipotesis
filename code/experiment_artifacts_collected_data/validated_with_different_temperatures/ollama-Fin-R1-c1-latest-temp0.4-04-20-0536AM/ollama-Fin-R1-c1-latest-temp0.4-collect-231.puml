@@ -1,0 +1,91 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+system "System" as S
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Access Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: Receive Spending Limit Alerts When Exceeding Predefined Thresholds" as CFR006
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: Access Consolidated Financial Information Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as CFR010
+
+  C1 --> (CFR001)
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+  SA --> (SAFR001)
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+
+  FA --> (FAFR001, FAFR002, FAFR003)
+}
+
+rectangle "System Core Functions" {
+  system S
+  
+  // System uses cases
+  usecase "SFR001: Deliver Alerts Through Notification Channels" as SFR001
+  usecase "SFR002: Provide Personalized Recommendations Based on Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations From AI Component" as SFR004
+  usecase "SFR005: Trigger Spending Limit Alerts for Exceeding Thresholds" as SFR005
+  usecase "SFR006: Identify Investment Opportunities Based on Risk Profile and ESG Preferences" as SFR006
+  usecase "SFR007: Extract Specific Investment Opportunities Matching Criteria" as SFR007
+  usecase "SFR008: Detect Anomalous Transactions for Fraud Prevention" as SFR008
+  usecase "SFR009: Find Contextualized News Relevant to Portfolios" as SFR009
+  usecase "SFR010: Process Contextualized News Insights" as SFR010
+  usecase "SFR011: Generate Client Dashboards for Financial Monitoring" as SFR011
+  usecase "SFR012: Send Alerts Based on Predefined Conditions" as SFR012
+  usecase "SFR013: Produce Client Analytics with Meaningful Insights" as SFR013
+  usecase "SFR014: Request Predictive Intervention Analyses from AI Component" as SFR014
+  usecase "SFR015: Enhance Financial Guidance via Predictive Insights" as SFR015
+  usecase "SFR016: Generate Financial Health Reports Using Standard Metrics" as SFR017
+  usecase "SFR018: Track Progress of Financial Goals and Offer Recommendations" as SFR019
+  usecase "SFR019: Maintain Historical Record for Trend Analysis" as SFR020
+
+  // AI System uses cases (not directly related to actors)
+  
+}
+
+rectangle "AI Component" {
+  system AIFR
+  
+  usecase "AIFR001: Generate Financial Predictions Based on Data and Trends" as AIFR001
+  usecase "AIFR002: Create Personalized Recommendations Aligning with Profiles" as AIFR002
+  usecase "AIFR003: Identify Spending Limit Alerts for Unusual Activity" as AIFR003
+  usecase "AIFR004: Analyze Investment Opportunities Against Risk Tolerance and Goals" as AIFR004
+  usecase "AIFR005: Discover Investment Instruments Aligning with Strategies" as AIFR005
+  usecase "AIFR006: Detect Anomalous Transactions Compliantly" as AIFR006
+  usecase "AIFR007: Correlate News to Portfolios for Relevant Insights" as AIFR007
+  usecase "AIFR008: Recommend Proactive Interventions Based on Patterns" as AIFR008
+  usecase "AIFR009: Provide Forward-Looking Analysis of Financial Situations" as AIFR009
+
+}
+
+// Relationships between actors and system components
+C1 --> (CFR001, CFR002, ..., CFR010)
+SA --> SAFR001
+FA --> FAFR001, FAFR002, FAFR003
+S --> SFR001, SFR002, ..., SFR020
+
+// Relationships between system components and AI component (not directly related to actors)
+AIFR --> AIFR001, AIFR002, ..., AIFR009
+
+@enduml

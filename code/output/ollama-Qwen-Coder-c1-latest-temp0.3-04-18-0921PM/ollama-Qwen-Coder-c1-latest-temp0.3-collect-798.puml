@@ -1,0 +1,53 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+  usecase "CFR008: View News Related to My Investment Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  Client --> (SFR02) : "Receive Alerts"
+  Client --> (SFR04) : "Receive Recommendations"
+  Client --> (SFR03) : "View Predictions"
+  Client --> (SFR12) : "Access Dashboards"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as FAFR003
+  
+  FinancialAdvisor --> (SFR06) : "View Investment Opportunities"
+  FinancialAdvisor --> (SFR17) : "Generate Financial Health Reports"
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+  usecase "CFR11: Send Feedback about Recommendations and Insights" as CFR11
+  
+  SysAdmin --> (SFR20) : "Manage User Feedback"
+}
+
+rectangle "System" {
+  usecase "SFR01": "Deliver Alerts to Users"
+  usecase "SFR05": "Request Spending Limit Alerts from AI Component"
+  usecase "SFR06": "Request Investment Opportunity Analysis from AI Component"
+  usecase "SFR07": "Request Specific Investment Opportunities from AI Component"
+  usecase "SFR13": "Generate Client Alerts Based on Predefined Conditions"
+  usecase "AIFR04": "Generate Spending Limit Alerts for Users"
+  
+  System --> (SAFR001) : "Manage Analysis Parameters"
+  System --> (FAFR002) : "View Intervention Alerts"
+}
+
+@enduml

@@ -1,0 +1,70 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  C1 --> CFR001 : "View financial data"
+  
+  SA --> SAFR001 : "Manage analysis parameters"
+  
+  FA --> SFR012 : "Request personalized recommendations"
+}
+
+rectangle "AI System" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  
+  SFR012 <|-- (CFR001)
+  
+  CFR003 --> AIFR001 : "Request financial predictions"
+  CFR005 --> AIFR001 : "Manage recommendations preferences"
+  
+  CFR007 --> AIFR004 : "View investment opportunities suitable to risk profile"
+
+}
+
+rectangle "Notification System" {
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "SFR013: Generate Client Analytics" as SFR013
+  
+  CFR002 --> SFR008 : "Request anomaly transaction alerts"
+  
+}
+
+rectangle "Client Management System" {
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+}
+
+@enduml
+```
+
+### Explanation:
+- **Actors**: The diagram includes three main actors - `Client`, `SysAdmin`, and `FinancialAdvisor`. Each actor is associated with specific use cases.
+  
+- **System Boundaries**:
+  - A rectangle labeled "System" contains the core functionalities managed by the system, including user interactions (`CFR001`), administrative management (`SAFR001`), and dashboard generation (`SFR012`).
+  - The AI System is another nested rectangle with its own use cases like generating financial predictions (`AIFR001`) and investment analyses (`AIFR004`).
+  
+- **Use Case Relationships**:
+  - `Client` interacts directly with the system to view dashboards, manage relationships, etc.
+  - The AI System provides critical data (e.g., predictions, recommendations) which are then presented in client-facing use cases like `CFR001`.
+  - Administrative tasks (`SAFR001`) and advisory requests (`SFR012`, `AIFR004`) tie the system to its components.
+  
+- **Inheritance**:
+  - The "System" rectangle includes both user-related (e.g., dashboards) and administrative use cases. This structure helps group related functionalities logically.
+
+This diagram ensures all functional requirements are represented accurately, with precise IDs and relationships between actors and use cases. Adjustments can be made based on further analysis or requirement changes.
+
+[Done: True
+Done Reason: stop
+Eval Count: 693]

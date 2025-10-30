@@ -1,0 +1,67 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  rectangle "Client System Boundary" {
+    user "Client" as c
+    client "System" as s
+    c -> s: View Alerts (CFR002)
+    c -> s: View Predictive Financial Insights (CFR003)
+    c -> s: Manage Recommendations Preferences (CFR005)
+    c -> s: View Spending Limit Alerts (CFR006)
+    c -> s: View Investment Opportunities (CFR007)
+    c -> s: Access Personalized Dashboard (CFR009)
+    c -> s: Manage Relationship with Advisors (CFR10)
+
+  }
+
+  rectangle "Advisor System Boundary" {
+    user "Financial Advisor" as f
+    client "System" as a
+    f -> a : View Client Intervention Alerts (FAFR002)
+    f -> a : View Predictive Analytics for Clients (FAFR003)
+    f -> a : Configure Analysis Parameters (FAFR004)
+
+  }
+
+  rectangle "Administrator System Boundary" {
+    user "System Administrator" as sa
+    client "System" as sysadmin
+    sa -> sysadmin: Manage Analysis Parameters (SAFR001)
+    
+  }
+  
+}
+
+@enduml
+
+**Explanation of the Diagram Structure:**
+- The system is divided into three main categories based on roles:
+  - **Client System Boundary**: Represents interactions from clients, including users like Client, Financial Advisor, and System Administrator.
+  - **Advisor System Boundary**: Includes actions performed by Financial Advisors (e.g., viewing client alerts).
+  - **Administrator System Boundary**: Actions managed by the System Administrator.
+
+- Each use case is categorized under its respective actor:
+  - **Client** interacts with use cases like "View Financial Insights Dashboard" (`CFR001`), receiving personalized recommendations, managing preferences, etc.
+  - **Financial Advisor** uses features such as viewing predictive analytics and client intervention alerts (`FAFR003`, `FAFR002`).
+  - **System Administrator** manages analysis parameters (`SAFR001`).
+
+- The system boundary ensures that interactions are isolated to their respective roles, maintaining clarity in the diagram.
+
+This structure aligns all use cases with their corresponding actors and relationships as per the provided requirements. Adjustments may be needed based on further clarification or additional details from the functional specifications.
+**Note:** This is a simplified representation focusing on key actor-use case links. Additional nested groupings (e.g., packages) could refine it further if required, but this structure balances readability with completeness.
+
+[Done: True
+Done Reason: stop
+Eval Count: 677]

@@ -1,0 +1,62 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FAFR001
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Deliver Personalized Recommendations" as SFR003
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+
+  Client --> CFR001
+  SysAdmin --> SAFR001
+  FAFR001 --> FAFR002
+}
+
+rectangle "Client Dashboard Features" {
+  usecase "CFR009: Access Consolidated Financial Dashboard" as CFR009
+  usecase "SAFR005: Manage Recommendation Preferences" as SAFR005
+
+  Client --> CFR009
+  SysAdmin --> SAFR005
+}
+
+rectangle "Financial Advisor Features" {
+  usecase "FAFR001: Manage Mentoring Sessions" as FAFR001
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+
+  FinancialAdvisor --> FAFR001
+  SysAdmin --> SAFR004
+}
+
+rectangle "System Features" {
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+  usecase "SAFR005: Manage Recommendation Preferences" as SAFR005
+
+  SystemAdmin --> SAFR001
+  SystemAdmin --> SAFR004
+}
+
+rectangle "AI Features" {
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+  SystemAdmin --> SAFR001
+}
+
+rectangle "Feedback Mechanism" {
+  usecase "CFR011: Send Feedback" as CFR011
+
+  Client --> CFR011
+  FinancialAdvisor --> CFR011
+  SysAdmin --> CFR011
+}
+@enduml

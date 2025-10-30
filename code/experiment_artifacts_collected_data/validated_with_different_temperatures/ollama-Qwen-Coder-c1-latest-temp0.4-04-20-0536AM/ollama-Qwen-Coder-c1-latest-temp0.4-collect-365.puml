@@ -1,0 +1,71 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+}
+
+package System {
+  actor "System Administrator" as SAFR001
+  
+  rectangle "AI Component" {
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Generate Financial Predictions" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+  }
+  
+  rectangle "Notification Channel" {
+    usecase "SFR013: Request Alerts from AI Component" as SFR013
+  }
+
+  rectangle "Dashboard Generation" {
+    usecase "AIFR012: Generate Client Dashboards" as AIFR012
+  }
+  
+  rectangle "Recommendation Processing" {
+    usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+  }
+
+  rectangle "Prediction Requesting" {
+    usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+    usecase "SFR017: Request Predictive Insights from AI Component to Enhance Financial Guidance" as SFR016
+  }
+
+  rectangle "News Processing" {
+    usecase "AIFR007: Generate Contextualized News Insights for Users' Portfolios" as AIFR007
+    usecase "SFR009: Find and Extract Relevant News from Trusted Sources" as SFR008
+  }
+
+  rectangle "Feedback Management" {
+    usecase "CFR011: Send Feedback about Recommendations and Insights to System Administrator" as CFR011
+  }
+}
+
+rectangle "System Boundaries" {
+  Client --> SAFR001 : CFR001, CFR002, CFR003, CFR004, CFR005, CFR006, CFR007, CFR008, CFR009, CFR010
+  FinancialAdvisor --> FAFR002 : FAFR001, FAFR003, FAFR004
+  System --> SAFR001 : SFR001, SFR002, SFR003, SFR004, SFR005, SFR006, SFR007, SFR008, SFR009, SFR010
+  System --> AIFR002 : AIFR001, AIFR003, AIFR004, AIFR005, AIFR006, AIFR007, AIFR008, AIFR009
+  System --> NotificationChannel : SFR013
+  System --> DashboardGeneration : AIFR012
+  System --> RecommendationProcessing : SFR002
+  System --> PredictionRequesting : AIFR003, AIFR004, SFR016
+  System --> NewsProcessing : AIFR007, SFR008
+}
+
+@enduml

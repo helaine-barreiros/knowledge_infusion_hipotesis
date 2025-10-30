@@ -1,0 +1,94 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Client Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR006: Monitor Spending Limits" as SAFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Portfolio News" as CFR008
+  usecase "CFR009: Manage Client Dashboards" as CFR009
+  usecase "SAFR010: Share Financial Data with Advisors" as SAFR010
+
+  user "Client" --> CFR001 : View dashboard  
+  user "Client" --> SAFR002 : Receive alerts  
+  user "Client" --> CFR003 : Predictions  
+  user "Client" --> CFR004 : Recommendations  
+  user "Client" --> CFR005 : Manage preferences  
+  user "Client" --> SAFR006 : Spending limits  
+  user "Client" --> CFR007 : Investment opportunities  
+  user "Client" --> CFR008 : Portfolio news  
+  user "Client" --> CFR009 : Dashboards  
+  user "Client" --> SAFR010 : Share data  
+
+  sysadmin "SysAdmin" --> SAFR002 : Configure alerts
+}
+
+rectangle "Financial Advisor (FAFR)" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002  
+  usecase "FAFR003: View Predictive Analytics" as FAFR003  
+
+  user "Financial Advisor (FAFR)" --> FAFR001 : Manage sessions
+  user "Client" --> FAFR002 : Receive alerts
+}
+
+rectangle "System (SFR)" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001  
+  usecase "SFR003: Request Financial Predictions" as SFR003  
+  usecase "SFR004: Generate Personalized Recommendations" as SFR004
+  usecase "SFR005: Manage Spending Limit Alerts" as SFR005 
+  usecase "SFR006: Analyze Investment Opportunities" as SFR006  
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "AIFR009: AI Contextualized News Insights" as AIFR009
+
+  system "System (SFR)" --> SFR003 : Request predictions  
+  system "System (SFR)" --> SFR004 : Generate recommendations  
+  system "System (SFR)" --> SFR005 : Manage alerts  
+  user "Client" --> AIFR009 : Receive news insights
+}
+
+rectangle "AI System (AIFR)" {
+  usecase "AIFR001: Financial Predictions" as AIFR001
+  usecase "AIFR002: Personalized Recommendations" as AIFR002  
+  usecase "AIFR003: Spending Limit Alerts" as AIFR003 
+  usecase "AIFR004: Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Investment Opportunities" as AIFR005  
+  usecase "AIFR006: Anomaly Transaction Alerts" as AIFR006 
+  usecase "AIFR007: Contextualized News Insights" as AIFR007
+  usecase "AIFR008: Predictive Intervention Recommendations" as AIFR008
+
+  system "AI System (AIFR)" --> AIFR001 : Generate predictions  
+  system "AI System (AIFR)" --> AIFR002 : Personalize recommendations
+}
+
+@enduml
+```
+
+### Explanation:
+- **Client**: Represents the end-user, including clients and financial advisors. They interact with various use cases like viewing dashboards, receiving alerts, etc.
+- **SysAdmin**: Manages system parameters (e.g., SAFR002 for client alerts).
+- **Financial Advisor (FAFR)**: Engages in mentoring sessions and receives intervention alerts (FAFR001–FAFR003).
+- **System (SFR)**: Handles alert delivery, requests from clients/advisors to AI systems.
+- **AI System (AIFR)**: Generates financial predictions, recommendations, investment analyses, etc.
+
+### Key Relationships:
+- Clients use system features directly via `Client` actors. For example, viewing a dashboard (`CFR001`) or receiving alerts (`SAFR002`).
+- Financial Advisors manage client interactions and receive specific insights (e.g., FAFR003: View predictive analytics about clients’ financial situations to provide data-driven recommendations during consultations).
+- System administrators configure parameters like alert thresholds.
+- The AI system processes requests from the main system, generating outputs that are then delivered back through SFR.
+
+### Diagram Structure:
+The diagram is divided into four major rectangles representing different components (Client, SysAdmin, FAFR, AIFR) with their respective use cases. Each actor points to relevant use cases they can interact with directly or indirectly via the AI system and main system functionalities. The `System` rectangle includes both SFR and AIFR sub-systems for clarity.
+
+This structure ensures all functional requirements are represented accurately while maintaining readability through logical grouping and relationships.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1334]

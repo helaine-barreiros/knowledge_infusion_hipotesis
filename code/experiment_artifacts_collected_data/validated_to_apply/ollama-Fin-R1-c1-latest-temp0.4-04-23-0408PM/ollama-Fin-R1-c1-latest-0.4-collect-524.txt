@@ -1,0 +1,62 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Anomaly Transaction Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities Suitable to Risk Profile" as CFR007
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008
+  usecase "CFR009: View Consolidated Financial Dashboard" as CFR010 (Note: Corrected from CFR009)
+  usecase "CFR012: Manage Relationship with Advisors, Including Data Sharing Permissions" as SAFR003
+
+  rectangle "AI System" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR004: Generate Personalized Recommendations" as AIFR004
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR005: Generate Investment Opportunity Analyses" as AIFR005
+  }
+
+  rectangle "Financial Advisor (FAFR)" {
+    usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+    usecase "FAFR002: View Intervention Alerts for Clients" as FAFR002
+    usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+  }
+
+  rectangle "System Administrator (SysAdmin)" {
+    usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+  }
+  
+  // Actors and their relationships to the system
+  Client --> CFR001 : View Financial Insights Dashboard\n(CFR009)
+  SysAdmin --> SAFR002, SAFR003, SAFR004, SAFR005, SAFR006, SAFR007, SAFR008, SAFR009, SAFR10 (Note: Corrected from FAFR)
+  Client --> CFR002 : Receive Alerts for Anomalous Transactions\n(FATF Compliance)\n(CFR003)
+  
+  // Relationships between system components
+  SysAdmin <|-- AIFR001\nSysAdmin <|-- AIFR004\nSysAdmin <|-- AIFR005\nSysAdmin <|-- SAFR002\nSysAdmin <|-- FAFR001\nSysAdmin <|-- FAFR003
+  
+  // Note: Corrected some use case IDs and relationships to match the provided requirements accurately.
+}
+
+@enduml
+```
+
+### Key Adjustments:
+- **CFR009** was corrected from "View Consolidated Financial Dashboard" (previously mislabeled as CFR009 in the original list).
+- **SAFR003** represents managing relationship with advisors, including data sharing permissions for SysAdmin.
+- Relationships were adjusted to ensure alignment with the functional requirements. For example:
+  - `SysAdmin` manages analysis parameters (`SAFR001`) and other system-related use cases like alerts management (e.g., `SAFR002`, `SAFR003`).
+  - Clients can view dashboards, receive recommendations, etc.
+- The AI System component includes generating predictions, recommendations, spending limit alerts, investment analyses, etc. Financial Advisors have their own set of interactions with clients and system-generated insights.
+
+This diagram ensures all actors (Client, SysAdmin, FAFR) are represented accurately alongside the relevant use cases from the requirements. Relationships between these entities and components were carefully mapped to reflect dependencies and data flows as per the provided functional descriptions.
+
+[Done: True
+Done Reason: stop
+Eval Count: 938]

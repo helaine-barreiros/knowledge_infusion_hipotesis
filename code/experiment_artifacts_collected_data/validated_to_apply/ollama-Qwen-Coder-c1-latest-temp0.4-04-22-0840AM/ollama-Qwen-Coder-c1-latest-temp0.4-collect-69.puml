@@ -1,0 +1,168 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Anomaly Transaction Alerts" as CFR002
+  usecase "CFR003: View Predictive Analytics for Spending Limits" as CFR003
+  usecase "CFR004: Get Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR010: View Investment Opportunities Suitable to My Risk Profile" as CFR010
+  
+  C --> (CFR001)
+  C --> (CFR002)
+  C --> (CFR003)
+  C --> (CFR004)
+  C --> (CFR005)
+  C --> (CFR010)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts for Clients" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Client Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  FA --> (FAFR001)
+  FA --> (FAFR002)
+  FA --> (FAFR003)
+  FA --> (FAFR004)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SA
+  
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+  usecase "SFR020: Manage User Feedback to Improve Recommendations" as SFR020
+  
+  SA --> (SAFR001)
+  SA --> (SFR020)
+}
+
+package "System Components" {
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Generate Suitable Investments Based on Risk Profile" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+    
+    C --> (AIFR001)
+    FA --> (AIFR002)
+    SA --> (AIFR003)
+  }
+  
+  rectangle "Notification System" {
+    usecase "SFR001: Deliver Alerts to Users" as SFR001
+    
+    C --> (SFR001)
+    FA --> (SFR001)
+    SA --> (SFR001)
+  }
+}
+
+rectangle "System" {
+  rectangle "Client Dashboard" {
+    usecase "SFR012: Generate Client Dashboards" as SFR012
+    
+    C --> (SFR012)
+  }
+
+  rectangle "Personalized Recommendations" {
+    usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+
+    C --> (SFR002)
+  }
+  
+  rectangle "Financial Predictions" {
+    usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+    
+    C --> (SFR003)
+  }
+
+  rectangle "Personalized Recommendations Generation" {
+    usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+
+    C --> (SFR004)
+  }
+  
+  rectangle "Spending Limit Alerts" {
+    usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+    
+    C --> (SFR005)
+  }
+
+  rectangle "Investment Opportunity Analysis" {
+    usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+
+    C --> (SFR006)
+  }
+  
+  rectangle "Specific Investment Opportunities" {
+    usecase "SFR007: Request Specific Investment Opportunities from AI Component Matching User Criteria and ESG Preferences" as SFR007
+    
+    C --> (SFR007)
+  }
+
+  rectangle "Anomaly Transaction Alerts" {
+    usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as SFR008
+
+    C --> (SFR008)
+  }
+  
+  rectangle "Contextualized News Insights" {
+    usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios From Trusted Sources" as SFR009
+    usecase "SFR10: Process Contextualized News To Extract Relevant Information For Users' Financial Situations" as SFR10
+    
+    C --> (SFR009)
+    FA --> (SFR10)
+  }
+
+  rectangle "Predictive Intervention Analyses" {
+    usecase "SFR15: Request Predictive Intervention Analyses From AI Component To Identify When Advisors Should Engage With Clients" as SFR15
+
+    C --> (SFR15)
+  }
+  
+  rectangle "Client Predictive Insights" {
+    usecase "SFR16: Request Client Predictive Insights That Provide Forward-Looking Analysis Of Financial Situations To Support More Effective Financial Planning" as SFR16
+    
+    C --> (SFR16)
+  }
+
+  rectangle "Financial Health Reports" {
+    usecase "SFR17: Generate Financial Health Reports Assessing Users' Overall Financial Wellbeing According to Standard Financial Ratios And Metrics" as SFR17
+
+    C --> (SFR17)
+  }
+  
+  rectangle "User Goals Management" {
+    usecase "SFR18: Manage User Financial Goals To Track Progress And Provide Relevant Recommendations" as SFR18
+    
+    C --> (SFR18)
+  }
+
+  rectangle "Historical Insights Record Maintenance" {
+    usecase "SFR19: Maintain A Historical Record Of Users' Insights To Enable Trend Analysis And Effectiveness Measurement" as SFR19
+
+    C --> (SFR19)
+  }
+  
+  rectangle "User Feedback Management" {
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations By Identifying Patterns That Indicate Potential Financial Difficulties Or Opportunities Requiring Advisor Engagement" as AIFR008
+    
+    C --> (AIFR008)
+  }
+}
+
+@enduml

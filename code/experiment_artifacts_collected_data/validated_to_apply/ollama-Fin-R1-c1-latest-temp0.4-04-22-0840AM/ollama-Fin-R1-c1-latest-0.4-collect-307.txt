@@ -1,0 +1,82 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR001: Adjust Analysis Parameters" as SAFR001
+  usecase "SFR020: Maintain Historical Record of Insights" as SFR020
+  usecase "AIFR009: Generate Client Predictive Interventions" as AIFR009
+
+  client --> CFR001 : View financial data and insights.
+  client --> SAFR002 : Configure alert preferences for anomalies, spending limits, etc.
+  client --> CFR003 : Access future predictions based on historical trends.
+  client --> CFR004 : Receive tailored investment advice aligned with goals.
+  client --> CFR005 : Customize recommendation settings per personal profile and risk tolerance.
+  client --> SAFR001 : Adjust AI system parameters for accuracy and compliance.
+  client --> SFR020 : Track historical data to measure performance over time.
+  client --> AIFR009 : Request proactive advisory actions based on predictive models.
+
+  sysadmin --> SAFR001 : Manage analysis settings across the platform.
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Schedule Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: Review Predictive Analytics" as FAFR003
+
+  financialAdvisor --> FAFR001 : Plan client interactions.
+  financialAdvisor --> FAFR002 : Monitor system-generated alerts for clients needing attention.
+  financialAdvisor --> FAFR003 : Use predictive data to guide discussions and recommendations.
+
+}
+
+rectangle "System" {
+  usecase "SFR008: Request Investment Opportunity Analysis" as SFR008
+  usecase "SAFR015: Schedule Predictive Interventions" as SAFR015
+
+  system --> SFR008 : Identify and present investment opportunities matching user profiles.
+  system --> SAFR015 : Plan when to trigger advisor interventions based on client data.
+
+}
+
+rectangle "AI System" {
+  usecase "AIFR003: Detect Spending Limits Exceedances" as AIFR003
+  usecase "AIFR004: Suggest Investment Opportunities" as AIFR004
+
+  system --> AIFR003 : Alert clients when spending exceeds thresholds.
+  system --> AIFR004 : Recommend investments based on risk and portfolio goals.
+
+}
+
+rectangle "Client" {
+  usecase "CFR011: Send Feedback to System" as CFR011
+  client --> CFR011 : Provide input for improving the AI's performance.
+
+}
+@enduml
+```
+
+### Key Observations:
+- **Actors**: The diagram includes multiple actors such as *Client*, *Financial Advisor (FA)*, and *System Administrator*. Each actor corresponds to a specific role within the system.
+- **Use Cases**:
+  - **Client-related use cases** include viewing dashboards, receiving recommendations, managing preferences, etc. These are grouped under the "Client" rectangle in PlantUML.
+  - **Financial Advisor (FA)** uses case includes scheduling sessions and reviewing alerts/predictive analytics. This is encapsulated within a separate FA rectangle.
+  - System-level use cases like adjusting parameters or generating reports span across multiple rectangles to show interactions between different components of the system.
+- **Relationships**: Arrows indicate how actors interact with specific use cases, ensuring clarity in who does what and when. For example, clients can view dashboards (CFR001), adjust alert settings (SAFR002), etc., while financial advisors schedule sessions or review alerts.
+
+### Notes:
+- The system boundary is represented by the "System" rectangle to encapsulate all internal components like AI systems (`AIFR...`), sub-systems (`SFR...`), and administrative controls.
+- Inheritance relationships (e.g., between actors) are not explicitly mentioned in the requirements but inferred from context. For example, both clients and financial advisors might share some interactions with system alerts or dashboards.
+
+This structure ensures all functional requirements are mapped accurately to their respective use cases and actors within a logical grouping for readability and maintainability.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1040]

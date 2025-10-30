@@ -1,0 +1,82 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  
+  Client --> (CFR001)
+  SysAdmin --> (SAFR001)
+}
+
+rectangle "Client" {
+  actor "User" as User
+  user -> CFR002 : "View Alerts"
+  
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Preferences for Recommendations" as CFR005
+  
+  User --> (CFR001)
+  User --> (CFR002)
+  User --> (CFR003) : "View Financial Predictions"
+  User --> (CFR004)
+  User --> (CFR005)
+}
+
+rectangle "Financial Advisor" {
+  actor "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts for Clients" as FAFR002
+  
+  FAFR001 --> (CFR003)
+  
+  SysAdmin <|-- SAFR001 : "Configure"
+}
+
+rectangle "System Administrator" {
+  actor "SysAdmin" as SysAdmin
+  usecase "SAFR004: Configure Analysis Parameters for Client Segments" as SAFR004
+  
+  SysAdmin --> (CFR003)
+  
+  SysAdmin <|-- SAFR001 : "Manage"
+}
+
+rectangle "System" {
+  actor "SFR008: Deliver Anomaly Transaction Alerts" as SFR008
+  usecase "AIFR006: Generate Spending Limit Alerts Based on AI Analysis" as AIFR006
+  
+  SysAdmin --> (SAFR004)
+  
+  SysAdmin <|-- SAFR001 : "Manage"
+}
+
+rectangle "AI System" {
+  actor "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+  usecase "CFR011: Send Feedback on Insights and Recommendations" as CFR011
+  
+  SysAdmin <|-- SAFR004 : "Configure"
+}
+
+@enduml
+
+**Key Observations**:
+- **Client**: Can view financial insights, receive alerts, make predictions, get recommendations, manage preferences. 
+- **Financial Advisor**: Manages client mentoring sessions and views predictive analytics.
+- **System Administrator**: Configures analysis parameters globally or for segments.
+- **AI System**: Generates specific AI-driven outputs like spending limit alerts and personalized recommendations.
+
+**Use Case Grouping**:
+1. **Client Interactions (CFR)**: View dashboards, receive/act on alerts, get predictions/recommendations, manage preferences.
+2. **System Admin & Financial Advisor Actions (SAFR, FAFR)**: Manage analysis parameters, configure segments, view client-specific data.
+3. **AI-Driven Features**: Predictive analyses and interventions.
+
+**Relationships**:
+- Clients interact with the system through multiple use cases, while admins/configure AI/parameters.
+- The "System" boundary encompasses all components (Client, Admin, AI), ensuring proper encapsulation of interactions within the system.
+
+[Done: True
+Done Reason: stop
+Eval Count: 756]

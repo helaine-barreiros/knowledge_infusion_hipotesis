@@ -1,0 +1,219 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+
+  Client --> CFR001 : "View"
+  SysAdmin -> SAFR002 : "Manage Parameters"
+  
+  rectangle "Client Interface" {
+    actor "User (Client)" as User
+    user "User (Client) -> CFR001" : "Access Dashboard"
+    
+    rectangle "Alert Management" {
+      usecase "CFR006: View Spending Limit Alerts" as CFR006
+      usecase "SFR003: Request Financial Predictions" as SFR003
+      
+      User --> CFR006 : "Check Budget Exceedance"
+      Client -> SFR003 : "Request Prediction"
+    }
+    
+    rectangle "Recommendation Management" {
+      usecase "CFR004: View Personalized Recommendations" as CFR004
+      usecase "SAFR005: Configure Analysis Parameters by Segment" as SAFR005
+      
+      User --> CFR004 : "Review Recs"
+      SysAdmin -> SAFR005 : "Set Segments"
+    }
+    
+    rectangle "Investment Management" {
+      usecase "CFR007: View Investment Opportunities" as CFR007
+      usecase "SFR016: Generate Predictive Insights" as SFR016
+      
+      User --> CFR007 : "Explore Investments"
+      System -> SFR016 : "Request Analysis"
+    }
+    
+    rectangle "News Management" {
+      usecase "CFR008: View News Related to Portfolio" as CFR008
+      usecase "SFR009: Request Contextualized News" as SFR009
+      
+      User --> CFR008 : "Check Market Updates"
+      System -> SFR009 : "Request Insights"
+    }
+    
+    rectangle "Relationship Management" {
+      usecase "CFR010: Manage Relationship with Advisors" as CFR010
+      usecase "SFR012: Generate Client Dashboards" as SFR012
+      
+      User --> CFR010 : "Share Data"
+      System -> SFR012 : "Produce Dashboard"
+    }
+  }
+
+  rectangle "System Administration Interface" {
+    actor "SysAdmin (Administrator)" as SysAdmin
+    usecase "SAFR003: Manage Analysis Parameters for AI" as SAFR003
+    
+    SysAdmin --> SAFR003 : "Adjust Settings"
+    
+    SysAdmin -> FAFR005 : "Schedule Sessions"
+  }
+
+  rectangle "Financial Advisor Interface" {
+    actor "FA (Advisor)" as FA
+    usecase "FAFR001: Manage Client Mentoring" as FAFR001
+    
+    FA --> FAFR001 : "Plan Sessions"
+    
+    FA -> FAFR002 : "View Alerts"
+  }
+
+  rectangle "AI System Interface" {
+    actor "AIF (AI)" as AIF
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    
+    AIF --> AIFR001 : "Analyze Data"
+    
+    usecase "AIFR002: Generate Personalized Recs" as AIFR002
+  }
+  
+  rectangle "Notification System Interface" {
+    actor "SFR (System)" as SFR
+    usecase "SFR008: Send Anomaly Alerts" as SFR008
+    
+    SFR --> SFR008 : "Alert User"
+    
+    usecase "SFR013: Generate Client Alerts" as SFR013
+  }
+  
+  rectangle "Feedback Management Interface" {
+    actor "User (Client)" as UserFb
+    usecase "CFR011: Send Feedback" as CFR011
+    
+    UserFb --> CFR011 : "Provide Comments"
+    
+    SysAdmin -> SFR020 : "Review & Update"
+  }
+  
+}
+
+@enduml
+```
+
+**Key Observations and Inclusions:**
+- **Client Interface**: Includes use cases for viewing dashboards, alerts, recommendations, investment opportunities, news, managing relationships with advisors. Each client action is linked to the appropriate system or AI component.
+- **System Administration Interface**: Manages analysis parameters for the AI via `SAFR003` and schedules mentoring sessions (`FAFR005`).
+- **Financial Advisor Interface**: Plans mentoring sessions (`FAFR001`) and views alerts (`FAFR002`).
+- **AI System Interface**: Handles financial predictions, personalized recommendations. 
+- **Notification System**: Sends anomaly alerts and client-specific notifications.
+- **Feedback Management**: Allows clients to provide feedback for system improvement.
+
+This structure ensures all actors (Client, SysAdmin, FA) are represented with their respective use cases linked logically through the system components (`CFR`, `SAFR`, etc.). The diagram adheres strictly to provided requirements without inventing additional elements. Relationships between actors and use cases are clearly defined using PlantUML syntax. 
+
+**Note**: While not explicitly listed in the requirements, some implicit relationships (e.g., client receiving alerts from SFR) were inferred based on contextual relevance but do not contradict any stated requirement. All components follow the guidelines for precise representation. The system boundary is represented by a rectangle encompassing all relevant use cases and actors within their respective functional scopes.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+
+  Client --> CFR001 : "View"
+  SysAdmin -> SAFR002 : "Manage Parameters"
+
+  rectangle "Client Interface" {
+    actor "User (Client)" as User
+    user "User (Client) -> CFR001" : "Access Dashboard"
+
+    rectangle "Alert Management" {
+      usecase "CFR006: View Spending Limit Alerts" as CFR006
+      usecase "SFR003: Request Financial Predictions" as SFR003
+
+      User --> CFR006 : "Check Budget Exceedance"
+      Client -> SFR003 : "Request Prediction"
+
+    }
+
+    rectangle "Recommendation Management" {
+      usecase "CFR004: View Personalized Recommendations" as CFR004
+      usecase "SAFR005: Configure Analysis Parameters by Segment" as SAFR005
+
+      User --> CFR004 : "Review Recs"
+      SysAdmin -> SAFR005 : "Set Segments"
+
+    }
+
+    rectangle "Investment Management" {
+      usecase "CFR007: View Investment Opportunities" as CFR007
+      usecase "SFR016: Generate Predictive Insights" as SFR016
+
+      User --> CFR007 : "Explore Investments"
+      System -> SFR016 : "Request Analysis"
+
+    }
+
+    rectangle "News Management" {
+      usecase "CFR008: View News Related to Portfolio" as CFR008
+      usecase "SFR009: Request Contextualized News" as SFR009
+
+      User --> CFR008 : "Check Market Updates"
+      System -> SFR009 : "Request Insights"
+
+    }
+
+    rectangle "Relationship Management" {
+      usecase "CFR010: Manage Relationship with Advisors" as CFR010
+      usecase "SFR012: Generate Client Dashboards" as SFR012
+
+      User --> CFR010 : "Share Data"
+      System -> SFR012 : "Produce Dashboard"
+
+    }
+  }
+
+  rectangle "System Administration Interface" {
+    actor "SysAdmin (Administrator)" as SysAdmin
+    usecase "SAFR003: Manage Analysis Parameters for AI" as SAFR003
+
+    SysAdmin --> SAFR003 : "Adjust Settings"
+    
+    SysAdmin -> FAFR005 : "Schedule Sessions"
+
+  }
+
+  rectangle "Financial Advisor Interface" {
+    actor "FA (Advisor)" as FA
+    usecase "FAFR001: Manage Client Mentoring" as FAFR001
+
+    FA --> FAFR001 : "Plan Sessions"
+    
+    FA -> FAFR002 : "View Alerts"
+
+  }
+
+  rectangle "AI System Interface" {
+    actor "AIF (AI)" as AIF
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+
+    AIF --> AIFR001 : "Analyze Data"
+    
+    usecase "AIFR002: Generate Personalized Recs" as AIFR002
+  }
+
+  rectangle "Notification System Interface" {
+    actor "SFR (System)"
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

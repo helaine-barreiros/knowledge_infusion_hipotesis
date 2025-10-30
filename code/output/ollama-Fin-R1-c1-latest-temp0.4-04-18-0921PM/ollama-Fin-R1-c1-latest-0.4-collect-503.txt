@@ -1,0 +1,108 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+system "System" as S
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile and Goals" as CFR004
+  usecase "CFR005: Manage Personalized Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts for Budget Control" as CFR006
+  usecase "CFR007: Access Investment Opportunities Suitable to Risk Profile" as CFR007
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008
+  usecase "CFR009: Personalized Dashboard for Financial Consolidation" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as CFR10
+
+  C1 --> CFR001 : View dashboard\nwith financial data  
+  C1 --> CFR002 : Receive alerts on anomalous transactions\ncompliant to FATF regulations  
+  C1 --> CFR003 : Predictions based on history and trends for informed decisions  
+  C1 --> CFR004 : Personalized recommendations tailored to profile and goals  
+  C1 --> CFR005 : Adjust preferences in personalized recommendations\nbased on KYC data  
+  C1 --> CFR006 : Alerts when exceeding spending limits in categories  
+  C1 --> CFR007 : Investment opportunities matching risk profile (MiFID II)  
+  C1 --> CFR008 : News related to portfolio for market awareness  
+  C1 --> CFR009 : Consolidated view of financial info\nfor efficient monitoring  
+  C1 --> CFR10 : Manage data sharing with advisors, including permissions  
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+
+  SA --> SAFR001 : Configure system parameters for accuracy and compliance\nincluding Basel III risk management  
+}
+ 
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+
+  FA --> FAFR001 : Schedule mentoring sessions\nusing AI-generated insights  
+  FA --> FAFR002 : Review alerts for proactive client support  
+  FA --> FAFR003 : Analyze predictive data during consultations  
+  FA --> FAFR004 : Customize system settings by segment\ncustomizing behavior per profile and regulations (GDPR, CCPA)  
+
+}
+
+rectangle "System Components" {
+  usecase "SFR001: Deliver Alerts Through Notification Channels" as SFR001
+  usecase "SFR002: Personalized Recommendations Based on Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations From AI Component" as SFR004  
+  usecase "SFR005: Spending Limit Alerts for Exceeding Thresholds" as SFR005
+  usecase "SFR006: Investment Opportunity Analysis Based on Risk Profile" as SFR006
+  usecase "SFR007: Specific Investment Opportunities Matching Criteria and ESG Preferences" as SFR007  
+  usecase "SFR008: Anomaly Transaction Alerts for Fraud Detection (AML)" as SFR008
+  usecase "SFR009: Contextualized News Relevant to Portfolio" as SFR009
+  usecase "SFR010: Client Dashboards with Financial Information" as SFR010  
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013  
+  usecase "SFR014: Client Analytics for Behavior and Performance Insights" as SFR014
+  usecase "SFR020: Manage User Feedback to Improve System Accuracy" as SFR020
+
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions Using Historical Data, Market Trends, and Economic Indicators" as AIFR001
+  usecase "AIFR003: Spending Limit Alerts Based on Unusual Deviations in Spending Patterns" as AIFR003  
+  usecase "AIFR004: Investment Opportunity Analyses Aligning with Risk Profiles and Financial Goals" as AIFR004
+  usecase "AIFR005: Identify Financial Instruments Matching Portfolio Strategies (Modern Portfolio Theory)" as AIFR005 
+  usecase "AIFR006: Anomaly Transaction Alerts Using Pattern Recognition for Fraud Detection" as AIFR006  
+  usecase "AIFR007: Contextualized News Insights Correlated with User Portfolios" as AIFR007
+  usecase "AIFR008: Client Predictive Intervention Recommendations Identifying Engagement Opportunities or Financial Difficulties" as AIFR008  
+}
+
+SFR020 <|-- S : Collects feedback\nfrom clients to improve system accuracy  
+
+C1 --> SFR009 : Request contextualized news insights for portfolio
+FA --> SFR003 : Request financial predictions from AI component (e.g., market trends)
+SA --> SAFR001 : Configure system parameters  
+Client <|-- AIFR004 : Receives personalized investment recommendations via client interface  
+
+@enduml
+```
+
+### Explanation:
+- **Actors**: The main actors are `Client`, `SysAdmin`, and `FinancialAdvisor`. Each has their own set of use cases.
+- **Use Cases**:
+  - Clients (CFRs) include viewing dashboards, receiving alerts, financial predictions, personalized recommendations, etc.
+  - System Administrator (`SAFR001`) manages analysis parameters for the AI system.
+  - Financial Advisors interact with `FAFR` use cases like mentoring sessions and client intervention alerts.
+- **System Components**: These are internal to the system (e.g., delivering alerts, generating dashboards).
+- **AI Component**: Generates predictions, recommendations, etc. based on data inputs.
+- **Inheritance/Extensions**:
+  - The Client actor extends some of the System components (`SFR020` for feedback collection) and AI component (`AIFR004`) through use case relationships.
+
+This diagram ensures all functional requirements are represented accurately with their respective actors, use cases, and interactions. Adjustments can be made based on further analysis or requirement updates.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1622]

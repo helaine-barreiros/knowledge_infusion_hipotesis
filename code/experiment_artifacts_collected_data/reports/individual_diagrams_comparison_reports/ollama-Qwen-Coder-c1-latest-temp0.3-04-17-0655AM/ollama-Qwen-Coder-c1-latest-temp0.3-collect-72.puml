@@ -1,0 +1,73 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  FinancialAdvisor --> (FAFR001)
+  FinancialAdvisor --> (FAFR002)
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR005
+}
+
+rectangle "AI Component" {
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunities Based on Modern Portfolio Theory Principles" as AIFR005
+  usecase "AIFR006: Generate Anomaly Transaction Alerts in Compliance with FinCEN Requirements" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights Correlated to User Portfolios" as AIFR007
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations Based on Patterns Indicating Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR008
+  usecase "AIFR009: Generate Client Predictive Insights Providing Forward-Looking Analysis of Financial Situations to Support More Effective Financial Planning" as AIFR009
+  
+  SAFR005 --> (SAFR001)
+}
+
+package "System" {
+  actor System as SFR002
+}
+
+rectangle "User Interface" {
+  usecase "SFR012: Generate Client Dashboards Presenting Financial Information in an Intuitive and Actionable Format" as SFR012
+  
+  CFR001 --> (CFR009)
+  FAFR002 --> (FAFR003)
+}
+
+rectangle "Notification System" {
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions to Ensure Timely Notification of Important Financial Events" as SFR013
+  
+  SAFR005 --> (SAFR008)
+  FAFR002 --> (FAFR007)
+}
+
+rectangle "News Processing System" {
+  usecase "SFR014: Generate Client Analytics That Provide Meaningful Insights into Financial Behavior and Performance" as SFR014
+  
+  SAFR005 --> (SAFR016)
+  FAFR002 --> (FAFR017)
+}
+
+rectangle "Recommendation System" {
+  usecase "SFR005: Deliver Personalized Recommendations to Users Based on Their Financial Profiles to Support Better Financial Decision-Making" as SFR005
+  
+  SAFR005 --> (SAFR018)
+  FAFR002 --> (FAFR019)
+}
+
+rectangle "Feedback System" {
+  usecase "CFR011: Send Feedback About the System's Recommendations and Insights to Help Improve the Accuracy and Relevance of Future Outputs" as CFR011
+  
+  SAFR005 --> (SAFR020)
+}
+@enduml

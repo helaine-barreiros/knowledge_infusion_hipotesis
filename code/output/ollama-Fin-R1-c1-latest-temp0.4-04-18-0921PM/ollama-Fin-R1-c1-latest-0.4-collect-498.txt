@@ -1,0 +1,73 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "SFR004: Request Personalized Recommendations" as SFR004
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "SAFR012: Generate Client Dashboards" as SAFR012
+
+  actor "Client" as client
+  actor "System Administrator" as sysadmin
+  actor "Financial Advisor" as advisor
+  
+  client --> CFR001 : View financial data consolidated in a dashboard.
+  client --> CFR003 : Access future financial trends and predictions.
+  client --> SAFR002 : Adjust alert settings for transactions or spending limits.
+  client --> CFR004 : Get personalized investment advice based on profile.
+  client --> CFR005 : Customize recommendation preferences via KYC data.
+  sysadmin --> SAFR001 : Configure system parameters like risk models (Basel III).
+  
+  advisor --> FAFR002 : Review client alerts for proactive guidance.
+  advisor --> FAFR003 : Analyze predictive analytics to tailor advice during meetings.
+  advisor --> FAFR004 : Set analysis parameters specific to clients' segments or regulatory needs.
+
+  system --> SFR001 : Send notifications through appropriate channels (e.g., SMS, email).
+  system --> SFR002 : Deliver personalized recommendations based on client data and preferences.
+  system --> SFR003 : Request financial predictions from AI for dashboards.
+  system --> SFR004: Ask the AI to generate tailored investment suggestions.
+  system --> SAFR001 : Adjust analysis parameters as needed (e.g., risk thresholds).
+  
+  ai --> AIFR002: Generate personalized recommendations using client profiles and goals.
+  ai --> AIFR003: Issue spending limit alerts when detected deviations exceed thresholds.
+  ai --> AIFR004: Propose investment opportunities matching user's risk profile.
+  ai --> AIFR005: Suggest investments aligned with Modern Portfolio Theory principles.
+  ai --> AIFR006: Detect potential fraud via pattern recognition in transactions.
+  
+  client <|-- CFR001
+  client <|-- SAFR002
+  client <|-- CFR003
+  client <|-- CFR004
+  client <|-- CFR005
+  
+  sysadmin <|-- SAFR001
+
+  advisor <|-- FAFR001: Manage mentoring sessions.
+  
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Actors**: Clients, System Administrators (SysAdmin), Financial Advisors (Advisor).
+- **Use Cases** are grouped by their primary purpose. For example, Client-related use cases include viewing dashboards, receiving recommendations, managing preferences, etc., while SysAdmin and Advisor have specific roles like parameter management.
+- **Inheritance/Delegation**: Some relationships indicate that certain actors can "extend" or influence other entities (e.g., `client <|-- CFR001` means the client extends the use case by participating in it).
+- **System Boundary**: The entire system is encapsulated within a rectangle labeled "System," which contains all internal components and their interactions.
+
+### Notes:
+- Ensure that each actor-use case relationship aligns with the functional requirements provided. For instance, Clients interact directly with view-related use cases (CFR001–6), while SysAdmin handles SAFR001.
+- The AI system (`ai`) is represented as a component generating various insights and recommendations, which are then delivered to clients or advisors through the `system` actor's interactions.
+
+[Done: True
+Done Reason: stop
+Eval Count: 936]

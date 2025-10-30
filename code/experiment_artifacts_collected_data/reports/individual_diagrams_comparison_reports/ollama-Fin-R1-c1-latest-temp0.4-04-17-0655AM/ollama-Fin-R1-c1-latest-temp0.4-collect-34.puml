@@ -1,0 +1,42 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Anomaly Detection Parameters" as SAFR002
+  usecase "SFR003: Request Predictive Analytics from AI" as SFR003
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+  Client --> CFR001 : View Financial Data  
+  SysAdmin --> SAFR002 : Manage System Parameters  
+  FAFR004 -> SFR003 : Configure Analysis for Segments  
+
+  rectangle "Client Interface" {
+    usecase "CFR005: Adjust Recommendation Preferences" as CFR005
+    Client --> CFR005 : Customize Recommendations
+
+    rectangle "User Feedback Loop" {
+      usecase "CFR011: Send System Feedback" as CFR011  
+      User -> (Client) --(SFR020): Provide Input for Improvement  
+
+  SysAdmin --> SFR004 : Request Personalized Recs
+  SysAdmin --> AIFR009 : Generate Intervention Recommendations
+
+  rectangle "Financial Advisor Interface" {
+    usecase "FAFR001: Schedule Mentoring Sessions" as FAFR001  
+    usecase "FAFR002: View Client Alerts" as FAFR002
+    usecase "FAFR003: Analyze Predictive Analytics" as FAFR003
+
+  SysAdmin --> SFR005 : Request Spending Limit Alerts
+  SysAdmin --> AIFR006 : Generate Anomaly Alerts  
+
+  rectangle "System Admin Interface" {
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001  
+    SysAdmin -> (Sys) --(SFR004): Configure System-Wide Settings
+
+  FAFR003 --> AIFR008 : Request Predictive Interventions
+}
+
+@enduml

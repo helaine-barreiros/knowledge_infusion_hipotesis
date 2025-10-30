@@ -1,0 +1,75 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FAFR001
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  Client --> (SFR012) : generate client dashboards that present financial information in an intuitive and actionable format.
+  SysAdmin --> (SAFR001)
+  
+  rectangle "Client Functions" {
+    Client --> CFR001
+    Client --> CFR003
+    Client --> CFR004
+    Client --> CFR005
+    Client --> CFR006
+    Client --> CFR007
+    Client --> CFR008
+    Client --> CFR009
+  }
+  
+  rectangle "Financial Advisor Functions" {
+    FinancialAdvisor --> (FAFR001) : manage client mentoring sessions based on system-generated insights.
+    FinancialAdvisor --> (FAFR002) : view client intervention alerts when the system detects patterns requiring professional attention to proactively assist clients with potential financial issues.
+    FinancialAdvisor --> (FAFR003) : view predictive analytics about my clients' financial situations to provide data-driven recommendations during consultations.
+    FinancialAdvisor --> (FAFR004) : configure analysis parameters for specific client segments to customize the system's behavior according to different client profiles and regulatory requirements such as GDPR or CCPA.
+  }
+  
+  rectangle "System Functions" {
+    SystemAdmin --> SAFR001
+    Client --> SFR002 : deliver personalized recommendations to users based on their financial profiles to support better financial decision-making.
+    FinancialAdvisor --> (FAFR004)
+    
+    system --> (SFR003) : request financial predictions from the AI component to provide users with forward-looking financial insights.
+    Client --> SFR002
+    SystemAdmin --> SAFR001
+    
+    system --> (SFR005) : request spending limit alerts from the AI component when user spending patterns exceed defined thresholds.
+    FinancialAdvisor --> FAFR003
+    Client --> SFR004 : request personalized recommendations from the AI component based on each user's financial data and preferences.
+    
+    system --> (SFR006) : request investment opportunity analysis from the AI component to identify suitable investments for users based on their risk profiles.
+    FinancialAdvisor --> FAFR013
+    Client --> SFR007 : request specific investment opportunities from the AI component that match user investment criteria and ESG preferences.
+    
+    system --> (SFR008) : request anomaly transaction alerts from the AI component to detect potentially fraudulent activities in accordance with AML regulations.
+    FinancialAdvisor --> FAFR15
+    Client --> SFR013
+    
+    system --> (SFR009) : find contextualized news relevant to users' financial portfolios from trusted financial news sources.
+    FinancialAdvisor --> FAFR16
+    SystemAdmin --> SAFR001
+    
+    system --> (SFR010) : process contextualized news to extract relevant information for users' financial situations.
+    Client --> SFR017 : generate client analytics that provide meaningful insights into financial behavior and performance.
+    
+    FinancialAdvisor --> FAFR23
+    SystemAdmin --> SAFR001
+    
+    system --> (SFR019) : maintain a historical record of users' insights to enable trend analysis and effectiveness measurement.
+    Client --> SFR24 : manage user feedback to continuously improve the quality and relevance of financial insights.
+  }
+}
+
+Client --> CFR011
+FinancialAdvisor --> FAFR05
+SystemAdmin --> SAFR06
+
+@enduml

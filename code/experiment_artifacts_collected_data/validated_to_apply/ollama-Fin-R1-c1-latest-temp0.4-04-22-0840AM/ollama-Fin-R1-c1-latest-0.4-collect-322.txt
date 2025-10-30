@@ -1,0 +1,78 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Data and Trends" as CFR003
+  usecase "CFR004: Personalized Recommendations Aligned with Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts for Budget Control" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008
+  usecase "CFR009: Consolidated Personalized Dashboard for Monitoring Finances" as CFR009
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+
+  SysAdmin --> SAFR001 : Configure system parameters
+  
+  rectangle "Professional" {
+    actor Client as cClient
+    actor SystemAdministrator as SA
+    actor FinancialAdvisor as FA
+    
+    cClient --> CFR001, CFR002, CFR003, CFR004, CFR005, CFR006, CFR007, CFR008, CFR009, CFR010 : Request access to services
+    SA --> SAFR001 : Manage system parameters
+  }
+  
+  rectangle "System" {
+    usecase SFR002: Deliver Personalized Recommendations as <<SFR>>
+    usecase SFR003: Request Financial Predictions from AI Component as <<SFR>>
+    usecase SFR004: Request Personalized Recommendations from AI Component as <<SFR>>
+    usecase SFR005: Request Spending Limit Alerts when Exceeding Thresholds as <<SFR>>
+    usecase SFR006: Request Investment Opportunity Analysis based on Risk Profile as <<SFR>>
+    usecase SFR007: Request Specific Investments Matching Criteria and ESG Preferences as <<SFR>>
+    usecase SFR008: Request Anomaly Transaction Alerts for Fraud Detection as <<SFR>>
+    usecase SFR012: Generate Client Dashboards in Intuitive Format as <<SFR>>
+    
+    SysAdmin --> SAFR001 : Manage analysis parameters
+  }
+  
+  rectangle "AI" {
+    usecase AIFR001: Generate Financial Predictions by Analyzing Data and Trends as <<AIFR>>
+    usecase AIFR002: Generate Personalized Recommendations Based on Profiles as <<AIFR>>
+    usecase AIFR003: Generate Spending Limit Alerts for Unusual Activity as <<AIFR>>
+    usecase AIFR004: Analyze Investment Opportunities Against Risk Profiles as <<AIFR>>
+    usecase AIFR005: Identify Financial Instruments Aligning with Strategies and MPT Principles as <<AIFR>>
+    usecase AIFR006: Detect Anomalous Transactions via Pattern Recognition for Compliance as <<AIFR>>
+    usecase AIFR007: Correlate News to Portfolios for Relevant Insights as <<AIFR>>
+    
+  }
+  
+  SysAdmin --> SAFR001 : Manage analysis parameters
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire system is enclosed within a rectangle labeled "System".
+- **Actors**:
+  - `Client` (CFRs): Represents clients like CFR001 to CFR010.
+  - `SysAdmin`: System Administrator for managing parameters (SAFR001).
+  - `FinancialAdvisor` (FAFRs): Financial Advisors handling client mentoring and alerts (e.g., FAFR002, FAFR003).
+- **Use Cases**:
+  - **Client Use Cases**: All CFR IDs are mapped to their respective use cases.
+  - **System Administrator Use Case**: SAFR001 for managing analysis parameters.
+  - **Professional Subsystem**: Grouped within "Professional" rectangle (SysAdmin, Client as actors), including client requests and system management.
+- **Inheritance/Delegation**:
+  - SysAdmin manages `SAFR001` via a direct relationship.
+- **AI Component**: Enclosed in its own rectangle ("AI") for AI-specific use cases like predictions (`AIFR001`) or transaction alerts (`AIFR006`).
+  
+This structure ensures clarity and adherence to the provided requirements, with proper grouping and relationships. Adjustments can be made based on further analysis if needed.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1053]

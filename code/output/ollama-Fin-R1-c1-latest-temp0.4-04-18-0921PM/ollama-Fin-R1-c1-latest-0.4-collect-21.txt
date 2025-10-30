@@ -1,0 +1,55 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+system SFR012: "Client Dashboard Generation" as SDG
+system AIFR009: "AI Predictive Interventions" as SPI
+system AIFR008: "AI Predictive Insights" as API
+
+rectangle System {
+  usecase CFR001: View Financial Insights Dashboard as VFD
+  usecase CFR002: Receive Alerts for Anomalous Transactions as RAT
+  usecase CFR003: View Financial Predictions Based on Historical Data and Market Trends as FPMT
+  usecase CFR004: Personalized Recommendations Aligned with Financial Profile and Goals as PRFG
+  usecase CFR005: Manage Preferences for Personalized Recommendations as MPRP
+  usecase CFR006: View Spending Limit Alerts When Exceeding Thresholds as VSLA
+  usecase CFR007: View Investment Opportunities Based on Risk Profile as VOIP
+  usecase CFR008: Access Consolidated Financial Information in a Single Dashboard as CFD
+  usecase CFR010: Manage Relationship with Financial Advisors Including Data Sharing Permissions as MFADP
+
+  usecase SAFR001: Manage Analysis Parameters for AI System as MAPS
+  usecase FAFR001: Manage Client Mentoring Sessions Based on Insights as MCSI
+  usecase FAFR002: View Client Intervention Alerts When Patterns Require Professional Attention as VCIAPRAA
+  usecase FAFR003: View Predictive Analytics About Clients' Financial Situations to Guide Consultations as VPAGCFC
+  usecase FAFR004: Configure Analysis Parameters for Specific Client Segments as CACS
+
+  usecase SFR012: Generate Client Dashboards with Intuitive Formatting as GCDI
+  usecase SPI: Generate Predictive Intervention Recommendations Based on AI Analyses as AIPRI
+  usecase API: Generate Predictive Insights From AI Analyzes to Enhance Financial Guidance As APPIE
+
+  C --> VFD : "Client requests financial insights."
+  SA --> MAPS : "System Administrator manages analysis parameters."
+  FA --> VCIAPRAA : "Financial Advisor views client intervention alerts."
+  FA --> VPAGCFC : "Financial Advisor reviews predictive analytics for clients."
+  SDG <|-- GCDI: "Client dashboard generation system creates dashboards."
+
+  CFR011: Send Feedback to System as SF
+}
+
+@enduml
+
+**Key Observations and Relationships:**
+- **Client (C)** interacts with the system through various use cases like viewing financial insights, receiving alerts, making predictions, etc.
+- **SysAdmin (SA)** manages analysis parameters for AI systems via `MAPS`.
+- **FinancialAdvisor (FA)** uses multiple features such as client mentoring sessions (`MCSI`), viewing intervention alerts (`VCIAPRAA`), and predictive analytics (`VPAGCFC`).
+- The system includes components like the Client Dashboard Generation System (`SDG`) which generates dashboards based on user requests, and AI systems for Predictive Interventions (`SPI`) and Insights (`API`). These are linked through inheritance where `ClientDashboardGenerationSystem <|-- GenerateClientDashboards`.
+- Use cases under each actor/actor group (e.g., Client, SysAdmin) are logically grouped within their respective rectangles.
+- Inheritance is applied to systems generating outputs (e.g., `SDG` extends dashboards), and relationships between actors and use cases ensure clarity in interactions.
+
+[Done: True
+Done Reason: stop
+Eval Count: 769]

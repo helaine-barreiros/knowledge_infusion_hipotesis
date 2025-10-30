@@ -1,0 +1,87 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts" as SAFR003
+  usecase "CFR003: View Financial Predictions" as SAFR004
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR005
+  usecase "CFR006: Manage Recommendation Preferences" as SAFR018
+  usecase "CFR007: View Spending Limit Alerts" as SFR005
+  usecase "CFR009: Access Personalized Dashboard" as SFR12
+  
+  CFR001 --> (SAFR003)
+  CFR001 --> (SAFR004)
+  CFR001 --> (SAFR005)
+  CFR001 --> (SAFR018)
+  CFR001 --> (SFR005)
+  CFR001 --> (SFR12)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts" as SAFR006
+  usecase "FAFR003: View Predictive Analytics" as SAFR007
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as SFR015
+  
+  FinancialAdvisor --> (SAFR002)
+  FinancialAdvisor --> (SAFR003)
+  FinancialAdvisor --> (SFR015)
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR001
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+}
+
+package "System" {
+  rectangle "Financial Insights Dashboard" {
+    usecase "SFR012: Generate Client Dashboards" as SFR12
+    
+    CFR009 --> (SFR12)
+  }
+  
+  rectangle "Personalized Recommendations" {
+    usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+    
+    CFR004 --> (SFR002)
+    SAFR005 --> (AIFR002)
+  }
+  
+  rectangle "Predictive Analytics and Insights" {
+    usecase "SAFR003: Deliver Predictive Analytics" as SFR003
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+    
+    SAFR015 --> (SFR003)
+    FAFR004 --> (AIFR009)
+  }
+  
+  rectangle "Spending Limit Alerts and News" {
+    usecase "SAFR007: Deliver Predictive Analytics about Financial Situations" as SFR007
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+    
+    SAFR006 --> (SFR013)
+  }
+  
+  rectangle "Investment Opportunities and Health Reports" {
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+    usecase "SFR017: Generate Financial Health Reports" as SFR017
+    
+    FAFR003 --> (AIFR004)
+  }
+  
+  rectangle "Notifications and Feedback Management" {
+    usecase "SAFR008: Deliver Alerts to Users Through Appropriate Notification Channels" as SFR008
+    usecase "SFR20: Manage User Feedback to Continuously Improve the Quality and Relevance of Financial Insights" as SFR20
+    
+    CFR11 --> (SFR008)
+  }
+}
+
+@enduml

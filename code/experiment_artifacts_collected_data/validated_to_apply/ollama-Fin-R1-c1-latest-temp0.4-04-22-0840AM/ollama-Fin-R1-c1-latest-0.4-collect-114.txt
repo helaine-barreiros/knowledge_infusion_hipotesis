@@ -1,0 +1,74 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sas
+actor FinancialAdvisor as faa
+system "System" as sys
+
+rectangle Professional {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+}
+
+rectangle ClientManagement {
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations" as CFR004
+}
+
+rectangle ClientPreferences {
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+}
+
+rectangle BudgetManagement {
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+}
+
+rectangle InvestmentAnalysis {
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Consolidated Financial Dashboard" as CFR009
+}
+
+rectangle RelationshipManagement {
+  usecase "CFR10: Manage Relationships with Advisors" as CFR10
+}
+
+usecase "SFR001: Deliver Alerts Through Notification Channels" as SFR001
+usecase "SFR002: Personalized Recommendations Based on Profiles" as SFR002
+usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+
+sas --> SAFR001 : Configure parameters
+
+c1 --> CFR001, CFR002, CFR003, CFR004, CFR005, CFR006, CFR007, CFR008, CFR009, CFR10
+faa --> CFR007, CFR008, CFR009
+
+sys --> SFR002 : Request recommendations
+sys --> AIFR003 : Generate spending limit alerts
+sys --> SAFR001 : Manage parameters (for SysAdmin)
+sas --> sys : System operations management
+
+@enduml
+```
+
+### Explanation:
+- **Professional**: Contains use cases related to system administration and client preferences.
+- **ClientManagement**: Includes use cases for clients regarding financial insights, predictions, recommendations, etc.
+- **BudgetManagement**, **InvestmentAnalysis**, **RelationshipManagement** are grouped under Client-related activities but split by function (spending limits vs. investment opportunities).
+- Each actor is linked to their respective use cases as per the requirements.
+
+### Key Relationships:
+1. **Client**: Interacts with most of the system's features like dashboards, alerts, predictions.
+2. **SysAdmin** focuses on managing analysis parameters via `SAFR001`.
+3. **FinancialAdvisor** handles investment-related activities (`CFR007`, `CFR008`).
+4. The System itself requests components from AI and other services (e.g., delivering alerts, generating recommendations).
+
+This structure ensures all requirements are represented accurately with proper categorization and relationships between actors and use cases. Adjustments can be made based on further analysis of the system's interactions if needed.
+
+[Done: True
+Done Reason: stop
+Eval Count: 741]

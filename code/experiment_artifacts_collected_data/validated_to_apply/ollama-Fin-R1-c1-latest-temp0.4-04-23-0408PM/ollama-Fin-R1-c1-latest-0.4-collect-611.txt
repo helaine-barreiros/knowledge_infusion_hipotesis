@@ -1,0 +1,68 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  CFR001 --> UserClient : "View Financial Insights Dashboard"
+  
+  SAFR001 <|-- SysAdmin : "Manage Analysis Parameters"
+
+  FAFR003 <|-- FAFA004 : "View Predictive Analytics for Clients"
+  FAFR003 <-- ClientUser : "Receive Personalized Recommendations"
+  
+  SFR012 --> UserClient : "Generate Client Dashboards"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Mentorship Sessions" as FAFR001
+  usecase "FAFR004: View Intervention Alerts for Clients" as FAFR004
+
+  FAFR001 --> UserClient : "Manage Client Mentoring"
+  
+  SysAdmin -> SAFR001 : "Configure Analysis Parameters"
+
+  FAFR004 <|-- FAFA003 : "View Client Intervention Alerts"
+}
+
+rectangle "System" {
+  usecase "SFR008: Request Investment Opportunity Analysis" as SFR008
+  usecase "AIFR005: Generate Investment Opportunities Based on Risk Profiles" as AIFR005
+
+  SysAdmin --> SAFR001 : "Manage System Parameters"
+
+  SFR008 --> AIFR005 : "Request Investment Opportunity Analysis"
+}
+
+rectangle "Client User" {
+  usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR011: Send Feedback on Recommendations" as CFR011
+
+  SysAdmin --> SAFR001 : "Manage System Parameters"
+
+  CFR002 <|-- UserClient : "View Alerts"
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Actors**: The system includes multiple components like the Financial Insights Dashboard (CFR001), Analysis Parameter Management (SAFR001), Predictive Analytics for Clients (FAFR003 & FAFR004), Client Dashboards (SFR012). These are grouped under a "System" rectangle.
+- **Financial Advisor Actors**: Includes managing mentorship sessions and viewing client intervention alerts. They also interact with the system to configure parameters via SAFR001.
+- **Client User Actor**: Interacts directly with the Financial Insights Dashboard, receives recommendations, views investment opportunities, and sends feedback (CFR011).
+- **Relationships**:
+  - `UserClient` is connected to dashboard generation (`SFR012`), anomaly alerts (`CFR002`), and personalized recommendations.
+  - `SysAdmin` manages system parameters like analysis settings via SAFR001, which also ties into FAFR004 for intervention alerts.
+- **Use Case Grouping**: Logical grouping by actor (e.g., Financial Advisor vs. Client) ensures clarity in the diagram.
+
+This structure adheres to all provided requirements and maintains readability through proper indentation and categorization. Adjustments may be needed based on further analysis, but this captures key interactions as per the given functional specs.
+
+[Done: True
+Done Reason: stop
+Eval Count: 773]

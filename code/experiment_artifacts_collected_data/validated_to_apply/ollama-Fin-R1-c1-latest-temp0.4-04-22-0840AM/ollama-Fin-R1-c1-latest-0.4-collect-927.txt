@@ -1,0 +1,96 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+
+  client --> CFR001 : "View Financial Dashboard"
+  
+  SysAdmin -> SAFR001 : "Manage Analysis Parameters"
+
+  user --|> FAFR002 : "Receive Alerts for Anomalous Transactions"
+  user --|> FAFR003 : "Review Predictive Analytics"
+}
+
+rectangle "Client" {
+  actor Client as client
+}
+actor SysAdmin as sysadmin
+
+package Professional {
+  package FinancialAdvisor {
+    usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+    usecase "FAFR004: Configure Analysis Parameters for Segments" as FAFR004
+    user --|> FAFR001 : "Schedule/Moderate Meetings"
+  }
+  
+  package SystemAdministrator {
+    usecase "SAFR002: Manage AI Component Settings" as SAFR002
+    SysAdmin -> SAFR002 : "Adjust System Configurations"
+
+    user --|> FAFR004 : "Set Client-Specific Parameters"
+  }
+}
+
+package FinancialSystem {
+  package CoreAI {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Investment Opportunity Analysis" as AIFR004
+    usecase "AIFR005: Align with Modern Portfolio Theory" as AIFR005
+  }
+  
+  package Notification {
+    usecase "SFR013: Generate Client Alerts" as SFR013
+    user --|> SFR013 : "Receive Notifications"
+    
+    usecase "SFR014: Provide Financial Analytics" as SFR014
+
+    usecase "AIFR006: Anomaly Transaction Detection" as AIFR006
+  }
+  
+  package News {
+    usecase "SFR009: Contextualized News for Portfolios" as SFR009
+    user --|> SFR009 : "Stay Informed"
+    
+    usecase "AIFR007: Extract Portfolio-Relevant News" as AIFR007
+
+    usecase "SFR012: Generate Client Dashboards" as SFR012
+  }
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The main system is represented within a rectangle labeled "System," containing all relevant use cases and actors.
+- **Actors**:
+  - `Client`: Represents the end-user (financial clients).
+  - `SysAdmin` (System Administrator): Manages administrative tasks like parameters.
+  - Sub-packages (`FinancialAdvisor`, `SystemAdministrator`) group related functionalities under their respective roles.
+  
+- **Use Cases**:
+  - Client-related use cases include viewing dashboards, receiving alerts, and managing recommendations.
+  - SysAdmin uses case for parameter management.
+  - Financial Advisor-specific actions (e.g., mentoring sessions).
+  - AI-generated predictions, recommendations, etc.
+
+- **Relationships**: Arrows denote interactions. For example, a client can view the financial dashboard (`CFR001`), while a system administrator manages analysis parameters (`SAFR001`). 
+
+### Key Observations:
+- The diagram groups use cases logically by role (client, sysadmin, advisor) and their associated functionalities.
+- Inheritance or extension relationships are not explicitly shown here but could be inferred from the context. For example, `FAFR004` extends parameter management for segments under advisors.
+
+This structure ensures clarity in representing all functional requirements with precise IDs and names as per the provided list. Adjustments can be made based on further analysis of dependencies or additional details.
+
+[Done: True
+Done Reason: stop
+Eval Count: 981]

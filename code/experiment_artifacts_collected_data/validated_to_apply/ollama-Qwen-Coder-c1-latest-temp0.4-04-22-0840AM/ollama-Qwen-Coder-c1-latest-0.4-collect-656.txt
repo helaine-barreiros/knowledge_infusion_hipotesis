@@ -1,0 +1,82 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as FAFR004
+
+  FinancialAdvisor --> (FAFR003)
+  FinancialAdvisor --> (FAFR004)
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR001
+}
+
+rectangle "AI Component" {
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Identify Financial Instruments Based on Modern Portfolio Theory Principles" as AIFR005
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+  usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+
+  SAFR001 --> (SAFR002)
+  SAFR001 --> (SAFR003)
+
+  CFR001 --> (SFR007)
+  FAFR002 --> (AIFR006) : "FAFR008"
+}
+
+rectangle "System" {
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+
+  SAFR001 --> (SAFR002)
+  SAFR001 --> (SAFR004)
+
+  CFR001 --> (AIFR005) : "SFR006"
+}
+
+rectangle "User Interface" {
+  usecase "CFR011: Send Feedback About Recommendations and Insights" as CFR011
+
+  SAFR001 --> (SAFR002)
+  SAFR001 --> (SAFR003)
+
+  CFR001 --> (AIFR005) : "SFR006"
+}
+
+CFR001 --> SFR007
+FAFR002 --> AIFR008
+
+rectangle "System" {
+    usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR009
+    usecase "SFR10: Process Contextualized News to Extract Relevant Information for Users' Financial Situations" as SFR10
+
+    SAFR001 --> (SAFR002)
+    SAFR001 --> (SAFR004)
+
+    CFR001 --> (AIFR005) : "SFR006"
+}
+
+CFR001 --> SFR009
+FAFR002 --> AIFR008
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 782]

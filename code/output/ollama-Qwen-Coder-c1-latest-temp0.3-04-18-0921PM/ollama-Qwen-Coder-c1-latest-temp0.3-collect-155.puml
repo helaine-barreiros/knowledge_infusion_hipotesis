@@ -1,0 +1,65 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Analysis Parameters" as SAFR002
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  
+  Client --> CFR001
+  SysAdmin --> SAFR002
+  FAFD --> FAFR004
+  System --> (SFR003)
+}
+
+rectangle "Client Dashboard Features" {
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  
+  Client --> CFR009
+}
+
+rectangle "Alerts and Notifications" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR002
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  
+  Client --> (SAFR001)
+  System --> (SFR005)
+}
+
+rectangle "Investment Opportunities and Recommendations" {
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+  usecase "FAFR003: View Predictive Analytics About Client Financial Situations" as FAFR003
+  
+  Client --> (CFR007)
+}
+
+rectangle "Client Mentoring and Guidance" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "SFR026: Request Predictive Intervention Analyses from AI Component" as SFR026
+  
+  Financial Advisor --> (FAFR001)
+}
+
+rectangle "Financial Health and Recommendations Management" {
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as CFR004
+  usecase "SFR018: Manage Users' Financial Goals to Track Progress and Provide Relevant Recommendations" as SFR018
+  
+  Client --> (CFR004)
+}
+
+rectangle "Feedback Management" {
+  usecase "CFR11: Send Feedback About the System's Recommendations and Insights" as CFR11
+  
+  User -> (CFR11)
+}
+@enduml

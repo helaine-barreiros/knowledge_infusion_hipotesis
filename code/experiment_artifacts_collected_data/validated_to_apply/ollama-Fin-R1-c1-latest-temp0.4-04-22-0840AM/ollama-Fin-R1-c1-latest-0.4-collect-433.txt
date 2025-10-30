@@ -1,0 +1,171 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR001: Monitor Spending Limits" as SAFR001
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Consolidated Financial Dashboard" as CFR012
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+
+  actor Client as c
+  client -> (c) : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001
+  SysAdmin --> SAFR003
+  
+  rectangle Professional {
+    package SystemManagement { 
+      usecase "SAFR002: Manage Alert Preferences" as SAFR002
+      client -> (c) : "Manage Relationship with Advisors"
+      
+      actor SysAdmin as s
+      s -->> c : "Configure Alerts, Recommendations, and Dashboards"
+
+      rectangle FinancialAdvisor {
+        package ClientServices { 
+          usecase "FAFR001: Manage Mentoring Sessions" as FAFR001
+          usecase "FAFR002: View Intervention Alerts" as FAFR002
+          usecase "FAFR003: Review Predictive Analytics" as FAFR003
+        }
+        
+        package ParameterManagement { 
+          usecase "SAFR004: Configure Analysis Parameters by Client Segment" as SAFR004  
+        }
+
+        actor FinancialAdvisor as fa
+      }
+    }  
+  }
+
+  rectangle System {
+    usecase "SFR012: Generate Personalized Dashboards" as SFR012
+    usecase "SFR013: Send Alerts Based on Predefined Conditions" as SFR013
+    usecase "AIFR009: Generate Client Predictive Interventions" as AIFR009
+
+    client --> (c) : "View Financial Insights Dashboard"
+    
+    SysAdmin -->> c : "Manage System Settings, Alerts, and Recommendations"
+
+    rectangle AI {
+      package Prediction { 
+        usecase "AIFR001: Generate Financial Predictions" as AIFR001
+        usecase "AIFR002: Personalized Recommendation Engine" as AIFR002  
+        usecase "AIFR003: Spending Limit Alerts" as AIFR003 
+      }
+    }
+
+  }  
+
+}
+
+@enduml
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002  
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004 
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR001: Monitor Spending Limits" as SAFR001  
+  usecase "CFR007: View Investment Opportunities" as CFR007  
+  usecase "CFR008: Access Consolidated Financial Dashboard" as CFR012 
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+
+  actor Client as c
+  client -> (c) : "View Financial Insights Dashboard"
+
+  SysAdmin --> SAFR001  
+  SysAdmin --> SAFR003  
+
+  rectangle Professional {
+    package SystemManagement { 
+      usecase "SAFR002: Manage Alert Preferences" as SAFR002  
+      client -> (c) : "Manage Relationship with Advisors"
+      
+      actor SysAdmin as s
+      s -->> c : "Configure Alerts, Recommendations, and Dashboards"
+
+      rectangle FinancialAdvisor {
+        package ClientServices { 
+          usecase "FAFR001: Manage Mentoring Sessions" as FAFR001  
+          usecase "FAFR002: View Intervention Alerts" as FAFR002
+          usecase "FAFR003: Review Predictive Analytics" as FAFR003  
+
+        }
+        
+        package ParameterManagement { 
+          usecase "SAFR004: Configure Analysis Parameters by Client Segment" as SAFR004  
+        }
+
+        actor FinancialAdvisor as fa
+      }  
+    }  
+  }  
+
+  rectangle System {
+    usecase "SFR012: Generate Personalized Dashboards" as SFR012  
+    usecase "SFR013: Send Alerts Based on Predefined Conditions" as SFR013  
+    usecase "AIFR009: Generate Client Predictive Interventions" as AIFR009  
+
+    client --> (c) : "View Financial Insights Dashboard"
+
+    SysAdmin -->> c : "Manage System Settings, Alerts, and Recommendations"
+
+    rectangle AI {
+      package Prediction { 
+        usecase "AIFR001: Generate Financial Predictions" as AIFR001  
+        usecase "AIFR002: Personalized Recommendation Engine" as AIFR002
+        usecase "AIFR003: Spending Limit Alerts" as AIFR003  
+
+      }
+    }  
+  }  
+}
+
+@enduml
+```
+
+### Explanation:
+1. **System Boundary**: The entire diagram is enclosed within a system boundary to represent the AI-Powered Analysis & Insights System.
+2. **Actors**:
+   - `Client`: Represents end-users (e.g., clients, financial advisors).
+   - `SysAdmin`: System Administrator for managing settings and alerts.
+3. **Use Cases**:
+   - **CFR001**: View Financial Insights Dashboard.
+   - **SAFR002**: Manage Alert Preferences.
+   - **CFR003**: View Financial Predictions.
+   - **CFR004**: Receive Personalized Recommendations.
+   - **CFR005**: Manage Recommendation Preferences.
+   - **SAFR001**: Monitor Spending Limits.
+   - **CFR007**: View Investment Opportunities.
+   - **CFR008**: Access Consolidated Financial Dashboard.
+   - **CFR010**: Manage Relationship with Advisors.
+
+4. **Grouping**:
+   - The system is divided into `Professional` (for financial advisors and administrators) and `System Management` packages within the Professional group.
+   - The AI component includes prediction-related use cases like generating recommendations, spending limit alerts, etc.
+
+5. **Inheritance/Delegation**:
+   - Financial Advisors can access client services (`ClientServices`) through their role in the system management package.
+
+This structure ensures clarity and adherence to functional requirements while maintaining readability. Adjustments may be needed based on further analysis or specific interactions not captured here. 
+
+### Key Notes:
+- Ensure all use case IDs match exactly as per the provided list.
+- Verify relationships between actors, use cases, and system components for accuracy.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1658]

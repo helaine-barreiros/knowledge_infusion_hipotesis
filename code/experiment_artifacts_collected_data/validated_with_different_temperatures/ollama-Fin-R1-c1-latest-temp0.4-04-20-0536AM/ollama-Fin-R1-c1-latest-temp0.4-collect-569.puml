@@ -1,0 +1,68 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Alerts (Client)" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences (KYC)" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities by Risk Profile" as CFR007
+  usecase "CFR008: View Portfolio-Related News" as CFR008
+  usecase "CFR009: Manage Personalized Dashboard (Client)" as CFR010
+  usecase "SAFR003: Share Financial Data with Advisors" as SAFR004
+
+  // System Admin Use Cases
+  usecase "SAFR001: Manage Analysis Parameters for AI" as SAFR001
+  
+  // Financial Advisor Use Cases
+  usecase "FAFR001: Schedule Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Intervention Alerts (Client)" as FAFR002
+  usecase "FAFR003: Analyze Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+
+  // System Functionalities (SFR)
+  usecase "SFR012: Generate Client Dashboards" as SFR012  
+  usecase "SFR013: Deliver Alerts Based on Predefined Rules" as SFR013
+  usecase "SFR014: Provide Financial Analytics" as SFR014
+
+  // AI System (AIFR)
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002  
+  usecase "AIFR003: Send Spending Limit Alerts Based on User Behavior" as AIFR003
+  usecase "AIFR004: Identify Investment Opportunities Aligning with Risk Profiles" as AIFR004
+
+}
+
+actor Client as C1, C2  
+actor SystemAdmin as SA  
+actor FinancialAdvisor as FA  
+
+// Relationships between Actors and Use Cases
+C1 --> CFR001 : "View Financial Insights Dashboard"
+SA --> SAFR001 : "Manage Analysis Parameters for AI" 
+FA --> FAFR003 : "Analyze Predictive Analytics for Clients"
+
+// Client-Specific Interactions  
+Client -> (CFR002) : "Receive Alerts on Anomalous Transactions"  
+Client -> CFR004 : "View Personalized Recommendations"
+Client -> SAFR002: "Manage User Alerts (Client)" 
+Client -> CFR005: "Adjust Recommendation Preferences (KYC)"
+Client -> CFR006: "Monitor Spending Limits"
+Client -> CFR007: "Explore Investment Opportunities by Risk Profile"  
+Client -> CFR008: "Read Portfolio-Related News"
+Client -> CFR010: "Manage Personalized Dashboard"
+
+// Financial Advisor Interactions
+FinancialAdvisor --> FAFR001 : "Schedule Mentoring Sessions Based on Insights" 
+FinancialAdvisor --> FAFR002 : "View Intervention Alerts (Client)"  
+FA --> AIFR004 : "Request Investment Opportunity Analysis"
+FA --> SFR013: "Receive System-Generated Alerts"
+
+// System Admin Interactions
+SystemAdmin --> SAFR004: "Configure Client-Specific Parameters"  
+
+@enduml

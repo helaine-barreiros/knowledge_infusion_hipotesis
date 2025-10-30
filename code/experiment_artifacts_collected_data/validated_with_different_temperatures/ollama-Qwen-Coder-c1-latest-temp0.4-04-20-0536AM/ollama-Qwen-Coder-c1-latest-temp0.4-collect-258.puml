@@ -1,0 +1,89 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  FinancialAdvisor --> (FAFR002)
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR001
+  
+  usecase "SAFR001: Manage Analysis Parameters for the AI System" as SAFR001
+  usecase "SFR019: Maintain a Historical Record of Users' Insights to Enable Trend Analysis and Effectiveness Measurement" as SFR019
+  
+  SystemAdministrator --> (SAFR001)
+}
+
+package "System Components" {
+  rectangle "Notification Channel Manager" {
+    usecase "SFR001: Deliver Alerts to Users Through Appropriate Notification Channels" as SFR001
+    usecase "AIFR006: Generate Anomaly Transaction Alerts by Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance with FinCEN Requirements" as AIFR006
+    
+    (SFR001) --> (AIFR006)
+  }
+  
+  rectangle "Recommendation Engine" {
+    usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR002
+    usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance As Defined by Industry Standards Like FINRA Guidelines" as AIFR002
+    
+    (SFR002) --> (AIFR002)
+  }
+  
+  rectangle "Prediction Engine" {
+    usecase "SFR003: Request Financial Predictions from the AI Component to Provide Users with Forward-Looking Financial Insights" as SFR003
+    usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+    
+    (SFR003) --> (AIFR001)
+  }
+  
+  rectangle "Spending Limit Manager" {
+    usecase "SFR005: Request Spending Limit Alerts from the AI Component When User Spending Patterns Exceed Defined Thresholds" as SFR005
+    usecase "AIFR003: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations From Established Spending Patterns" as AIFR003
+    
+    (SFR005) --> (AIFR003)
+  }
+  
+  rectangle "Investment Opportunity Analyzer" {
+    usecase "SFR006: Request Investment Opportunity Analysis from the AI Component to Identify Suitable Investments for Users Based on Their Risk Profiles" as SFR006
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users by Evaluating Potential Investments Against Their Risk Profiles, Time Horizons, and Financial Goals" as AIFR004
+    
+    (SFR006) --> (AIFR004)
+  }
+  
+  rectangle "ESG Analysis Engine" {
+    usecase "SFR017: Generate Client Dashboards That Present Financial Information in an Intuitive and Actionable Format" as SFR012
+    usecase "SFR018: Manage Users' Financial Goals to Track Progress and Provide Relevant Recommendations" as SFR018
+    
+    (SFR012) --> (AIFR005)
+  }
+  
+  rectangle "News Processing Engine" {
+    usecase "SFR007: Request Contextualized News from Trusted Financial News Sources" as SFR007
+    usecase "SFR016: Generate Client Predictive Insights That Provide Forward-Looking Analysis of Financial Situations to Support More Effective Financial Planning" as SFR019
+    
+    (SFR007) --> (AIFR007)
+  }
+}
+
+CFR001 --> ("View Financial Insights Dashboard") : "CFR001"
+CFR002 --> ("Receive Alerts About Anomalous Transactions in My Accounts") : "CFR002"
+CFR003 --> ("View Financial Predictions Based on My Historical Data and Current Market Trends") : "CFR003"
+CFR004 --> ("Receive Personalized Recommendations Aligned with My Financial Profile and Goals") : "CFR004"
+CFR005 --> ("Manage Personalized Recommendations Preferences to Ensure the System Provides Insights Relevant to My Financial Objectives and Risk Tolerance as Defined in My KYC (Know Your Customer) Profile") : "CFR005"
+CFR006 --> ("View Spending Limit Alerts When I Exceed Predefined Thresholds in Specific Expense Categories to Maintain Better Control Over My Budget") : "CFR006"
+FAFR001 --> ("Manage Client Mentoring Sessions Based on System-Generated Insights to Provide More Valuable Guidance Aligned with Each Client's Financial Goals") : "FAFR001"
+FAFR002 --> ("View Client Intervention Alerts When the System Detects Patterns Requiring Professional Attention to Proactively Assist Clients With Potential Financial Issues") : "FAFR002"
+CFR011 --> ("Send Feedback About the System's Recommendations and Insights to Help Improve the Accuracy and Relevance of Future Outputs") : "AIFR009"
+
+@enduml

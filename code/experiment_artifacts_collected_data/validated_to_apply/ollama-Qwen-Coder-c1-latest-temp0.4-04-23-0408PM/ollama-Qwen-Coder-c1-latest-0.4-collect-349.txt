@@ -1,0 +1,146 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Clients" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Anomaly Transaction Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  C --> CFR001
+  C --> CFR002
+  C --> CFR003
+  C --> CFR004
+  C --> CFR005
+  C --> CFR006
+  C --> CFR007
+  C --> CFR008
+  C --> CFR009
+  C --> CFR10
+}
+
+package "Financial Advisors" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  FA --> FAFR001
+  FA --> FAFR002
+  FA --> FAFR003
+  FA --> FAFR004
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SA
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SA --> SAFR001
+}
+
+rectangle "System Components" {
+  package "Alerts and Notifications" {
+    usecase "SFR001: Deliver Alerts to Users" as SFR001
+    
+    C --> SFR001
+    FA --> SFR001
+    SA --> SFR001
+  }
+  
+  package "Recommendations" {
+    usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+    
+    C --> SFR002
+    FA --> SFR002
+    SA --> SFR002
+  }
+
+  package "Predictive Analytics" {
+    usecase "SFR003: Request Financial Predictions from AI" as SFR003
+    usecase "SFR016: Request Predictive Insights from AI" as SFR016
+    
+    C --> SFR003
+    FA --> SFR003
+    SA --> SFR003
+
+    C --> SFR016
+    FA --> SFR016
+    SA --> SFR016
+  }
+
+  package "Spending Limits" {
+    usecase "SFR005: Request Spending Limit Alerts from AI" as SFR005
+    
+    C --> SFR005
+  }
+  
+  package "Investment Opportunities" {
+    usecase "SFR006: Request Investment Opportunity Analysis from AI" as SFR006
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+    
+    C --> SFR006
+    FA --> SFR006
+
+    C --> SFR013
+  }
+
+  package "News and Insights" {
+    usecase "SFR007: Request Contextualized News from AI" as SFR007
+    usecase "SFR008: Find Relevant News for Users' Portfolios" as SFR008
+    
+    C --> SFR007
+    FA --> SFR007
+
+    C --> SFR008
+  }
+
+  package "Health Reports and Goals" {
+    usecase "SFR17: Generate Financial Health Reports" as SFR17
+    usecase "SFR18: Manage Users' Financial Goals" as SFR18
+    
+    C --> SFR17
+    FA --> SFR17
+
+    C --> SFR18
+  }
+
+  package "AI System Functions" {
+    usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+    
+    C --> AIFR001
+    FA --> AIFR001
+
+    C --> AIFR002
+    FA --> AIFR002
+
+    C --> AIFR003
+  }
+}
+
+package "Feedback" {
+  usecase "CFR11: Send Feedback about System Recommendations and Insights" as CFR11
+  
+  C --> CFR11
+  FA --> CFR11
+  SA --> CFR11
+}
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 1240]

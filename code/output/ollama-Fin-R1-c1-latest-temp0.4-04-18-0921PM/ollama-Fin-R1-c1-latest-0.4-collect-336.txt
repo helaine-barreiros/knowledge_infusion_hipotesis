@@ -1,0 +1,100 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Permissions and Data Sharing" as SAFR002
+  
+  Client --> CFR001 : "View"
+  
+  SysAdmin -> (System) : "Manage System Parameters, Notifications, etc."
+}
+
+rectangle "Client" {
+  actor "User" as U
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Personalized Dashboard" as CFR008
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+  
+  U --> (System) : "Request Financial Predictions, Recommendations, Alerts, etc."
+}
+
+rectangle "Financial Advisor" {
+  actor "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "CFR009: View News Related to Portfolio" as CFR009
+  
+  FAFR001 --> (System) : "Request Contextualized News, Predictive Analytics"
+}
+
+rectangle "SysAdmin" {
+  actor "User" as SysU
+  usecase "SAFR003: Configure System-Wide Settings" as SAFR003
+  usecase "SAFR004: Manage Analysis Parameters for Specific Segments" as SAFR004
+  
+  SysU --> (System) : "Manage User Accounts, Permissions"
+}
+
+rectangle "AI Component" {
+  actor "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "CFR002: Anomaly Transaction Alerts" as CFR002
+  usecase "SAFR005: Spending Limit Alerts" as SAFR005
+  usecase "AIFR006: Investment Opportunity Analysis" as AIFR006
+  usecase "CFR011: Send Feedback to System" as CFR011
+  
+  SysU --> (System) : "Configure AI Parameters"
+}
+
+rectangle "Notification Component" {
+  actor "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SAFR006: Generate Client Alerts" as SAFR006
+  usecase "CFR013: Manage Historical Records of Insights" as CFR013
+  
+  SysU --> (System) : "Set Notification Preferences"
+}
+
+rectangle "Contextualized News Component" {
+  actor "SFR009: Extract Relevant News" as SFR009
+  usecase "CFR008: View Portfolio-Related News" as CFR008
+  
+  SysU --> (System) : "Request Contextualized News"
+}
+
+rectangle "Client Dashboard Component" {
+  actor "SFR12: Generate Dashboards" as SFR12
+  usecase "CFR009: Access Client-Directed Insights" as CFR009
+
+  U --> (System) : "View Consolidated Financial Data"
+}
+@enduml
+```
+
+### Explanation:
+- **Client**: Represents the end-users, including clients and financial advisors. They interact with various system components to view data, receive recommendations, etc.
+- **SysAdmin**: Manages administrative tasks such as user permissions, system settings, and analysis parameters for specific segments or all users.
+- **AI Component**: Handles AI-driven functionalities like generating predictions, alerts (e.g., spending limit), investment opportunities, anomaly detection, contextualized news, etc.
+- **Notification Component**: Delivers personalized recommendations to clients via appropriate channels.
+- **Contextualized News Component**: Fetches and correlates financial news relevant to user portfolios.
+- **Client Dashboard Component**: Generates consolidated dashboards for users.
+
+### Key Relationships:
+1. **User (Client)**: Can view multiple use cases like financial insights, predictions, alerts, etc., all directed through the system.
+2. **SysAdmin**: Configures systems-wide settings and manages analysis parameters via AI components.
+3. **AI Component**: Processes user requests to generate specific outputs (e.g., predictions, recommendations).
+4. **Notification Component**: Delivers personalized content based on user preferences or system-generated insights.
+
+This structure ensures clarity in the interactions between actors and use cases while adhering strictly to provided functional requirements. Each actor is linked appropriately with their respective use cases through directed relationships. The system boundary encompasses all components, ensuring logical grouping and readability. 
+
+### Note:
+- Inheritance was not explicitly required here as per the given requirements; each relationship was direct.
+- Components like "Client" could be further refined if more detailed interactions were needed beyond what's provided in the functional descriptions. However, based on the scope of this exercise, these groupings are sufficient.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1130]

@@ -1,0 +1,76 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as CFR007
+  usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+}
+
+actor Client as C {
+  --> CFR001 : "View Financial Insights Dashboard"
+  --> SFR013 : "Receive Alerts Based on Predefined Conditions (e.g., spending limits)"
+  --> FAFR002 : "View Anomaly Transaction Alerts for Fraud Detection"
+  --> CFR007 : "Access Investment Opportunities Matching Risk Profile"
+}
+
+actor System Administrator as SA {
+  --> SAFR001 : "Manage Analysis Parameters for AI Algorithms"
+}
+
+actor Financial Advisor as FA {
+  --> FAFR003: View Predictive Analytics About Clients' Situations
+  --> FAFR004: Configure Analysis Parameters for Client Segments
+  --> AIFR008: Generate Intervention Recommendations Based on Patterns
+}
+
+system SFR012: "Generate Client Dashboards" {
+  usecase "SFR013: Generate Client Alerts"
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile"
+
+  C -> SFR013 : "Request alerts based on conditions (e.g., spending limits)"
+}
+
+system AIFR004: "AI System - Investment Opportunity Analysis" {
+  usecase "AIFR005: Generate Investment Opportunities Based on Strategies"
+  
+  FA --> AIFR004 : "Configure analysis parameters for client segments"
+  C -> AIFR004 : "Request investment opportunity analyses based on risk profile"
+}
+
+system AIFR008: "AI System - Intervention Recommendations" {
+  usecase "AIFR009: Generate Predictive Intervention Recs"
+
+  FA --> AIFR008 : "Identify patterns requiring advisor attention"
+}
+
+@enduml
+```
+
+### Explanation:
+1. **System Boundary**: The entire diagram is enclosed within a system boundary labeled "AI-Powered Analysis & Insights System" to represent all components and interactions.
+2. **Actors**:
+   - **Client (C)**: Represents end-users, including clients, financial advisors, or system administrators who interact with the system through various use cases.
+   - **System Administrator (SA)**: Manages analysis parameters for AI algorithms via `SAFR001`.
+   - **Financial Advisor (FA)**: Views predictive analytics and configures client-specific settings using `FAFR003` and `FAFR004`, and receives intervention recommendations from the system.
+3. **Use Cases**:
+   - Client-related use cases like viewing financial dashboards (`CFR001`), receiving alerts (`SAFR002`, `SFR013`), investment opportunities (`CFR007`), etc., are linked to their respective actors.
+   - System Administrator manages analysis parameters via `SAFR001`.
+   - Financial Advisor uses predictive tools, configures settings for clients, and receives alerts/interventions through AI components like `AIFR008`, which generates intervention recommendations based on patterns detected in client data.
+4. **System Components**:
+   - The system includes sub-systems such as "Client Dashboards" (`SFR012`), "AI Investment Opportunity Analysis" (`AIFR004`), and "Intervention Recommendations" (`AIFR008`). These components handle specific functionalities like generating alerts, analyzing investments, or recommending actions.
+5. **Relationships**:
+   - Arrows indicate direct interactions between actors and use cases (e.g., `Client -> SFR013: Generate Client Alerts`).
+   - Inheritance relationships are represented using `<|--`, though in this context, the main focus is on explicit actor-use case links rather than hierarchical inheritance.
+
+This diagram ensures all functional requirements are mapped accurately to their corresponding actors and use cases while maintaining clarity through proper grouping and labeling. Adjustments can be made based on further analysis or additional details from the requirements list.
+
+[Done: True
+Done Reason: stop
+Eval Count: 980]

@@ -1,0 +1,74 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+
+  FinancialAdvisor --> (FAFR001)
+  FinancialAdvisor --> (FAFR002)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR005
+}
+
+package "Financial Insights Dashboard" {
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  CFR001 --> (CFR009)
+  FinancialAdvisor --> (FAFR003)
+  SystemAdmin --> (SAFR005)
+}
+
+package "Alerts and Notifications" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  
+  CFR002 --> (CFR008)
+  FinancialAdvisor --> (FAFR003)
+  SystemAdmin --> (SAFR005)
+}
+
+package "Personalized Recommendations and Predictions" {
+  usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  
+  CFR003 --> (CFR006)
+  FinancialAdvisor --> (FAFR005)
+  SystemAdmin --> (SAFR007)
+}
+
+package "Investment Opportunities and News" {
+  usecase "SFR008: Request Contextualized News Insights from AI Component" as SFR008
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  
+  CFR004 --> (CFR012)
+  FinancialAdvisor --> (FAFR003)
+  SystemAdmin --> (SAFR005)
+}
+
+package "Spending Limits and Anomaly Detection" {
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  usecase "AIFR003: Generate Spreading Limit Alerts" as AIFR003
+  
+  CFR010 --> (CFR012)
+  FinancialAdvisor --> (FAFR007)
+  SystemAdmin --> (SAFR009)
+}
+
+package "Client Feedback and Management" {
+  usecase "SFR018: Manage Users' Financial Goals to Track Progress" as SFR018
+  usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance" as AIFR002
+  
+  CFR011 --> (SFR018)
+}
+
+@enduml

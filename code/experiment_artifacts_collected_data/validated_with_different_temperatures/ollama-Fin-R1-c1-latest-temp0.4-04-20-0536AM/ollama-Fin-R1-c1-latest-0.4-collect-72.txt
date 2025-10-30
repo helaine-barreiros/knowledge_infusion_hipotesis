@@ -1,0 +1,149 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor SysAdmin as sysadmin
+actor FinancialAdvisor as financialadvisor
+system "System" as system
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as cfr001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as cfr002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as cfr003
+  usecase "CFR004: Access Personalized Recommendations Aligned with Financial Profile" as cfr004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as cfr005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds in Expense Categories" as cfr006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile (MiFID II)" as cfr007
+  usecase "CFR008: Receive News Related to My Portfolio" as cfr008
+  usecase "CFR009: View Consolidated Financial Information in a Personalized Dashboard" as cfr009
+  usecase "CFR10: Manage Relationship with Financial Advisors Including Data Sharing Permissions" as cfr10
+
+  client --> cfr001 : "View"
+  client --> cfr002 : "Receive Alerts for Anomalous Transactions (FATF)"
+  client --> cfr003 : "View Predictions Based on Historical and Market Trends"
+  client --> cfr004 : "Access Personalized Recommendations Aligning with Financial Profile"
+  client --> cfr005 : "Manage Preferences for Recs"
+  client --> cfr006 : "View Spending Limit Alerts (Budget Control)"
+  client --> cfr007 : "View Investment Opportunities Based on Risk Profile (MiFID II)"
+  client --> cfr008 : "Receive News Related to Portfolio"
+  client --> cfr009 : "Consolidated View of Financial Info in Personalized Dashboard"
+  client --> cfr10 : "Manage Relationship with Advisors, Share Data"
+
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System Compliance (Basel III)" as safr001
+  sysadmin --> safr001 : "Manage"
+  
+}
+system <|-- cfr001
+system <|-- cfr002
+system <|-- cfr003
+system <|-- cfr004
+system <|-- cfr005
+system <|-- cfr006
+system <|-- cfr007
+system <|-- cfr008
+system <|-- cfr009
+system <|-- cfr10
+
+sysadmin --> safr001 : "Manage"
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights (KYC)" as fafrr001
+  usecase "FAFR002: View Intervention Alerts for Clients in Need of Professional Attention" as fafr002
+  usecase "FAFR003: View Predictive Analytics About Client Financial Situations to Guide Consultations" as fafr003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment (GDPR/CCPA)" as fafrr004
+
+  financialadvisor --> fafr001 : "Manage"
+  financialadvisor --> fafr002 : "View Alerts for Intervention"
+  financialadvisor --> fafr003 : "View Predictive Analytics"
+  financialadvisor --> fafr004 : "Configure Parameters by Segment"
+
+}
+
+system <|-- fafrr001
+system <|-- fafr002
+system <|-- fafr003
+system <|-- fafrr004
+
+rectangle "System Components" {
+  usecase "SFR001: Deliver Alerts Through Notification Channels (AML)" as sfr001
+  usecase "SFR002: Generate Personalized Recommendations Based on Financial Profiles" as sfr002
+  usecase "SFR003: Request Predictive Analytics from AI Component for Financial Insights" as sfr003
+  usecase "SFR004: Request Personalized Recs From AI" as sfr004
+  usecase "SFR005: Request Spending Limit Alerts (Budget Management)" as sfr005
+  usecase "SFR006: Request Investment Opportunity Analysis Based on Risk Profile" as sfr006
+  usecase "SFR007: Find Specific Investment Opportunities Matching User Criteria and ESG Preferences" as sfr007
+  usecase "SFR008: Request Anomaly Transaction Alerts (AML)" as sfr008
+  usecase "SFR009: Extract Contextualized News for Users' Portfolios from Trusted Sources" as sfr009
+  usecase "SFR010: Process Contextualized News to Identify Relevant Info for Financial Situations" as sfr010
+  usecase "SFR011: Request Insights From AI Component on Portfolio Impacts of News" as sfr011
+  usecase "SFR012: Generate Client Dashboards (UI/UX)" as sfr012
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions for Timely Notifications" as sfr013
+  usecase "SFR014: Generate Financial Health Reports Using Standard Metrics" as sfr014
+  usecase "SFR015: Request Predictive Intervention Analyses to Identify When Advisors Should Engage Clients (Regulatory Compliance)" as sfr015
+  usecase "SFR016: Enhance Value of Financial Guidance via AI-Generated Insights" as sfr016
+  usecase "SFR017: Generate Financial Health Reports Based on Ratios and Metrics for Users" as sfr017
+  usecase "SFR018: Manage User's Financial Goals to Track Progress (Goal Setting)" as sfr018
+  usecase "SFR019: Maintain Historical Record of Insights for Trend Analysis" as sfr019
+  usecase "SFR020: Collect and Process User Feedback on Recommendations/Insights" as sfr020
+
+}
+
+system <|-- sfr001
+system <|-- sfr002
+system <|-- sfr003
+system <|-- sfr004
+system <|-- sfr005
+system <|-- sfr006
+system <|-- sfr007
+system <|-- sfr008
+system <|-- sfr009
+system <|-- sfr010
+system <|-- sfr011
+system <|-- sfr012
+system <|-- sfr013
+system <|-- sfr014
+system <|-- sfr015
+system <|-- sfr016
+system <|-- sfr017
+system <|-- sfr018
+system <|-- sfr019
+system <|-- sfr020
+
+rectangle "AI Components" {
+  usecase "AIFR001: Generate Financial Predictions Based on Historical Data and Market Trends (Basel III)" as aifr001
+  usecase "AIFR002: Generate Personalized Recommendations Aligning with User's Profile and Risk Tolerance (FINRA)" as aifr002
+  usecase "AIFR003: Generate Spending Limit Alerts Based on Unusual Deviations from Established Patterns" as aifr003
+  usecase "AIFR004: Identify Investment Opportunities Aligning with User's Risk Profile and Portfolio Diversification (MPT)" as aifr004
+  usecase "AIFR005: Generate ESG-Compliant Investment Recommendations Based on Modern Portfolio Theory" as aifr005
+  usecase "AIFR006: Detect Anomalous Transactions Using Pattern Recognition in Compliance with FinCEN Rules (AML)" as aifr006
+  usecase "AIFR007: Correlate Financial News to User Portfolios for Relevant Insights" as aifr007
+  usecase "AIFR008: Recommend Actions Based on Predictive Analytics to Enhance Client Engagement and Retention (Regulatory)" as aifr008
+  usecase "AIFR009: Provide Forward-Looking Analysis of Financial Situations for Strategic Planning" as aifr009
+
+}
+
+system <|-- aifr001
+system <|-- aifr002
+system <|-- aifr003
+system <|-- aifr004
+system <|-- aifr005
+system <|-- aifr006
+system <|-- aifr007
+system <|-- aifr008
+system <|-- aifr009
+
+@enduml
+```plantuml
+@startuml
+left to right direction
+
+title
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

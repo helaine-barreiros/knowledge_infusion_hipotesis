@@ -1,0 +1,71 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "SFR015: Request Intervention Analysis from AI Component" as SFR015
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+
+  actor "Client" as C
+  actor "Financial Advisor (FA)" as FA
+  actor "System Administrator (SA)" as SAADMN
+}
+
+C --> CFR001 : View Financial Insights Dashboard
+C --> SAFR001 : Manage Analysis Parameters
+C --> SFR002 : Deliver Personalized Recommendations
+C --> AIFR004: Generate Investment Opportunity Analyses
+FA --> SFR015 : Request Intervention Analysis from AI Component
+SAADMN --> CFR003 : View Financial Predictions
+
+rectangle "System" {
+  usecase "SFR009: Find Contextualized News Relevant to Portfolio" as SFR009
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+}
+
+FA --> SFR009 : View Client Intervention Alerts
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+}
+
+C --> AIFR001 : View Financial Predictions (via System)
+FA --> AIFR004 : Request Investment Opportunity Analyses
+
+rectangle "Client Dashboards & Notifications" {
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR013: Deliver Client Alerts Based on Predefined Conditions" as SFR013
+}
+
+C --> SFR012 : View Personalized Dashboard
+
+rectangle "User Feedback Management" {
+  usecase "CFR011: Send System Recommendations/Insights Feedback" as CFR011
+}
+SAADMN --> CFR011 : Provide Admin Access for Feedback
+
+@enduml
+```
+
+### Key Observations:
+- **Actors**: The diagram includes three main actors - Client, Financial Advisor (FA), and System Administrator (SA). Each is linked to specific use cases.
+- **Use Cases**:
+  - Clients can view financial dashboards (`CFR001`), receive personalized recommendations (`SFR002`), manage their data (`SAFR001`), etc. Financial Advisors have access to client alerts, predictive analyses, and more detailed system interactions like `SFR015`.
+- **System Component**: The "System" rectangle aggregates multiple use cases related to delivering insights (e.g., recommendations, news). It also includes AI components (`AIFR`) for generating predictions, personalized advice, spending limits, etc.
+- **AI Integration**: AI systems handle core analytical tasks. For example, `AIFR001` generates financial forecasts using historical data and market trends; `AIFR002` provides tailored investment suggestions based on user profiles.
+- **Notifications & Dashboards**: The system ensures timely alerts (e.g., through SFR components) while dashboards consolidate information for easy monitoring. Feedback mechanisms allow users to report issues or suggest improvements.
+
+This structure aligns with the provided requirements, ensuring clarity in how each actor interacts within the system’s use case framework. Adjustments may be needed based on further analysis of dependencies and additional details from the requirements list.
+
+[Done: True
+Done Reason: stop
+Eval Count: 901]

@@ -1,0 +1,122 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as c
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts About Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as CFR004
+  usecase "CFR005: Manage Personalized Recommendations Preferences to Ensure Insights Relevant to My Financial Objectives and Risk Tolerance" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceed Predefined Thresholds in Specific Expense Categories" as CFR006
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile (as Defined Under MiFID II or Equivalent Standards)" as CFR007
+  usecase "CFR008: View News Related to My Investment Portfolio to Stay Informed About Market Events" as CFR008
+  usecase "CFR009: Access a Personalized Dashboard That Consolidates My Financial Information in a Single View" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors, Including Permissions for Sharing Data to Maintain Privacy and Control Over My Financial Information" as CFR10
+  
+  c --> CFR001
+  c --> CFR002
+  c --> CFR003
+  c --> CFR004
+  c --> CFR005
+  c --> CFR006
+  c --> CFR007
+  c --> CFR008
+  c --> CFR009
+  c --> CFR10
+  
+  rectangle "Client System" {
+    usecase "SFR02: Request Financial Predictions from the AI Component to Provide Users with Forward-Looking Insights" as SFR03
+    usecase "SFR04: Request Personalized Recommendations from the AI Component Based on Each User's Financial Data and Preferences" as SFR04
+    usecase "SFR12: Generate Client Dashboards That Present Financial Information in an Intuitive and Actionable Format" as SFR12
+    
+    c --> SFR03
+    c --> SFR04
+    c --> SFR12
+  }
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as fa
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights to Provide More Valuable Guidance Aligned with Each Client's Financial Goals" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts When the System Detects Patterns Requiring Professional Attention to Proactively Assist Clients With Potential Financial Issues" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations to Provide Data-Driven Recommendations During Consultations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments to Customize the System's Behavior According to Different Client Profiles and Regulatory Requirements Such As GDPR or CCPA" as FAFR004
+  
+  fa --> FAFR001
+  fa --> FAFR002
+  fa --> FAFR003
+  fa --> FAFR004
+}
+
+package "System Administrator" {
+  actor SystemAdmin as sa
+  
+  usecase "SAFR001: Manage Analysis Parameters for the AI System to Ensure Algorithms Remain Accurate, Relevant, and Compliant with Financial Regulations Such As Basel III for Risk Management" as SAFR001
+  
+  sa --> SAFR001
+}
+
+package "System" {
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance As Defined By Industry Standards Like FINRA Guidelines" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations from Established Spending Patterns" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users By Evaluating Potential Investments Against Their Risk Profiles, Time Horizons, and Financial Goals" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities for Users by Identifying Financial Instruments That Align With Their Investment Strategies and Modern Portfolio Theory Principles" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts By Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance with FinCEN Requirements" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News With Specific User Portfolios To Identify Relevant Impacts" as AIFR007
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations By Identifying Patterns That Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR008
+    usecase "AIFR009: Generate Client Predictive Insights that Provide Forward-Looking Analysis of Financial Situations to Support More Effective Financial Planning" as AIFR009
+    
+    sa --> AIFR001
+    sa --> AIFR002
+    sa --> AIFR003
+    sa --> AIFR004
+    sa --> AIFR005
+    sa --> AIFR006
+    sa --> AIFR007
+    sa --> AIFR008
+    sa --> AIFR009
+    
+  }
+  
+  usecase "SFR13: Generate Client Alerts Based on Predefined Conditions to Ensure Timely Notification of Important Financial Events" as SFR13
+  usecase "SFR14: Generate Client Analytics That Provide Meaningful Insights Into Financial Behavior and Performance" as SFR14
+  
+  fa --> SFR13
+  c --> SFR13
+  sa --> SFR13
+  
+  c --> SFR14
+}
+
+package "System Components" {
+  usecase "SFR05: Request Spending Limit Alerts from the AI Component When User Spending Patterns Exceed Defined Thresholds" as SFR05
+  usecase "SFR06: Request Investment Opportunity Analysis from the AI Component to Identify Suitable Investments for Users Based on Their Risk Profiles" as SFR06
+  usecase "SFR17: Generate Financial Health Reports That Assess Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as SFR17
+  
+  c --> SFR05
+  fa --> SFR06
+}
+
+package "News Processing" {
+  rectangle "AI Component News Insights" {
+    usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News With Specific User Portfolios To Identify Relevant Impacts" as AIFR010
+    
+    c --> AIFR010
+  }
+}
+
+package "Feedback Management" {
+  rectangle "System Feedback Handling" {
+    usecase "CFR11: Send Feedback About the System's Recommendations and Insights to Help Improve Accuracy and Relevance of Future Outputs" as CFR11
+    
+    c --> CFR11
+  }
+}
+@enduml

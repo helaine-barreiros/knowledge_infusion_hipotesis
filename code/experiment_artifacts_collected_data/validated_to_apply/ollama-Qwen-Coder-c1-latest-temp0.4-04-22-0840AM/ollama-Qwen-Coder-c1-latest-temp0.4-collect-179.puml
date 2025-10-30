@@ -1,0 +1,66 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure analysis parameters for specific client segments" as FAFR004
+  usecase "SFR002: Deliver personalized recommendations to users based on their financial profiles" as SFR002
+  usecase "AIFR002: Generate personalized recommendations for users based on their financial profiles, goals, and risk tolerance" as AIFR002
+  
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  Client --> SAFR001 : "Manage Analysis Parameters"
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  FAFD --> FAFR004 : "Configure analysis parameters for specific client segments"
+  Client --> SFR002 : "Receive personalized recommendations aligned with my financial profile and goals"
+  System Admin --> AIFR002 : "Generate personalized recommendations based on each user's financial data and preferences"
+
+}
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR005: Manage personalized recommendations preferences" as SAFR005
+  usecase "FAFR008: Configure analysis parameters for specific client segments" as FAFR004
+  
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  Client --> SAFR005 : "Manage Personalized Recommendations Preferences"
+  SysAdmin --> SAFR005 : "Manage Analysis Parameters"
+
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR002: Manage client mentoring sessions based on system-generated insights" as FAFR002
+  usecase "FAFR003: View predictive analytics about my clients' financial situations to provide data-driven recommendations during consultations" as FAFR003
+  usecase "SFR015: Request predictive intervention analyses from the AI component to identify when financial advisors should engage with clients" as SFR015
+  
+  Financial Advisor --> FAFR002 : "Manage Client Mentoring Sessions"
+  Financial Advisor --> FAFR003 : "View Predictive Analytics About My Clients' Financial Situations"
+  System Admin --> SFR015 : "Request Predictive Intervention Analyses From The AI Component"
+
+}
+
+rectangle "System" {
+  usecase "SFR009: Request contextualized news from the AI component to find relevant information for users' financial situations" as SFR009
+  usecase "AIFR007: Generate contextualized news insights by correlating financial news with specific user portfolios to identify relevant impacts" as AIFR007
+  
+  System Admin --> SFR009 : "Request Contextualized News From The AI Component"
+  Financial Advisor --> AIFR007 : "Generate Contextualized News Insights"
+
+}
+
+rectangle "User (Client, Financial Advisor, or System Administrator)" {
+  usecase "CFR11: Send feedback about the system's recommendations and insights to help improve accuracy and relevance" as CFR11
+  
+  Client --> CFR11 : "Send Feedback"
+  FAFD --> CFR11 : "Send Feedback"
+  SysAdmin --> CFR11 : "Send Feedback"
+
+}
+
+@enduml

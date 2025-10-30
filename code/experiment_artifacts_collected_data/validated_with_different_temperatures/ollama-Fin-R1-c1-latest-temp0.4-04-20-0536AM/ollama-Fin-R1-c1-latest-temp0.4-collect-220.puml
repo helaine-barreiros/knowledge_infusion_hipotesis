@@ -1,0 +1,51 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage System's AI Parameters"
+  SysAdmin --> FAFR004 : "Configure Analysis Params for Clients"
+
+  rectangle "Client Interface" {
+    actor User as U
+    user U -> (CFR001) : "View Financial Data, Alerts, Predictions, Recommendations"
+    
+    usecase "SFR012: Generate Client Dashboards" as SFR012
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+
+    U --> (CFR002) : "View Anomaly Transaction Alerts"
+    U --> (CFR006) : "Manage Spending Limits"
+    U --> (CFR009) : "Access Consolidated Financial Info"
+    
+  }
+
+  rectangle "AI & System Components" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Personalized Recommendations Based on Profiles" as AIFR002
+    usecase "AIFR003: Spending Limit Alerts for Users" as AIFR003
+    usecase "AIFR004: Investment Opportunity Analysis" as AIFR004
+
+    SysAdmin --> (SFR019) : "Maintain Historical Records"
+  }
+
+  rectangle "Financial Advisor Interface" {
+    actor FinancialAdvisor as FA
+    user FA -> (FAFR002) : "View Client Intervention Alerts"
+    user FA -> (FAFR003) : "View Predictive Analytics for Clients"
+    
+    usecase "SFR014: Generate Client Analytics" as SFR014
+
+  }
+
+  SysAdmin --> FAFR004 : "Set Segmentation Rules"
+
+}
+
+@enduml

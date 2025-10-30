@@ -1,0 +1,62 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  Client --> (SFR012) : generate client dashboards that present financial information in an intuitive and actionable format.
+  SysAdmin --> (SAFR001)
+  
+  rectangle "Client Features" {
+    Client --> CFR001
+    Client --> (SFR003) : request financial predictions from the AI component to provide users with forward-looking financial insights.
+    Client --> (SFR004) : request personalized recommendations from the AIFR002 to support better financial decision-making.
+    Client --> (SFR005) : request spending limit alerts from the AIFR003 when user spending patterns exceed defined thresholds.
+    Client --> (SFR006) : request investment opportunity analysis from the AI component to identify suitable investments for users based on their risk profiles.
+    Client --> (SFR017) : generate financial health reports that assess users' overall financial wellbeing according to standard financial ratios and metrics.
+  }
+  
+  rectangle "Financial Advisor Features" {
+    FAFD --> (FAFR002) : view client intervention alerts when the system detects patterns requiring professional attention.
+    FAFD --> (FAFR003) : view predictive analytics about clients' financial situations to provide data-driven recommendations during consultations.
+    FAFD --> (FAFR004) : configure analysis parameters for specific client segments based on different profiles and regulatory requirements such as GDPR or CCPA.
+  }
+  
+  rectangle "System Features" {
+    System Admin --> SAFR001
+    Client --> (SFR002) : deliver personalized recommendations to users based on their financial profiles.
+    
+    Client --> (SAFR005)
+    FAFD --> (FAFR008) : view anomaly transaction alerts when the system detects potentially fraudulent activities in accordance with AML regulations.
+    System Admin --> SAFR019
+  }
+  
+  rectangle "AI Features" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Generate Financial Opportunities for Users" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    
+    Client --> (AIFR001)
+    FAFD --> (FAFR009) : generate client predictive intervention recommendations by identifying patterns that indicate potential financial difficulties or opportunities requiring advisor engagement.
+    
+  }
+  
+}
+
+Client <|-- (CFR002: View Alerts)
+Client <|-- (SFR007) : request specific investment opportunities from the AI component that match user investment criteria and ESG preferences.
+
+FAFD --> (AIFR016)
+
+@enduml

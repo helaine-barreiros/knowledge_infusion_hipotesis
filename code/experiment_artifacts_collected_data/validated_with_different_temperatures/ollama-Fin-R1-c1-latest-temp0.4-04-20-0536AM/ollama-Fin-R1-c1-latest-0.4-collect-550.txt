@@ -1,0 +1,92 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile and Goals" as CFR004
+  usecase "CFR005: Manage Personalized Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts for Budget Control" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile (MiFID II)" as CFR007
+  usecase "CFR008: Receive News Related to Portfolio Investments" as CFR008
+  usecase "CFR009: Consolidate Financial Information in a Personalized Dashboard" as CFR009
+  usecase "CFR010: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as CFR010
+
+  
+  rectangle "Financial Advisor (FAFR)" {
+    usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+    usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+    usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+  }
+  
+  rectangle "System Administrator (SAFR)" {
+    usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+  }
+
+  rectangle "Client, User (CFR)" {
+    actor Client as CFR002_Client
+    actor Client as CFR003_Client
+    actor Client as CFR004_Client
+    actor Client as CFR005_Client
+    actor Client as CFR006_Client
+    actor Client as CFR007_Client
+    actor Client as CFR008_Client
+    actor Client as CFR009_Client
+    actor Client as CFR10_User
+
+  }
+  
+  rectangle "Financial Advisor (FAFR)" {
+    actor FinancialAdvisor as FAFR002_Advisor
+  }
+
+  rectangle "System, AI" {
+    usecase "AIFR001: Generate Financial Predictions Based on Historical Data and Market Trends" as AIFR001
+    usecase "AIFR002: Personalized Recommendations Aligned with Client Profiles" as AIFR002
+    usecase "AIFR003: Spending Limit Alerts for Budget Control" as AIFR003
+    usecase "AIFR004: Investment Opportunity Analysis Based on Risk Profile" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities Matching Client Strategies" as AIFR005
+    usecase "AIFR006: Anomaly Transaction Alerts for Fraud Detection" as AIFR006
+    usecase "AIFR007: Contextualized News Insights Related to Portfolio Investments" as AIFR007
+  }
+  
+  rectangle "System, Client (CFR)" {
+    usecase "SFR012: Generate Personalized Dashboards for Users" as SFR012
+    usecase "SFR013: Deliver Alerts Based on Predefined Conditions" as SFR013
+    usecase "SFR014: Provide Client Analytics (e.g., Financial Health Reports)" as SFR014
+
+  }
+
+  
+  // Relationships between actors and use cases
+  CFR002_Client --> CFR002 : "Receive Alerts for Anomalous Transactions"
+  CFR003_Client --> CFR003 : "View Financial Predictions Based on Historical Data and Market Trends"
+  CFR004_Client --> CFR004 : "Personalized Recommendations Aligned with Financial Profile and Goals"
+  SAFR001 <|-- AIFR002 : "Manage Analysis Parameters for AI System"
+  
+  FAFR001_Advisor -> (CFR009_Client) : "Mentor Clients via Insights from the System"
+
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Client Actors**: All client-related use cases are grouped under a single rectangle labeled "Client, User (CFR)" to represent multiple clients with varying roles.
+- **Financial Advisor Actor**: Grouped separately in its own rectangle ("FAFR") for clarity. This includes managing mentoring sessions and viewing alerts/predictive analytics.
+- **System/AI Actors**: Combined into another rectangle labeled "System, AI" since these use cases involve the system’s interaction with external entities (e.g., generating predictions or recommendations).
+- **Use Case Relationships**:
+  - Direct client interactions are established via arrows from clients to relevant use cases. For example, a client receives alerts about anomalous transactions.
+  - System-administrator-specific use case "SAFR001" is linked to the AI system’s parameter management (AIFR002).
+- **Inheritance and Grouping**: The diagram uses inheritance (`<|--`) where applicable but in this setup, it's more about logical grouping. For instance, FAFR003 inherits from AIFR007 for contextualized news insights.
+
+This structure ensures all functional requirements are represented accurately while maintaining readability through proper categorization and relationships.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1253]

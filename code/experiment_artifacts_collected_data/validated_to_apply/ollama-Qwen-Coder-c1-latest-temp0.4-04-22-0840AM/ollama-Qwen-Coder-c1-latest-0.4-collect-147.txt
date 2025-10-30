@@ -1,0 +1,110 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics about My Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  FinancialAdvisor --> (CFR011)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR002
+  
+  usecase "SAFR003: Manage Analysis Parameters for the AI system to ensure the algorithms remain accurate, relevant, and compliant with financial regulations such as Basel III for risk management." as SAFR003
+}
+  
+package "System Components" {
+  rectangle "Notification System" {
+    usecase "SFR012: Generate Client Dashboards that present financial information in an intuitive and actionable format." as SFR012
+    usecase "SFR013: Generate client alerts based on predefined conditions to ensure timely notification of important financial events." as SFR013
+    
+    CFR001 --> (SFR012)
+    FAFR002 --> (SFR012)
+    SAFR002 --> (SFR012)
+    
+    CFR001 --> (SFR013)
+    FAFR002 --> (SFR013)
+    SAFR002 --> (SFR013)
+  }
+  
+  rectangle "Recommendation System" {
+    usecase "AIFR002: Generate personalized recommendations for users based on their financial profiles, goals, and risk tolerance as defined by industry standards like FINRA guidelines." as AIFR002
+    usecase "SFR014: Generate client analytics that provide meaningful insights into financial behavior and performance." as SFR014
+    
+    CFR001 --> (AIFR002)
+    FAFR002 --> (AIFR002)
+    
+    CFR001 --> (SFR014)
+  }
+  
+  rectangle "Prediction System" {
+    usecase "AIFR001: Generate financial predictions for users by analyzing historical transaction data, market trends, and economic indicators." as AIFR001
+    usecase "SFR020: Manage user feedback to continuously improve the quality and relevance of financial insights." as SFR020
+    
+    CFR003 --> (AIFR001)
+    
+    FAFR002 --> (AIFR001)
+  }
+  
+  rectangle "Investment System" {
+    usecase "AIFR004: Generate investment opportunity analyses for users by evaluating potential investments against their risk profiles, time horizons, and financial goals." as AIFR004
+    usecase "SFR025: Request specific investment opportunities from the AI component that match user investment criteria and ESG (Environmental, Social, and Governance) preferences." as SFR025
+    
+    CFR001 --> (AIFR004)
+    
+    FAFR002 --> (AIFR004)
+  }
+  
+  rectangle "News System" {
+    usecase "SFR009: Find contextualized news relevant to users' financial portfolios from trusted financial news sources." as SFR009
+    usecase "SFR10: Process contextualized news to extract relevant information for users' financial situations." as SFR10
+    
+    CFR003 --> (SFR009)
+    
+    FAFR002 --> (SFR009)
+  }
+  
+  rectangle "Spending Limit System" {
+    usecase "AIFR003: Generate spending limit alerts for users by identifying unusual deviations from established spending patterns." as AIFR003
+    usecase "SFR14: Request specific investment opportunities from the AI component that match user investment criteria and ESG (Environmental, Social, and Governance) preferences." as SFR14
+    
+    CFR001 --> (AIFR003)
+    
+    FAFR002 --> (AIFR003)
+  }
+  
+  rectangle "Anomaly Detection System" {
+    usecase "AIFR006: Generate anomaly transaction alerts by employing pattern recognition to detect potentially fraudulent activities in compliance with FinCEN requirements." as AIFR006
+    usecase "SFR15: Request specific investment opportunities from the AI component that match user investment criteria and ESG (Environmental, Social, and Governance) preferences." as SFR15
+    
+    CFR003 --> (AIFR006)
+    
+    FAFR002 --> (AIFR006)
+  }
+  
+  rectangle "Predictive Intervention System" {
+    usecase "SFR17: Generate financial health reports that assess users' overall financial wellbeing according to standard financial ratios and metrics." as SFR17
+    usecase "SFR18: Manage users' financial goals to track progress and provide relevant recommendations." as SFR18
+    
+    CFR003 --> (SFR17)
+    
+    FAFR002 --> (SFR18)
+  }
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1174]

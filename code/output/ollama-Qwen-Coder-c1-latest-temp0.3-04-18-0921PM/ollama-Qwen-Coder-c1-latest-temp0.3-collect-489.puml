@@ -1,0 +1,95 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Analysis Parameters" as SAFR002
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  Client --> (CFR001)
+  SysAdmin --> (SAFR002)
+  Financial Advisor --> (FAFR004)
+}
+
+rectangle "Client Dashboard" {
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "SFR017: Generate Financial Health Reports" as SFR017
+  
+  Client --> (CFR009)
+  System Admin --> (SAFR002) : <<ID:SFR018>>
+}
+
+rectangle "Client Alerts and Recommendations" {
+  usecase "CFR002: Receive Anomalous Transaction Alerts" as CFR002
+  usecase "SFR003: Deliver Personalized Recommendations" as SFR003
+  
+  Client --> (CFR002)
+  System Admin --> (SAFR001) : <<ID:SFR004>>
+}
+
+rectangle "Spending Limits and Budget Control" {
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  
+  Client --> (CFR006)
+  System Admin --> (SAFR001) : <<ID:SFR004>>
+}
+
+rectangle "Investment Opportunities and Portfolio Management" {
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+  
+  Client --> (CFR007)
+  System Admin --> (SAFR001) : <<ID:SFR004>>
+}
+
+rectangle "Financial News and Insights" {
+  usecase "CFR008: View News Related to My Investment Portfolio" as CFR008
+  usecase "SFR009: Request Contextualized News from AI Component" as SFR009
+  
+  Client --> (CFR008)
+  System Admin --> (SAFR001) : <<ID:SFR004>>
+}
+
+rectangle "Client Relationship Management" {
+  usecase "CFR10: Manage My Relationship with Financial Advisors" as CFR10
+  usecase "SFR20: Generate Client Dashboards that Present Financial Information in an Intuitive and Actionable Format" as SFR20
+  
+  Client --> (CFR10)
+}
+
+rectangle "Feedback Mechanism" {
+  usecase "CFR11: Send Feedback about the System's Recommendations and Insights" as CFR11
+  usecase "SFR20: Manage User Feedback to Continuously Improve the Quality and Relevance of Financial Insights" as SFR20
+  
+  Client --> (CFR11)
+}
+
+rectangle "Financial Advisor Support" {
+  usecase "FAFR01: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR01
+  usecase "SFR15: Request Predictive Intervention Analyses from the AI Component to Identify When Financial Advisors Should Engage with Clients" as SFR15
+  
+  Financial Advisor --> (FAFR01)
+}
+
+rectangle "Client Intervention Alerts and Analytics" {
+  usecase "FAFR02: View Client Intervention Alerts when System Detects Patterns Requiring Professional Attention" as FAFR02
+  usecase "SFR14: Generate Client Analytics that Provide Meaningful Insights into Financial Behavior and Performance" as SFR14
+  
+  Financial Advisor --> (FAFR02)
+}
+
+rectangle "Predictive Analytics for Clients" {
+  usecase "FAFR03: View Predictive Analytics About My Clients' Financial Situations to Provide Data-Driven Recommendations During Consultations" as FAFR03
+  usecase "SFR16: Request Predictive Insights from the AI Component to Enhance the Value of Financial Guidance Provided to Clients" as SFR16
+  
+  Financial Advisor --> (FAFR03)
+}
+
+@enduml

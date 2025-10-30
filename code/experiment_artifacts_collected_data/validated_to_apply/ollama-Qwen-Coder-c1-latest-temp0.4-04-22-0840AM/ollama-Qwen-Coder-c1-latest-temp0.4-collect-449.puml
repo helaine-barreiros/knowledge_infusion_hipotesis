@@ -1,0 +1,84 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003  
+  usecase "CFR004: Receive Personalized Recommendations" as SFR002
+  usecase "CFR005: Manage Preferences for Recommendations" as CFR010
+  usecase "CFR006: View Spending Limit Alerts" as SAFR008  
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as SFR006 
+  usecase "CFR008: View News Related to Portfolio" as AIFR007
+  usecase "CFR012: Access Personalized Dashboard" as SFR013
+  
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+    
+  usecase "FAFR002: View Client Intervention Alerts" as SAFR009  
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as SFR015
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR001
+  
+  usecase "SAFR002: Manage Analysis Parameters" as SAFR001 
+}
+
+rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003  
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004 
+    usecase "AIFR005: Identify Financial Instruments for Users" as AIFR005
+    usecase "AIFR006: Detect Anomaly Transactions" as AIFR006  
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007 
+}
+
+package "System Functions" {
+  usecase "SFR013: Generate Client Dashboards" as SFR012
+  usecase "SFR014: Generate Client Analytics" as SAFR005  
+  usecase "SFR019: Maintain Historical Record of Insights" as AIFR008 
+}
+
+rectangle "System" {
+    rectangle "Client Interface" {
+        CFR001 --> (SAFR003)
+        CFR004 --> (SFR002)   
+        CFR005 --> (CFR010)
+        CFR006 --> (SAFR008)  
+        CFR007 --> (AIFR004)
+        CFR008 --> (AIFR007)
+        CFR012 --> (SFR013)
+    }
+    
+    rectangle "Financial Advisor Interface" {
+        FAFR001 --> (SAFR009)  
+        FAFR004 --> (SFR015)
+    }
+
+    rectangle "System Admin Interface" {
+        SAFR001 --> (SAFR002)
+    }
+    
+    rectangle "AI Processing" {
+        AIFR001 <|-- (AIFR003) 
+        AIFR004 <|-- (SFR016)
+        AIFR005 <|-- (SFR017)
+        AIFR008 <|-- (SAFR020)
+    }
+    
+    rectangle "System Functions" {
+        SFR013 --> (AIFR009)  
+        SAFR004 <|-- (SFR016)
+        AIFR005 <|-- (SFR017)
+        AIFR008 <|-- (SAFR20)
+    }
+}
+
+CFR011 --> (SAFR020)
+
+@enduml

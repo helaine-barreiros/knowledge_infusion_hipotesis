@@ -1,0 +1,76 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Notifications" as SAFR002
+  usecase "SFR003: Request Predictive Analytics from AI" as SFR003
+  usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+  
+  Client --> CFR001 : "View Financial Dashboard"
+  
+  SysAdmin -> SAFR002 : "Manage System Parameters"
+  
+  User <- (CFR001) : "Receive Notifications"
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Predictive Analytics" as AIFR001
+  usecase "AIFR003: Detect Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Analyze Investment Opportunities" as AIFR004
+  usecase "AIFR006: Identify Anomaly Transactions" as AIFR006
+  
+  SFR001 -> AIFR001 : "Request Predictions"
+  
+  CFR002 -> AIFR003 : "Trigger Alerts for Unusual Spending"
+  
+  SAFR005 -> AIFR004 : "Identify Suitable Investments Based on Risk Profile"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  
+  User -> FAFR001 : "Schedule Meetings"
+  
+  AIFR008 -> FAFR002 : "Provide Predictive Interventions"
+}
+
+rectangle "Client (User)" {
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Preferences for Recommendations" as CFR005
+  
+  Client --> SFR002 : "Configure Notifications"
+  
+  AIFR007 -> User : "Provide Contextual News Insights"
+}
+
+@enduml
+```
+
+### Explanation:
+1. **System Boundary**: The main system is represented by a rectangle labeled "System". Inside, there are use cases for clients (CFRs), administrators (SAFRs), and the AI component.
+2. **Client Use Cases**:
+   - `CFR001` allows clients to view financial dashboards.
+   - `CFR004` requests personalized recommendations from the system.
+3. **System Administrator Use Case** (`SAFR002`) manages user notifications (e.g., alerts).
+4. **AI Component**: 
+   - Generates predictive analytics, spending limit alerts, investment opportunities, and anomaly transactions.
+5. **Financial Advisor Use Cases**:
+   - `FAFR001` schedules mentoring sessions based on AI insights.
+   - `FAFR002` receives intervention alerts from the system.
+6. **Client (User)**: 
+   - Can manage preferences (`CFR005`) and receive contextualized news.
+
+### Relationships:
+- Clients interact with the system through dashboards, recommendations, etc., while administrators adjust parameters like notifications.
+- The AI component processes requests from clients/systems to generate insights and alerts. Financial advisors use these insights for client interactions. 
+
+This structure ensures clarity in how different actors (clients, admins, financial advisors) engage with the system and its components. Adjustments may be needed based on specific requirement interpretations or additional relationships inferred from context. The key is maintaining alignment with provided functional requirements while adhering to PlantUML syntax rules.
+
+[Done: True
+Done Reason: stop
+Eval Count: 827]

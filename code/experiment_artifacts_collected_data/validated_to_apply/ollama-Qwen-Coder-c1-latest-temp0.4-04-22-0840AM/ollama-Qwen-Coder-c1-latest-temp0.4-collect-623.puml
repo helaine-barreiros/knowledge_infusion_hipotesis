@@ -1,0 +1,96 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:User (Client, Financial Advisor, or System Administrator): as User
+:System: as Sys
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Analysis Parameters" as SAFR002
+  
+  User --> (CFR001)
+}
+
+package "Financial Advisor" {
+  rectangle "Advisor" {
+    usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+    usecase "FAFR003: View Predictive Analytics" as FAFR003
+    
+    User --> (FAFR001)
+    User --> (FAFR003)
+  }
+  
+  rectangle "Advisor Admin" {
+    usecase "FAFR002: Manage Client Intervention Alerts" as FAFR002
+    usecase "FAFR004: Configure Analysis Parameters for Specific Clients" as FAFR004
+    
+    User --> (FAFR002)
+    User --> (FAFR004)
+  }
+}
+
+rectangle "System Admin" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR003
+  
+  User --> (SAFR003)
+}
+
+package "Notifications and Alerts" {
+  rectangle "Notification System" {
+    usecase "SFR001: Deliver Alerts to Users" as SFR001
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    
+    User --> (SFR001)
+  }
+}
+
+package "Recommendations and Predictions" {
+  rectangle "Prediction System" {
+    usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+    
+    User --> (SFR002)
+  }
+  
+  rectangle "Prediction Analysis System" {
+    usecase "SFR014: Generate Client Analytics" as SFR014
+    usecase "AIFR009: Generate Predictive Insights for Users" as AIFR009
+    
+    User --> (SFR014)
+  }
+}
+
+package "Investment Opportunities and News" {
+  rectangle "Investment System" {
+    usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+    usecase "AIFR005: Generate Investment Opportunities for Users" as AIFR005
+    
+    User --> (SFR006)
+  }
+  
+  rectangle "News System" {
+    usecase "SFR013: Request Contextualized News Insights from AI Component" as SFR013
+    usecase "AIFR007: Generate Client Predictive Intervention Recommendations" as AIFR008
+    
+    User --> (SFR013)
+  }
+}
+
+package "System Management and Feedback" {
+  rectangle "Feedback System" {
+    usecase "CFR011: Send Feedback about the System's Recommendations and Insights" as CFR011
+    
+    User --> (CFR011)
+  }
+  
+  rectangle "Historical Record System" {
+    usecase "SFR019: Maintain a Historical Record of Users' Insights to Enable Trend Analysis" as SFR019
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations by Identifying Patterns that Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR008
+    
+    User --> (SFR019)
+  }
+}
+
+@enduml

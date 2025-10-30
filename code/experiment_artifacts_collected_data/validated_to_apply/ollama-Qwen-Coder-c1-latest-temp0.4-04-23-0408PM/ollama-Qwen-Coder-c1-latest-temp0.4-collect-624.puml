@@ -1,0 +1,101 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Clients" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR001
+  usecase "CFR003: View Financial Predictions" as SAFR002
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR003
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as SAFR004
+  usecase "CFR006: View Spending Limit Alerts" as SAFR005
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as SAFR006
+  usecase "CFR008: View News Related to My Investment Portfolio" as SAFR007
+  usecase "CFR009: Access Personalized Dashboard" as SAFR012
+  
+  CFR001 --> (SAFR001)
+  CFR001 --> (SAFR002)
+  CFR001 --> (SAFR003)
+  CFR001 --> (SAFR004)
+  CFR001 --> (SAFR005)
+  CFR001 --> (SAFR006)
+  CFR001 --> (SAFR007)
+  CFR001 --> (SAFR008)
+  CFR001 --> (SAFR012)
+}
+
+package "Financial Advisors" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts" as SAFR009
+  usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as SAFR016
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as SAFR025
+  
+  FAFR001 --> (SAFR009)
+  FAFR001 --> (SAFR013) : "View Predictive Insights"
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR001
+  
+  usecase "SAFR001: Manage Analysis Parameters for the AI System" as SAFR024
+  usecase "SFR019: Maintain a Historical Record of Users' Insights" as SFR019
+  
+  SAFR001 --> (SAFR024)
+}
+
+package "System Components" {
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities for Users" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+    
+    SAFR001 --> (AIFR003)
+  }
+  
+  rectangle "Notification System" {
+    usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR002
+    usecase "SFR005: Request Spending Limit Alerts from the AI Component When User Spending Patterns Exceed Defined Thresholds" as SFR005
+    
+    SAFR001 --> (SFR002)
+  }
+  
+  rectangle "News Processing System" {
+    usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios from Trusted Financial News Sources" as SFR009
+    usecase "SFR010: Process Contextualized News to Extract Relevant Information for Users' Financial Situations" as SFR010
+    
+    SAFR001 --> (AIFR007)
+  }
+  
+  rectangle "Dashboard Generation System" {
+    usecase "SFR012: Generate Client Dashboards That Present Financial Information in an Intuitive and Actionable Format" as SFR012
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions to Ensure Timely Notification of Important Financial Events" as SFR014
+    
+    SAFR001 --> (AIFR009)
+  }
+  
+  rectangle "Predictive Analytics System" {
+    usecase "SFR016: Enhance the Value of Financial Guidance Provided to Clients Through Predictive Insights" as SFR017
+    usecase "SFR020: Generate Client Predictive Intervention Recommendations by Identifying Patterns That Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as SFR020
+    
+    SAFR001 --> (AIFR008)
+  }
+}
+
+package "User Feedback System" {
+  usecase "CFR11: Send Feedback about the System's Recommendations and Insights to Help Improve Future Outputs" as CFR11
+  
+  CFR001 --> (CFR11)
+  FAFR001 --> (CFR11)
+  SAFR001 --> (CFR11)
+}
+
+@enduml

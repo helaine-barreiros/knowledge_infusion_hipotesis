@@ -1,0 +1,118 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor SysAdmin as sysadmin
+actor FinancialAdvisor as financialadvisor
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as cfr001_view_dashboard
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as cfr002_alerts_anomalies
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as cfr003_predictions
+  usecase "CFR004: Receive Personalized Recommendations Aligned with Profile" as cfr004_recommendations
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as cfr005_preferences
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as cfr006_spending_alerts
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile (MiFID II)" as cfr007_investment_opportunities
+  usecase "CFR008: Access News Related to Portfolio" as cfr008_news_portfolio
+  usecase "CFR009: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as cfr009_relationship_management
+
+}
+
+rectangle "System Management and Analysis" {
+  usecase "SAFR001: Manage AI Parameters for Accuracy & Compliance (Basel III)" as safr001_manage_params
+}
+
+rectangle "Financial Advisor Tools" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as fafr001_mentor_sessions
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as fafr002_intervention_alerts
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as fafr003_predictive_analytics
+}
+
+rectangle "System Services (SFR)" {
+  usecase "SFR001: Deliver Alerts Through Notification Channels" as sfr001_deliver_alerts
+  usecase "SFR002: Provide Personalized Recommendations Based on Profiles" as sfr002_recommendations
+  usecase "SFR003: Request Financial Predictions from AI Component" as sfr003_request_predictions
+  usecase "SFR004: Request Personalized Recommendations From AI" as sfr004_request_recs
+  usecase "SFR005: Request Spending Limit Alerts Based on Thresholds" as sfr005_spending_alerts
+  usecase "SFR006: Request Investment Opportunity Analysis for Users" as sfr006_investment_analysis
+  usecase "SFR007: Find Specific Investment Opportunities Matching Criteria and ESG Preferences" as sfr007_specific_opportunities
+  usecase "SFR008: Request Anomaly Transaction Alerts Compliant with AML Regulations" as sfr008_anomaly_alerts
+  usecase "SFR009: Find Contextualized News Relevant to Portfolio" as sfr009_context_news
+  usecase "SFR010: Extract Relevance from Financial News for Users' Portfolios" as sfr010_extract_relevance
+}
+
+rectangle "AI System (AIFR)" {
+  usecase "AIFR001: Generate Financial Predictions Based on Historical Data and Market Trends" as aifr001_generate_predictions
+  usecase "AIFR002: Generate Personalized Recommendations Aligning with User Profiles & Goals" as aifr002_recommendations
+  usecase "AIFR003: Identify Spending Limit Alerts for Unusual Deviations from Patterns" as aifr003_spending_alerts
+  usecase "AIFR004: Analyze Investment Opportunities Against Risk Profiles and Strategies" as aifr004_investment_analysis
+  usecase "AIFR005: Identify Financial Instruments Aligning with Portfolio Management Principles" as aifr005_instruments_selection
+  usecase "AIFR006: Detect Anomalous Transactions Using Pattern Recognition (FinCEN)" as aifr006_anomaly_detection
+  usecase "AIFR007: Correlate News to Portfolios for Relevant Insights" as aifr007_news_insights
+}
+
+useclient(client) --> cfr001_view_dashboard : "View financial insights"
+client --> cfr002_alerts_anomalies : "Receive alerts about anomalous transactions"
+
+sysadmin --> safr001_manage_params : "Manage AI parameters for compliance and accuracy (Basel III)"
+
+financialadvisor --> fafr001_mentor_sessions : "Manage client mentoring sessions based on system-generated insights"
+financialadvisor --> fafr002_intervention_alerts : "View client intervention alerts when pattern recognition flags issues requiring professional attention"
+
+client --> sfr001_deliver_alerts : "Receive timely notifications about critical financial events (e.g., spending limits, portfolio impacts)"
+client --> sfr002_recommendations : "Get personalized recommendations aligned with their financial profile and goals"
+sysadmin --> safr003_request_predictions : "Request AI to generate forward-looking predictions for clients"
+
+financialadvisor --> fafr003_predictive_analytics : "View predictive analytics about client's financial situations during consultations"
+
+client --> sfr004_request_recs : "Request personalized recommendations from the system"
+sysadmin --> safr005_spending_alerts : "Set up spending limit alerts for clients based on defined thresholds"
+
+financialadvisor --> fafr002_intervention_alerts <<|-- client : "Client receives proactive assistance when needed (e.g., via alerts)"
+
+client --> sfr006_investment_analysis : "View investment opportunities suitable to their risk profile"
+sysadmin --> safr007_specific_opportunities : "Find specific investments matching user criteria and ESG preferences"
+
+financialadvisor --> fafr003_predictive_analytics <<|-- client : "Client receives data-driven recommendations during consultations (e.g., via the system's predictive insights)"
+
+client --> sfr008_anomaly_alerts : "Receive alerts for potential AML-related activities"
+sysadmin --> safr009_context_news : "Find contextualized news relevant to user portfolios"
+
+financialadvisor --> fafr004_view_predictive_analytics <<|-- client : "Client receives forward-looking analysis during consultations (e.g., via the system's predictive insights)"
+
+client --> sfr010_extract_relevance : "Access extracted financial news insights related to their portfolio"
+sysadmin --> safr012_generate_dashboards : "Create consolidated dashboards for clients"
+
+financialadvisor --> fafr005_config_params <<|-- client : "Client can adjust parameters influencing system recommendations (e.g., via preferences management)"
+
+client --> aifr003_spending_alerts : "View spending limit alerts when exceeding thresholds"
+sysadmin --> safr014_generate_analytics : "Produce meaningful financial behavior and performance insights"
+
+financialadvisor --> fafr006_predictive_interventions <<|-- client : "Client receives recommendations on when to engage with advisors (e.g., via predictive analyses)"
+
+client --> aifr007_news_insights : "View contextualized news related to their investments"
+sysadmin --> safr015_request_predictions : "Request AI for predictive intervention analysis"
+
+financialadvisor --> fafr003_predictive_analytics <<|-- client : "Client receives data-driven recommendations during consultations (e.g., via the system's predictive insights)"
+
+client --> aifr009_generate_reports : "Receive financial health reports assessing overall wellbeing"
+sysadmin --> safr016_request_insights : "Request AI-generated forward-looking analysis"
+
+financialadvisor --> fafr008_predictive_analyses <<|-- client : "Client receives data-driven recommendations during consultations (e.g., via the system's predictive insights)"
+
+client --> aifr017_historical_record : "View historical record of received insights for trend analysis"
+sysadmin --> safr020_feedback_management : "Manage user feedback to improve future outputs"
+
+financialadvisor --> fafr009_request_interventions <<|-- client : "Client receives recommendations on when advisors should be engaged (e.g., via predictive analyses)"
+
+client --> aifr018_financial_goals_tracking : "Track progress towards financial goals"
+sysadmin --> safr020_feedback_management : "Process user feedback to refine system outputs"
+
+financialadvisor --> fafr009_request_interventions <<|-- client : "Client receives recommendations on when advisors should be engaged (e.g., via predictive analyses)"
+
+client --> aifr018_financial_goals_tracking : "Track progress towards financial goals"
+sysadmin --> safr020_feedback_management : "Process user feedback to refine system outputs"
+
+@enduml

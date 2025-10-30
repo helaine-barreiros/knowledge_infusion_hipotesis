@@ -1,0 +1,79 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SFR002
+  usecase "CFR005: Manage Recommendation Preferences" as SAFR006
+  usecase "CFR017: Access Financial Health Reports" as AIFR009
+  
+  CFR001 --> (SAFR003)
+  CFR001 --> (SFR002)
+  CFR001 --> (SAFR006)
+  CFR001 --> (AIFR009)
+}
+
+rectangle "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR003: View Predictive Analytics" as AIFR004
+  usecase "FAFR007: Configure Analysis Parameters for Client Segments" as SAFR005
+  usecase "FAFR008: Send Feedback" as CFR011
+  
+  FinancialAdvisor --> (FAFR003)
+  FinancialAdvisor --> (SAFR005)
+  FinancialAdvisor --> (CFR011)
+}
+
+rectangle "System Administrator" {
+  actor SystemAdministrator as SAFR007
+  usecase "SAFR008: Manage Analysis Parameters for AI System" as AIFR002
+  
+  SAFR007 --> (AIFR002)
+}
+
+package "Notifications and Alerts" {
+  usecase "SFR013: Generate Client Alerts" as SFR013
+  usecase "SAFR009: Deliver Alerts to Users" as AIFR006
+  
+  CFR001 --> (SFR013)
+  SAFR007 --> (AIFR006)
+}
+
+package "Personalized Recommendations and Insights" {
+  usecase "SFR002: Generate Personalized Recommendations" as SFR002
+  usecase "FAFR004: View Predictive Analytics about Clients' Financial Situations" as AIFR003
+  
+  CFR001 --> (SFR002)
+  FinancialAdvisor --> (AIFR003)
+}
+
+package "Spending Limits and Alerts" {
+  usecase "SAFR006: Request Spending Limit Alerts from AI Component" as SFR005
+  usecase "CFR008: View News Related to Investment Portfolio" as AIFR010
+  
+  CFR001 --> (SFR005)
+  SAFR007 --> (AIFR010)
+}
+
+package "Investment Opportunities and Analysis" {
+  usecase "SAFR004: Request Investment Opportunity Analyses from AI Component" as SFR006
+  usecase "FAFR002: Configure Analysis Parameters for Specific Client Segments" as SAFR005
+  
+  CFR001 --> (SFR006)
+  FinancialAdvisor --> (SAFR005)
+}
+
+package "System Management and Operations" {
+  usecase "AIFR009: Generate Contextualized News Insights by Correlating Financial News with User Portfolios" as AIFR007
+  usecase "SFR018: Manage Users' Financial Goals to Track Progress and Provide Relevant Recommendations" as SFR018
+  
+  CFR001 --> (AIFR007)
+  SAFR007 --> (SFR018)
+}
+
+@enduml

@@ -1,0 +1,103 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  client --> CFR001 : "View Financial Insights"
+  
+  SysAdmin -> SAFR001 : "Manage System Settings"
+  SysAdmin -> FAFR004 : "Configure Segment-Specific AI Parameters"
+}
+
+rectangle "Client" {
+  actor Client as c
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Get Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Receive Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+  
+  c --> SAFR001 : "Set Alerts"
+  
+}
+
+rectangle "Financial Advisor (FA)" {
+  actor FinancialAdvisor as fa
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: Review Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR001: Manage Mentoring Sessions Based on Insights" as FAFR001
+  
+}
+
+rectangle "System (S)" {
+  actor SystemAdmin as sa
+  usecase "SAFR002: Ensure AI Compliance with Basel III" as SAFR002
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  usecase "SFR013: Manage Client Alerts Based on Predefined Conditions" as SFR013
+  
+}
+
+rectangle "AI System (A)" {
+  actor AISystem as ai
+  usecase "AIFR008: Generate Predictive Intervention Recommendations for Advisors" as AIFR008
+  usecase "AIFR009: Provide Client-Specific Predictive Insights" as AIFR009
+  
+}
+
+client --> CFR002 : "Receive Alerts"
+Client --> CFR003 : "View Financial Predictions"
+Client --> CFR004 : "Get Recommendations"
+Client --> CFR005 : "Manage Preferences"
+Client --> CFR006 : "Spending Limit Alerts"
+Client --> CFR007 : "Investment Opportunities"
+Client --> CFR008 : "News Related to Portfolio"
+Client --> CFR009 : "Dashboard Management"
+Client --> CFR10 : "Advisors Relationship"
+
+client -> SAFR001 : "Set System Parameters"
+financialadvisor --> FAFR002 : "Intervention Alerts"
+financialadvisor --> FAFR003 : "Predictive Analytics Review"
+financialadvisor --> FAFR001 : "Mentoring Sessions"
+
+systemadmin --> SAFR001 : "System Settings Management"
+systemadmin --> SAFR002 : "Compliance with Basel III"
+systemadmin -> AIFR006 : "Anomaly Alerts Generation"
+
+client --|> ai: "Request Data/Analysis"
+ai --|> sfr003: "Predictive Interventions"
+ai --|> aifr001: "Financial Predictions"
+ai --|> aifr002: "Personalized Recommendations"
+ai --|> aifr006: "Anomaly Alerts"
+
+@enduml
+```
+
+### Key Observations:
+- **Client**: Interacts with the system through various use cases (CFR series). They can view dashboards, receive alerts, make recommendations, etc.
+- **Financial Advisor (FA)**: Receives specific alerts and analytics to provide personalized guidance. Can also manage mentoring sessions based on AI insights.
+- **System Administrator (SysAdmin)**: Manages the system’s parameters (SAFR001) and ensures compliance with financial regulations like Basel III (SAFR002).
+- **AI System**: Core component generating predictions, recommendations, alerts, etc., driven by client interactions. It also handles anomaly detection.
+  
+### Relationships:
+- The `Client` uses multiple use cases directly (`CFR001` to `CFR10`). They can set system parameters via `SAFR001`.
+- Financial Advisors leverage specific features like intervention alerts (FAFR002), predictive analytics (FAFR003), and mentoring session management.
+- The System Administrator controls the underlying AI settings (`AIFR006`) and compliance requirements.
+  
+### Inheritance/Extends:
+No explicit inheritance is present. Actors are distinct based on their roles, but some use cases extend system functionalities.
+
+This diagram ensures all required actors and use cases are included with precise IDs and relationships as per the functional specifications provided. Adjustments may be needed if additional details arise from further analysis.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1195]

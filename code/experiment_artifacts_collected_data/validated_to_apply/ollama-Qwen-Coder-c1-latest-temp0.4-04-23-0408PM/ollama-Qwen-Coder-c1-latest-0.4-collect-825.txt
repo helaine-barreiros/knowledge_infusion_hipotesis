@@ -1,0 +1,65 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System: as Sys
+:Financial Advisor: as FAdvisor
+:System Administrator: as SAAdmin
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure analysis parameters for specific client segments" as FAFR004
+  usecase "SFR002: Deliver personalized recommendations to users based on their financial profiles" as SFR002
+  usecase "AIFR001: Generate financial predictions for users by analyzing historical transaction data, market trends, and economic indicators" as AIFR001
+  usecase "SFR013: Request client alerts based on predefined conditions to ensure timely notification of important financial events" as SFR013
+
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  Client --> SAFR001 : "Manage Analysis Parameters"
+  FAdvisor --> FAFR004 : "Configure analysis parameters for specific client segments"
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  Client --> SFR002 : "Receive personalized recommendations aligned with my financial profile and goals"
+  Financial Advisor --> AIFR002 : "Generate personalized recommendations based on users' financial data and preferences"
+  
+  System --> SFR013 : "Deliver alerts to users through appropriate notification channels"
+
+  Client --> SFR005 : "Manage personal recommendation preferences"
+  FAdvisor --> FAFR004 : "Configure analysis parameters for specific client segments"
+}
+
+rectangle "Client Dashboard" {
+  usecase "CFR012: Generate client dashboards that present financial information in an intuitive and actionable format" as CFR012
+  Client -> CFR012 : "View personalized dashboard"
+}
+
+rectangle "Investment Opportunities" {
+  usecase "CFR007: View investment opportunities suitable to my risk profile (as defined under MiFID II or equivalent standards)" as CFR007
+  Financial Advisor --> FAFR003 : "View predictive analytics about client's financial situations"
+  
+  System -> AIFR004 : "Request investment opportunity analysis from the AI component based on each user's risk profiles and time horizons"
+
+}
+
+rectangle "News & Alerts" {
+  usecase "CFR008: View news related to my investment portfolio" as CFR008
+  Financial Advisor --> FAFR013 : "View predictive intervention alerts when system detects patterns requiring professional attention"
+  
+  System -> AIFR007 : "Request contextualized news insights from the AI component based on user portfolios"
+
+}
+
+rectangle "Feedback & Improvement" {
+  usecase "CFR011: Send feedback about the system's recommendations and insights to help improve future outputs" as CFR011
+  Client --> CFR011 : "Send Feedback"
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 674]

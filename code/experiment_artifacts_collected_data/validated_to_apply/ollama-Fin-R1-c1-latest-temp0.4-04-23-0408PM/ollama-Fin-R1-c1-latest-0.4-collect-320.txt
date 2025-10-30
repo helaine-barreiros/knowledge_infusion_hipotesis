@@ -1,0 +1,80 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  User --> CFR001 : "Client, Financial Advisor"
+  
+  SysAdmin --> SAFR001 : "System Administrator"
+  
+  FAFR003 <|-- (CFR001) : label="Provides context for client dashboards"
+  
+  rectangle "User Interface" {
+    usecase "View Alerts" as ViewAlerts
+    usecase "Receive Recommendations" as ReceiveRecommendations
+    usecase "Set Personalized Preferences" as SetPreferences
+    
+    User --> ViewAlerts : "Client, Financial Advisor"
+    Client --> ViewAlerts : "Client only"
+    
+    User --> ReceiveRecommendations : "Client, Financial Advisor"
+  
+  }
+}
+
+rectangle "System Components" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Investment Opportunity Analysis" as AIFR004
+  
+  Sys --> AIFR001 : "System"
+  
+  SFR002 <|-- (AIFR002) : label="Personalized recommendations based on user profiles"
+  
+  SAFR001 <|-- (AIFR003) : label="Adjust spending limits per analysis parameters"
+  
+  AIFR004 <|-- (SFR006) : label="Identify investments matching risk profile and goals"
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The main system is enclosed in a rectangle labeled "System". Inside, use cases are grouped into logical components.
+  
+1. **Client Use Cases** (`CFR*`):
+   - `View Financial Insights Dashboard (CFR001)`: Clients can view financial data dashboards.
+   - `Receive Alerts (CFR002)`, `Predictions (CFR003)`, etc.: Various client-related functionalities are linked to the system through user interactions.
+
+2. **System Administrator Use Cases** (`SAFR*`):
+   - `Manage Analysis Parameters (SAFR001)`: System Admins can adjust parameters for AI algorithms, ensuring compliance and accuracy.
+  
+3. **Financial Advisor Use Cases** (`FAFR*`):
+   - `View Predictive Analytics (FAFR003)` ties into client dashboards for more informed guidance.
+
+4. **User Interface Interactions**: 
+   - Users (Clients/Advisors) interact with the system via interfaces like "View Alerts" and "Receive Recommendations".
+
+5. **System Components (`AIFR*`)**:
+   - AI-driven use cases handle core functionalities such as generating predictions, recommendations, alerts, etc., which are requested by the main system.
+
+6. **Relationships**:
+   - Arrows indicate direct interactions (e.g., `User --> CFR001`). Inheritance is shown with `<|--`, like how client dashboards derive from predictive analytics (`FAFR003 <|-- (CFR001)`).
+
+This structure ensures clarity and adherence to the provided requirements, grouping related use cases under their respective actors. The system boundary clarifies which components are part of the AI-powered analysis & insights framework. 
+
+### Notes:
+- Actors like "User" encompass all roles (`Client`, `Financial Advisor`, `System Administrator`) as specified in the requirements.
+- Relationships between use cases and components (e.g., inheritance) align with logical dependencies derived from the functional descriptions.
+
+[Done: True
+Done Reason: stop
+Eval Count: 880]

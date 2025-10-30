@@ -1,0 +1,49 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Preferences (Client)" as SAFR002
+  usecase "SFR009: Deliver Contextualized News to Users" as SFR009
+
+  Client --> CFR001 : "View Financial Insights"
+  Client --> SAFR002 : "Manage Personalization"
+  Client --> SFR009 : "Receive Relevant News"
+
+  SysAdmin -->> SAFR002 : "Configure System-Wide Preferences"
+
+  rectangle "AI" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+    Client --> AIFR001 : "Request Predictive Analysis"
+    Client --> AIFR007 : "Request News Correlation"
+
+  }
+
+}
+
+@enduml
+```
+
+### Explanation:
+- **Actors**: The diagram includes three main actors: `Client`, `SysAdmin` (System Administrator), and an implicit role for Financial Advisors (`FAFR`). However, based on the provided requirements, only explicit references to these roles are included. For example, CFR010 mentions managing relationships with financial advisors but doesn't explicitly create a separate actor; thus, it's inferred as part of client interactions.
+- **Use Cases**: 
+  - `CFR001` (Client) – View Financial Insights Dashboard
+  - `SAFR002` (SysAdmin) – Manage User Preferences for Clients
+  - `SFR009` (System) – Deliver Contextualized News to Users
+- **Relationships**:
+  - Client interacts with the system through multiple use cases, such as viewing dashboards and receiving personalized recommendations.
+  - SysAdmin configures preferences via SAFR002.
+  - The AI component generates predictions (`AIFR001`) and contextualized news insights (`AIFR007`), which are then delivered to clients by the system.
+
+### Notes:
+- Some requirements (e.g., FAFR series) relate to financial advisors but aren't directly represented as separate actors here because they're either implied within client interactions or not explicitly detailed in use cases. The focus is on high-level interactions between clients, administrators, and the AI/system.
+- Inheritance relationships are minimal since most use cases are direct actor-to-use case links. Packages could be expanded if more granularity was needed (e.g., grouping all financial-related use cases under a "Finance" package). However, based on provided requirements, this structure suffices for clarity.
+
+[Done: True
+Done Reason: stop
+Eval Count: 608]

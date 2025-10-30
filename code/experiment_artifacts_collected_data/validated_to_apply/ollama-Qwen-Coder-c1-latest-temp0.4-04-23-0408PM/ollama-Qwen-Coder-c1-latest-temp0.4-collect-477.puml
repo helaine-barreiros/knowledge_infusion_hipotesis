@@ -1,0 +1,68 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Clients" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Preferences for Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  C --> (View Alerts about Anomalous Transactions)
+  C --> (Receive Recommendations aligned with Goals)
+  C --> (Manage Preferences for Recommendations)
+  C --> (View Spending Limit Alerts)
+  C --> (Access Personalized Dashboard)
+}
+
+package "Financial Advisors" {
+  actor FinancialAdvisor as FA
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts for Clients" as FAFR002
+  usecase "FAFR003: View Predictive Analytics about Financial Situations" as FAFR003
+  
+  FA --> (Manage Client Mentoring Sessions)
+  FA --> (View Intervention Alerts for Clients)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SA
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "CFR11: Send Feedback about Recommendations and Insights" as CFR11
+  
+  SA --> (Manage Analysis Parameters)
+}
+
+rectangle AIComponent {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  useusecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Generate Anomaly Transaction Alerts" as AIFR005
+  
+  C --> (Generate Financial Predictions)
+  C --> (Generate Personalized Recommendations)
+  C --> (Generate Spending Limit Alerts)
+  
+  FA --> (Generate Investment Opportunity Analyses)
+}
+
+rectangle System {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  
+  C --> (Deliver Alerts to Users)
+  FA --> (Deliver Personalized Recommendations)
+}
+
+@enduml

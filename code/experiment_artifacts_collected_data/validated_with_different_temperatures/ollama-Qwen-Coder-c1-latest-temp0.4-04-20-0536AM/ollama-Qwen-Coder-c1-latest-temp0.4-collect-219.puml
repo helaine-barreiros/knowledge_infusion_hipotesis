@@ -1,0 +1,88 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Financial Insights & Recommendations System
+
+package Client {
+  actor "Client" as Client
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Anomaly Transaction Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  Client --> (SAFR002)
+  Client --> (SFR013)
+  Client --> (AIFR006)
+  Client --> (AIFR007)
+}
+
+package System {
+  actor "System Administrator" as SysAdmin
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SysAdmin --> (SFR023)
+  
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+    
+    SysAdmin --> (SAFR001)
+  }
+  
+  rectangle "Notification Component" {
+    usecase "SFR023: Deliver Alerts to Users" as SFR023
+  }
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  FAFR --> (SFR016)
+}
+
+package System {
+  
+  rectangle "Contextualized News Component" {
+    usecase "SFR025: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR025
+    usecase "SFR026: Process Contextualized News to Extract Information for Users' Financial Situations" as SFR026
+    
+  }
+  
+}
+
+package System {
+  
+  rectangle "Dashboard Component" {
+    usecase "SFR12: Generate Client Dashboards" as SFR12
+  }
+  
+  
+}
+rectangle "System Boundary" {
+Client --> (CFR009)
+Client --> (AIFR007)
+FAFR --> (FAFR03)
+SAFR005 <|-- SAFR004
+
+}
+
+@enduml

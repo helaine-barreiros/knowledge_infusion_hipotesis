@@ -1,0 +1,68 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+}
+
+package "System Administrator" {
+  actor SysAdmin as SAFR003
+}
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR004
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR002
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR003
+  usecase "SFR001: Deliver Alerts to Users" as SFR004
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR005
+}
+
+CFR001 --> CFR004 : View Financial Insights Dashboard
+CFR001 --> SAFR002 : Manage Analysis Parameters Preferences
+CFR001 --> SFR004 : Receive Alerts (Anomalous Transactions)
+CFR001 --> AIFR006 : Request Anomaly Transaction Alerts
+
+FAFR002 --> FAFR003 : View Client Intervention Alerts
+FAFR002 --> SAFR002 : Configure Analysis Parameters for Specific Clients
+FAFR002 --> SFR004 : Receive Alerts (Client Interventions)
+CFR001 --> AIFR006 : Request Anomaly Transaction Alerts
+
+SysAdmin --> SAFR002 : Manage System-Wide Analysis Parameters
+SFR004 --> CFR001 : Deliver Financial Insights Dashboard Alerts
+AIFR005 --> SFR004 : Generate and Deliver Anomaly Transaction Alerts
+
+rectangle "Components" {
+  usecase "AI Component" as AIC
+}
+
+CFR001 --> AIC : Request Financial Predictions
+CFR001 --> AIC : Request Personalized Recommendations
+FAFR002 --> AIC : Request Client Intervention Insights
+SFR004 --> AIC : Request Contextualized News Insights
+
+AIFR005 <|-- SAFR002 : Customizes Alerts for Specific Clients
+SAFR003 <|-- FAFR001 : Manages System-Wide Analysis Parameters
+FAFR003 <|-- SFR004 : Provides Predictive Analytics to Financial Advisors
+SFR007 --> AIC : Request Investment Opportunities Matching User Criteria
+
+rectangle "System Boundaries" {
+  usecase "User Interface (UI)" as UI
+}
+
+CFR001 --> UI : Interact with System
+FAFR002 --> UI : Interact with System
+SysAdmin --> UI : Manage System Settings
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 614]

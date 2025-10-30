@@ -1,0 +1,106 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Clients" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive FATF Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR017: Access Consolidated Dashboard" as CFR017
+  
+  C --> (CFR001)
+  C --> (CFR002)
+  C --> (CFR003)
+  C --> (CFR004)
+  C --> (CFR005)
+  C --> (CFR006)
+  C --> (CFR17)
+}
+
+package "Financial Advisors" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  
+  FA --> (FAFR001)
+  FA --> (FAFR002)
+  FA --> (FAFR003)
+}
+
+package "System Admins" {
+  actor SystemAdmin as SA
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SA --> (SAFR001)
+}
+
+rectangle "AI System" {
+  package "Alert Generation" {
+    usecase "SFR001: Deliver Alerts" as SFR001
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    
+    C --> (SFR001)
+    FA --> (SFR001)
+    SA --> (SFR001)
+  }
+  
+  package "Recommendation Generation" {
+    usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    
+    C --> (SFR002)
+    FA --> (SFR002)
+  }
+  
+  package "Prediction Generation" {
+    usecase "SFR003: Request Financial Predictions" as SFR003
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    
+    C --> (SFR003)
+    FA --> (SFR003)
+  }
+  
+  package "Spending Limit Alerts Generation" {
+    usecase "SFR005: Request Spending Limit Alerts" as SFR005
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    
+    C --> (SFR005)
+  }
+  
+  package "Investment Opportunity Analysis Generation" {
+    usecase "SFR006: Request Investment Opportunities" as SFR006
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    
+    C --> (SFR006)
+  }
+  
+  package "Contextualized News Generation" {
+    usecase "SFR008: Request Contextualized News" as SFR008
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    
+    C --> (SFR008)
+  }
+  
+  package "Client Dashboard Generation" {
+    usecase "SFR12: Generate Client Dashboards" as SFR12
+    usecase "AIFR009: Generate Financial Health Reports" as AIFR009
+    
+    C --> (SFR12)
+  }
+}
+
+package "User Feedback Management" {
+  usecase "CFR11: Send Feedback" as CFR11
+  
+  C --> (CFR11)
+}
+@enduml

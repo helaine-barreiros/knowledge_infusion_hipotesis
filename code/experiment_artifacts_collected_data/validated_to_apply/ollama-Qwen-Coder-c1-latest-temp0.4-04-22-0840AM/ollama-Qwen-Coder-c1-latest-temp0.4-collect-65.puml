@@ -1,0 +1,89 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR005: Manage Recommendations Preferences" as SAFR005
+  
+  Client --> CFR001
+  Client --> SAFR005
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  
+  FinancialAdvisor --> FAFR002
+  FinancialAdvisor --> FAFR003
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SystemAdmin --> SAFR001
+}
+
+package "Notifications & Alerts (SFR)" {
+  usecase "SFR001: Deliver Alerts" as SFR001
+  
+  Client --> SFR001
+  FinancialAdvisor --> SFR001
+  SystemAdministrator --> SFR001
+}
+
+package "Recommendations (SAFR, FAFR, AIFR)" {
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  Client --> SFR002
+  FinancialAdvisor --> FAFR004
+}
+
+package "Predictive Analytics & Insights (SAFR, AIFR)" {
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+  
+  Client --> SFR013
+  FinancialAdvisor --> AIFR009
+}
+
+package "Investment Opportunities & News (FAFR, AIFR)" {
+  usecase "FAFR007: View Investment Opportunities Suitable to Risk Profile" as FAFR007
+  usecase "SFR008: Find Contextualized News Relevant to Financial Portfolios" as SFR008
+  
+  Client --> FAFR007
+  Client --> SFR008
+}
+
+package "Spending Limits & Alerts (AIFR)" {
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+  
+  Client --> AIFR003
+}
+
+rectangle "System Components" {
+  usecase "SFR12: Generate Client Dashboards" as SFR12
+  usecase "SFR19: Maintain Historical Record of User Insights" as SFR19
+  
+  SystemAdministrator --> SFR12
+  SystemAdministrator --> SFR19
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  usecase "AIFR005: Generate Investment Opportunities Based on Modern Portfolio Theory Principles" as AIFR005
+  
+  Client --> AIFR001
+  FinancialAdvisor --> AIFR005
+}
+
+rectangle "Feedback & Improvement (CFR)" {
+  usecase "SAFR020: Manage User Feedback to Improve Recommendations" as SAFR020
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations Based on Patterns" as AIFR008
+  
+  CFR11 --> SAFR020
+  CFR11 --> AIFR008
+}
+@enduml

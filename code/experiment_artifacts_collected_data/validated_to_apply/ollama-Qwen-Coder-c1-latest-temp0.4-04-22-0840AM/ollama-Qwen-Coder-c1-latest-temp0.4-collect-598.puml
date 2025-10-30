@@ -1,0 +1,64 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+  
+  usecase "CFR002: View Alerts" as SAFR004 <|-- (SAFR003)
+  usecase "CFR009: Access Personalized Dashboard" as SFR012
+  usecase "CFR010: Manage Relationship with Advisors" as FAFR005
+  
+  CFR001 --> SAFR004 : View Alerts about anomalous transactions.
+  CFR001 --> SFR012 : Access personalized dashboard for financial information consolidation.
+  CFR001 --> FAFR005 : Manage relationship with Financial Advisors.
+}
+
+package System {
+  actor "System" as SFR003
+  
+  usecase "SFR004: Deliver Personalized Recommendations" as AIFR002
+  usecase "SFR006: Request Investment Opportunity Analysis" as AIFR004
+  usecase "SFR017: Generate Financial Health Reports" as SAFR005
+  
+  SFR003 --> AIFR002 : Deliver personalized recommendations based on financial profiles.
+  SFR003 --> AIFR004 : Request investment opportunity analysis for users.
+  SFR003 --> SAFR005 : Generate financial health reports assessing overall financial wellbeing.
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts" as AIFR006
+  usecase "FAFR003: View Predictive Analytics" as AIFR009
+  usecase "FAFR004: Configure Analysis Parameters for Segments" as SAFR001
+  
+  FAFR001 --> AIFR006 : View alerts requiring professional attention.
+  FAFR001 --> AIFR003 : View predictive analytics about clients' financial situations.
+  FAFR001 --> SAFR001 : Configure analysis parameters for specific client segments.
+}
+
+package AI {
+  actor "AI System" as AIFR001
+  
+  usecase "AIFR002: Generate Personalized Recommendations" as SFR004
+  usecase "AIFR003: Generate Spending Limit Alerts" as SAFR006
+  usecase "AIFR005: Generate Investment Opportunity Analyses" as FAFR004
+  
+  AIFR001 --> SFR004 : Generate personalized recommendations for users.
+  AIFR001 --> SAFR006 : Generate spending limit alerts based on unusual deviations from established patterns.
+  AIFR001 --> FAFR004 : Generate investment opportunity analyses tailored to user risk profiles and financial goals.
+}
+
+package SystemAdministrator {
+  actor "System Administrator" as SAFR001
+  
+  usecase "SAFR002: Manage Analysis Parameters for AI System" as SFR005
+  usecase "CFR011: Send Feedback about Recommendations" as AIFR007
+  
+  SAFR001 --> SFR005 : Manage analysis parameters to ensure compliance and accuracy.
+  SAFR001 --> AIFR007 : Receive feedback from users to improve system outputs.
+}
+
+@enduml

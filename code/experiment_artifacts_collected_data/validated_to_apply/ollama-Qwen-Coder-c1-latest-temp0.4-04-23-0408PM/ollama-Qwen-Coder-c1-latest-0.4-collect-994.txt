@@ -1,0 +1,153 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Financial Insights & Advisory System
+
+package "Clients" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Anomaly Transaction Alerts" as CFR002
+  usecase "CFR003: View Predictive Analytics" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  C --> (View Alerts)
+}
+
+package "Financial Advisors" {
+  actor Advisor as A
+
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  A --> (Client Mentoring)
+}
+
+package "System Administrator" {
+  actor SysAdmin as SA
+
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR020: Manage User Feedback" as SFR020
+  
+  SA --> (Manage Params)
+}
+
+package "System Components" {
+  rectangle System as SysComp {
+    usecase "SFR001: Deliver Alerts to Users" as SFR001
+    usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+    usecase "SFR003: Request Financial Predictions from AI" as SFR003
+    usecase "SFR004: Request Personalized Recommendations from AI" as SFR004
+    usecase "SFR005: Request Spending Limit Alerts from AI" as SFR005
+    usecase "SFR006: Request Investment Opportunity Analysis from AI" as SFR006
+    usecase "SFR007: Request Specific Investment Opportunities from AI" as SFR007
+    usecase "SFR008: Request Anomaly Transaction Alerts from AI" as SFR008
+    usecase "SFR009: Find Contextualized News Relevant to Portfolio" as SFR009
+    usecase "SFR010: Process Contextualized News for Users" as SFR010
+    usecase "SFR011: Request Contextualized News Insights from AI" as SFR011
+    usecase "SFR012: Generate Client Dashboards" as SFR012
+    usecase "SFR013: Generate Client Alerts Based on Conditions" as SFR013
+    usecase "SFR014: Generate Client Analytics for Insights" as SFR014
+    usecase "SFR015: Request Predictive Intervention Analyses from AI" as SFR015
+    usecase "SFR016: Request Predictive Insights from AI" as SFR016
+    usecase "SFR017: Generate Financial Health Reports" as SFR017
+    usecase "SFR018: Manage Users' Financial Goals" as SFR018
+    usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  
+    SysComp --> (Alerts)
+  }
+}
+
+package "AI System Components" {
+  rectangle AI as AIComp {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities Based on Strategies" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+  
+    AI --> (Predictions)
+  }
+}
+
+package "Notifications" {
+  rectangle Notifications as NotifComp {
+    usecase "SFR013: Deliver Alerts to Users" as SFR013
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  
+    NotifComp --> (Alerts)
+  }
+}
+
+package "Recommendations" {
+  rectangle Recommendations as RecompComp {
+    usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  
+    RecompComp --> (Reco)
+  }
+}
+
+package "Predictive Insights" {
+  rectangle PredictInsights as PredicInsightComp {
+    usecase "SFR016: Request Predictive Insights from AI" as SFR016
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+  
+    PredicInsightComp --> (Pred)
+  }
+}
+
+C --> CFR001 : View Financial Dashboard
+C --> CFR002 : Receive Alerts
+C --> CFR003 : View Analytics
+C --> CFR004 : Receive Recommendations
+C --> CFR005 : Manage Preferences
+C --> CFR006 : View Spending Limits
+C --> CFR007 : View Investment Opportunities
+C --> CFR008 : Receive News
+C --> CFR009 : Access Dashboard
+C --> CFR10 : Manage Relationships
+
+A --> FAFR001 : Mentoring Sessions
+A --> FAFR002 : Intervention Alerts
+A --> FAFR003 : Predictive Analytics for Clients
+A --> FAFR004 : Configure Analysis Parameters
+
+SA --> SAFR001 : Manage Params
+SA --> SFR020 : Manage Feedback
+
+SysComp --> C : Deliver Alerts
+SysComp --> A : Deliver Recommendations
+SysComp --> SA : Manage Params
+
+AI --> SysComp : Generate Predictions
+AI --> RecompComp : Generate Recommendations
+AI --> PredicInsightComp : Generate Insights
+
+NotifComp <|-- SFR013
+NotifComp <|-- AIFR006
+
+RecompComp <|-- SFR002
+RecompComp <|-- AIFR002
+
+PredicInsightComp <|-- SFR016
+PredicInsightComp <|-- AIFR009
+
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 1689]

@@ -1,0 +1,108 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "AIFR005: Generate Investment Opportunities for Users" as AIFR005
+
+  actor "Client" as Client {
+    --> CFR001 : "View Financial Insights Dashboard"
+    --> SFR009 : "Request Contextualized News Relevant to Portfolio"
+    --> CFR004 : "Receive Personalized Recommendations"
+    --> SAFR001 : "Manage Analysis Parameters"
+  }
+  
+  actor "Financial Advisor" as FAFR {
+    --> FAFR002 : "View Client Intervention Alerts"
+    --> AIFR008 : "Generate Predictive Intervention Recommendations for Clients"
+    --> CFR004 : "Receive Personalized Recommendations"
+    -->> SFR013 : "Manage User Feedback" (indirect via system)
+  }
+
+  actor "System Administrator" as SysAdmin {
+    --> SAFR001 : "Manage Analysis Parameters"
+    --> AIFR002 : "Generate Personalized Recommendations for Users"
+  }
+  
+  actor "User" as User {
+    -->> CFR011: Send Feedback
+  }
+
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+  Client --> SFR008 : "Request Specific Investment Opportunities"
+  
+  SysAdmin <|-- SAFR001 : <<extends>>
+}
+
+@enduml
+```
+
+**Key Observations and Relationships in the Diagram:**
+- **Client**: Can view financial dashboards, receive personalized recommendations (CFR004), manage analysis parameters via system admin. Also requests contextualized news.
+- **Financial Advisor**: Views client alerts, receives predictive interventions from AI, manages user feedback indirectly through the system.
+- **System Administrator**: Manages analysis parameters and generates recommendations for users.
+- Inheritance: `SysAdmin` extends `SAFR001`, indicating they can perform all actions of a System Admin plus possibly more detailed parameter management. However, in this case, it's explicitly stated as extending SAFR001 (Manage Analysis Parameters).
+- **Use Cases** grouped by actor for clarity.
+- Indirect relationships like the user sending feedback (`CFR011`) are represented with double arrows to indicate a flow but not direct interaction.
+
+This structure ensures all actors and use cases from the requirements are accurately mapped, respecting their exact IDs and names. Relationships between them (e.g., client-to-use case) are clearly defined for easy understanding of system interactions.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "AIFR005: Generate Investment Opportunities for Users" as AIFR005
+
+  actor "Client" as Client {
+    --> CFR001 : "View Financial Insights Dashboard"
+    --> SFR009 : "Request Contextualized News Relevant to Portfolio"
+    --> CFR004 : "Receive Personalized Recommendations"
+    --> SAFR001 : "Manage Analysis Parameters"
+  }
+  
+  actor "Financial Advisor" as FAFR {
+    --> FAFR002 : "View Client Intervention Alerts"
+    --> AIFR008 : "Generate Predictive Intervention Recommendations for Clients"
+    --> CFR004 : "Receive Personalized Recommendations"
+    -->> SFR013 : "Manage User Feedback" (indirect via system)
+  }
+
+  actor "System Administrator" as SysAdmin {
+    --> SAFR001 : "Manage Analysis Parameters"
+    --> AIFR002 : "Generate Personalized Recommendations for Users"
+  }
+  
+  actor "User" as User {
+    -->> CFR011: Send Feedback
+  }
+
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+  Client --> SFR008 : "Request Specific Investment Opportunities"
+  
+  SysAdmin <|-- SAFR001 : <<extends>>
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1146]

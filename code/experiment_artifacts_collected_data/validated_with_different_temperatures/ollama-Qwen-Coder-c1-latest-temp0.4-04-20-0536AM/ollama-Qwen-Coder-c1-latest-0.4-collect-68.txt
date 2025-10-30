@@ -1,0 +1,119 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+  usecase "CFR002: View Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  CFR001 --> CFR002 : "Receive Alerts"
+  CFR001 --> CFR003 : "View Predictions"
+  CFR001 --> CFR004 : "Get Recommendations"
+  CFR001 --> CFR005 : "Manage Preferences"
+  CFR001 --> CFR006 : "Spending Limits"
+  CFR001 --> CFR007 : "Investment Opportunities"
+  CFR001 --> CFR008 : "View News"
+  CFR001 --> CFR009 : "Access Dashboard"
+  CFR001 --> CFR10 : "Manage Advisors"
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Clients" as FAFR004
+  
+  FAFR001 --> FAFR002 : "Client Alerts"
+  FAFR001 --> FAFR003 : "Predictive Analytics"
+  FAFR001 --> FAFR004 : "Configure Parameters"
+}
+
+package System {
+  actor "System" as SFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts from AI" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from AI" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities from AI" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI" as SFR008
+  usecase "SFR009: Find Contextualized News Relevant to Portfolio" as SFR009
+  usecase "SFR10: Process Contextualized News for Users" as SFR10
+  usecase "SFR11: Request Contextualized News Insights from AI" as SFR11
+  usecase "SFR12: Generate Client Dashboards" as SFR12
+  usecase "SFR13: Generate Client Alerts Based on Conditions" as SFR13
+  usecase "SFR14: Generate Client Analytics" as SFR14
+  usecase "SFR15: Request Predictive Intervention Analyses from AI" as SFR15
+  usecase "SFR16: Request Predictive Insights from AI" as SFR16
+  usecase "SFR17: Generate Financial Health Reports" as SFR17
+  usecase "SFR18: Manage Users' Financial Goals" as SFR18
+  usecase "SFR19: Maintain Historical Record of User Insights" as SFR19
+  usecase "SFR20: Manage User Feedback for Improvement" as SFR20
+  
+  SFR001 --> SFR002 : "Deliver Recommendations"
+  SFR001 --> SFR003 : "Request Predictions"
+  SFR001 --> SFR004 : "AI Recommendations"
+  SFR001 --> SFR005 : "Spending Alerts"
+  SFR001 --> SFR006 : "Investment Analysis"
+  SFR001 --> SFR007 : "Specific Investments"
+  SFR001 --> SFR008 : "Anomaly Alerts"
+  SFR001 --> SFR009 : "Find News Relevant to Portfolio"
+  SFR001 --> SFR10 : "Process News for Users"
+  SFR001 --> SFR11 : "Request Insights from AI"
+  SFR001 --> SFR12 : "Generate Dashboards"
+  SFR001 --> SFR13 : "Client Alerts Based on Conditions"
+  SFR001 --> SFR14 : "Generate Analytics"
+  SFR001 --> SFR15 : "Predictive Interventions"
+  SFR001 --> SFR16 : "Request Predictive Insights from AI"
+  SFR001 --> SFR17 : "Financial Health Reports"
+  SFR001 --> SFR18 : "Manage Financial Goals"
+  SFR001 --> SFR19 : "Maintain Historical Record of User Insights"
+  SFR001 --> SFR20 : "User Feedback for Improvement"
+}
+
+package AI {
+  actor "AI" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations Based on Industry Standards" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts by Identifying Unusual Deviations" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+  usecase "AIFR005: Identify Financial Instruments Aligning with User Strategies and Modern Portfolio Theory" as AIFR005
+  usecase "AIFR006: Generate Anomaly Transaction Alerts by Employing Pattern Recognition" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights Correlating Financial News with User Portfolios" as AIFR007
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations by Identifying Patterns Indicating Potential Issues or Opportunities Requiring Advisor Engagement" as AIFR008
+  usecase "AIFR009: Provide Forward-Looking Analysis of Financial Situations to Support More Effective Planning" as AIFR009
+  
+  SFR004 --> AIFR002 : "Generate Recommendations"
+  SFR005 --> AIFR003 : "Spending Alerts"
+  SFR006 --> AIFR004 : "Investment Analysis"
+  SFR017 --> AIFR005 : "Financial Instruments"
+  SFR008 --> AIFR006 : "Anomaly Alerts"
+  SFR009 --> AIFR007 : "Contextualized News Insights"
+  SFR13 --> AIFR008 : "Predictive Intervention Recommendations"
+  SFR16 --> AIFR009 : "Forward-Looking Analysis"
+}
+
+rectangle "System" {
+  CFR002 <|-- (SFR001)
+  FAFR002 <|-- (SFR001)
+  CFRAFR003 <|-- (AIFR008)
+  AIFR004 <|-- (FAFR003)
+}
+
+@enduml
+```
+
+This PlantUML code creates a comprehensive use case diagram for the AI-Powered Analysis & Insights System, accurately representing all actors and use cases with their exact IDs and names as given in the requirements. The diagram is structured into packages to group related actors and use cases logically.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1858]

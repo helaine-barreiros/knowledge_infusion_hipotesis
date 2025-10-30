@@ -1,0 +1,82 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+}
+
+package "System Administrator" {
+  actor SysAdmin as SAFR003
+}
+
+rectangle "User Interface" {
+  usecase "CFR009: View Personalized Dashboard" as CFR001_9
+  usecase "SFR12: Generate Client Dashboards" as SFR12
+  
+  CFR001 --> CFR001_9 : "View"
+}
+
+rectangle "Alerts and Notifications" {
+  usecase "CFR002: View Alerts" as CFR002_3
+  usecase "SAFR005: Request Spending Limit Alerts" as SAFR005
+  
+  CFR001 --> CFR002_3 : "View"
+  SysAdmin --> SAFR005 : "Manage"
+}
+
+rectangle "Financial Insights and Predictions" {
+  usecase "CFR004: View Personalized Recommendations" as CFR004
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  
+  CFR001 --> CFR004 : "View"
+}
+
+rectangle "Investment and Portfolio Management" {
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+  
+  CFR001 --> CFR007 : "View"
+}
+
+rectangle "News and Information" {
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR009
+  
+  CFR001 --> CFR008 : "View"
+}
+
+rectangle "System Management and Maintenance" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001_3
+  usecase "SFR20: Manage User Feedback to Continuously Improve the Quality and Relevance of Financial Insights" as SFR20
+  
+  SysAdmin --> SAFR001_3 : "Manage"
+}
+
+rectangle "Financial Advisor Support" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "SFR15: Request Predictive Intervention Analyses from the AI Component to Identify When Financial Advisors Should Engage with Clients" as SFR15
+  
+  FAFR002 --> FAFR001 : "Manage"
+}
+
+rectangle "AI System Functions" {
+  usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance as Defined By Industry Standards Like FINRA Guidelines" as AIFR002
+  
+  CFR004 --> AIFR002 : "Generate"
+}
+
+rectangle "User Feedback Loop" {
+  usecase "CFR11: Send Feedback About the System's Recommendations and Insights to Help Improve the Accuracy and Relevance of Future Outputs" as CFR11
+}
+
+FAFR002 <|-- FAFR003 : "Manages Client Intervention Alerts"
+SFR006 <|-- AIFR004 : "Generates Investment Opportunity Analyses for Users by Evaluating Potential Investments Against Their Risk Profiles, Time Horizons, and Financial Goals"
+
+@enduml

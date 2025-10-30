@@ -1,0 +1,67 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SFR002
+  usecase "CFR005: Manage Recommendation Preferences" as CFR010
+  usecase "CFR006: View Spending Limit Alerts" as SFR005
+  
+  Client --> SAFR003 : "View"
+  Client --> SFR002 : "Receive"
+  Client --> CFR010 : "Manage"
+  Client --> SFR005 : "View"
+}
+
+package "Financial Advisor (FA)" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR003: View Predictive Analytics" as SAFR004
+  usecase "FAFR002: Manage Client Mentoring Sessions" as AIFR008
+  usecase "FAFR005: Configure Analysis Parameters for Specific Segments" as SFR016
+  
+  FinancialAdvisor --> SAFR003 : "View"
+  FinancialAdvisor --> FAFR002 : "Manage"
+  FinancialAdvisor --> SAFR004 : "View"
+  FinancialAdvisor --> AIFR008 : "Generate Recommendations"
+}
+
+package "System" {
+  actor System as SFR013
+  
+  usecase "SFR006: Request Investment Opportunity Analysis" as AIFR002
+  usecase "SFR007: Generate Client Alerts Based on Predefined Conditions" as SAFR008
+  usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios" as AIFR007
+  
+  System --> SFR013 : "Deliver"
+  System --> AIFR002 : "Request Analysis"
+  System --> SAFR008 : "Generate Alerts"
+  System --> AIFR007 : "Find News Insights"
+}
+
+package "AI" {
+  actor AI as AIFR009
+  
+  usecase "AIFR001: Generate Financial Predictions" as SFR003
+  usecase "AIFR002: Generate Personalized Recommendations" as SFR004
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as SAFR008
+  
+  AI --> AIFR001 : "Generate Predictions"
+  AI --> AIFR002 : "Generate Recommendations"
+  AI --> SAFR008 : "Generate Alerts"
+}
+
+package "User (Client, Financial Advisor, or System Administrator)" {
+  actor User as CFR011
+  
+  usecase "CFR011: Send Feedback" as SFR020
+  
+  User --> SFR020 : "Send"
+}
+
+@enduml

@@ -1,0 +1,86 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations Based on Financial Profile and Goals" as SFR002
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR010
+  
+  Client --> (SAFR003)
+  Client --> (SFR002)
+  Client --> (CFR010)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as SAFR005
+  
+  FinancialAdvisor --> (FAFR001)
+  FinancialAdvisor --> (SAFR005)
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR001
+  usecase "SAFR004: Configure Analysis Parameters for Specific Client Segments" as SAFR006
+  
+  SystemAdministrator --> (SAFR001)
+  SystemAdministrator --> (SAFR005)
+}
+
+package "System Components" {
+  rectangle "Notification Service" {
+    usecase "SFR003: Deliver Alerts to Users Through Appropriate Notification Channels" as SFR003
+  }
+  
+  rectangle "Recommendation Engine" {
+    usecase "SFR002: Deliver Personalized Recommendations Based on Financial Profiles" as SFR004
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+    
+    RecommendationEngine --> (SFR004)
+    RecommendationEngine --> (AIFR002)
+  }
+  
+  rectangle "Prediction Engine" {
+    usecase "SFR003: Request Financial Predictions from the AI Component" as SFR017
+    usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+    
+    PredictionEngine --> (SFR017)
+    PredictionEngine --> (AIFR001)
+  }
+  
+  rectangle "Insight Engine" {
+    usecase "SFR003: Request Investment Opportunity Analysis from the AI Component" as SFR025
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+    
+    InsightEngine --> (SFR025)
+    InsightEngine --> (AIFR004)
+  }
+  
+  rectangle "News Service" {
+    usecase "SFR013: Request Contextualized News Insights from the AI Component to Identify Potential Impacts on Users' Investments" as SFR018
+    usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios" as AIFR007
+    
+    NewsService --> (SFR018)
+    NewsService --> (AIFR007)
+  }
+  
+  rectangle "Feedback Service" {
+    usecase "CFR011: Send Feedback about the System's Recommendations and Insights to Help Improve Future Outputs" as CFR011
+    usecase "AIFR009: Generate Client Predictive Intervention Recommendations by Identifying Patterns That Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR008
+    
+    FeedbackService --> (CFR011)
+    FeedbackService --> (AIFR008)
+  }
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 801]

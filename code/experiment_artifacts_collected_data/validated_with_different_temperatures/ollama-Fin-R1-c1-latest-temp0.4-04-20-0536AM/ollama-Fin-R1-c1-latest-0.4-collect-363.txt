@@ -1,0 +1,120 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+  user --> CFR001 : "Client"
+  SysAdmin --> SAFR001 : "System Administrator"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+
+  user --> FAFR002 : "Client"
+}
+
+rectangle "System (SFR)" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  usecase "SFR007: Request Investment Opportunity Analysis from AI Component" as SFR007
+
+  SysAdmin --> SAFR001 : "Manage analysis parameters"
+}
+
+rectangle "AI System (AIFR)" {
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+
+  SFR --> AIFR003 : "Request spending limit alerts"
+}
+
+rectangle "Client (CFR)" {
+  usecase "CFR011: Send Feedback to System" as CFR011
+}
+@enduml
+```
+
+**Explanation of the Diagram Structure:**
+
+- **System Boundary:** The main system is represented by a rectangle labeled "System," which includes core functionalities like delivering alerts, generating recommendations, and requesting analyses from AI components.
+  
+- **Client (CFR):**
+  - `CFR001` allows clients to view financial insights dashboards.
+  - `SAFR001` enables system administrators to manage analysis parameters for the AI system.
+  - A client can request a dashboard (`CFR001`) directly, while an administrator manages settings via `SAFR001`.
+
+- **Financial Advisor (FAFR):**
+  - Advisors access alerts and predictive analytics about clients through their roles. For example:
+    - `FAFR002` provides intervention alerts.
+    - `FAFR003` shows predictive financial analyses.
+
+- **System Subsystems:**
+  - The "SFR" component handles alert delivery, investment opportunity requests, etc., interacting with both the AI and client/advisor systems. For instance:
+    - `SFR001` sends alerts to users.
+    - `AIFR003` generates spending limit alerts based on SFR's requests.
+
+- **AI System (AIFR):**
+  - The AI component creates personalized recommendations (`AIFR002`) and spending limit alerts (`AIFR003`). These are triggered by the system or client actions.
+  
+- **Feedback Loop:**
+  - `CFR011` allows users to provide feedback, improving future outputs. This is a critical feature for iterative improvement.
+
+**Key Relationships:**  
+- Clients interact with the core functionalities (`CFR001`, `SFR`).  
+- Administrators manage parameters via `SAFR001`.  
+- Advisors use predictive tools like alerts and analytics (FAFR).  
+- The system orchestrates interactions between clients, advisors, AI components, and itself.  
+
+This structure ensures clarity in how different actors (clients, admins, advisors) engage with the system’s various functionalities through well-defined use cases. Each relationship is explicitly labeled to maintain readability.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+  user --> CFR001 : "Client"
+  SysAdmin --> SAFR001 : "System Administrator"
+
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+
+  user --> FAFR002 : "Client"
+}
+
+rectangle "System (SFR)" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  usecase "SFR007: Request Investment Opportunity Analysis from AI Component" as SFR007
+
+  SysAdmin --> SAFR001 : "Manage analysis parameters"
+}
+
+rectangle "AI System (AIFR)" {
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+
+  SFR --> AIFR003 : "Request spending limit alerts"
+}
+
+rectangle "Client (CFR)" {
+  usecase "CFR011: Send Feedback to System" as CFR011
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1188]

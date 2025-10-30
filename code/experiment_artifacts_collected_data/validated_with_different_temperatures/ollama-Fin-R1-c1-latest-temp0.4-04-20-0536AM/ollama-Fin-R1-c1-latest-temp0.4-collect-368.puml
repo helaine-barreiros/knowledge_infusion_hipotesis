@@ -1,0 +1,56 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sa
+actor FinancialAdvisor as fa
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  c1 --> CFR001 : "View Financial Insights Dashboard"
+  sa --> SAFR001 : "Manage Analysis Parameters"
+  fa --> FAFR002 : "View Client Intervention Alerts"
+
+  SysAdmin <|-- (SAFR001)
+}
+
+rectangle "Client" {
+  usecase "CFR002: View Alerts About Anomalous Transactions" as CFR002
+  c1 --> CFR002 : "Receive Alerts on Anomalies"
+  
+  SysAdmin <|-- (CFR002) 
+}
+
+rectangle "FinancialAdvisor" {
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  fa --> FAFR003 : "View Client's Financial Predictions"
+
+  SysAdmin <|-- (FAFR003)
+}
+
+rectangle "System" {
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+  SysAdmin <|-- (SFR012)
+  sa --> SAFR001 : "Manage Analysis Parameters"
+  
+}
+
+rectangle "AI System" {
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+  usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+
+  SysAdmin <|-- (AIFR008)
+}
+
+rectangle "User" {
+  usecase "CFR011: Send Feedback on Recommendations/Insights" as CFR011
+}
+@enduml

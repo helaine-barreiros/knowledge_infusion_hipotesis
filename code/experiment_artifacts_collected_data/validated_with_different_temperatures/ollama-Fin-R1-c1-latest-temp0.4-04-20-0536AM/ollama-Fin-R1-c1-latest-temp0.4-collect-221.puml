@@ -1,0 +1,61 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "SAFR004: Configure Analysis Parameters for Segments" as SAFR004
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as CFR005
+  usecase "SAFR002: Deliver Alerts Through Channels" as SAFR002
+  usecase "AIFR006: Generate Investment Opportunities Based on Risk Profiles" as AIFR006
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+
+  actor Client as client
+  actor SystemAdmin as sysadmin
+  actor FAFR as financialAdvisor
+}
+
+client --> CFR001 : View dashboard\nwith financial data  
+sysadmin --> SAFR001 : Adjust analysis parameters for compliance  
+financialAdvisor --> FAFR002 : Review alerts and intervene when needed  
+
+CFR003 <<|-- AIFR001 : Request predictions from AI
+
+SAFR004 <|-- AIFR005 : Set segment-specific parameters\nfor personalized recommendations  
+
+client --> CFR005 : Adjust preferences for recommendations  
+sysadmin --> SAFR002 : Manage notification channels  
+
+CFR006 <<|-- SFR013 : Request spending limit alerts when thresholds exceeded  
+
+financialAdvisor --> FAFR004 : Review client segments and adjust parameters  
+
+SFR019 <|-- AIFR007 : Store historical data for trend analysis  
+
+client --> CFR008 : Access investment opportunities matching risk profile  
+financialAdvisor --> FAFR003 : View predictive analytics during consultations  
+
+CFR009 <<|-- SFR012 : Consolidate financial info into a single view
+
+sysadmin --> SAFR004 : Configure parameters for specific client segments  
+
+client --> CFR010 : Share data with advisors\nand manage permissions  
+financialAdvisor --> FAFR007 : View contextualized news related to investments  
+
+SFR013 <<|-- AIFR008 : Generate spending limit alerts when thresholds breached  
+
+CFR004 <<|-- SFR005 : Request personalized recommendations from AI  
+
+client --> CFR002 : Receive transaction anomaly alerts  
+financialAdvisor --> FAFR006 : View investment opportunities aligned with risk profile  
+
+SFR019 <|-- AIFR007 : Track user insights for future analysis  
+
+CFR011 <<|-- SFR008 : Provide feedback to system on outputs
+
+@enduml

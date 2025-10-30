@@ -1,0 +1,116 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor FinancialAdvisor as FAdvisors
+actor SysAdmin as SA
+system :System: as S
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Consolidated Personalized Dashboard for Financial Monitoring" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors Including Data Sharing Permissions" as CFR10
+
+  C1 --> CFR001 : View dashboard
+  C1 --> CFR002 : Receive alerts on transactions
+  C1 --> CFR003 : Get financial predictions
+  C1 --> CFR004 : Personalized recommendations based profile
+  C1 --> CFR005 : Manage recommendation preferences
+  C1 --> CFR006 : Spending limit alerts when exceeded
+  C1 --> CFR007 : View investment opportunities aligned with risk profile
+  C1 --> CFR008 : Access portfolio-related news
+  C1 --> CFR009 : Consolidated dashboard access
+  C1 --> CFR10 : Manage advisor relationships
+
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+
+  FAdvisors --> FAFR001 : Manage mentoring sessions with insights
+  FAdvisors --> FAFR002 : View intervention alerts for clients
+  FAdvisors --> FAFR003 : Analyze client data proactively
+  FAdvisors --> FAFR004 : Customize analysis parameters by segment
+
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System Compliance" as SAFR001
+  
+  SA --> SAFR001 : Administer system settings
+}
+
+system S {
+  
+  usecase "SFR002: Deliver Personalized Recommendations Based on Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations From AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts Based on Thresholds Exceeded" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis for Users" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities Matching Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts Based on AML Compliance" as SFR008
+  usecase "SFR009: Find Contextualized News Relevant to Portfolio" as SFR009
+  usecase "SFR010: Generate Client Dashboards with Financial Information" as SFR010
+  usecase "SFR013: Manage User Feedback for System Improvement" as SFR013
+
+  
+}
+
+system AIFR {
+  usecase "AIFR002: Generate Personalized Recommendations Based on Profiles and Goals" as AIFR002
+  usecase "AIFR004: Identify Investment Opportunities Aligning with Risk Profile" as AIFR004
+  usecase "AIFR005: Evaluate Financial Instruments Against Portfolio Theory Principles" as AIFR005
+}
+
+system SFR {
+  
+  usecase "SFR012: Generate Client Alerts Based on Predefined Conditions" as SFR012
+
+}
+system SAFR {
+usecase "SAFR001: Manage Analysis Parameters for AI System Compliance" as SAFR001
+}
+
+package "System Components" {
+  system AIFR as AIFR
+  system SFR as SFR
+  system SAFR as SAFR
+  
+  
+}
+
+C1 --> S : Use cases (CFRs)
+FAdvisors --> S : Use cases (FAFRs)
+SA --> S: Administer settings
+
+@enduml
+```
+
+This PlantUML code represents the use case diagram for an AI-powered analysis and insights system. It includes actors such as Client, Financial Advisor, System Administrator, and their respective use cases derived from the provided functional requirements. The relationships between these entities are clearly defined with arrows indicating interactions. Systems like `SFR` (System Functional Requirements), `AIFR` (AI Functionality Recommendations), and `SAFR` (System Analysis & Risk) group related functionalities under packages for better organization. The diagram adheres to the guidelines by using exact requirement IDs, proper indentation, and logical grouping of use cases. 
+
+**Key Observations:**
+1. **Client Actor**: Interacts with most use cases directly, such as viewing dashboards, receiving alerts (CFR002), financial predictions (CFR003), personalized recommendations (CFR004), managing preferences (CFR005), spending limit alerts (CFR006), investment opportunities (CFR007), portfolio news (CFR008), consolidated dashboards (CFR009), and advisor relationship management (CFR10).
+2. **Financial Advisor Actor**: Engages with use cases related to mentoring clients, viewing intervention alerts, analyzing client data proactively, and customizing analysis parameters by segment.
+3. **System Administrator**: Manages AI system compliance via SAFR001.
+4. **Systems**: The `SFR` (User Interface), `AIFR` (AI Engine), and `SAFR` (Compliance) components are logically grouped to show their interactions with the client, advisor, or administrator.
+
+This structure ensures clarity in understanding how different actors interact within the system based on the provided requirements. Each use case is tied back to its corresponding functional requirement ID for easy reference during development. The diagram also highlights potential areas of integration between systems and components (e.g., `SFR` generating alerts that clients can view). 
+
+**Note:** Ensure all PlantUML syntaxes are correctly formatted, especially when dealing with multiple packages or nested structures. Double-checking the alignment and relationships is crucial to avoid misinterpretation during implementation.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1609]

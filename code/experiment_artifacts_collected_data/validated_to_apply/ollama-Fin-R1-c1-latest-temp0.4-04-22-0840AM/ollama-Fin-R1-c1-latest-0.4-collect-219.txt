@@ -1,0 +1,71 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+    usecase "CFR001: View Financial Insights Dashboard" as CFR001
+    usecase "SAFR002: Manage Alert Preferences" as SAFR002
+    usecase "CFR003: View Historical Predictions" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004
+    usecase "CFR005: Customize Recommendation Preferences" as CFR005
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+    usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+    usecase "FAFR003: Review Predictive Analytics" as FAFR003
+    usecase "SFR009: Extract News for Portfolios" as SFR009
+    usecase "CFR010: Manage Data Sharing with Advisors" as CFR010
+
+    Client --> CFR001 : View financial data in a comprehensive format.
+    SysAdmin -> SAFR002 : Configure alert settings and thresholds.
+    Client -> SAFR003 : Request historical predictions based on data trends.
+    Client -> CFR004 : Receive tailored investment advice aligned with profile.
+    Client -> CFR005 : Adjust personalization options in KYC profile.
+    SysAdmin -> SAFR001 : Tune AI system parameters for compliance and accuracy.
+    FAFR002 --> Client : Alert about potential financial issues detected by the system.
+    FAFR003 --> Advisor: Present predictive models to guide client discussions.
+    SFR009 --> Client: Deliver portfolio-relevant news articles.
+    CFR010 --> SysAdmin: Share or restrict data access with advisors.
+
+    // Inheritance relationships
+    (Client) <|-- (CFR002)
+    (SysAdmin) <|-- SAFR001
+
+    package "Professional" {
+        actor Advisor as A
+        advisor -> FAFR003 : Review predictive analytics.
+        advisor -> FAFR004 : Customize analysis parameters for segments.
+        SysAdmin --> FAFR005: Configure segment-specific settings.
+
+        (Advisor) <|-- (FAFR002)
+    }
+}
+
+@enduml
+```
+
+### Explanation:
+1. **Actors**:
+   - `Client`: Represents end-users (financial advisors, clients).
+   - `SysAdmin`: System Administrator for managing system parameters.
+   - `Advisor`: Financial advisor role.
+
+2. **Use Cases**:
+   - **CFR001**: View financial insights dashboard.
+   - **SAFR001**: Manage analysis parameters by SysAdmin.
+   - **FAFR003**: Review predictive analytics (by advisors).
+   - Inheritance relationships are established between `Client` and other use cases requiring similar interactions.
+
+3. **Relationships**:
+   - Direct links from actors to use cases, e.g., Client → CFR001 for viewing the dashboard.
+   - SysAdmin has a relationship with SAFR002 (manage alert preferences) but this is not explicitly shown here as it's inferred by role.
+
+4. **Packages and Inheritance**:
+   - Grouped advisors under "Professional" package to show their specialized use cases like FAFR003, FAFR005.
+   - SysAdmin extends SAFR001 (manage analysis parameters) for compliance management.
+
+This diagram adheres strictly to the provided functional requirements and maintains clarity through logical groupings and explicit relationships. Adjustments can be made based on further clarification if needed.
+
+[Done: True
+Done Reason: stop
+Eval Count: 804]

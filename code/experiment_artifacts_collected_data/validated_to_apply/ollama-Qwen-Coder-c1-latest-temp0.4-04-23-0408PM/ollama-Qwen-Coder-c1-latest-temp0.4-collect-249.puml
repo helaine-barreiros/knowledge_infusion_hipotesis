@@ -1,0 +1,130 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Clients" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  C --> (View Financial Insights Dashboard)
+  C --> (Receive Alerts on Anomalous Transactions)
+  C --> (View Financial Predictions)
+  C --> (Receive Personalized Recommendations)
+  C --> (Manage Recommendation Preferences)
+  C --> (View Spending Limit Alerts)
+  C --> (View Investment Opportunities)
+  C --> (View News Related to Portfolio)
+  C --> (Access Personalized Dashboard)
+  C --> (Manage Relationship with Financial Advisors)
+}
+
+package "Financial Advisors" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as FAFR004
+  
+  FA --> (Manage Client Mentoring Sessions)
+  FA --> (View Client Intervention Alerts)
+  FA --> (View Predictive Analytics for Clients)
+  FA --> (Configure Analysis Parameters for Specific Segments)
+}
+
+package "System Administrator" {
+  actor SysAdmin as SA
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFAFR005": As a System, I must request financial predictions from the AI component to provide users with forward-looking financial insights.
+  
+  SA --> (Manage Analysis Parameters)
+}
+
+package "System Components" {
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities for Users" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+    
+    C --> (SFR012)
+    FA --> (SFR016)
+    SA --> (SAFR001)
+  }
+  
+  rectangle "Notifications Component" {
+    usecase "SFR001": As a system, I must deliver alerts to users through appropriate notification channels.
+    
+    C --> (SFR013)
+    FA --> (SFR017)
+    SA --> (SAFR002)
+  }
+  
+  rectangle "Recommendations Component" {
+    usecase "SFR002": As a system, I must deliver personalized recommendations to users based on their financial profiles.
+    
+    C --> (SFR014)
+    FA --> (SFR018)
+    SA --> (SAFR003)
+  }
+  
+  rectangle "Predictive Analytics Component" {
+    usecase "SFR006": As a system, I must request investment opportunity analysis from the AI component to identify suitable investments for users based on their risk profiles.
+    
+    C --> (AIFR004)
+    FA --> (FAFR003)
+  }
+  
+  rectangle "Spending Limit Alerts Component" {
+    usecase "SFR005": As a system, I must request spending limit alerts from the AI component when user spending patterns exceed defined thresholds.
+    
+    C --> (AIFR003)
+  }
+}
+
+package "System Boundary" {
+  rectangle System as Sys
+  
+  Sys --> (CFR011: Send Feedback about Recommendations and Insights)
+  
+  SysAdmin <|-- SA
+  FinancialAdvisor <|-- FA
+  Client <|-- C
+  
+  Sys --> CFR001
+  Sys --> CFR002
+  Sys --> CFR003
+  Sys --> CFR004
+  Sys --> CFR005
+  Sys --> CFR006
+  Sys --> CFR007
+  Sys --> CFR008
+  Sys --> CFR009
+  Sys --> CFR10
+  
+  Sys --> FAFR001
+  Sys --> FAFR002
+  Sys --> FAFR003
+  Sys --> FAFR004
+  
+  Sys --> SAFR001
+}
+
+@enduml

@@ -1,0 +1,58 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FAFR001
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  Client --> (SFR012) : generate client dashboards that present financial information in an intuitive and actionable format.
+  SysAdmin --> (SAFR001)
+  
+  rectangle "Client Features" {
+    Client --> CFR001
+    Client --> (SFR003) : request financial predictions from the AI component to provide users with forward-looking financial insights.
+    Client --> (SFR004) : request personalized recommendations from the AI component based on each user's financial data and preferences.
+    Client --> (SFR005) : request spending limit alerts from the AI component when user spending patterns exceed defined thresholds.
+    Client --> (SFR016) : generate client predictive insights that provide forward-looking analysis of financial situations to support more effective financial planning.
+  }
+  
+  rectangle "Financial Advisor Features" {
+    FinancialAdvisor --> FAFR002
+    FinancialAdvisor --> FAFR003
+    FinancialAdvisor --> FAFR004
+    
+    Client --> (FAFR001) : manage client mentoring sessions based on system-generated insights to provide more valuable guidance aligned with each client's financial goals.
+  }
+  
+  rectangle "System Features" {
+    System --> SFR002
+    System --> SFR008
+    System --> SFR13
+    
+    Client --> (SFR019) : maintain a historical record of users' insights to enable trend analysis and effectiveness measurement.
+    
+    FinancialAdvisor --> FAFR005
+  }
+  
+  rectangle "AI Features" {
+    System --> AIFR002
+    System --> AIFR003
+    
+    Client --> (AIFR006) : generate anomaly transaction alerts by employing pattern recognition to detect potentially fraudulent activities in compliance with FinCEN requirements.
+    
+    FinancialAdvisor --> FAFR007
+  }
+  
+  rectangle "User Feedback" {
+    User --> CFR011
+  }
+}
+
+@enduml

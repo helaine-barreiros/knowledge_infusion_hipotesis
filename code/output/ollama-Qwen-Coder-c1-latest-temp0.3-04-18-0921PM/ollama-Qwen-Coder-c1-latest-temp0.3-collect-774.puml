@@ -1,0 +1,58 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics about My Clients' Financial Situations" as FAFR003
+  usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR002
+  usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions to Ensure Timely Notification of Important Financial Events" as SFR013
+  
+  Client --> CFR001
+  SysAdmin --> SAFR001
+  FAFD --> FAFR003
+  System Admin --> AIFR001
+  System Admin --> SFR013
+}
+
+rectangle "Client Dashboard Features" {
+  usecase "CFR002: Receive Alerts About Anomalous Transactions in My Accounts" as CFR002
+  usecase "CFR006: View Spending Limit Alerts When I Exceed Predefined Thresholds in Specific Expense Categories" as CFR006
+  
+  Client --> CFR002
+  Client --> CFR006
+}
+
+rectangle "Financial Advisor Features" {
+  usecase "FAFR01: Manage Client Mentoring Sessions Based on System-Generated Insights to Provide More Valuable Guidance Aligned with Each Client's Financial Goals" as FAFR01
+  usecase "FAFR02: View Client Intervention Alerts When the System Detects Patterns Requiring Professional Attention to Proactively Assist Clients With Potential Financial Issues" as FAFR02
+  
+  FAFD --> FAFR01
+  FAFD --> FAFR02
+}
+
+rectangle "System Features" {
+  usecase "SFR003: Request Financial Predictions from the AI Component to Provide Users with Forward-Looking Financial Insights" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from the AI Component Based on Each User's Financial Data and Preferences" as SFR004
+  usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance As Defined by Industry Standards Like FINRA Guidelines" as AIFR002
+  
+  System Admin --> SFR003
+  System Admin --> SFR004
+  FAFD --> AIFR002
+}
+
+rectangle "User Feedback Management" {
+  usecase "CFR11: Send Feedback About the System's Recommendations and Insights to Help Improve the Accuracy and Relevance of Future Outputs" as CFR11
+  
+  Client --> CFR11
+  SysAdmin --> CFR11
+  FAFD --> CFR11
+}
+@enduml

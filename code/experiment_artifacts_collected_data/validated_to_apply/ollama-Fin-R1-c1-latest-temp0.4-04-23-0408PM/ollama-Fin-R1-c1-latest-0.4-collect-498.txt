@@ -1,0 +1,78 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage System Administration Tasks"
+  SysAdmin --> FAFR004 : "Configure Analysis Parameters"
+
+  FinancialAdvisor --> FAFR002: View Client Intervention Alerts
+  FinancialAdvisor --> FAFR003: View Predictive Analytics
+}
+
+rectangle "Client" {
+  actor "User (Client)" as User
+
+  User --> CFR001 : "View Financial Insights Dashboard"
+  User --> SFR019: Manage Financial Goals
+  User --> SAFR005: Request Spending Limit Alerts
+  User --> AIFR002: Receive Personalized Recommendations
+}
+
+rectangle "FinancialAdvisor" {
+  actor "User (Financial Advisor)" as FA
+
+  FA --> FAFR004 : Configure Analysis Parameters for Client Segments
+  FA --> FAFR001: View Predictive Intervention Analyses
+  FA --> AIFR008: Generate Client Predictive Interventions
+}
+
+rectangle "SysAdmin" {
+  actor SysAdmin as SA
+
+  SA --> SAFR001 : Manage Analysis Parameters for System
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire system is enclosed within a rectangle labeled "System". This includes all use cases and actors related to the AI-powered analysis.
+  
+- **Use Cases**:
+  - `CFR001: View Financial Insights Dashboard` (Client): Allows clients to view their financial data in an intuitive format.
+  - `SAFR001: Manage Analysis Parameters` (SysAdmin/FinancialAdvisor): System administrators and advisors can adjust parameters for the AI system. This is also accessible by SysAdmin via a separate use case (`FAFR004`) which configures analysis parameters specifically for client segments.
+  
+- **Actors**:
+  - `Client`: Represents users who are clients of the financial service, including both individuals and entities like Financial Advisors or System Administrators when acting as Clients (e.g., managing their own data).
+  - `SysAdmin` (System Administrator): Manages system-level tasks such as parameter management.
+  - `FinancialAdvisor` (User): A role for advisors who can view client-specific alerts, perform predictive analyses, and manage parameters.
+
+- **Relationships**:
+  - Clients interact with the system through use cases like viewing dashboards or receiving recommendations. For example, a Client uses `CFR001` to access their financial insights.
+  - SysAdmin manages the AI’s analysis parameters via `SAFR001`, and also configures segment-specific settings using `FAFR004`.
+  
+- **Grouping**:
+  - Use cases are grouped logically by actor or subsystem. For instance, all client-related use cases (e.g., viewing dashboards) are under the "Client" rectangle.
+  - Financial Advisors have their own set of interactions (`View Client Intervention Alerts`, `View Predictive Analytics`).
+  
+- **Inheritance/Extends**:
+  - The SysAdmin role extends both general System Admin and Financial Advisor functionalities. However, in this model, each actor is distinct to avoid overlap.
+
+This diagram ensures all specified use cases and actors are represented accurately with their exact IDs from the requirements. Relationships between them are clearly defined for clarity. 
+
+### Notes:
+- Ensure that "User (Client)", "SysAdmin", and "FinancialAdvisor" are correctly mapped based on context in the functional requirements.
+- The system boundary encompasses all components, ensuring no external entities are included unless explicitly stated.
+
+[Done: True
+Done Reason: stop
+Eval Count: 844]

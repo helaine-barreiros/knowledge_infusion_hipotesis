@@ -1,0 +1,133 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  SysAdmin --> FAFR004 : "Configure Analysis Parameters"
+
+  user --> CFR001,SAFR001,FAFR004,FACR002,FACR003,FACR005,FACR006,FACR007,FACR008,FACR009,FACR010 : "View Alerts", "Manage Recommendations Preferences", etc.
+}
+
+rectangle "Client" {
+  actor client as Client
+  usecase CFR002: View Alerts, label="Anomalous Transactions"
+  usecase CFR003: Financial Predictions
+  usecase CFR004: Personalized Recommendations
+  usecase CFR005: Manage Preferences
+  usecase CFR006: Spending Limit Alerts
+  usecase CFR007: Investment Opportunities
+  usecase CFR008: News Related to Portfolio
+  usecase CFR009: Consolidated Dashboard
+  usecase CFR10: Relationship Management with Advisors
+
+  Client --> all above usecases except SAFR001, FAFR004 : "Request/View"
+}
+
+rectangle "Financial Advisor" {
+  actor advisor as FinancialAdvisor
+  usecase FAFR002: Manage Intervention Alerts
+  usecase FAFR003: Predictive Analytics for Clients
+  usecase FAFR001: View Client Dashboards
+
+  FinancialAdvisor --> all above except SAFR001, FAFR004 : "Request/View"
+}
+
+rectangle "System Administrator" {
+  actor sysadmin as SysAdmin
+  usecase SAFR001: Manage Analysis Parameters (Basel III)
+  
+  SysAdmin --> SAFR001 : "Manage"
+}
+
+package Professional { 
+  rectangle "Professional System" {
+    SysAdmin <|-- SAFR001 : "System Administrator manages parameters"
+
+    client <|-- CFR002,CFR003,CFR004,CFR005,CFR006,CFR007,CFR008,CFR009,CFR10
+  }
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Client** (User) actors interact with multiple use cases like viewing dashboards, alerts, recommendations, etc.
+- **Financial Advisor** and **System Administrator** are specialized roles that manage specific parameters or systems.
+- Use case relationships are established based on the functional requirements provided. For example, `CFR001` is linked to clients for viewing financial insights, while `SAFR001` is managed by system administrators.
+
+### Note:
+The diagram groups related use cases and actors under packages/rectangles for clarity. The Professional System rectangle encapsulates administrative tasks like parameter management (`SAFR001`). Relationships between entities are defined using the `<|--` notation to indicate ownership or responsibility.
+```plantuml
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  SysAdmin --> FAFR004 : "Configure Analysis Parameters"
+
+  user --> CFR001,SAFR001,FAFR004,FACR002,FACR003,FACR005,FACR006,FACR007,FACR008,FACR009,FACR010 : "View Alerts", "Manage Recommendations Preferences", etc.
+}
+
+rectangle "Client" {
+  actor client as Client
+  usecase CFR002: View Alerts, label="Anomalous Transactions"
+  usecase CFR003: Financial Predictions
+  usecase CFR004: Personalized Recommendations
+  usecase CFR005: Manage Preferences
+  usecase CFR006: Spending Limit Alerts
+  usecase CFR007: Investment Opportunities
+  usecase CFR008: News Related to Portfolio
+  usecase CFR009: Consolidated Dashboard
+  usecase CFR10: Relationship Management with Advisors
+
+  Client --> all above usecases except SAFR001, FAFR004 : "Request/View"
+}
+
+rectangle "Financial Advisor" {
+  actor advisor as FinancialAdvisor
+  usecase FAFR002: Manage Intervention Alerts
+  usecase FAFR003: Predictive Analytics for Clients
+  usecase FAFR001: View Client Dashboards
+
+  FinancialAdvisor --> all above except SAFR001, FAFR004 : "Request/View"
+}
+
+rectangle "System Administrator" {
+  actor sysadmin as SysAdmin
+  usecase SAFR001: Manage Analysis Parameters (Basel III)
+  
+  SysAdmin --> SAFR001 : "Manage"
+}
+
+package Professional { 
+  rectangle "Professional System" {
+    SysAdmin <|-- SAFR001 : "System Administrator manages parameters"
+
+    client <|-- CFR002,CFR003,CFR004,CFR005,CFR006,CFR007,CFR008,CFR009,CFR10
+  }
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1345]

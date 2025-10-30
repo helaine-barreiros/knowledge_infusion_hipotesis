@@ -1,0 +1,128 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  C --> (CFR001)
+  C --> (CFR002)
+  C --> (CFR003)
+  C --> (CFR004)
+  C --> (CFR005)
+  C --> (CFR006)
+  C --> (CFR007)
+  C --> (CFR008)
+  C --> (CFR009)
+  C --> (CFR10)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Segment" as FAFR004
+  
+  FA --> (FAFR001)
+  FA --> (FAFR002)
+  FA --> (FAFR003)
+  FA --> (FAFR004)
+}
+
+package "System Administrator" {
+  actor SysAdmin as SA
+  
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+  SA --> (SAFR001)
+}
+
+rectangle "AI Component" {
+  package "Financial Insights & Predictions" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    
+    CFR003 <|-- (AIFR001) : Provides financial predictions
+    FAFR003 <|-- (AIFR001) : Provides predictive insights for clients
+  }
+  
+  package "Personalized Recommendations & Insights" {
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    
+    CFR004 <|-- (AIFR002)
+    FAFR001 <|-- (AIFR002) : Provides personalized guidance
+  }
+  
+  package "Spending Limits & Alerts" {
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    
+    CFR006 <|-- (AIFR003)
+  }
+  
+  package "Investment Opportunities Analysis" {
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Identify Suitable Investments Based on Risk Profiles" as AIFR005
+    
+    CFR007 <|-- (AIFR004)
+  }
+  
+  package "Anomaly Detection & Fraud Alerts" {
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    FAFR002 <|-- (AIFR006) : Provides intervention alerts
+    
+    CFR008 <|-- (AIFR006)
+  }
+  
+  package "Contextualized News & Insights" {
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    FAFR003 <|-- (AIFR007) : Provides insights related to investments
+    
+    CFR008 <|-- (AIFR007)
+  }
+  
+  package "Predictive Interventions & Recommendations" {
+    usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+    FAFR002 <|-- (AIFR008) : Provides intervention recommendations
+    
+    CFR10 <|-- (AIFR008)
+  }
+  
+  package "Client Feedback & Improvement" {
+    usecase "SFR019: Manage User Feedback to Improve Recommendations" as SFR019
+    CFR11 --> (SFR019) : Provides feedback for improvement
+    
+    FAFR004 <|-- (SFR019)
+  }
+}
+
+package "System Functions & Alerts" {
+  usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+  usecase "SFR017: Generate Financial Health Reports for Users" as SFR017
+  
+  CFR002 <|-- (SFR002)
+  
+  C --> (SFR003) : Requests financial predictions
+  C --> (SFR004) : Requests personalized recommendations
+  C --> (SFR005) : Requests spending limit alerts
+  C --> (SFR006) : Requests investment opportunities
+  
+  FA --> (SFR017)
+}
+
+@enduml

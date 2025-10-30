@@ -1,0 +1,86 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics about My Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR001
+  
+  usecase "SAFR002: Manage Analysis Parameters for the AI System" as SAFR002
+}
+
+rectangle "AI Component" {
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+  usecase "AIFR006: Generate Anomaly Transaction Alerts by Employing Pattern Recognition" as AIFR006
+}
+
+rectangle "News Component" {
+  usecase "SFR010: Process Contextualized News to Extract Relevant Information for Users' Financial Situations" as SFR010
+  
+  rectangle "AI Component" {
+    usecase "AIFR007: Generate Client Predictive Insights that Provide Forward-Looking Analysis of Financial Situations" as AIFR007
+  }
+}
+
+rectangle "System" {
+  usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR002
+  
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+    usecase "AIFR005: Generate Investment Opportunities for Users by Identifying Financial Instruments that Align with Their Investment Strategies and Modern Portfolio Theory Principles" as AIFR005
+  }
+}
+
+rectangle "User Interface Component" {
+  rectangle "Client Dashboard" {
+    usecase "SFR12: Generate Client Dashboards That Present Financial Information in an Intuitive and Actionable Format" as SFR12
+    
+    rectangle "AI Component" {
+      usecase "AIFR008: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as AIFR008
+    }
+  }
+  
+  rectangle "Feedback Mechanism" {
+    actor User as CFR011
+    
+    usecase "SFR20: Manage Users' Feedback to Continuously Improve the Quality and Relevance of Financial Insights" as SFR20
+    
+    User --> (CFR003)
+    User --> (FAFR004)
+    User --> (SAFR002)
+  }
+}
+
+Client --> CFR011
+FinancialAdvisor --> FAFR003
+SystemAdministrator --> SAFR002
+
+User --> SFR12 : "View Alerts"
+User --> AIFR008 : "Receive News Insights"
+
+rectangle "AI Component" {
+  usecase "AIFR009: Generate Client Predictive Intervention Recommendations by Identifying Patterns That Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR009
+}
+
+User --> SFR13 : "Generate Alerts Based on Predefined Conditions"
+User --> SFR20 : "Manage Users' Feedback"
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 778]

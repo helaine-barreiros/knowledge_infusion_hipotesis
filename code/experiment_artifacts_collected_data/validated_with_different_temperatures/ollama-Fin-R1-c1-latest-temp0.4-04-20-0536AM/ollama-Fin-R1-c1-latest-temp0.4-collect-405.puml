@@ -1,0 +1,67 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "SAFR006: Request Spending Limit Alerts" as SAFR006
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "CFR012: Generate Client Dashboards" as CFR012
+  usecase "SFR009: Request Contextualized News Insights" as SFR009
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "SFR012: Request Investment Opportunity Analysis" as SFR012
+  usecase "SAFR005: Generate Anomaly Transaction Alerts" as SAFR005
+}
+
+actor Client as C {
+  --> CFR001 : View Financial Insights Dashboard
+  --> CFR003 : View Financial Predictions
+  --> CFR004 : Receive Personalized Recommendations
+  --> CFR006 : Manage Spending Limit Alerts (CFR006)
+  --> CFR008 : View Investment Opportunities
+  --> CFR012 : Generate Client Dashboards
+}
+
+actor SystemAdmin as SA {
+  --> SAFR001: Manage Analysis Parameters
+}
+
+actor FinancialAdvisor as FA {
+  --> FAFR004: Configure Analysis Parameters for Client Segments
+  --> FAFR003: View Predictive Analytics (FAFR003)
+  --> FAFR002: View Client Intervention Alerts (FAFR002)
+}
+
+system "AI System" as AI {
+  usecase AIFR001: Generate Financial Predictions
+  usecase AIFR002: Generate Personalized Recommendations
+  usecase AIFR003: Generate Spending Limit Alerts
+  usecase AIFR004: Generate Investment Opportunity Analyses
+  usecase AIFR005: Identify Aligning Investments (AIFR005)
+  usecase AIFR006: Detect Anomaly Transactions (AIFR006)
+}
+
+system "Contextualized News" as CN {
+  usecase SFR013: Extract Relevant Context for Users
+  usecase SFR014: Generate Client Analytics
+}
+
+system "Client Feedback System" as CFS {
+  --> CFR011: Send User Feedback (CFR011)
+}
+
+rectangle "System Components" {
+  AI <|-- AIFR003 : Generates alerts based on spending patterns.
+  AI <|-- AIFR006 : Detects anomalies in transactions.
+  
+  CN <|-- SFR014 : Provides client analytics from extracted context.
+
+  CFS --> CFR011: Collects and processes user feedback (CFR011)
+}
+
+@enduml

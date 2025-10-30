@@ -1,0 +1,93 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Advisors" as CFR009
+
+  rectangle "Client Interface" {
+    actor Client as C1
+    client --> (Start) : "User logs in"
+
+    (Start) <|-- (C1)
+    
+    C1 -> CFR001 : View Financial Insights Dashboard
+    C1 -> SAFR002 : Manage Alert Preferences
+    C1 -> CFR003 : View Financial Predictions
+    C1 -> CFR004 : Receive Personalized Recommendations
+    C1 -> CFR005 : Manage Recommendation Preferences
+    C1 -> CFR006 : View Spending Limit Alerts
+    C1 -> CFR007 : View Investment Opportunities
+    C1 -> CFR008 : Access News Related to Portfolio
+    C1 -> CFR009 : Manage Relationship with Advisors
+
+  }
+
+  usecase "SAFR003: Deliver Financial Predictions" as SAFR003
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+
+  (Start) <|-- (SAFR003)
+  SAFR003 --> Client : Provide Predictions
+  
+  (Start) <|-- (SFR002)
+  SFR002 --> Client : Deliver Recommendations
+  SFR002 --> AIFR001 : Request Financial Predictions
+
+}
+
+actor SysAdmin as SA
+SysAdmin -> SAFR003: Configure Analysis Parameters for AI System
+
+usecase "FAFR004: Manage Client Segments" as FAFR004
+SA <|-- (FAFR004)
+
+usecase "SFR018: Maintain Financial Goals Records" as SFR018
+(SysAdmin) --> (Start): Administer System Settings
+
+rectangle "AI Component" {
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Analyze Investment Opportunities" as AIFR004
+  usecase "AIFR005: Identify Suitable Investments" as AIFR005
+  usecase "AIFR006: Detect Anomalies in Transactions" as AIFR006
+  usecase "AIFR007: Extract Relevant News Insights" as AIFR007
+  usecase "AIFR008: Recommend Predictive Interventions" as AIFR008
+  usecase "AIFR009: Generate Client Analytics" as AIFR009
+
+  (Start) <|-- (SAFR003)
+}
+
+usecase "CFR011: Send Feedback" as CFR011
+Client -> SAFR002 : Provide feedback on recommendations and insights
+
+@enduml
+```
+
+**Description of the Diagram Structure:**
+- The system is represented by a rectangle containing various use cases related to client interactions, administrative management (SysAdmin), financial advisors' activities, AI functionalities, and internal system processes.
+- **Client Interface**: A nested rectangle under "System" represents direct user interactions. Actors include `Client` (`C1`) who can access multiple services like viewing dashboards, receiving alerts, predictions, recommendations, managing preferences, etc. Each client action is linked to the corresponding use case (e.g., `CFR001`, `SAFR002`, ...).
+- **System Administrator**: The SysAdmin actor manages analysis parameters for AI systems (`FAFR004`), which are part of the "AI Component" rectangle.
+- **Financial Advisor Activities** (`FAFR003`) and other system-related use cases like delivering recommendations or alerts to clients are also included in their respective rectangles within the main diagram structure.
+- The `AIFR*` series represents AI-generated services, such as generating predictions, personalized recommendations, spending limit alerts, etc. These connect back to client interfaces via the "System" boundary.
+
+**Key Relationships:**
+1. **Client Interactions**: Direct links between clients and use cases (e.g., `C1 -> CFR003`).
+2. **Admin/Advisor Management**: SysAdmin manages AI parameters (`SA <|-- FAFR004`) or configures system settings via `SFR018`.
+3. **AI Processing**: Use cases within the "AI Component" rectangle (e.g., `AIFR007` generates news insights which may be delivered to clients through other use cases like `CFR008`).
+
+This structure ensures clarity in how different actors interact with various components of the system, adhering strictly to provided functional requirements. Each requirement ID is explicitly mapped to its corresponding use case or actor relationship.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1257]

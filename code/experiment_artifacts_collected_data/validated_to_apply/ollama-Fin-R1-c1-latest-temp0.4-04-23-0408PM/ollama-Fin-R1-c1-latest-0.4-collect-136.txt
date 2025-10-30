@@ -1,0 +1,114 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts About Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Personalized Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as CFR009
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+}
+
+rectangle "System (SFR)" {
+  usecase "SFR001: Deliver Alerts Through Notification Channels" as SFR001
+  usecase "SFR002: Provide Personalized Recommendations Based on Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations From AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts From AI Component" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities Matching Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts From AI Component" as SFR008
+  usecase "SFR009: Find Contextualized News Relevant to Portfolio" as SFR009
+  usecase "SFR010: Generate Client Dashboards for Financial Information" as SFR010
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "SFR014: Generate Client Analytics with Meaningful Insights" as SFR014
+  usecase "SFR015: Request Predictive Intervention Analyses From AI Component" as SFR015
+  usecase "SFR016: Request Predictive Insights from AI Component to Enhance Guidance" as SFR016
+  usecase "SFR017: Generate Financial Health Reports Based on Standard Metrics" as SFR017
+}
+
+rectangle "AI System (AIFR)" {
+  usecase "AIFR001: Generate Financial Predictions by Analyzing Data and Trends" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations Based on Profiles" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts for Unusual Patterns" as AIFR003
+  usecase "AIFR004: Analyze Investment Opportunities Against Risk Profiles and Goals" as AIFR004
+  usecase "AIFR005: Identify Financial Instruments Aligning with Strategies and Portfolio Theory" as AIFR005
+  usecase "AIFR006: Detect Anomaly Transactions Using Pattern Recognition for Compliance" as AIFR006
+  usecase "AIFR007: Correlate News With Portfolios to Identify Relevant Impacts" as AIFR007
+  usecase "AIFR008: Recommend Intervention When Patterns Indicate Financial Issues or Opportunities" as AIFR008
+}
+
+usecase "CFR011: Send Feedback About System's Outputs for Improvement" as CFR011
+
+Client --> SFR002 : "Receive Personalized Recommendations"
+Client --> SFR003 : "Request Financial Predictions"
+Client --> SFR004 : "Request Personalized Recommendations"
+Client --> SFR005 : "Request Spending Limit Alerts"
+Client --> SFR006 : "Request Investment Opportunity Analysis"
+Client --> AIFR002 : "Receive Personalized Recommendations from AI"
+
+System Administrator --> SAFR001
+
+Financial Advisor --> FAFR003
+Financial Advisor --> FAFR004
+Financial Advisor --> SFR015
+
+SFR008 --> AIFR006
+
+AIFR007 --> SFR009 : "Find Contextualized News"
+
+Client <|-- (CFR002)
+Client <|-- (CFR003)
+Client <|-- (CFR004)
+Client <|-- (CFR005)
+Client <|-- (CFR006)
+Client <|-- (CFR007)
+Client <|-- (CFR008)
+Client <|-- (CFR009)
+
+SFR013 --> Client : "Generate Alerts Based on Conditions"
+
+SFR014 --> Client : "Provide Financial Analytics"
+
+AIFR002 --> SFR002
+
+@enduml
+```
+
+### Explanation:
+- **Actors**: The diagram includes six main actors: `Client`, `System Administrator`, `Financial Advisor`, and three sub-systems (`System (SFR)`, `AI System (AIFR)`).
+  
+- **Use Cases**:
+  - Clients have use cases related to viewing dashboards, receiving alerts, financial predictions, recommendations management, etc.
+  - The System Administrator manages analysis parameters for the AI system.
+  - Financial Advisors manage mentoring sessions and view client-specific insights.
+
+- **Relationships**: 
+  - Direct interactions between clients/system components (e.g., requesting data from SFR or AIFR).
+  - Indirect relationships via inheritance (`Client <|--` notation) to show that certain use cases are applicable across multiple actors.
+  
+- **System Boundaries**:
+  - The `SFR`, `AIFR`, and other sub-systems (like AI components) are grouped within their respective rectangles. 
+
+This structure ensures all functional requirements are represented accurately, with proper relationships between actors and system functionalities. Adjustments can be made based on further analysis or specific use case interactions not covered here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1553]

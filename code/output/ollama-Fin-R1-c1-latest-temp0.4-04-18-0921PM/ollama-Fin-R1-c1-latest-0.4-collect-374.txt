@@ -1,0 +1,124 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+system SFR012: "System" {
+  usecase CFR001: View Financial Insights Dashboard as VFD
+  usecase CFR002: Receive Alerts on Anomalous Transactions as RAT
+  usecase CFR003: View Financial Predictions Based on Historical Data and Market Trends as FPT
+  usecase CFR004: Personalized Recommendations Aligned with Financial Profile as PRG
+  usecase CFR005: Manage Personalized Recommendation Preferences as MPRP
+  usecase CFR006: Spending Limit Alerts When Exceeding Predefined Thresholds as SLA
+  usecase CFR007: Investment Opportunities Based on Risk Profile as IORP
+  usecase CFR008: Access News Related to Portfolio as ANR
+  usecase CFR009: Consolidated Personalized Dashboard for Monitoring Finances as CPD
+  usecase CFR10: Manage Relationship with Financial Advisors including Data Sharing Permissions as MRA
+
+  usecase SAFR001: Manage Analysis Parameters as MAP
+  usecase FAFR001: Manage Client Mentoring Sessions Based on System Insights as MCSI
+  usecase FAFR002: View Client Intervention Alerts for Proactive Assistance as VCA
+  usecase FAFR003: Predictive Analytics About Clients' Financial Situations as PAFS
+  usecase FAFR004: Configure Analysis Parameters by Segment to Customize System Behavior as CABS
+
+  SysAdmin --> MAP
+  Client --> (VFD, RAT, FPT, PRG, MPRP, SLA, IORP, ANR, CPD, MRA)
+  FinancialAdvisor --> (MCSI, VCA, PAFS)
+
+  SFR012: "System" {
+    usecase AIFR001: Generate Financial Predictions as GFP
+    usecase AIFR002: Personalized Recommendations Based on Profiles and Goals as PRGAI
+    usecase AIFR003: Spending Limit Alerts via AI Analysis as SLAIA
+    usecase AIFR004: Investment Opportunity Analyses for Users as IOAAI
+    usecase AIFR005: Align Investments with Risk Profiles Using MPT Principles as IAMPT
+    usecase AIFR006: Anomaly Transaction Alerts via Pattern Recognition as ATAPR
+    usecase AIFR007: Contextualized News Insights Correlated to Portfolios as CNI
+    usecase AIFR008: Predictive Intervention Recommendations for Advisors as PRIA
+    usecase AIFR009: Client Predictive Insights via Forward-Looking Analysis as CPIA
+
+    VFD --> GFP, PRGAI, SLAIA, IOAAI, CNI, MPRP
+    RAT --> ATAPR
+    FPT --> GFP, PAFS
+    PRG --> PRGAI, IAMPT
+    MPRP --> PRGAI
+    SLA --> SLAIA
+    IORP --> IOAAI, IAMPT
+    ANR --> CNI
+    CPD --> GFP, PRGAI, SLAIA, IOAAI, CNI, MPRP
+    MRA --> (MPRP)
+  }
+
+  Client -> VFD : "View Financial Insights Dashboard"
+  SysAdmin -> MAP : "Manage Analysis Parameters"
+
+  SFR012: "System" {
+    usecase AIFR009: Generate Client Predictive Interventions as CPIA
+    clientadvisor --> CPIA
+
+    SA -> (MAP)
+    FA -> (MCSI, VCA, PAFS)
+
+    Client -->> GFP : "Receive Financial Predictions"
+  }
+
+  C --> RAT : "View Alerts on Anomalous Transactions"
+
+  SFR012: "System" {
+    usecase AIFR006: Generate Contextualized News Insights as CPIA
+    clientadvisor --> CPIA
+
+    Client -->> ANR : "Access Relevant Portfolio News"
+  }
+
+  C --> MPRP : "Manage Recommendation Preferences"
+
+  SFR012: "System" {
+    usecase AIFR03: Manage User Feedback for Improvement as FUI
+    clientadvisor --> FUI
+
+    C -> FUI : "Provide Feedback on System Outputs"
+  }
+  
+@enduml
+  
+
+**Description of the Diagram**
+
+The provided PlantUML code represents a comprehensive Use Case Diagram (UCD) for an AI-Powered Analysis & Insights System. The system is designed to serve multiple stakeholders, including Clients, Financial Advisors, and System Administrators, with functionalities ranging from financial data visualization to predictive analytics and personalized recommendations.
+
+### Key Components:
+1. **Actors**:
+   - **Client**: Represents end-users (individuals or entities) who interact directly with the system.
+   - **SysAdmin**: Manages administrative aspects of the AI system.
+   - **FinancialAdvisor**: Engages in client mentoring, intervention alerts, and predictive analysis.
+
+2. **Use Cases**:
+   - **CFR001–CFR10**: Client-related use cases (e.g., viewing dashboards, receiving alerts).
+   - **SAFR001**: System Administrator-specific management of AI parameters.
+   - **FAFR001–FAFR004**: Financial Advisor-related actions like mentoring and alert monitoring.
+
+3. **System Components**:
+   - The system is structured into logical packages using the `system` keyword, which groups related use cases (e.g., financial predictions, alerts).
+   - Each package contains AI-generated functionalities (`AIFRXXX`) that support client interactions via the main application logic.
+
+### Relationships and Flow:
+- **Client–System Interactions**: Clients can view dashboards, receive alerts, make recommendations, etc. These are linked to specific use cases within the system.
+- **SysAdmin–AI Management**: SysAdmins manage AI parameters (e.g., `SAFR001`), which influence how data is processed and analyzed by the system.
+- **FinancialAdvisor–Client Engagement**: Advisors can view client-specific alerts, generate mentoring insights, or access predictive analytics to guide clients.
+
+### Diagram Structure:
+The UCD organizes use cases into categories based on stakeholder roles. For example, all Client-related use cases are grouped under a single `system` boundary (`SFR012`). Similarly, Financial Advisors and SysAdmins have their respective groupings. This structure ensures clarity in understanding the flow of interactions between actors and system components.
+
+### Notes:
+- The diagram adheres strictly to provided functional requirements, ensuring no extraneous use cases or actors are introduced.
+- Relationships (e.g., `Client --> VFD`) explicitly link user actions to corresponding functionalities within the system.
+- Inheritance relationships (not directly shown here) could be inferred from role-specific interactions but aren't required based on current definitions.
+
+This UCD serves as a foundational blueprint for further architectural and technical design, ensuring alignment with business requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1518]

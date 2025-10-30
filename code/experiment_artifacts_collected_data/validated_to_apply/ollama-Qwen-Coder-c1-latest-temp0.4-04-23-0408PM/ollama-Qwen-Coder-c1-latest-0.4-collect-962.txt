@@ -1,0 +1,83 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR013: Generate Client Alerts" as SFR013
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  usecase "SFR015: Request Predictive Intervention Analyses" as SFR015
+  usecase "SFR016: Request Predictive Insights" as SFR016
+  usecase "SFR017: Generate Financial Health Reports" as SFR017
+  usecase "SFR018: Manage Users' Financial Goals" as SFR018
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  usecase "SFR020: Manage User Feedback" as SFR020
+  
+  Client --> (CFR001)
+  Client --> (CFR002)
+  Client --> (CFR003)
+  Client --> (CFR004)
+  Client --> (CFR005)
+  Client --> (CFR006)
+  Client --> (CFR007)
+  Client --> (CFR008)
+  Client --> (CFR009)
+  Client --> (CFR010)
+  Client --> (SFR020)
+
+  FinancialAdvisor --> (FAFR001)
+  FinancialAdvisor --> (FAFR002)
+  FinancialAdvisor --> (FAFR003)
+  FinancialAdvisor --> (FAFR004)
+
+  SystemAdmin --> (SAFR001)
+}
+
+rectangle "User" {
+  actor Client as client
+  actor FinancialAdvisor as advisor
+  actor SystemAdministrator as admin
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  client --> CFR002 : "Receive Alerts About Anomalous Transactions"
+  client --> CFR003 : "View Financial Predictions Based on Historical Data and Current Market Trends"
+  client --> CFR004 : "Receive Personalized Recommendations Aligned with My Financial Profile and Goals"
+  client --> CFR005 : "Manage Personalized Recommendations Preferences"
+  client --> CFR006 : "View Spending Limit Alerts When Exceeding Predefined Thresholds in Specific Expense Categories"
+  client --> CFR007 : "View Investment Opportunities Suitable to My Risk Profile (as Defined Under MiFID II or Equivalent Standards)"
+  client --> CFR008 : "View News Related to My Investment Portfolio"
+  client --> CFR009 : "Access a Personalized Dashboard That Consolidates Financial Information in a Single View"
+  client --> CFR010 : "Manage Relationship with Financial Advisors, Including Permissions for Sharing Financial Data"
+
+  advisor --> FAFR001 : "Manage Client Mentoring Sessions Based on System-Generated Insights"
+  advisor --> FAFR002 : "View Client Intervention Alerts When the System Detects Patterns Requiring Professional Attention to Proactively Assist Clients With Potential Financial Issues"
+  advisor --> FAFR003 : "View Predictive Analytics About My Clients' Financial Situations To Provide Data-Driven Recommendations During Consultations"
+  advisor --> FAFR004 : "Configure Analysis Parameters for Specific Client Segments To Customize the System's Behavior According to Different Client Profiles and Regulatory Requirements Such As GDPR or CCPA"
+
+  admin --> SAFR001 : "Manage Analysis Parameters For The AI System To Ensure Algorithms Remain Accurate, Relevant, And Compliant With Financial Regulations Such As Basel III For Risk Management"
+}
+
+rectangle "AI" {
+  usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance As Defined By Industry Standards Like FINRA Guidelines" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts For Users by Identifying Unusual Deviations From Established Spending Patterns" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses for Users By Evaluating Potential Investments Against Their Risk Profiles, Time Horizons, and Financial Goals" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunities For Users by Identifying Financial Instruments That Align With Their Investment Strategies and Modern Portfolio Theory Principles" as AIFR005
+  usecase "AIFR006: Generate Anomaly Transaction Alerts By Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance with FinCEN Requirements" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News With Specific User Portfolios To Identify Relevant Impacts" as AIFR007
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations By Identifying Patterns That Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR008
+  usecase "AIFR009: Generate Client Predictive Insights that Provide Forward-Looking Analysis of Financial Situations to Support More Effective Financial Planning" as AIFR009
+
+  SFR012 --> AIFR007 : "Generate Contextualized News Insights"
+  
+  FAFR003 --> (AIFR004)
+  FAFR005 --> (AIFR006)
+
+  client --> (CFR11) : "Send Feedback About the System's Recommendations and Insights to Help Improve the Accuracy and Relevance of Future Outputs"
+}
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 1273]

@@ -1,0 +1,76 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FAFR001
+:AIFR001: as AIFR001
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR002
+  usecase "CFR008: View News Related to Investment Portfolio" as CFR008
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  Client --> (CFR001)
+  SysAdmin --> (SAFR001)
+  FAFR001 --> (FAFR002)
+  FinancialAdvisor --> (FAFR003)
+  SystemAdmin --> (SFR013)
+  AIFR006 <|-- (AIFR007)
+
+}
+
+rectangle "Client" {
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR004: Receive Personalized Recommendations Based on Financial Profile and Goals" as CFR004
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds in Specific Expense Categories" as CFR006
+  usecase "SFR12: Generate Client Dashboards That Present Financial Information in an Intuitive and Actionable Format" as SFR12
+
+  Client --> (CFR002)
+  Client --> (CFR004)
+  Client --> (CFR005)
+  Client --> (CFR006)
+  Client --> (SFR12)
+
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations to Provide Data-Driven Recommendations During Consultations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments Based on Different Client Profiles and Regulatory Requirements Such As GDPR or CCPA" as FAFR004
+
+  FinancialAdvisor --> (FAFR003)
+  FinancialAdvisor --> (FAFR004)
+
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters for the AI System to Ensure Algorithms Remain Accurate, Relevant, and Compliant with Financial Regulations Such As Basel III for Risk Management" as SAFR001
+  usecase "SFR020: Manage User Feedback to Continuously Improve the Quality and Relevance of Financial Insights" as SFR020
+
+  SystemAdmin --> (SAFR001)
+  SystemAdmin --> (SFR020)
+
+}
+
+rectangle "AI System" {
+  usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance As Defined By Industry Standards Like FINRA Guidelines" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations from Established Spending Patterns" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses for Users By Evaluating Potential Investments Against Their Risk Profiles, Time Horizons, and Financial Goals" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunities for Users by Identifying Financial Instruments That Align With Their Investment Strategies and Modern Portfolio Theory Principles" as AIFR005
+
+  Client --> (AIFR001)
+  Client --> (AIFR002)
+  Client --> (AIFR003)
+  Client --> (AIFR004)
+  Client --> (AIFR005)
+
+}
+
+@enduml

@@ -1,0 +1,81 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR005
+  usecase "CFR006: Manage Recommendation Preferences" as SAFR019
+  
+  CFR001 --> (View Financial Insights Dashboard)
+  CFR001 --> SAFR003
+  CFR001 --> SAFR004
+  CFR001 --> SAFR005
+  CFR001 --> SAFR019
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics" as SAFR006
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as SAFR018
+
+  FinancialAdvisor --> (Manage Client Mentoring Sessions)
+  FinancialAdvisor --> FAFR002
+  FinancialAdvisor --> SAFR003
+  FinancialAdvisor --> SAFR006
+  FinancialAdvisor --> SAFR014
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR007
+  
+  usecase "SAFR008: Manage Analysis Parameters for AI System" as SAFR009
+
+  SystemAdmin --> (Manage Analysis Parameters)
+  SystemAdmin --> SAFR008
+  SystemAdmin --> SAFR015
+}
+
+package "System" {
+  rectangle "AI Component" {
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR014: Generate Client Predictive Insights" as AIFR016
+    
+    System --> (Deliver Personalized Recommendations)
+    System --> (Request Financial Predictions)
+    System --> (Request Personalized Recommendations from AI Component)
+    System --> (Request Spending Limit Alerts)
+    System --> (Generate Client Dashboards)
+    System --> (Generate Client Alerts Based on Predefined Conditions)
+  }
+  
+  rectangle "News Processing" {
+    usecase "SFR014: Generate Client Analytics" as SFR017
+    usecase "AIFR008: Generate Anomaly Transaction Alerts" as AIFR006
+    
+    System --> (Find Contextualized News Relevant to User's Financial Portfolio)
+    System --> (Process Contextualized News to Extract Information for Users' Financial Situations)
+  }
+  
+  rectangle "Client Relationship Management" {
+    usecase "SFR12: Generate Client Dashboards" as SFR018
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR009
+    
+    System --> (Generate Financial Health Reports)
+    System --> (Manage Users' Financial Goals to Track Progress and Provide Relevant Recommendations)
+  }
+}
+
+package "User Feedback Management" {
+  actor UserFeedback as CFR012
+  
+  usecase "CFR013: Send Feedback about System's Recommendations and Insights" as SAFR020
+
+  UserFeedback --> (Send Feedback About the System's Outputs)
+}
+@enduml

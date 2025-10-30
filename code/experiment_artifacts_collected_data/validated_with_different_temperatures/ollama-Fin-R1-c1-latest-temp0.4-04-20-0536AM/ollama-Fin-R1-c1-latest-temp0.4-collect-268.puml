@@ -1,0 +1,52 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage AML Alerts" as SAFR002
+  usecase "FAFR005: Schedule Client Sessions" as FAFR005
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "SAFR001: Manage Analysis Parameters (Basel III)" as SAFR001
+  usecase "FAFR006: View Client Intervention Alerts" as FAFR006
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR003: Request Market Data for Predictions" as SAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "FAFR007: View Portfolio Diversification Opportunities" as FAFR007
+  usecase "SFR008: Request Investment Opportunity Analysis" as SFR008
+  usecase "CFR009: Access Consolidated Financial Dashboard" as CFR009
+  usecase "FAFR004: Configure Analysis Parameters for Segments (GDPR)" as FAFR004
+  usecase "SFR013: Generate Client Alerts Based on Conditions" as SFR013
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+  usecase "AIFR002: Generate Personalized Recommendations (FINRA)" as AIFR002
+  usecase "SAFR004: Configure Analysis Parameters for Segments (CCPA)" as SAFR004
+  usecase "SFR017: Generate Financial Health Reports" as SFR017
+}
+
+actor Client as C
+actor SystemAdministrator as SA
+actor FinancialAdvisor as FA
+
+C --> CFR001 : View financial insights dashboard  
+SA --> SAFR002 : Manage AML alerts  
+FA --> FAFR005 : Schedule client sessions  
+
+SFR013 <|-- (Client) : Generates alerts based on conditions  
+CFR004 <|-- (Client) : Receives recommendations  
+
+CFR006 <|-- (Client) : View spending limit alerts  
+SAFR002 <|-- (SystemAdministrator) : Manages AML parameters  
+FA --> FAFR007 : Views portfolio diversification opportunities  
+
+SFR013 <|-- (FinancialAdvisor) : Generates client-specific alerts  
+CFR009 <|-- (Client) : Accesses consolidated dashboard  
+SA --> SAFR004 : Configures analysis parameters for segments  
+
+AIFR002 <|-- (Client, FinancialAdvisor) : Provides personalized recommendations  
+SFR017 <|-- (Client) : Generates financial health reports  
+
+' Relationships between actors and use cases
+@enduml

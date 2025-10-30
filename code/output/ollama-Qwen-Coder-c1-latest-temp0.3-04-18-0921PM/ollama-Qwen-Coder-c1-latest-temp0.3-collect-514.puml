@@ -1,0 +1,58 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FAFR001
+:User: as User
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "CFR006: Manage Relationship with Financial Advisors" as CFR010
+  
+  rectangle "Client Use Cases" {
+    Client --> (SAFR001)
+    Client --> (FAFR002)
+    Client --> (AIFR003)
+    Client --> (CFR010)
+    
+    usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR009
+    usecase "SFR010: Process Contextualized News for Users" as SFR010
+    
+    Client --> (SFR009)
+    Client --> (SFR010)
+  }
+  
+  rectangle "Financial Advisor Use Cases" {
+    FinancialAdvisor --> (FAFR002)
+    
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+    usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+    
+    FinancialAdvisor --> (AIFR004)
+    FinancialAdvisor --> (CFR007)
+  }
+  
+  rectangle "System Use Cases" {
+    SystemAdmin --> (SAFR001)
+    
+    usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR002
+    usecase "AIFR005: Generate Investment Opportunities for Users by Identifying Financial Instruments that Align with Their Investment Strategies and Modern Portfolio Theory Principles" as AIFR005
+    
+    SystemAdmin --> (SFR002)
+    SystemAdmin --> (AIFR005)
+    
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions to Ensure Timely Notification of Important Financial Events" as SFR013
+    usecase "CFR011: Send Feedback About the System's Recommendations and Insights" as CFR011
+    
+    User --> (SFR013)
+    User --> (CFR011)
+  }
+}
+
+@enduml

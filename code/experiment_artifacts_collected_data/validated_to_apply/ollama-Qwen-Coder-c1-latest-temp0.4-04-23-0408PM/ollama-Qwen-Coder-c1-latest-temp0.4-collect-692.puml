@@ -1,0 +1,123 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR004
+  usecase "CFR005: Manage Recommendation Preferences" as SAFR005
+  usecase "CFR006: View Spending Limit Alerts" as SAFR006
+  usecase "CFR007: View Investment Opportunities" as SAFR007
+  usecase "CFR008: View News Related to Portfolio" as SAFR008
+  usecase "CFR009: Access Personalized Dashboard" as SAFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as SAFR10
+  
+  CFR001 --> (SAFR002)
+  CFR001 --> (SAFR003)
+  CFR001 --> (SAFR004)
+  CFR001 --> (SAFR005)
+  CFR001 --> (SAFR006)
+  CFR001 --> (SAFR007)
+  CFR001 --> (SAFR008)
+  CFR001 --> (SAFR009)
+  CFR001 --> (SAFR10)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts" as SAFR007
+  usecase "FAFR003: View Predictive Analytics" as SAFR008
+  usecase "FAFR004: Configure Analysis Parameters for Specific Clients" as SAFR010
+  
+  FinancialAdvisor --> (SAFR002)
+  FinancialAdvisor --> (SAFR003)
+  FinancialAdvisor --> (SAFR004)
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR006
+  
+  usecase "SAFR007: Manage Analysis Parameters for AI System" as SAFR011
+  usecase "SFR020: Manage User Feedback" as SFR020
+  
+  SystemAdministrator --> (SAFR011)
+  SystemAdministrator --> (SFR020)
+}
+
+package "System" {
+  rectangle "Core Services" {
+    usecase "SFR003: Request Financial Predictions from AI Component" as SAFR014
+    usecase "SFR006: Request Spending Limit Alerts from AI Component" as SFR015
+    usecase "SFR012: Generate Client Dashboards" as SAFR017
+    
+    CoreServices --> (SAFR014)
+    CoreServices --> (SFR015)
+    CoreServices --> (SAFR017)
+  }
+  
+  rectangle "Recommendation Services" {
+    usecase "SFR002: Request Personalized Recommendations from AI Component" as SAFR013
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR004
+    
+    RecommendationServices --> (SAFR013)
+    RecommendationServices --> (AIFR004)
+  }
+  
+  rectangle "News Services" {
+    usecase "SFR008: Request Contextualized News from AI Component" as SAFR025
+    usecase "AIFR007: Generate Client Predictive Insights" as AIFR013
+    
+    NewsServices --> (SAFR025)
+    NewsServices --> (AIFR013)
+  }
+  
+  rectangle "Intervention Services" {
+    usecase "SFR016: Request Predictive Intervention Analyses from AI Component" as SAFR018
+    usecase "AIFR009: Generate Client Predictive Insights for Advisors" as AIFR024
+    
+    InterventionServices --> (SAFR018)
+    InterventionServices --> (AIFR024)
+  }
+}
+
+package "AI System" {
+  rectangle "Prediction Engine" {
+    usecase "AIFR001: Generate Financial Predictions for Users" as AIFR005
+    
+    PredictionEngine --> (AIFR005)
+  }
+
+  rectangle "Recommendation Engine" {
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR006
+    
+    RecommendationEngine --> (AIFR006)
+  }
+  
+  rectangle "Anomaly Detection Engine" {
+    usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR012
+    usecase "AIFR008: Generate Anomaly Transaction Alerts by Employing Pattern Recognition" as AIFR016
+    
+    AnomalyDetectionEngine --> (AIFR012)
+    AnomalyDetectionEngine --> (AIFR016)
+  }
+  
+  rectangle "Investment Analysis Engine" {
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR017
+    usecase "AIFR005: Identify Financial Instruments that Align with User's Investment Strategies and Modern Portfolio Theory Principles" as AIFR023
+    
+    InvestmentAnalysisEngine --> (AIFR017)
+    InvestmentAnalysisEngine --> (AIFR023)
+  }
+  
+  rectangle "News Analysis Engine" {
+    usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as AIFR018
+    
+    NewsAnalysisEngine --> (AIFR018)
+  }
+}
+@enduml

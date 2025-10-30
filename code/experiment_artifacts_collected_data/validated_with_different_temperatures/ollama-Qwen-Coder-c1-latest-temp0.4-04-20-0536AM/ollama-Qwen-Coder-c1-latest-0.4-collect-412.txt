@@ -1,0 +1,117 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Anomaly Transaction Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View Financial News" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+  
+  C --> (View Financial Insights Dashboard)
+  C --> (Receive Anomaly Transaction Alerts)
+  C --> (View Financial Predictions)
+  C --> (Receive Personalized Recommendations)
+  C --> (Manage Recommendation Preferences)
+  C --> (View Spending Limit Alerts)
+  C --> (View Investment Opportunities)
+  C --> (View Financial News)
+  C --> (Access Personalized Dashboard)
+  C --> (Manage Relationship with Advisors)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  FA --> (Manage Client Mentoring Sessions)
+  FA --> (View Intervention Alerts)
+  FA --> (View Predictive Analytics)
+  FA --> (Configure Analysis Parameters for Client Segments)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SA
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SA --> (Manage Analysis Parameters)
+}
+
+package "AI Component" {
+  rectangle AIComponent {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities Based on Modern Portfolio Theory" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+    
+    C --> (View Financial Insights Dashboard) : CFR012
+    C --> (Receive Anomaly Transaction Alerts) : SFR006, SAFR007, FAFR005
+    C --> (View Financial Predictions) : SFR003, AIFR009
+    C --> (Receive Personalized Recommendations) : SFR002, AIFR001
+    C --> (Manage Recommendation Preferences)
+    C --> (View Spending Limit Alerts) : SFR005, SAFR007, FAFR003
+    C --> (View Investment Opportunities) : SFR006, AIFR004, AIFR005
+    C --> (View Financial News)
+    C --> (Access Personalized Dashboard) : CFR12
+    
+    FA --> (Manage Client Mentoring Sessions) : FAFR008, SAFR007, AIFR009
+    FA --> (View Intervention Alerts) : SFR004, SAFR006
+    FA --> (View Predictive Analytics)
+    
+    SA --> (Manage Analysis Parameters) : CFR13
+  }
+}
+
+package "System" {
+  usecase "SFR007: Request Investment Opportunity Analysis from AI Component" as SFR007
+  
+  C --> (Request Financial Predictions) : AIFR009, SFR004
+  FA --> (Receive Client Intervention Alerts)
+  
+  rectangle SystemBoundary {
+    C --> (Deliver Personalized Recommendations to Users) : SFR002, SAFR018, FAFR007, CFR15, AIFR003, AIFR004
+    FA --> (View Predictive Insights)
+    
+    rectangle "Notification Channels" {
+      usecase "SFR013: Request Client Alerts from AI Component" as SFR013
+      
+      C --> (Deliver Anomaly Transaction Alerts) : SAFR007, AIFR006
+      FA --> (View Intervention Alerts)
+      
+      rectangle "News Processing" {
+        usecase "SFR009: Request Contextualized News from AI Component" as SFR009
+        
+        C --> (Deliver Financial Insights Dashboard) : CFR12
+        C --> (Request Specific Investment Opportunities Based on User Criteria and ESG Preferences)
+      }
+    }
+  }
+}
+
+C --> (Send Feedback about Recommendations and Insights to System)
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1299]

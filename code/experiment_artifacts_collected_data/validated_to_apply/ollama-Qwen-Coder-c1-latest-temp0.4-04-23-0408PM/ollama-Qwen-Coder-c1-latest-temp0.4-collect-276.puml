@@ -1,0 +1,104 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Anomalous Transaction Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View Financial News" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  C --> (View Financial Insights Dashboard)
+  C --> (Receive Anomalous Transaction Alerts)
+  C --> (View Financial Predictions)
+  C --> (Receive Personalized Recommendations)
+  C --> (Manage Recommendation Preferences)
+  C --> (View Spending Limit Alerts)
+  C --> (View Investment Opportunities)
+  C --> (View Financial News)
+  C --> (Access Personalized Dashboard)
+  C --> (Manage Relationship with Financial Advisors)
+}
+
+package "Financial Advisor" {
+  actor "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  
+  (Manage Client Mentoring Sessions) --> (View Intervention Alerts)
+  (Manage Client Mentoring Sessions) --> (View Predictive Analytics)
+}
+
+package "System Administrator" {
+  actor SAFR001 as SAFR001
+  usecase "SAFR002: Manage Analysis Parameters" as SAFR002
+  
+  SAFR001 --> (Manage Analysis Parameters)
+}
+
+rectangle "AI System" {
+  package "Analysis & Recommendations" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    
+    (Generate Financial Predictions) --> (Request Financial Predictions from AI Component)
+    (Generate Personalized Recommendations) --> (Request Personalized Recommendations from AI Component)
+  }
+  
+  package "Alerts & Notifications" {
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    
+    (Generate Spending Limit Alerts) --> (Request Spending Limit Alerts from AI Component)
+    (Generate Investment Opportunity Analyses) --> (Request Investment Opportunity Analysis from AI Component)
+  }
+  
+  package "News & Insights" {
+    usecase "AIFR005: Generate Investment Opportunities Based on ESG Preferences" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    
+    (Generate Investment Opportunities Based on ESG Preferences) --> (Request Contextualized News Insights from AI Component)
+    (Generate Anomaly Transaction Alerts) --> (Request Anomaly Transaction Alerts from AI Component)
+  }
+  
+  package "Predictive Interventions & Analytics" {
+    usecase "AIFR007: Generate Predictive Intervention Recommendations" as AIFR007
+    usecase "AIFR008: Generate Client Predictive Insights" as AIFR008
+    
+    (Generate Predictive Intervention Recommendations) --> (Request Predictive Intervention Analyses from AI Component)
+    (Generate Client Predictive Insights) --> (Request Predictive Insights from AI Component)
+  }
+  
+  package "Health & Goal Management" {
+    usecase "AIFR009: Generate Financial Health Reports" as AIFR009
+    usecase "AIFR010: Manage Users' Financial Goals" as AIFR010
+    
+    (Generate Financial Health Reports) --> (Request Predictive Insights from AI Component)
+    (Manage Users' Financial Goals) --> (Track Progress and Provide Recommendations)
+  }
+}
+
+package "System Operations" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  
+  (Deliver Alerts to Users) --> (Request Client Alerts from AI Component)
+  (Deliver Personalized Recommendations) --> (Request Personalized Recommendations from AI Component)
+}
+
+package "User Feedback Management" {
+  usecase "CFR11: Send Feedback" as CFR11
+  usecase "SFR020: Manage User Feedback" as SFR020
+  
+  (Send Feedback) --> (Manage User Feedback to Improve Future Outputs)
+}
+@enduml

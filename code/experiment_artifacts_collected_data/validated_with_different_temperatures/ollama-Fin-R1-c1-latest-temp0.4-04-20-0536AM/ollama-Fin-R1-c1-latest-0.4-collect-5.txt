@@ -1,0 +1,56 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+  usecase "AIFR005: Generate Investment Opportunities Based on Risk Profiles" as AIFR005
+
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  
+  // User (Client, Advisor) relationships
+  Client -> FAFR003 : "View Predictive Analytics for Clients"
+  Client -> SFR002 : "Receive Personalized Recommendations"
+  Client -> AIFR005 : "Access Investment Opportunities"
+
+  FinancialAdvisor --> FAFR001 : "Mentor Clients Based on System Insights"
+  FinancialAdvisor --> FAFR003 : "View Predictive Analytics for Clients"
+  
+  // Alert Management
+  SFR008 -> AIFR006 : "Request Anomaly Transaction Alerts"
+  SysAdmin <|-- SAFR001 : "Manage Analysis Parameters"
+
+  // Feedback Loop
+  Client --> CFR020: "Send User Feedback to Improve System"
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire diagram is enclosed within a rectangle labeled "System" to represent the AI-Powered Analysis & Insights System.
+- **Use Cases**:
+  - `CFR001` (Client): View Financial Insights Dashboard.
+  - `SAFR001` (SysAdmin): Manage Analysis Parameters for compliance and accuracy.
+  - `FAFR003` (Advisor): View predictive analytics to guide clients effectively.
+  - `SFR002`: Deliver personalized recommendations based on user profiles.
+  - `AIFR005`: Generate investment opportunities aligned with risk profiles.
+- **Actors**:
+  - **Client**: Can view dashboards, receive alerts/recommendations, and provide feedback. Direct relationships include viewing the dashboard (`CFR001`), receiving recommendations (`SFR002`), accessing investment opportunities (`AIFR005`).
+  - **SysAdmin**: Manages analysis parameters via `SAFR001`.
+  - **FinancialAdvisor**: Mentors clients, views predictive analytics through `FAFR003`, and receives alerts/recommendations.
+- **Relationships**:
+  - Direct interactions between users (Client) and system use cases like viewing dashboards or receiving recommendations. SysAdmin indirectly affects analysis parameters via management (`SAFR001`).
+  - Financial Advisors leverage predictive analytics for client guidance but do not directly manage the system’s internal processes.
+
+This structure ensures clarity in how different actors interact with various components of the system, adhering strictly to provided requirements without inventing additional entities. Adjustments can be made based on further analysis or specific use case nuances omitted here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 695]

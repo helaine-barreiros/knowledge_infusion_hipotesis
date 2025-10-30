@@ -1,0 +1,123 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+  usecase "SFR004: Request Personalized Recommendations from AI Component Based on User Data and Preferences" as SFR004
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  usecase "CFR009: View Consolidated Financial Dashboard" as CFR009
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+  usecase "SFR015: Request Predictive Interventions from AI Component to Engage Advisors with Clients" as SFR015
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component in Compliance with AML Regulations" as SFR008
+  usecase "AIFR006: Generate Anomaly Transaction Alerts Using Pattern Recognition" as AIFR006
+  usecase "CFR013: Manage User Feedback to Improve System Accuracy" as CFR013
+  usecase "SFR020: Maintain Historical Record of Insights for Trend Analysis" as SFR020
+}
+
+actor Client as C
+actor FinancialAdvisor as FA
+actor SysAdmin as SA
+
+C --> CFR001 : View financial insights dashboard
+C --> CFR006 : Receive spending limit alerts
+C --> CFR009 : Access consolidated financial dashboard
+C --> CFR004 : Get personalized recommendations aligned with profile and goals
+C --> SAFR005 : Request spending limit alerts from AI component (via system)
+C --> SFR012 : Use generated client dashboards
+
+FA --> FAFR003 : View predictive analytics for clients during consultations
+FA --> AIFR008 : Get client predictive intervention recommendations to proactively assist clients
+
+SA --> SAFR001 : Manage analysis parameters (system admin)
+SA --> FAFR004 : Configure analysis parameters for specific segments
+
+SysAdmin -> System: "Manage system operations and ensure compliance"
+System <|-- AIFR001, AIFR002, AIFR003, AIFR006, AIFR008
+Client <|-- CFR001, SAFR005 (via SFR)
+FinancialAdvisor <|-- FAFR004, FAFR008
+
+@enduml
+```
+
+**Key Observations:**
+- The diagram includes all use cases and actors as per the provided requirements.
+- Actors are categorized into `Client`, `FinancialAdvisor`, and `SysAdmin`.
+- Use case relationships reflect direct interactions between clients/advisors/systems. For example, a client requests personalized recommendations (SFR002), which is delivered via AIFR002.
+- The system aggregates various components like AI systems (`AIFR`) to fulfill use cases such as generating alerts or predictions.
+- Inheritance relationships are established where the `System` classifies and manages multiple sub-use cases. For instance, `SFR015` requests predictive interventions from AIFR008, which is part of the system's functionality.
+
+This structure ensures clarity in how different entities (actors) interact with various components (use cases) within the AI-Powered Analysis & Insights System. Each line represents a direct relationship between an actor and their desired use case or another component’s sub-use cases. The grouping under `System` consolidates all technical functionalities, while individual actors focus on user-specific interactions. 
+
+**Note:** Ensure that each use case ID matches exactly as per the requirements to avoid discrepancies in the model's accuracy.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+  usecase "SFR004: Request Personalized Recommendations from AI Component Based on User Data and Preferences" as SFR004
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  usecase "CFR009: View Consolidated Financial Dashboard" as CFR009
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+  usecase "SFR015: Request Predictive Interventions from AI Component to Engage Advisors with Clients" as SFR015
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component in Compliance with AML Regulations" as SFR008
+  usecase "AIFR006: Generate Anomaly Transaction Alerts Using Pattern Recognition" as AIFR006
+  usecase "CFR013: Manage User Feedback to Improve System Accuracy" as CFR013
+  usecase "SFR020: Maintain Historical Record of Insights for Trend Analysis" as SFR020
+
+actor Client as C
+actor FinancialAdvisor as FA
+actor SysAdmin as SA
+
+C --> CFR001 : View financial insights dashboard  
+C --> SAFR005 : Request spending limit alerts from AI component (via system)  
+C --> AIFR003 : Receive generated spending limit alerts  
+C --> SFR002 : Get personalized recommendations aligned with profile and goals  
+C --> SFR012 : Use generated client dashboards  
+
+FA --> FAFR004 : Configure analysis parameters for specific segments  
+FA --> AIFR008 : Request predictive interventions from AI component to engage advisors  
+
+SA --> SAFR001 : Manage system's analysis parameters (system admin)  
+SA --> FAFR003 : View client-specific predictive analytics  
+
+SysAdmin -> System: "Manage system operations and ensure compliance"  
+System <|-- AIFR001, AIFR002, AIFR003, AIFR006, AIFR008
+Client <|-- CFR001, SAFR005 (via SFR)  
+FinancialAdvisor <|-- FAFR004, FAFR008  
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1939]

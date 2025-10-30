@@ -1,0 +1,85 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Clients" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR002
+  usecase "CFR003: View Financial Predictions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR004
+  usecase "CFR005: Manage Recommendation Preferences" as SAFR005
+  usecase "CFR006: View Spending Limit Alerts" as SAFR006
+  usecase "CFR007: View Investment Opportunities" as SAFR007
+  usecase "CFR008: View Financial News" as SAFR008
+  usecase "CFR009: Access Personalized Dashboard" as SAFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as SAFR10
+  
+  CFR001 --> (SAFR002)
+  CFR001 --> (SAFR003)
+  CFR001 --> (SAFR004)
+  CFR001 --> (SAFR005)
+  CFR001 --> (SAFR006)
+  CFR001 --> (SAFR007)
+  CFR001 --> (SAFR008)
+  CFR001 --> (SAFR009)
+  CFR001 --> (SAFR10)
+}
+
+package "Financial Advisors" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts" as SAFR007
+  usecase "FAFR003: View Predictive Analytics" as SAFR008
+  usecase "FAFR004: Configure Analysis Parameters for Specific Clients" as SAFR10
+  
+  FinancialAdvisor --> (SAFR002)
+  FinancialAdvisor --> (SAFR003)
+  FinancialAdvisor --> (SAFR004)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR001
+  
+  usecase "SAFR001: Manage Analysis Parameters for the AI System" as SAFR009
+  SAFR001 <|-- SAFR002
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Generate Financial Health Reports" as AIFR005
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  
+  SAFR001 --> (AIFR009)
+  SAFR002 --> (AIFR002)
+  SAFR003 --> (AIFR003)
+  SAFR004 --> (AIFR004)
+  SAFR005 --> (AIFR001)
+  SAFR006 --> (AIFR006)
+  SAFR007 --> (AIFR007)
+}
+
+package "System" {
+  usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  
+  SAFR009 --> (AIFR005)
+}
+
+package "Users" {
+  actor User as CFR011
+  
+  usecase "CFR011: Send Feedback about System Recommendations and Insights" as SAFR11
+  User --> (SAFR11)
+}
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 932]

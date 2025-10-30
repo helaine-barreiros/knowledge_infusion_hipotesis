@@ -1,0 +1,62 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:User (Client): as Client
+:User (Financial Advisor): as FAdvisor
+:System Admin: as SysAdmin
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "CFR011: Send Feedback" as CFR011
+  
+  Client --> (SAFR001)
+  FAdvisor --> (FAFR002)
+  SysAdmin --> (SFR003)
+
+  Client --> (AIFR004)
+  Client --> (CFR011)
+}
+
+rectangle "Client Dashboard" {
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "SAFR005: Manage Recommendations Preferences" as SAFR005
+  
+  Client --> (CFR009)
+  Client --> (SAFR005)
+}
+
+rectangle "Spending Limits & Alerts" {
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  
+  Client --> (CFR006)
+  SysAdmin --> (SFR005)
+}
+
+rectangle "Investment Opportunities & News" {
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View Financial News" as CFR008
+  
+  Client --> (CFR007)
+  Client --> (CFR008)
+}
+
+rectangle "Financial Health & Recommendations" {
+  usecase "SFR14: Generate Client Analytics" as SFR14
+  usecase "AIFR02: Generate Personalized Recommendations" as AIFR02
+  
+  SysAdmin --> (SFR14)
+  FAdvisor --> (AIFR02)
+}
+
+rectangle "Client Relationship Management" {
+  usecase "CFR10: Manage Financial Advisors' Permissions" as CFR10
+  Client --> (CFR10)
+}
+@enduml

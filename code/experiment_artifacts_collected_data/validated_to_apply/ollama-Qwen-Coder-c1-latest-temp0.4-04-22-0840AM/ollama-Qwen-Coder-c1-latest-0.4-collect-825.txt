@@ -1,0 +1,71 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR006
+  usecase "CFR005: Manage Preferences" as SAFR007
+  usecase "CFR010: Manage Relationship with Financial Advisors" as SAFR023
+  
+  CFR001 --> SAFR003 : "View Alerts"
+  CFR001 --> SAFR006 : "Receive Personalized Recommendations"
+  CFR001 --> SAFR007 : "Manage Preferences"
+  CFR001 --> SAFR023 : "Manage Relationship with Financial Advisors"
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts" as SFR014
+  usecase "FAFR003: View Predictive Analytics" as AIFR009
+  usecase "FAFR005: Configure Analysis Parameters for Specific Segments" as SAFR016
+  
+  FinancialAdvisor --> SFR014 : "View Client Intervention Alerts"
+  FinancialAdvisor --> AIFR009 : "View Predictive Analytics"
+  FinancialAdvisor --> SAFR016 : "Configure Analysis Parameters for Specific Segments"
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR001
+  
+  usecase "SAFR002: Manage Analysis Parameters" as SAFR008
+  usecase "SFR013: Generate Client Alerts" as SFR014
+  
+  SystemAdmin --> SAFR008 : "Manage Analysis Parameters"
+  SystemAdmin --> SFR014 : "Generate Client Alerts"
+}
+
+package "System" {
+  rectangle "System Components" {
+    usecase "SFR002: Deliver Personalized Recommendations" as AIFR003
+    usecase "SFR005: Request Spending Limit Alerts" as AIFR006
+    usecase "SFR017: Generate Financial Health Reports" as AIFR018
+    
+    CFR002 --> SFR002 : "Deliver Personalized Recommendations"
+    SAFR003 --> SFR005 : "Request Spending Limit Alerts"
+  }
+}
+
+package "AI System" {
+  rectangle "AI Components" {
+    usecase "AIFR017: Generate Financial Health Reports" as AIFR024
+    usecase "AIFR018: Manage Users' Financial Goals" as AIFR025
+    
+    CFR003 --> AIFR017 : "Generate Financial Health Reports"
+    SAFR006 --> AIFR018 : "Manage Users' Financial Goals"
+  }
+}
+
+CFR011 --> SFR014 : "Send Feedback"
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 674]

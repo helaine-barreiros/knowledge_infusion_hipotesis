@@ -1,0 +1,78 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Fraud Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR001: Monitor Spending Limits" as SAFR001
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Portfolio News" as CFR008
+  usecase "CFR009: Manage Relationship with Advisors" as CFR009
+
+  rectangle "Client" {
+    actor Client as c1
+    client --> (CFR001)
+    client --> (SAFR002)
+    client --> (CFR003)
+    client --> (CFR004)
+    client --> (CFR005)
+    client --> (SAFR001)
+    client --> (CFR007)
+    client --> (CFR008)
+    client --> (CFR009)
+  }
+
+  rectangle "Financial Advisor" {
+    actor FinancialAdvisor as fad
+    fad --> (FAFR001)
+    fad --> (FAFR002)
+    fad --> (FAFR003)
+    fad --> (FAFR004)
+  }
+
+  rectangle "System Administrator" {
+    actor SysAdmin as saa
+    saa --> (SAFR001)
+  }
+  
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+
+  rectangle "AI System" {
+    component AI as ai
+    ai --> (AIFR001)
+    ai --> (AIFR002)
+    ai --> (SAFR001)
+    ai --> (AIFR004)
+    ai --> (AIFR005)
+    ai --> (AIFR006)
+    ai --> (AIFR007)
+  }
+
+  usecase "SFR020: Manage User Feedback" as SFR020
+}
+
+@enduml
+
+**Explanation of the Diagram Structure:**
+- The system is represented within a rectangle, which contains various use cases categorized by their primary actors.
+- **Client**: Represents interactions with the financial insights dashboard and related services. Use cases include viewing dashboards (CFR001), receiving alerts about transactions or spending limits (SAFR002/SAFR001), getting predictions (CFR003), personalized recommendations (CFR004/CRR005), investment opportunities (CFR007), portfolio news (CFR008), and managing relationships with advisors (CFR009).
+- **Financial Advisor**: Interacts through use cases like managing client mentoring sessions, viewing alerts/predictions (FAFR001/FAFR003), customizing analysis parameters for clients (FAFR004). They do not directly manage system components but influence the AI's configuration via FAFR004.
+- **System Administrator**: Manages analysis parameters globally (SAFR001) and possibly other administrative tasks, though specific use cases are limited here. 
+- The **AI System** is a component within the main rectangle that generates financial predictions, recommendations, alerts, etc., based on input from clients or advisors through SFR components.
+  
+This structure ensures clarity in how different actors interact with system functionalities and AI-generated services. Use case relationships adhere strictly to provided requirements without introducing assumptions beyond what's explicitly stated.
+
+**Key Observations:**
+- All client-related use cases are grouped under the "Client" actor, reflecting their primary interaction points.
+- Financial advisors have fewer direct interactions compared to clients but leverage more advanced analytical tools (e.g., FAFR003 for predictive insights).
+- System administrators focus on parameter management and compliance settings rather than front-end services.
+
+[Done: True
+Done Reason: stop
+Eval Count: 944]

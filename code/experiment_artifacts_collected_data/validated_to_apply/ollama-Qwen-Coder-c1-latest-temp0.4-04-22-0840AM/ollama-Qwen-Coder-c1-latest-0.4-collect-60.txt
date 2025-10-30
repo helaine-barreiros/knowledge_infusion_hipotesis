@@ -1,0 +1,66 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR005: Manage Analysis Parameters Preferences" as SAFR005
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  Client --> CFR001
+  Client --> SAFR005
+  SysAdmin --> SAFR005
+}
+
+rectangle "Financial Advisor Functions" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  
+  FinancialAdvisor --> FAFR001
+  FinancialAdvisor --> FAFR002
+}
+
+rectangle "System Functions" {
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "SFR004: Request Personalized Recommendations" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "SFR016: Generate Predictive Insights" as SFR016
+  
+  System --> SFR003
+  System --> SFR004
+  System --> SFR005
+  System --> FAFD : FAFR002
+}
+
+rectangle "AI Functions" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  
+  System --> AIFR001
+  System --> AIFR003
+}
+
+rectangle "Notifications and Feedback" {
+  usecase "SFR013: Request Client Alerts" as SFR013
+  usecase "CFR011: Send Feedback" as CFR011
+  
+  Client --> SFR013 : "Receive"
+  FinancialAdvisor --> SFR013 : "Receive"
+  SysAdmin --> SFR013 : "Receive"
+  
+  System --> CFR011
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 539]

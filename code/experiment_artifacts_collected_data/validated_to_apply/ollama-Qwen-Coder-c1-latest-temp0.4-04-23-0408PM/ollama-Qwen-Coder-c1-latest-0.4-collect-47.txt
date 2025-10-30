@@ -1,0 +1,68 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:User (Client): as User
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFR001
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "AIFR009: Generate Contextualized News Insights" as AIFR009
+  
+  User --> CFR001
+  SysAdmin --> SAFR001
+  FAFR001 --> (FAFR002)
+  
+  User --> SFR003 : "Request Predictions"
+  System Admin --> SFR003 : "Manage Parameters"
+  Financial Advisor --> FAFR002
+  
+  User --> AIFR009
+}
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR005: Manage Recommendations Preferences" as SAFR005
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  User --> CFR001
+  SysAdmin --> SAFR005
+  Financial Advisor --> (FAFR004)
+}
+
+rectangle "Financial Advisor" {
+  usecase "CFR002: View Alerts about Anomalous Transactions" as CFR002
+  usecase "SAFR003: Manage Analysis Parameters for the AI System" as SAFR003
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  
+  Financial Advisor --> (CFR002)
+  SysAdmin --> SAFR003
+  User --> (FAFR001)
+}
+
+rectangle "System Components" {
+  usecase "SFR004: Request Personalized Recommendations from the AI Component" as SFR004
+  usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance" as AIFR002
+  
+  User --> (SFR004)
+  System Admin --> SAFR003 : "Manage Parameters"
+  Financial Advisor --> FAFR001
+}
+
+rectangle "Client Management" {
+  usecase "CFR010: Manage Relationship with Financial Advisors, Including Permissions for Sharing My Financial Data" as CFR010
+  
+  User --> (CFR010)
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 634]

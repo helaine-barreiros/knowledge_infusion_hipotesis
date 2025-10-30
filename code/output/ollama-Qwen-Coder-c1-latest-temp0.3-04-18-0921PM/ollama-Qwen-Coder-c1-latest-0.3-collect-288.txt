@@ -1,0 +1,69 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SFR002
+  usecase "CFR005: Manage Recommendation Preferences" as CFR010
+  
+  Client --> (SAFR003)
+  Client --> (SFR002)
+  Client --> (CFR010)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  actor FinancialAdvisor as FAFR002
+  actor FinancialAdvisor as FAFR004
+  
+  usecase "FAFR003: View Predictive Analytics about Client's Financial Situation" as SFR016
+  usecase "FAFR005: Configure Analysis Parameters for Specific Client Segments" as SAFR002
+  
+  FinancialAdvisor --> (FAFR001)
+  FinancialAdvisor --> (FAFR003)
+  FinancialAdvisor --> (FAFR004)
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR001
+  usecase "SAFR005: Manage Analysis Parameters for the AI System" as SFR002
+  
+  SystemAdministrator --> (SAFR001)
+  SystemAdministrator --> (SFR002)
+}
+
+package "System Components" {
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  }
+  
+  rectangle "News Component" {
+    usecase "SFR013: Request Contextualized News Insights from AI Component" as SFR017
+    usecase "SFR014: Process Contextualized News to Extract Relevant Information for Users' Financial Situations" as AIFR005
+  }
+  
+  rectangle "Dashboard Component" {
+    usecase "SFR012: Generate Client Dashboards that Present Financial Information in an Intuitive and Actionable Format" as SFR018
+  }
+}
+
+CFR001 --> (SAFR003)
+CFR004 --> (AIFR005)
+FAFR001 --> (SFR016)
+FAFR002 --> (AIFR007)
+SystemAdministrator --> (SAFR005)
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 630]

@@ -1,0 +1,134 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor Client2 as C2  
+actor FinancialAdvisor as FA 
+actor SysAdmin as SA 
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Predictive Financial Data" as CFR003  
+  usecase "CFR004: Get Personalized Recommendations" as CFR004 
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007  
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008 
+  usecase "CFR009: View Consolidated Financial Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001  
+}
+
+rectangle "Financial Advisor Interface" { 
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: Review Predictive Analytics for Clients" as FAFR003  
+}
+
+rectangle "System Core (SFR)" {
+  usecase "SFR001: Deliver Alerts Through Channels" as SFR001 
+  usecase "SFR002: Provide Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI" as SFR003  
+  usecase "SFR004: Request Personalized Recs Based on Profiles" as SFR004 
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006  
+  usecase "SFR007: Find Specific Investment Opportunities Matching Criteria and ESG Preferences" as SFR007 
+  usecase "SFR008: Request Anomaly Transaction Alerts for AML Compliance" as SFR008
+  usecase "SFR009: Extract Contextualized News Relevant to Portfolio" as SFR009  
+  usecase "SFR010: Generate Client Dashboards" as SFR010 
+}
+
+rectangle "AI Component (AIFR)" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002  
+  usecase "AIFR003: Identify Spending Limit Alerts" as AIFR003 
+  usecase "AIFR004: Analyze Investment Opportunities Based on Risk Profile" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunity Lists Aligning with Strategies and MPT Principles" as AIFR005  
+  usecase "AIFR006: Detect Anomalous Transactions for Fraud Prevention" as AIFR006 
+  usecase "AIFR007: Correlate News to Portfolios Contextually" as AIFR007
+  usecase "AIFR008: Recommend Intervention Actions Based on Predictive Analysis" as AIFR008  
+}
+
+use C1 --> CFR001 : "View Financial Insights Dashboard"
+C1 --> CFR002 : "Receive Alerts for Anomalous Transactions"
+C1 --> CFR003 : "View Predictive Financial Data"
+C1 --> CFR004 : "Get Personalized Recommendations"
+C1 --> CFR005 : "Manage Recommendation Preferences"  
+C1 --> CFR006 : "View Spending Limit Alerts"
+C1 --> CFR007 : "Access Investment Opportunities Based on Risk Profile"
+C1 --> CFR008 : "Receive News Related to Portfolio"
+C1 --> CFR009 : "View Consolidated Financial Dashboard"
+C1 --> CFR10  : "Manage Relationship with Advisors"
+
+SA --> SAFR001: Manage Analysis Parameters
+
+FA --> FAFR001: Manage Client Mentoring Sessions Based on Insights
+FA --> FAFR002: View Client Intervention Alerts  
+FA --> FAFR003: Review Predictive Analytics for Clients  
+
+SFR001 <|-- SFR008 : "Deliver" 
+SFR009 <|-- AIFR007: Extract News
+AIFR006 <|-- SAFR001: Use Parameters  
+AIFR004 <|-- AIFR005: Align with Strategies
+
+@enduml
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor SysAdmin as SA 
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001  
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002 
+  usecase "CFR003: View Predictive Financial Data" as CFR003
+  usecase "CFR004: Get Personalized Recommendations" as CFR004  
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006 
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007  
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008
+  usecase "CFR009: View Consolidated Financial Dashboard" as CFR009 
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001  
+}
+
+use C1 --> CFR001 : "View Financial Insights Dashboard"
+C1 --> CFR002 : "Receive Alerts for Anomalous Transactions"
+C1 --> CFR003 : "View Predictive Financial Data"
+C1 --> CFR004 : "Get Personalized Recommendations" 
+C1 --> CFR005 : "Manage Recommendation Preferences"  
+C1 --> CFR006 : "View Spending Limit Alerts"
+C1 --> CFR007 : "Access Investment Opportunities Based on Risk Profile"
+C1 --> CFR008 : "Receive News Related to Portfolio"
+C1 --> CFR009 : "View Consolidated Financial Dashboard"
+C1 --> CFR10  : "Manage Relationship with Advisors"
+
+SA --> SAFR001: Manage Analysis Parameters
+@enduml
+```
+This PlantUML code represents the use case diagram for an AI-powered analysis and insights system. The actors include **Client**, **SysAdmin** (System Administrator), and others like Financial Advisor, which are grouped into their respective interfaces (e.g., Client Interface). Each functional requirement is mapped to a specific use case with precise IDs as per the requirements. Relationships between actors and use cases are established using arrows (`-->`). The system boundaries are defined by rectangles grouping related components.
+
+Key points:
+- **Client** interacts with multiple features like viewing dashboards, receiving alerts, personalized recommendations, etc.
+- **SysAdmin** handles administrative tasks such as managing analysis parameters.
+- Use case relationships (e.g., `C1 --> CFR002`) denote the flow of interactions between actors and their desired functionalities.
+
+This structure ensures clarity in understanding how different roles engage with the system to achieve specific goals. Adjustments can be made based on further requirements or organizational context, but this diagram adheres strictly to the provided functional specifications.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1810]

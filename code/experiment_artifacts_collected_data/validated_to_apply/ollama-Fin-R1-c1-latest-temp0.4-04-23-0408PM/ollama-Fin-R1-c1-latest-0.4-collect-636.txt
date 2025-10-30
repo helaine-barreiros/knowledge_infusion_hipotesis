@@ -1,0 +1,54 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Preferences" as SAFR002
+  usecase "SFR009: Deliver Contextualized News" as SFR009
+  
+  Client --> CFR001 : "View financial data and dashboards"
+  
+  SysAdmin <|-- (CFR005) : "Manage client preferences"
+  
+  FinancialAdvisor --> SAFR002 : "Customize system settings for clients"
+}
+
+rectangle "AI System" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR003: Send Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Identify Investment Opportunities" as AIFR004
+  
+  System --> (CFR008) : "Provide investment opportunities"
+  
+  SysAdmin <|-- (SAFR001) : "Manage analysis parameters for AI components"
+}
+
+rectangle "Client Feedback Loop" {
+  usecase "CFR011: Send User Feedback" as CFR011
+  Client --> CFR011 : "Report issues or suggest improvements"
+
+  System <-- CFR011 : "Receive feedback and update models"
+}
+@enduml
+```
+
+### Explanation:
+- **Client**: Represents all users (Clients, Financial Advisors, SysAdmins) interacting with the system.
+- **System**: Central component managing user interactions. It includes use cases like viewing dashboards (`CFR001`), delivering contextualized news (`SFR009`), and handling client feedback (`CFR011`).
+- **AI System**: Handles AI-generated components such as financial predictions, spending alerts, investment opportunities.
+- **SysAdmin**: Manages system parameters (e.g., `SAFR002`, `AIFR005`).
+
+### Key Relationships:
+- Clients interact with the main dashboard (`CFR001`) and receive news (`SFR009`).
+- SysAdmins manage user preferences (`CFR005`) and AI parameters (`SAFR001`).
+- Financial Advisors customize client settings via `SAFR002`.
+- Feedback from clients is captured in the loop for continuous improvement.
+
+This structure ensures clarity by grouping related use cases under their respective actors/system components. Adjustments can be made based on further analysis, but this aligns with the provided requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 571]

@@ -1,0 +1,118 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  C1 --> CFR001 : "View Financial Insights Dashboard"
+  
+  SA --> SAFR001 : "Manage Analysis Parameters"
+  
+  FA --> FAFR003 : "View Predictive Analytics"
+}
+
+rectangle "System Components" {
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "SFR004: Request Personalized Recommendations" as SFR004
+  
+  SAFR001 <|-- AIFR002 : "Tune AI"
+  
+  C1 --> SFR004 : "Request Personalized Recommendations"
+}
+
+rectangle "Notification System" {
+  usecase "SFR013: Generate Client Alerts" as SFR013
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  
+  C1 --> SFR013 : "Receive Alerts"
+  
+  SA --> SAFR001 <|-- AIFR006 : "Configure Thresholds"
+}
+
+rectangle "News Processing" {
+  usecase "SFR009: Request Contextualized News" as SFR009
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  
+  C1 --> SFR009 : "Request News"
+}
+
+rectangle "User Feedback Management" {
+  usecase "CFR011: Send User Feedback" as CFR011
+}
+@enduml
+
+**Description of the Diagram:**
+- **Client (C1):** Represents all user types (Clients, Financial Advisors, System Administrators) interacting with the system.
+- **System Components:** Includes AI and SFR use cases for generating recommendations, alerts, dashboards, etc. SAFR001 is linked to AIFR002 via inheritance ("Tune AI") indicating that SA can adjust parameters affecting the AI's output.
+- **Notification System:** Manages client alerts (SFR013) and anomaly transaction alerts (AIFR006). Alerts are triggered by system components based on user actions or data thresholds set by administrators.
+- **News Processing:** Handles requests for contextualized news relevant to clients' portfolios, processed via AIFR007.
+- **User Feedback Management:** Allows users to provide feedback on recommendations and insights.
+
+This structure ensures clarity in relationships between actors, use cases, and components. Each actor's interactions are clearly mapped to the appropriate system functionalities. The inheritance relationship (SAFR001 <|-- AIFR002) reflects how administrative actions influence AI parameters. All requirements are represented without inventing extraneous elements or misalignments.
+**End of Diagram**
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  C1 --> CFR001 : "View Financial Insights Dashboard"
+  
+  SA --> SAFR001 : "Manage Analysis Parameters"
+  
+  FA --> FAFR003 : "View Predictive Analytics"
+}
+
+rectangle "System Components" {
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "SFR004: Request Personalized Recommendations" as SFR004
+  
+  SAFR001 <|-- AIFR002 : "Tune AI"
+  
+  C1 --> SFR004 : "Request Personalized Recommendations"
+}
+
+rectangle "Notification System" {
+  usecase "SFR013: Generate Client Alerts" as SFR013
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  
+  C1 --> SFR013 : "Receive Alerts"
+  
+  SA --> SAFR001 <|-- AIFR006 : "Configure Thresholds"
+}
+
+rectangle "News Processing" {
+  usecase "SFR009: Request Contextualized News" as SFR009
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  
+  C1 --> SFR009 : "Request News"
+}
+
+rectangle "User Feedback Management" {
+  usecase "CFR011: Send User Feedback" as CFR011
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1179]

@@ -1,0 +1,64 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as fadvisors
+actor SysAdmin as sadmin
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  c1 --> CFR001 : "View Financial Insights"
+  sadmin --> SAFR001 : "Manage Analysis Parameters"
+  fadvisors --> FAFR003 : "Access Predictive Analytics for Clients"
+  
+  rectangle "Client-Specific Use Cases" {
+    usecase "CFR002: View Alerts on Anomalous Transactions" as CFR002
+    usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+    usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+    
+    c1 --> CFR002 : "View Alerts"
+    c1 --> CFR004 : "Personalize Recommendations"
+    c1 --> CFR010 : "Manage Relationships"
+  }
+  
+  rectangle "Financial Advisor-Specific Use Cases" {
+    usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+    usecase "FAFR002: View Intervention Alerts for Clients" as FAFR002
+    
+    fadvisors --> FAFR001 : "Schedule and Track Mentoring"
+    fadvisors --> FAFR002 : "Review Client Interventions"
+  }
+  
+  rectangle "SysAdmin-Specific Use Cases" {
+    usecase "SFR009: Process Contextualized News for Users" as SFR009
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001 (already exists)
+    
+    sadmin --> SFR009 : "Extract Relevant Financial News"
+  }
+  
+}
+
+@enduml
+```
+
+### Explanation:
+- **Actors**: Defined three main actors - `Client`, `FinancialAdvisor`, and `SysAdmin`.
+- **Use Cases**:
+  - Client-related use cases include viewing financial dashboards, alerts (e.g., CFR002), personalized recommendations (CFR004), managing relationships with advisors (CFR010).
+  - Financial Advisor-specific actions like mentoring clients (FAFR001) and reviewing intervention alerts (FAFR002).
+  - SysAdmin manages analysis parameters (SAFR001) and processes contextualized news (SFR009).
+- **Relationships**: Actors connect to use cases with appropriate labels, e.g., `Client` sends requests for dashboards or recommendations.
+- **Grouping**: Use cases are grouped by actor type within the system boundary. Subsystems like "Client-Specific" and "SysAdmin-Specific" are nested under their respective roles.
+
+This structure ensures clarity in associating actors with use cases while adhering to the provided requirements. Adjustments can be made based on further details or additional requirements not listed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 732]

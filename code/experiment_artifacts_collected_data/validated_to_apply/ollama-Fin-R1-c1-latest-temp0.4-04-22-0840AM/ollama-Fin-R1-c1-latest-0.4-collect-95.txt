@@ -1,0 +1,63 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR002: Deliver Personalized Recommendations Based on Profiles" as SFR002
+  usecase "AIFR003: Generate Spending Limit Alerts for Unusual Activity" as AIFR003
+  usecase "CFR006: View Spent Limit Exceedance Notifications" as CFR006
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  usecase "AIFR007: Generate Contextualized News Insights for Portfolios" as AIFR007
+
+  Client --> CFR001 : "View Financial Dashboard"
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  
+  // User (Client, Advisor) can view recommendations
+  usecase "SFR002: Deliver Personalized Recommendations Based on Profiles" as SFR002
+  Client -> SFR002 : "Request Recommendations"
+  FinancialAdvisor -> SFR002 : "Review and Provide Feedback"
+
+  // Alerts Management
+  usecase "AIFR003: Generate Spending Limit Alerts for Unusual Activity" as AIFR003
+  Client --> AIFR003 : "Receive Spent Limit Exceedance Notifications"
+  
+  usecase "CFR006: View Spent Limit Exceedance Notifications" as CFR006
+  Client -> CFR006 : "View Alerts"
+
+  // News and Portfolio Management
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  Client --> SFR019 : "Access Historical Data"
+  
+  usecase "AIFR007: Generate Contextualized News Insights for Portfolios" as AIFR007
+  Client -> AIFR007 : "View Relevant News"
+
+  // System Admin and Financial Advisor Use Cases
+  SysAdmin --> SAFR001 : "Set Analysis Parameters"
+  
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Actors**: The primary actors are `Client`, `SysAdmin` (System Administrator), and implicitly the role of a `FinancialAdvisor`. 
+- **Use Cases**:
+  - Client-related use cases include viewing dashboards, receiving personalized recommendations, managing alerts, etc.
+  - SysAdmin handles system configuration like analysis parameters.
+  - Financial Advisors can review client data but do not have explicit creation or management rights beyond what’s implied by the system (e.g., reviewing recommendations).
+- **Relationships**:
+  - Direct interactions between `Client` and various systems (`CFR001`, `SFR002`, etc.).
+  - Indirect relationships via AI components like generating alerts, insights.
+  
+### Notes for Improvement:
+- Ensure all use cases are mapped to their respective actors (e.g., SysAdmin managing parameters should be explicitly linked in the diagram). 
+- Verify that no implicit actor roles were missed (like `FinancialAdvisor` needing access to certain features).
+- Confirm that each requirement ID is correctly associated with its corresponding use case.
+
+[Done: True
+Done Reason: stop
+Eval Count: 733]

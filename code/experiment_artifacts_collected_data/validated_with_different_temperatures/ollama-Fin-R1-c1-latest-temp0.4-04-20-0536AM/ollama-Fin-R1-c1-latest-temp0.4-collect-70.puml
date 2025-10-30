@@ -1,0 +1,110 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as Client
+actor SysAdmin as SysAdmin
+actor FinancialAdvisor as FAADvisor
+package Professional {
+  actor Chef as c
+}
+rectangle "System" {
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  Client --> CFR001 : "View"
+}
+
+package SystemAdmin {
+  SysAdmin --> SAFR001 : "Manage"
+}
+
+package Professional {
+  FAADvisor --> FAFR002 : "View Alerts", 
+                 FAFR003 : "Predictive Analytics",
+                 FAFR004 : "Configure Parameters"
+  
+  Chef <|-- c
+}
+
+rectangle "System" {
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  
+  SysAdmin --> SFR019 : "Manage", 
+                       SAFR002 : "Deliver Personalized Recommendations",
+                       SAFR003 : "Request Predictions",
+                       SAFR004 : "Request Recommendations",
+                       SAFR005 : "Request Spending Alerts",
+                       SAFR006 : "Request Investment Opportunities",
+                       SAFR007 : "Request Specific Investments",
+                       SAFR008 : "Request Anomaly Alerts",
+                       SAFR009 : "Find Contextualized News",
+                       SAFR010 : "Generate Dashboards", 
+                       SAFR013 : "Generate Client Alerts",
+                       SAFR014 : "Generate Analytics",
+                       SAFR015 : "Request Intervention Analyses",
+                       SAFR016 : "Request Insights",
+                       SFR020: "Manage User Feedback"
+  
+  Client --> CFR001, 
+            FAFR003,
+            AIFR007,
+            AIFR008
+  
+  FAADvisor --> FAFR004, 
+               FAFR005,
+               FAFR006,
+               FAFR009,
+               FAFR10: "View News"
+  
+}
+
+usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+usecase "AIFR005: Generate Specific Investments" as AIFR005
+usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+usecase "CFR011: Send Feedback" as CFR011
+
+Client --> AIFR002, 
+          AIFR003,
+          AIFR004,
+          AIFR005,
+          AIFR006,
+          AIFR007,
+          SFR019,
+          SAFR008: "Request Predictions",
+          CFR011
+
+FAADvisor --> FAFR002, 
+             FAFR003,
+             FAFR004,
+             FAFR005,
+             AIFR007
+             
+SysAdmin --> SAFR008: "Request Predictions", 
+                     SFR019
+
+rectangle "AI System" {
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Generate Specific Investments" as AIFR005
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  
+  
+}
+
+client --> AI System : "Request Predictions", 
+                      "Request Recommendations",
+                      "Request Spending Alerts",
+                      "Request Investment Opportunities",
+                      "Find Contextualized News"
+AI System --> Client : "Deliver Personalized Recommendations",
+                 "Deliver Financial Insights"
+
+@enduml

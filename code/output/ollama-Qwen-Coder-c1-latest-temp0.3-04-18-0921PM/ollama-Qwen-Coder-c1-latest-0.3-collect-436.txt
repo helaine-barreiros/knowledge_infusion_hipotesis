@@ -1,0 +1,71 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  FinancialAdvisor --> (FAFR002)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR001
+  
+  usecase "SAFR001: Manage Analysis Parameters for the AI System" as SAFR001
+  usecase "SFR005: Request Spending Limit Alerts from the AI Component" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from the AI Component" as SFR006
+  
+  SystemAdmin --> (SAFR001)
+}
+
+package "System Components" {
+  rectangle "AI System" {
+    usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations from Established Spending Patterns" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users by Evaluating Potential Investments Against Their Risk Profiles, Time Horizons, and Financial Goals" as AIFR004
+    
+    CFR001 --> (AIFR002)
+    FAFR003 --> (AIFR002)
+    SAFR001 --> (AIFR002)
+    
+    SFR005 --> (AIFR003)
+    SFR006 --> (AIFR004)
+  }
+  
+  rectangle "Notification System" {
+    usecase "SFR009: Request Contextualized News Insights from the AI Component to Identify Potential Impacts on Users' Investments" as SFR009
+    usecase "SFR13: Generate Client Alerts Based on Predefined Conditions to Ensure Timely Notification of Important Financial Events" as SFR13
+    
+    CFR002 --> (SFR009)
+    FAFR004 --> (SFR009)
+    
+    SAFR001 --> (SFR13)
+  }
+  
+  rectangle "Dashboard System" {
+    usecase "SFR12: Generate Client Dashboards that Present Financial Information in an Intuitive and Actionable Format" as SFR12
+    
+    CFR001 --> (SFR12)
+  }
+}
+
+CFR001 --> ("View Alerts about Anomalous Transactions") : "FAFR005"
+CFR001 --> ("Manage Personalized Recommendations Preferences") : "SAFR005"
+
+FAFR003 --> ("Configure Analysis Parameters for Specific Client Segments") : "SFR024"
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 694]

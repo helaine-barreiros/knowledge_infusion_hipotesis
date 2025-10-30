@@ -1,0 +1,93 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor FinancialAdvisor as advisor
+actor SysAdmin as sysadmin
+system "System" as system
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as cfr001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as cfr002
+  usecase "CFR003: Access Financial Predictions Based on Historical Data and Market Trends" as cfr003
+  usecase "CFR004: Get Personalized Recommendations Aligned with Financial Profile" as cfr004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as cfr005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as cfr006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as cfr007
+  usecase "CFR008: Receive News Related to Investment Portfolio" as cfr008
+  usecase "CFR009: Use a Consolidated Personalized Dashboard for Financial Monitoring" as cfr009
+  usecase "CFR10: Manage Relationship with Advisors, Including Data Sharing Permissions" as cfr10
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters" as safr001
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System Insights" as fafr001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as fafr002
+  usecase "FAFR003: Review Predictive Analytics About Clients' Financial Situations" as fafr003
+}
+
+rectangle "System Core Components" {
+  system component "SFR019: Manage Historical Record of Insights for Trend Analysis"
+  
+  // System Services
+  system service "SFR020: Process User Feedback to Improve Accuracy and Relevance"
+
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as sfr008
+}
+
+rectangle "AI Subsystem" {
+  component "AIFR001: Generate Financial Predictions Based on Data Analysis"
+  
+  // More components can be added here based on requirements
+
+}
+ 
+// Relationships between actors and use cases
+client --> cfr001 : "View financial insights dashboard"
+client --> cfr002 : "Receive alerts for anomalous transactions"
+client --> cfr003 : "Access financial predictions"
+client --> cfr004 : "Get personalized recommendations"
+client --> cfr005 : "Manage preferences"
+client --> cfr006 : "View spending limit alerts"
+client --> cfr007 : "Access investment opportunities based on risk profile"
+client --> cfr008 : "Receive news related to portfolio"
+client --> cfr009 : "Use consolidated personalized dashboard"
+client --> cfr10 : "Manage relationship with advisors"
+
+sysadmin --> safr001 : "Manage analysis parameters for AI system"
+
+advisor --> fafr001 : "Manage client mentoring sessions based on insights"
+advisor --> fafr002 : "View intervention alerts"
+advisor --> fafr003 : "Review predictive analytics about clients' financial situations"
+
+// System components and services
+system <|-- sfr020 : "Process user feedback to improve relevance"
+sfr020 <|-- cfr10 : "Manage historical record for trend analysis"
+
+// AI component relationships
+aifr001 --> safr008 : "Generate financial predictions from data"
+aifr008 --> sfr008 : "Request anomaly transaction alerts based on patterns"
+
+@enduml
+```
+
+### Key Notes:
+- **Actors**: The diagram includes three main actors: `Client`, `FinancialAdvisor`, and `SysAdmin`. Each has associated use cases.
+- **Use Cases** are grouped logically under their respective interfaces (client, system admin, financial advisor).
+- **System Components**: The "system" rectangle groups core components like historical record management (`SFR019`) and feedback processing (`SFR020`), along with services such as anomaly detection requests.
+- **AI Subsystem**: Represents the AI component generating predictions, recommendations, etc. It’s linked to other use cases for data flow (e.g., `AIFR001` generates financial predictions used by clients).
+- **Relationships**: Arrows denote interactions between actors and use cases. For example, a client uses multiple features (`CFR001`, ..., `CFR10`) through the system.
+- **Inheritance/Extends**: Not explicitly shown here but could be inferred from role overlaps (e.g., SysAdmin extends System components).
+  
+This diagram adheres to all provided guidelines and accurately reflects the functional requirements. Adjustments can be made based on further details or specific interactions not captured in this initial model.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1117]

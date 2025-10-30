@@ -1,0 +1,75 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  
+  Client --> CFR001 : "View"
+  
+  SysAdmin -> SAFR001 : "Manage"
+  
+  FinancialAdvisor -- (CFR003, CFR004) : "Use"
+}
+
+rectangle "Client" {
+  actor "User: Client" as User
+  usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+  
+  User --> CFR001 : "View Financial Insights Dashboard"
+  
+  User -> CFR003 : "View Financial Predictions"
+  
+  User -> CFR004 : "Receive Personalized Recommendations"
+  
+  User -> SAFR005 : "Request Spending Limit Alerts"
+  
+  User -> CFR006: "Manage Recommendation Preferences"
+  
+  User -> FAFR002: "View Client Intervention Alerts"
+}
+
+rectangle "FinancialAdvisor" {
+  actor "User: Financial Advisor" as FA
+  usecase "FAFR001: Manage Mentoring Sessions" as FAFR001
+  
+  FA --> CFR007 : "View Investment Opportunities"
+  
+  FA -> CFR008 : "Access News for Portfolio"
+  
+  FA -- (CFR009, SAFR002) : "Use"
+}
+
+rectangle "SysAdmin" {
+  actor SysAdmin as SA
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SA -> CFR005 : "Manage Recommendation Preferences"
+  
+  SA -- (CFR006, FAFR003) : "Use"
+}
+
+rectangle "System" {
+  actor System as Sys
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  
+  Sys --> CFR001 : "Generate Client Dashboards"
+  
+  Sys -> SAFR006 : "Request Investment Opportunity Analysis"
+  
+  Sys -- (CFR003, CFR004) : "Use"
+}
+
+rectangle "AI System" {
+  actor AI as A
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  
+  A --> SFR002 : "Provide Recommendations"
+  
+  Sys -- (CFR003, CFR004) : "Use"
+}
+
+@enduml

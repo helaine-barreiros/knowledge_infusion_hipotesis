@@ -1,0 +1,69 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR009: Request Contextualized News" as SFR009
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+  Client --> CFR001 : "View Financial Dashboard"
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  
+  rectangle "Client Interface" {
+    actor "User (Client)" as User
+    user -> CFR001: "Access Dashboard"
+    user -> SFR009: "Request News"
+  }
+  
+  rectangle "System Administrator Interface" {
+    actor "SysAdmin" : "Manage System Parameters"
+    SysAdmin --> SAFR001: "Adjust Analysis Settings"
+  }
+
+  rectangle "Financial Advisor Interface" {
+    actor "FAFR002: Financial Advisor" as FAFR
+    FAFR --> AIFR008: "Request Intervention Recommendations"
+  }
+  
+  rectangle "AI System" {
+    usecase "AIFR001: Generate Predictions" as AIFR001
+    usecase "AIFR002: Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Investment Opportunity Analysis" as AIFR004
+
+    user --> AIFR001 : "Request Predictions"
+    user --> AIFR002 : "Get Recommendations"
+    user --> AIFR003 : "Check Alerts"
+    user --> AIFR004: "Explore Investments"
+
+  }
+
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire system is enclosed within a rectangle labeled "System" to define the scope.
+- **Use Cases**:
+  - **Client-related Use Cases (CFR)**: 
+    - `CFR001` for viewing financial dashboards, managed by the client actor (`User`).
+    - `SFR009` and `AIFR007` handle contextualized news requests.
+  - **System Administrator**: Manages analysis parameters via `SAFR001`.
+- **Actors**:
+  - Client actors include "User (Client)" for interactions like viewing dashboards or requesting news.
+  - System Admin handles system parameter management (`SysAdmin`).
+  - Financial Advisor interacts with the AI through use cases like generating intervention recommendations (`AIFR008`).
+- **Relationships**:
+  - Direct client-to-use case arrows, e.g., `User -> CFR001`.
+  - Indirect interactions via the system (e.g., user requests news from AIFR component).
+
+This structure ensures all requirements are mapped accurately to their respective actors and use cases. Adjustments can be made based on further clarifications or additional requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 693]

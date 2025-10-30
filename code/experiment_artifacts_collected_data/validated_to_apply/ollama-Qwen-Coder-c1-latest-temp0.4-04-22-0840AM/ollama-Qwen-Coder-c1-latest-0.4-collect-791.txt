@@ -1,0 +1,88 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "System" {
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR013: Generate Client Alerts" as SFR013
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  usecase "SFR015: Request Predictive Intervention Analyses" as SFR015
+  usecase "SFR016: Request Predictive Insights" as SFR016
+  usecase "SFR017: Generate Financial Health Reports" as SFR017
+  usecase "SFR018: Manage Users' Financial Goals" as SFR018
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  usecase "SFR020: Manage User Feedback" as SFR020
+
+  package "Client" {
+    actor "CFR001: View Financial Insights Dashboard" as CFR001
+    actor "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+    actor "CFR003: View Financial Predictions" as CFR003
+    actor "CFR004: Receive Personalized Recommendations" as CFR004
+    actor "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+    actor "CFR006: View Spending Limit Alerts" as CFR006
+    actor "CFR007: View Investment Opportunities" as CFR007
+    actor "CFR008: View News Related to Portfolio" as CFR008
+    actor "CFR009: Access Personalized Dashboard" as CFR009
+    actor "CFR10: Manage Relationship with Financial Advisors" as CFR10
+
+    CFR001 --> SFR012
+    CFR002 --> SFR013
+    CFR003 --> SFR014
+    CFR004 --> SFR015
+    CFR005 --> SFR016
+    CFR006 --> SFR017
+    CFR007 --> SFR018
+    CFR008 --> SFR019
+    CFR009 --> SFR020
+  }
+
+  package "Financial Advisor" {
+    actor "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+    actor "FAFR002: View Intervention Alerts for Clients" as FAFR002
+    actor "FAFR003: View Predictive Analytics about Clients' Financial Situations" as FAFR003
+    actor "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+    FAFR001 --> SFR012
+    FAFR002 --> SFR013
+    FAFR003 --> SFR015
+    FAFR004 --> SFR016
+  }
+
+  package "System Administrator" {
+    actor "SAFR001: Manage Analysis Parameters for the AI System" as SAFR001
+
+    SAFR001 --> SFR012
+    SAFR001 --> SFR013
+    SAFR001 --> SFR014
+  }
+}
+
+package "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunities Based on User Strategies and MPT Principles" as AIFR005
+  usecase "AIFR006: Generate Anomaly Transaction Alerts in Compliance with FinCEN Requirements" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights Correlated to User Portfolios" as AIFR007
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations Based on Patterns Identified" as AIFR008
+  usecase "AIFR009: Generate Client Predictive Insights Providing Forward-Looking Analysis of Financial Situations" as AIFR009
+
+  SFR012 --> AIFR007
+  SFR013 --> AIFR006
+  SFR014 --> AIFR005
+  SFR015 --> AIFR008
+  SFR016 --> AIFR009
+}
+
+rectangle "User (Client, Financial Advisor, or System Administrator)" {
+  CFR001 <|-- CFR002 <|-- CFR003 <|-- CFR004 <|-- CFR005 <|-- CFR006 <|-- CFR007 <|-- CFR008 <|-- CFR009 <|-- CFR10
+}
+
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 1202]

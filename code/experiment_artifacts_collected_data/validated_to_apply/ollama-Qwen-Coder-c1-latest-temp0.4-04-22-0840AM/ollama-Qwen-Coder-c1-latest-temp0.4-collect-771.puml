@@ -1,0 +1,82 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:User (Client): as User
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFR001
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics about Client's Financial Situation" as FAFR003
+  
+  User --> (CFR001)
+  SysAdmin --> (SAFR001)
+}
+
+rectangle "Financial Advisor Module" {
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  FinancialAdvisor --> (FAFR002)
+  FinancialAdvisor --> (FAFR003)
+  FinancialAdvisor --> (FAFR004)
+}
+
+rectangle "Alert Module" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  
+  User --> (SFR001)
+  FinancialAdvisor --> (SFR001)
+  SystemAdmin --> (SFR001)
+  
+  User --> (AIFR006)
+}
+
+rectangle "Recommendation Module" {
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as CFR004
+  usecase "SAFR002: Manage Analysis Parameters for the AI System to Ensure Compliance" as SAFR002
+  
+  User --> (CFR004)
+  SysAdmin --> (SAFR002)
+}
+
+rectangle "Dashboard Module" {
+  usecase "SFR12: Generate Client Dashboards that Present Financial Information in an Intuitive and Actionable Format" as SFR12
+  usecase "AIFR009: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as AIFR009
+  
+  User --> (SFR12)
+}
+
+rectangle "Investment Module" {
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+  usecase "FAFR005: Configure Analysis Parameters for Specific Client Segments" as FAFR005
+  
+  User --> (CFR007)
+  FinancialAdvisor --> (FAFR005)
+}
+
+rectangle "News Module" {
+  usecase "SFR10: Request Contextualized News to Extract Relevant Information for Users' Financial Situations" as SFR10
+  usecase "AIFR007: Generate Client Predictive Insights that Provide Forward-looking Analysis of Financial Situations to Support More Effective Financial Planning" as AIFR009
+  
+  User --> (SFR10)
+}
+
+rectangle "Goal Management Module" {
+  usecase "CFR018: Manage Users' Financial Goals to Track Progress and Provide Relevant Recommendations" as CFR018
+  usecase "AIFR023: Generate Client Predictive Insights that Provide Forward-looking Analysis of Financial Situations to Support More Effective Financial Planning" as AIFR019
+  
+  User --> (CFR018)
+}
+
+rectangle "Feedback Module" {
+  usecase "CFR11: Send Feedback about the System's Recommendations and Insights" as CFR11
+  
+  User --> (CFR11)
+}
+@enduml

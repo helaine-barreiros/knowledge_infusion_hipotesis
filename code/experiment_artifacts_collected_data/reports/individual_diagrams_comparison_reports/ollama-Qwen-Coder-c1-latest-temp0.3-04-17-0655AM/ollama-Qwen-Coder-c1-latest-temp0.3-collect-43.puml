@@ -1,0 +1,110 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR001_1
+  usecase "CFR003: View Financial Predictions" as SAFR001_2
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR001_3
+  usecase "CFR005: Manage Recommendation Preferences" as SAFR001_4
+  usecase "CFR006: View Spending Limit Alerts" as SAFR001_5
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as SAFR001_6
+  usecase "CFR008: View News Related to My Investment Portfolio" as SAFR001_7
+  usecase "CFR009: Access Personalized Dashboard" as SAFR001_8
+  usecase "CFR10: Manage Relationship with Financial Advisors" as SAFR001_9
+  
+  CFR001 --> SAFR001_1 : "View Alerts"
+  CFR001 --> SAFR001_2 : "View Predictions"
+  CFR001 --> SAFR001_3 : "Receive Recommendations"
+  CFR001 --> SAFR001_4 : "Manage Preferences"
+  CFR001 --> SAFR001_5 : "View Spending Alerts"
+  CFR001 --> SAFR001_6 : "View Investment Opportunities"
+  CFR001 --> SAFR001_7 : "View News"
+  CFR001 --> SAFR001_8 : "Access Dashboard"
+  CFR001 --> SAFR001_9 : "Manage Advisors"
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts" as SAFR001_10
+  usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as SAFR001_11
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as SAFR001_12
+  
+  FAFR001 --> SAFR001_10 : "View Alerts"
+  FAFR001 --> SAFR001_11 : "View Analytics"
+  FAFR001 --> SAFR001_12 : "Configure Parameters"
+}
+
+package "System" {
+  actor System as SFR001
+  
+  usecase "SFR002: Deliver Personalized Recommendations to Users" as SAFR001_13
+  usecase "SFR003: Request Financial Predictions from AI Component" as AIFR001
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as AIFR002
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as AIFR003
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as AIFR004
+  usecase "SFR007: Request Specific Investment Opportunities from AI Component Matching User Criteria and ESG Preferences" as AIFR005
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as AIFR006
+  usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR017
+  usecase "SFR010: Process Contextualized News to Extract Relevant Information for Users' Financial Situations" as SFR018
+  usecase "SFR011: Request Contextualized News Insights from AI Component Identifying Potential Impacts on Users' Investments" as AIFR007
+  usecase "SFR012: Generate Client Dashboards Presenting Financial Information in an Intuitive and Actionable Format" as SFR019
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions Ensuring Timely Notification of Important Financial Events" as SAFR001_14
+  usecase "SFR014: Generate Client Analytics Providing Meaningful Insights into Financial Behavior and Performance" as SFR020
+  usecase "SFR015: Request Predictive Intervention Analyses from AI Component Identifying When Financial Advisors Should Engage with Clients" as AIFR008
+  usecase "SFR016: Request Predictive Insights From the AI Component Enhancing Value of Financial Guidance Provided to Clients" as AIFR009
+  usecase "SFR017: Generate Financial Health Reports Assessing Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as SFR021
+  usecase "SFR018: Manage Users' Financial Goals Tracking Progress Providing Relevant Recommendations" as SAFR001_15
+  usecase "SFR019: Maintain Historical Record of Users' Insights Enabling Trend Analysis Effectiveness Measurement" as AIFR010
+  
+  SFR001 --> SAFR001_13 : "Deliver Recommendations"
+  SFR001 --> AIFR001 : "Request Predictions"
+  SFR001 --> AIFR002 : "Request Recommendations"
+  SFR001 --> AIFR003 : "Request Spending Alerts"
+  SFR001 --> AIFR004 : "Request Investment Analysis"
+  SFR001 --> AIFR005 : "Request Specific Opportunities Matching Criteria and Preferences"
+  SFR001 --> AIFR006 : "Request Anomaly Transaction Alerts"
+  SFR001 --> SAFR001_9 : "Find News Relevant to Portfolios"
+  SFR001 --> SAFR001_10 : "Process Contextualized News for Users"
+  SFR001 --> AIFR007 : "Request Insights Matching User Criteria and Preferences"
+  SFR001 --> SAFR001_8 : "Generate Dashboards"
+  SFR001 --> SAFR001_14 : "Generate Alerts Based on Conditions"
+  SFR001 --> SAFR001_15 : "Generate Analytics Providing Insights"
+  SFR001 --> AIFR008 : "Request Predictive Intervention Recommendations"
+  SFR001 --> AIFR009 : "Request Predictive Insights Enhancing Financial Guidance"
+  SFR001 --> SAFR001_7 : "Generate Health Reports Assessing Wellbeing"
+  SFR001 --> SAFR001_18 : "Manage Goals Tracking Progress and Recommendations"
+  SFR001 --> AIFR010 : "Maintain Historical Record of Insights for Trend Analysis"
+}
+
+package "AI System" {
+  actor AI as AIFR001
+  
+  usecase "AIFR003: Generate Spending Limit Alerts by Identifying Unusual Deviations from Established Spending Patterns" as SAFR001_5
+  usecase "AIFR004: Generate Investment Opportunity Analyses for Users Evaluating Potential Investments Against Their Risk Profiles Time Horizons and Financial Goals" as SAFR001_6
+  
+  AI --> SAFR001_5 : "Generate Spending Alerts"
+  AI --> SAFR001_6 : "Generate Investment Opportunities"
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR001
+  
+  usecase "SAFR002: Manage Analysis Parameters for the AI System Ensuring Algorithms Remain Accurate Relevant and Compliant with Financial Regulations Such as Basel III for Risk Management" as SAFR001_1
+  
+  SAFR001 --> SAFR001_1 : "Manage Parameters"
+}
+
+package "User (Client, Financial Advisor or System Administrator)" {
+  actor User as CFR011
+  
+  usecase "CFR011: Send Feedback about the System's Recommendations and Insights to Help Improve Accuracy and Relevance of Future Outputs" as SAFR001_20
+  
+  User --> SAFR001_20 : "Send Feedback"
+}
+
+@enduml

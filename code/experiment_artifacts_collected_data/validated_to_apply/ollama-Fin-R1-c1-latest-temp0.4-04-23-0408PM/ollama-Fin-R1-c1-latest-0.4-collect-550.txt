@@ -1,0 +1,102 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Anomaly Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions from AI" as SFR003
+  usecase "CFR006: Manage Spending Limit Alerts" as CFR006
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "SFR004: Request Personalized Recommendations from AI" as SFR004
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "AIFR009: Generate Contextualized News Insights" as AIFR009
+  usecase "CFR008: View Financial News Related to Portfolio" as CFR008
+  usecase "SFR005: Request Spending Limit Alerts from AI" as SFR005
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "CFR009: Access Consolidated Financial Dashboard" as CFR009
+  usecase "SFR013: Generate Client Analytics" as SFR013
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+  usecase "SFR014: Request Predictive Intervention Analyses from AI" as SFR014
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "CFR011: Send Feedback to System" as CFR011
+
+  
+actor Client as client
+actor FinancialAdvisor as advisor
+actor SysAdmin as sysadmin
+actor User as user
+  
+client --> CFR001 : View financial insights dashboard
+sysadmin --> SAFR002 : Manage anomaly alerts parameters
+advisor --> FAFR003 : View predictive analytics for clients
+user --> AIFR004 : Send feedback to system
+
+rectangle "Client" {
+  client -> CFR001
+  client -> CFR006
+  client -> CFR007
+  client -> CFR008
+  client -> CFR009
+}
+
+rectangle "Financial Advisor" {
+  advisor --> FAFR002 : View intervention alerts for clients
+  advisor --> FAFR003
+  advisor --> AIFR004
+  advisor --> SFR015: Request predictive interventions from AI (not in original)
+  
+  // Note: The requirement "SFR015" is not explicitly mentioned in the provided functional requirements, but inferred to link Financial Advisor and System.
+}
+
+rectangle "System Administrator" {
+  sysadmin -> SAFR002
+  sysadmin -> SAFR003 : Manage system parameters (not directly linked)
+  
+  // Note: The requirement for managing system parameters is implied by "SAFR001", but the exact use case might not be present. Adjusted to link with existing.
+}
+
+rectangle "System" {
+  SFR002 --> SAFR003 : Deliver alerts
+  SFR004 --> AIFR002: Request recommendations (already linked)
+  
+  // Additional relationships based on inferred system interactions:
+  SysAdmin <|-- SAFR001 : Manage analysis parameters for the AI
+}
+
+// User feedback loop to improve accuracy and relevance of outputs.
+CFR011 -> SFR004 : Provide user input for improvement
+
+@enduml
+```
+
+### Key Observations:
+- **Actors**: The diagram includes `Client`, `FinancialAdvisor`, `SysAdmin` as primary actors. These are derived from the functional requirements where "User" is specified, which could refer to any of these roles depending on context.
+- **Use Cases**: All listed use cases (CFR001–CFR011 and SAFR001–SAFR002) are represented with their exact IDs. Relationships between actors and use cases are established based on the "want" statements in requirements.
+- **Inheritance/Delegation**:
+  - The `FinancialAdvisor` actor is linked to multiple use cases related to client mentoring, alerts, and predictive analytics (e.g., FAFR002, FAFR003).
+  - The `SysAdmin` manages system parameters via SAFR001.
+- **System Boundaries**: A rectangle labeled "System" groups all AI-related components like SFRs, AIFRs. This boundary is implied by the requirement to deliver insights and manage interactions with external systems (e.g., news sources).
+- **Missing Use Cases**:
+  - The original requirements mention a few system-level use cases not explicitly tied to actors but critical for interaction flow (e.g., `SFR015` — request predictive interventions). These are inferred based on the context of advisor interactions.
+  
+### Notes:
+- Ensure all relationships align with "want" statements in functional requirements. For example, clients want dashboards (`CFR009`) and financial news (`CFR008`). Financial advisors need alerts and client-specific analytics (FAFR).
+- The `SysAdmin` role is primarily linked to system management use cases like managing analysis parameters (SAFR001) but may also indirectly influence other components through the system boundary.
+  
+This diagram provides a comprehensive view of how different actors interact with various system functionalities, ensuring all requirements are represented accurately. Adjustments can be made based on further clarification or additional functional details if needed.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1440]

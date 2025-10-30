@@ -1,0 +1,74 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+  
+  usecase "CFR002: View Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR004
+  usecase "CFR005: Manage Recommendation Preferences" as SAFR005
+  usecase "CFR006: View Spending Limit Alerts" as SAFR006
+  usecase "CFR012: Access Personalized Dashboard" as SAFR012
+  
+  CFR001 --> (SAFR002)
+  CFR001 --> (SAFR003)
+  CFR001 --> (SAFR004)
+  CFR001 --> (SAFR005)
+  CFR001 --> (SAFR006)
+  CFR001 --> (SAFR012)
+
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts" as SAFR007
+  usecase "FAFR003: View Predictive Analytics" as SAFR008
+  usecase "FAFR004: Configure Analysis Parameters for Specific Clients" as SAFR015
+  
+  FAFR001 --> (SAFR002)
+  FAFR001 --> (SAFR003)
+  FAFR001 --> (SAFR015)
+
+}
+
+package System {
+  actor "System Administrator" as SAFR009
+  actor "AI System" as AIFR001
+  
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  useusecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  useusecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities from AI Component that Match User Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component to Detect Potentially Fraudulent Activities in Accordance with AML Regulations" as SFR008
+  useusecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  
+  
+  SAFR009 --> (SAFR002)
+  SAFR009 --> (AIFR004)
+  AIFR001 --> (SFR003)
+  AIFR001 --> (SFR004)
+  AIFR001 --> (SFR005)
+  AIFR001 --> (SFR006)
+  AIFR001 --> (SFR007)
+  AIFR001 --> (SFR008)
+
+}
+
+package "System Components" {
+    usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance as Defined by Industry Standards Like FINRA Guidelines" as SFR004
+    useusecase "AIFR003: Generate Spending Limit Alerts for Users By Identifying Unusual Deviations from Established Spending Patterns" as SFR019
+}
+
+rectangle "System Boundary" {
+  SAFR002 <|-- (SFR004)
+  SAFR008 <|-- (SFR019)
+
+}
+@enduml

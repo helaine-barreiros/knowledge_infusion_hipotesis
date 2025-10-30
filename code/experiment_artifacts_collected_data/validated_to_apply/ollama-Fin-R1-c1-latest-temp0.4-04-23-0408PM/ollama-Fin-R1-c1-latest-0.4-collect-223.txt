@@ -1,0 +1,68 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  // Clients (CFR)
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  // System Administrators (SAFR)
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  // Financial Advisors (FAFR)
+  FAFR002 <|-- SAFR001
+  FAFR003 --> AIFR008
+
+  // AI Systems (AIFR)
+  AIFR006 <|-- CFR002 : "Send Alerts"
+  
+}
+
+@enduml
+```
+
+**Explanation:**
+- The system includes use cases for clients, financial advisors, and system administrators. Each actor is represented with their exact IDs from the requirements.
+- Clients can view a financial insights dashboard (CFR001) through direct interaction (`client --> CFR001`).
+- System Administrators manage analysis parameters (SAFR001), which are extended by Financial Advisors for specific client segments (FAFR004). This is shown with inheritance: `FAFR003 <|-- SAFR001`.
+- Financial Advisors also view client intervention alerts (`FAFR002 --> AIFR008`).
+- The AI system generates anomaly transaction alerts (`AIFR006`) which are linked to clients via feedback mechanisms.
+  
+This structure ensures all actors and use cases are accurately represented with their relationships. Adjustments can be made based on further requirements or interactions between components. 
+
+**Note:** Ensure the PlantUML syntax is correctly formatted, especially quotation marks around actor names and use case IDs where spaces exist (e.g., "CFR002: View Alerts"). The system boundary and direction are set as per guidelines.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  FAFR003 <|-- SAFR001
+  FAFR002 --> AIFR008
+  
+  AIFR006 <|-- CFR002 : "Send Alerts"
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 684]

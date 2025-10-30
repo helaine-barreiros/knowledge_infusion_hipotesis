@@ -1,0 +1,73 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+}
+
+package "System Administrator" {
+  actor SysAdmin as SAFR003
+}
+
+rectangle "User Interface" {
+  usecase "CFR009: View Personalized Dashboard" as CFR009
+  usecase "SFR12: Generate Client Dashboards" as SFR12
+  
+  CFR001 --> (View Alerts)
+  CFR001 --> (Manage Preferences)
+  CFR001 --> (View Financial Predictions)
+  CFR001 --> (Receive Recommendations)
+  CFR001 --> (Manage Relationship with Advisors)
+  
+  FAFR002 --> (Configure Analysis Parameters for Client Segments)
+  FAFR002 --> (View Client Intervention Alerts)
+  FAFR002 --> (Provide Mentoring Sessions Based on Insights)
+  
+  SAFR003 --> (SAFR001: Manage Analysis Parameters)
+}
+
+rectangle "System" {
+  usecase "SFR08: Request Contextualized News from AI Component" as SFR08
+  usecase "SFR17: Generate Financial Health Reports" as SFR17
+  
+  CFR009 --> (View Spending Limit Alerts)
+  CFR009 --> (View Investment Opportunities)
+  CFR009 --> (View News Related to Portfolio)
+  
+  FAFR002 --> (FAFR03: View Predictive Analytics About Client Financial Situations)
+  
+  SAFR003 --> (SFR15: Request Predictive Intervention Analyses from AI Component)
+}
+
+rectangle "AI System" {
+  usecase "AIFR01: Generate Financial Predictions for Users" as AIFR01
+  usecase "AIFR02: Generate Personalized Recommendations Based on Profiles and Goals" as AIFR02
+  
+  CFR009 --> (SFR3: Request Financial Predictions from AI Component)
+  
+  FAFR002 --> (FAFR04: Configure Analysis Parameters for Specific Client Segments)
+  
+  SAFR003 --> (AIFR01: Generate Financial Predictions for Users)
+}
+
+rectangle "Notifications" {
+  usecase "SFR08: Request Contextualized News from AI Component" as SFR08
+  usecase "SFR17: Generate Financial Health Reports" as SFR17
+  
+  CFR009 --> (SFR13: Generate Client Alerts Based on Predefined Conditions)
+  
+  FAFR002 --> (FAFR04: Configure Analysis Parameters for Specific Client Segments)
+}
+
+rectangle "Feedback Loop" {
+  usecase "CFR11: Send Feedback about System Recommendations and Insights" as CFR11
+  
+  CFR11 --> (SFR20: Manage User Feedback to Continuously Improve Outputs)
+}
+@enduml

@@ -1,0 +1,78 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR006: Generate Anomaly Transaction Alerts for Users" as AIFR006
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  sysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  financialAdvisor --> FAFR002 : "View Client Intervention Alerts"
+  
+  system <|-- (CFR001, SFR013)
+  system <|-- AIFR006
+}
+
+rectangle "Client" {
+  actor client as Client
+  usecase "CFR002: View Alerts About Anomalous Transactions" as CFR002
+  usecase "CFR004: Receive Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR011: Send Feedback on System Outputs" as CFR011
+  
+  Client --> CFR002 : "View Alerts"
+  Client --> CFR004 : "Receive Recommendations"
+}
+
+rectangle "Financial Advisor" {
+  actor financialAdvisor as FinancialAdvisor
+  usecase "FAFR003: View Predictive Analytics About Clients' Finances" as FAFR003
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  
+  financialAdvisor --> FAFR003 : "View Predictive Analytics"
+}
+
+rectangle "System Administrator" {
+  actor sysAdmin as SysAdmin
+  usecase "SAFR002: View Historical Record of Users' Insights for Trend Analysis" as SAFR002
+  usecase "CFR010: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as CFR010
+  
+  SysAdmin --> SAFR002 : "View Historical Record"
+}
+
+rectangle "AI System" {
+  actor AI_system as AIFR009
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations Based on Patterns in Financial Behavior" as AIFR008
+  
+  system --> AIFR008 : "Generate Intervention Recommendations"
+}
+
+@enduml
+```
+
+### Explanation:
+1. **System Boundary**: The entire diagram is enclosed within a rectangle labeled "System," which contains all use cases and actors relevant to the AI-powered financial insights platform.
+2. **Actors**:
+   - `Client`: Represents end-users (e.g., clients, financial advisors).
+   - `SysAdmin`: System Administrator for managing parameters and historical data.
+   - `FinancialAdvisor`: Financial Advisor role with specific use cases.
+3. **Use Cases**:
+   - Client-related: Viewing dashboards (`CFR001`), alerts (`SAFR006`, `CFR002`), recommendations (`CFR004`), and feedback (`CFR011`).
+   - System Administrator: Managing analysis parameters (`SAFR001`) and historical records (`SAFR002`).
+   - Financial Advisor: Viewing predictive analytics (`FAFR003`) and mentoring sessions based on insights (`FAFR001`).
+4. **Relationships**:
+   - Clients interact with the system through various use cases (e.g., viewing alerts, receiving recommendations).
+   - System Administrator manages parameters and historical data.
+   - Financial Advisors view client-related analytics and manage relationships.
+5. **AI Component**: The `AIFR008` use case represents AI-generated predictive intervention recommendations, which are driven by the system.
+
+This structure ensures all requirements are captured accurately with proper actor-to-use-case mappings and logical groupings within the system boundary. Adjustments can be made based on further analysis or additional requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 901]

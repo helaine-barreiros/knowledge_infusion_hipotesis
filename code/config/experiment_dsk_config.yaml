@@ -1,20 +1,25 @@
 general:
   dsk_dir: "./dsk"                 # Diretório onde os documentos estão armazenados
-  iteractions: 30
+  iteractions: 1000
   log_level: "DEBUG"
   output_directory: "./output"
+  report_directory: "./reports"
   log_dir: "./log"
+  encoding: "utf-8"
+  diagram_extension: "puml"
   models:
     default_openai_provider: "https://api.openai.com/v1"
     default_openai_model: "gpt-4o"
     default_openai_temperature: 1
     default_openai_key: ""
-    default_ollama_url: "https://faa2-200-133-1-77.ngrok-free.app/"
+    default_ollama_url: "https://7a2d-200-133-1-77.ngrok-free.app"
     default_ollama_model: "Qwen2.5-Coder-7B-Instruct:latest"
     default_ollama_temperature: 1
     default_ollama_timeout: 60
     default_ollama_top_p: 0.8
     default_ollama_num_predict: 512
+    default_ollama_presence_penalty: 0.1
+    default_ollama_frequency_penalty: 0.4
     default_provider: "ollama"  #ollama|openai
 rag:
   embeddings_dir: "./embeddings"
@@ -23,223 +28,120 @@ rag:
   normalize_embeddings: True 
 artifacts:  
   output_directory: "experiment_artifacts_collected_data"
+  output_analysis_directory: "experiment_artifacts_analysis"
+  reference_puml_evaluator: "./config/AI-Powered-Analysis-Insights-System/use-case-reference.puml"
+  reference_image_evaluator: "./config/AI-Powered-Analysis-Insights-System/use-case-reference.png"
   treatment_model_1: "Qwen-Coder-c1:latest"
   treatment_model_2: "Fin-R1-c1:latest"
-  #treatment_model_2: "deepseek-r1:70b"
   treatment_provider_1: "ollama"
   treatment_provider_2: "ollama"
-  treatment_model_1_temperature: 1.5
-  treatment_model_2_temperature: 1.5
-  treatment_model_1_top_p: 0.7
-  treatment_model_2_top_p: 0.7
+  treatment_model_1_temperature: 0.4
+  treatment_model_2_temperature: 0.4
+  treatment_model_1_top_p: 0.95
+  treatment_model_2_top_p: 0.95
+  treatment_model_1_top_k: 80
+  treatment_model_2_top_k: 40
+  treatment_model_1_presence_penalty: 0.4
+  treatment_model_2_presence_penalty: 0.6
+  treatment_model_1_frequence_penalty: 0.2
+  treatment_model_2_frequence_penalty: 0.4
   treatment_model_1_num_predict: 2048
   treatment_model_2_num_predict: 2048
   ollama_model: "Qwen-Coder-c1:latest"
-  ollama_url: " https://faa2-200-133-1-77.ngrok-free.app/api/chat"
+  ollama_url: "https://7a2d-200-133-1-77.ngrok-free.app/api/chat"
   plantum_png_url: "http://www.plantuml.com/plantuml/png/"
   pipeline_processor: parallel
-  system_prompt: "you are a experiment software architect, proficient in the language PlantUML, use case diagrams and architectural approach 'C4 Modeling'. You are specialist in Financial business and must model a new system: 'AI-Powered Personal Financial Management System'."
+  system_prompt: |
+    You are a specialized UML modeling assistant with expertise in software engineering and technical specification. Your primary function is to convert functional requirements into precise PlantUML use case diagrams.
+
+    Technical guidelines:
+    1. Use only valid PlantUML syntax
+    2. Work within a left-to-right direction for readability
+    3. Ensure actors are represented with their exact names from requirements
+    4. Format use cases as <<ID: Name>> where ID matches requirement IDs (eg: usecase "SAFR001: Manage Analysis Parameters" as SAFR001)
+    5. Be precise with actor-to-use-case relationships
+    6. Identify inheritance relationships between actors if implied by requirements
+    7. Group use cases logically by actor or subsystem
+    8. Include a descriptive title in the diagram
+    9. Avoid inventing actors or use cases not present in requirements
+    10. Structure the PlantUML code with proper indentation
+    11. Begin with @startuml and end with @enduml
+    12. Use the 'rectangle' notation to define system boundaries
+    13. Wrap the complete PlantUML code in a code block
+    14. Actors (defined by actor keyword with alias (eg: usecase "CFR001: View" as CFR001)
+    15. Use cases (declared by usecase keyword (eg: usecase "Wash" as W))
+    16. Relationships relate actors and usecase (declared with arrow --> (eg: User -> (Start)), can apply labels (eg: User -> (Human) : label)), actor/usecase can extens another with  <|-- (eg:(Start) <|-- (Use)))
+    17. Packages group actors ou usecases (eg: package Professional { actor Chef as c } )
+    18. System boundary (represented as a rectangle (eg: rectangle Professional { actor Chef as c }))
+    19. Do not forgett quotation marks when any definition have spaces (eg: usecase "CFR001: View Financial" as CFR001)
+    20. the components name could not have the same identification.
+    21. comments use a single quote (ex: 'my comment)
+    22. wrap any text with a space character with double quotes (eg: lient --> CFR002 : "View Alerts")
+
+    Here is an example:
+    @startuml
+    left to right direction
+
+    title Use Case Diagram for AI-Powered Analysis & Insights System
+
+    :Client: as Client
+    :System: as Sys
+
+    rectangle "System" {
+      usecase "CFR001: View Financial Insights Dashboard" as CFR001
+      usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+      
+      Client --> CFR001
+      SysAdmin --> SAFR001
+    }
+    @enduml
   user_prompt: |
-    Develop a use case diagram in PlantUML for the "AI-powered Personal Financial Management System" following the guidelines below:
-    ## General guidelines:
-    1. Use standard UML notation for use cases, not C4 notation. External systems should be represented as actors in the diagram.
-    2. Organize the diagram into functional packages to improve readability (e.g., "Authentication", "Financial Management", "Analysis and Recommendations", "Planning", "Collaboration").
-    3. Create 20-30 core use cases that represent complete functionality. A use case can implement multiple related functional requirements.
-    4. Use UML relationships correctly: <<include>> for functionality that is always performed as part of the base use case <<extend>> for optional conditional functionality generalization for specialized cases of a more generic use case
-    5. Represent both human users and external systems as actors, visually differentiating them.
-    6. The use cases must correctly represent the functionalities of the system and follow the PlantUML syntax. See the provided example in ###Use Case Example.
-    7. The diagram should be consistent with C1 Specification and Requirements, maintaining uniform terminology.
-    8. All functional requirements must be covered, with adequate detail.
-    9. The diagram should be clear enough to guide implementation by development teams.
-    10. Return only the PlantUML code between the @startuml and @enduml tags in your response
-    
-    ### "AI-powered Personal Financial Management System" C1 Specification
+    Generate a complete PlantUML use case diagram based on the following functional requirements list. The diagram must accurately represent all actors and use cases with their exact IDs and names as given in the requirements.
 
-    @startuml "AI-Enhanced Personal Finance Management System - Context Diagram"
-    !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
-    'Define SPRITE for custom icons
-    !define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
-    !include FONTAWESOME/users.puml
-    !include FONTAWESOME/user_tie.puml
-    !include FONTAWESOME/server.puml
-    !include FONTAWESOME/brain.puml
-    !include FONTAWESOME/newspaper.puml
-    !include FONTAWESOME/university.puml
-    !include FONTAWESOME/chart_line.puml
-    !include FONTAWESOME/lock.puml
+    Functional requirements:
 
-    'Define custom colors
-    !define CUSTOMER_COLOR #08427B
-    !define SYSTEM_COLOR #1168BD
-    !define EXTERNAL_SYSTEM_COLOR #999999
-
-    LAYOUT_WITH_LEGEND()
-
-    'Persons / Actors
-    Person(individual, "Individual Customer", "A person who wants to manage their personal finances and receive financial insights", $sprite="users")
-
-    Person(advisor, "Financial Advisor", "Professional who provides financial advice based on customer data", $sprite="user_tie")
-    'Main System
-    System(pfm_system, "AI-Enhanced Personal Finance Management System", "Provides financial aggregation, analysis, visualization, and AI-powered recommendations to help users manage their finances effectively", $sprite="server")
-
-    'External Systems
-    System_Ext(banking_api, "Banking APIs", "External services that provide secure access to users' bank accounts and transactions", $sprite="university")
-    System_Ext(investment_api, "Investment APIs", "External services that provide market data and investment portfolio information", $sprite="chart_line")
-    System_Ext(credit_service, "Credit Scoring Service", "Provides credit score information and assessment", $sprite="server")
-    System_Ext(news_service, "Financial News Service", "Provides relevant financial news and economic indicators", $sprite="newspaper")
-    System_Ext(auth_service, "Authentication Service", "Handles user authentication through various methods", $sprite="lock")
-
-    System_Ext(ai_engine, "AI Reasoning Engine", "Provides advanced financial reasoning and predictive capabilities", $sprite="brain")
-
-    'Relationships - Individual Customer
-    Rel(individual, pfm_system, "Views financial information, receives insights, manages budgets and goals")
-
-    'Relationships - Financial Advisor
-    Rel(advisor, pfm_system, "Accesses shared customer financial data and provides recommendations")
-
-    'Relationships - PFM System to External Systems
-    Rel(pfm_system, banking_api, "Retrieves banking transactions, account balances, and account information")
-    Rel(pfm_system, investment_api, "Fetches investment data, portfolio performance, and market information")
-    Rel(pfm_system, credit_service, "Obtains credit scores and credit-related insights")
-    Rel(pfm_system, news_service, "Receives relevant financial news and market updates")
-    Rel(pfm_system, auth_service, "Verifies user identities and manages authentication")
-    Rel(pfm_system, ai_engine, "Leverages for advanced financial analysis and personalized recommendations")
-
-    'Feedback Relationships
-    Rel(banking_api, pfm_system, "Sends transaction notifications and account updates")
-    Rel(pfm_system, individual, "Sends notifications about financial alerts, insights, and goal progress")
-    @enduml
-    ```
-    
-    ### "AI-powered Personal Financial Management System" Functional Requirements
-    | ID   | Requirement                                                                           | Priority  |
-    | ---- | ------------------------------------------------------------------------------------- | --------- |
-    | FR01 | The system shall authenticate users via username/password and OAuth2 providers        | Essential |
-    | FR02 | The system shall connect to users' financial accounts through secure banking APIs     | Essential |
-    | FR03 | The system shall aggregate and categorize financial transactions                      | Essential |
-    | FR04 | The system shall visualize spending patterns and financial history                    | Essential |
-    | FR05 | The system shall provide AI-powered insights on spending habits                       | Essential |
-    | FR06 | The system shall generate personalized financial recommendations                      | Essential |
-    | FR07 | The system shall allow users to set and track financial goals                         | Important |
-    | FR08 | The system shall provide budget creation and monitoring capabilities                  | Important |
-    | FR09 | The system shall deliver alerts for unusual spending patterns                         | Important |
-    | FR10 | The system shall forecast future financial positions based on historical data         | Important |
-    | FR11 | The system shall suggest investment opportunities based on user profile               | Important |
-    | FR12 | The system shall provide debt management strategies with repayment simulations        | Important |
-    | FR13 | The system shall allow users to share selected financial data with financial advisors | Desirable |
-    | FR14 | The system shall provide a chatbot for financial queries                              | Desirable |
-    | FR15 | The system shall generate periodic financial health reports                           | Desirable |
-    | FR16 | The system shall offer cryptocurrency portfolio tracking and analysis                 | Desirable |
-    
-    ### "AI-powered Personal Financial Management System" Non-Functional Requirements
-    | ID    | Requirement                                                                       | Priority  |
-    | ----- | --------------------------------------------------------------------------------- | --------- |
-    | NFR01 | The system shall comply with financial data regulations (GDPR, PSD2, etc.)        | Essential |
-    | NFR02 | The system shall secure all financial data with encryption at rest and in transit | Essential |
-    | NFR03 | The system shall maintain 99.9% uptime during business hours                      | Essential |
-    | NFR04 | The system shall respond to user interactions within 1 second                     | Essential |
-    | NFR05 | The system shall scale to handle at least 100,000 concurrent users                | Important |
-    | NFR06 | The system shall provide multi-factor authentication                              | Important |
-    | NFR07 | The system shall recover from failures within 5 minutes                           | Important |
-    | NFR08 | The system shall support internationalization and multiple currencies             | Important |
-    | NFR09 | The AI components shall be explainable and provide reasoning for recommendations  | Important |
-    | NFR10 | The system shall be compatible with major web browsers and mobile devices         | Important |
-    | NFR11 | The system shall maintain an audit trail of all data access                       | Important |
-    | NFR12 | The system shall allow customization of dashboards and reports                    | Desirable |
-    | NFR13 | The system shall support offline mode with limited functionality                  | Desirable |
-    | NFR14 | The system shall be accessible according to WCAG 2.1 level AA standards           | Desirable |
-    
-    
-    ###Use Case Example
-
-    @startuml "AI-Enhanced Personal Financial Management System - Use Cases"
-
-    title "AI-Enhanced Personal Financial Management System - Use Cases"
-
-    ' ACTOR DEFINITION
-    ' Syntax: actor "Display Name" as alias_name [#optional_color]
-    ' Human actors are represented without color
-    actor "Individual Customer" as user
-    actor "Financial Advisor" as advisor
-
-    ' System actors (external systems) should use color to differentiate 
-    actor "Banking System" as bank #lightblue
-    actor "Investment System" as invest #lightblue
-    actor "AI Engine" as ai #lightgreen
-
-    ' PACKAGE DEFINITION
-    ' Syntax: package "Package Name" { ... use cases ... }
-    ' Use packages to group related use cases
-    package "Authentication & Security" {
-        ' USE CASE DEFINITION
-        ' Syntax: usecase "UC##: Use Case Name" as alias
-        usecase "UC01: Authenticate User" as UC01
-        
-        ' NOTES - Add requirements traceability and descriptions
-        ' Syntax: note [position] of [element]
-        note right of UC01
-          **Req. ID:** FR01, NFR06
-          **Description:** Allows users to authenticate via 
-          username/password or OAuth2 providers, with 
-          optional multi-factor authentication.
-        end note
-        
-        usecase "UC02: Manage Account Settings" as UC02
-    }
-
-    package "Financial Account Management" {
-        usecase "UC03: Connect Financial Accounts" as UC03
-        
-        note right of UC03
-          **Req. ID:** FR02
-          **Description:** Securely links external financial accounts 
-          using banking APIs to retrieve transaction data.
-        end note
-        
-        usecase "UC04: View Transactions" as UC04
-        usecase "UC05: Categorize Transactions" as UC05
-        
-        ' INCLUDE RELATIONSHIP
-        ' Syntax: base_case ..> included_case : <<include>>
-        ' Used when a base use case ALWAYS includes the functionality of another use case
-        UC03 ..> UC04 : <<include>>
-        
-        ' EXTEND RELATIONSHIP
-        ' Syntax: extending_case ..> base_case : <<extend>>
-        ' Used when functionality is OPTIONALLY added to a base use case
-        UC04 ..> UC05 : <<extend>>
-    }
-
-    package "Analysis & Insights" {
-        usecase "UC06: View Financial Dashboard" as UC06
-        usecase "UC07: Receive AI Insights" as UC07
-        
-        ' GENERALIZATION RELATIONSHIP
-        ' Syntax: specific_case --|> general_case
-        ' Used when one use case is a specialized version of a more general one
-        usecase "UC08: View Basic Reports" as UC08
-        usecase "UC09: View Advanced Analytics" as UC09
-        UC09 --|> UC08
-    }
-
-    ' CROSS-PACKAGE RELATIONSHIPS
-    ' Use cases can have relationships across different packages
-    UC06 ..> UC04 : <<include>>
-
-    ' ACTOR-USE CASE RELATIONSHIPS
-    ' Syntax: actor --> usecase
-    ' Shows which actors interact with which use cases
-    user --> UC01
-    user --> UC03
-    user --> UC06
-    advisor --> UC09
-    bank --> UC03
-    ai --> UC07
-
-    ' LAYOUT HINTS
-    ' Use these commands if you need to adjust the layout
-    ' left to right direction
-    ' top to bottom direction
-
-    @enduml
-
+    CFR001: As a Client, I want to view a financial insights dashboard that presents my financial data in a comprehensive format to better understand my overall financial health.
+    CFR002: As a Client, I want to receive alerts about anomalous transactions in my accounts to quickly identify potential fraud or unusual spending patterns according to regulations set by the Financial Action Task Force (FATF).
+    CFR003: As a Client, I want to view financial predictions based on my historical data and current market trends to make more informed financial decisions and plan for future expenses.
+    CFR004: As a Client, I want to receive personalized recommendations aligned with my financial profile and goals to optimize my financial strategies and investment portfolio.
+    CFR005: As a Client, I want to manage my personalized recommendations preferences to ensure the system provides insights relevant to my financial objectives and risk tolerance as defined in my KYC (Know Your Customer) profile.
+    CFR006: As a Client, I want to view spending limit alerts when I exceed predefined thresholds in specific expense categories to maintain better control over my budget.
+    CFR007: As a Client, I want to view investment opportunities suitable to my risk profile (as defined under MiFID II or equivalent standards) to diversify my portfolio and maximize returns.
+    CFR008: As a Client, I want to view news related to my investment portfolio to stay informed about market events that might affect my assets.
+    CFR009: As a Client, I want to access a personalized dashboard that consolidates my financial information in a single view to efficiently monitor my finances.
+    CFR010: As a Client, I want to manage my relationship with Financial Advisors, including permissions for sharing my financial data, to maintain privacy and control over my financial information.
+    SAFR001: As a System Administrator, I want to manage analysis parameters for the AI system to ensure the algorithms remain accurate, relevant, and compliant with financial regulations such as Basel III for risk management.
+    FAFR001: As a Financial Advisor, I want to manage client mentoring sessions based on system-generated insights to provide more valuable guidance aligned with each client's financial goals.
+    FAFR002: As a Financial Advisor, I want to view client intervention alerts when the system detects patterns requiring professional attention to proactively assist clients with potential financial issues.
+    FAFR003: As a Financial Advisor, I want to view predictive analytics about my clients' financial situations to provide data-driven recommendations during consultations.
+    FAFR004: As a Financial Advisor, I want to configure analysis parameters for specific client segments to customize the system's behavior according to different client profiles and regulatory requirements such as GDPR or CCPA.
+    SFR001: As a system, I must deliver alerts to users through appropriate notification channels to ensure timely awareness of critical financial events.
+    SFR002: As a system, I must deliver personalized recommendations to users based on their financial profiles to support better financial decision-making.
+    SFR003: As a system, I must request financial predictions from the AI component to provide users with forward-looking financial insights.
+    SFR004: As a system, I must request personalized recommendations from the AI component based on each user's financial data and preferences.
+    SFR005: As a system, I must request spending limit alerts from the AI component when user spending patterns exceed defined thresholds.
+    SFR006: As a system, I must request investment opportunity analysis from the AI component to identify suitable investments for users based on their risk profiles.
+    SFR007: As a system, I must request specific investment opportunities from the AI component that match user investment criteria and ESG (Environmental, Social, and Governance) preferences.
+    SFR008: As a system, I must request anomaly transaction alerts from the AI component to detect potentially fraudulent activities in accordance with AML (Anti-Money Laundering) regulations.
+    SFR009: As a system, I must find contextualized news relevant to users' financial portfolios from trusted financial news sources.
+    SFR010: As a system, I must process contextualized news to extract relevant information for users' financial situations.
+    SFR011: As a system, I must request contextualized news insights from the AI component to identify potential impacts on users' investments.
+    SFR012: As a system, I must generate client dashboards that present financial information in an intuitive and actionable format.
+    SFR013: As a system, I must generate client alerts based on predefined conditions to ensure timely notification of important financial events.
+    SFR014: As a system, I must generate client analytics that provide meaningful insights into financial behavior and performance.
+    SFR015: As a system, I must request predictive intervention analyses from the AI component to identify when financial advisors should engage with clients.
+    SFR016: As a system, I must request predictive insights from the AI component to enhance the value of financial guidance provided to clients.
+    SFR017: As a system, I must generate financial health reports that assess users' overall financial wellbeing according to standard financial ratios and metrics.
+    SFR018: As a system, I must manage users' financial goals to track progress and provide relevant recommendations.
+    SFR019: As a system, I must maintain a historical record of users' insights to enable trend analysis and effectiveness measurement.
+    SFR020: As a system, I must manage user feedback to continuously improve the quality and relevance of financial insights.
+    AIFR001: As an AI system, I must generate financial predictions for users by analyzing historical transaction data, market trends, and economic indicators.
+    AIFR002: As an AI system, I must generate personalized recommendations for users based on their financial profiles, goals, and risk tolerance as defined by industry standards like FINRA guidelines.
+    AIFR003: As an AI system, I must generate spending limit alerts for users by identifying unusual deviations from established spending patterns.
+    AIFR004: As an AI system, I must generate investment opportunity analyses for users by evaluating potential investments against their risk profiles, time horizons, and financial goals.
+    AIFR005: As an AI system, I must generate investment opportunities for users by identifying financial instruments that align with their investment strategies and Modern Portfolio Theory principles.
+    AIFR006: As an AI system, I must generate anomaly transaction alerts by employing pattern recognition to detect potentially fraudulent activities in compliance with FinCEN requirements.
+    AIFR007: As an AI system, I must generate contextualized news insights by correlating financial news with specific user portfolios to identify relevant impacts.
+    AIFR008: As an AI system, I must generate client predictive intervention recommendations by identifying patterns that indicate potential financial difficulties or opportunities requiring advisor engagement.
+    AIFR009: As an AI system, I must generate client predictive insights that provide forward-looking analysis of financial situations to support more effective financial planning.
+    CFR011: As a User (Client, Financial Advisor, or System Administrator), I want to send feedback about the system's recommendations and insights to help improve the accuracy and relevance of future outputs.

@@ -1,0 +1,112 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+
+  client --> CFR001 : "Client wants to view financial insights"
+  
+  SysAdmin --> SAFR001 : "System Administrator manages analysis parameters"
+
+  user --> FAFR002 : "User (client or advisor) views alerts based on system conditions"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  SysAdmin --> FAFR003 : "System Administrator configures analysis parameters for clients"
+
+  user --> FAFR002 : "User (advisor) views client intervention alerts"
+}
+
+rectangle "Client" {
+  usecase "CFR011: Send Feedback to Improve System Outputs" as CFR011
+  SysAdmin --> CFR011 : "System Administrator receives and processes feedback"
+
+  user --> SFR013 : "User (client) requests system-generated alerts"
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+
+  SysAdmin --> AIFR001 : "System Administrator sets up data sources for predictions"
+  
+  user --> AIFR004 : "User (client) receives personalized recommendations"
+
+  SFR002 --> AIFR002 : "SFR requests AI-generated recommendations based on profiles and goals"
+}
+
+@enduml
+```
+
+**Key Observations:**
+- **Client**: Interacts with the system through use cases like viewing dashboards, receiving alerts (CFR001–CFR006), accessing personalized recommendations (CFR004–CFR007), managing preferences (CFR005), and sending feedback (CFR011).
+- **System Administrator**: Manages system parameters via SAFR001. Also, receives client feedback for improvement.
+- **Financial Advisor**: Views predictive analytics (FAFR003) and intervention alerts (FAFR002). Configures analysis parameters under SysAdmin’s guidance.
+- **AI Component**: Central to generating predictions, recommendations, spending limit alerts, etc., based on user data. Interacts with SFR components for requests.
+
+**Inheritance/Grouping:**
+- Users can be clients or advisors but not both in the same context (e.g., client-specific use cases vs advisor-specific).
+- SysAdmin and AI components are system-related entities.
+  
+This structure ensures clarity by segregating user types, system roles, and interactions. Each actor’s responsibilities align with their defined requirements. The diagram adheres to PlantUML syntax rules for readability and accuracy. 
+
+**Final Note:** Ensure all use cases correspond exactly to the provided IDs in functional requirements without inventing additional ones or misattributing existing ones. Adjustments may be needed based on further analysis of dependencies not explicitly stated here.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+
+  client --> CFR001 : "Client wants to view financial insights"
+  
+  SysAdmin --> SAFR001 : "System Administrator manages analysis parameters"
+
+  user --> FAFR002 : "User (client or advisor) views alerts based on system conditions"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  SysAdmin --> FAFR003 : "System Administrator configures analysis parameters for clients"
+
+  user --> FAFR002 : "User (advisor) views client intervention alerts"
+}
+
+rectangle "Client" {
+  usecase "CFR011: Send Feedback to Improve System Outputs" as CFR011
+  SysAdmin --> CFR011 : "System Administrator receives and processes feedback"
+
+  user --> SFR013 : "User (client) requests system-generated alerts"
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+
+  SysAdmin --> AIFR001 : "System Administrator sets up data sources for predictions"
+  
+  user --> AIFR004 : "User (client) receives personalized recommendations"
+
+  SFR002 --> AIFR002 : "SFR requests AI-generated recommendations based on profiles and goals"
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1239]

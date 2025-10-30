@@ -1,0 +1,66 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Anomaly Alerts Thresholds" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Financial Advisors" as CFR009
+
+  SysAdmin --> SAFR002 : Configure system parameters for alerts and recommendations.
+  
+  Client -> CFR001 : View dashboard.
+  Client -> CFR003 : View predictions.
+  Client -> CFR004 : Receive recommendations.
+  Client -> CFR005 : Manage preferences.
+  Client -> CFR006 : View spending limits.
+  Client -> CFR007 : View opportunities.
+  Client -> CFR008 : Access news.
+
+  FinancialAdvisor --> FAFR001: Schedule mentoring sessions based on insights.
+  FinancialAdvisor --> FAFR002: View client alerts for proactive assistance.
+  FinancialAdvisor --> FAFR003: Analyze predictive analytics to guide clients.
+  
+  SystemAdmin -> SAFR001 : Manage analysis parameters ensuring compliance with regulations.
+
+  Sys -- (SFR005) <|-- (CFR006)
+  Sys -- (SFR007) <|-- (CFR007)
+  Sys -- (SFR008) <|-- (CFR003, CFR004)
+  
+  AI -> AIFR001: Generate financial predictions.
+  AI -> AIFR002: Provide personalized recommendations based on profiles and goals.
+  AI -> AIFR006: Detect anomaly transactions for fraud prevention.
+
+Client --> (CFR009): Manage relationships with advisors through the system.
+SysAdmin -- (SFR018) <|-- (CFR009)
+  
+UserFeedback --> CFR011 : Send feedback to improve recommendations and insights.
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Actors**: The primary actors are "Client", "FinancialAdvisor", "SystemAdmin". 
+- **Use Cases**:
+  - Client-related use cases (CFR series) include viewing dashboards, receiving alerts/predictions/recommendations, managing preferences.
+  - SystemAdministrator and FinancialAdvisor have their own use cases for system management and advisory services.
+- **Relationships**: Use case dependencies are established between the client and various system functionalities. For example, clients can view financial predictions (CFR003) which require AI-generated data from AIFR001.
+- **Inheritance/Extends**:
+  - System components like `SFR005` manage spending limit alerts (`CFR006`) and extend the client's use case.
+  - Similarly, other system functionalities are linked to specific client needs (e.g., investment opportunities via SFR007).
+- **Grouping**: Use cases grouped under "System" represent internal processes managed by the AI or systems. Actors like SysAdmin interact with these components for configuration.
+
+This diagram ensures all requirements are represented accurately while maintaining readability and logical grouping of use cases. Adjustments may be needed based on further analysis, but this captures the essence provided in the functional requirements list.
+
+[Done: True
+Done Reason: stop
+Eval Count: 831]

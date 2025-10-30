@@ -1,0 +1,51 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "CFR007: Access News Related to Investment Portfolio" as CFR007
+
+  rectangle "Client Actors" {
+    actor "Client" as C
+    client --> CFR001 : "View Financial Insights Dashboard"
+    client --> SAFR001 : "Manage Analysis Parameters"
+    client --> FAFR003 : "View Predictive Analytics for Clients"
+    client --> SFR012 : "Generate Client Dashboards"
+  }
+
+  rectangle "Financial Advisor Actors" {
+    actor "FAFRA001: Financial Advisor" as FA
+    FA --> FAFR003 : "View Predictive Analytics for Clients"
+    FA --> SAFR001 : "Manage Analysis Parameters (for clients)"
+    FA --> SFR012 : "Generate Client Dashboards"
+  }
+
+  rectangle "System Administrator Actors" {
+    actor "SysAdmin" as SA
+    SA --> SAFR001 : "Manage Analysis Parameters for the System"
+  }
+}
+
+@enduml
+```
+
+**Explanation:**
+- The diagram includes three main categories of actors: **Client**, **Financial Advisor (FAFRA001)**, and **System Administrator (SysAdmin)**.
+- Each use case is represented with its exact ID from the requirements. For example:
+  - `CFR001` for viewing a financial insights dashboard,
+  - `SAFR001` for managing analysis parameters by system administrators,
+  - `FAFR003` for financial advisors to view predictive analytics.
+- Relationships between actors and use cases are established using arrows. For instance, clients can access the "View Financial Insights Dashboard" (`CFR001`) or manage their own data through "Manage Analysis Parameters" (`SAFR001`). Similarly, financial advisors have specific interactions with certain use cases like predictive analytics.
+- The system boundary is defined to encapsulate all components and ensure clarity. Notably, the AI-related functionalities (e.g., generating recommendations) are grouped under `SFR` or directly linked through relationships.
+
+This structure adheres strictly to the provided requirements while ensuring logical groupings and explicit actor-use case associations. Adjustments can be made if additional details from the requirements become necessary.
+
+[Done: True
+Done Reason: stop
+Eval Count: 587]

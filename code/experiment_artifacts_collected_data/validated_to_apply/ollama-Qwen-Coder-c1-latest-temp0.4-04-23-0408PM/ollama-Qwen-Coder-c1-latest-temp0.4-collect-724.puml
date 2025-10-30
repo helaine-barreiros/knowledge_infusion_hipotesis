@@ -1,0 +1,79 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:User (Client): as Client
+:Financial Advisor: as FAdvisor
+:System Administrator: as SysAdmin
+:AIFR001: as AIFR001
+:SFR020: as SFR020
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  Client --> (SFR013) : "View Alerts"
+  Client --> (SFR020) : "Send Feedback"
+  
+  FAdvisor --> (FAFR004) : "Configure Analysis Parameters for Specific Clients"
+  FAdvisor --> (SAFR001) : "Manage Analysis Parameters"
+  FAdvisor --> (AIFR009) : "Generate Predictive Insights"
+  FAdvisor --> (SFR020) : "Send Feedback"
+  
+  SysAdmin --> (SAFR001) : "Manage Analysis Parameters"
+  SysAdmin --> (SFR020) : "Send Feedback"
+
+}
+
+rectangle "Client Dashboard" {
+  usecase "CFR009: Access Personalized Financial Dashboard" as CFR009
+  Client --> CFR009
+  
+  rectangle "Financial Insights" {
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "SFR03": "Request Financial Predictions from AI"
+    
+    Client --> (AIFR002) : "View Recommendations"
+    Client --> (SAFR001) : "Manage Analysis Parameters"
+  }
+  
+  rectangle "Spending Limits" {
+    usecase "CFR006: View Spending Limit Alerts" as CFR006
+    usecase "SFR05": "Request Spreading Limit Alerts from AI"
+
+    Client --> (CFR006) : "View Alerts"
+  }
+  
+  rectangle "Investment Opportunities" {
+    usecase "CFR007: View Investment Opportunities suitable to My Risk Profile" as CFR007
+    usecase "SFR05": "Request Spreading Limit Alerts from AI"
+
+    Client --> (CFR007) : "View Opportunities"
+  }
+  
+  rectangle "News and Analytics" {
+    usecase "CFR008: View News Related to My Investment Portfolio" as CFR008
+    usecase "SFR12": "Generate Client Dashboards"
+
+    Client --> (CFR008) : "View News"
+  }
+}
+
+rectangle "Financial Advisor Dashboard" {
+  usecase "FAFR001: Manage Client Mentoring Sessions based on System-Generated Insights" as FAFR001
+  usecase "FAFR02: View Client Intervention Alerts when the System Detects Patterns Requiring Professional Attention to Proactively Assist Clients with Potential Financial Issues" as FAFR02
+  
+  FAdvisor --> (FAFR01) : "Manage Sessions"
+  FAdvisor --> (SFR05): "Request Spreading Limit Alerts from AI"
+
+}
+
+rectangle "System Management Dashboard" {
+  usecase "SAFR001: Manage Analysis Parameters for the AI System to Ensure the Algorithms Remain Accurate, Relevant and Compliant with Financial Regulations Such as Basel III for Risk Management" as SAFR001
+  FAdvisor --> (FAFR04) : "Configure Analysis Parameters"
+  
+}
+
+@enduml

@@ -1,0 +1,107 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  
+  user --> FAFR002 : "View Client Intervention Alerts"
+  
+  system --> AIFR006 : "Generate Anomaly Transaction Alerts"
+}
+
+rectangle "Client" {
+  actor "User (Client)" as User
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  User --> (All Client Use Cases)
+}
+
+rectangle "Financial Advisor" {
+  actor "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Segment" as FAFR004
+  
+  FAFR002 --> (All Financial Advisor Use Cases)
+}
+
+rectangle "System Administrator" {
+  actor "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  
+  SysAdmin --> (All System Admin Use Cases)
+  
+  SAFR001 <|-- (System) : "Manage"
+}
+
+rectangle "AI System" {
+  actor "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Analyze Investment Opportunities Based on Risk Profile" as AIFR004
+  usecase "AIFR005: Identify Financial Instruments for Portfolio Diversification" as AIFR005
+  usecase "AIFR006: Detect Anomaly Transactions via Pattern Recognition" as AIFR006
+  usecase "AIFR007: Correlate News with User Portfolios" as AIFR007
+  usecase "AIFR008: Predict Intervention Recommendations for Advisors" as AIFR008
+  usecase "AIFR009: Provide Forward-Looking Financial Insights" as AIFR009
+  
+  AI --> (All AI Use Cases)
+}
+
+rectangle "System" {
+  actor "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR013: Send Alerts Based on Predefined Conditions" as SFR013
+  usecase "SFR014: Provide Analytics for Financial Behavior and Performance" as SFR014
+  
+  system --> (All System Use Cases)
+}
+
+rectangle "Client - Relationship Management" {
+  actor "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  usecase "CFR10: Share Data, Permissions" as CFR10
+
+  client --> CFR10 : "Manage"
+  
+  system --> CFR10 : "Process"
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire diagram is enclosed within a rectangle labeled "System," which contains all use cases and actors related to the AI-powered analysis & insights system.
+- **Actors**:
+  - **Client (User)**: Represents individual clients, including financial advisors or system administrators. They are grouped into separate rectangles for clarity but share common interactions with various components of the system.
+  - **Financial Advisor**: A specialized actor focused on client mentoring and alerts.
+  - **System Administrator**: Manages analysis parameters within the AI component.
+- **Use Cases**:
+  - Client-related use cases (CFR001–CFR011) are grouped under "Client" to show their interactions with system components like dashboards, recommendations, etc.
+  - Financial Advisor-specific uses include viewing client alerts and predictive analytics.
+  - System Administrator tasks focus on managing analysis parameters via the AI component.
+- **Inheritance Relationships**:
+  - The `System` actor is a parent of multiple use cases (e.g., SFR012: Generate Client Dashboards), indicating it orchestrates these processes.
+- **Relationships**:
+  - Arrows denote direct interactions between actors and use cases. For example, clients interact with "View Financial Insights Dashboard," while system administrators manage analysis parameters.
+
+This structure ensures all functional requirements are represented accurately within the PlantUML framework. Adjustments can be made to refine specific relationships or groupings as needed.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1284]

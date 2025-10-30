@@ -1,0 +1,67 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Notification Preferences" as SAFR002
+  usecase "CFR003: Access Historical Data and Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "SAFR005: Configure AI Parameters for Clients" as SAFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities" as CFR007
+  usecase "CFR008: Receive Relevant News Updates" as CFR008
+  usecase "SAFR013: Generate Client Dashboards" as SAFR013
+  usecase "SFR020: Manage User Feedback" as SFR020
+
+  client --> CFR001 : View financial insights dashboard  
+  client --> CFR006 : View spending limit alerts when exceeding thresholds  
+  client --> CFR007 : Access investment opportunities based on risk profile  
+  client --> CFR008 : Receive relevant news updates related to investments  
+  client --> SAFR020 : Send feedback for system improvement  
+
+  sysadmin --> SAFR005 : Configure AI parameters globally or per segment  
+  financial_advisor --> FAFR001: Manage mentoring sessions based on insights  
+  financial_advisor --> FAFR004: View predictive analytics and configure client-specific settings  
+  financial_advisor --> AIFR007: Request contextualized news for clients  
+
+  system_boundary {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Personalize Recommendations" as AIFR002  
+    usecase "AIFR003: Spending Limit Alerts" as AIFR003  
+    usecase "AIFR004: Investment Opportunity Analysis" as AIFR004
+    usecase "AIFR005: Generate Suitable Investments" as AIFR005  
+    usecase "AIFR006: Anomaly Transaction Alerts" as AIFR006  
+    usecase "AIFR007: Contextualized News Insights" as AIFR007
+    usecase "AIFR008: Predictive Intervention Recommendations" as AIFR008  
+
+    system_boundary {
+      client --> CFR001 : View dashboard  
+      client --> SAFR020 : Feedback submission  
+      
+      sysadmin --> SAFR005 : Configure parameters  
+      
+      financial_advisor --> FAFR004: Client-specific settings  
+      financial_advisor --> AIFR007: Request news insights  
+
+      system_boundary {
+        usecase "SFR012: Generate Dashboards" as SFR012
+        client --> SFR012 : View dashboards
+
+        system --> AIFR001 : Request predictions  
+        system --> AIFR002 : Personalize recommendations  
+        system --> AIFR003 : Spending limit alerts  
+        system --> AIFR004: Investment opportunities analysis  
+        system --> AIFR005: Suitable investments generation  
+        system --> AIFR006: Anomaly transaction detection  
+        system --> AIFR007: Contextualized news extraction  
+        system --> AIFR008: Predictive insights  
+
+        client --> SFR013 : View generated dashboards
+      }
+    }
+  }
+
+}
+@enduml

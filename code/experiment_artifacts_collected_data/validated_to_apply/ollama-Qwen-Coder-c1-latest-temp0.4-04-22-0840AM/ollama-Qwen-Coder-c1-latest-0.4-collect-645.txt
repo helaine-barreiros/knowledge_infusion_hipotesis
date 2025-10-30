@@ -1,0 +1,120 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR002
+}
+
+package SystemAdmin {
+  actor "System Administrator" as SAFR003
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR005: Request Spending Limit Alerts from the AI Component" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from the AI Component" as SFR006
+  
+  SystemAdmin --> SAFR001 : Manage analysis parameters for the AI system to ensure compliance with financial regulations.
+}
+
+package FinancialSystem {
+  rectangle "Financial System" {
+    usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR002
+    usecase "SFR003: Request Financial Predictions from the AI Component" as SFR003
+    usecase "SFR004: Request Personalized Recommendations from the AI Component Based on Each User's Financial Data and Preferences" as SFR004
+    usecase "SFR012: Generate Client Dashboards That Present Financial Information in an Intuitive and Actionable Format" as SFR012
+    
+    SystemAdmin --> SAFR003 : Request financial predictions from the AI component.
+    SystemAdmin --> SAFR004 : Request personalized recommendations from the AI component based on each user's financial data and preferences.
+  }
+}
+
+package User {
+  actor "User (Client, Financial Advisor, or System Administrator)" as CFR011
+  
+  usecase "CFR011: Send Feedback About the System's Recommendations and Insights" as CFR011
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions to Ensure Timely Notification of Important Financial Events" as SFR013
+  
+  User --> SAFR005 : Request spending limit alerts from the AI component.
+  User --> SAFR006 : Request investment opportunity analysis from the AI Component.
+}
+
+package NewsSystem {
+  rectangle "News System" {
+    usecase "SFR008: Find Contextualized News Relevant to Users' Financial Portfolios From Trusted Financial News Sources" as SFR008
+    usecase "SFR10: Process Contextualized News To Extract Relevant Information for Users' Financial Situations" as SFR10
+    
+    User --> SAFR008 : Request contextualized news.
+  }
+}
+
+package AIComponent {
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions For Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance As Defined By Industry Standards Like FINRA Guidelines" as AIFR002
+    
+    SystemAdmin --> SFR003 : Request financial predictions from the AI component.
+    User --> SFR014 : Generate client analytics that provide meaningful insights into financial behavior and performance.
+  }
+}
+
+package ClientMentoring {
+  rectangle "Client Mentoring" {
+    usecase "FAFR002: View Client Intervention Alerts When the System Detects Patterns Requiring Professional Attention to Proactively Assist Clients With Potential Financial Issues" as FAFR002
+    usecase "SFR15: Request Predictive Intervention Analyses From the AI Component To Identify When Financial Advisors Should Engage with Clients" as SFR15
+    
+    User --> SAFR003 : Request financial predictions from the AI component.
+  }
+}
+
+package InvestmentAnalysis {
+  rectangle "Investment Analysis" {
+    usecase "FAFR007: View Predictive Analytics About My Clients' Financial Situations to Provide Data-Driven Recommendations During Consultations" as FAFR007
+    usecase "SFR16: Request Predictive Insights From the AI Component To Enhance the Value of Financial Guidance Provided to Clients" as SFR16
+    
+    User --> SAFR003 : Request financial predictions from the AI component.
+  }
+}
+
+package NewsInsights {
+  rectangle "News Insights" {
+    usecase "SFR07: Generate Contextualized News Insights by Correlating Financial News With Specific User Portfolios to Identify Relevant Impacts" as SFR007
+    
+    User --> SAFR013 : Generate client alerts based on predefined conditions.
+  }
+}
+
+package HealthReports {
+  rectangle "Health Reports" {
+    usecase "SFR17: Generate Financial Health Reports That Assess Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as SFR17
+    
+    User --> SAFR013 : Generate client alerts based on predefined conditions.
+  }
+}
+
+package GoalsManagement {
+  rectangle "Goals Management" {
+    usecase "SFR18: Manage Users' Financial Goals to Track Progress and Provide Relevant Recommendations" as SFR18
+    
+    User --> SAFR013 : Generate client alerts based on predefined conditions.
+  }
+}
+
+CFR001 --> CFR012
+FAFR002 --> FAFR007
+SFR005 <|-- (SAFR001)
+SFR006 <|-- (AIFR004)
+SFR008 <|-- (AIFR006)
+CFR011 --> CFR013
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1213]

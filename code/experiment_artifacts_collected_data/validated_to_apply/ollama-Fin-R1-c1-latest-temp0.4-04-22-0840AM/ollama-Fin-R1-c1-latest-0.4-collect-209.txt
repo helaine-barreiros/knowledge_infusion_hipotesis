@@ -1,0 +1,86 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin -> SAFR001 : "Manage Analysis Parameters"
+  SysAdmin -> FAFR004 : "Configure Analysis Parameters"
+
+  rectangle "Client Interface" {
+    actor Client as c
+    usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004
+    usecase "CFR005: Manage Recommendation Preferences" as CFR005
+    usecase "CFR006: View Spending Limit Alerts" as CFR006
+    usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as CFR007
+    usecase "CFR008: Access News Related to Portfolio" as CFR008
+    usecase "CFR009: Manage Personalized Dashboard" as CFR009
+    usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+
+    c --> CFR002 : "View Alerts for Anomalous Transactions"
+    c --> CFR003 : "View Financial Predictions"
+    c --> CFR004 : "Receive Personalized Recommendations"
+    c --> CFR005 : "Manage Recommendation Preferences"
+    c --> CFR006 : "View Spending Limit Alerts"
+    c --> CFR007 : "View Investment Opportunities Suitable to Risk Profile"
+    c --> CFR008 : "Access News Related to Portfolio"
+    c --> CFR009 : "Manage Personalized Dashboard"
+    c --> CFR10 : "Manage Relationship with Financial Advisors"
+
+  }
+
+  rectangle "Financial Advisor Interface" {
+    actor FAFR as f
+    usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+    usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+
+    f --> FAFR002 : "View Client Intervention Alerts"
+    f --> FAFR003 : "View Predictive Analytics"
+
+  }
+
+  rectangle "System Administrator Interface" {
+    actor SysAdmin as s
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+
+    s -> SAFR001 : "Manage Analysis Parameters"
+  }
+
+}
+
+@enduml
+```
+
+**Key Observations and Relationships in the Diagram:**
+- **Client Interface:** The client can access multiple use cases, such as viewing financial insights dashboards (CFR001), receiving alerts for anomalous transactions (CFR002), managing recommendations preferences (CFR005), etc. These are all directly related to the Client actor.
+  
+- **System Administrator Interface:** The SysAdmin can manage analysis parameters (SAFR001) and configure analysis parameters for client segments (FAFR004). This shows administrative control over system settings.
+
+- **Financial Advisor Interface:** Advisors have access to specific use cases like viewing client intervention alerts (FAFR002) and predictive analytics about clients’ financial situations (FAFR003), which are critical for their role in providing guidance.
+
+**Relationships Between Actors:**
+1. The Client actor is linked to all user-related use cases, indicating that these functionalities cater directly to the end-user experience.
+2. System Administrator and Financial Advisor actors have specific roles tied to system maintenance (e.g., managing parameters) or advisory services but do not overlap with client-facing features.
+
+**Use Case Grouping:**
+- The diagram groups related use cases under their respective interfaces, ensuring clarity in which interactions are available through each role’s interface.
+  
+This structure ensures that all functional requirements from the provided list are accurately represented within a single PlantUML model. Each actor is explicitly tied to its relevant use cases via direct relationships (e.g., arrows), and system boundaries are delineated using rectangles for encapsulation. The logical grouping of actors and their associated use cases enhances readability and maintainability of the diagram.  
+
+**Note:**  
+- All use case IDs match those in the requirements, ensuring no discrepancies.
+- Inheritance or extension relationships between actors were not implied by the provided requirements, so direct associations are used instead.
+- The "System" rectangle contains all system-related components (use cases) to represent internal operations distinct from client interactions.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1048]

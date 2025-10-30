@@ -1,0 +1,72 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FinancialAdvisor
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  
+  Client --> CFR001
+  Client --> SAFR001
+  FinancialAdvisor --> FAFR001
+  SystemAdmin --> SAFR001
+
+  Client -> (SFR002) : "Receive Alerts"
+  FinancialAdvisor -> (FAFR003) : "View Predictive Analytics"
+
+  rectangle "Client Dashboard" {
+    usecase "CFR009: Access Personalized Dashboard" as CFR009
+    usecase "CFR10: Manage Relationship with Advisors" as CFR10
+
+    Client --> CFR009
+    Client --> CFR10
+  }
+
+  rectangle "Financial Advisor Functions" {
+    usecase "FAFR02: View Client Intervention Alerts" as FAFR02
+    usecase "FAFR03: View Predictive Analytics for Clients" as FAFR03
+
+    FinancialAdvisor --> FAFR02
+    FinancialAdvisor --> FAFR03
+  }
+
+  rectangle "System Functions" {
+    usecase "SFR017: Generate Financial Health Reports" as SFR017
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+    System --> (SAFR002) : "Deliver Recommendations"
+    System --> (FAFR03) : "Provide Predictive Analytics"
+
+    System -> SFR017
+    System -> AIFR006
+  }
+
+  rectangle "Feedback Mechanism" {
+    usecase "CFR11: Send Feedback to Improve Outputs" as CFR11
+
+    Client --> (SFR020) : "Provide Feedback"
+    FinancialAdvisor --> (AIFR09) : "Provide Insights"
+    SystemAdmin --> (SAFR005) : "Configure Parameters"
+
+    Sys -> SFR020
+    Sys -> AIFR09
+    Sys -> SAFR005
+  }
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 599]

@@ -1,0 +1,77 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "CFR009: Access Consolidated Financial Dashboard" as CFR009
+
+  client --> CFR001 : "View financial data, alerts, and recommendations"
+  SysAdmin -> SAFR001 : "Manage system parameters for accuracy and compliance"
+
+  rectangle "Client Interface" {
+    actor Client as c
+    usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Personalized Recommendations Management" as CFR004
+    usecase "CFR010: Manage Relationship with Advisors" as CFR010
+
+    c --> CFR002 : "Get alerts for unusual transactions"
+    c --> CFR003 : "See future financial trends and plan expenses"
+    c --> CFR004 : "Adjust personalization preferences based on KYC data"
+    c --> CFR009 : "Access a single view of all financial info"
+
+  }
+
+  rectangle "Advisor Interface" {
+    actor FinancialAdvisor as fa
+    usecase "FAFR001: Manage Client Mentoring Sessions Based On Insights" as FAFR001
+    usecase "FAFR002: View Intervention Alerts for Clients" as FAFR002
+
+    fa --> FAFR001 : "Schedule and track mentoring sessions"
+    fa --> FAFR002 : "Respond to system-generated alerts"
+
+  }
+
+  rectangle "System Admin Interface" {
+    actor SysAdmin as sa
+    usecase "SAFR003: Request Financial Predictions from AI Component" as SAFR003
+
+    sa -> SAFR001 : "Set up and adjust analysis parameters"
+    sa --> SAFR003 : "Request predictions for system updates"
+
+  }
+
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire diagram is enclosed within a rectangle labeled "System" to represent the AI-Powered Analysis & Insights System.
+- **Use Cases**:
+  - `CFR001`, `SAFR001`, etc., are client-facing and system-administrator facing use cases, respectively. These are grouped under their respective actors (Client or SysAdmin).
+- **Actors**:
+  - **Client**: Represents the end-user interacting with the system.
+  - **SysAdmin**: Manages system parameters for compliance and accuracy.
+  - **FinancialAdvisor**: Interacts through specific interfaces like mentoring sessions, alerts, etc.
+  
+### Key Relationships:
+1. **Client to Use Cases** (e.g., `client --> CFR001`): The client uses the financial insights dashboard by viewing their data, receiving alerts, making predictions, managing recommendations, and accessing consolidated dashboards.
+2. **SysAdmin to Use Cases**: System administrators manage analysis parameters (`SAFR001`) and request AI-generated components like financial predictions (`SAFR003`).
+3. **FinancialAdvisor to Use Cases**: Advisors schedule mentoring sessions based on insights (`FAFR001`) and respond to intervention alerts (`FAFR002`).
+
+This structure ensures that all functional requirements are represented accurately, with clear relationships between actors and use cases within the system boundary. The diagram adheres strictly to provided IDs and names for precision. 
+
+### Notes:
+- All actors and use cases are explicitly defined using PlantUML syntax.
+- Logical grouping (e.g., client interface vs. advisor interface) simplifies readability while maintaining completeness of interactions.
+
+[Done: True
+Done Reason: stop
+Eval Count: 873]

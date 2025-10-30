@@ -1,0 +1,72 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Anomaly Detection Rules" as SAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  
+  Client --> CFR001 : "View Financial Insights"
+  
+  SysAdmin -> SAFR002 : "Manage Analysis Parameters for AI System"
+  
+  // Relationship between system components
+  (CFR001) <|-- (SFR008)
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+  
+  SysAdmin -> FAFR004 : "Set up segment-specific parameters"
+  
+  // Relationship between system components
+  (SFR013) <|-- (SAFR002)
+}
+
+rectangle "Client" {
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  
+  Client --> SFR005 : "Check spending limits"
+  
+  // Relationship between system components
+  (SFR013) <|-- (SAFR002)
+}
+
+rectangle "Financial Advisor - System Administrator Collaboration" {
+  usecase "AIFR004: Generate Personalized Recommendations for Users" as AIFR004
+  
+  SysAdmin -> AIFR004 : "Adjust recommendations based on KYC data"
+  
+  // Relationship between system components
+  (SFR013) <|-- (SAFR002)
+}
+
+rectangle "Client - System Communication" {
+  usecase "CFR011: Send Feedback to Improve Recommendations" as CFR011
+  
+  Client --> SFR019 : "Provide feedback"
+  
+  // Relationship between system components
+  (SFR013) <|-- (SAFR002)
+}
+@enduml
+```
+
+### Key Observations:
+- **Client**: Interacts with the system to view dashboards, receive alerts, and manage recommendations. Primary use cases include viewing financial insights, spending limit alerts, personalized recommendations, etc.
+- **System Administrator**: Manages AI parameters (e.g., SAFR001: Manage Analysis Parameters) for compliance and accuracy.
+- **Financial Advisor**: Configures analysis settings specific to client segments (FAFR004), views predictive analytics about clients’ financial situations (FAFR003).
+- **AI System**: Generates insights, recommendations, alerts, etc. via use cases like AIFR001–AIFR009.
+- **Collaboration**: SysAdmin and Financial Advisors work together to adjust parameters or generate personalized content.
+
+### Diagram Structure:
+The system is divided into four main rectangles (actors/roles) with nested use cases. Relationships are established using arrows, indicating the flow of interactions between actors/system components. Use case inheritance where applicable (e.g., SFR013 extends both client and sysadmin). 
+
+This structure ensures clarity in roles and their respective functionalities while maintaining compliance with provided requirements. Adjustments can be made based on further analysis or additional use cases not explicitly listed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 711]

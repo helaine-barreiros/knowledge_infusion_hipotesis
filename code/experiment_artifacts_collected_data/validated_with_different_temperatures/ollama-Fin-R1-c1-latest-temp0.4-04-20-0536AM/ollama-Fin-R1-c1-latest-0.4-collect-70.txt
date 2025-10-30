@@ -1,0 +1,123 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as Client
+actor SysAdmin as SysAdmin
+actor FinancialAdvisor as FAADvisor
+package Professional {
+  actor Chef as c
+}
+rectangle "System" {
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  Client --> CFR001 : "View"
+}
+
+package SystemAdmin {
+  SysAdmin --> SAFR001 : "Manage"
+}
+
+package Professional {
+  FAADvisor --> FAFR002 : "View Alerts", 
+                 FAFR003 : "Predictive Analytics",
+                 FAFR004 : "Configure Parameters"
+  
+  Chef <|-- c
+}
+
+rectangle "System" {
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  
+  SysAdmin --> SFR019 : "Manage", 
+                       SAFR002 : "Deliver Personalized Recommendations",
+                       SAFR003 : "Request Predictions",
+                       SAFR004 : "Request Recommendations",
+                       SAFR005 : "Request Spending Alerts",
+                       SAFR006 : "Request Investment Opportunities",
+                       SAFR007 : "Request Specific Investments",
+                       SAFR008 : "Request Anomaly Alerts",
+                       SAFR009 : "Find Contextualized News",
+                       SAFR010 : "Generate Dashboards", 
+                       SAFR013 : "Generate Client Alerts",
+                       SAFR014 : "Generate Analytics",
+                       SAFR015 : "Request Intervention Analyses",
+                       SAFR016 : "Request Insights",
+                       SFR020: "Manage User Feedback"
+  
+  Client --> CFR001, 
+            FAFR003,
+            AIFR007,
+            AIFR008
+  
+  FAADvisor --> FAFR004, 
+               FAFR005,
+               FAFR006,
+               FAFR009,
+               FAFR10: "View News"
+  
+}
+
+usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+usecase "AIFR005: Generate Specific Investments" as AIFR005
+usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+usecase "CFR011: Send Feedback" as CFR011
+
+Client --> AIFR002, 
+          AIFR003,
+          AIFR004,
+          AIFR005,
+          AIFR006,
+          AIFR007,
+          SFR019,
+          SAFR008: "Request Predictions",
+          CFR011
+
+FAADvisor --> FAFR002, 
+             FAFR003,
+             FAFR004,
+             FAFR005,
+             AIFR007
+             
+SysAdmin --> SAFR008: "Request Predictions", 
+                     SFR019
+
+rectangle "AI System" {
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Generate Specific Investments" as AIFR005
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  
+  
+}
+
+client --> AI System : "Request Predictions", 
+                      "Request Recommendations",
+                      "Request Spending Alerts",
+                      "Request Investment Opportunities",
+                      "Find Contextualized News"
+AI System --> Client : "Deliver Personalized Recommendations",
+                 "Deliver Financial Insights"
+
+@enduml
+**Key Observations and Explanations:**
+1. **Actors Grouping:** The diagram includes three main actors: `Client`, `SysAdmin`, and `FinancialAdvisor`. These are categorized into their respective packages for clarity.
+2. **Use Cases Allocation:** Each functional requirement is mapped to a specific use case, ensuring all requirements from the list are represented accurately with their exact IDs and descriptions.
+3. **System Boundaries:** The "System" rectangle encapsulates core functionalities managed by various components (e.g., `SFR019`, `SAFR008`). This helps isolate system interactions and responsibilities.
+4. **Inheritance Relationships:** For example, the FinancialAdvisor extends (`<|--`) use cases like FAFR002 ("View Alerts") to indicate role-specific permissions or focus areas within their duties.
+5. **Cross-Actor Interactions:** The diagram shows how different actors (Client, SysAdmin) interact with system components and other actors through requests and feedback mechanisms.
+6. **AI System Integration:** Use cases related to AI-generated outputs (`AIFR002`–`AIFR007`) are grouped under the "AI System" rectangle, illustrating their role in processing client data and delivering insights.
+
+This structure ensures a comprehensive representation of all functional requirements while maintaining readability and logical grouping.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1269]

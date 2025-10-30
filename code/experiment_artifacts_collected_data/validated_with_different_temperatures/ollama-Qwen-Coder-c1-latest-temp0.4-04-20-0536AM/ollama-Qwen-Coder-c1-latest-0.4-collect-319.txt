@@ -1,0 +1,82 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts About Anomalous Transactions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations Based on My Financial Profile and Goals" as SFR002
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR010
+  
+  Client --> (View Alerts About Anomalous Transactions)
+  Client --> (Receive Personalized Recommendations Based on My Financial Profile and Goals)
+  Client --> (Manage Preferences for Personalized Recommendations)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as SAFR004
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations" as SFR006
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as CFR012
+  
+  FinancialAdvisor --> (Manage Client Mentoring Sessions)
+  FinancialAdvisor --> (View Predictive Analytics About My Clients' Financial Situations)
+  FinancialAdvisor --> (Configure Analysis Parameters for Specific Client Segments)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR005
+  usecase "SAFR001: Manage Analysis Parameters for the AI System" as SFR024
+  
+  SystemAdmin --> (Manage Analysis Parameters for the AI System)
+}
+
+rectangle "AI Component" {
+  package "Financial Insights and Predictions" {
+    usecase "AIFR001: Generate Financial Predictions" as SAFR006
+    usecase "AIFR003: Generate Spending Limit Alerts" as SFR025
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as SFR027
+    
+    CFR001 --> (Generate Financial Predictions)
+    SAFR003 --> (Generate Spending Limit Alerts)
+    FAFR004 --> (Generate Investment Opportunity Analyses)
+  }
+  
+  package "Personalized Recommendations and Insights" {
+    usecase "AIFR002: Generate Personalized Recommendations" as SFR019
+    usecase "AIFR007: Generate Contextualized News Insights" as SFR030
+    
+    CFR004 --> (Generate Personalized Recommendations)
+    FAFR001 --> (Generate Contextualized News Insights)
+  }
+  
+  package "Anomaly Detection and Alerts" {
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as SFR028
+    
+    SAFR003 --> (Generate Anomaly Transaction Alerts)
+  }
+}
+
+rectangle "System" {
+  usecase "SFR017: Generate Financial Health Reports" as SFR035
+  usecase "SFR019: Manage Users' Financial Goals" as SFR042
+  
+  CFR009 --> (Generate Financial Health Reports)
+  SAFR006 --> (Manage Users' Financial Goals)
+}
+
+rectangle "User Feedback Management" {
+  usecase "CFR011: Send Feedback About the System's Recommendations and Insights" as SFR038
+  
+  CFR011 --> (Send Feedback About the System's Recommendations and Insights)
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 754]

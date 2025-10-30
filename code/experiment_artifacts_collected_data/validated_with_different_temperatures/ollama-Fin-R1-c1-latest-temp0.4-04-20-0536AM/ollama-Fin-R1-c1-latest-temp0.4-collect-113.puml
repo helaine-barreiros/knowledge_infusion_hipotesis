@@ -1,0 +1,99 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+system "System" as S
+system "AI System" as A
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001  
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002  
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations Aligned with Profile" as CFR004 
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005  
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007 
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008  
+  usecase "CFR009: View Consolidated Financial Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors, Including Data Sharing Permissions" as CFR10
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001 
+}
+  
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003  
+}
+
+rectangle "System Components" {
+  system S --> (CFR001) : "Deliver Financial Insights"
+  system S --> (CFR002) : "Deliver Anomaly Alerts"
+  system S --> (CFR003) : "Request Predictions from AI"
+  system S --> (CFR004) : "Request Personalized Recommendations"
+  system S --> (CFR005) : "Process Recommendation Preferences"
+  system S --> (CFR006) : "Deliver Spending Limit Alerts"
+  system S --> (CFR007) : "Identify Investment Opportunities Based on Risk Profile"
+  system S --> (CFR008) : "Extract Portfolio-Relevant News"
+  system S --> (CFR009) : "Generate Consolidated Dashboards"
+  system S --> (SAFR001) : "Manage Analysis Parameters for AI"
+
+}
+
+rectangle "AI System Components" {
+  system A <|-- (S)
+  
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002 
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003  
+  usecase "AIFR004: Identify Investment Opportunities Based on Risk Profile" as AIFR004
+  usecase "AIFR005: Identify Financial Instruments Aligning with Strategies and MPT" as AIFR005 
+  usecase "AIFR006: Detect Anomaly Transactions in Compliance with FinCEN" as AIFR006  
+  usecase "AIFR007: Correlate News to Portfolios for Insights" as AIFR007
+  usecase "AIFR008: Recommend Predictive Interventions Based on Patterns" as AIFR008 
+}
+
+actor C --> CFR001 : "View"
+C --> CFR002 : "Receive Alerts"
+C --> CFR003 : "View Predictions"
+C --> CFR004 : "Receive Recommendations"
+C --> CFR005 : "Manage Preferences"
+C --> CFR006 : "View Alerts"
+C --> CFR007 : "Access Opportunities"
+C --> CFR008 : "Receive News"
+C --> CFR009 : "View Consolidated Dashboard"
+C --> CFR10 : "Manage Relationship"
+
+SysAdmin --> SAFR001 : "Manage Parameters"
+
+FA --> FAFR001 : "Manage Sessions"
+FA --> FAFR002 : "View Alerts"
+FA --> FAFR003 : "View Analytics"
+
+system S <|-- (CFR001)
+system S <|-- (CFR002)  
+system S <|-- (CFR003)
+system S <|-- (CFR004)
+system S <|-- (CFR005)
+system S <|-- (CFR006)
+system S <|-- (CFR007)
+system S <|-- (CFR008)  
+system S <|-- (CFR009)
+
+system A <|-- (AIFR001)
+system A <|-- (AIFR002)
+system A <|-- (AIFR003)
+system A <|-- (AIFR004)
+system A <|-- (AIFR005)  
+system A <|-- (AIFR006)
+system A <|-- (AIFR007)
+system A <|-- (AIFR008)
+
+@enduml

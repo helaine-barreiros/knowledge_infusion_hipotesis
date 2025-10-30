@@ -1,0 +1,101 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+}
+
+package System {
+  actor "System Administrator" as SAFR001
+  
+  rectangle "AI Component" {
+    usecase "AIFR002: Generate Personalized Recommendations Based on Financial Profiles, Goals and Risk Tolerance" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations from Established Spending Patterns" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users by Evaluating Potential Investments Against Their Risk Profiles, Time Horizons and Financial Goals" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities for Users by Identifying Financial Instruments That Align with Their Investment Strategies and Modern Portfolio Theory Principles" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts By Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance With FinCEN Requirements" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as AIFR007
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations By Identifying Patterns That Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR008
+    usecase "AIFR009: Generate Client Predictive Insights that Provide Forward-Looking Analysis of Financial Situations to Support More Effective Financial Planning" as AIFR009
+    
+    SAFR001 --> (SAFR002)
+  }
+  
+  rectangle "User Interface Component" {
+    usecase "SFR017: Generate Financial Health Reports that Assess Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as SFR017
+    usecase "SFR018: Manage Users' Financial Goals to Track Progress and Provide Relevant Recommendations" as SFR018
+    
+    SAFR001 --> (SAFR002)
+  }
+  
+  rectangle "Notification Component" {
+    usecase "SFR003: Deliver Alerts to Users Through Appropriate Notification Channels" as SFR003
+    usecase "AIFR006: Generate Anomaly Transaction Alerts By Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance With FinCEN Requirements" as AIFR006
+    
+    SAFR001 --> (SAFR002)
+  }
+  
+  rectangle "Recommendation Component" {
+    usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles to Support Better Financial Decision-Making" as SFR002
+    usecase "AIFR002: Generate Personalized Recommendations Based on Financial Profiles, Goals and Risk Tolerance" as AIFR002
+    
+    SAFR001 --> (SAFR002)
+  }
+  
+  rectangle "Prediction Component" {
+    usecase "SFR003: Request Financial Predictions from the AI Component to Provide Users With Forward-Looking Financial Insights" as SFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users by Evaluating Potential Investments Against Their Risk Profiles, Time Horizons and Financial Goals" as AIFR004
+    
+    SAFR001 --> (SAFR002)
+  }
+  
+  rectangle "Spending Limit Component" {
+    usecase "SFR005: Request Spending Limit Alerts from the AI Component When User Spending Patterns Exceed Defined Thresholds" as SFR005
+    usecase "AIFR003: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations From Established Spending Patterns" as AIFR003
+    
+    SAFR001 --> (SAFR002)
+  }
+  
+  rectangle "Investment Opportunity Component" {
+    usecase "SFR006: Request Investment Opportunity Analysis from the AI Component to Identify Suitable Investments for Users Based on Their Risk Profiles" as SFR006
+    usecase "AIFR005: Generate Investment Opportunities for Users by Identifying Financial Instruments That Align With Their Investment Strategies and Modern Portfolio Theory Principles" as AIFR005
+    
+    SAFR001 --> (SAFR002)
+  }
+  
+  rectangle "News Component" {
+    usecase "SFR007: Request Specific News Insights from the AI Component to Identify Potential Impacts on Users' Investments" as SFR007
+    usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as AIFR007
+    
+    SAFR001 --> (SAFR002)
+  }
+  
+  rectangle "Dashboard Component" {
+    usecase "SFR12: Generate Client Dashboards that Present Financial Information in an Intuitive and Actionable Format" as SFR12
+    usecase "AIFR009: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as AIFR007
+    
+    SAFR001 --> (SAFR002)
+  }
+  
+  rectangle "Feedback Component" {
+    usecase "CFR011: Send Feedback About the System's Recommendations and Insights to Help Improve the Accuracy and Relevance of Future Outputs" as CFR011
+    usecase "AIFR009: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as AIFR007
+    
+    SAFR001 --> (SAFR002)
+  }
+}
+
+CFR001 --> (SFR003)
+FAFR002 --> (AIFR009)
+
+@enduml

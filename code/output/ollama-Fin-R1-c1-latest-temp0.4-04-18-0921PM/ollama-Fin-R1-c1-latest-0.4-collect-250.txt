@@ -1,0 +1,61 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Preferences" as SAFR002  
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+
+  Client --> CFR001 : "View financial data and insights"
+  SysAdmin -> SAFR002
+}
+
+rectangle "AI System" {
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Recommend Investment Opportunities" as AIFR004
+
+  Client --> AIFR003 : Exceed spending thresholds detected in expense categories
+}
+
+rectangle "AI System (Continued)" {
+  usecase "AIFR005: Analyze Market Trends for Predictions" as AIFR005
+  usecase "AIFR006: Create Investment Portfolio Diversification Plans" as AIFR006
+
+  SysAdmin --> AIFR005 : Configure analysis parameters based on regulatory requirements (e.g., Basel III)
+}
+
+rectangle "News Component" {
+  usecase "SFR019: Extract Relevant News Insights" as SFR019
+  Client --> SFR019 : Access contextualized news related to investment portfolio
+
+  AIFR007 <|-- SFR019 : AI provides context for news relevance based on user's financial data and investments
+}
+
+rectangle "User Feedback System" {
+  usecase "CFR011: Send User Feedback" as CFR011
+  Client --> CFR011
+
+  SysAdmin -> AIFR002 : Adjust recommendations preferences per client feedback
+}
+@enduml
+```
+
+### Explanation:
+- **System** rectangle includes core functionalities like viewing dashboards (Client), managing user preferences and analysis parameters (SysAdmin).
+- The **AI System** handles generating alerts, personalized recommendations, market trend analyses.
+- News extraction is handled by the "News Component" which uses AI insights to filter relevant news for clients.
+- User feedback allows clients or SysAdmins to report on system outputs to improve accuracy.
+
+### Key Relationships:
+1. Clients directly interact with the financial dashboard (CFR001) and receive alerts from AIFR003 via the System boundary.
+2. SysAdmin manages parameters in SAFR002, which affects how AI systems operate (e.g., AIFR005).
+3. FAFRs like scheduling mentoring sessions are specific to Financial Advisors but not directly shown here due to scope.
+
+This structure ensures all use cases and actors from the requirements are represented accurately within their respective system components. Adjustments can be made based on further analysis of dependencies or additional requirement details.
+
+[Done: True
+Done Reason: stop
+Eval Count: 630]

@@ -1,0 +1,69 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Preferences" as SAFR002
+  
+  Client --> CFR001 : "View"
+  
+  SysAdmin <|-- (SAR) : "Manage System Admin Tasks"
+
+  rectangle "Client Interface" {
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004
+    usecase "CFR005: Manage Recommendation Preferences" as CFR005
+    usecase "CFR006: View Spending Limit Alerts" as CFR006
+    usecase "CFR007: View Investment Opportunities" as CFR007
+    usecase "CFR008: Access Personalized Dashboard" as CFR008
+    usecase "SAFR003: Manage Relationship with Advisors" as SAFR003
+
+    Client --> (CFR001) : "Interact"
+  }
+
+  rectangle "Financial Advisor Interface" {
+    usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+    usecase "FAFR004: Configure Analysis Parameters for Segments" as FAFR004
+
+    FinancialAdvisor --> (FAFR001) : "Manage Mentoring Sessions"
+  }
+
+  rectangle "System Interface" {
+    usecase "SFR009: Process Contextualized News" as SFR009
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+    Sys --> (SFR001) : "Deliver Alerts"
+  }
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire system is enclosed within a rectangle labeled "System".
+- **Use Cases**:
+  - Client-related use cases are grouped under the "Client Interface" sub-system.
+    - `CFR001` (View Financial Insights Dashboard)
+    - `SAFR002` (Manage User Preferences) — This might be related to client preferences, but since it's not explicitly mentioned in requirements, inferred from context. Also added for completeness as a possible System Admin task.
+  - Financial Advisor-related use cases are grouped under "Financial Advisor Interface".
+    - `FAFR001`: Manage Client Mentoring Sessions
+    - `FAFR002`: View Client Intervention Alerts
+    - `FAFR004`: Configure Analysis Parameters for Segments
+  - System Admin (`SysAdmin`) has a use case to manage system tasks, inferred as `SAR` (System Administration Role).
+- **Actors**:
+  - `Client`, `FinancialAdvisor`, and `SysAdmin` are the main actors.
+- **Relationships**:
+  - Clients can interact with various dashboards/predictions/recommendations (`CFR001-CFR008`).
+  - Financial Advisors can manage client interactions, alerts, and analysis parameters (`FAFR002`, `FAFR004`).
+  - System Admin manages system-level tasks via the inferred use case.
+- **Inheritance**:
+  - The SysAdmin role extends from a base class (not explicitly defined here but implied by context).
+
+This structure ensures all requirements are represented accurately, grouped logically by actor and subsystem. Adjustments may be needed based on further clarification of certain use cases or relationships not fully captured in the initial list.
+
+[Done: True
+Done Reason: stop
+Eval Count: 790]

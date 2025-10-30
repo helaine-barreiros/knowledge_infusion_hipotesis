@@ -1,0 +1,69 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Advisors" as CFR009
+  
+  rectangle "Client Interface" {
+    actor Client as C1
+    client --> CFR001 : View Financial Insights Dashboard  
+    client --> CFR003 : View Financial Predictions  
+    client --> CFR004 : Receive Personalized Recommendations  
+    client --> CFR005 : Manage Recommendation Preferences  
+    client --> CFR006 : View Spending Limit Alerts  
+    client --> CFR007 : View Investment Opportunities  
+    client --> CFR008 : Access News Related to Portfolio  
+    client --> CFR009 : Manage Relationship with Advisors
+  }
+}
+
+rectangle "System Administrator" {
+  actor SysAdmin as SA1
+  sysadmin --> SAFR002 : Manage Alert Preferences (for clients)  
+}
+ 
+package Professional {  
+  rectangle "Financial Advisor Interface" {
+    actor FinancialAdvisor as FA1
+    financialadvisor --> FAFR003 : View Predictive Analytics for Clients  
+    financialadvisor --> FAFR004 : Configure Analysis Parameters by Client Segment  
+    financialadvisor --> FAFR002 : Manage Intervention Alerts (for clients)  
+  }
+}
+
+rectangle "System" {
+  usecase "SFR015: Generate Predictive Interventions" as SFR015
+  usecase "AIFR008: Generate Client Predictive Insights" as AIFR008
+
+  sysadmin <|-- SAFR002  
+}
+
+@enduml
+```
+
+**Key Observations and Explanations:**
+- **Client Actors**: Represented by `C1` (for simplicity, assuming a single client for this model). The client can perform multiple use cases related to viewing dashboards, predictions, recommendations, etc.
+- **System Administrator Actor**: Represents administrative tasks like managing alert preferences (`SAFR002`). This is linked under the "Professional" package but operates within the system boundary.
+- **Financial Advisor Actors**: Grouped into a separate `package Professional` with actors `FA1`. They can view predictive analytics, configure parameters, and manage intervention alerts for clients. These are distinct from client-level use cases like viewing dashboards or receiving recommendations directly.
+- **Use Case Relationships**:
+  - Clients (`C1`) interact with the system through various financial-related use cases (CFR001–9).
+  - System Administrator (`SA1`) manages alert preferences via `SAFR002`.
+  - Financial Advisors (`FA1`) perform more advanced tasks under their professional role.
+- **System Use Cases**: Some internal system-level interactions are included, such as generating predictive insights (`SFR015`, `AIFR008`), which tie into administrative and advisor activities but remain within the "system" boundary.
+
+This structure ensures clarity in separating client-facing functionalities from administrative and professional services while adhering to the provided requirements. Adjustments may be needed based on further analysis or additional context not explicitly listed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 825]

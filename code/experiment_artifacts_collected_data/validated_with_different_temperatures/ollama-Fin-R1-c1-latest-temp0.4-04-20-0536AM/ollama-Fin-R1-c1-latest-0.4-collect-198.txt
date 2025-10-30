@@ -1,0 +1,66 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Notification Preferences" as SAFR002
+  
+  Client --> CFR001 : "View"
+  
+  SysAdmin -> SAFR002 : "Manage Parameters"
+}
+
+rectangle "Client" {
+  actor "User (Client)" as UserCFR
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as CFR005
+  
+  UserCFR --> CFR001 : "View Dashboard"
+  UserCFR --> SAFR002 : "Manage Alerts"
+  
+}
+
+rectangle "Financial Advisor" {
+  actor "FAFR003: View Client Intervention Alerts" as FAFR003
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  
+  FAFR003 --> SAFR002 : "View Alerts"
+  
+}
+
+rectangle "System Administrator" {
+  actor "SysAdmin" as SysAdminSAFR
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+
+  SysAdminSAFR <|-- SAFR001
+  
+}
+@enduml
+```
+
+### Explanation:
+- **Client**: Represents the user (either a client, financial advisor, or system administrator). The main interactions are with `CFR001` and `SAFR002`.
+- **Financial Advisor**: Interacts primarily through `FAFR003` to view alerts.
+- **System Administrator**: Manages analysis parameters via `SAFR001`.
+
+### Key Use Cases:
+1. **Client** (User):
+   - `CFR001`: View financial insights dashboard.
+   - `CFR005`: Manage personalized recommendations preferences.
+2. **Financial Advisor** (`FAFR003`):
+   - `CFR007`: View investment opportunities based on risk profile.
+3. **System Administrator**:
+   - `SAFR001`: Manage analysis parameters.
+
+### Relationships:
+- Clients can view the dashboard and manage alerts/preferences.
+- Financial Advisors focus on viewing client-specific alerts and recommendations.
+- System Administrators handle system-level parameter management.  
+
+This structure ensures clarity in role-based interactions while adhering to the provided requirements. Adjustments may be needed based on further details, but this aligns with the initial functional descriptions.
+
+[Done: True
+Done Reason: stop
+Eval Count: 545]

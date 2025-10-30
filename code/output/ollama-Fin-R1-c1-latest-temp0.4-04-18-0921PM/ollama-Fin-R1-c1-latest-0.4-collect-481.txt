@@ -1,0 +1,76 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "SFR017: Generate Financial Health Reports" as SFR017
+  
+  Client --> CFR001 : "View financial insights"
+  
+  SysAdmin -> SAFR001 : "Manage analysis parameters"
+  
+  FAFR002 <|-- (Client, Advisor) : "Receive alerts for intervention"
+  
+  SFR003 -->> AIFR001: "Request predictions"
+  SFR004 -->> AIFR002: "Request recommendations"
+  SFR017 -->> AIFR009: "Generate reports"
+}
+
+rectangle "Client" {
+  actor Client as c
+}
+rectangle "Advisor" {
+  actor FinancialAdvisor as fa
+}
+rectangle "SysAdmin" {
+  actor SystemAdministrator as sa
+}
+
+package Professional { 
+  rectangle "System" {
+    usecase "CFR012: Generate Client Dashboards" as CFR012
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+    
+    c --> CFR012 : "View dashboards"
+  }
+  
+  rectangle "Advisor Tools" {
+    usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as FAFR004
+    fa -> FAFR004 : "Set parameters per client segment"
+    
+    sa --> SAFR001 : "Manage system-wide analysis settings"
+  }
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The main system is represented by a rectangle containing all use cases and actors.
+- **Client Use Cases** (CFR series): 
+  - `View Financial Insights Dashboard` (`CFR001`) allows clients to access their financial data in an intuitive format.
+  - Other client-related features like alerts, predictions, recommendations, etc., are grouped under the same system boundary but separated by different packages or sub-systems for clarity.
+- **Advisor Use Cases** (FAFR series): 
+  - `View Client Intervention Alerts` (`FAFR002`) and other advisor-specific functionalities are isolated in their own package to maintain separation of concerns.
+- **SysAdmin Use Case**: `Manage Analysis Parameters` (`SAFR001`) is handled by the SysAdmin actor, ensuring regulatory compliance and system accuracy.
+- **AI Component (AIFR series)**: AI-generated services like financial predictions, recommendations, etc., are called via requests from the main system or advisors. These use cases handle data processing and analysis.
+- **Packages**: The diagram uses packages to group related actors and use cases logically (`Professional`, `Advisor Tools`), enhancing readability.
+
+### Key Relationships:
+1. **Client-to-Usecase**: Direct interactions (e.g., viewing dashboards, receiving alerts).
+2. **SysAdmin-to-Usecase**: Management of system-wide parameters.
+3. **AI Component Interactions**: System requests data from AI components for predictions and recommendations.
+4. **Advisor-System Integration**: Advisors can configure analysis settings or request specific insights.
+
+This structure ensures all functional requirements are represented accurately, with proper relationships between actors and use cases. Adjustments may be needed based on further clarification of the system architecture.
+
+[Done: True
+Done Reason: stop
+Eval Count: 821]

@@ -1,0 +1,108 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor FinancialAdvisor as advisor
+actor SysAdmin as sysadmin
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as cfr001_view_dashboard
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as cfr002_alerts
+  usecase "CFR003: View Financial Predictions" as cfr003_predictions
+  usecase "CFR004: Personalized Recommendations Based on Profile" as cfr004_recommendations
+  usecase "CFR005: Manage Recommendation Preferences" as cfr005_preferences
+  usecase "CFR006: View Spending Limit Alerts" as cfr006_spending_alerts
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as cfr007_investment_opportunities
+  usecase "CFR008: Receive News Related to Portfolio" as cfr008_news
+  usecase "CFR009: View Consolidated Financial Dashboard" as cfr009_dashboard
+  usecase "CFR10: Manage Relationship with Advisors" as cfr10_relationships
+
+  client --> cfr001_view_dashboard : "View financial data"
+  client --> cfr002_alerts       : "Receive alerts for transactions"
+  client --> cfr003_predictions   : "View predictions"
+  client --> cfr004_recommendations: "Get personalized recommendations"
+  client --> cfr005_preferences    : "Manage preferences"
+  client --> cfr006_spending_alerts: "Monitor spending limits"
+  client --> cfr007_investment_opportunities: "View investment opportunities"
+  client --> cfr008_news           : "Stay informed about market events"
+  client --> cfr009_dashboard      : "Consolidate financial info"
+  client --> cfr10_relationships   : "Manage advisor access"
+
+}
+
+rectangle "FinancialAdvisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as fafr001_sessions
+  usecase "FAFR002: View Intervention Alerts for Clients" as fafr002_alerts
+  usecase "FAFR003: View Predictive Analytics on Clients' Finances" as fafr003_analytics
+
+  advisor --> fafr001_sessions : "Schedule and manage sessions"
+  advisor --> fafr002_alerts   : "Respond to alerts"
+  advisor --> fafr003_analytics: "Analyze client data"
+
+}
+
+rectangle "SysAdmin" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as safr001_params
+  sysadmin --> safr001_params : "Adjust parameters"
+  
+}
+
+// System components (SFR)
+system Sfr as system
+
+package "System Functions" {
+  rectangle "Sfr" {
+    usecase "SFR002: Deliver Personalized Recommendations" as sfr002_recommendations
+    usecase "SFR013: Generate Client Alerts Based on Conditions" as sfr013_alerts
+    usecase "SFR017: Generate Financial Health Reports" as sfr017_reports
+
+    system --> sfr002_recommendations : "Request recommendations"
+    system --> sfr013_alerts         : "Request alerts"
+    system --> sfr017_reports        : "Generate reports"
+
+  }
+}
+
+// AI components (AIFR)
+package "AI Components" {
+  rectangle "Aifr" {
+    usecase "AIFR002: Generate Personalized Recommendations" as aifr002_recommendations
+    usecase "AIFR004: Analyze Investment Opportunities" as aifr004_opportunities
+
+    system --> aifr002_recommendations : "Request recommendations"
+    system --> aifr004_opportunities   : "Analyze opportunities"
+
+  }
+}
+
+// Feedback Loop
+usecase "CFR11: Send User Feedback to System" as cfr11_feedback
+client --> cfr11_feedback       : "Provide feedback on outputs"
+system --> cfr11_feedback        : "Collect and process user input for improvement"
+
+@enduml
+```
+
+### Key Observations:
+- **Actors**: The diagram includes three main actors: `Client`, `FinancialAdvisor`, and `SysAdmin`. Each is associated with specific use cases.
+- **Use Cases**:
+  - Clients (CFR001–CFR10) cover viewing dashboards, receiving alerts, predictions, recommendations, etc.
+  - Financial Advisors (FAFR001–FAFR004) manage mentoring sessions and view client data/insights.
+  - SysAdmin handles system parameter management (SAFR001).
+- **System Components**: The `system` component (`Sfr`) includes functions like delivering recommendations, generating alerts/reports. AI components (`Aifr`) generate personalized recommendations and analyze opportunities.
+- **Feedback Loop** (`CFR11`): Allows users to provide feedback for system improvement.
+
+### Structure:
+The diagram is organized into packages: "Client", "FinancialAdvisor", "SysAdmin", "System Functions" (Sfr), "AI Components" (Aifr). Each package contains relevant use cases linked via arrows. The `system` and AI components are nested within their respective functional groups for clarity. 
+
+### Notes:
+- All use case IDs match the provided requirements.
+- Inheritance/extension relationships aren't explicitly shown here, as none were implied in the given requirements (e.g., no "extends" or generalization).
+- Relationships between actors and use cases follow the defined interactions (e.g., clients initiating requests to system components).
+
+[Done: True
+Done Reason: stop
+Eval Count: 1282]

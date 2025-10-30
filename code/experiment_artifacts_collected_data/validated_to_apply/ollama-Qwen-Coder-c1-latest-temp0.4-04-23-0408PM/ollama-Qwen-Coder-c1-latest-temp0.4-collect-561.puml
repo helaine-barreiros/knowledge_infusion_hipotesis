@@ -1,0 +1,82 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+}
+
+package "System Administrator" {
+  actor SysAdmin as SAFR003
+}
+
+rectangle "User Interface" {
+  usecase "CFR009: View Personalized Dashboard" as CFR009
+  usecase "SFR12: Generate Client Dashboards" as SFR12
+  
+  CFR001 --> (CFR009)
+}
+
+rectangle "Financial Insights & Predictions" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "SFR3: Request Financial Predictions from AI Component" as SFR3
+  
+  CFR001 --> (CFR009)
+  FAFR002 --> (FAFR004)
+}
+
+rectangle "Anomaly Detection & Alerts" {
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  usecase "SFR8: Request Anomaly Transaction Alerts from AI Component" as SFR8
+  
+  CFR001 --> (CFR002)
+}
+
+rectangle "Investment Opportunities & Recommendations" {
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "SFR6: Request Investment Opportunity Analysis from AI Component" as SFR6
+  
+  CFR001 --> (CFR003)
+}
+
+rectangle "Personalized Recommendations & Preferences Management" {
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "SFR4: Request Personalized Recommendations from AI Component" as SFR4
+  
+  CFR001 --> (CFR005)
+}
+
+rectangle "Spending Limits & Alerts Management" {
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "SFR5: Request Spending Limit Alerts from AI Component" as SFR5
+  
+  CFR001 --> (CFR006)
+}
+
+rectangle "News & Analysis Integration" {
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "SFR9: Request Contextualized News from AI Component" as SFR9
+  
+  CFR001 --> (CFR008)
+}
+
+rectangle "Client Mentoring & Intervention Alerts" {
+  usecase "FAFR003: View Predictive Analytics About Client Financial Situations" as FAFR003
+  usecase "AIFR008: Generate Anomaly Transaction Alerts" as AIFR008
+  
+  FAFR002 --> (FAFR001)
+}
+
+rectangle "System Management & Feedback Handling" {
+  usecase "SFR20: Manage User Feedback to Improve System Outputs" as SFR20
+  usecase "AIFR09: Generate Client Predictive Intervention Recommendations" as AIFR09
+  
+  CFR011 --> (SFR20)
+}
+
+@enduml

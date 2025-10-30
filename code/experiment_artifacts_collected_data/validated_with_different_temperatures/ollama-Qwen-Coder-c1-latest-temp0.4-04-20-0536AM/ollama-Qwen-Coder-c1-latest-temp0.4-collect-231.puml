@@ -1,0 +1,64 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FinancialAdvisor
+:User: as User
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  
+  Client --> CFR001
+  SysAdmin --> SAFR001
+  FinancialAdvisor --> FAFR001
+  User --> (Send Feedback)
+}
+
+rectangle "Client System Features" {
+  usecase "CFR002: View Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  
+  Client --> (View Alerts)
+  Client --> (View Financial Predictions)
+  Client --> (Receive Personalized Recommendations)
+  Client --> (Manage Recommendation Preferences)
+  Client --> (View Spending Limit Alerts)
+}
+
+rectangle "Financial Advisor System Features" {
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  FinancialAdvisor --> (View Intervention Alerts)
+  FinancialAdvisor --> (View Predictive Analytics)
+  FinancialAdvisor --> (Configure Analysis Parameters for Client Segments)
+}
+
+rectangle "System Features" {
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  
+  SystemAdmin --> (Manage Analysis Parameters)
+  User --> (Send Feedback)
+}
+
+rectangle "AI Features" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  
+  SystemAdmin --> (Manage Analysis Parameters)
+}
+
+@enduml

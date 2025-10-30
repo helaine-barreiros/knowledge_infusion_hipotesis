@@ -1,0 +1,82 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Anomaly Detection Parameters" as SAFR002
+  usecase "FAFR005: Schedule Client Mentoring Sessions" as FAFR005
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "SAFR004: Configure Risk Tolerance Preferences" as SAFR004
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SAFR003: Manage Regulatory Compliance Settings" as SAFR003
+}
+
+rectangle "Client" {
+  actor "User (Client)" as UserC
+  userc --> CFR001 : "View Financial Insights Dashboard"
+  userc --> CFR003 : "View Financial Predictions"
+  userc --> CFR006 : "View Spending Limit Alerts"
+  userc --> SFR012 : "Access Personalized Dashboards"
+}
+
+rectangle "Financial Advisor" {
+  actor "FA (Client)" as FAD
+  fad --> SAFR005 : "Schedule Client Mentoring Sessions"
+  fad --> FAFR003 : "View Predictive Analytics for Clients"
+  fad --> SFR012 : "Access Personalized Dashboards"
+}
+
+rectangle "System Administrator" {
+  actor "SysAdmin" as SA
+  sa --> SAFR004 : "Configure Risk Tolerance Preferences"
+  sa --> SAFR003 : "Manage Regulatory Compliance Settings"
+  sa --> SAFR002 : "Manage Anomaly Detection Parameters"
+}
+
+package Professional {
+  SysAdmin <|-- (SA)
+  
+  rectangle "System" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Identify Investments Aligning with Strategies" as AIFR005
+    usecase "AIFR006: Detect Anomaly Transactions" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "AIFR008: Recommend Predictive Interventions for Advisors" as AIFR008
+  }
+  
+  SysAdmin <|-- (SA) --> AIFR001 : "Request Financial Predictions"
+  SysAdmin <|-- (SA) --> AIFR003 : "Request Spending Limit Alerts"
+  SysAdmin <|-- (SA) --> AIFR004 : "Request Investment Opportunity Analyses"
+  
+}
+
+UserC --> AIFR007 : "Extract Relevant News for Portfolio" 
+FA --> AIFR008 : "Identify When to Engage Clients"
+
+rectangle "System Boundary" {
+  SysAdmin <|-- (SA) 
+  UserC -|> System
+  FAD -|> System
+}
+
+@enduml
+```
+
+**Key Observations:**
+1. **Actors**: The diagram includes three main actors: `User (Client)`, `Financial Advisor` (`FA`), and `System Administrator`. Each actor is linked to specific use cases.
+2. **Use Cases Grouping**: Use cases are categorized under the system boundary, with some grouped into packages like "Professional" for administrative tasks.
+3. **Inheritance/Delegation**:
+   - The System Administrator extends or requests services from various components (e.g., `SAFR004` and `AIFR001`).
+4. **System Boundary**: All interactions occur within the system boundary, ensuring encapsulation of internal processes.
+
+This structure aligns with the requirements by precisely mapping each actor to their respective use cases while maintaining logical groupings and dependencies.
+
+[Done: True
+Done Reason: stop
+Eval Count: 929]

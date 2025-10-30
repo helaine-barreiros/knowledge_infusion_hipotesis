@@ -1,0 +1,65 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor (FA): as FA
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SFR013: Deliver Client Alerts" as SFR013
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  usecase "CFR002: View Alerts About Anomalous Transactions" as CFR002
+  
+  rectangle "Client Dashboard Features" {
+    usecase "SFR12: Generate Client Dashboards" as SFR12
+    usecase "AIFR08: Generate Predictive Intervention Recommendations" as AIFR08
+    usecase "CFR009: Access Personalized Dashboard" as CFR009
+  }
+  
+  rectangle "Financial Advisor Features" {
+    usecase "FAFR01: Manage Client Mentoring Sessions" as FAFR01
+    usecase "FAFR02: View Client Intervention Alerts" as FAFR02
+    usecase "AIFR04: Generate Predictive Insights" as AIFR04
+  }
+  
+  rectangle "System Management Features" {
+    usecase "SFR03: Request Financial Predictions" as SFR03
+    usecase "SFR06: Request Investment Opportunity Analysis" as SFR06
+    usecase "AIFR01: Generate Financial Predictions" as AIFR01
+  }
+  
+  rectangle "AI System Features" {
+    usecase "AIFR02: Generate Personalized Recommendations" as AIFR02
+    usecase "AIFR03: Generate Spending Limit Alerts" as AIFR03
+    usecase "AIFR04: Generate Investment Opportunity Analyses" as AIFR04
+    usecase "AIFR05: Generate Financial Health Reports" as AIFR05
+  }
+}
+
+Client --> CFR001
+Client --> SFR02
+Client --> CFR009
+Client --> SAFR001
+Client --> CFR005
+
+SysAdmin --> SAFR001
+SysAdmin --> SFR03
+SysAdmin --> AIFR04
+SysAdmin --> CFR011
+
+FA --> FAFR01
+FA --> FAFR02
+FA --> AIFR06
+FA --> CFR011
+
+Client -> (CFR005) : "Manage Preferences"
+System Admin -> (SAFR001) : "Manage Parameters"
+
+@enduml

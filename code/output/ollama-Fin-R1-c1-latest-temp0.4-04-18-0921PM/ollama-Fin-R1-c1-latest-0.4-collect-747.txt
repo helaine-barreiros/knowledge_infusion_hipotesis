@@ -1,0 +1,110 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Fraud Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Adjust Recommendation Preferences" as CFR005
+  usecase "CFR006: Monitor Spending Limits" as CFR006
+  usecase "CFR007: Explore Investment Opportunities" as CFR007
+  usecase "CFR008: Access Portfolio News" as CFR008
+  usecase "CFR009: Consolidate Financial Views" as CFR009
+  usecase "CFR010: Manage Data Sharing with Advisors" as CFR010
+
+  rectangle "Client Interface" {
+    actor Client as C
+    client --> (CFR001)
+    client --> (SAFR002)
+    client --> (CFR003)
+    client --> (CFR004)
+    client --> (CFR005)
+    client --> (CFR006)
+    client --> (CFR007)
+    client --> (CFR008)
+    client --> (CFR009)
+  }
+
+  rectangle "System Management" {
+    actor SysAdmin as SA
+    sysadmin --> SAFR001
+  }
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Schedule Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Alerts" as FAFR002
+  usecase "FAFR003: Review Predictive Analytics" as FAFR003
+  usecase "FAFR004: Customize Analysis Parameters" as FAFR004
+
+  actor FinancialAdvisor as FA
+  financialadvisor --> (FAFR001)
+  financialadvisor --> (FAFR002)
+  financialadvisor --> (FAFR003)
+}
+
+rectangle "System Services" {
+  usecase "SFR001: Send Alerts" as SFR001
+  usecase "SFR002: Provide Recommendations" as SFR002
+  usecase "SFR003: Request Predictions" as SFR003
+  usecase "SFR004: Deliver Personalized Recs" as SFR004
+  usecase "SFR005: Monitor Spending Limits" as SFR005
+  usecase "SFR006: Analyze Investment Opportunities" as SFR006
+  usecase "SFR007: Find ESG-Compliant Investments" as SFR007
+  usecase "SFR008: Detect Anomalies" as SFR008
+  usecase "SFR009: Extract News Context" as SFR009
+  usecase "SFR010: Generate Dashboards" as SFR010
+  usecase "SFR011: Analyze Client Data for Insights" as SFR011
+
+  system --> (SFR001)
+  system --> (SFR002)
+  system --> (SFR003)
+  system --> (SFR004)
+  system --> (SFR005)
+  system --> (SFR006)
+  system --> (SFR007)
+  system --> (SFR008)
+  system --> (SFR009)
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Predict Financial Outcomes" as AIFR001
+  usecase "AIFR002: Generate Recs Based on Profiles" as AIFR002
+  usecase "AIFR003: Alert On Spending Anomalies" as AIFR003
+  usecase "AIFR004: Analyze Inv Opportunities" as AIFR004
+  usecase "AIFR005: Identify ESG Investments" as AIFR005
+  usecase "AIFR006: Flag Fraudulent Transactions" as AIFR006
+  usecase "AIFR007: Correlate News with Portfolios" as AIFR007
+  usecase "AIFR008: Recommend Interventions" as AIFR008
+
+  ai --> (aifr001)
+  ai --> (aifr002)
+  ai --> (aifr003)
+  ai --> (aifr004)
+  ai --> (aifr005)
+  ai --> (aifr006)
+}
+
+usecase "CFR011: Provide Feedback" as CFR011
+client --|> (cfro11)
+
+@enduml
+```
+
+**Key Observations and Relationships:**
+- **Client Interface**: The client can interact with various use cases like viewing dashboards, receiving recommendations, managing preferences, etc. These are all part of the "Client Interface" rectangle.
+- **System Management**: System administrators manage analysis parameters via SAFR001 (Manage Analysis Parameters).
+- **Financial Advisor Interface**: Financial advisors schedule sessions and view alerts through FAFR use cases.
+- **System Services**: The system handles alert delivery, recommendation generation, etc., as per SFR components. These are linked to the "Client" for interaction.
+- **AI Component**: AI generates predictions, recommendations, detects anomalies, etc., which feed into other systems or directly interact with clients (e.g., through CFR011).
+- **Inheritance/Extending Actors**: Not explicitly present here but could be inferred if roles overlap. For example, a client might also act as an advisor in certain contexts.
+
+This structure ensures all actors and use cases are represented accurately based on the provided requirements. Each relationship is clearly defined to show how different components (actors and systems) interact within the framework. The system boundary groups related functionalities logically for clarity.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1384]

@@ -1,0 +1,72 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FAFR001
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  
+  Client --> (CFR001)
+  SysAdmin --> (SAFR001)
+  FinancialAdvisor --> (FAFR003)
+}
+
+rectangle "Client Management" {
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  
+  Client --> (CFR002)
+  Client --> (CFR006)
+}
+
+rectangle "Investment Management" {
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "FAFR007: Configure Analysis Parameters for Specific Clients" as FAFR004
+  
+  Client --> (CFR003)
+  FinancialAdvisor --> (FAFR004)
+}
+
+rectangle "Personalized Recommendations" {
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "SAFR005: Manage Recommendation Preferences" as SAFR002
+  
+  Client --> (CFR004)
+  SysAdmin --> (SAFR002)
+}
+
+rectangle "Financial Advisor Management" {
+  usecase "FAFR01: Manage Client Mentoring Sessions" as FAFR01
+  usecase "FAFR02: View Intervention Alerts for Clients" as FAFR02
+  
+  FinancialAdvisor --> (FAFR01)
+  FinancialAdvisor --> (FAFR02)
+}
+
+rectangle "System Operations" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  
+  SystemAdmin --> (SFR001)
+  SystemAdmin --> (SFR003)
+}
+
+rectangle "AI Operations" {
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  
+  SystemAdmin --> (AIFR001)
+  SystemAdmin --> (AIFR002)
+}
+
+rectangle "Feedback Management" {
+  usecase "CFR11: Send Feedback about the System's Recommendations and Insights" as CFR11
+  Client --> (CFR11)
+}
+@enduml

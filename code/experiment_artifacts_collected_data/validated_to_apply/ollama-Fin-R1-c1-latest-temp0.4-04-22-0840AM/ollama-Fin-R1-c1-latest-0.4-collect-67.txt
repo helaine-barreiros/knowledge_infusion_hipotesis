@@ -1,0 +1,76 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Permissions and Data Sharing" as SAFR002
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "SFR009: Deliver Contextualized News Insights Based on Portfolio" as SFR009
+  
+  actor "Client" as C1
+  actor "Financial Advisor" as FA
+  actor "System Administrator" as SA
+
+  Client --> CFR001 : View financial data and insights.
+  
+  FinancialAdvisor -> FAFR004 : Configure analysis parameters for clients.
+  SystemAdministrator -> SAFR002 : Manage user permissions, sharing.
+
+  SFR009 <|-- (Client) : Deliver contextualized news to client.
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Personalize Recommendations Based on Profiles" as AIFR002
+  
+  Client --> AIFR001 : Request financial predictions.
+  
+  AIFR002 <|-- (Client) : Generate personalized recommendations for client.
+
+}
+
+rectangle "Notification System" {
+  usecase "SFR003: Deliver Financial Predictions to User" as SFR003
+  usecase "SFR006: Request Investment Opportunity Analysis from AI" as SFR006
+  
+  Client --> SFR003 : Receive financial predictions.
+  
+  AIFR002 -> SFR006 : Send investment opportunity analysis to system.
+
+}
+
+@enduml
+```
+
+### Explanation:
+1. **System Boundary**: The main rectangle represents the entire "AI-Powered Analysis & Insights System."
+   - **Use Cases**:
+     - `CFR001: View Financial Insights Dashboard` (Client) – Allows clients to view their financial data.
+     - `SAFR002: Manage User Permissions and Data Sharing` (System Administrator) – Manages user permissions for sharing data.
+     - `FAFR004: Configure Analysis Parameters for Client Segments` (Financial Advisor) – Configures parameters based on client segments.
+     - `SFR009: Deliver Contextualized News Insights Based on Portfolio` (Client/System) – Delivers news relevant to the user's portfolio.
+
+2. **Actors**:
+   - **Client**: Represents all clients using the system, including individual users and financial advisors.
+   - **Financial Advisor**: Manages client interactions, mentoring sessions, etc.
+   - **System Administrator**: Handles administrative tasks like managing permissions.
+
+3. **Relationships**:
+   - The `Client` interacts with multiple use cases (e.g., viewing dashboards, receiving recommendations).
+   - The system administrator manages user permissions via the `SAFR002` use case.
+   - Financial advisors configure analysis parameters using `FAFR004`.
+   - Notifications and data flows are managed through components like `SFR003`, which delivers predictions to clients.
+
+### Key Observations:
+- **Inheritance**: The system uses inheritance where appropriate (e.g., `AIFR002` extends the client for personalized recommendations).
+- **Grouping**: Use cases related to AI generation (`AIFR001`, `AIFR002`) are grouped under their respective components.
+- **Directionality**: All relationships flow logically from actor to use case or system component.
+
+This diagram ensures all functional requirements are represented accurately with precise IDs and names, adhering strictly to the provided guidelines. Adjustments can be made based on further analysis if needed.
+
+[Done: True
+Done Reason: stop
+Eval Count: 826]

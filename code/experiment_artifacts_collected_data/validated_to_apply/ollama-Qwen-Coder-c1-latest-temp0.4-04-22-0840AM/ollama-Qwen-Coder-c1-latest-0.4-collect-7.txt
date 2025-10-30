@@ -1,0 +1,179 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Clients" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Anomaly Transaction Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  C --> (CFR001)
+  C --> (CFR002)
+  C --> (CFR003)
+  C --> (CFR004)
+  C --> (CFR005)
+  C --> (CFR006)
+  C --> (CFR007)
+  C --> (CFR008)
+  C --> (CFR009)
+  C --> (CFR10)
+}
+
+package "Financial Advisors" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  FA --> (FAFR001)
+  FA --> (FAFR002)
+  FA --> (FAFR003)
+  FA --> (FAFR004)
+}
+
+package "System Administrators" {
+  actor SystemAdministrator as SA
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SA --> (SAFR001)
+}
+
+rectangle "System Components" {
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    useusecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    useusecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    useusecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    useusecase "AIFR005: Generate Investment Opportunities Based on Strategies and MPT Principles" as AIFR005
+    useusecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    useusecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    useusecase "AIFR008: Generate Predictive Intervention Recommendations for Clients" as AIFR008
+    useusecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+    
+    C --> (AIFR001)
+    C --> (AIFR002)
+    C --> (AIFR003)
+    C --> (AIFR004)
+    C --> (AIFR005)
+    C --> (AIFR006)
+    C --> (AIFR007)
+    C --> (AIFR008)
+    C --> (AIFR009)
+    
+    FA --> (AIFR001)
+    FA --> (AIFR002)
+    FA --> (AIFR003)
+    FA --> (AIFR004)
+    FA --> (AIFR005)
+    FA --> (AIFR006)
+    FA --> (AIFR007)
+    FA --> (AIFR008)
+    FA --> (AIFR009)
+    
+    SA --> (AIFR001)
+    SA --> (AIFR002)
+    SA --> (AIFR003)
+    SA --> (AIFR004)
+    SA --> (AIFR005)
+    SA --> (AIFR006)
+    SA --> (AIFR007)
+    SA --> (AIFR008)
+    SA --> (AIFR009)
+  }
+  
+  rectangle "Notification System" {
+    usecase "SFR001: Deliver Alerts to Users" as SFR001
+    C --> (SFR001)
+    FA --> (SFR001)
+    SA --> (SFR001)
+    
+    AIFR006 <|-- (SFR001)  ' Anomaly transaction alerts are delivered through the notification system.
+    AIFR008 <|-- (SFR001)  ' Interventions for financial issues detected by AI are sent via notifications.
+  }
+  
+  rectangle "Recommendation System" {
+    usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+    C --> (SFR002)
+    
+    AIFR001 <|-- (SFR002)  ' Financial predictions are part of personalized recommendations.
+    AIFR005 <|-- (SFR002)  ' Investment opportunities based on strategies and MPT principles are included in personalized recommendations.
+    AIFR007 <|-- (SFR002)  ' News insights related to financial portfolios are also a part of the recommendation system.
+    
+    FAFR001 --> (SFR002)  ' Mentoring sessions can be recommended based on client needs and AI-generated insights.
+  }
+  
+  rectangle "Prediction System" {
+    usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+    C --> (SFR003)
+    
+    AIFR001 <|-- (SFR003)  ' The system requests financial predictions from the AI component.
+  }
+  
+  rectangle "Recommendation Engine" {
+    usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+    C --> (SFR004)
+    
+    AIFR002 <|-- (SFR004)  ' The system requests personalized recommendations based on user data and preferences.
+  }
+  
+  rectangle "Spending Limit Alert System" {
+    usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+    C --> (SFR005)
+    
+    AIFR003 <|-- (SFR005)  ' The system requests spending limit alerts when patterns exceed thresholds.
+  }
+  
+  rectangle "Investment Opportunity Analysis System" {
+    usecase "SFR006: Request Investment Opportunity Analyses from AI Component" as SFR006
+    C --> (SFR006)
+    
+    AIFR004 <|-- (SFR006)  ' The system requests analyses to identify suitable investments based on user risk profiles.
+  }
+  
+  rectangle "ESG Investment Analysis System" {
+    usecase "SFR007: Request Specific Investment Opportunities Matching User Criteria and ESG Preferences" as SFR007
+    C --> (SFR007)
+    
+    AIFR005 <|-- (SFR007)  ' The system generates investment opportunities that align with user's ESG preferences.
+  }
+  
+  rectangle "Anomaly Transaction Detection System" {
+    usecase "SFR013: Request Anomaly Transaction Alerts from AI Component" as SFR013
+    C --> (SFR013)
+    
+    AIFR006 <|-- (SFR013)  ' The system requests alerts for potentially fraudulent activities.
+  }
+  
+  rectangle "News Retrieval System" {
+    usecase "SFR008: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR008
+    C --> (SFR008)
+    
+    AIFR007 <|-- (SFR008)  ' The system retrieves news insights relevant to users' financial situations.
+  }
+  
+  rectangle "News Processing System" {
+    usecase "SFR014: Process Contextualized News Insights for Users" as SFR014
+    C --> (SFR014)
+    
+    AIFR007 <|-- (SFR014)  ' The system processes news insights to extract relevant information.
+  }
+  
+  rectangle "Insight Generation System" {
+    usecase "SFR015: Request Contextualized News Insights from AI Component"
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

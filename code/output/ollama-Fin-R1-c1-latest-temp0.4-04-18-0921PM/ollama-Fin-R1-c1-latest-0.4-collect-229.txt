@@ -1,0 +1,75 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FAdviser
+:AIFR001: as AIFR001
+:SFR002: as SFR002
+:SFR003: as SFR003
+:SFR004: as SFR004
+:SFR005: as SFR005
+:SFR006: as SFR006
+:SFR007: as SFR007
+:SFR008: as SFR008
+:SFR009: as SFR009
+:SFR010: as SFR010
+:AIFR002: as AIFR002
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Spending Limit Alerts for Budget Control" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access Portfolio-Related News" as CFR008
+  usecase "CFR009: Consolidated Financial Dashboard" as CFR009
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+
+  SysAdmin --> SAFR001
+  
+  Client --> SFR002 : "View Alerts"
+  
+  AIFR001 <|-- (SFR003)
+  AIFR001 <|-- (SFR004)
+  AIFR001 <|-- (SFR005)
+  AIFR001 <|-- (SFR006)
+  
+  SFR002 --> CFR009
+  SFR003 --> CFR003 : "Deliver Predictions"
+  SFR004 --> CFR004 : "Generate Recommendations"
+  SFR005 --> CFR001, CFR006, SAFR008
+  
+  AIFR002 <|-- (SFR007)
+  
+  FAdviser --> FAFR003
+}
+
+@enduml
+```
+
+### Explanation:
+- **Actors**: The diagram includes three main actors: `Client`, `SystemAdmin`, and `FinancialAdvisor`. Each has their respective use cases.
+- **Use Cases**:
+  - Client-related (CFR): View dashboards, receive alerts, view predictions, etc.
+  - System Admin (`SAFR001`): Manage analysis parameters for the AI system.
+  - Financial Advisor (`FAFR` series): Manage client sessions, view alerts/predictions, and configure segments.
+- **System Components**:
+  - `AIFR`: Represents the AI components (e.g., generating predictions, recommendations).
+  - `SFR`: System functionalities like delivering notifications or requests to AIFRs.
+  
+### Key Relationships:
+1. **Client-to-SFR**: Client uses SFR for alerts (`CFR002`), which are delivered via appropriate channels.
+2. **AIFR-to-SFR**: AI systems generate data (e.g., predictions, recommendations) that flow into system components like `SFR003`, `SFR004`.
+3. **System Admin to SAFR001**: System admin manages analysis parameters for the AI.
+
+This structure ensures all functional requirements are mapped accurately with their actors and use cases. Adjustments can be made based on specific interactions or additional details in future requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 893]

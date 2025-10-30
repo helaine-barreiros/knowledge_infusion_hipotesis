@@ -1,0 +1,52 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR010: Generate Client Dashboards" as SFR010
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+  client --> CFR001 : "Client"
+  SysAdmin --> SAFR001 : "System Administrator"
+  FAFR002 <|-- (CFR001) : "Financial Advisor/Client"
+  FAFR003 <|-- (SAFR001, AIFR007) : "Financial Advisor/System"
+}
+
+rectangle "User Interface" {
+  actor Client as c
+  actor FinancialAdvisor as fa
+  actor SystemAdministrator as sa
+
+  client --> CFR001 : "View Dashboard"
+  financialadvisor --> FAFR002 : "Check Alerts"
+  financialadvisor --> FAFR003 : "Review Predictive Analytics"
+  systemadministrator --> SAFR001 : "Manage Parameters"
+
+}
+
+@enduml
+```
+
+This PlantUML code represents the use case diagram based on the provided functional requirements. The main components include:
+
+- **System**: Contains core functionalities like financial insights dashboards, analysis parameter management, and AI-generated recommendations.
+- **User Interface**: Represents actors (Client, Financial Advisor, System Administrator) interacting with system use cases.
+
+Key relationships:
+1. Clients interact directly with `CFR001` for viewing dashboards.
+2. System Administrators manage parameters via `SAFR001`.
+3. Financial Advisors view alerts (`FAFR002`) and predictive analytics (`FAFR003`), which may involve both system-generated content (e.g., from AIFR components) and client-specific data.
+
+The structure adheres to the guidelines, ensuring precise representation of actors and use cases with their IDs. Relationships are clearly defined using arrows and labels where applicable. The diagram is organized into logical groups within the "System" rectangle for clarity. 
+
+**Note**: Some requirements (e.g., FAFR001, SFR008–SFR20) were excluded as they either represent internal system functionalities or involve components not directly interacting with external actors in this context. The focus here is on high-level interactions between users and the AI/analysis systems. Adjustments can be made if additional details are needed for specific use cases.
+
+[Done: True
+Done Reason: stop
+Eval Count: 615]

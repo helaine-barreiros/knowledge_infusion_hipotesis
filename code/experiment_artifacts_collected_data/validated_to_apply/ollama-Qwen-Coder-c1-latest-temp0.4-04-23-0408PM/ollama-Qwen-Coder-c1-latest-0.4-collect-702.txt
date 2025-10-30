@@ -1,0 +1,76 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor "Client" as Client
+actor "Financial Advisor" as FAdvisor
+actor "System Administrator" as SysAdmin
+rectangle "User Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR005: Manage Recommendations Preferences" as SAFR005
+}
+rectangle "Notifications and Alerts" {
+  usecase "SFR003: Deliver Alerts to Users" as SFR003
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+}
+rectangle "Recommendations and Insights" {
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "SFR004: Deliver Personalized Recommendations to Users" as SFR004
+  usecase "AIFR016: Generate Predictive Insights" as AIFR016
+}
+rectangle "Investment Opportunities and News" {
+  usecase "CFR007: View Investment Opportunities Suitable for My Risk Profile" as CFR007
+  usecase "SFR008: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR008
+}
+rectangle "Client Management" {
+  usecase "FAFR010: Manage Client Relationship with Advisors" as FAFR010
+}
+
+Client --> CFR001
+Client --> SAFR005
+Client --> CFR002
+SFR003 --> (CFR002)
+AIFR006 --> SFR003
+
+FAFRACTOR004: As a Financial Advisor, I want to manage client mentoring sessions based on system-generated insights to provide more valuable guidance aligned with each client's financial goals.
+FAAFRO01: As a Financial Advisor, I want to view client intervention alerts when the system detects patterns requiring professional attention to proactively assist clients with potential financial issues.
+FAFR003: As a Financial Advisor, I want to view predictive analytics about my clients' financial situations to provide data-driven recommendations during consultations.
+
+SFR004 --> (SFR021)
+SFR008 --> (AIFR007)
+
+rectangle "System" {
+  usecase "SFR005: Deliver Personalized Recommendations to Users Based on Financial Data and Preferences" as SFR005
+  usecase "SFR006: Request Spending Limit Alerts from AI Component When User Spending Patterns Exceed Defined Thresholds" as SFR006
+  usecase "AIFR012: Generate Client Dashboards That Present Financial Information in an Intuitive and Actionable Format" as AIFR012
+}
+
+SFR005 --> (SAFR004)
+SFR006 --> (AIFR003)
+
+FAFRACTOR004 --> FAFRO001
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance as Defined By Industry Standards Like FINRA Guidelines" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts For Users by Identifying Unusual Deviations From Established Spending Patterns" as AIFR003
+  usecase "AIFR015: Generate Predictive Intervention Analyses for Users to Identify When Financial Advisors Should Engage With Clients" as AIFR015
+}
+
+FAFRACTOR004 --> (AIFR002)
+SFR006 --> (AIFR003)
+
+rectangle "Historical Data and Analytics" {
+  usecase "SFR019: Maintain a Historical Record of Users' Insights to Enable Trend Analysis and Effectiveness Measurement" as SFR019
+}
+
+Client -> CFR011 : Send Feedback
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 918]

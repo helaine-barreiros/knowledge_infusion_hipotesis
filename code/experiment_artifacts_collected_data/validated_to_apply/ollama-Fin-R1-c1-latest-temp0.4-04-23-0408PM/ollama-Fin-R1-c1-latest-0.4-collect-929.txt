@@ -1,0 +1,83 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sas
+actor FinancialAdvisor as faa
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics About Client's Finances" as FAFR003
+  usecase "SFR009: Generate Contextualized News Relevant to Portfolio" as SFR009
+
+  c1 --> CFR001 : "View Financial Insights Dashboard"
+  sas --> SAFR001 : "Manage Analysis Parameters"
+  faa --> FAFR003 : "View Predictive Analytics About Client's Finances"
+
+}
+
+rectangle "Client-Specific System" {
+  usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+
+  c1 --> CFR002 : "View Alerts for Anomalous Transactions"
+  c1 --> CFR004 : "Receive Personalized Recommendations"
+  c1 --> CFR010 : "Manage Relationship with Financial Advisors"
+
+}
+
+rectangle "Financial Advisor-Specific System" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Intervention Alerts for Clients" as FAFR002
+
+  faa --> FAFR001 : "Manage Client Mentoring Sessions"
+  faa --> FAFR002 : "View Intervention Alerts"
+
+}
+
+rectangle "System-Specific Use Cases" {
+  usecase "SFR007: Request Investment Opportunity Analysis Based on Risk Profile" as SFR007
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+
+  SysAdmin --> SFR007 : "Request Investment Opportunity Analysis"
+  SysAdmin --> SFR013 : "Generate Client Alerts"
+
+}
+
+@enduml
+```
+
+**Description of the Diagram Components:**
+- **Client-Specific System**: 
+  - `CFR002` (View Alerts for Anomalous Transactions): Allows clients to see alerts about suspicious transactions.
+  - `CFR004` (Receive Personalized Recommendations): Provides tailored financial advice based on user profiles.
+  - `CFR010` (Manage Relationship with Financial Advisors): Enables clients to control data sharing and privacy settings.
+
+- **Financial Advisor-Specific System**:
+  - `FAFR001` (Client Mentoring Sessions Based on Insights): Advisers can schedule sessions using AI-generated insights.
+  - `FAFR002` (Intervention Alerts for Clients): Notifies advisers when clients need immediate attention based on system data.
+
+- **System-Specific Use Cases**:
+  - `SFR007`: The system requests investment analyses from the AI to match user risk profiles.
+  - `SFR013`: Generates alerts automatically via predefined conditions (e.g., budget overruns).
+
+- **Shared System Actors**: 
+  - Clients, SysAdmins, and Financial Advisors interact with various use cases. For example:
+    - Clients can view dashboards (`CFR001`), receive recommendations (`SAFR004`, `SFR007`), or manage relationships (`CFR010`).
+    - SysAdmins handle system parameters (`SAFR001`) and generate alerts (`SFR013`).
+    - Financial Advisors use predictive tools (`FAFR002`, `FAFR003`) to guide clients.
+
+**Key Relationships:**
+- Direct interactions between actors (e.g., client viewing dashboards) are represented with simple arrows.
+- System administrators manage parameters and generate alerts, which flow through the system’s logical components like AI systems or other subsystems. 
+
+This structure ensures clarity in how different roles interact within the system framework while adhering strictly to provided functional requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 927]

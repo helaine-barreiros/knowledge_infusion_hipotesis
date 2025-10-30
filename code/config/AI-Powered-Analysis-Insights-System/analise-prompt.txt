@@ -1,0 +1,80 @@
+# Analisando do prompt e compatibilidade com as configuraçÕes de contexto
+
+## Análise de Tamanho do Prompt
+
+O prompt completo (sistema + usuário) contém aproximadamente 6.800 tokens de texto. 
+
+O prompt está dentro dos limites do modelo Qwen2, utilizando aproximadamente 20,8% da capacidade do tamanho do contexto:
+1. O comprimento de contexto do modelo é de 32.768 tokens
+2. O comprimento de embedding do modelo é de 3.584 tokens
+3. O comprimento do num_ctx do modelo é de 131.072 tokens (ver se representa a pergunta mais resposta!!)
+3. O tamanho do contexto do modelo é de 131.072 tokens
+4. O tamanho do prompt de usuário + sistema é de 6.800 tokens o que representa 20,8% da capacidade do tamanho da janela de contexto do modelo de 32.768 tokens
+
+## Análise de Complexidade
+
+O prompt está estruturado em duas partes principais:
+1. **Prompt de Sistema** (~700 tokens): Fornece diretrizes técnicas claras e objetivas
+2. **Prompt de Usuário** (~6.100 tokens): Contém os requisitos funcionais agrupados por ator
+
+A lista completa de requisitos é extensa porém bem organizada e estruturada para facilitar o raciocínio do modelo. 
+A formatação é consistente, apresenta o identificador do requisito para ajudar o modelo a identificar padrões.
+
+## Parâmetros do Modelo e Compatibilidade Com A Tarefa
+
+O modelo pode ser ajustado sob alguns aspectos para a tarefa de modelagem:
+
+1. top_p: configuração que tem efeito sobre  a criatividade do modelo
+2. temperature: configuração que tem efeito na diversidade nas respostas
+3. num_predict: configuracao que limita a quantidade de tokens de saída (efeito em respostas infinitas?! quando deixamos ele maior ele ficava misturando respostas antigas com as atuais)
+4. repeat_penalty: configuracao que tem o efeito de evitar repetições de respostas gerada
+
+
+Fiz uma interpretação combinando as diferentes possibilidades de configuração relacionando a tarefa de modelar o diagrama de casos de uso a partir da lista de requisitos.
+Simulei o possivel efeito de diferentes configurações de temperature e top_p e como eles poderiam afetar a geração do diagrama UML, com uma análise dos prováveis efeitos:
+
+## Simulação de Configurações e Efeitos
+
+| Temperature | top_p | Provável Efeito na Geração do Diagrama UML |
+|-------------|-------|-------------------------------------------|
+| 0.2 | 0.8 | **Alta consistência, baixa criatividade**: O modelo provavelmente geraria um diagrama muito literal baseado apenas nos requisitos explícitos, com pouca interpretação de relacionamentos implícitos. Melhor para sintaxe precisa, mas pode perder nuances. |
+| 0.2 | 0.95 | **Alta consistência, criatividade moderada**: Mesmo com temperature baixa, o aumento do top_p permitiria ao modelo considerar mais opções para interpretar relacionamentos entre atores e casos de uso, mantendo alta consistência sintática. |
+| 0.5 | 0.8 | **Consistência moderada, criatividade moderada**: Equilíbrio razoável que permitiria ao modelo alguma interpretação criativa dos relacionamentos implícitos nos requisitos, mantendo boa consistência na estrutura e na sintaxe. |
+| 0.5 | 0.95 | **Consistência moderada, criatividade alta**: O modelo consideraria mais amplamente possíveis relacionamentos e hierarquias entre atores, potencialmente descobrindo conexões não explícitas nos requisitos. |
+| 0.7 | 0.8 | **Consistência baixa-moderada, criatividade moderada**: O modelo poderia começar a incluir estruturas mais elaboradas ou inesperadas, mas ainda limitadas pelo top_p moderado. |
+| 0.7 | 0.95 | **Consistência baixa-moderada, criatividade alta**: O modelo poderia propor estruturas mais complexas e relacionamentos mais elaborados entre casos de uso, potencialmente incluindo relações de extensão ou inclusão não explicitamente mencionadas. |
+| 1.0 | 0.8 | **Consistência baixa, criatividade moderada**: O modelo teria alta liberdade para variar sua saída, mas ainda com algum limite na diversidade de tokens considerados. |
+| 1.0 | 0.95 | **Consistência baixa, criatividade alta**: Máxima liberdade criativa, poderia produzir diagramas com interpretações mais audaciosas dos requisitos, incluindo estruturas complexas de herança e relações entre casos de uso. |
+
+## Interpretação para a tarefa de modelagem
+
+Para a geração de um diagrama UML que seja:
+1. Sintaticamente correto
+2. Semanticamente alinhado com os requisitos
+3. Com capacidade de inferir relações implícitas sem "inventar" elementos
+
+Eu decidi:
+- **Temperature: 0.3-0.4** - Baixa o suficiente para manter consistência na sintaxe PlantUML, mas não tão baixa que impeça a interpretação de relações implícitas
+- **top_p: 0.9** - Elevado o suficiente para permitir ao modelo considerare diversas possibilidades ao modelar relacionamentos entre atores e casos de uso
+
+Com isso a intenção foi de privilegiar a consistência sintática e modelagem adequada das relações entre atores e casos de uso. Assim espero que o  modelo possa até ser capaz de 
+identificar relações implícitas entre os requisitos, entretanto não estou esperando isso no padrão de resposta desejado, é considerado um plus
+
+Esta configuração teve como objetivo configurar e estabilizar o modelo para ser capaz de gerar um diagrama PlantUML válido e capaz de modelar os requisitos no nivel de complexidade das instruçÕes técnicas
+
+O equilíbrio entre baixa temperatura e top_p elevado buscou adequar o modelo para tarefas de modelagem técnica que exigem rigor de sintaxe e criatividade na estrutura semântica.
+
+
+
+
+
+
+
+
+Estes parâmetros são adequados para a tarefa de geração de um diagrama UML, que requer precisão sintática mas também alguma interpretação dos relacionamentos implícitos nos requisitos.
+
+## Conclusão
+
+O prompt está perfeitamente compatível com as configurações de contexto do modelo Qwen2 de 7.6B parâmetros. O tamanho total (~6.800 tokens) está bem abaixo do limite de contexto (32.768), deixando amplo espaço para o modelo processar as informações e gerar uma resposta completa.
+
+A estrutura organizacional, as instruções claras e a formatação consistente também aumentam a probabilidade do modelo gerar um diagrama UML preciso e bem estruturado.

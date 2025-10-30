@@ -1,0 +1,71 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  sysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  financialAdvisor --> FAFR002 : "View Client Intervention Alerts"
+  system --> AIFR006 : "Generate Anomaly Transaction Alerts"
+
+  package Professional {
+    actor Client as c
+    actor SysAdmin as sa
+    actor FinancialAdvisor as faa
+
+    client <|-- (c)
+    sysAdmin <|-- (sa)
+    financialAdvisor <|-- (faa)
+
+    rectangle Professional {
+      usecase "CFR001: View Financial Insights Dashboard" as CFR001
+      usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+      usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+
+      c --> CFR001 : "View"
+      sa --> SAFR001 : "Manage"
+      faa --> FAFR002 : "View"
+
+    }
+  }
+
+  rectangle System {
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    system --> AIFR006 : "Request"
+
+    'System components'
+  }
+}
+
+@enduml
+```
+
+**Explanation of the Diagram Structure:**
+1. **Rectangle System**: Represents the entire system boundary.
+2. **Use Cases Grouped by Actor/Functionality**:
+   - Under `Professional` (a package), three use cases are grouped for clients, sysadmins, and financial advisors.
+     - **Client Use Cases**: View Financial Insights Dashboard (`CFR001`) and Send Feedback (`CFR011`).
+     - **SysAdmin Use Case**: Manage Analysis Parameters (`SAFR001`).
+     - **Financial Advisor Use Cases**: View Client Intervention Alerts (`FAFR002`), View Predictive Analytics (`FAFR003`), Configure Analysis Params for Segments (`FAFR004`).
+   - The `System` component handles generating alerts and requests from AI.
+3. **Relationships**:
+   - Clients interact with the system via use cases like viewing dashboards or receiving recommendations.
+   - SysAdmins manage parameters, ensuring compliance.
+   - Financial Advisors receive insights and alerts to guide clients.
+
+This structure ensures clarity in roles and interactions within the system. Each actor is linked directly to their relevant use cases, maintaining alignment with functional requirements. The `System` component handles AI-generated content, which flows into specific use cases based on user needs or regulatory triggers (e.g., anomaly detection). 
+
+**Key Observations**:
+- Inheritance relationships are implied where an actor extends another's role but aren't explicitly defined here since each has distinct responsibilities.
+- Packages logically group related actors and their associated use cases for better organization.
+
+[Done: True
+Done Reason: stop
+Eval Count: 721]

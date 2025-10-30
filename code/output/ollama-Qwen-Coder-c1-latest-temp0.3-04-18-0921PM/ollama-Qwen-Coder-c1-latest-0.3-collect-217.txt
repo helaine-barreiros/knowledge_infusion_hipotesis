@@ -1,0 +1,86 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+rectangle "System" {
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  
+  rectangle "Client Dashboard Features" {
+    usecase "CFR001: View Financial Insights Dashboard" as CFR001
+    usecase "CFR009: Access Personalized Dashboard" as CFR009
+    
+    CFR001 --> SAFR002 : "View Alerts"
+  }
+  
+  rectangle "Personalization Features" {
+    usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+    usecase "CFR005: Manage Recommendation Preferences" as CFR005
+    
+    SAFR002 --> SFR003 : "Request Predictions"
+  }
+  
+  rectangle "Spending Limits and Alerts" {
+    usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+    usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+    
+    SAFR002 --> SFR004 : "Request Recommendations"
+  }
+  
+  rectangle "Investment Opportunities and News" {
+    usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+    usecase "CFR013: Manage Users' Financial Goals" as CFR013
+    
+    SAFR002 --> SFR005 : "Request Alerts"
+  }
+  
+  rectangle "System Notifications and Feedback" {
+    usecase "SFR018: Generate Client Analytics that Provide Meaningful Insights into Financial Behavior and Performance" as SFR014
+    usecase "CFR11: Send Feedback about System's Recommendations and Insights" as CFR11
+    
+    SAFR002 --> SFR013 : "Request Predictive Insights"
+  }
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  rectangle "Mentoring Sessions and Alerts" {
+    usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+    usecase "SFR007: Request Specific Investment Opportunities from AI Component that Match User Investment Criteria and ESG Preferences" as SFR007
+    
+    SAFR002 --> FAFR001 : "View Alerts"
+  }
+  
+  rectangle "Predictive Analytics and Recommendations" {
+    usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations to Provide Data-Driven Recommendations During Consultations" as FAFR003
+    usecase "SFR016: Request Predictive Insights from AI Component to Enhance the Value of Financial Guidance Provided to Clients" as SFR015
+    
+    SAFR002 --> FAFR003 : "View Analytics"
+  }
+  
+  rectangle "Client Segments and Analysis Parameters" {
+    usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments to Customize the System's Behavior According to Different Client Profiles and Regulatory Requirements Such as GDPR or CCPA" as FAFR004
+    
+    SAFR002 --> SFR015 : "Request Predictive Intervention Analyses"
+  }
+}
+
+package "System Administrator" {
+  actor SysAdmin as SAFR001
+  
+  usecase "SAFR001: Manage Analysis Parameters for the AI System to Ensure Algorithms Remain Accurate, Relevant, and Compliant with Financial Regulations Such As Basel III for Risk Management" as SAFR001
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 849]

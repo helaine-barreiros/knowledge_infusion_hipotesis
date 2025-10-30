@@ -1,0 +1,62 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage AML Alerts" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+
+  Client --> CFR001 : "View Financial Insights"
+  SysAdmin --> SAFR002 : "Manage AML Alerts"
+  Advisor --> FAFR005 : "Schedule Mentoring Sessions"
+
+}
+
+rectangle "Client" {
+  usecase "CFR002: View Anomaly Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+
+}
+
+rectangle "Advisor" {
+  usecase "FAFR001: Manage Client Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: Analyze Predictive Analytics" as FAFR003
+
+}
+
+rectangle "SysAdmin" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  SysAdmin --> SAFR001 : "Manage AI System Params"
+
+}
+
+rectangle "AI" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Issue Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Identify Investment Opportunities" as AIFR004
+  usecase "AIFR005: Analyze Risk Profiles" as AIFR005
+  usecase "AIFR006: Detect Anomalies" as AIFR006
+  usecase "AIFR007: Extract News Insights" as AIFR007
+  usecase "AIFR008: Recommend Interventions" as AIFR008
+}
+
+Client --> CFR002 : "View Anomaly Alerts"
+Client --> CFR003 : "View Financial Predictions"
+Client --> CFR004 : "Receive Personalized Recommendations"
+
+Advisor --> FAFR001 : "Manage Client Sessions"
+Advisor --> FAFR002 : "View Intervention Alerts"
+Advisor --> FAFR003 : "Analyze Predictive Analytics"
+
+SysAdmin --> SAFR001 : "Manage AI System Params"
+
+AIFR001 <|-- AIFR004
+AIFR002 <|-- AIFR005
+AIFR006 <|-- AIFR003
+
+@enduml

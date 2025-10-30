@@ -1,0 +1,49 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR005: Request Spending Limit Alerts Based on Thresholds" as SFR005
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "AIFR006: Generate Investment Opportunity Analyses for Users" as AIFR006
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  FAFR004 <|-- (SAFR001) : "Extends System Admin's Role in Parameter Management for Segments"
+  
+  SFR003 <-- AIFR001 : "Request Predictions from AI Component"
+  SFR005 <-- AIFR006 : "Request Spending Limit Alerts Based on Thresholds"
+
+  client --> SFR012 : "View Client Dashboards"
+}
+
+actor "Client" as client
+actor "System Administrator (SysAdmin)" as SysAdmin
+actor "Financial Advisor (FAFR)" as FAFR
+
+@enduml
+```
+
+**Key Observations:**
+- **Actors:** The diagram includes three main actors: *Client*, *System Administrator (SysAdmin)*, and *Financial Advisor (FAFR)*. These are defined using the `actor` keyword.
+- **Use Cases:** Each functional requirement is mapped to a specific use case in PlantUML notation (`usecase "..." as ...`). For example:
+  - CFR001: View Financial Insights Dashboard
+  - SAFR001: Manage Analysis Parameters (for SysAdmin)
+  - FAFR004: Configure Analysis Parameters for Client Segments (extends SysAdmin's role via inheritance)
+- **Relationships:** Arrows indicate the direction of interaction. For instance, a client can request financial predictions from the AI component (`SFR003`), and similarly, spending limit alerts are requested by `SFR005`. The system administrator manages analysis parameters through `SAFR001`.
+- **Grouping:** Use cases related to clients (e.g., viewing dashboards) are grouped under the client actor. System administrators manage parameters via their own use case.
+- **Extensions and Inheritance:** FAFR004 extends SysAdmin's role in managing analysis parameters, shown with `<|--`.
+
+This structure ensures clarity and alignment with the provided functional requirements while adhering to PlantUML syntax rules. Adjustments can be made based on additional details or evolving requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 654]

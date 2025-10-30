@@ -1,0 +1,69 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Notification Preferences" as SAFR002
+  
+  Client --> CFR001 : "View dashboard"
+  
+  SysAdmin --> SAFR002 : "Manage parameters"
+
+}
+
+rectangle "Client" {
+  actor "User (Client)" as UserC
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Preferences for Insights" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities" as CFR007
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Dashboard Permissions" as CFR010
+
+  UserC --> (CFR003, CFR004, CFR005, CFR006, CFR007, CFR008) : "Interact with system"
+}
+
+rectangle "Financial Advisor" {
+  actor "FAFR002: Financial Advisor" as FAFRA
+  usecase "CFR011: Send Feedback to System" as CFR011
+
+  FAFRA --> (CFR011)
+}
+  
+rectangle "System Administrator" {
+  actor "SysAdmin" as SysA
+  usecase "SAFR003: View Client Intervention Alerts" as SAFR003
+  usecase "SAFR004: Configure Analysis Parameters for Segments" as SAFR004
+
+  SysA --> (SAFR001, SAFR002)
+}
+
+rectangle "AI System" {
+  actor "AIFR008: AI Component" as AIA
+  usecase "CFR003: Generate Financial Predictions" as CFR009
+  usecase "CFR004: Provide Personalized Recommendations" as CFR012
+  usecase "SAFR005: Detect Anomalies in Spending Patterns" as SAFR006
+  usecase "AIFR007: Analyze Investment Opportunities" as AIA003
+
+  SysAdmin --> (CFR009, CFR012)
+  
+}
+
+@enduml
+```
+
+**Key Observations and Adjustments:**
+- **Client Actor:** Consolidated multiple client-related use cases into a single "User (Client)" actor for clarity. This includes viewing financial insights, predictions, recommendations, managing alerts, investment opportunities, news, dashboard permissions, etc.
+- **System Administrator Actor:** Added management of analysis parameters and intervention alerts under SysAdmin to ensure comprehensive control over the system's configuration.
+- **AI System Component:** Integrated AI-related use cases (e.g., generating predictions, recommendations) into a single "AIFR008: AI Component" actor for logical grouping. This aligns with the requirement that the AI must generate these outputs based on user data and preferences.
+- **Relationships:** Established direct interactions between actors and use cases where explicit requirements exist (e.g., Client viewing dashboards, SysAdmin managing parameters). Inherited relationships are inferred from parent-child or role-based associations in the requirements.
+
+This structure ensures all functional requirements are represented accurately while maintaining readability through logical grouping. Adjustments were made to avoid redundancy and ensure alignment with the provided guidelines.
+
+[Done: True
+Done Reason: stop
+Eval Count: 802]

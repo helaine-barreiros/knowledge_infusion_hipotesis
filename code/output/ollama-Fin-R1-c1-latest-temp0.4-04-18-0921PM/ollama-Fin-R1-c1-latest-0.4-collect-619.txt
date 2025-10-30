@@ -1,0 +1,72 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Consolidated Financial Dashboard" as CFR012
+  usecase "SAFR003: Manage Analysis Parameters for AI" as SAFR003
+  usecase "FAFR004: Configure Analysis Params by Client Segment" as FAFR004
+  usecase "SFR008: Request Investment Opportunity Analysis" as SFR008
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+}
+
+actor "Client" as C
+actor "Financial Advisor (FA)" as FADV
+actor "System Administrator (SA)" as SAADM
+
+C --> CFR001 : View financial insights dashboard
+C --> SAFR002 : Manage alert preferences
+C --> CFR003 : View financial predictions
+C --> CFR004 : Receive personalized recommendations
+C --> CFR005 : Manage recommendation preferences
+C --> CFR006 : View spending limit alerts
+C --> FCFR012: Access consolidated financial dashboard (Note: This appears to be a typo in the requirements; "CFR012" is likely intended here)
+FADV --> FAFR004 : Configure analysis parameters by client segment
+SAADM --> SAFR003 : Manage AI system's analysis parameters
+
+rectangle "System Components" {
+  usecase AIFR001: Generate financial predictions
+  usecase AIFR002: Generate personalized recommendations
+  usecase AIFR006: Generate spending limit alerts
+  usecase SFR008: Request investment opportunity analysis from AI
+
+  AIFR001 <|-- SAFR003 : Use case for generating predictions (inherited)
+}
+
+rectangle "Client Interface" {
+  usecase CFR001, CFR002, CFR003, CFR004, CFR005, CFR006, CFR007, FCFR012
+}
+rectangle "System Admin & Advisor Management" {
+  usecase SAFR003, FAFR004
+}
+
+C --> AIFR002 : Receive personalized recommendations (Client receives from system)
+FADV --> AIFR006 : View spending limit alerts for clients (Advisor uses to check client limits)
+SAADM --> SFR019: Maintain historical record of insights
+
+' Note on CFR012: The original requirement mentions "CFR013" but the use case here is labeled as FCFR012, which seems like a typo. Assuming it's intended to be CFR012.
+
+@enduml
+```
+
+**Key Observations and Adjustments:**
+- **Client (C)** interacts with most of the user-facing features.
+- **Financial Advisor (FA)** uses specific use cases related to client mentoring and alerts.
+- **System Administrator (SA)** manages system parameters for compliance and accuracy.
+- The diagram groups similar functionalities under rectangles, such as "Client Interface," "System Admin & Advisor Management," and "System Components."
+- Inheritance relationships are applied where a parent use case extends child functionality. For example, `AIFR001` uses cases from `SAFR003`.
+- A typo in the original requirements for "CFR012" is addressed by assuming it's intended to reference an existing use case (likely CFR007 or another similar ID).
+- Relationships between actors and use cases are defined with arrows, ensuring clarity on who performs which actions.
+
+[Done: True
+Done Reason: stop
+Eval Count: 926]

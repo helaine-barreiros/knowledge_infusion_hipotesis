@@ -1,0 +1,121 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR001
+  
+  usecase "SAFR002: Manage Analysis Parameters for the AI System" as SAFR002
+}
+
+package "Financial Insights & Recommendations" {
+  rectangle "Client Dashboard Features" {
+    usecase "CFR009: Access a Personalized Dashboard that Consolidates Financial Information in a Single View" as CFR009
+    
+    package "Viewing Data and Alerts" {
+      usecase "CFR001: View Financial Insights Dashboard" as CFR001
+      usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+      
+      CFR001 --> SFR013 : "View"
+    }
+    
+    package "Spending Limits and Investment Opportunities" {
+      usecase "CFR006: View Spending Limit Alerts When Exceeding Defined Thresholds in Specific Expense Categories" as CFR006
+      usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+      
+      CFR006 --> SFR013 : "View"
+      CFR007 --> SFR015 : "Generate Insights for"
+    }
+    
+    package "Personalized Recommendations and News" {
+      usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as CFR004
+      usecase "SFR020: Manage User Feedback to Continuously Improve the Quality and Relevance of Financial Insights" as SFR020
+      
+      CFR004 --> SFR013 : "View"
+    }
+  }
+  
+  rectangle "Financial Advisor Features" {
+    usecase "FAFR005: View Client Intervention Alerts When System Detects Patterns Requiring Professional Attention to Proactively Assist Clients with Potential Financial Issues" as FAFR005
+    
+    package "Client Mentoring and Predictive Insights" {
+      usecase "FAFR01: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR01
+      
+      FAFR01 --> SFR026 : "Manage"
+      
+      FAFR005 --> SFR034 : "Generate Recommendations for"
+    }
+    
+    package "Investment Opportunities and Predictive Analytics" {
+      usecase "FAFR007: View Predictive Insights from the AI Component to Enhance the Value of Financial Guidance Provided to Clients" as FAFR007
+      
+      FAFR007 --> SFR016 : "Generate"
+    }
+  }
+  
+  rectangle "System Features" {
+    usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles to Support Better Financial Decision-Making" as SFR002
+    usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance as Defined by Industry Standards Like FINRA Guidelines" as AIFR002
+    
+    package "Alerts and Notifications" {
+      usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+      usecase "AIFR006: Generate Anomaly Transaction Alerts by Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance with FinCEN Requirements" as AIFR006
+      
+      SFR013 --> CFR002 : "Deliver"
+    }
+    
+    package "Predictive Insights and Analytics" {
+      usecase "SFR014: Generate Client Analytics That Provide Meaningful Insights into Financial Behavior and Performance" as SFR014
+      usecase "AIFR009: Generate Client Predictive Insights that Provide Forward-Looking Analysis of Financial Situations to Support More Effective Financial Planning" as AIFR009
+      
+      SFR014 --> CFR002 : "Deliver"
+    }
+    
+    package "Financial Health and Recommendations Management" {
+      usecase "SFR017: Generate Financial Health Reports That Assess Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as SFR017
+      usecase "AIFR004: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations from Established Spending Patterns" as AIFR004
+      
+      SFR017 --> CFR002 : "Deliver"
+    }
+  }
+}
+
+rectangle "System Components and Services" {
+  usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+  usecase "SFR026: Manage Client Mentoring Sessions Based on System-Generated Insights" as SFR026
+  
+  package "News Processing" {
+    usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as AIFR007
+    usecase "SFR019: Maintain a Historical Record of Users' Insights to Enable Trend Analysis and Effectiveness Measurement" as SFR019
+    
+    AIFR007 --> CFR002 : "Deliver"
+  }
+  
+  package "Predictive Intervention Recommendations" {
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations by Identifying Patterns That Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR008
+    usecase "SFR015: Request Predictive Intervention Analyses from the AI Component to Identify When Financial Advisors Should Engage with Clients" as SFR015
+    
+    AIFR008 --> CFR002 : "Deliver"
+  }
+}
+
+CFR009 --> FAFR003
+FAFR007 --> AIFR004
+
+SFR013 <|-- (Client)
+SFR013 <|-- (FinancialAdvisor)
+SFR015 <|-- (SystemAdministrator)
+
+@enduml

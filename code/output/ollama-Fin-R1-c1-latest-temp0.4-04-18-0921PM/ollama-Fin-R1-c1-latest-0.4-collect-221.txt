@@ -1,0 +1,65 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  user --> CFR001 : View financial data and insights\n(Financial Advisor, Client)
+  
+  SysAdmin -> SAFR001 : Manage system parameters (Financial Administrator)
+
+  FAFR002 <|-- SFR013 : Alert management
+  AIFR006 <|-- SFR013 : Alert generation
+
+}
+
+rectangle "Client" {
+  user as Client
+  
+  Client --> CFR001 : View financial insights\n(Financial Advisor, System)
+  
+  Client -> FAFR002 : Receive client intervention alerts (Financial Advisor)\n
+}
+ 
+rectangle "Financial Advisor" {
+  user as FinancialAdvisor
+
+  FinancialAdvisor -->> SFR007 : Request investment opportunities analysis\n(Generate personalized recommendations)
+}
+
+rectangle "System Administrator" {
+  SysAdmin
+  
+  SysAdmin --> SAFR001 : Manage system parameters (AI, System)\n
+}
+ 
+@enduml
+```
+
+**Description:**
+- **Client**: Can view financial insights dashboards (`CFR001`), receive alerts like transactional anomalies (`FAFR002`) and personalized recommendations (`SFR007`). They can also manage their relationship with advisors (`SAFR005`).
+- **Financial Advisor (User)**: Receives client intervention alerts, requests investment opportunities analysis from the system.
+- **System Administrator**: Manages AI parameters via `SAFR001`.
+- **Use Cases**:
+  - `CFR001`: Client views financial insights.
+  - `FAFR002`: Financial Advisor receives transactional anomaly alerts.
+  - `SFR007`: System generates investment opportunities for clients based on risk profiles (`AIFR004`).
+- **System**: Manages system parameters, requests AI-generated services (e.g., recommendations, spending limits), and handles alert generation.
+
+This diagram groups related use cases under their respective actors/subsystems to maintain clarity. Relationships between entities are clearly defined using arrows and labels. Actors like `Client`, `Financial Advisor`, and `SysAdmin` are linked appropriately with the relevant use cases they interact with. The system boundary is represented by a rectangle containing all internal components (use cases, relationships). 
+
+**Key Observations:**
+- Inheritance (`<|--`) shows how certain use cases extend or relate to others.
+- Relationships between actors and systems ensure that interactions align with functional requirements.
+- Packages are used implicitly within the `System` boundary for organizational purposes.
+
+[Done: True
+Done Reason: stop
+Eval Count: 664]

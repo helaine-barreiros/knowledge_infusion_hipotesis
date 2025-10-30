@@ -1,0 +1,82 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFD002
+  
+  Client --> (CFR001)
+  SysAdmin --> (SAFR001)
+  Financial Advisor --> (FAFD002)
+}
+
+rectangle "Client Dashboard Features" {
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+  
+  Client --> (CFR009)
+  Client --> (CFR010)
+}
+
+rectangle "Financial Insights Features" {
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  
+  Client --> (CFR002)
+  Client --> (CFR003)
+  Client --> (CFR004)
+}
+
+rectangle "Financial Advisor Features" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFD001
+  usecase "FAFR003: View Predictive Analytics" as FAFD003
+  
+  Financial Advisor --> (FAFD001)
+  Financial Advisor --> (FAFD003)
+}
+
+rectangle "System Features" {
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  
+  System Admin --> (SAFR001)
+  Financial Advisor --> (FAFD003)
+  Client --> (SFR002)
+  
+  SFR002 <|-- (AIFR002)
+}
+
+rectangle "AI Component Features" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  
+  System Admin --> (SAFR001)
+  Financial Advisor --> (FAFD002)
+  
+  SFR005 <|-- (AIFR003)
+  SFR006 <|-- (AIFR004)
+}
+
+rectangle "News and Analytics Features" {
+  usecase "CFR008: View News Related to Investment Portfolio" as CFR008
+  usecase "SFR017: Generate Financial Health Reports" as SFR017
+  
+  Client --> (CFR008)
+  System Admin --> (SFR017)
+}
+
+rectangle "Feedback Features" {
+  usecase "CFR11: Send Feedback about Recommendations and Insights" as CFR11
+  
+  Client --> (CFR11)
+}
+@enduml

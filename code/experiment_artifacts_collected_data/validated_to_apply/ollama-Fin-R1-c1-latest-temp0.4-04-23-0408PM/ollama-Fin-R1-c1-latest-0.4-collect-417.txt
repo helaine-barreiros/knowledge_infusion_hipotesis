@@ -1,0 +1,151 @@
+```plantuml
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA
+}
+
+package "System Administrator" {
+  actor SysAdmin as SA
+}
+
+rectangle "System" {
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  
+  C --> CFR001 : View Financial Insights Dashboard
+  SA --> SAFR001 : Manage System's Analysis Parameters
+  FA --> FAFR004 : Configure Analysis for Segments
+}
+
+rectangle "AI Component - AIFR" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Identify Investment Opportunities" as AIFR004
+  usecase "AIFR005: Align Investments with Risk Profiles" as AIFR005
+  usecase "AIFR006: Detect Anomaly Transactions" as AIFR006
+  usecase "AIFR007: Extract Contextual News Insights" as AIFR007
+  
+  
+  CFR001 <|-- (CFR001) : Use Predictions and Recommendations from AI
+  SAFR001 --> AIFR002 : Configure Parameters for AI's Recommendation Generation
+}
+
+rectangle "System - SFR" {
+  usecase "SFR008: Request Anomaly Alerts" as SFR008
+  usecase "SFR009: Find Contextual News" as SFR009
+  usecase "SFR13: Generate Client Analytics" as SFR13
+  
+  
+  SA --> SAFR001 : Manage System's Analysis Parameters (via AIFR)
+}
+
+rectangle "User Feedback - CFR011" {
+  usecase "CFR011: Send User Feedback" as CFR011
+}
+
+// Relationships between components and system
+
+AIFR001 <|-- SFR003 : Provide Predictions to System for Recommendations
+AIFR002 <|-- AIFR004 : Generate Personalized Recs Based on Profiles
+AIFR003 --> CFR006 : Send Spending Limit Alerts (via SFR)
+AIFR004 --> SFR10: Identify Investment Opportunities (via AIFR)
+AIFR005 <|-- AIFR007 : Align Investments with Risk Profiles for News Insights
+AIFR008 <|-- SFR12: Generate Intervention Recommendations
+
+@enduml
+```
+
+This PlantUML code represents the use case diagram based on provided functional requirements. The system is structured into packages for Clients, Financial Advisors, System Administrators, and components like AI (AIFR), System Functions (SFR), and User Feedback (CFR011). Actors are linked to their respective use cases with appropriate relationships. Relationships between the components ensure data flow from input requests through processing by AIFR and SFR modules back to clients or advisors for action. The diagram adheres strictly to requirement IDs and names, ensuring precision in representation. 
+
+**Key Observations:**
+1. **Client Interactions:** CFR001 (financial dashboard), CFR002 (alerts), etc., are directly tied to the Client actor.
+2. **System Administrator Actions:** SAFR001 manages analysis parameters for AIFR and SFR components.
+3. **Financial Advisor Activities:** FAFR-related use cases involve client mentoring, alerts, and predictive analyses.
+4. **AI Component (AIFR):** Central processing unit generating predictions, recommendations, alerts, etc., which are distributed via SFR to clients/advisors.
+5. **System Functions (SFR):** Handles requests from AIFR and other components like news finding or alert generation.
+
+The structure ensures clarity in how different actors interact with the system through various use cases, maintaining alignment with functional requirements. Adjustments may be needed based on further analysis of dependencies not explicitly stated here but inferred logically. 
+
+\boxed{UseCaseDiagram}
+```plantuml
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA
+}
+
+package "System Administrator" {
+  actor SysAdmin as SA
+}
+
+rectangle "System" {
+
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  
+  C --> CFR001 : View Financial Insights Dashboard
+  SA --> SAFR001 : Manage System's Analysis Parameters
+  FA --> FAFR004 : Configure Analysis for Segments
+
+}
+
+rectangle "AI Component - AIFR" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Identify Investment Opportunities" as AIFR004
+  usecase "AIFR005: Align Investments with Risk Profiles" as AIFR005
+  usecase "AIFR006: Detect Anomaly Transactions" as AIFR006
+  usecase "AIFR007: Extract Contextual News Insights" as AIFR007
+  
+  
+  CFR001 <|-- (CFR001) : Use Predictions and Recommendations from AI
+  SAFR001 --> AIFR002 : Configure Parameters for AI's Recommendation Generation
+
+}
+
+rectangle "System - SFR" {
+  usecase "SFR008: Request Anomaly Alerts" as SFR008
+  usecase "SFR009: Find Contextual News" as SFR009
+  usecase "SFR13: Generate Client Analytics" as SFR13
+  
+  
+  SA --> SAFR001 : Manage System's Analysis Parameters (via AIFR)
+}
+
+rectangle "User Feedback - CFR011" {
+  usecase "CFR011: Send User Feedback" as CFR011
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1573]

@@ -1,0 +1,85 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FinancialAdvisor
+:System: as Sys
+:AIFR001: as AIFR001
+:AIFR002: as AIFR002
+:AIFR003: as AIFR003
+:AIFR004: as AIFR004
+:AIFR005: as AIFR005
+:AIFR006: as AIFR006
+:AIFR007: as AIFR007
+:AIFR008: as AIFR008
+:AIFR009: as AIFR009
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  Client --> (SFR012)
+  Client --> (AIFR004)
+  Client --> (AIFR005)
+  Client --> (AIFR006)
+  Client --> (AIFR007)
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  FinancialAdvisor --> (SFR016)
+  FinancialAdvisor --> (AIFR009)
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  SystemAdmin --> (SAFR001)
+}
+
+rectangle "AI Component" {
+  AIFR001 <|-- (SFR003)
+  AIFR002 <|-- (AIFR004)
+  AIFR002 <|-- (AIFR005)
+  AIFR006 <|-- (SAFR008)
+  AIFR007 <|-- (SFR013)
+  AIFR008 <|-- (FAFR004)
+}
+
+rectangle "System" {
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR009: Find Contextualized News Relevant to Portfolio" as SFR009
+  
+  System --> (AIFR001)
+  System --> (AIFR003)
+  System --> (AIFR006)
+  System --> (AIFR007)
+}
+
+rectangle "Feedback Loop" {
+  usecase "CFR11: Send Feedback" as CFR11
+  
+  Client --> (CFR11)
+  FinancialAdvisor --> (CFR11)
+  SystemAdmin --> (CFR11)
+  
+  CFR11 --> (AIFR004)
+  CFR11 --> (AIFR005)
+  CFR11 --> (SFR020)
+}
+
+@enduml

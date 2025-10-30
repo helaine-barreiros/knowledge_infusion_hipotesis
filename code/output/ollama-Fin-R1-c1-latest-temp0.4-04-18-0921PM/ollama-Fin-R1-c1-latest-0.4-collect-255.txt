@@ -1,0 +1,79 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin -> SAFR001 : "Manage System Parameters"
+  SysAdmin -> FAFR004 : "Configure Analysis Parameters"
+
+  rectangle "Client Interface" {
+    user --> CFR001
+    user --> SFR012: "Generate Client Dashboards"
+    user --> SFR013: "Generate Alerts Based on Predefined Conditions"
+    user --> SFR019: "Maintain Historical Record of Insights"
+
+    client -> FAFR004 : "Request Analysis Parameter Configurations for Segments"
+  }
+
+  rectangle "Financial Advisor Interface" {
+    advisor --> FAFR002: "View Client Intervention Alerts"
+    advisor --> FAFR003: "View Predictive Analytics About Clients' Financial Situations"
+    advisor --> FAFR004 : "Configure Analysis Parameters for Segments"
+
+    client -> FAFR001 : "Request Anomaly Transaction Alerts (via System)"
+  }
+
+  rectangle "System Admin Interface" {
+    SysAdmin --> SAFR001: "Manage AI System Parameters"
+    SysAdmin --> AIFR002: "Generate Personalized Recommendations for Users"
+
+    client -> FAFR004 : "Request Analysis Parameter Configurations (via System)"
+  }
+
+  rectangle "AI Component Interface" {
+    system --+> AIFR001: "Analyze Historical Data, Market Trends"
+    system --+> AIFR002: "Generate Personalized Recommendations"
+    system --> AIFR003: "Identify Unusual Spending Patterns for Alerts"
+    system --> AIFR004: "Evaluate Investments Against Risk Profiles"
+    system --> AIFR005: "Identify Financial Instruments Aligning with Strategies"
+    system --> AIFR006: "Detect Anomalous Transactions via Pattern Recognition"
+    system --+> AIFR007: "Correlate News With Portfolios for Insights"
+    system --> AIFR008: "Recommend Interventions Based on Client Patterns"
+    system --> AIFR009: "Provide Forward-Looking Analysis of Financial Situations"
+
+  }
+
+}
+
+@enduml
+```
+
+**Key Observations and Explanations:**
+1. **System Boundary**: The entire diagram is enclosed within a rectangle labeled "System" to denote the scope.
+2. **Actors**: 
+   - `client`: Represents both Client, Financial Advisor (FA), and System Administrator (SA) roles as per requirement generalization.
+   - `SysAdmin`, `advisor` are specialized actors for administrative and advisory actions respectively.
+3. **Use Cases**:
+   - CFR001–CFR011: All client-related use cases grouped under "Client Interface".
+   - SAFR001, FAFR004 (related to system administration): Grouped under "System Admin Interface" for administrative tasks.
+   - AIFR series: AI-specific operations within the "AI Component Interface".
+4. **Relationships**:
+   - Direct client interactions with the system via use cases like viewing dashboards or receiving alerts.
+   - Administrative actions (e.g., managing parameters) involve SysAdmin and FAFR004.
+5. **Inheritance/Delegation**: Not explicitly shown, but implied through role-based access (e.g., advisors using some of the same interfaces as clients).
+6. **Grouping**:
+   - Logical grouping by interface type (Client, Advisor, Admin) simplifies navigation.
+
+This structure ensures clarity in mapping functional requirements to use cases and their actors while adhering strictly to PlantUML syntax rules. Adjustments can be made based on further analysis or specific organizational structures not captured here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 895]

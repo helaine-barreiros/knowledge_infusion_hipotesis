@@ -1,0 +1,83 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  client --> CFR001 : "Client wants to view financial insights."
+  
+  SysAdmin --> SAFR001 : "System Administrator manages analysis parameters."
+
+  FinancialAdvisor --> FAFR003 : "Financial Advisor views predictive analytics for clients."
+
+  System --> SFR012 : "System generates client dashboards based on data requests."
+
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+  System --> AIFR001 : "System requests financial predictions."
+  
+  System --> AIFR004 : "System requests investment opportunity analyses."
+
+}
+
+rectangle "Notification Component" {
+  usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+  usecase "AIFR006: Generate Spending Limit Alerts" as AIFR006
+
+  System --> SFR008 : "System requests anomaly transaction alerts."
+  
+  System --> AIFR006 : "AI system generates spending limit alerts."
+
+}
+
+rectangle "News Component" {
+  usecase "SFR019: Generate Financial Health Reports" as SFR019
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+  System --> SFR019 : "System requests financial health reports."
+  
+  System --> AIFR007 : "AI system generates contextualized news insights."
+
+}
+
+rectangle "User Feedback Component" {
+  usecase "CFR011: Send User Feedback" as CFR011
+}
+
+client --> CFR011 : "Client provides feedback to improve the system."
+@enduml
+```
+
+### Explanation:
+- **System**: Contains core functionalities like generating dashboards, managing parameters, and requesting data from AI components.
+- **AI Component**: Handles predictions, investment analyses, anomaly detection, etc., using machine learning algorithms.
+- **Notification Component**: Manages alerts (spending limits, transaction anomalies).
+- **News Component**: Fetches and contextualizes financial news relevant to user portfolios.
+- **User Feedback Component**: Allows clients to provide feedback for system improvement.
+
+### Key Relationships:
+1. **Client** interacts with the System via `CFR001` (`View Financial Insights Dashboard`) directly or indirectly through other use cases (e.g., receiving alerts, viewing dashboards).
+2. **SysAdmin** manages parameters in `SAFR001`.
+3. **FinancialAdvisor** uses predictive analytics from `FAFR003` and receives contextualized news insights via the News Component.
+4. The System requests data/services from various components (e.g., AI for predictions, alerts) to fulfill client needs.
+
+### Diagram Structure:
+- Use cases are grouped into logical categories based on their function (financial insight generation, parameter management, etc.).
+- Actors (`client`, `SysAdmin`, `FinancialAdvisor`) connect directly or indirectly with the System and its components through use case interactions.
+- Components like AI, News, Notifications are encapsulated within rectangles to show interdependencies.
+
+This structure ensures clarity in understanding how different actors interact with various system functionalities and components. Adjustments can be made based on further requirements analysis if needed.
+
+[Done: True
+Done Reason: stop
+Eval Count: 827]

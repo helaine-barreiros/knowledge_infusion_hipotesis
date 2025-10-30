@@ -1,0 +1,66 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage AML Alerts" as SAFR002
+  usecase "SFR003: Request Predictive Analytics from AI" as SFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+  Client --> CFR001 : "View Financial Insights"
+  
+  SysAdmin -> SAFR002 : "Manage Analysis Parameters (Regulatory)"
+
+  System --> SFR003 : "Request Predictive Analytics"
+
+  AIComponent <|-- AIFR004 : "Generate Investment Opportunity Analyses"
+
+}
+
+rectangle "Client" {
+  actor Client as c
+  usecase CFR001, SAFR002, FAFR001, FAFR003, SFR008, SFR009, SFR017
+
+  c --> CFR001 : "View Financial Insights"
+  
+}
+
+rectangle "Financial Advisor" {
+  actor FinancialAdvisor as f
+  usecase FAFR002, FAFR004, AIFR003
+  
+  f --> FAFR002 : "Manage Client Mentoring Sessions"
+  f --> FAFR004 : "View Predictive Analytics for Clients"
+
+}
+
+rectangle "System Administrator" {
+  actor SysAdmin as s
+  usecase SAFR001, SFR005
+
+  s -> SAFR001 : "Manage Analysis Parameters (Regulatory)"
+  
+}
+
+@enduml
+```
+
+### Explanation:
+- **Client**: Can view financial insights dashboards and receive various alerts. They also manage their recommendations preferences.
+- **Financial Advisor**: Manages client mentoring sessions, views predictive analytics about clients' financial situations, and reviews system-generated intervention alerts.
+- **System Administrator**: Configures analysis parameters for the AI to ensure regulatory compliance (e.g., Basel III).
+- **AI Component**: Generates predictions, personalized recommendations, spending limit alerts, investment opportunity analyses, anomaly transaction alerts, contextualized news insights, etc.
+
+### Key Relationships:
+1. **Client** interacts with multiple use cases directly.
+2. **Financial Advisor** and **System Administrator** have specific interactions tied to their roles (e.g., FAFR004 for advisors vs. SAFR001/SFR005 for admins).
+3. The system itself requests data from the AI component via SFR003, which drives other use cases like AIFR004.
+
+This structure ensures clarity in role-specific interactions and dependencies within the system. Adjustments can be made if additional relationships or actors are required based on further analysis of requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 618]

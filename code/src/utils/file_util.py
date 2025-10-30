@@ -5,7 +5,7 @@ from openpyxl.utils.dataframe import dataframe_to_rows
 
 import os
 import pandas as pd
-
+import json
 
 class FileUtil:
     """
@@ -56,8 +56,28 @@ class FileUtil:
         output_file = os.path.join(output_directory, filename)
 
         try:
-            with open(output_file, 'w', encoding='utf-8') as file:
-                file.write(content)
+            if filename.endswith('.md') and isinstance(content, dict):
+                content = json.dumps(content, indent=4)
+                mode = 'w'
+                encoding = 'utf-8'
+            elif filename.endswith(('.txt', '.md', '.puml')) and isinstance(content, str):
+                mode = 'w'
+                encoding = 'utf-8'
+            elif filename.endswith(('.png', '.xlsx')) and isinstance(content, bytes):
+                mode = 'wb'
+                encoding = None
+            else:
+                raise ValueError("Unsupported file type or content type mismatch.")
+
+            with open(output_file, mode, encoding=encoding) as file:
+                if mode == 'w':
+                    if isinstance(content, dict):
+                        json.dump(content, file, indent=4)
+                    else:
+                        file.write(str(content))
+                else:  # modo binário
+                    file.write(content)
+
 
             self.LOGGER.info(f"File saved successfully at: {output_file}")
 

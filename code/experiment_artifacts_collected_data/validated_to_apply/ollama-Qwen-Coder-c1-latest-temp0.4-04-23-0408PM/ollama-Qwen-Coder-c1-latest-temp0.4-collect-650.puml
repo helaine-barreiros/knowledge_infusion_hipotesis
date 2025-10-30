@@ -1,0 +1,59 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR005: Manage Recommendations Preferences" as SAFR005
+  
+  Client --> CFR001
+  Client -> (SAR)
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  
+  FinancialAdvisor --> FAFR002
+  FinancialAdvisor -> (SAR)
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Client Segments" as FAFR004
+  
+  SystemAdmin --> SAFR001
+  SystemAdmin -> (SAR)
+}
+
+rectangle "System" {
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "SFR004: Request Personalized Recommendations" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  System --> (SAR)
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunities" as AIFR005
+  
+  AIComponent --> (SAR)
+}
+
+rectangle "Alerts and Recommendations Requester" {
+  usecase "SFR013: Deliver Client Alerts" as SFR013
+  usecase "SFR020: Manage User Feedback" as SFR020
+  
+  SAR --> SFR013
+  SAR -> SFR020
+}
+
+@enduml

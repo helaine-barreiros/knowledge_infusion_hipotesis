@@ -1,0 +1,65 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  client --> CFR001 : "Client requests financial insights dashboard"
+  
+  SysAdmin --> SAFR001 : "System Administrator manages analysis parameters"
+
+  user --> FAFR003 : "User (Client, Advisor) views predictive analytics for clients"
+  
+  system --> SFR012 : "System generates client dashboards based on data and recommendations"
+
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+  system --> AIFR001 : "System requests financial predictions from AI"
+  
+  user --> AIFR004 : "User (Client, Advisor) views investment opportunity analyses"
+
+}
+
+rectangle "Notification System" {
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  system --> SFR003 : "System requests financial predictions"
+  
+  client --> AIFR006 : "Client receives anomaly transaction alerts"
+
+}
+
+rectangle "User Management System" {
+  usecase "CFR011: Send Feedback to the System" as CFR011
+  SysAdmin <|-- SAFR005 : "Sys Admin configures system for user preferences"
+  
+  client --> CFR011 : "Client provides feedback on recommendations and insights"
+
+}
+
+@enduml
+```
+
+**Key Observations:**  
+
+- **Actors**: The main actors are categorized into three groups: *Clients*, *System Administrators (SysAdmin)*, and *Users* (which includes both Clients and Financial Advisors).  
+- **Use Cases**: Each functional requirement corresponds to a specific use case. For example, CFR001 is represented as "View Financial Insights Dashboard," while SAFR001 represents managing analysis parameters by the SysAdmin.  
+- **System Boundaries**: The system encompasses components like AI generation (AIFR), financial prediction requests (SFR003), and client dashboards (SFR012).  
+- **Relationships**: Arrows indicate interactions between actors, use cases, and systems. For instance, the Client sends feedback to the System via CFR011, while SysAdmin configures parameters through SAFR005.  
+
+This diagram ensures all requirements are mapped accurately with their respective IDs and relationships. Adjustments can be made based on further clarifications or additional details in the requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 671]

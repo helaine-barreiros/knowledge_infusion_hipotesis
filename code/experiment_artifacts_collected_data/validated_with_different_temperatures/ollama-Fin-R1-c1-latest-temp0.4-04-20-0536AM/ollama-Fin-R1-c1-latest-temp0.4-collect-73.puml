@@ -1,0 +1,76 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor FinancialAdvisor as advisor
+actor SysAdmin as sysadmin
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as cfr001
+  usecase "SAFR001: Manage Analysis Parameters" as safr001
+  usecase "FAFR002: View Client Intervention Alerts" as fafr002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as sfr013
+
+  client --> cfr001 : "View Financial Insights Dashboard"
+  sysadmin --> safr001 : "Manage Analysis Parameters"
+}
+
+rectangle "AI System" {
+  usecase "AIFR007: Generate Contextualized News Insights" as aifr007
+  usecase "SFR008: Request Investment Opportunity Analysis from AI Component" as sfr008
+
+  client --> aifr007 : "Request Contextualized News"
+}
+
+rectangle "Client-Dashboard Generation" {
+  usecase "SFR012: Generate Client Dashboards" as sfr012
+  cfr001 <|-- sfr012 : "Consolidate Financial Information"
+
+  client --> sfr012 : "View Personalized Dashboard"
+}
+
+rectangle "Client-Feedback Management" {
+  usecase "CFR011: Send Feedback to Improve System Outputs" as cfr011
+  sysadmin <|-- cfr011 : "Review and Act on Client Feedback"
+
+  client --> cfr011 : "Provide Feedback"
+}
+
+rectangle "System-Parameter Management" {
+  usecase "SFR020: Manage User Feedback to Improve Quality of Insights" as sfr020
+  sysadmin <|-- sfr020 : "Improve System Based on Feedback"
+
+  client --> cfr011 : "Provide Feedback"
+}
+
+rectangle "System-Intervention Alerts" {
+  usecase "SFR015: Request Predictive Intervention Analyses from AI Component" as sfr015
+  sysadmin <|-- sfr015 : "Engage Financial Advisors"
+
+  client --> cfr002 : "Receive Anomaly Transaction Alerts"
+}
+
+rectangle "Client-News Access" {
+  usecase "SFR009: Request Contextualized News Insights from AI Component" as sfr009
+  aifr007 <|-- sfr009 : "Extract Relevant Financial News"
+
+  client --> sfr009 : "View Portfolio-Relevant News"
+}
+
+rectangle "Client-Recommendation Management" {
+  usecase "SFR014: Generate Client Analytics for Insights" as sfr014
+  aifr002 <|-- sfr014 : "Provide Predictive Analysis"
+
+  client --> sfr014 : "View Financial Health Reports"
+}
+
+rectangle "Client-Goal Tracking" {
+  usecase "SFR018: Manage Users' Financial Goals to Track Progress" as sfr018
+  sysadmin <|-- sfr018 : "Adjust Goals Based on Feedback"
+
+  client --> cfr011 : "Provide Feedback"
+}
+
+@enduml

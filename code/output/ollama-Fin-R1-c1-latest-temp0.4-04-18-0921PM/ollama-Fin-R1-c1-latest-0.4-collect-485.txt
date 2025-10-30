@@ -1,0 +1,56 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Receive Anomalous Transaction Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Portfolio News" as CFR008
+  usecase "CFR009: Consolidated Financial Dashboard" as CFR010
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+  
+  SysAdmin --> SAFR002 : Configure analysis parameters for fraud detection (SAFR007)
+  
+  Client --> CFR001, CFR003, CFR004, CFR005, CFR006, CFR007, CFR008, CFR009, CFR010
+  FinancialAdvisor --> FAFR002 : Manage client mentoring sessions (FAFR001)
+  
+  SysAdmin <|-- SAFR001 : System Admin manages analysis parameters
+  
+  Client -->> SFR005 : Receive spending limit alerts (SFR006, AIFR003)
+  FinancialAdvisor --> FAFR004 : View client-specific analytics
+  Client --> CFR002: Receive FATF-compliant transaction alerts via SFR018
+  
+  SysAdmin -->> SAFR007 : Request anomaly detection (AIFR006, AFRS003)
+  
+  System -->> AIFR009 : Generate predictive interventions based on client data
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Actors**: The main actors are "Client," "SysAdmin" ("System Administrator"), and "FinancialAdvisor." Each has specific use cases they interact with.
+- **Use Cases**:
+  - Clients can view dashboards, receive alerts (e.g., transactional or spending), make predictions, get recommendations, manage preferences, etc. (`CFR001` to `CFR010`).
+  - SysAdmins handle system-level tasks like managing analysis parameters for fraud detection and anomaly recognition.
+  - Financial Advisors focus on client mentoring sessions (e.g., FAFR002), viewing alerts/interventions (FAFR003, SAFR007), etc. (`FAFR001` to `FAFR004`).
+- **System Components**: The system includes components like the AI (`AIFR00X`) and its interactions with clients/financial advisors through services like SFR00X.
+- **Inheritance/Subsystem Grouping**:
+  - SysAdmin extends SAFR001 (Manage Analysis Parameters) for fraud/anomaly detection setup.
+  - Client use cases are grouped under "System" as they all involve interaction with the system’s features.
+
+### Notes:
+- Relationships between actors and use cases follow the requirements. For example, clients can view their dashboard (`CFR001`), while SysAdmins configure parameters for anomaly detection (SAFR007).
+- The diagram includes interactions like `Client --> SFR005 : Receive spending limit alerts`, which ties into AIFR003 generating such alerts.
+- Financial Advisors use FAFR004 to view client-specific analytics, which might be derived from system-generated insights.
+
+[Done: True
+Done Reason: stop
+Eval Count: 835]

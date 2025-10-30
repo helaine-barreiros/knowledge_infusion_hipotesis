@@ -1,0 +1,73 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+}
+
+package "System Administrator" {
+  actor SysAdmin as SAFR003
+}
+
+rectangle "User Interface" {
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "SAFR005: Manage Analysis Parameters Preferences" as SAFR012
+  
+  CFR001 --> CFR009
+  FAFR002 --> SAFR012
+}
+
+rectangle "Alerts and Notifications" {
+  usecase "SFR003: Deliver Alerts to Users" as SFR004
+  usecase "SAFR008: Request Anomaly Transaction Alerts from AI Component" as AIFR006
+  
+  CFR001 --> SFR004
+  FAFR002 --> SFR004
+  SAFR003 --> SFR004
+}
+
+rectangle "Personalized Recommendations and Insights" {
+  usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR015
+  usecase "SAFR007: Request Investment Opportunity Analysis from AI Component" as AIFR003
+  
+  CFR001 --> SFR015
+  FAFR002 --> SFR015
+}
+
+rectangle "Financial Predictions and Analytics" {
+  usecase "SFR001: Deliver Financial Predictions to Users" as SFR007
+  usecase "SAFR004: Request Client Intervention Alerts from AI Component" as AIFR008
+  
+  CFR001 --> SFR007
+  FAFR002 --> SFR007
+}
+
+rectangle "Spending Limits and Budget Management" {
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR013
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as AIFR004
+  
+  CFR001 --> SFR005
+}
+
+rectangle "Investment Opportunities and Diversification" {
+  usecase "CFR012: View Investment Opportunities Suitable to My Risk Profile" as CFR016
+  usecase "SFR009: Request Contextualized News Insights from AI Component" as AIFR007
+  
+  CFR001 --> SFR009
+}
+
+rectangle "System Management and Feedback" {
+  usecase "CFR11: Send Feedback about System's Recommendations and Insights" as CFR024
+  
+  CFR001 --> CFR024
+  FAFR002 --> CFR024
+  SAFR003 --> CFR024
+}
+
+@enduml

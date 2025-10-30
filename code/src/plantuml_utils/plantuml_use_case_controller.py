@@ -3,9 +3,18 @@ from plantuml import PlantUML
 from src.utils.system_parametrization import SYSTEM_CONFIG
 from src.utils.logger import Logger
 from src.plantuml_utils.plantuml_parser_use_case import PlantUMLUseCaseParser
+from openpyxl import load_workbook
+from collections.abc import Mapping
+import pandas as pd
+from io import BytesIO
+from collections.abc import Mapping
 
 import io
+import os
 import pandas as pd
+import re
+import json
+from typing import List, Dict
 
 
 class PlantUMLUseCaseController:
@@ -19,13 +28,9 @@ class PlantUMLUseCaseController:
 
     def __init__(self, *args, **kwargs):
         if not hasattr(self, "initialized"):
-            """
-            Initializes the PlantUMLUseCaseController class.
-            """
             self.LOGGER = Logger
             self.PLANT_UML_URL = SYSTEM_CONFIG.get("artifacts.plantuml_png_url", "http://www.plantuml.com/plantuml/png/")
             self.PLANTUML_SERVER = PlantUML(url=self.PLANT_UML_URL)
-            self.parser = PlantUMLUseCaseParser()
             self.initialized = True
 
     def extract_plantuml_use_case_code(self, text_with_code: str) -> str:
@@ -82,6 +87,7 @@ class PlantUMLUseCaseController:
             - The method does not raise exceptions and is safe to call with invalid or empty input.
             - The image is generated using the PlantUML server and returned as a byte array.
         """
+
         diagram_image = None
 
         try:
@@ -89,128 +95,61 @@ class PlantUMLUseCaseController:
             diagram_image = self.PLANTUML_SERVER.processes(extracted_code)
 
         except Exception as e:
-            self.LOGGER.critical(f"Failed to generate diagram image: {str(e)}")
+            self.LOGGER.info(f"Could not generate diagram image: {str(e)}")
 
         return diagram_image
 
-    def extract_plantuml_use_case_components(self, plantuml_code):
-        """
-        Extracts components and their counts from a given PlantUML use case diagram code.
+    def generate_overall_diagrams_evaluation_markdown_report(self, data_objects):
+        if not data_objects:
+            return "# COLLECTED DATA DETAILED REPORT\n\nNo data available."
 
-        Args:
-            plantuml_code (str): The PlantUML code to analyze. If no code is provided,
-                                the method will return None.
+        # Ordena colunas de forma consistente
+        keys = list(data_objects[0].keys())
 
-        Returns:
-            Dict[str, List[Dict[str, Any]]]: A dictionary containing the extracted components,
-            or None if extraction fails.
+        # Cabeçalho
+        markdown = "# COLLECTED DATA DETAILED REPORT\n\n"
+        markdown += "| " + " | ".join(keys) + " |\n"
+        markdown += "| " + " | ".join(["---"] * len(keys)) + " |\n"
 
-        Notes:
-            - If `plantuml_code` is not provided or is invalid, the method will return None.
-            - The method does not raise exceptions. Instead, it logs error messages
-            when issues occur during the parsing process.
-        """
-        diagram = []
+        # Linhas
+        for obj in data_objects:
+            row = []
+            for key in keys:
+                value = obj.get(key, "")
+                if isinstance(value, (dict, list)):
+                    try:
+                        value = json.dumps(value, ensure_ascii=False, separators=(",", ":"))
+                    except:
+                        value = str(value)
+                row.append(str(value).replace("\n", " ").replace("|", "\\|"))
+            markdown += "| " + " | ".join(row) + " |\n"
 
-        try:
-            extracted_code = self.extract_plantuml_use_case_code(plantuml_code)
-            if not extracted_code:
-                return diagram
+        return markdown
 
-            diagram = self.parser.parse(extracted_code)
-            self.LOGGER.info(f"Extracted diagram:{diagram}")
+    def generate_overall_diagrams_evaluation_excel_report(self, data_objects):
+        if not data_objects:
+            return b''
 
-        except Exception as e:
-            self.LOGGER.error(f"Error extracting use case diagram: {str(e)}")
+        # Prepara os dados para o DataFrame
+        def flatten_value(value):
+            if isinstance(value, (dict, list)):
+                try:
+                    return json.dumps(value, ensure_ascii=False, separators=(",", ":"))
+                except:
+                    return str(value)
+            return value
 
-        return diagram
+        processed_data = []
+        for obj in data_objects:
+            row = {key: flatten_value(value) for key, value in obj.items()}
+            processed_data.append(row)
 
-    def extract_excel_report(self, plantuml_code):
-        """
-        Extracts components from PlantUML code and generates an Excel report.
+        # Cria o DataFrame
+        df = pd.DataFrame(processed_data)
 
-        Args:
-            plantuml_code (str): The PlantUML code to analyze.
-            output_filename (str): The name of the Excel file to create.
+        # Salva o DataFrame em memória (Excel)
+        output = io.BytesIO()
+        with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
+            df.to_excel(writer, index=False, sheet_name='Detailed Diagrams Report')
 
-        Returns:
-            bytes: The Excel file contents as bytes if successful, otherwise None.
-
-        Notes:
-            - The method extracts components using extract_plantuml_use_case_components.
-            - If components cannot be extracted, the method returns None.
-            - The Excel file contains two sheets: "Components" and "Relations".
-            - If an error occurs during the process, the method logs an error message and returns None.
-        """
-
-        excel_bytes = None
-
-        try:
-            diagram = self.extract_plantuml_use_case_components(plantuml_code)
-
-            consolidated_data = []
-
-            consolidated_data.extend(
-                {
-                    'Type': 'Actor',
-                    'Name': actor['name'],
-                    'Alias': actor['alias'],
-                    'Details': f"Type: {actor['type']}",
-                }
-                for actor in diagram['actors']
-            )
-            consolidated_data.extend(
-                {
-                    'Type': 'Use Case',
-                    'Name': use_case['name'],
-                    'Alias': use_case['alias'],
-                    'Details': f"Type: {use_case['type']}",
-                }
-                for use_case in diagram['use_cases']
-            )
-
-            consolidated_data.extend(
-                {
-                    'Type': 'Relationship',
-                    'Name': f"{rel['source']} --> {rel['target']}",
-                    'Alias': '',
-                    'Details': f"Type: {rel['type']}, Kind: {rel.get('kind', '')}",
-                }
-                for rel in diagram['relationships']
-            )
-
-            consolidated_data.extend(
-                {
-                    'Type': 'Note',
-                    'Name': note['target'],
-                    'Alias': '',
-                    'Details': note['content'],
-                }
-                for note in diagram['notes']
-            )
-
-            consolidated_data.extend(
-                {
-                    'Type': 'Rectangle',
-                    'Name': rect['name'],
-                    'Alias': '',
-                    'Details': '',
-                }
-                for rect in diagram['rectangles']
-            )
-
-            df_consolidated = pd.DataFrame(consolidated_data)
-
-            with io.BytesIO() as buffer:
-                with pd.ExcelWriter(buffer, engine="xlsxwriter") as writer:
-                    df_consolidated.to_excel(writer, sheet_name="Use Case Report", index=False)
-
-                buffer.seek(0)
-                excel_bytes = buffer.read()
-
-            self.LOGGER.info("Excel report generated successfully")
-
-        except Exception as e:
-            self.LOGGER.error(f"Error generating Excel report: {str(e)}")
-
-        return excel_bytes
+        return output.getvalue()

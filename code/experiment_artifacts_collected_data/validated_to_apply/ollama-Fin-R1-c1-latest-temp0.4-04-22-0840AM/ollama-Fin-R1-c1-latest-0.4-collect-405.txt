@@ -1,0 +1,155 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  Client --> CFR001 : View Financial Insights\nDashboard\n(CFR001)
+  
+  SysAdmin --> SAFR001 : Manage AI System's\nAnalysis Parameters (SAFR001)\nand\nCompliance with Basel III
+  SysAdmin --> FAFR004 : Configure Analysis\nParameters for Specific Client Segments
+  
+  FinancialAdvisor --> FAFR002: View Client Intervention Alerts\n(FATF, AML Compliance)
+  
+  FinancialAdvisor --> FAFR003: View Predictive Analytics about Clients' Finances
+}
+
+@enduml
+```
+
+### Explanation:
+1. **System Boundary**: The entire diagram is enclosed within a system boundary labeled "System" to represent the AI-Powered Analysis & Insights System.
+2. **Use Cases**:
+   - **CFR001: View Financial Insights Dashboard**: This use case allows Clients (represented by `Client`) to access and view their financial data in an intuitive format through the system’s dashboard.
+   - **SAFR001: Manage Analysis Parameters**: A System Administrator (`SysAdmin`) can manage the parameters of the AI algorithms used for analysis, ensuring compliance with regulations like Basel III. This use case is also linked to `FAFR004` (Configure Analysis Parameters), which allows for segment-specific customization.
+   - **CFR002–CFR11**: These are Client-related use cases but not included here because the primary focus of this diagram seems to be on System Administrators and Financial Advisors managing system parameters, with Clients viewing dashboards. The other client-facing interactions (e.g., alerts, recommendations) might require a more detailed breakdown.
+3. **Actors**:
+   - **Client**: Represents end-users who interact directly with the financial insights dashboard.
+   - **SysAdmin**: A System Administrator responsible for managing system parameters and ensuring compliance.
+   - **FinancialAdvisor**: An advisor who uses the system to view client-specific data, alerts, etc., but does not manage system settings. Their interactions are limited to viewing predictive analytics and intervention alerts.
+
+### Key Relationships:
+- The `Client` actor has a direct relationship with `CFR001`, allowing them to view the financial insights dashboard.
+- The `SysAdmin` interacts with both `SAFR001` (for general parameter management) and `FAFR004` (specifically for client segment configuration).
+- Financial Advisors (`FinancialAdvisor`) can view intervention alerts (`FAFR002`) and predictive analytics (`FAFR003`), but no direct interaction is shown with the system’s core parameters.
+
+### Omissions:
+Other use cases like `CFR002–11`, which pertain to client-specific actions (e.g., receiving alerts, managing recommendations), are excluded here because they might not align directly with the primary focus of this diagram: System Administrators and Financial Advisors managing AI system settings. However, if more detailed interactions were required, additional use cases could be included within their respective categories.
+
+This structure ensures clarity in representing the key actors (Client, SysAdmin, FinancialAdvisor) and critical use cases related to parameter management and client interaction with financial insights. Adjustments can be made based on further requirements or system complexities not captured here.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  package ClientInteractions {
+    usecase "CFR001: View Financial Insights Dashboard" as CFR001
+    usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Personalized Recommendations" as CFR004
+    usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  }
+  
+  package SystemAdminInteractions {
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+    usecase "FAFR003: View Predictive Analytics about Clients' Finances" as FAFR003
+    usecase "SFR014: Generate Client Analytics" as SFR014
+  }
+  
+  package FinancialAdvisorInteractions {
+    usecase "FAFR002: Manage Client Mentoring Sessions" as FAFR002
+    usecase "FAFR003: View Intervention Alerts" as FAFR003
+    usecase "SFR014: Generate Client Analytics" as SFR014
+  }
+  
+  client --> CFR001 : View Financial Insights\nDashboard (CFR001)
+  sysadmin --> SAFR001 : Manage AI System's\nAnalysis Parameters (SAFR001)\nand Compliance with Basel III
+  
+  financialadvisor --> FAFR002: View Client Intervention Alerts (FAFR002)
+  
+}
+
+@enduml
+```
+
+### Explanation:
+This expanded version categorizes use cases by actor type and groups them logically within packages. Here’s the breakdown:
+
+#### **ClientInteractions** Package:
+- **CFR001**: View Financial Insights Dashboard.
+- **CFR002**: Receive Alerts about Anomalous Transactions (FATF, AML).
+- **CFR003**: View Financial Predictions based on historical data and market trends.
+- **CFR004**: Personalized Recommendations aligned with financial goals.
+- **CFR005**: Manage personalized recommendation preferences.
+
+#### **SystemAdminInteractions** Package:
+- **SAFR001**: Manage Analysis Parameters for the AI system, ensuring compliance with regulations like Basel III and GDPR/CCPA.
+- **FAFR003**: View Predictive Analytics about clients’ financial situations (proactive guidance).
+- **SFR014**: Generate Client Analytics that provide meaningful insights into financial behavior.
+
+#### **FinancialAdvisorInteractions** Package:
+- **FAFR002**: Manage client mentoring sessions based on system-generated insights.
+- **FAFR003**: View Intervention Alerts when the system detects patterns requiring professional attention (proactive risk management).
+- **SFR014**: Generate Client Analytics to support data-driven recommendations during consultations.
+
+### Key Relationships:
+- **Client** interacts with all use cases in the `ClientInteractions` package.
+- **SysAdmin** manages AI parameters and compliance through `SAFR001`.
+- **FinancialAdvisor** uses predictive analytics (`FAFR003`) and generates client-specific dashboards/analytics (`SFR014`).
+
+### Omissions:
+Other use cases like `CFR006–11`, which involve managing spending limits, investment opportunities, etc., are grouped under the respective packages but not detailed here. The focus remains on key interactions for clarity.
+
+This structure ensures a clear separation of concerns between clients (viewing and receiving alerts), system administrators (managing parameters), and financial advisors (providing guidance). Each package can be expanded further if needed to include additional use cases or sub-use cases.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  client --> CFR001 : View Financial Insights Dashboard (CFR001)
+  
+  sysadmin --> SAFR001 : Manage Analysis Parameters\n(SAFR001)\nand\nCompliance with Basel III
+  
+  financialadvisor --> FAFR002: View Client Intervention Alerts (FAFR002)
+  financialadvisor --> FAFR003: View Predictive Analytics about Clients' Finances (FAFR003)
+  
+  client --> CFR004 : Personalized Recommendations\n(CFR004)\nBased on Financial Profile
+}
+
+@enduml
+```
+
+### Explanation:
+This simplified version focuses strictly on the most critical use cases and their relationships. Here’s a concise breakdown:
+
+#### **Key Actors**:
+- **Client**: Interacts with the system via `CFR001` (viewing dashboards) and other client-facing features.
+- **SysAdmin**: Manages AI parameters (`SAFR001`) to ensure compliance and accuracy.
+- **FinancialAdvisor**: Views alerts (`FAFR002`) and predictive analytics (`FAFR003`) for proactive guidance.
+
+#### **Use Cases**:
+1. **ClientInteractions** (under "System"):
+   - `CFR001`: View Financial Insights Dashboard: Clients access their financial data.
+   - `CFR004`: Personalized Recommendations: AI-generated recommendations based on user profiles.
+2. **SysAdminInteractions**:
+   - `SAFR001`: Manage Analysis Parameters: System Administrator adjusts parameters for the AI system, ensuring regulatory compliance (Basel III).
+3. **FinancialAdvisorInteractions**:
+   - `FAFR002`: View Client Intervention Alerts: Financial Advisors receive alerts about potential issues.
+   - `FAFR003`: View Predictive Analytics: Analyze clients’ financial situations to provide guidance.
+
+### Relationships:
+- Clients directly interact with the system through dashboards and recommendations (`CFR001` & `CFR004`).
+-
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

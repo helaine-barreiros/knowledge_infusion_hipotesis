@@ -1,0 +1,70 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Request Financial Predictions from AI" as SAFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "SFR008: Deliver Personalized Recommendations to Users via System" as SFR008
+  usecase "CFR004: Receive Personalized Financial Recommendations Aligned with Profile" as CFR004
+  usecase "SAFR016: Generate Client Predictive Insights from AI for Advisors" as SAFR016
+  usecase "SFR020: Manage User Feedback to Improve System Accuracy" as SFR020
+}
+
+rectangle "Client" {
+  actor "User (Client)" as U
+  user -> CFR001 : View Financial Dashboard\n(Fig. 1)
+  user -> SAFR008 : Request Personalized Recommendations\n(Fig. 3)\n(Req: SFR004, AIFR002)
+}
+
+rectangle "Financial Advisor" {
+  actor "Advisor (FA)" as F
+  advisor --> FAFR001 : Manage Client Mentoring Sessions Based on System Insights\n(Fig. 5)\n(Req: FAFR001)
+  advisor --> FAFR003 : View Predictive Analytics for Clients\n(Fig. 6)\n(Req: FAFR003, AIFR007)
+}
+
+rectangle "System Administrator" {
+  actor "SysAdmin (SA)" as SA
+  sysadmin -> SAFR001 : Manage Analysis Parameters for AI System\n(Fig. 2)\n(Req: SAFR001)
+  sysadmin -> SFR020 : Send Feedback to Improve Recommendations\n(Fig. 7)\n(Req: CFR011, AIFR009)
+}
+
+rectangle "AI" {
+  usecase "AIFR001: Generate Financial Predictions via AI" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts Based on User Data" as AIFR003
+  usecase "AIFR004: Identify Investment Opportunities Matching Risk Profiles" as AIFR004
+  usecase "AIFR005: Align Investments with Modern Portfolio Theory Principles" as AIFR005
+}
+
+user -> CFR001 : View Financial Dashboard\n(Fig. 1)
+user -> SAFR008 : Request Personalized Recommendations\n(Fig. 3)\n(Req: SFR004, AIFR002)
+advisor --> FAFR001 : Manage Client Mentoring Sessions Based on System Insights\n(Fig. 5)\n(Req: FAFR001)
+advisor --> FAFR003 : View Predictive Analytics for Clients\n(Fig. 6)\n(Req: FAFR003, AIFR007)
+sysadmin -> SAFR001 : Manage Analysis Parameters for AI System\n(Fig. 2)\n(Req: SAFR001)
+sysadmin -> SFR020 : Send Feedback to Improve Recommendations\n(Fig. 7)\n(Req: CFR011, AIFR009)
+
+CFR004 --> AIFR002 : Receive Personalized Recommendations (Fig. 3) [AIFR002]
+SAFR008 --> AIFR002 : Deliver System-Generated Recommendations to Client\n(Fig. 3)\n(Req: SFR004, AIFR002)
+CFR001 <|-- (User): View Financial Insights Dashboard [Client]
+
+@enduml
+```
+
+This PlantUML code represents the use case diagram for an AI-powered analysis and insights system based on the provided functional requirements. The key components include:
+
+- **System**: Contains various use cases like viewing financial dashboards, requesting personalized recommendations from the AI component, generating predictive analyses, etc.
+- **Client (User)**: Interacts with the system to view dashboards, receive recommendations, manage feedback, and more.
+- **Financial Advisor (FA)**: Manages client mentoring sessions using insights provided by the system. They also access predictive analytics for clients via specific use cases like FAFR003.
+- **System Administrator (SA)**: Responsible for managing AI parameters and collecting user feedback to improve recommendations.
+
+The relationships between actors, use cases, and components are clearly defined with arrows indicating interactions such as requests, deliveries, or management activities. The system boundary is represented by a rectangle encompassing all relevant use cases and their connections. This ensures clarity in understanding how different stakeholders (clients, advisors, administrators) engage with the AI-driven functionalities of the system. 
+
+**Note**: Ensure that each requirement ID corresponds correctly to its respective use case or actor interaction within the diagram. Adjustments may be needed based on further analysis if additional requirements surface during implementation. Also, verify all relationships for accuracy and completeness as per the provided functional descriptions.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1168]

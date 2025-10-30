@@ -1,0 +1,221 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+  
+  rectangle "Financial Dashboard Features" {
+    usecase "CFR001: View Financial Insights Dashboard" as CFR001
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR005: Manage Recommendations Preferences" as CFR005
+    usecase "CFR006: View Spending Limit Alerts" as CFR006
+    usecase "CFR010: Manage Relationship with Advisors" as CFR010
+    
+    C --> CFR001
+    C --> CFR003
+    C --> CFR005
+    C --> CFR006
+    C --> CFR010
+  }
+  
+  rectangle "Alert Features" {
+    usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+    
+    C --> CFR002
+  }
+  
+  rectangle "Personalized Recommendations" {
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004
+    usecase "CFR11: Send Feedback about System's Recommendations and Insights" as CFR11
+    
+    C --> CFR004
+    C --> CFR11
+  }
+  
+  rectangle "Investment Features" {
+    usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+    usecase "CFR008: View News Related to My Investment Portfolio" as CFR008
+    
+    C --> CFR007
+    C --> CFR008
+  }
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA
+  
+  rectangle "Client Management Features" {
+    usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+    
+    FA --> FAFR001
+  }
+  
+  rectangle "Alerts and Predictions for Clients" {
+    usecase "FAFR002: View Client Intervention Alerts When the System Detects Patterns Requiring Professional Attention" as FAFR002
+    usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations to Provide Data-Driven Recommendations During Consultations" as FAFR003
+    
+    FA --> FAFR002
+    FA --> FAFR003
+  }
+  
+  rectangle "Configuration Features for Client Segments" {
+    usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments to Customize the System's Behavior According to Different Client Profiles and Regulatory Requirements Such as GDPR or CCPA" as FAFR004
+    
+    FA --> FAFR004
+  }
+}
+
+package "System Administrator" {
+  actor SysAdmin
+  
+  rectangle "Management Features" {
+    usecase "SAFR001: Manage Analysis Parameters for the AI System to Ensure the Algorithms Remain Accurate, Relevant, and Compliant with Financial Regulations Such as Basel III for Risk Management" as SAFR001
+    
+    SysAdmin --> SAFR001
+  }
+}
+
+package "System Components" {
+  rectangle "Notification Channel Integration" {
+    usecase "SFR001: Deliver Alerts to Users Through Appropriate Notification Channels to Ensure Timely Awareness of Critical Financial Events" as SFR001
+    
+    System --> SFR001
+  }
+  
+  rectangle "Personalized Recommendations Generation" {
+    usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles to Support Better Financial Decision-Making" as SFR002
+    
+    System --> SFR002
+  }
+  
+  rectangle "Financial Predictions Request" {
+    usecase "SFR003: Request Financial Predictions from the AI Component to Provide Users with Forward-Looking Financial Insights" as SFR003
+    
+    System --> SFR003
+  }
+  
+  rectangle "Personalized Recommendations Request" {
+    usecase "SFR004: Request Personalized Recommendations from the AI Component Based on Each User's Financial Data and Preferences" as SFR004
+    
+    System --> SFR004
+  }
+  
+  rectangle "Spending Limit Alerts Request" {
+    usecase "SFR005: Request Spending Limit Alerts from the AI Component When User Spending Patterns Exceed Defined Thresholds" as SFR005
+    
+    System --> SFR005
+  }
+  
+  rectangle "Investment Opportunity Analysis Request" {
+    usecase "SFR006: Request Investment Opportunity Analysis from the AI Component to Identify Suitable Investments for Users Based on Their Risk Profiles" as SFR006
+    
+    System --> SFR006
+  }
+  
+  rectangle "Specific Investment Opportunities Request" {
+    usecase "SFR007: Request Specific Investment Opportunities from the AI Component That Match User Investment Criteria and ESG Preferences" as SFR007
+    
+    System --> SFR007
+  }
+  
+  rectangle "Anomaly Transaction Alerts Request" {
+    usecase "SFR008: Request Anomaly Transaction Alerts from the AI Component to Detect Potentially Fraudulent Activities in Accordance with AML Regulations" as SFR008
+    
+    System --> SFR008
+  }
+  
+  rectangle "Contextualized News Retrieval" {
+    usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios from Trusted Financial News Sources" as SFR009
+    
+    System --> SFR009
+  }
+  
+  rectangle "News Processing and Insights Generation" {
+    usecase "SFR010: Process Contextualized News to Extract Relevant Information for Users' Financial Situations" as SFR010
+    
+    System --> SFR010
+  }
+  
+  rectangle "Contextualized News Insights Request" {
+    usecase "SFR011: Request Contextualized News Insights from the AI Component to Identify Potential Impacts on Users' Investments" as SFR011
+    
+    System --> SFR011
+  }
+  
+  rectangle "Client Dashboards Generation" {
+    usecase "SFR012: Generate Client Dashboards That Present Financial Information in an Intuitive and Actionable Format" as SFR012
+    
+    System --> SFR012
+  }
+  
+  rectangle "Client Alerts Generation" {
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions to Ensure Timely Notification of Important Financial Events" as SFR013
+    
+    System --> SFR013
+  }
+  
+  rectangle "Client Analytics Generation" {
+    usecase "SFR014: Generate Client Analytics That Provide Meaningful Insights into Financial Behavior and Performance" as SFR014
+    
+    System --> SFR014
+  }
+  
+  rectangle "Predictive Intervention Analyses Request" {
+    usecase "SFR015: Request Predictive Intervention Analyses from the AI Component to Identify When Financial Advisors Should Engage with Clients" as SFR015
+    
+    System --> SFR015
+  }
+  
+  rectangle "Enhanced Insights Generation" {
+    usecase "SFR016: Request Predictive Insights From the AI Component to Enhance the Value of Financial Guidance Provided to Clients" as SFR016
+    
+    System --> SFR016
+  }
+  
+  rectangle "Financial Health Reports Generation" {
+    usecase "SFR017: Generate Financial Health Reports That Assess Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as SFR017
+    
+    System --> SFR017
+  }
+  
+  rectangle "User Goals Management" {
+    usecase "SFR018: Manage User Feedback to Continuously Improve the Quality and Relevance of Financial Insights" as SFR019
+    
+    System --> SFR019
+  }
+}
+
+package "AI Components" {
+  rectangle "Financial Predictions Generation" {
+    usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+    
+    AI --> AIFR001
+  }
+  
+  rectangle "Personalized Recommendations Generation" {
+    usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance As Defined by Industry Standards Like FINRA Guidelines" as AIFR002
+    
+    AI --> AIFR002
+  }
+  
+  rectangle "Spending Limit Alerts Generation" {
+    usecase "AIFR003: Generate Spending Limit Alerts for Users By Identifying Unusual Deviations from Established Spending Patterns" as AIFR003
+    
+    AI --> AIFR003
+  }
+  
+  rectangle "Investment Opportunity Analysis Generation" {
+    usecase "AIFR004: Generate Investment Opportunity Analyses For Users by Evaluating Potential Investments Against Their Risk Profiles, Time Horizons, and Financial Goals" as AIFR004
+    
+    AI --> AIFR004
+  }
+  
+  rectangle "Investment Opportunities Generation Based on Modern Portfolio Theory Principles" {
+    usecase "AIFR005: Generate Investment Opportunities for Users by Identifying Financial Instruments That Align with Their Investment Strategies and Modern Portfolio Theory Principles" as AIF
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

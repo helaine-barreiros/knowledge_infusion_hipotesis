@@ -1,0 +1,139 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+system "System" as S
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as VFD
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as RAT
+  usecase "CFR003: View Financial Predictions" as FPP
+  usecase "CFR004: Personalized Recommendations Based on Profile" as PRP
+  usecase "CFR005: Manage Recommendation Preferences" as RMP
+  usecase "CFR006: Spending Limit Alerts for Budget Control" as SLA
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as VIO
+  usecase "CFR008: Access News Related to Portfolio" as ANP
+  usecase "CFR009: Consolidated Personalized Dashboard" as CPD
+  usecase "CFR10: Manage Relationship with Financial Advisors" as MRA
+
+  C1 --> VFD : "View financial data"
+  C1 --> RAT : "Receive alerts for anomalies"
+  C1 --> FPP : "Review predictions"
+  C1 --> PRP : "Get personalized recommendations"
+  C1 --> RMP : "Adjust preference settings"
+  C1 --> SLA : "Monitor spending limits"
+  C1 --> VIO : "Explore investment options"
+  C1 --> ANP : "Stay informed about market news"
+  C1 --> CPD : "Access consolidated dashboard"
+  C1 --> MRA : "Manage advisor relationships"
+
+}
+
+rectangle "System Administration" {
+  usecase "SAFR001: Manage Analysis Parameters" as MAP
+  SA --> MAP : "Adjust parameters for accuracy and compliance"
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as MCS
+  usecase "FAFR002: View Intervention Alerts" as VIA
+  usecase "FAFR003: Predictive Analytics on Clients' Financial Situations" as PCA
+  usecase "FAFR004: Configure Analysis Parameters for Segments" as CAPS
+
+  FA --> MCS : "Schedule and manage sessions"
+  FA --> VIA : "Respond to alerts"
+  FA --> PCA : "Use predictive insights in consultations"
+  FA --> CAPS : "Customize system settings per client segment"
+
+}
+
+rectangle "System Core" {
+  usecase "SFR001: Deliver Alerts Through Channels" as DAC
+  usecase "SFR002: Personalized Recommendations Based on Profiles" as PRB
+  usecase "SFR003: Request Financial Predictions from AI" as RFP
+  usecase "SFR004: Request Personalized Recommendations From AI" as RPRF
+  usecase "SFR005: Spending Limit Alerts for Users" as SLA_Sys
+  usecase "SFR006: Investment Opportunity Analysis by Risk Profile" as IOARP
+  usecase "SFR007: Specific Investment Opportunities Matching Criteria and ESG Preferences" as SIO_MESG
+  usecase "SFR008: Anomaly Transaction Alerts for Compliance" as ATAC
+  usecase "SFR009: Contextualized News Relevant to Portfolio" as CNRP
+  usecase "SFR010: Generate Client Dashboards" as GCD
+  usecase "SFR013: Generate Client Analytics" as GCA
+
+  S --> DAC : "Notify users of critical events"
+  S --> PRB : "Provide personalized guidance based on user data"
+  S --> RFP : "Request predictions from AI component"
+  S --> RPRF : "Request recommendations from AI component"
+  S --> SLA_Sys : "Alert when spending exceeds thresholds"
+  S --> IOARP : "Identify suitable investments for users"
+  S --> SIO_MESG : "Find ESG-aligned investment options"
+  S --> ATAC : "Detect potential fraud via transaction patterns"
+  S --> CNRP : "Extract relevant news from sources"
+  S --> GCD : "Create dashboards with financial info"
+  S --> GCA : "Produce meaningful analytics for users"
+
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as GFP
+  usecase "AIFR002: Personalized Recommendations Based on Profiles and Standards" as PPRBS
+  usecase "AIFR003: Spending Limit Alerts for Users" as SLAU
+  usecase "AIFR004: Investment Opportunity Analyses by Risk Profile" as IOARP_AI
+  usecase "AIFR005: Generate Investment Opportunities Based on Strategies and MPT" as GIO_BS_MPT
+  usecase "AIFR006: Anomaly Transaction Alerts for Compliance" as ATAC_AI
+  usecase "AIFR007: Contextualized News Insights by Portfolio Correlation" as CNI_PB
+  usecase "AIFR008: Predictive Intervention Recommendations Based on Patterns" as PIRBP
+  usecase "AIFR009: Client Predictive Insights for Forward-Looking Analysis" as CPI_FLA
+
+  S --> GFP : "Request financial predictions"
+  S --> PPRBS : "Get personalized recommendations from AI"
+  S --> SLAU : "Issue spending limit alerts to system"
+  S --> IOARP_AI : "Identify investments matching user risk profile"
+  S --> GIO_BS_MPT : "Suggest investment opportunities aligned with strategies and MPT"
+  S --> ATAC_AI : "Detect anomalies for compliance checks"
+  S --> CNI_PB : "Correlate news to portfolios"
+  S --> PIRBP : "Recommend interventions based on patterns"
+  S --> CPI_FLA : "Provide forward-looking analysis"
+
+}
+
+usecase "CFR011: Send Feedback" as CF
+C1, FA, SA --> CF : "Submit feedback for improvement"
+
+S <|-- VFD
+S <|-- RAT
+S <|-- FPP
+S <|-- PRP
+S <|-- RMP
+S <|-- SLA
+S <|-- VIO
+S <|-- ANP
+S <|-- CPD
+S <|-- MRA
+
+FAFR001 --> GCD : "Use generated dashboards in mentoring"
+FAFR002 --> ATAC_AI : "Utilize anomaly alerts for client support"
+
+@enduml
+```
+
+This PlantUML code represents the use case diagram based on the provided functional requirements. Here's a breakdown of key components:
+
+- **Client Interface**: Includes all user-related interactions (e.g., viewing dashboards, receiving alerts).
+- **System Administration**: Manages system parameters.
+- **Financial Advisor Interface**: Interactions specific to advisors (mentoring sessions, client insights).
+- **System Core**: Centralized processing and request handling for various services.
+- **AI Component**: Generates predictions, recommendations, and analyses using AI algorithms.
+
+The diagram ensures all actors are linked appropriately with their respective use cases. Relationships between system components and external entities like clients or financial advisors are clearly defined. The structure follows the guidelines provided, including precise ID matching and logical grouping of related functionalities. 
+
+**Note**: This is a simplified representation to fit within the constraints of this format. In practice, additional details (e.g., specific relationships, more detailed use cases) might be expanded further. However, based on the requirements given, this should accurately capture the core interactions.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1652]

@@ -1,0 +1,86 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage AML Alerts" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR006: Manage Spending Limit Alerts" as CFR006
+  usecase "CFR007: Discover Investment Opportunities" as CFR007
+  usecase "CFR008: Access Portfolio News" as CFR008
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR013: Send Alerts Based on Conditions" as SFR013
+  usecase "CFR009: Access Consolidated Financial View" as CFR009
+  usecase "SAFR004: Configure Analysis Parameters for Segments" as SAFR004
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "CFR010: Manage Data Sharing with Advisors" as CFR010
+
+  // Clients (User)
+  actor Client as UserClient {
+    --> CFR001 : View Financial Insights Dashboard
+    --> SAFR004 : Configure Analysis Parameters for Segments
+    --> SFR012 : Generate Client Dashboards
+    --> AIFR003 : Manage Spending Limit Alerts
+    --> AIFR005 : Discover Investment Opportunities
+  }
+
+  // System Administrator (SysAdmin)
+  actor SysAdmin as Admin {
+    --> SAFR004 : Configure Analysis Parameters for Segments
+    --> CFR010 : Manage Data Sharing with Advisors
+  }
+
+  // Financial Advisor (FA)
+  actor FAFR002 as FA {
+    --> SFR013 : Send Alerts Based on Conditions
+    --> AIFR008 : Generate Predictive Intervention Recommendations
+    --> AIFR009 : Provide Client Predictive Insights
+  }
+  
+  // System (Sys)
+  usecase "SFR002: Deliver Personalized Recs" as SFR002 {
+    <|-- UserClient : Based on profile and goals
+  }
+
+  usecase "AIFR001: Generate Financial Preds" as AIFR001 {
+    --> CFR003 : View Predictions
+  }
+  
+  usecase "AIFR004: Find Investment Opportunities" as AIFR004 {
+    --> CFR007 : Discover Investments
+  }
+
+}
+
+@enduml
+```
+
+**Key Observations and Relationships in the Diagram:**
+1. **Client (User) Actor**: Represents all clients, including users of different types (e.g., Client, Financial Advisor). They interact with use cases like viewing dashboards (`CFR001`), receiving personalized recommendations (`CFR004`), managing spending limits (`CFR006`), etc.
+2. **System Administrator Actor**: Manages system-level tasks such as configuring analysis parameters for segments (`SAFR004`) and data sharing policies with advisors (`CFR010`).
+3. **Financial Advisor (FA) Actor**: Engages in activities like scheduling mentoring sessions (`FAFR005`), viewing client alerts (`SFR013`), generating predictive insights (`AIFR009`), etc.
+4. **Use Case Grouping**:
+   - Financial Insights and Predictions: `CFR001`, `CFR003`
+   - Personalized Recommendations: `CFR004`
+   - Alerts Management: `SAFR002`, `AIFR005` (spending limit), `AIFR006` (AML)
+   - Investment Opportunities and News: `CFR007`, `CFR008`
+   - System Administration: `SAFR004`, `CFR010`
+   - AI-Generated Use Cases (`AIFR*`) are linked to specific client interactions.
+5. **Inheritance**: For example, the system's role in delivering personalized recommendations is represented by both a direct use case and an extension via the AI component:  
+   ```plantuml
+   usecase "SFR002: Deliver Personalized Recs" as SFR002 {
+     <|-- UserClient : Based on profile and goals
+   }
+   ```
+6. **Relationships**: Each actor is connected to relevant use cases, with some extending others (e.g., `UserClient` extends multiple financial-related use cases).
+
+This structure ensures clarity in how different actors interact within the system, adhering strictly to provided functional requirements without inventing additional entities or relationships.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1102]

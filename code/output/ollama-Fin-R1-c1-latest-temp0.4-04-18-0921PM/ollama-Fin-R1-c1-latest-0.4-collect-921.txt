@@ -1,0 +1,73 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR004: Personalized Recommendations Based on Financial Profile" as CFR004
+  usecase "SAFR019: Manage Historical Record of Insights" as SAFR019
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+
+  rectangle "Client" {
+    actor "User (Client)" as U
+    User --> CFR001 : View financial data in a consolidated dashboard.
+    User --> CFR002 : Receive alerts about anomalous transactions.
+    User --> CFR004 : Get personalized recommendations aligned with their goals.
+    User --> SAFR019 : Provide feedback on system outputs to improve future accuracy.
+  }
+
+  rectangle "Financial Advisor" {
+    actor "FAFR003: View Predictive Analytics for Clients" as FAFR
+    FAFR <|-- (CFR004) : Configure analysis parameters for client segments.
+    FAFR --> CFR010 : Manage client relationships, including data sharing permissions.
+
+  }
+
+  rectangle "System Administrator" {
+    actor "SAFR001: Manage Analysis Parameters" as SAFR
+    SAFR <|-- (CFR004) : Adjust system parameters for personalized recommendations.
+    SAFR --> SFR013 : Configure alert systems based on thresholds and regulations.
+
+  }
+
+  rectangle "System" {
+    usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+    usecase "AIFR002: Generate Personalized Recommendations via AI" as AIFR002
+
+    SAFR --> AIFR002 : Request adjustments to the AI's personalized recommendation generation.
+  }
+
+}
+
+@enduml
+```
+
+### Key Observations:
+1. **Client Actors** (User, Financial Advisor): These are end-users of the system and interact with various use cases like viewing dashboards, receiving alerts, etc.
+2. **System Administrator**: Manages analysis parameters to ensure compliance and accuracy in AI-generated insights.
+3. **Financial Advisor**: Interacts primarily through predictive analytics and client relationship management.
+4. **Use Case Grouping**:
+   - Client-related: CFR001-005, 007-009, 010, SAFR019
+   - System Administrator: SAFR001, SFR013 (alert systems)
+   - Financial Advisor: FAFR002-004, CFR010
+
+### Relationships:
+- **Client to Use Cases**: Direct interactions via arrows.
+- **System Components**: Indirect relationships through AI and system use cases.
+
+This structure ensures clarity in the diagram by separating actors based on their roles (client vs. admin) and grouping related use cases logically within each role’s context. The system boundary encompasses all components, with inheritance where applicable (e.g., SAFR managing analysis parameters). 
+
+### Notes:
+- Ensure that all IDs match exactly as per requirements.
+- Use parentheses for nested elements (e.g., `FAFR <|-- (CFR004)`).
+- Maintain consistency in notation and indentation.
+
+[Done: True
+Done Reason: stop
+Eval Count: 810]

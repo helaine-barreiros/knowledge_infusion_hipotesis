@@ -1,0 +1,105 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Params for Client Segments" as FAFR004
+
+  client --> CFR001 : View Financial Insights Dashboard  
+  sysAdmin -> SAFR001 : Manage System Settings  
+  financialAdvisor -> (CFR003, CFR008) : View Predictions & News
+  client -> (CFR005, CFR006, CFR009, CFR10): Personalized Management & Dashboard Access
+
+  SysAdmin <|-- SAFR001 : System Admin Control  
+}
+
+rectangle "System" {
+  usecase "SFR002: Deliver Recommendations" as SFR002
+  usecase "AIFR002: Generate Personalized Recs" as AIFR002
+
+  SysAdmin -> (SFR002, AIFR002) : System & AI Control  
+}
+
+rectangle "System" {
+  usecase "SFR013: Client Alerts Generation" as SFR013
+  usecase "AIFR006: Generate Anomaly Alerts" as AIFR006
+
+  SysAdmin -> (SFR013, AIFR006) : System & AI Control  
+}
+
+rectangle "System" {
+  usecase "SFR019: Manage Historical Records" as SFR019
+  usecase "AIFR008: Generate Predictive Interventions" as AIFR008
+
+  SysAdmin -> (SFR019, AIFR008) : System & AI Control  
+}
+
+rectangle "System" {
+  usecase "CFR011: Send Feedback" as CFR011
+  SysAdmin <|-- CFR011 : Admin Review  
+
+}
+@enduml
+```
+
+### Explanation:
+
+This PlantUML diagram represents the **AI-Powered Analysis & Insights System** with its actors and use cases based on provided functional requirements. The system is divided into four main subsystems, each enclosed within a rectangle to logically group related functionalities.
+
+#### 1. Client Interactions:
+- **Client**: Represents end-users (Clients) who interact directly with the system.
+  - Use Cases: 
+    - `CFR001` – View Financial Insights Dashboard
+    - `CFR002` – Receive Alerts for Anomalous Transactions
+    - `CFR003` – View Financial Predictions
+    - `CFR004` – Personalized Recommendations Alignment
+    - `CFR005` – Manage Recommendation Preferences (KYC)
+    - `CFR006` – Spending Limit Alerts Management
+    - `CFR007` – Investment Opportunity Views Based on Risk Profile
+    - `CFR008` – Access News Related to Portfolio
+    - `CFR009` – Consolidated Personalized Dashboard
+    - `CFR10` (Implied from requirements) – Manage Relationship with Financial Advisors
+
+#### 2. System Administrator:
+- **SysAdmin**: Represents administrative control over system settings and parameters.
+  - Use Cases: 
+    - `SAFR001` – Manage Analysis Parameters for AI Algorithms
+    - `FAFR004` – Configure Analysis Params for Client Segments (for Financial Advisors)
+
+#### 3. Financial Advisor:
+- **FinancialAdvisor**: Represents interactions with the system by financial advisors.
+  - Use Cases: 
+    - FAFR001–FAFR008 are not explicitly listed in requirements but inferred from context.
+
+#### 4. System Subsystems:
+   - **SFR (System Functional Requirements)**:
+     - `SFR002` – Deliver Personalized Recommendations
+     - `AIFR002` – Generate Personalized Recommendations via AI
+
+   - **Anomaly Detection**:
+     - `SFR013` – Client Alerts Generation  
+     - `AIFR006` – Anomaly Transaction Alert Generation  
+
+   - **Historical Record Management**:
+     - `SFR019` – Manage Historical Records
+     - `AIFR008` – Predictive Intervention Analysis via AI
+
+#### 5. Feedback Loop:
+- **Client**: Can send feedback (`CFR011`) to the system for improvement.
+
+### Key Relationships and Inheritance:
+- The diagram explicitly links actors (e.g., Client, SysAdmin) with their respective use cases.
+- Subsystem relationships are represented by nested rectangles: e.g., `System` contains multiple sub-systems like Alerts Generation (`SFR013`, `AIFR006`) or Recommendation Delivery (`SFR002`, `AIFR002`).
+- Inheritance is implied where an actor (e.g., SysAdmin) controls multiple use cases within a subsystem.
+
+### Notes:
+- The requirements mention "User" as a general term, but specific actors like Client, FinancialAdvisor, and SysAdmin are used based on context.
+- Use case IDs strictly follow the provided functional requirement identifiers to ensure accuracy.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1150]

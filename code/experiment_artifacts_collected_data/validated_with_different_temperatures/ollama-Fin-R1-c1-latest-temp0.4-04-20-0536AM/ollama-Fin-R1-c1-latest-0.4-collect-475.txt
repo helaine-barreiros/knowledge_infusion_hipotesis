@@ -1,0 +1,127 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C1, C2
+}
+
+rectangle "System Boundary" {
+  
+  package "User Interface (UI)" {
+    usecase "CFR001: View Financial Insights Dashboard" as CFR001
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004
+    usecase "CFR005: Manage Recommendation Preferences" as CFR005
+    usecase "CFR006: View Spending Limit Alerts" as CFR006
+    usecase "CFR007: View Investment Opportunities" as CFR007
+    usecase "CFR008: Access News Related to Portfolio" as CFR008
+    usecase "CFR009: Manage Relationship with Advisors" as CFR009
+
+    C1 --> CFR001 : "Client wants to view financial insights"
+    C2 --> CFR003 : "Client seeks financial predictions"
+
+  }
+
+  package "System Management (SM)" {
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+    SysAdmin -> SAFR001 : "Administrator adjusts system parameters for accuracy and compliance"
+  
+  }
+}
+
+package "Financial Advisor (FA)" {
+  actor FinancialAdvisor as FA
+
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Segments" as FAFR004
+
+  FA --> FAFR002 : "Advisor monitors client alerts"
+}
+
+package "System Functionality (SF)" {
+  
+  package "Alerts & Notifications" {
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+    C1 --> SFR013 : "Client receives timely notifications"
+
+    SysAdmin -> SAFR001 <|-- (C1) : Administrator configures system parameters affecting alerts
+
+  }
+
+  package "Recommendations & Predictions" {
+    usecase "SFR004: Request Personalized Recommendations from AI" as SFR004
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+    C1 --> AIFR002 : "Client receives personalized recommendations"
+
+  }
+
+  package "Spending Limit Management" {
+    usecase "SFR005: Request Spending Limit Alerts from AI" as SFR005
+    usecase "AIFR003: Generate Spening Limit Alerts for Users" as AIFR003
+
+    C1 --> AIFR003 : "Client receives spending limit alerts"
+
+  }
+
+  package "Investment Opportunities & News" {
+    usecase "SFR006: Request Investment Opportunity Analysis from AI" as SFR006
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+
+    C1 --> AIFR004 : "Client receives investment opportunities"
+
+  }
+
+}
+
+package "AI System (AI)" {
+  
+  actor AI as A
+
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+  FAFR002 --> AIFR008 : "Advisor requests intervention recommendations"
+
+}
+@enduml
+```
+
+### Explanation:
+1. **Client Actors**: Two clients (C1, C2) are defined under the client package to represent different user types or instances.
+2. **Use Cases for Clients**:
+   - CFR001: View Financial Insights Dashboard (client wants to view)
+   - CFR003: View Financial Predictions
+   - CFR004: Receive Personalized Recommendations
+   - CFR005: Manage Recommendation Preferences
+   - CFR006: View Spending Limit Alerts
+   - CFR007: View Investment Opportunities
+   - CFR008: Access News Related to Portfolio
+   - CFR009: Manage Relationship with Advisors
+
+3. **System Management (SM)**:
+   - SAFR001: Manage Analysis Parameters for the system.
+
+4. **Financial Advisor (FA) Actors**:
+   - FinancialAdvisor as FA handles use cases related to advisor interactions.
+   
+5. **Use Cases for Advisors**:
+   - FAFR002: View Client Intervention Alerts
+   - FAFR003: View Predictive Analytics
+   - FAFR004: Configure Analysis Parameters for Segments
+
+6. **System Functionality (SF)**:
+   - Packages are organized into sub-systems like "Alerts & Notifications", "Recommendations & Predictions", etc.
+   
+7. **AI System**:
+   - AI actor handles all the predictive and analytical use cases, such as generating recommendations or alerts.
+
+### Diagram Structure:
+- The system boundary groups all components logically by their function (Client UI, SM, FA, SF).
+- Use case relationships are clearly defined between actors and systems.
+- Packages help categorize related use cases for easier readability.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1168]

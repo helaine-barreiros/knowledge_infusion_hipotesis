@@ -1,0 +1,52 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  client --> CFR001 : "Client"
+  
+  SysAdmin --> SAFR001, FAFR004 : "System Administrator", "Financial Advisor (FAD)"
+}
+
+rectangle "AI Component - AIFR" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunities Based on Risk Profiles" as AIFR005
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+  usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+  
+  SysAdmin --> (AIFR) : "System Administrator"
+  
+}
+
+rectangle "Client-Specific Services - SFR" {
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  
+  client --> (SFR) : "Client"
+  
+}
+
+rectangle "System Management - SSM" {
+  usecase "SSM001: Manage User Accounts" as SSM001
+  usecase "SSM002: Update System Settings" as SSM002
+  
+  SysAdmin --> (SSM) : "System Administrator"
+  
+}
+
+rectangle "Feedback Management - FBM" {
+  usecase "CFR011: Send Feedback to Improve Recommendations and Insights" as CFR011
+  client --> (FBM) : "Client", "Financial Advisor (FAD)", "System Administrator"
+}
+@enduml

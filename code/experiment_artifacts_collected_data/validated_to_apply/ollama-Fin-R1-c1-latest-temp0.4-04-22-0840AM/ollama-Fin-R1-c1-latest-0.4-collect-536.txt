@@ -1,0 +1,131 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor FinancialAdvisor as FAdvisors
+actor SysAdmin as SA
+system :System: as S
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile (MiFID II)" as CFR007
+  usecase "CFR008: Receive News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: View Consolidated Financial Information in a Single Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as CFR10
+
+  C1 --> CFR001 : "View"
+  C1 --> CFR002 : "Receive Alerts"
+  C1 --> CFR003 : "View Predictions"
+  C1 --> CFR004 : "Receive Recommendations"
+  C1 --> CFR005 : "Manage Preferences"
+  C1 --> CFR006 : "View Spending Limit Alerts"
+  C1 --> CFR007 : "Access Investment Opportunities"
+  C1 --> CFR008 : "Receive News"
+  C1 --> CFR009 : "View Consolidated Dashboard"
+  C1 --> CFR10 : "Manage Relationship"
+
+}
+
+rectangle "FinancialAdvisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters Specific to Client Segments" as FAFR004
+
+  FAdvisors --> FAFR001 : "Manage"
+  FAdvisors --> FAFR002 : "View Alerts"
+  FAdvisors --> FAFR003 : "View Analytics"
+  FAdvisors --> FAFR004 : "Configure Parameters"
+
+}
+
+rectangle "SysAdmin" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System to Ensure Accuracy and Compliance with Basel III" as SAFR001
+
+  SA --> SAFR001 : "Manage"
+}
+
+package "System" {
+  system S
+  rectangle "S" {
+    usecase "SFR001: Deliver Alerts Through Notification Channels" as SFR001
+    usecase "SFR002: Provide Personalized Recommendations Based on Financial Profiles" as SFR002
+    usecase "SFR003: Request AI Predictions for Financial Insights" as SFR003
+    usecase "SFR004: Request AI-Generated Recommendations from Client Data and Preferences" as SFR004
+    usecase "SFR005: Request Spending Limit Alerts Based on User Activity" as SFR005
+    usecase "SFR006: Identify Investment Opportunities for Users Matching Risk Profiles" as SFR006
+    usecase "SFR007: Find Specific Investments Aligning with Client's ESG Preferences and Criteria" as SFR007
+    usecase "SFR008: Detect Anomalous Transactions in Compliance with AML Regulations" as SFR008
+    usecase "SFR009: Extract Relevant News for Financial Portfolios from Trusted Sources" as SFR009
+    usecase "SFR010: Generate Client Dashboards Presenting Financial Information Intuitively" as SFR010
+    usecase "SFR013: Create Alerts Based on Predefined Conditions to Ensure Timely Notifications" as SFR013
+    usecase "SFR014: Provide Meaningful Analytics of Financial Behavior and Performance" as SFR014
+    usecase "SFR015: Request AI Predictive Interventions for Client Engagement Timing" as SFR015
+    usecase "SFR016: Enhance Value of Financial Guidance via AI-Generated Insights" as SFR016
+    usecase "SFR017: Generate Financial Health Reports Using Standard Metrics and Ratios" as SFR017
+    usecase "SFR018: Track Progress Towards Financial Goals for Personalized Recommendations" as SFR018
+    usecase "SFR019: Maintain Historical Record of Insights for Trend Analysis" as SFR019
+    usecase "SFR020: Manage User Feedback to Improve System Accuracy and Relevance" as SFR020
+
+  }
+}
+
+package "AI-System" {
+  system AIFR001 :AIFR001
+  system AIFR002 :AIFR002
+  system AIFR003 :AIFR003
+  system AIFR004 :AIFR004
+  system AIFR005 :AIFR005
+  system AIFR006 :AIFR006
+  system AIFR007 :AIFR007
+  system AIFR008 :AIFR008
+  system AIFR009 :AIFR009
+
+}
+
+C1 --> SFR002 : "Receive Personalized Recommendations"
+SFR003 --> AIFR001 : "Request Predictions"
+SFR004 --> AIFR002 : "Request AI-Generated Recommendations"
+SFR005 --> AIFR003 : "Request Spending Limit Alerts"
+SFR006 --> AIFR004 : "Identify Investment Opportunities Based on Risk Profiles"
+SFR007 --> AIFR005 : "Find Specific Investments Aligning with ESG Preferences and Criteria"
+SFR008 --> AIFR006 : "Detect Anomalous Transactions in Compliance with AML Regulations"
+SFR013 --> SFR009 : "Extract Relevant News for Portfolios"
+AIFR007 --> SFR009 : "Generate Contextualized News Insights"
+SFR015 --> AIFR008 : "Request AI Predictive Interventions"
+
+@enduml
+```
+
+### Explanation:
+- **Actors**: The diagram includes three main actors: `Client`, `FinancialAdvisor`, and `SysAdmin`. Each has their respective use cases tied to specific functional requirements.
+  
+- **Use Cases**:
+  - Clients (CFR001–CFR10): Cover viewing dashboards, receiving alerts, financial predictions, personalized recommendations, spending limit management, investment opportunities, news access, consolidated views, and managing relationships with advisors.
+  - Financial Advisors (FAFR001–FAFR004): Manage mentoring sessions, view client intervention alerts, analyze predictive analytics, configure parameters for clients.
+  - SysAdmins (SAFR001): Manage AI system analysis parameters.
+
+- **System**: The central component that aggregates all functionalities. It includes use cases like delivering notifications, generating recommendations, requesting data from the AI components, and managing historical records/feedback.
+
+- **AI System**: A separate package containing specific AI-related use cases such as financial predictions (AIFR001), personalized recommendations (AIFR002), spending limit alerts (AIFR003), investment opportunities (AIFR004–5), anomaly detection (AIFR006), contextualized news insights (AIFR007), predictive interventions (AIFR008–9).
+
+- **Relationships**: All client-related use cases are linked to the `Client` actor. Financial advisors and sysadmins have their respective interactions with system components, while the AI system processes requests from both clients and financial advisors.
+
+### Key Observations:
+1. The diagram ensures that each functional requirement is mapped precisely to a corresponding use case or actor.
+2. Inheritance relationships are not explicitly required here since all actors and use cases are clearly defined without overlaps.
+3. Packages help organize related functionalities (e.g., AI system, client interactions) for clarity.
+
+This structure aligns with the provided requirements while maintaining readability and adherence to PlantUML standards.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1973]

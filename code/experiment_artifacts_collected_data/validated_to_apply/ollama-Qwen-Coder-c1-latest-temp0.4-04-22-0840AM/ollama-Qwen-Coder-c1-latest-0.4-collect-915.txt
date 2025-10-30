@@ -1,0 +1,69 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR005: Manage Analysis Parameters Preferences" as SAFR005
+  
+  Client --> CFR001
+  Client --> SAFR005
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  
+  FinancialAdvisor --> FAFR002
+  FinancialAdvisor --> FAFR003
+}
+
+rectangle "System Admin" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SystemAdmin --> SAFR001
+}
+
+package "Client Interactions" {
+  Client --> (SFR012: Generate Client Dashboards)
+  Client --> (SFR013: Generate Client Alerts)
+  Client --> (SFR014: Generate Client Analytics)
+  Client --> (SAFR005: Manage Analysis Parameters Preferences)
+}
+
+package "Financial Advisor Interactions" {
+  FinancialAdvisor --> (FAFR002: View Client Intervention Alerts)
+  FinancialAdvisor --> (FAFR003: View Predictive Analytics)
+  FinancialAdvisor --> (SFR016: Generate Predictive Insights)
+  FinancialAdvisor --> (AIFR004: Generate Investment Opportunity Analyses)
+}
+
+package "System Interactions" {
+  SystemAdmin --> (SAFR001: Manage Analysis Parameters)
+  
+  Sys --> (SFR002: Deliver Personalized Recommendations)
+  Sys --> (SFR003: Request Financial Predictions from AI)
+  Sys --> (SFR004: Request Personalized Recommendations from AI)
+  Sys --> (SFR005: Request Spending Limit Alerts from AI)
+  Sys --> (SFR006: Request Investment Opportunity Analysis from AI)
+  Sys --> (SFR017: Generate Financial Health Reports)
+  
+  System --> (AIFR002: Generate Personalized Recommendations for Users)
+}
+
+package "User Feedback" {
+  Client --> (CFR011: Send Feedback about the system's recommendations and insights)
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 546]

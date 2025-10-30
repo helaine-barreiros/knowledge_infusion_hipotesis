@@ -1,0 +1,69 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as fa
+actor SysAdmin as sa
+system SFR001: "System" as sys
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Access Personalized Recommendations Aligned with Financial Goals" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: Receive Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Financial Advisors" as CFR009
+}
+
+rectangle "System Admin Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+}
+
+rectangle "AI System Interface" {
+  usecase "AIFR001: Generate Financial Predictions Based on Data and Trends" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations Aligning with Goals" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts for Unusual Patterns" as AIFR003
+}
+
+rectangle "System Core Functions" {
+  usecase "SFR018: Manage Users' Financial Goals to Track Progress and Provide Recommendations" as SFR018  
+  usecase "SFR020: Maintain Historical Record of Insights for Trend Analysis" as SFR020
+  usecase "CFR011: Send Feedback on System Outputs" as CFR011  
+}
+
+c1 --> CFR001 : View Financial Dashboard
+c1 --> CFR002 : Receive Transaction Alerts
+c1 --> CFR003 : View Predictions Based on Data and Trends
+c1 --> CFR004 : Access Personalized Recommendations
+c1 --> CFR005 : Manage Recommendation Preferences  
+c1 --> CFR006 : Get Spending Limit Alerts
+c1 --> CFR007 : View Investment Opportunities
+c1 --> CFR008 : Read Portfolio News  
+c1 --> CFR009 : Manage Advisor Relationship  
+
+sa --> SAFR001 : Administer Analysis Parameters
+
+fa --> FAFR001 : Schedule Mentoring Sessions Based on Insights  
+fa --> FAFR002 : View Intervention Alerts
+fa --> FAFR003 : Review Predictive Analytics for Clients
+
+sys <|-- AIFR001 : AI Generates Predictions
+sys <|-- AIFR002 : AI Provides Personalized Recommendations
+sys <|-- AIFR003 : AI Issues Spending Limit Alerts  
+
+sys <|-- SFR018 : Track Financial Goals  
+sys <|-- SFR020 : Store Historical Insights  
+sys --> CFR011 : Collect User Feedback
+
+@enduml

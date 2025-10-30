@@ -1,0 +1,84 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Spending Limit Alerts" as SAFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SAFR003: View Anomaly Transaction Alerts" as SAFR003
+  usecase "CFR006: Manage Relationship with Financial Advisors" as CFR006
+
+  Client --> CFR001 : "View financial insights"
+  Client --> SFR003 : "Request predictions"
+  Client --> CFR004 : "Receive recommendations"
+  Client --> SAFR002 : "Manage spending limits"
+  Client --> CFR005 : "Adjust preferences"
+  Client --> SFR012 : "View dashboards"
+  Client --> SAFR003 : "Check alerts"
+
+  SysAdmin --> SAFR001
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+  SFR003 --> AIFR001 : "Request predictions"
+  CFR004 --> AIFR002 : "Receive recommendations"
+  SAFR002 --> AIFR003 : "Set alerts"
+}
+
+rectangle "News Component" {
+  usecase "SFR009: Request Contextualized News" as SFR009
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+  SFR009 --> AIFR007 : "Request news"
+}
+
+rectangle "Client Management Component" {
+  usecase "CFR011: Send Feedback" as CFR011
+}
+
+@enduml
+```
+
+**Explanation of the Diagram Structure:**
+
+- **System Boundary:** The main system is represented by a rectangle labeled "System," which includes various client-related use cases (e.g., viewing dashboards, receiving recommendations) and some administrative ones.
+  
+- **Client Interactions:** Clients interact with several features:
+  - Viewing financial insights (CFR001).
+  - Receiving personalized recommendations (CFR004).
+  - Managing spending limit alerts (SAFR002).
+  - Adjusting recommendation preferences (CFR005).
+  - Accessing dashboards (SFR012).
+
+- **System Administrator Interactions:** SAFR001 is managed by the System Admin for AI parameter tuning.
+
+- **AI Component:** This handles core functionalities:
+  - Financial predictions (AIFR001),
+  - Personalized recommendations (AIFR002),
+  - Spending limit alerts (AIFR003).
+
+- **News Component:** Fetches and processes contextualized news for clients via AIFR007.
+
+- **Client Management:** Feedback mechanism (CFR011) is included here to improve system outputs based on user input. 
+
+This structure ensures clarity in how different actors interact with the system, components, and AI functionalities. Each use case corresponds directly to its requirement ID for precision. Relationships are established through directed arrows indicating who initiates which actions within the system. The grouping of related use cases under their respective components (AI Component, News Component) enhances readability by logical categorization. 
+
+**Key Observations:**
+- No redundant or implied actors beyond those explicitly listed in requirements.
+- Use case relationships strictly follow requirement descriptions to avoid overcomplication.
+- System boundaries are clearly defined with nested rectangles for modularity and easier comprehension.
+
+[Done: True
+Done Reason: stop
+Eval Count: 940]

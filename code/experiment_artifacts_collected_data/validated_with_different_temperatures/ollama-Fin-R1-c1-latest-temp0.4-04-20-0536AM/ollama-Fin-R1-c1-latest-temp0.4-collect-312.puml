@@ -1,0 +1,62 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Advisors" as CFR009
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  
+  client --> CFR001 : "View Financial Insights Dashboard"
+  client --> FAFR002 : "View Client Intervention Alerts"
+  client --> CFR003 : "View Financial Predictions"
+  client --> CFR004 : "Receive Personalized Recommendations"
+  client --> CFR005 : "Manage Recommendation Preferences"
+  client --> CFR006 : "View Spending Limit Alerts"
+  client --> CFR007 : "View Investment Opportunities"
+  client --> CFR008 : "Access News Related to Portfolio"
+  client --> CFR009 : "Manage Relationship with Advisors"
+
+  sysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  advisor --> FAFR002 : "View Client Intervention Alerts"
+  advisor --> FAFR003 : "View Predictive Analytics for Clients"
+  advisor --> AIFR008 : "Generate Client Predictive Interventions"
+  
+  system --> CFR001 <|-- (CFR001)
+  system --> SAFR001 <|-- (SAFR001)
+  system --> FAFR002 <|-- (FAFR002)
+  system --> CFR003 <|-- (CFR003)
+  system --> CFR004 <|-- (CFR004)
+  system --> CFR005 <|-- (CFR005)
+  system --> CFR006 <|-- (CFR006)
+  system --> CFR007 <|-- (CFR007)
+  system --> CFR008 <|-- (CFR008)
+  system --> CFR009 <|-- (CFR009)
+  
+  client <|-- (system) : "User"
+  sysAdmin <|-- (system) : "System Administrator"
+  advisor <|-- (system) : "Financial Advisor"
+
+  rectangle "Client" {
+    actor Client as c
+  }
+  rectangle "System Administrator" {
+    actor SysAdmin as sa
+  }
+  rectangle "Financial Advisor" {
+    actor FAFR001 as faa, actor AIFR009 as aifra
+  }
+
+}
+@enduml

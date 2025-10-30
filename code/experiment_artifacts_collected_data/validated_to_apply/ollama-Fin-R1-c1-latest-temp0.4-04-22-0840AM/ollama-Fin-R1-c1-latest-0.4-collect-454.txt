@@ -1,0 +1,88 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Personalized Dashboard" as CFR008
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+
+  rectangle "Client Interface" {
+    actor Client as client
+    client --> CFR001 : View dashboard
+    client --> CFR003 : View predictions
+    client --> CFR004 : Receive recommendations
+    client --> CFR005 : Manage preferences
+    client --> CFR006 : Receive spending alerts
+    client --> CFR007 : View investments
+    client --> CFR008 : Access dashboard
+  }
+
+  rectangle "System Admin" {
+    actor SysAdmin as sysadmin
+    sysadmin --> SAFR001 : Manage parameters
+  }
+
+  rectangle "Financial Advisor Interface" {
+    actor FinancialAdvisor as advisor
+    advisor --> FAFR002 : View alerts
+    advisor --> CFR007: View investments
+    advisor --> FAFR003: View analytics
+    advisor --> FAFR004: Configure parameters
+  }
+
+  rectangle "System" {
+    usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+
+    SysAdmin <|-- SAFR001 : Configures parameters for compliance and accuracy.
+
+    client --> CFR002 : View alerts (FATF)
+    client --> SFR003 : Request predictions
+    client --> SFR004 : Request recommendations
+    client --> SFR005: Receive spending limits
+    client --> SFR018: Manage goals
+
+    SysAdmin --> SAFR002: System Admin can view system logs (not explicitly mentioned in requirements but inferred for completeness)
+  }
+
+  Client <|-- CFR009 : Access consolidated dashboard.
+
+  FinancialAdvisor <|-- FAFR005: Configure parameters specific to client segments.
+  
+  advisor --> SFR013: Generate alerts based on conditions set by advisors.
+}
+
+@enduml
+```
+
+### Explanation:
+- **Actors**: The diagram includes three main actors - `Client`, `SysAdmin` (System Administrator), and `FinancialAdvisor`. Each actor is associated with specific use cases as per the requirements. For example, Clients can view dashboards, receive recommendations, etc., while System Administrators manage analysis parameters.
+  
+- **Use Cases**:
+  - Client-related use cases (`CFR001`, `CFR003`–`CFR008`, `CFR010`) are grouped under the "Client Interface" rectangle. These represent functionalities like viewing financial data, receiving alerts, personalized recommendations, etc.
+  - System Administrator uses case (`SAFR001`) is for managing analysis parameters in the system.
+  
+- **System**: The "System" rectangle contains use cases related to maintaining historical records and generating client-specific insights (e.g., `SFR019`, `AIFR008`).
+  
+- **Relationships**:
+  - Clients can trigger multiple use cases directly, such as viewing dashboards or receiving recommendations.
+  - System Administrators manage parameters via `SAFR001`.
+  - Financial Advisors view client alerts and generate specific reports like investment opportunities (`CFR007`) but also have their own configuration options (e.g., `FAFR004`).
+  
+- **Inheritance/Extends**: The system admin's role extends to managing parameters, which are critical for compliance. Financial advisors extend the use of certain client-related features based on their needs.
+
+This structure ensures all requirements are captured accurately and relationships between actors and use cases are clearly defined. Adjustments may be needed if additional context from the problem statement is required (e.g., explicit mention of SysAdmin viewing logs). However, given the provided list, this should cover all necessary interactions.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1036]

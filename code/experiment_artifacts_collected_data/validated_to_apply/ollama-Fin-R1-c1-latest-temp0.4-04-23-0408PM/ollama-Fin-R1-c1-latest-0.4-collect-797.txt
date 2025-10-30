@@ -1,0 +1,124 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  User --> FAFR002 : "View Client Intervention Alerts"
+
+  System --> AIFR006 : "Generate Anomaly Transaction Alerts"
+}
+
+rectangle "Client" {
+  actor "User (Client)" as U
+
+  U -> CFR001
+  U -->> SAFR001 via SysAdmin
+  U --> FAFR002
+  U --> SFR013: "View Client Alerts"
+
+  User <|-- (CFR005) : Manage Recommendations Preferences
+}
+
+rectangle "Financial Advisor" {
+  actor "User (FA)" as FA
+
+  FA -> AIFR008: "Generate Predictive Intervention Recs"
+  FA --> FAFR002
+  FA -->> SFR013 via System
+}
+
+rectangle "System Administrator" {
+  actor "SysAdmin" as SA
+  
+  SA --> SAFR001 : Manage Analysis Parameters
+
+  SysAdmin -> AIFR009: Generate Predictive Insights
+}
+@enduml
+```
+
+### Explanation:
+- **Client**: Represents the end-users (clients, financial advisors) who interact with the system.
+- **SysAdmin**: System Administrator role for managing analysis parameters.
+- **User (FA)**: Financial Advisor as a user type within the client group.
+  
+The diagram includes use cases like viewing dashboards, generating alerts, and managing preferences. Relationships are established between actors and their respective use cases through directed arrows to show interactions.
+
+### Key Components:
+1. **Client**: Interacts with `CFR001` (view dashboard), `SAFR001`, and others.
+2. **SysAdmin**: Manages parameters via `SAFR001`.
+3. **User (FA)**: Financial Advisors use specific features like predictive interventions (`AIFR008`) and alerts (`FAFR002`).
+4. **System**: Executes AI functionalities such as anomaly detection (`AIFR006`).  
+
+This structure ensures clarity in role-based interactions within the system. Adjustments can be made based on further requirements or additional use cases not listed here. 
+
+---
+
+**Note:** Ensure all actors and use case IDs match exactly with those provided, adhering strictly to formatting rules (e.g., quotes around names with spaces). The relationships are bidirectional where applicable but follow directionality as per the requirements. For instance, `Client` can view dashboards (`CFR001`) directly or through system actions like alerts (`SFR013`). Financial Advisors use specific AI-generated insights (`AIFR008`, etc.), while System Administrators manage parameters (`SAFR001`). The diagram groups related actors and use cases under their respective categories for better organization. 
+
+The PlantUML code is structured with proper indentation, using rectangles to encapsulate system components where necessary. All relationships are clearly defined via arrows, ensuring no ambiguity in the flow of interactions between entities.
+```plantuml
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001  
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002  
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006  
+
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  User --> FAFR002 : "View Client Intervention Alerts"
+
+  System --> AIFR006 : "Generate Anomaly Transaction Alerts"
+}
+
+rectangle "Client" {
+  actor "User (Client)" as U
+
+  U -> CFR001
+  U -->> SAFR001 via SysAdmin
+  U --> FAFR002  
+  U --> SFR013: "View Client Alerts"
+
+  User <|-- (CFR005) : Manage Recommendations Preferences
+}
+
+rectangle "Financial Advisor" {
+  actor "User (FA)" as FA
+
+  FA -> AIFR008: "Generate Predictive Intervention Recs"
+  FA --> FAFR002  
+  FA -->> SFR013 via System
+}
+
+rectangle "System Administrator" {
+  actor "SysAdmin" as SA
+  
+  SA --> SAFR001 : Manage Analysis Parameters
+
+  SysAdmin -> AIFR009: Generate Predictive Insights
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1129]

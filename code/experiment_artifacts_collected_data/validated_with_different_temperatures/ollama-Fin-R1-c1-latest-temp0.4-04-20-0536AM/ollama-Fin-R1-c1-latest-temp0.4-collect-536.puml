@@ -1,0 +1,60 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  usecase "AIFR008: Generate Predictive Intervention Recommendations for Advisors" as AIFR008
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "AIFR006: Generate Investment Opportunities for Users" as AIFR006
+  usecase "CFR004: Receive Personalized Financial Recommendations Based on Profile and Goals" as CFR004
+  usecase "SFR009: Deliver Contextualized News Related to Portfolio" as SFR009
+  usecase "AIFR007: Generate Contextualized News Insights for Users" as AIFR007
+  usecase "CFR010: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as CFR010
+}
+
+actor Client as cClient {
+  --> CFR001 : View financial insights dashboard\nView spending limit alerts\nReceive personalized recommendations\nView investment opportunities\nAccess consolidated dashboards\nManage relationship with advisors\nSend feedback to system
+}
+actor SysAdmin as aSysAdmin {
+  --> SAFR001 : Manage analysis parameters for AI systems\nEnsure compliance (Basel III, etc.)
+}
+
+actor FinancialAdvisor as fAdvisor {
+  --> FAFR003: View predictive analytics about clients' financial situations\nView client intervention alerts\nConfigure analysis parameters for specific segments\nReceive contextualized news insights
+}
+actor System as Sys {
+  --> CFR001 : Deliver dashboards to users\nRequest predictions, recommendations, etc.\nProcess user requests and generate outputs (e.g., SFR014)
+}
+
+// Relationships between actors and use cases
+
+cClient -> CFR001: View financial data in comprehensive format
+cClient -> CFR002: Receive alerts on anomalous transactions
+cClient -> CFR003: View future predictions based on history and trends
+cClient -> CFR004: Get personalized recommendations aligned with profile
+cClient -> CFR005: Manage preferences for personalization (KYC)
+cClient -> CFR006: View spending limit alerts when exceeding thresholds
+cClient -> CFR007: Access investment opportunities suitable to risk profile
+cClient -> CFR008: Receive news related to portfolio management
+cClient -> CFR010: Control data sharing with advisors
+
+aSysAdmin -> SAFR001: Manage system parameters for AI components (e.g., AIFR002, etc.)
+
+fAdvisor -> FAFR003: Use predictive analytics in client consultations\nView alerts and recommendations
+fAdvisor -> FAFR004: Customize analysis settings per client segment
+
+SysAdmin <|-- Sys : System is managed by Sys Admin for compliance and maintenance.
+
+// Grouping actors under system boundary
+rectangle "System" {
+  cClient, fAdvisor, aSysAdmin, Sys
+}
+
+@enduml

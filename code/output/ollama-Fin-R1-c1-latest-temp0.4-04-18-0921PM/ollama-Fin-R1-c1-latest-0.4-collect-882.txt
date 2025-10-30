@@ -1,0 +1,118 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sas
+actor FinancialAdvisor as fa
+system "System" as sys
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Access Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Receive Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Consolidate Financial Information in Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+
+  c1 --> CFR001 : View dashboard
+  c1 --> CFR002 : Receive alerts for transactions
+  c1 --> CFR003 : Get financial predictions
+  c1 --> CFR004 : Personalized recommendations
+  c1 --> CFR005 : Manage preferences
+  c1 --> CFR006 : Spending limit alerts
+  c1 --> CFR007 : Investment opportunities
+  c1 --> CFR008 : Portfolio news
+  c1 --> CFR009 : Consolidated view
+  c1 --> CFR10 : Manage advisors
+
+}
+
+rectangle "System Admin Interface" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  sas --> SAFR001 : Configure parameters
+}
+  
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: Access Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Segment" as FAFR004
+
+  fa --> FAFR001 : Mentoring sessions
+  fa --> FAFR002 : Intervention alerts
+  fa --> FAFR003 : Predictive analytics
+  fa --> FAFR004 : Configure segments
+}
+
+rectangle "System Core" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  usecase "SFR002: Generate Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI" as SFR003
+  usecase "SFR004: Request Personalized Recs from AI" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "SFR006: Request Investment Opportunities Analysis" as SFR006
+  usecase "SFR007: Request Specific Investments Based on Criteria and ESG" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts for AML Compliance" as SFR008
+  usecase "SFR009: Find Contextualized News Relevant to Portfolio" as SFR009
+  usecase "SFR010: Process Contextualized News Insights" as SFR010
+  usecase "SFR011: Request AI-Generated Client Dashboards" as SFR011
+  usecase "SFR012: Generate Client Alerts Based on Conditions" as SFR012
+  usecase "SFR013: Generate Client Analytics for Financial Insights" as SFR013
+  usecase "SFR014: Request Predictive Interventions from AI" as SFR014
+  usecase "SFR015: Manage Users' Financial Goals Tracking" as SFR015
+  usecase "SFR016: Maintain Historical Record of Insights for Trend Analysis" as SFR016
+  usecase "SFR017: Generate Financial Health Reports Based on Ratios and Metrics" as SFR017
+
+  sys --> (all above) : Core functionalities
+}
+
+rectangle "AI System Interface" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Analyze Investment Opportunities Based on Risk Profile" as AIFR004
+  usecase "AIFR005: Identify Suitable Investments Aligning with Strategies and MPT Principles" as AIFR005
+  usecase "AIFR006: Detect Anomalies in Transactions for Fraud Detection" as AIFR006
+  usecase "AIFR007: Correlate News to Portfolios for Impact Analysis" as AIFR007
+  usecase "AIFR008: Recommend Interventions Based on Client Patterns" as AIFR008
+  usecase "AIFR009: Provide Forward-Looking Financial Insights via Predictive Analytics" as AIFR009
+
+  sys --> (all above) : AI-generated services
+}
+
+actor User as u1 extends c1, fa, sas { }
+  
+User <|-- Client 
+User <|-- FinancialAdvisor 
+User <|-- SysAdmin 
+
+@enduml
+```
+
+### Explanation:
+- **Client Interface**: Represents all client-related use cases and their interactions. The `Client` actor (alias: `c1`) is connected to each of the 9 functional requirements (`CFR001–CFR009`). Additionally, a new requirement for managing relationships with advisors (`CFR10`) was added based on the provided list.
+- **System Admin Interface**: Contains only one use case (`SAFR001: Manage Analysis Parameters`), accessible by `SysAdmin`.
+- **Financial Advisor Interface**: Includes 4 use cases related to client management, alerts, predictive analytics, and parameter configuration. The advisor can access these through their role as a user.
+- **System Core**: A central rectangle encompassing all system-related functionalities (`SFR001–SFR020`). These are executed by the `sys` component but also include interactions with external components like AI systems or third-party services (e.g., news sources).
+- **AI System Interface**: Represents AI-generated outputs and requests, such as predictions, recommendations, etc. This is part of the system core.
+- **User** (`u1`) extends all three main actor types: Client, Financial Advisor, and SysAdmin. This ensures that any user (regardless of role) can access their respective use cases.
+
+### Key Observations:
+1. The `Client` actor encompasses most functional requirements, reflecting its central role in the system.
+2. Inheritance relationships are established between actors to handle multiple roles (`User <|-- Client`, etc.), ensuring flexibility and adherence to real-world scenarios where users might switch roles (e.g., a client becoming an advisor).
+3. The use case grouping follows logical categories: client interactions, admin management, advisor activities, system core, and AI services.
+4. All relationships are bidirectional or unidirectional as per the requirements, with proper labels indicating directionality when necessary.
+
+This structure ensures clarity in defining roles, their permissions, and interactions within the complex ecosystem of the AI-Powered Analysis & Insights System.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1762]

@@ -1,0 +1,84 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR009: Request Contextualized News Insights" as SFR009
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  sysadmin --> SAFR001 : "Manage Analysis Parameters"
+  advisor --> FAFR002 : "View Client Intervention Alerts"
+  advisor --> FAFR003 : "View Predictive Analytics for Clients"
+  system --> SFR009 : "Request Contextualized News Insights"
+
+  package Professional {
+    actor User as u
+    user <|-- (CFR001)
+    user <|-- (SAFR001)
+    user <|-- (FAFR002)
+    user <|-- (FAFR003)
+    user <|-- (SFR009)
+
+    package Client {
+      actor Client as c
+      client --> CFR001 : "View Financial Insights Dashboard"
+      client --> SFR009 : "Request Contextualized News Insights"
+
+      package Advisor {
+        actor FinancialAdvisor as fa
+        advisor --> FAFR002 : "View Client Intervention Alerts"
+        advisor --> FAFR003 : "View Predictive Analytics for Clients"
+        
+        package Admin {
+          actor SysAdmin as sa
+          sysadmin --> SAFR001 : "Manage Analysis Parameters"
+
+          rectangle "System" {
+            usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+            sa <|-- (SAFR001)
+            fa <|-- (FAFR002, FAFR003)
+            c --> CFR001
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire system is enclosed within a rectangle labeled "System".
+- **Use Cases**:
+  - `CFR001: View Financial Insights Dashboard` (Client)
+  - `SAFR001: Manage Analysis Parameters` (SysAdmin)
+  - `FAFR002: View Client Intervention Alerts`, `FAFR003: View Predictive Analytics for Clients` (Advisor)
+- **Actors**:
+  - **User**: A general term encompassing clients, advisors, and sysadmins.
+    - Subcategories:
+      - **Client**
+        - Can view the dashboard (`CFR001`) and request contextualized news insights (`SFR009`).
+      - **Advisor**
+        - Views client alerts (`FAFR002`) and predictive analytics (`FAFR003`).
+      - **SysAdmin**
+        - Manages analysis parameters (`SAFR001`).
+
+- **Relationships**:
+  - Clients interact with the system via use cases like viewing dashboards or receiving news.
+  - Advisors receive alerts and perform analyses.
+  - Sysadmins manage parameter settings.
+
+This structure ensures all actors and their interactions are represented accurately based on the provided requirements. The nested packages help organize related entities (e.g., client, advisor) under broader categories for clarity.
+
+[Done: True
+Done Reason: stop
+Eval Count: 768]

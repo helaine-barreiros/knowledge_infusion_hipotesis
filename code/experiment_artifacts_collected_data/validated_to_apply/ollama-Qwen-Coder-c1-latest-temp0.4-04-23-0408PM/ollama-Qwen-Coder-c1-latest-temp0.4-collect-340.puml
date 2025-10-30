@@ -1,0 +1,66 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR013: Generate Client Alerts" as SFR013
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  usecase "SFR015: Request Predictive Intervention Analyses" as SFR015
+  usecase "SFR016: Request Predictive Insights" as SFR016
+  usecase "SFR017: Generate Financial Health Reports" as SFR017
+  usecase "SFR018: Manage Users' Financial Goals" as SFR018
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  usecase "SFR020: Manage User Feedback" as SFR020
+  
+  rectangle "Client Use Cases" {
+    actor Client as C
+    C --> (CFR001)
+    C --> (CFR002)
+    C --> (CFR003)
+    C --> (CFR004)
+    C --> (CFR005)
+    C --> (CFR006)
+    C --> (CFR007)
+    C --> (CFR008)
+    C --> (CFR009)
+  }
+  
+  rectangle "Financial Advisor Use Cases" {
+    actor FinancialAdvisor as FA
+    FA --> (FAFR001)
+    FA --> (FAFR002)
+    FA --> (FAFR003)
+    FA --> (FAFR004)
+  }
+  
+  rectangle "System Administrator Use Cases" {
+    actor SystemAdmin as SA
+    SA --> (SAFR001)
+  }
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunities" as AIFR005
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+  usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+  
+  SFR012 --> (AIFR007)
+  SFR013 --> (AIFR006, AIFR008, AIFR009)
+  SFR014 --> (AIFR005)
+  SFR015 --> (AIFR002)
+  SFR016 --> (AIFR003, AIFR007)
+  SFR018 --> (SFR019)
+}
+
+rectangle "Notification Channels" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+}
+@enduml

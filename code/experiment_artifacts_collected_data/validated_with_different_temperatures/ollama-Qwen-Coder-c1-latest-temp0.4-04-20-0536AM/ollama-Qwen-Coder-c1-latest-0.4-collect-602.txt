@@ -1,0 +1,95 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR004
+  usecase "CFR005: Manage Recommendation Preferences" as SAFR005
+  usecase "CFR006: View Spending Limit Alerts" as SAFR006
+  usecase "CFR007: View Investment Opportunities" as SAFR007
+  usecase "CFR008: View News Related to Portfolio" as SAFR008
+  usecase "CFR009: Access Personalized Dashboard" as SAFR009
+  usecase "CFR10: Manage Financial Advisor Relationship" as SAFR10
+  
+  CFR001 --> SAFR002
+  CFR001 --> SAFR003
+  CFR001 --> SAFR004
+  CFR001 --> SAFR005
+  CFR001 --> SAFR006
+  CFR001 --> SAFR007
+  CFR001 --> SAFR008
+  CFR001 --> SAFR009
+  CFR001 --> SAFR10
+  
+  rectangle "Financial Advisor" {
+    actor FinancialAdvisor as FAFR002
+    
+    usecase "FAFR003: View Predictive Analytics" as FAFR003
+    usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+    
+    FAFR002 --> FAFR003
+    FAFR002 --> FAFR004
+  }
+  
+  rectangle "System Administrator" {
+    actor SystemAdmin as SAFR001
+    
+    usecase "SAFR007: Manage Analysis Parameters for AI System" as SAFR007
+    
+    SAFR001 --> SAFR007
+  }
+}
+
+rectangle "AI Component" {
+  package "Recommendations and Insights Generation" {
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR004: Generate Spending Limit Alerts" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunity Analyses" as AIFR005
+    
+    SAFR001 --> AIFR002
+    SAFR001 --> AIFR004
+    SAFR001 --> AIFR005
+  }
+  
+  package "Predictive Analytics and Interventions" {
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+    
+    FAFR002 --> AIFR009
+  }
+}
+
+rectangle "System" {
+  usecase "SFR013: Deliver Personalized Recommendations to Users" as SFR013
+  
+  SAFR004 <|-- SFR013
+  SAFR005 <|-- SFR013
+  AIFR002 <|-- SFR013
+}
+
+rectangle "Notification Channels" {
+  usecase "SFR019: Maintain Historical Record of Users' Insights" as SFR019
+  
+  SAFR004 --> SFR019
+  SAFR005 --> SFR019
+  AIFR002 --> SFR019
+}
+
+rectangle "User Feedback Management" {
+  usecase "CFR11: Send Feedback About Recommendations and Insights" as CFR11
+  
+  SAFR004 --> CFR11
+  SAFR005 --> CFR11
+  AIFR002 --> CFR11
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 901]

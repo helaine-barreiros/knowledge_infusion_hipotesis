@@ -1,0 +1,49 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAdvisor
+:User: as User
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+  
+  rectangle "Client Functions" {
+    Client --> CFR001 : "View Financial Insights Dashboard"
+    Client --> SAFR002 : "Manage Analysis Parameters"
+    Client --> FAFR004 : "Configure Analysis Parameters for Specific Client Segments"
+    Client --> SFR005 : "Request Spending Limit Alerts from AI Component"
+  }
+  
+  rectangle "Financial Advisor Functions" {
+    FinancialAdvisor --> FAFR001 : "Manage Client Mentoring Sessions Based on System-Generated Insights"
+    FinancialAdvisor --> FAFR002 : "View Client Intervention Alerts When the System Detects Patterns Requiring Professional Attention to Proactively Assist Clients with Potential Financial Issues"
+    FinancialAdvisor --> FAFR003 : "View Predictive Analytics About My Clients' Financial Situations To Provide Data-Driven Recommendations During Consultations"
+  }
+  
+  rectangle "System Functions" {
+    User --> SFR012 : "Generate Client Dashboards That Present Financial Information in an Intuitive and Actionable Format"
+    User --> SFR013 : "Generate Client Alerts Based on Predefined Conditions To Ensure Timely Notification of Important Financial Events"
+    User --> AIFR009 : "Generate Client Predictive Intervention Recommendations By Identifying Patterns That Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement"
+  }
+  
+  rectangle "AI System Functions" {
+    AIFR001 : "Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators"
+    AIFR002 : "Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance as Defined By Industry Standards Like FINRA Guidelines"
+    AIFR003 --> SFR015 : "Request Predictive Intervention Analyses From the AI Component to Identify When Financial Advisors Should Engage With Clients"
+  }
+  
+  User <|-- Client
+  User <|-- FinancialAdvisor
+  User <|-- SysAdmin
+  
+}
+
+@enduml

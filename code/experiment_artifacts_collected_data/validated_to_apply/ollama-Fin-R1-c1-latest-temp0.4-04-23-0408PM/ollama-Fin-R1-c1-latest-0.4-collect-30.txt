@@ -1,0 +1,56 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "SAFR004: Configure Analysis Parameters for Segments" as SAFR004
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+
+  Client --> CFR001 : "View financial data"
+  SysAdmin -> SAFR001 : "Manage parameters"
+
+  rectangle "Client Interface" {
+    actor User as U
+    U --> CFR001 : "Interact with dashboard"
+    U --> FAFR002 : "Check alerts"
+    U --> SFR019 : "Review history"
+  }
+
+  rectangle "Advisor Tools" {
+    actor FinancialAdvisor as FA
+    FA -> FAFR002 : "View client alerts"
+    FA -> CFR004 : "Receive recommendations"
+    FA -> SAFR003 : "Request predictions"
+    FA --> SFR019 : "Check history"
+  }
+
+  rectangle "Admin Tools" {
+    actor SysAdmin as SA
+    SA -> SAFR001 : "Manage parameters"
+    SA -> CFR005 : "Adjust preferences"
+  }
+}
+
+@enduml
+```
+
+**Key Observations:**
+- **Client Interface**: The system provides a financial insights dashboard (CFR001) for clients to view their data. Clients can also manage recommendations and alerts.
+- **Advisor Tools**: Financial advisors use tools like FAFR002 to check client intervention alerts, CFR004 for personalized recommendations, SAFR003 for requests, and SFR019 to review historical insights.
+- **Admin Tools**: SysAdmins handle parameter management (SAFR001) and preference adjustments (CFR005).
+- **Use Case Grouping**:
+  - Clients interact with the system through CFR001, FAFR002, SFR019.
+  - Advisors use FAFR002, CFR004, SAFR003, SFR019.
+  - SysAdmins manage parameters via SAFR001 and preferences with CFR005.
+
+This structure ensures clarity in actor-to-use-case relationships while adhering to the provided requirements. Adjustments may be needed based on further analysis or specific interactions not detailed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 598]

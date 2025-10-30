@@ -1,0 +1,84 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Current Trends" as SAFR004
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as SAFR005
+  usecase "CFR006: Manage Personalized Recommendations Preferences" as SAFR012
+  usecase "CFR007: View Spending Limit Alerts When Exceeding Predefined Thresholds in Specific Expense Categories" as SAFR013
+  
+  CFR001 --> SAFR003
+  CFR001 --> SAFR004
+  CFR001 --> SAFR005
+  CFR001 --> SAFR012
+  CFR001 --> SAFR013
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts When System Detects Patterns Requiring Professional Attention" as SAFR014
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations to Provide Data-Driven Recommendations During Consultations" as SAFR015
+  
+  FAFR001 --> SAFR014
+  FAFR001 --> SAFR015
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR006
+  
+  usecase "SAFR007: Manage Analysis Parameters for the AI System to Ensure Algorithms Remain Accurate, Relevant, and Compliant with Financial Regulations Such as Basel III for Risk Management" as SAFR018
+  usecase "CFR011: Send Feedback About the System's Recommendations and Insights to Help Improve Accuracy and Relevance of Future Outputs" as AIFR023
+  
+  SAFR006 --> SAFR018
+  SAFR006 --> AIFR023
+}
+
+package "System Components" {
+  usecase "SFR001: Deliver Alerts to Users Through Appropriate Notification Channels" as SFR001
+  usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from the AI Component" as AIFR009
+  usecase "SFR004: Request Personalized Recommendations From the AI Component Based on Each User's Financial Data and Preferences" as AIFR010
+  usecase "SFR005: Request Spending Limit Alerts From the AI Component When User Spending Patterns Exceed Defined Thresholds" as AIFR026
+  usecase "SFR006: Request Investment Opportunity Analysis from the AI Component to Identify Suitable Investments for Users Based on Their Risk Profiles" as AIFR013
+  usecase "SFR007: Request Specific Investment Opportunities From the AI Component That Match User Investment Criteria and ESG Preferences" as AIFR025
+  usecase "SFR008: Request Anomaly Transaction Alerts from the AI Component to Detect Potentially Fraudulent Activities in Accordance with AML Regulations" as AIFR017
+  usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios From Trusted Financial News Sources" as SFR024
+  usecase "SFR010: Process Contextualized News To Extract Relevant Information for Users' Financial Situations" as AIFR035
+  usecase "SFR011: Request Contextualized News Insights from the AI Component to Identify Potential Impacts on Users' Investments" as AIFR028
+  usecase "SFR012: Generate Client Dashboards That Present Financial Information in an Intuitive and Actionable Format" as SFR036
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions to Ensure Timely Notification of Important Financial Events" as AIFR045
+  usecase "SFR014: Generate Client Analytics That Provide Meaningful Insights Into Financial Behavior and Performance" as SFR027
+  usecase "SFR015: Request Predictive Intervention Analyses from the AI Component to Identify When Financial Advisors Should Engage With Clients" as AIFR039
+  usecase "SFR016: Request Predictive Insights From the AI Component To Enhance the Value of Financial Guidance Provided to Clients" as AIFR042
+  usecase "SFR017: Generate Financial Health Reports That Assess Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as SFR038
+  usecase "SFR018: Manage Users' Financial Goals To Track Progress and Provide Relevant Recommendations" as AIFR046
+  usecase "SFR019: Maintain a Historical Record of Users' Insights to Enable Trend Analysis and Effectiveness Measurement" as SFR037
+  
+  SFR002 --> SAFR005
+  SFR008 --> SAFR013
+}
+
+rectangle "System Boundary" {
+  usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios From Trusted Financial News Sources" as SFR024
+  
+  rectangle "AI System" {
+    usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR009
+    usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance As Defined By Industry Standards Like FINRA Guidelines" as AIFR010
+    usecase "AIFR003: Generate Spending Limit Alerts For Users by Identifying Unusual Deviations From Established Spending Patterns" as AIFR026
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users by Evaluating Potential Investments Against Their Risk Profiles, Time Horizons, and Financial Goals" as AIFR013
+    usecase "AIFR005: Generate Investment Opportunities For Users by Identifying Financial Instruments That Align With Their Investment Strategies and Modern Portfolio Theory Principles" as AIFR025
+    usecase "AIFR006: Generate Anomaly Transaction Alerts By Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance with FinCEN Requirements" as AIFR017
+    usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News With Specific User Portfolios to Identify Relevant Impacts" as AIFR028
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations By Identifying Patterns That Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR039
+    usecase "AIFR009: Generate Client Predictive Insights that Provide Forward-Looking Analysis of Financial Situations to Support More Effective Financial Planning" as AIFR042
+  
+    SFR024 --> AIFR017
+  }
+}
+@enduml

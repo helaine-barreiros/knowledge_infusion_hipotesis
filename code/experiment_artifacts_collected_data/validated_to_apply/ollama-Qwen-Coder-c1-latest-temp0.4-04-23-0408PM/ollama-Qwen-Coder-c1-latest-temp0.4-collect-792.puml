@@ -1,0 +1,131 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:Financial Advisor: as FAdvisor
+:System Admin: as SysAdmin
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  
+  Client --> (CFR009) : "View Personalized Dashboard"
+  Client --> CFR001
+  Client --> SAFR005
+  Client --> SFR003
+  Client --> AIFR004
+  Client --> FFAFR007
+
+  Financial Advisor --> (FAFR02)
+  Financial Advisor --> FAFR008
+  Financial Advisor --> FAFR016
+  
+  System Admin --> SAFR005
+}
+
+rectangle "Client" {
+  usecase "CFR009: View Personalized Dashboard"
+  Client --> CFR009
+
+  rectangle "Financial Insights & Predictions" {
+    usecase "SAFR002: Manage Analysis Parameters"
+    usecase "SFR014: Generate Client Analytics"
+
+    SAFR005 <|-- (CFR003)
+    SFR014 <|-- (FAFR09)
+
+    Client --> SAFR002
+    Financial Advisor --> SAFR002
+
+    System Admin --> SAFR002
+  }
+
+  rectangle "Recommendations & Alerts" {
+    usecase "SFR005: Request Spending Limit Alerts"
+    usecase "SAFR001: Manage Analysis Parameters"
+
+    Client --> SFR005
+    Financial Advisor --> SFR005
+
+    System Admin --> SAFR002
+  }
+
+  rectangle "Investment & News" {
+    usecase "SFR006: Request Investment Opportunity Analysis"
+    usecase "FAFR017: Configure Analysis Parameters for Specific Client Segments"
+
+    Client --> SFR006
+    Financial Advisor --> FAFR017
+
+    System Admin --> SAFR002
+  }
+}
+
+rectangle "Financial Advisor" {
+  rectangle "Client Mentoring & Alerts" {
+    usecase "FAFR001: Manage Client Mentoring Sessions"
+    usecase "SFR013: Generate Client Alerts"
+
+    Financial Advisor --> FAFR001
+    System Admin --> SAFR002
+
+    FAdvisor --> SFR013
+  }
+
+  rectangle "Predictive Insights & Recommendations" {
+    usecase "FAFR009: View Predictive Intervention Analyses"
+    usecase "SFR016: Request Predictive Insights"
+
+    Financial Advisor --> FAFR009
+
+    System Admin --> SAFR002
+  }
+
+  rectangle "Investment Opportunities & News" {
+    usecase "FAFR003: View Predictive Analytics About Client's Financial Situations"
+    usecase "SFR107: Request Specific Investment Opportunities From AI Component"
+
+    Financial Advisor --> FAFR003
+
+    System Admin --> SAFR002
+  }
+}
+
+rectangle "System" {
+  rectangle "Alerts & Notifications" {
+    usecase "AIFR006: Generate Anomaly Transaction Alerts"
+    usecase "SFR108: Request Contextualized News Insights"
+
+    SysAdmin --> AIFR006
+
+    System --> SFR108
+  }
+
+  rectangle "Recommendations & Predictions" {
+    usecase "AIFR002: Generate Personalized Recommendations"
+    usecase "SFR109: Request Contextualized News Insights"
+
+    SysAdmin --> AIFR002
+
+    System --> SFR109
+  }
+
+  rectangle "Investment & News" {
+    usecase "AIFR004: Generate Investment Opportunity Analyses"
+    usecase "SFR110: Request Contextualized News Insights"
+
+    SysAdmin --> AIFR004
+
+    System --> SFR110
+  }
+}
+
+Client --> CFR011 : "Send Feedback"
+Financial Advisor --> FAFR018 : "Manage Client Goals"
+System Admin --> SAFR019 : "Maintain Historical Record of Insights"
+
+@enduml

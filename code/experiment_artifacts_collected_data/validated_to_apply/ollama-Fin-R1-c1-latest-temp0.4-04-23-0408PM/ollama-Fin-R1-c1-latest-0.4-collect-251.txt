@@ -1,0 +1,59 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+
+  SysAdmin --> SAFR001 : Manage Analysis Parameters  
+  Client --> CFR001, SFR004, SFR005, SFR006, SFR013
+  FinancialAdvisor --> FAFR002, FAFR003, AIFR008
+
+  SysAdmin <|-- (SFR003) : System requests predictions  
+  Client <|-- (CFR001), (AIFR004), (AIFR005)
+  FinancialAdvisor <|-- (FAFR002), (FAFR003)
+
+}
+@enduml
+```
+
+### Explanation:
+- **Actors**: 
+  - `Client`: Represents all end-users, including clients and system administrators.
+  - `SysAdmin`: System Administrator for managing parameters.
+  - `FinancialAdvisor`: Financial Advisor role involved in client mentoring and alerts.
+
+- **Use Cases**:
+  - **CFR001 (View Financial Insights Dashboard)**: Client wants to view a consolidated financial dashboard. 
+  - **SAFR001 (Manage Analysis Parameters)**: SysAdmin manages AI parameters.
+  - **FAFR002 (Client Intervention Alerts)**: Financial Advisor views alerts for clients needing attention.
+  - **SFR003 (Request Predictions from AI)**: System requests financial predictions from the AI component.
+  - **SFR004 (Personalized Recommendations)**: Client receives personalized recommendations based on their profile.
+  - **SFR005 (Spending Limit Alerts)**: Client gets alerts when spending exceeds thresholds.
+  - **SFR006 (Investment Opportunity Analysis)**: System requests AI to analyze investment opportunities.
+  - **AIFR002**: AI generates personalized recommendations.
+
+- **Relationships**:
+  - SysAdmin has a relationship with `SAFR001` for parameter management.
+  - Clients interact directly with multiple use cases like viewing dashboards, receiving alerts, and getting recommendations. 
+  - Financial Advisors handle client-specific interactions (alerts, mentoring).
+
+This structure ensures all actors and their relationships to specific use cases are accurately represented based on the provided requirements. The system boundary groups related components logically for clarity. 
+
+### Notes:
+- Inheritance/extension is not explicitly required here as per current definitions.
+- Grouping by actor or subsystem could be improved further if more detailed categorization was needed, but within these constraints, it’s appropriately structured.
+
+[Done: True
+Done Reason: stop
+Eval Count: 764]

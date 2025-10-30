@@ -1,0 +1,95 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin -> (CFR001) : "Manage System Settings"
+
+  user --|> SAFR001
+}
+
+rectangle "Financial Advisor Role" {
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+
+  user --> (FAFR002)
+}
+
+rectangle "System Administrator Role" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SysAdmin --|> (SAFR001) : "Manage System-Wide Settings"
+  
+  SysAdmin --|> FAFR004
+}
+@enduml
+```
+
+### Explanation:
+- **Client**: Can view the financial insights dashboard (`CFR001`). This is directly related to `client --> CFR001`.
+- **System Administrator (SysAdmin)**: Manages analysis parameters for both the system and specific client segments via `SAFR001` and `FAFR004`. The SysAdmin also has a relationship with `CFR001`, but it's unclear from the requirements if they can manage it. However, given that `SysAdmin --> SAFR001` is explicitly stated, this was included.
+- **Financial Advisor (user)**: Can view client intervention alerts (`FAFR002`) and predictive analytics for clients (`FAFR003`). The Financial Advisors are represented under the "Financial Advisor Role" rectangle.
+
+### Notes:
+- The requirements mention multiple actors like `Client`, `SysAdmin`, `User` etc. However, in some cases (e.g., `CFR011: Send Feedback`), it's a user across roles but since specific use case relationships are defined here, the interactions were mapped accordingly.
+- Inheritance or extension wasn't explicitly mentioned between actors beyond their role-specific use cases. The SysAdmin can manage both system-wide and client segment parameters (`FAFR004`).
+- `CFR001`, `SAFR001`, etc., are directly linked to the appropriate actor based on their description in requirements.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  
+  client --> (CFR001) : "View Financial Data"
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  SysAdmin --|> (SAFR001)
+  
+  SysAdmin -> CFR001 : "Manage System Settings for Dashboard"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  user --> (FAFR002) : "Monitor Alerts"
+
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  
+  user --|> (FAFR003)
+}
+
+rectangle "System" {
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  SysAdmin --> (SFR014) : "Generate Insights"
+  
+  SysAdmin -> CFR001 : "Manage System-Wide Settings for Dashboards"
+}
+@enduml
+```
+
+### Key Adjustments:
+- **Client**: Directly interacts with `CFR001` to view the financial insights dashboard.
+- **System Administrator** (`SysAdmin`): Manages both analysis parameters via `SAFR001` and system-wide settings related to dashboards (e.g., `SFR014`). The SysAdmin also has a direct relationship with `CFR001`.
+- **Financial Advisor**: Can view client intervention alerts (`FAFR002`) and predictive analytics for clients (`FAFR003`).
+- **System** role: Represents the system's own use cases like generating client analytics. Here, SysAdmin can manage these as well.
+
+### Further Clarifications:
+1. The `CFR001` interaction is straightforward with the Client.
+2. SysAdmins have broad access to multiple components (e.g., managing parameters for both clients and systems).
+3. Financial Advisors focus on alerts and predictive analytics tied directly to their role in client management.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1062]

@@ -1,0 +1,129 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor SysAdmin as sysadmin
+actor FinancialAdvisor as financialadvisor
+system SFR012: Generate Client Dashboards as system_dashboard
+system AIFR009: Generate Predictive Intervention Recommendations as ai_predict_interventions
+system AIFR007: Generate Contextualized News Insights as ai_news_insights
+
+rectangle "System" {
+  usecase CFR001: View Financial Insights Dashboard as cfr001
+  usecase CFR002: Receive Alerts for Anomalous Transactions as cfr002
+  usecase CFR003: View Financial Predictions Based on Historical Data and Market Trends as cfr003
+  usecase CFR004: Receive Personalized Recommendations Aligned with Financial Profile as cfr004
+  usecase CFR005: Manage Personalized Recommendation Preferences as cfr005
+  usecase CFR006: View Spending Limit Alerts When Exceeding Thresholds as cfr006
+  usecase CFR007: View Investment Opportunities Based on Risk Profile as cfr007
+  usecase CFR008: Access News Related to Portfolio as cfr008
+  usecase CFR009: Manage Relationship with Financial Advisors Including Data Sharing Permissions as cfr009
+
+  client --> cfr001 : "View"
+  sysadmin --> cfr005 : "Manage Preferences"
+
+  system_dashboard <|-- ai_news_insights : "Request Contextualized News Insights for Client Dashboards"
+}
+
+rectangle "System Admin" {
+  usecase SAFR001: Manage Analysis Parameters as safr001
+  financialadvisor -> safr001 : "Configure Analysis Params for Segments"
+
+  sysadmin --> safr001 : "Manage System-Wide Analysis Parameters"
+}
+
+rectangle "Financial Advisor" {
+  usecase FAFR001: Manage Client Mentoring Sessions as fafr001
+  financialadvisor -> ai_predict_interventions : "Request Predictive Intervention Recs for Clients"
+
+  usecase FAFR002: View Client Intervention Alerts as fafr002
+  sysadmin --> ffafr003 : "View Alerts Based on System-Detected Patterns"
+  
+  financialadvisor -> ai_news_insights : "Request Contextualized News Insights During Consultations"
+
+  usecase FAFR004: Configure Analysis Parameters for Segments as fafr004
+}
+
+@enduml
+```
+
+### Key Observations:
+1. **Actors** are categorized into `Client`, `SysAdmin`, and `FinancialAdvisor`.
+2. **Use Cases** map directly to the functional requirements, with IDs like CFR (Client), SAFR (System Administrator), FAFR (Financial Advisor).
+3. **Relationships**: 
+   - Clients interact with use cases related to dashboards, alerts, predictions, recommendations.
+   - SysAdmin manages system-wide parameters and client preferences.
+   - Financial Advisors manage mentoring sessions, view alerts, configure segments, etc.
+4. **System Components**:
+   - `system_dashboard` handles requests for contextualized news insights from AI components (AIFR007).
+   - Other systems like AIFR009 generate predictive interventions and AIFR007 generates context-based news.
+
+This diagram ensures all actors, use cases, and their relationships are accurately represented. Adjustments can be made based on further requirements or system complexities.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor SysAdmin as sysadmin
+actor FinancialAdvisor as financialadvisor
+system SFR012: Generate Client Dashboards as system_dashboard
+system AIFR009: Generate Predictive Intervention Recommendations as ai_predict_interventions
+system AIFR007: Generate Contextualized News Insights as ai_news_insights
+
+rectangle "System" {
+  usecase CFR001: View Financial Insights Dashboard as cfr001
+  usecase CFR002: Receive Alerts for Anomalous Transactions as cfr002
+  usecase CFR003: View Financial Predictions Based on Historical Data and Market Trends as cfr003
+  usecase CFR004: Receive Personalized Recommendations Aligned with Financial Profile as cfr004
+  usecase CFR005: Manage Personalized Recommendation Preferences as cfr005
+  usecase CFR006: View Spending Limit Alerts When Exceeding Thresholds as cfr006
+  usecase CFR007: View Investment Opportunities Based on Risk Profile as cfr007
+  usecase CFR008: Access News Related to Portfolio as cfr008
+  usecase CFR009: Manage Relationship with Financial Advisors Including Data Sharing Permissions as cfr009
+
+  client --> cfr001 : "View"
+  sysadmin --> cfr005 : "Manage Preferences"
+
+  system_dashboard <|-- ai_news_insights : "Request Contextualized News Insights for Client Dashboards"
+}
+
+rectangle "System Admin" {
+  usecase SAFR001: Manage Analysis Parameters as safr001
+  financialadvisor -> safr001 : "Configure Analysis Params for Segments"
+
+  sysadmin --> safr001 : "Manage System-Wide Analysis Parameters"
+}
+
+rectangle "Financial Advisor" {
+  usecase FAFR001: Manage Client Mentoring Sessions as fafr001
+  financialadvisor -> ai_predict_interventions : "Request Predictive Intervention Recs for Clients"
+
+  usecase FAFR002: View Client Intervention Alerts as ffafr003
+  sysadmin --> ffafr003 : "View Alerts Based on System-Detected Patterns"
+  
+  financialadvisor -> ai_news_insights : "Request Contextualized News Insights During Consultations"
+
+  usecase FAFR004: Configure Analysis Parameters for Segments as fafr004
+}
+
+@enduml
+```
+
+### Explanation:
+1. **Actors** are defined with their exact names from the requirements.
+2. **Use Cases** correspond to each functional requirement, ensuring alignment with IDs like `CFR` (Client), `SAFR` (System Admin), and `FAFR` (Financial Advisor).
+3. Relationships between actors and use cases are established using arrows (`-->`). For example:
+   - Clients can view financial insights dashboards (`client --> cfr001`).
+   - SysAdmins manage analysis parameters for the system (`sysadmin --> safr001`).
+4. **System Components** like `system_dashboard`, `ai_predict_interventions`, and `ai_news_insights` are grouped within their respective rectangles to show logical groupings.
+5. Inheritance relationships (e.g., a Financial Advisor extending SysAdmin capabilities) aren't explicitly shown here but could be inferred if required.
+
+This structure ensures clarity in the use case diagram, adhering strictly to the provided requirements and technical guidelines. Adjustments can be made as needed based on additional context or system complexities not covered by the initial list of functional requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1549]

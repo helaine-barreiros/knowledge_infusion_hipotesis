@@ -1,0 +1,182 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+system "System" as S
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as VFD
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as RAT
+  usecase "CFR003: View Financial Predictions" as FPre
+  usecase "CFR004: Personalized Recommendations" as RecP
+  usecase "CFR005: Manage Preferences for Recommendations" as MPRecPref
+  usecase "CFR006: Spending Limit Alerts" as SLA
+  usecase "CFR007: View Investment Opportunities" as InvOp
+  usecase "CFR008: Access News Related to Portfolio" as NRPort
+  usecase "CFR009: Consolidated Personalized Dashboard" as CDash
+  usecase "CFR10: Manage Relationship with Financial Advisors" as MRelFA
+
+  C1 --> VFD : "View financial insights"
+  C1 --> RAT : "Receive alerts on anomalous transactions"
+  C1 --> FPre : "View predictions"
+  C1 --> RecP : "Get personalized recommendations"
+  C1 --> MPRecPref : "Manage recommendation preferences"
+  C1 --> SLA : "Set spending limit thresholds and receive alerts"
+  C1 --> InvOp : "Explore investment opportunities"
+  C1 --> NRPort : "Read portfolio-related news"
+  C1 --> CDash : "Access consolidated dashboard"
+  C1 --> MRelFA : "Manage interactions with advisors"
+
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as MAP
+  SA --> MAP : "Adjust system parameters for accuracy and compliance"
+}
+  
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as MCS
+  usecase "FAFR002: View Intervention Alerts" as VIntA
+  usecase "FAFR003: Analyze Predictive Analytics for Clients" as PAnC
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as CACPS
+
+  FA --> MCS : "Schedule and manage mentoring sessions"
+  FA --> VIntA : "Review alerts requiring attention"
+  FA --> PAnC : "Use predictive analytics for client guidance"
+  FA --> CACPS : "Set parameters specific to client segments"
+
+}
+
+rectangle "System" {
+  usecase "SFR001: Deliver Alerts Through Channels" as DelAlert
+  usecase "SFR002: Provide Personalized Recommendations" as RecRec
+  usecase "SFR003: Request Financial Predictions from AI" as ReqFPre
+  usecase "SFR004: Request Personalized Recommendations from AI" as ReqRecP
+  usecase "SFR005: Request Spending Limit Alerts from AI" as ReqSLA
+  usecase "SFR006: Request Investment Opportunity Analysis from AI" as ReqInvOp
+  usecase "SFR007: Find Specific Investments Based on Criteria" as InvCrit
+  usecase "SFR008: Generate Anomaly Transaction Alerts" as GenAnomAl
+  usecase "SFR009: Extract Contextual News for Portfolios" as ExpNewsPort
+  usecase "SFR010: Process Contextualized News Insights" as ProInsight
+  usecase "SFR012: Generate Client Dashboards" as GenCDash
+  usecase "SFR013: Manage Client Alerts Based on Conditions" as ManCA
+  usecase "SFR014: Generate Client Analytics" as GenCAnlys
+  usecase "SFR015: Request Intervention Analyses from AI" as ReqIntervA
+  usecase "SFR016: Enhance Financial Guidance with Predictive Insights" as EFinGuid
+  usecase "SFR017: Generate Financial Health Reports" as GenFHRpt
+  usecase "SFR018: Manage Users' Financial Goals" as ManGoal
+  usecase "SFR019: Maintain Historical Record of Insights" as HistRecIns
+  usecase "SFR20: Process User Feedback for Improvements" as ProFeed
+
+  S --> DelAlert : "Deliver system-generated alerts"
+  S --> RecRec : "Provide personalized recommendations to clients"
+  S --> ReqFPre : "Request financial predictions from AI component"
+  S --> ReqRecP : "Request personalized recommendations from AI"
+  S --> ReqSLA : "Request spending limit alerts from AI"
+  S --> ReqInvOp : "Request investment opportunity analysis from AI"
+  S --> InvCrit : "Identify specific investments based on user criteria and ESG preferences"
+  S --> GenAnomAl : "Generate anomaly transaction alerts for fraud detection"
+  S --> ExpNewsPort : "Find relevant news related to client portfolios"
+  S --> ProInsight : "Process contextualized news insights"
+  S --> GenCDash : "Create consolidated dashboards for clients"
+  S --> ManCA : "Manage conditions-based alerts"
+  S --> GenCAnlys : "Produce meaningful financial analytics"
+  S --> ReqIntervA : "Request predictive intervention analyses from AI"
+  S --> EFinGuid : "Improve guidance with predictive insights"
+  S --> GenFHRpt : "Generate comprehensive financial health reports"
+  S --> ManGoal : "Track and update client goals"
+  S --> HistRecIns : "Store historical data for trend analysis"
+  S --> ProFeed : "Handle user feedback to refine system outputs"
+
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as GenFPre
+  usecase "AIFR002: Personalized Recommendations Based on Profiles" as RecProf
+  usecase "AIFR003: Spending Limit Alerts via Pattern Recognition" as SLAPatRecog
+  usecase "AIFR004: Investment Opportunity Analyses" as InvOpAnlys
+  usecase "AIFR005: Align Investments with Strategies and MPT Principles" as InvCritMPT
+  usecase "AIFR006: Anomaly Transaction Detection via Pattern Recognition" as GenAnomAlAI
+  usecase "AIFR007: Contextualized News Insights Correlation" as CxNewsCorr
+  usecase "AIFR008: Predictive Intervention Recommendations for Advisors" as PredIntervRec
+  usecase "AIFR009: Forward-Looking Analysis for Clients" as FwrdAnlys
+
+  S --> GenFPre : "Receive financial predictions from AI"
+  S --> RecProf : "Get personalized recommendations generated by AI"
+  S --> SLAPatRecog : "Generate spending limit alerts using pattern recognition"
+  S --> InvOpAnlys : "Provide investment opportunity analyses to clients via AI"
+  S --> InvCritMPT : "Identify investments that match client strategies and MPT principles"
+  S --> GenAnomAlAI : "Produce anomaly transaction alerts through AI analysis"
+  S --> CxNewsCorr : "Cross-reference financial news with user portfolios for insights"
+  S --> PredIntervRec : "Offer predictive intervention recommendations to advisors via AI"
+  S --> FwrdAnlys : "Generate forward-looking client analyses using AI"
+
+}
+
+C1 <|-- VFD
+C1 <|-- RAT
+C1 <|-- FPre
+C1 <|-- RecP
+C1 <|-- MPRecPref
+C1 <|-- SLA
+C1 <|-- InvOp
+C1 <|-- NRPort
+C1 <|-- CDash
+C1 <|-- MRelFA
+
+SA <|-- MAP
+
+FA <|-- MCS
+FA <|-- VIntA
+FA <|-- PAnC
+FA <|-- CACPS
+
+S <|-- DelAlert
+S <|-- RecRec
+S <|-- ReqFPre
+S <|-- ReqRecP
+S <|-- ReqSLA
+S <|-- ReqInvOp
+S <|-- InvCrit
+S <|-- GenAnomAl
+S <|-- ExpNewsPort
+S <|-- ProInsight
+S <|-- GenCDash
+S <|-- ManCA
+S <|-- GenCAnlys
+S <|-- ReqIntervA
+S <|-- EFinGuid
+S <|-- GenFHRpt
+S <|-- ManGoal
+S <|-- HistRecIns
+S <|-- ProFeed
+
+GenFPre --> S : "Deliver financial predictions to system"
+RecProf --> S : "Provide recommendations to system"
+
+SLAPatRecog --> S : "Report spending limit alerts to system"
+
+InvOpAnlys --> S: "Share investment analyses with system"
+
+AIFR001 --> GenFPre
+AIFR002 --> RecProf
+AIFR003 --> SLAPatRecog
+AIFR004 --> InvOpAnlys
+AIFR005 --> InvCritMPT
+AIFR006 --> GenAnomAlAI
+AIFR007 --> CxNewsCorr
+AIFR008 --> PredIntervRec
+AIFR009 --> FwrdAnlys
+
+@enduml
+```plantuml
+@startuml
+
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

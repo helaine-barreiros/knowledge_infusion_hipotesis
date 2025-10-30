@@ -1,0 +1,64 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor FinancialAdvisor as advisor
+actor SysAdmin as sysadmin
+system System as system
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as cfr001
+  usecase "SAFR001: Manage Analysis Parameters" as safr001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as cfr002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as cfr003
+  usecase "CFR004: Personalized Recommendations Alignment with Financial Profile" as cfr004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as cfr005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as cfr006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as cfr007
+  usecase "CFR008: Access Consolidated Financial Dashboard" as cfr008
+  usecase "CFR009: Manage Relationship with Financial Advisors Including Data Sharing Permissions" as cfr009
+
+  sysadmin --> safr001 : "Manage system parameters"
+
+  client --> (cfr001, cfr002, cfr003, cfr004, cfr005, cfr006, cfr007, cfr008, cfr009) 
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as fafr001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as fafr002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as fafr003
+
+  advisor --> (fafr001, fafr002, fafr003)
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System Compliance with Basel III and Other Regulations" as safr001
+  
+  sysadmin --> safr001 : "Manage system parameters"
+}
+
+system --> (cfr001, cfr002, cfr003, cfr004, cfr005, cfr006, cfr007, cfr008, cfr009)
+system --> (fafr001, fafr002, fafr003)
+
+@enduml
+```
+
+### Explanation:
+- **Actors**: The diagram includes three main actors: `Client`, `FinancialAdvisor`, and `SysAdmin`.
+- **Use Cases**:
+  - Client-related use cases (CFR IDs) are grouped under the "System" rectangle.
+  - Financial Advisor-specific use cases (FAFR IDs) are in their own group.
+  - SysAdmin is associated with managing analysis parameters (`SAFR001`).
+- **Relationships**: 
+  - `Client` interacts with all financial-related use cases except for system management. The SysAdmin manages the AI's analysis parameters via `SAFR001`.
+  - Financial Advisors can manage mentoring sessions, view alerts, and predictive analytics.
+  - System components (e.g., AIFR) are implied but not explicitly drawn as they're part of internal processes.
+
+This structure ensures clarity in associating actors with their respective use cases while maintaining logical groupings. Adjustments may be needed based on further requirements or system details.
+
+[Done: True
+Done Reason: stop
+Eval Count: 838]

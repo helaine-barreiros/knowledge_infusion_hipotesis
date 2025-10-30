@@ -1,0 +1,59 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Preferences (Client)" as SAFR002
+  usecase "SFR009: Deliver Contextualized News for Users" as SFR009
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "SAFR005: Manage Analysis Parameters for AI System (System Admin)" as SAFR005
+  usecase "SFR012: Generate Client Dashboards Consolidating Financial Information" as SFR012
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds" as CFR006
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations (Financial Advisor)" as FAFR003
+  usecase "SFR014: Generate Client Analytics for Behavior and Performance Insights" as SFR014
+  usecase "CFR007: Access Investment Opportunities Suitable to Risk Profile" as CFR007
+  usecase "AIFR002: Generate Personalized Recommendations Based on Financial Profiles (AI)" as AIFR002
+}
+
+rectangle "Client" {
+  actor Client as C1
+  user -> CFR001 : View financial insights dashboard
+  user -> CFR003 : View financial predictions
+  user -> CFR004 : Receive personalized recommendations
+  user -> SAFR002 : Manage preferences (CFR005)
+  user -> SFR009 : Access contextualized news
+}
+
+rectangle "Financial Advisor" {
+  actor FinancialAdvisor as FA1
+  FA1 --> FAFR003: View predictive analytics
+  FA1 --> AIFR008: Receive client intervention alerts (CFR002)
+  FA1 --> SAFR004: Configure analysis parameters for segments
+}
+
+rectangle "System Administrator" {
+  actor SysAdmin as SA1
+  SA1 -> SAFR005 : Manage AI system parameters
+}
+
+rectangle "AI System" {
+  usecase AIFR001: Generate financial predictions (SFR003)
+  usecase AIFR002: Generate personalized recommendations (CFR004, SFR004)
+  usecase AIFR006: Generate spending limit alerts (CFR006)
+  usecase AIFR007: Generate investment opportunity analyses (CFR007)
+}
+
+rectangle "System" {
+  usecase SFR012: Generate client dashboards
+  usecase SFR014: Generate client analytics
+  usecase SFR009: Deliver contextualized news
+  usecase SAFR003: Manage analysis parameters (CFR005)
+}
+
+rectangle "Client" {
+  user -> CFR002 : Receive alerts about anomalous transactions
+}
+@enduml

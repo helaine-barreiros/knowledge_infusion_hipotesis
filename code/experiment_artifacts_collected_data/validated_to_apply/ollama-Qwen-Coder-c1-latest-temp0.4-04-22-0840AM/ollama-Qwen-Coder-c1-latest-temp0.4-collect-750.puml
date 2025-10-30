@@ -1,0 +1,110 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR005
+  usecase "CFR006: Manage Recommendation Preferences" as SAFR019
+  
+  CFR001 --> (SAFR002)
+  CFR001 --> (SAFR003)
+  CFR001 --> (SAFR004)
+  CFR001 --> (SAFR005)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts" as SAFR006
+  usecase "FAFR003: View Predictive Analytics" as SAFR007
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as SAFR015
+  
+  FinancialAdvisor --> (SAFR002)
+  FinancialAdvisor --> (SAFR006)
+  FinancialAdvisor --> (SAFR003)
+  FinancialAdvisor --> (SAFR007)
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR001
+  
+  usecase "SAFR009: Manage Analysis Parameters for AI System" as SAFR008
+  usecase "SFR020: Manage User Feedback to Improve Accuracy and Relevance of Future Outputs" as AIFR007
+  
+  SystemAdministrator --> (SAFR001)
+}
+
+package "System Components" {
+  rectangle "Notifications" {
+    usecase "SFR003: Deliver Alerts Through Appropriate Notification Channels" as SFR002
+  }
+  
+  rectangle "Recommendations" {
+    usecase "SFR004: Deliver Personalized Recommendations Based on Financial Profiles" as AIFR001
+  }
+  
+  rectangle "Predictive Analytics" {
+    usecase "SFR005: Request Financial Predictions from AI Component" as SFR003
+    usecase "SFR016: Generate Client Predictive Insights to Enhance Value of Guidance Provided" as AIFR009
+  }
+  
+  rectangle "Spending Limits" {
+    usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR004
+  }
+  
+  rectangle "Investment Opportunities" {
+    usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as AIFR002
+    usecase "SFR018: Generate Financial Health Reports Based on Standard Ratios and Metrics" as SFR017
+  }
+  
+  rectangle "News Insights" {
+    usecase "SFR009: Request Contextualized News Relevant to Users' Portfolios" as AIFR004
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR012
+  }
+  
+  rectangle "Predictive Interventions" {
+    usecase "SFR015: Request Predictive Intervention Analyses from AI Component to Identify When Advisors Should Engage with Clients" as AIFR008
+  }
+}
+
+rectangle "System Boundary" {
+  package Client {
+    CFR002 --> (SAFR003)
+    CFR004 --> (SFR016)
+    SAFR019 --> (AIFR007)
+  }
+
+  package FinancialAdvisor {
+    FAFR002 --> (SAFR006)
+    FAFR003 --> (SFR005)
+    SAFR015 --> (AIFR008)
+  }
+  
+  package SystemAdministrator {
+    SAFR009 --> (SAFR008)
+    AIFR007 --> (SFR20)
+  }
+
+  rectangle "Notifications" as Notifications
+  rectangle "Recommendations" as Recommendations
+  rectangle "Predictive Analytics" as PredictiveAnalytics
+  rectangle "Spending Limits" as SpendingLimits
+  rectangle "Investment Opportunities" as InvestmentOpportunities
+  rectangle "News Insights" as NewsInsights
+  rectangle "Predictive Interventions" as PredictiveInterventions
+
+  Notifications --> (SFR002)
+  Recommendations --> (AIFR001)
+  PredictiveAnalytics --> (SFR003)
+  SpendingLimits --> (SFR004)
+  InvestmentOpportunities --> (AIFR002)
+  NewsInsights --> (AIFR004)
+  PredictiveInterventions --> (AIFR008)
+
+  CFR011 --> (SAFR009)
+}
+@enduml

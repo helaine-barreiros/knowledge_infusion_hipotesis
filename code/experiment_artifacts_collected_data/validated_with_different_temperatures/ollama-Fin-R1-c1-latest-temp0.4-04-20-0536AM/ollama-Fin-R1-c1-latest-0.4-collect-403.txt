@@ -1,0 +1,81 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Client Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Customize Recommendation Preferences" as CFR005
+  usecase "CFR006: Monitor Spending Limits" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Portfolio News" as CFR008
+  usecase "CFR009: Consolidate Financial Information" as CFR009
+  usecase "SAFR003: Manage User Permissions" as SAFR003
+
+  usecase "FAFR001: Schedule Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Alerts" as FAFR002
+  usecase "FAFR003: Analyze Predictive Analytics" as FAFR003
+  usecase "SAFR004: Configure Analysis Parameters for Segments" as SAFR004
+
+  usecase "SFR001: Deliver Alerts via Notifications" as SFR001
+  usecase "SFR002: Generate Personalized Recommendations" as SFR002
+  usecase "AIFR003: Detect Spending Limit Exceedances" as AIFR003
+
+  usecase "CFR011: Provide Feedback on Insights and Recommendations" as CFR011
+
+}
+
+actor Client as C
+actor FinancialAdvisor as FA
+actor SystemAdministrator as SA
+
+C --> CFR001 : View financial insights dashboard  
+C --> SAFR002 : Manage client alerts (e.g., transactional, spending limit)
+C --> CFR003 : View financial predictions based on data and trends
+C --> CFR004 : Receive personalized recommendations aligned with profile and goals
+C --> CFR005 : Customize recommendation preferences for relevance to KYC-defined objectives  
+C --> CFR006 : Monitor spending limits when exceeding thresholds in categories
+C --> CFR007 : View investment opportunities suitable per risk profile (e.g., MiFID II)
+C --> CFR008 : Access portfolio-related news articles and updates 
+C --> CFR009 : Consolidate all financial info into a single view for efficient monitoring  
+C --> SAFR003 : Manage sharing permissions with advisors to control data access
+
+FA --> FAFR001 : Schedule mentoring sessions using system-generated insights
+FA --> FAFR002 : View client intervention alerts (e.g., anomaly transactions, spending limits)
+FA --> FAFR003 : Analyze predictive analytics about clients' financial situations for consultations  
+SA --> SAFR004 : Configure analysis parameters per segment or regulatory requirement
+
+SFR001 <|-- C : Deliver system-generated alerts to client
+SFR002 <|-- C : Provide personalized recommendations based on user data and preferences (CFR004)
+AIFR003 <|-- SFR005 : Generate spending limit alerts when thresholds are exceeded  
+SAFR004 <|-- AIFR001 : Request financial predictions from AI component for users
+SAFR004 <|-- AIFR002 : Request personalized recommendations based on user profiles and goals
+
+CFR011 --> SFR009 : Send feedback to improve system's outputs (e.g., accuracy, relevance)
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire diagram is enclosed within a rectangle labeled "System" to represent the AI-Powered Analysis & Insights System.
+- **Use Cases**:
+  - Client-related use cases (`CFR001`–`CFR009`, `SAFR002`) are grouped under client interactions. These include viewing dashboards, alerts, predictions, recommendations, etc.
+  - Financial Advisor-related use cases (`FAFR001`–`FAFR003`) focus on mentoring sessions and predictive analytics for clients.
+  - System Administrator-related use case (`SAFR004`) is about managing analysis parameters across segments or regulatory requirements.
+- **Actors**:
+  - `Client`: Represents individual users (e.g., financial advisors, system administrators) with specific needs like viewing dashboards or receiving alerts.
+  - `FinancialAdvisor` and `SystemAdministrator` are distinct roles interacting with the system via their respective use cases.
+- **Relationships**: Arrows indicate interactions between actors and use cases. For example:
+  - Clients interact directly with most of the system’s features (e.g., viewing dashboards, receiving alerts).
+  - Advisors schedule mentoring sessions using insights from the system (`FAFR001`), view client-specific alerts (`FAFR002`), or analyze predictive analytics (`FAFR003`).
+- **Inheritance**: Some use cases extend others. For instance, `SAFR004: Configure Analysis Parameters for Segments` extends regulatory compliance (e.g., GDPR, CCPA) through its interaction with the AI component.
+  
+This structure ensures clarity in mapping functional requirements to their corresponding actors and use cases within the system. Adjustments can be made if additional relationships or groupings are needed based on further analysis of the provided requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1213]

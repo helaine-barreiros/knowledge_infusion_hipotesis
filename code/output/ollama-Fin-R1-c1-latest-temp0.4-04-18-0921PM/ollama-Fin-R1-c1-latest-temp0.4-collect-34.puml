@@ -1,0 +1,69 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts on Exceeding Thresholds" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: View News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: Personalized Dashboard for Consolidated Financial Information" as CFR009
+  usecase "CFR010: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as CFR010
+
+  usecase "SAFR001: Manage Analysis Parameters for AI System Compliance" as SAFR001
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts from the System" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+
+  usecase "SFR001: Deliver Alerts Through Appropriate Channels" as SFR001
+  usecase "SFR002: Provide Personalized Recommendations Based on Financial Profiles" as SFR002
+  usecase "SFR003: Request Predictive Interventions from AI Component" as SFR003
+  usecase "SFR004: Generate Client Dashboards with Financial Insights" as SFR004
+
+}
+
+actor "Client" as C1, C2, C3 {
+    C1 --> CFR001 : View financial insights dashboard
+    C1 --> CFR002 : Receive alerts on anomalous transactions
+    C1 --> CFR003 : View financial predictions based on historical data and market trends
+    C1 --> CFR004 : Personalized recommendations aligned with profile
+    C1 --> CFR005 : Manage preferences for personalized recommendations
+    C1 --> CFR006 : View spending limit alerts exceeding thresholds
+    C1 --> CFR007 : Access investment opportunities based on risk profile
+    C1 --> CFR008 : View news related to investment portfolio
+    C1 --> CFR009 : Personalized dashboard for consolidated financial info
+    C1 --> CFR010 : Manage relationship with advisors, data sharing
+
+}
+
+actor "Financial Advisor" as FA {
+  FA --> FAFR001 : Manage client mentoring sessions based on insights
+  FA --> FAFR002 : View client intervention alerts from system
+  FA --> FAFR003 : View predictive analytics for clients' financial situations during consultations
+}
+
+actor "System Administrator" as SA {
+    SA --> SAFR001 : Manage analysis parameters ensuring compliance with regulations like Basel III and others
+
+}
+
+actor "AI System" as AI {
+    AI <|-- SFR002 : Generate personalized recommendations based on profiles
+    AI <|-- CFR003 : Generate financial predictions for users
+    AI <|-- CFR006 : Generate spending limit alerts when thresholds exceeded
+    AI <|-- CFR007 : Identify investment opportunities aligned with risk profile and ESG preferences
+    AI <|-- SFR001 : Deliver contextualized news relevant to portfolios
+}
+
+actor "Client, Financial Advisor or System Administrator" as CFA {
+  CFA --> CFR011 : Send feedback about system's outputs for improvement
+
+}
+@enduml

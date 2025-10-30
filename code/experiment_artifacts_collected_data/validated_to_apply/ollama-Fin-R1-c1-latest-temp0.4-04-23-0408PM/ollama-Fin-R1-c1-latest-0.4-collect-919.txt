@@ -1,0 +1,141 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+  Client --> CFR001 : "Request Financial Insights Dashboard"
+  
+  SysAdmin -> (CFR001) : "Manage System Settings"
+
+  rectangle "Client Management" {
+    actor "User" as User
+    usercase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004
+    usecase "CFR005: Manage Recommendation Preferences" as CFR005
+    usecase "CFR006: View Spending Limit Alerts" as CFR006
+    usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+    usecase "CFR008: View Portfolio-Related News" as CFR008
+    usecase "CFR009: Manage Personalized Dashboards" as CFR009
+    usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+
+    User --> (CFR002) : "Receive Alerts"
+    User --> (CFR003) : "View Predictions"
+    User --> (CFR004) : "Get Recommendations"
+    User --> (CFR005) : "Adjust Preferences"
+    User --> (CFR006) : "Check Spending Limits"
+    User --> (CFR007) : "Explore Investments"
+    User --> (CFR008) : "Read News"
+    User --> (CFR009) : "Use Dashboards"
+    User --> (CFR10) : "Interact with Advisors"
+
+  }
+
+  rectangle "Financial Advisor Management" {
+    actor "FAFR003: Financial Advisor" as FAFR
+    usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+    usecase "FAFR001: Manage Mentoring Sessions Based on Insights" as FAFR001
+
+    FAFR --> (CFR003) : "Review Predictions"
+    FAFR --> (CFR004) : "Provide Recommendations"
+
+  }
+
+  rectangle "System Administrator Management" {
+    actor "SysAdmin: System Administrator" as SysAdmin
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+
+    SysAdmin -> (CFR005) : "Adjust Recommendation Preferences"
+    SysAdmin --> (FAFR004): "Set Client-Specific Parameters"
+
+  }
+
+}
+
+@enduml
+```
+
+### Explanation:
+- **Client Management**: Represents the interactions for clients (User, Financial Advisor, System Administrator). Each use case corresponds to a specific client need. For example, viewing financial insights dashboards (`CFR001`), receiving alerts (`CFR002`), etc.
+  
+- **Financial Advisor Management**: Includes actions like managing mentoring sessions based on system-generated insights (`FAFR001`) and viewing intervention alerts for clients (`FAFR002`). Financial advisors can also view financial predictions and recommendations provided by the client.
+
+- **System Administrator Management**: System administrators handle analysis parameter management (`SAFR001`), which affects how data is processed across all use cases. They also manage recommendation preferences set by clients through `CFR005`.
+
+### Key Relationships:
+1. **Client** interacts with most of the system’s features, such as viewing dashboards, receiving alerts, and managing personal settings.
+2. **Financial Advisors** focus on mentoring sessions (`FAFR001`), client intervention alerts (`FAFR002`), reviewing predictions/recommendations provided by clients or the AI.
+3. **System Administrators** manage system-wide parameters like `SAFR001`, which indirectly affect all other use cases.
+
+This structure ensures clarity and adherence to the functional requirements, grouping related actors and their respective use cases logically within the diagram. Each actor’s role is distinct yet interconnected through shared data flows (e.g., alerts, recommendations). The system boundary encompasses all components, ensuring completeness.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+  Client --> CFR001 : "Request Financial Insights Dashboard"
+  
+  SysAdmin -> (CFR001) : "Manage System Settings"
+
+  rectangle "Client Management" {
+    actor "User" as User
+    usercase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004
+    usecase "CFR005: Manage Recommendation Preferences" as CFR005
+    usecase "CFR006: View Spending Limit Alerts" as CFR006
+    usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+    usecase "CFR008: View Portfolio-Related News" as CFR008
+    usecase "CFR009: Manage Personalized Dashboards" as CFR009
+    usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+
+    User --> (CFR002) : "Receive Alerts"
+    User --> (CFR003) : "View Predictions"
+    User --> (CFR004) : "Get Recommendations"
+    User --> (CFR005) : "Adjust Preferences"
+    User --> (CFR006) : "Check Spending Limits"
+    User --> (CFR007) : "Explore Investments"
+    User --> (CFR008) : "Read News"
+    User --> (CFR009) : "Use Dashboards"
+    User --> (CFR10) : "Interact with Advisors"
+
+  }
+
+  rectangle "Financial Advisor Management" {
+    actor "FAFR003: Financial Advisor" as FAFR
+    usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+    usecase "FAFR001: Manage Mentoring Sessions Based on Insights" as FAFR001
+
+    FAFR --> (CFR003) : "Review Predictions"
+    FAFR --> (CFR004) : "Provide Recommendations"
+
+  }
+
+  rectangle "System Administrator Management" {
+    actor "SysAdmin: System Administrator" as SysAdmin
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+
+    SysAdmin -> (CFR005) : "Adjust Recommendation Preferences"
+    SysAdmin --> (FAFR004): "Set Client-Specific Parameters"
+
+  }
+
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1665]

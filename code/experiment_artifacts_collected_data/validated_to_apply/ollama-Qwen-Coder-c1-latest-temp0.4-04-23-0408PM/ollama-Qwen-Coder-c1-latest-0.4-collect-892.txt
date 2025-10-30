@@ -1,0 +1,132 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as FAFR004
+  
+  FinancialAdvisor --> (FAFR001)
+  FinancialAdvisor --> (FAFR002)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR005
+}
+
+package "System" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  
+  rectangle "AI Component" {
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    
+    FinancialAdvisor --> (FAFR003)
+    
+    Client --> (CFR012)
+    Client --> (SFR014)
+  }
+  
+  rectangle "User Interface" {
+    usecase "AIFR009: Generate Predictive Intervention Recommendations for Clients" as AIFR009
+    usecase "AIFR016: Enhance Financial Guidance Insights" as AIFR016
+    
+    Client --> (SFR020)
+  }
+  
+  rectangle "Data Management" {
+    usecase "AIFR008: Generate Anomaly Transaction Alerts for Users" as AIFR008
+    usecase "AIFR017: Generate Financial Health Reports" as AIFR017
+    
+    Client --> (SFR019)
+  }
+  
+  rectangle "Recommendations Engine" {
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+    usecase "AIFR005: Generate Investment Opportunities Based on User Risk Profiles" as AIFR005
+    
+    Client --> (SFR013)
+  }
+  
+  rectangle "Spending Limits Management" {
+    usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+    usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds in Specific Categories" as CFR006
+    
+    Client --> (SFR015)
+  }
+  
+  rectangle "Investment Opportunities Analysis" {
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+    usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+    
+    Client --> (SFR016)
+  }
+  
+  rectangle "News Management" {
+    usecase "AIFR009: Generate Contextualized News Insights for Users' Financial Portfolios" as AIFR009
+    usecase "CFR008: View News Related to My Investment Portfolio" as CFR008
+    
+    Client --> (SFR017)
+  }
+  
+  rectangle "Goal Management" {
+    usecase "AIFR014: Generate Predictive Insights for Clients" as AIFR014
+    usecase "CFR018: Manage My Relationship with Financial Advisors, Including Permissions for Sharing Data" as CFR010
+    
+    Client --> (SFR019)
+  }
+}
+
+rectangle "System Components" {
+  rectangle "User Interface" {
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+    usecase "AIFR005: Generate Investment Opportunities Based on User Risk Profiles" as AIFR005
+    
+    Client --> (SFR013)
+  }
+  
+  rectangle "Data Management" {
+    usecase "AIFR008: Generate Anomaly Transaction Alerts for Users" as AIFR008
+    usecase ("CFR006") : View Spending Limit Alerts When Exceeding Thresholds in Specific Categories
+    
+    Client --> (SFR015)
+  }
+  
+  rectangle "Investment Opportunities Analysis" {
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+    usecase ("CFR007") : View Investment Opportunities Suitable to My Risk Profile
+    
+    Client --> (SFR016)
+  }
+  
+  rectangle "News Management" {
+    usecase "AIFR009: Generate Contextualized News Insights for Users' Financial Portfolios" as AIFR009
+    usecase ("CFR008") : View News Related to My Investment Portfolio
+    
+    Client --> (SFR017)
+  }
+  
+  rectangle "Goal Management" {
+    usecase "AIFR014: Generate Predictive Insights for Clients" as AIFR014
+    usecase ("CFR018") : Manage My Relationship with Financial Advisors, Including Permissions for Sharing Data
+    
+    Client --> (SFR019)
+  }
+}
+
+Client --> (SAFR005)
+FinancialAdvisor --> (FAFR002)
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1151]

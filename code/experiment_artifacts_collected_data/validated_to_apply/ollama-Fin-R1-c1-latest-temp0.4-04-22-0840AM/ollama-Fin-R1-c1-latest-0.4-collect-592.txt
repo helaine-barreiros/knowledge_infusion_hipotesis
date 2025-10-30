@@ -1,0 +1,91 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+  client --> CFR001 : View financial data and insights  
+  SysAdmin --> SAFR001 : Adjust analysis parameters  
+  FA --> FAFR004 : Customize system behavior per client segment  
+
+}
+
+rectangle "Client" {
+  actor Client as C
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003  
+  usecase "CFR004: Personalized Recommendations" as CFR004  
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005  
+  usecase "CFR006: Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007 
+  usecase "CFR008: Access News Related to Portfolio" as CFR008  
+  usecase "CFR009: Personalized Dashboard" as CFR009  
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10  
+
+  C --> SAFR001 : Configure alerts and recommendations
+}
+
+rectangle "Financial Advisor (FA)" {
+  actor FA as FAD
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001  
+  usecase "FAFR002: View Intervention Alerts" as FAFR002 
+  usecase "FAFR003: Predictive Analytics for Clients" as FAFR003
+}
+
+rectangle "System Administrator (SA)" {
+  actor SAAdmin as SysA
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10  
+}
+
+rectangle "AI System (AIS)" {
+  component AIFR002 : Personalized Recommendations  
+  component AIFR003 : Spending Limit Alerts  
+  component AIFR004 : Investment Opportunity Analyses
+  component AIFR005 : Investment Opportunities Generation  
+  component AIFR006 : Anomaly Transaction Alerts  
+  component AIFR007 : Contextualized News Insights  
+}
+
+rectangle "System" {
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR013: Generate Client Alerts" as SFR013 
+  usecase "SFR014: Generate Client Analytics" as SFR014  
+}
+
+rectangle "System Boundary" {
+  SysA --> SAFR001 : Manage analysis parameters (SA)
+  FAD --> AIFR002 : Request personalized recommendations
+  C --> AIFR003 : Receive spending limit alerts 
+  C --> AIFR006 : Get anomaly transaction alerts  
+  C --> AIFR007 : Access contextualized news insights
+}
+
+@enduml
+```
+
+### Explanation:
+1. **System Boundary**: The main system is enclosed within a rectangle labeled "System". This includes all use cases and components that interact with the external actors.
+2. **Client Actor** (`C`): Represents clients (Users) who can perform various actions like viewing dashboards, receiving alerts, etc.
+3. **Financial Advisor (FA)**: An actor for financial advisors to manage mentoring sessions, view intervention alerts, or access predictive analytics.
+4. **System Administrator (SA)**: Manages relationships with advisors and possibly other administrative tasks.
+5. **Use Cases**:
+   - **Client**: CFR001–CFR009 focus on client-specific actions like viewing dashboards, receiving personalized recommendations, etc.
+   - **Financial Advisor**: FAFR001–FAFR004 include managing mentoring sessions and customizing system parameters for clients.
+   - **System Administrator**: SAFR001 manages analysis parameters (common to both).
+6. **AI System Components** (`AIS`): Breaks down AI-generated use cases into specific components like recommendations, alerts, etc., ensuring clarity in the diagram.
+
+### Key Relationships:
+- Clients interact with multiple system components via their personalization and alert preferences.
+- Financial Advisors leverage AI-driven tools for better client guidance.
+- The System Administrator oversees both client and advisor interactions through administrative use cases.  
+
+This structure ensures all functional requirements are mapped accurately to actors, use cases, and relationships within the PlantUML diagram. Adjustments can be made based on further analysis or specific project needs.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1051]

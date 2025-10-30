@@ -1,0 +1,71 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Clients" {
+  actor Client as CFR001
+}
+
+package "Financial Advisors" {
+  actor FinancialAdvisor as FAFR002
+}
+
+package "System Administrators" {
+  actor SysAdmin as SAFR003
+}
+
+package "Users (Client, Financial Advisor, or System Administrator)" {
+  usecase "CFR009: View personalized dashboard" as CFR009
+  usecase "SFR12: Generate client dashboards" as SFR12
+  
+  CFR001 --> CFR009 : "View"
+}
+
+package "Client Features" {
+  usecase "SAFR005: Manage analysis parameters for the AI system" as SAFR005
+  usecase "SFR03: Request financial predictions from the AI component" as SFR03
+  
+  CFR001 --> SAFR005 : "Manage"
+  CFR001 --> SFR03 : "Request Predictions"
+}
+
+package "Financial Advisor Features" {
+  usecase "FAFR002: View client intervention alerts" as FAFR002
+  usecase "SFR04: Request personalized recommendations from the AI component" as SFR04
+  
+  FinancialAdvisor --> FAFR002 : "View"
+  FinancialAdvisor --> SFR04 : "Request Recommendations"
+}
+
+package "System Features" {
+  usecase "SAFR001: Manage analysis parameters for the AI system" as SAFR001
+  usecase "SFR08: Request anomaly transaction alerts from the AI component" as SFR08
+  
+  SysAdmin --> SAFR001 : "Manage"
+  SysAdmin --> SFR08 : "Request Alerts"
+}
+
+package "AI System Features" {
+  usecase "AIFR004: Generate investment opportunity analyses for users by evaluating potential investments against their risk profiles, time horizons, and financial goals." as AIFR004
+  usecase "SFR16: Request predictive insights from the AI component to enhance the value of financial guidance provided to clients" as SFR16
+  
+  FinancialAdvisor --> AIFR004 : "Generate Analyses"
+  FinancialAdvisor --> SFR16 : "Request Insights"
+}
+
+package "Notifications and Feedback" {
+  usecase "SFR013: Generate client alerts based on predefined conditions to ensure timely notification of important financial events." as SFR013
+  usecase "CFR011: Send feedback about the system's recommendations and insights to help improve the accuracy and relevance of future outputs." as CFR011
+  
+  CFR009 --> SFR013 : "Receive Alerts"
+  CFR001 --> CFR011 : "Send Feedback"
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 622]

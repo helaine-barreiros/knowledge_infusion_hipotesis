@@ -1,0 +1,152 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor "Client" as Client
+actor "Financial Advisor" as FAdvisor
+actor "System Administrator" as SysAdmin
+actor "User" as User
+
+package "Clients" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Anomalous Transaction Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+
+  Client --> (CFR001)
+  Client --> (CFR002)
+  Client --> (CFR003)
+  Client --> (CFR004)
+  Client --> (CFR005)
+  Client --> (CFR006)
+  Client --> (CFR007)
+  Client --> (CFR008)
+  Client --> (CFR009)
+  Client --> (CFR10)
+
+  User --> (CFR001)
+  User --> (CFR002)
+  User --> (CFR003)
+  User --> (CFR004)
+  User --> (CFR005)
+  User --> (CFR006)
+  User --> (CFR007)
+  User --> (CFR008)
+  User --> (CFR009)
+  User --> (CFR10)
+
+}
+
+package "Financial Advisors" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+  FAdvisor --> (FAFR001)
+  FAdvisor --> (FAFR002)
+  FAdvisor --> (FAFR003)
+  FAdvisor --> (FAFR004)
+
+}
+
+package "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+
+  SysAdmin --> (SAFR001)
+
+}
+
+rectangle "AI System Components" {
+  package "AI Recommendations Engine" {
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    FAdvisor --> (FAFR004)
+    Client --> (CFR005)
+    User --> (CFR11)
+
+    SysAdmin -> (SAFR001) : <<SFR007>>
+
+  }
+
+  package "AI Predictive Analytics" {
+    usecase "AIFR003: Generate Financial Predictions" as AIFR003
+    FAdvisor --> (FAFR02)
+    Client --> (CFR004)
+
+    SysAdmin -> (SAFR001) : <<SFR008>>
+
+  }
+
+  package "AI Alerts Engine" {
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    FAdvisor --> (FAFR02)
+    Client --> (CFR003)
+
+    SysAdmin -> (SAFR001) : <<SFR009>>
+
+  }
+
+  package "AI Investment Opportunities Engine" {
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    FAdvisor --> (FAFR02)
+    Client --> (CFR007)
+
+    SysAdmin -> (SAFR001) : <<SFR010>>
+
+  }
+
+  package "AI News Insights Engine" {
+    usecase "AIFR005: Generate Contextualized News Insights" as AIFR005
+    FAdvisor --> (FAFR02)
+    Client --> (CFR008)
+
+    SysAdmin -> (SAFR001) : <<SFR011>>
+
+  }
+
+}
+
+rectangle "System Components" {
+  package "Notification System" {
+    usecase "SFR007: Deliver Alerts to Users" as SFR007
+    Client --> (CFR002)
+    FAdvisor --> (FAFR02)
+
+    SysAdmin -> (SAFR001) : <<AIFR006>>
+
+  }
+
+  package "Personalization System" {
+    usecase "SFR008: Deliver Personalized Recommendations to Users" as SFR008
+    Client --> (CFR004)
+    FAdvisor --> (FAFR02)
+
+    SysAdmin -> (SAFR001) : <<AIFR007>>
+
+  }
+
+  package "Dashboard System" {
+    usecase "SFR12: Generate Client Dashboards" as SFR12
+    Client --> (CFR009)
+    FAdvisor --> (FAFR02)
+
+    SysAdmin -> (SAFR001) : <<AIFR018>>
+
+  }
+
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1273]

@@ -1,0 +1,86 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+    usecase "CFR001: View Financial Insights Dashboard" as CFR001
+    usecase "SAFR002: Manage Alert Preferences" as SAFR002
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004
+    usecase "CFR005: Manage Recommendation Preferences" as CFR005
+    usecase "CFR006: View Spending Limit Alerts" as CFR006
+    usecase "CFR007: Access Investment Opportunities" as CFR007
+    usecase "CFR008: Receive Portfolio News" as CFR008
+    usecase "CFR009: Manage Relationship with Advisors" as CFR009
+
+    rectangle "Client Actor" {
+        actor Client as c1
+        client --> CFR001 : View Financial Insights Dashboard
+        client --> SAFR002 : Manage Alert Preferences
+        client --> CFR003 : View Financial Predictions
+        client --> CFR004 : Receive Personalized Recommendations
+        client --> CFR005 : Manage Recommendation Preferences
+        client --> CFR006 : View Spending Limit Alerts
+        client --> CFR007 : Access Investment Opportunities
+        client --> CFR008 : Receive Portfolio News
+        client --> CFR009 : Manage Relationship with Advisors
+    }
+
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+
+    rectangle "System Administrator Actor" {
+        actor SysAdmin as sadmin
+        sysadmin --> SAFR001 : Manage Analysis Parameters
+    }
+
+    usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+
+    rectangle "Financial Advisor Actors" {
+        actor FinancialAdvisor as fa1, fa2, fa3
+        financialadvisor <|-- (CFR009) : Share Data
+        financialadvisor --> FAFR001 : Manage Mentoring Sessions
+        financialadvisor --> FAFR002 : View Intervention Alerts
+    }
+
+    usecase "SFR006: Request Spending Limit Alerts" as SFR006
+
+    rectangle "System Components" {
+        systemcomponent <|-- (CFR003) : Deliver Predictions
+        systemcomponent <|-- (SAFR001) : Manage Parameters
+        systemcomponent --> CFR004 : Provide Recommendations
+        systemcomponent --> SAFR002 : Process Preferences
+        systemcomponent --> SFR006 : Send Alerts
+    }
+
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+
+    rectangle "AI Components" {
+        aicomponent <|-- (CFR001) : Analyze Data
+        aicomponent --> CFR002 : Detect Anomalies
+        aicomponent --> SFR006 : Trigger Alerts
+        aicomponent --> AIFR003 : Create Limits
+    }
+
+}
+
+@enduml
+```
+
+### Explanation:
+- **Client Actor**: Represents the end-users (Clients) who interact with various use cases like viewing dashboards, receiving recommendations, etc.
+- **System Administrator Actor**: Manages system parameters and configurations. Only interacts with `SAFR001`.
+- **Financial Advisor Actors**: Manage client relationships (`CFR009`), mentoring sessions (`FAFR001`), and view intervention alerts (`FAFR002`). They also share data with the system.
+- **System Components** & **AI Components**: Represent different parts of the system (e.g., delivering predictions, generating recommendations). These components are linked to specific use cases they fulfill.
+
+### Key Relationships:
+- Clients interact directly with most use cases except `SAFR001` and some internal management tasks handled by System Admin.
+- Financial Advisors share data but otherwise don't directly trigger use cases; their interactions are through client relationships managed via the system.
+- AI components generate insights (e.g., alerts, recommendations) which flow into client-facing use cases or other systems.
+
+This structure ensures clarity in how actors and components relate to each other based on provided requirements. Adjustments can be made if additional details surface during implementation.
+
+[Done: True
+Done Reason: stop
+Eval Count: 944]

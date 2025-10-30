@@ -1,0 +1,173 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Risk Parameters" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "SFR014: Generate Client Analytics" as SFR014
+}
+
+rectangle "Client" {
+  actor "User (Client)" as UserClient
+
+  UserClient --> CFR001 : View financial insights dashboard  
+  UserClient --> SAFR002 : Manage risk parameters for system alerts  
+  UserClient --> SFR003 : Request financial predictions  
+  UserClient --> SFR014 : Generate client analytics
+}
+
+rectangle "Financial Advisor" {
+  actor "FAFR001: Financial Advisor" as FAFR001
+
+  FAFR001 --> FAFR005 : Schedule mentoring sessions based on system insights  
+  FAFR001 --> SAFR002 : Manage risk parameters for clients  
+  FAFR001 --> SFR003: Request financial predictions
+}
+
+rectangle "System Administrator" {
+  actor "SysAdmin" as SysAdmin
+
+  SysAdmin --> SAFR002: Configure system analysis parameters to ensure compliance with regulations like Basel III and GDPR
+}
+
+rectangle "AI System" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001  
+  usecase "AIFR003: Send Spending Limit Alerts" as AIFR003 
+  usecase "AIFR004: Recommend Investment Opportunities" as AIFR004
+  usecase "AIFR005: Analyze Portfolio Against ESG Criteria" as AIFR005  
+  usecase "AIFR006: Detect Anomaly Transactions" as AIFR006 
+  usecase "AIFR007: Correlate News with Portfolios" as AIFR007
+  usecase "AIFR008: Recommend Interventions for Advisors" as AIFR008  
+  usecase "AIFR009: Provide Predictive Insights" as AIFR009
+
+  SysAdmin --> SAFR002 <|-- (AIFR001) : Configure system parameters
+}
+
+rectangle "Client Feedback System" {
+  actor "UserFeedback" as UserFeedback
+  
+  UserFeedback --> CFR011: Send feedback to improve recommendations and insights  
+}
+@enduml
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Risk Parameters" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "SFR014: Generate Client Analytics" as SFR014
+
+  SysAdmin --> SAFR002 <|-- (AIFR001) : Configure system parameters for financial predictions  
+}
+
+rectangle "Client" {
+  actor "User (Client)" as UserClient
+  actor "System Administrator" as SysAdmin
+  
+  UserClient --> CFR001 : View financial insights dashboard  
+  UserClient --> SAFR002: Manage risk parameters for system alerts  
+  UserClient --> SFR003: Request financial predictions  
+  UserClient --> SFR014: Generate client analytics
+
+  SysAdmin --> SAFR002 <|-- (AIFR001) : Configure system parameters
+}
+
+rectangle "Financial Advisor" {
+  actor "FAFR001: Financial Advisor" as FAFR001
+  
+  FAFR001 --> FAFR005 : Schedule mentoring sessions based on system insights  
+  FAFR001 --> SAFR002: Manage risk parameters for clients  
+  FAFR001 --> SFR003: Request financial predictions
+}
+
+rectangle "AI System" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001  
+  usecase "AIFR002: Manage Risk Parameters for AI Alerts" as AIFR002 
+  usecase "AIFR003: Send Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Recommend Investment Opportunities" as AIFR004  
+  usecase "AIFR005: Analyze Portfolio Against ESG Criteria" as AIFR005 
+  usecase "AIFR006: Detect Anomaly Transactions" as AIFR006
+  usecase "AIFR007: Correlate News with Portfolios" as AIFR007  
+  usecase "AIFR008: Recommend Interventions for Advisors" as AIFR008  
+  usecase "AIFR009: Provide Predictive Insights" as AIFR009
+
+  SysAdmin --> SAFR002 <|-- (AIFR001) : Configure system parameters
+}
+
+rectangle "Client Feedback System" {
+  actor "UserFeedback" as UserFeedback
+  
+  UserFeedback --> CFR011: Send feedback to improve recommendations and insights  
+}
+@enduml
+```
+
+This PlantUML code represents the use case diagram for an AI-powered analysis & insights system. The main components include:
+
+- **System**: Contains various use cases like viewing financial dashboards, managing risk parameters (both by clients and administrators), scheduling mentoring sessions, requesting predictions, generating analytics.
+- **Client Actors**: User (client) interacts with the system through several use cases such as viewing dashboards, receiving alerts, making requests for predictions, etc. The SysAdmin manages some of these settings via AI components.
+  
+The diagram is structured into four main rectangles: System, Client, Financial Advisor, and AI System. Each actor or subsystem has relationships with specific use cases based on their roles (client, advisor, admin). Relationships are established using arrows to indicate interactions.
+
+Key points:
+- **UserClient** can view dashboards (`CFR001`), manage risk parameters (`SAFR002` via SysAdmin configuration), request predictions (`SFR003` and `SFR014`).
+- **FAFR001 (Financial Advisor)** schedules mentoring sessions (`FAFR005`) based on system insights, manages client-specific risk params (`SAFR002`), requests financial predictions.
+- **SysAdmin** configures AI parameters like generating financial predictions (`AIFR001`). 
+- The **AI System** handles all automated tasks (e.g., prediction generation, alerting).
+  
+This setup ensures clarity in how different actors interact with the system and its components. Each use case is linked appropriately to reflect real-world scenarios as per functional requirements. 
+
+\boxed{UseCaseDiagram}
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001  
+  usecase "SAFR002: Manage Risk Parameters" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+  usecase "SFR003: Request Financial Predictions" as SFR003  
+  usecase "SFR014: Generate Client Analytics" as SFR014
+
+  SysAdmin --> SAFR002 <|-- (AIFR001) : Configure system parameters for financial predictions
+}
+
+rectangle "Client" {
+  actor "User (Client)" as UserClient  
+  actor "System Administrator" as SysAdmin  
+
+  UserClient --> CFR001: View financial insights dashboard  
+  UserClient --> SAFR002: Manage risk parameters for system alerts  
+  UserClient --> SFR003: Request financial predictions  
+  UserClient --> SFR014: Generate client analytics
+
+  SysAdmin --> SAFR002 <|-- (AIFR001) : Configure system parameters
+}
+
+rectangle "Financial Advisor" {
+  actor "FAFR001: Financial Advisor" as FAFR001  
+
+  FAFR001 --> FAFR005: Schedule mentoring sessions based on system insights  
+  FAFR001 --> SAFR002: Manage risk parameters for clients  
+  FAFR001 --> SFR003: Request financial predictions
+}
+
+rectangle "AI System" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001  
+  usecase "AIFR002: Manage Risk Parameters for AI Alerts" as AIFR002  
+  usecase "AIFR003: Send Spending Limit Alerts" as AIFR003
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

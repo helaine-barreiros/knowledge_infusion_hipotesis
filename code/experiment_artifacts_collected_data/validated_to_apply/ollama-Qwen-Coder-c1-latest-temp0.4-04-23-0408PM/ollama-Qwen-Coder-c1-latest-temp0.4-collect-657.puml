@@ -1,0 +1,57 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFD002
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+  Client --> CFR001 : "View Dashboard"
+  SysAdmin --> SAFR001 : "Manage Parameters"
+  FAFD --> FAFD002 : "Review Alerts"
+  System --> SFR003 : "Request Predictions"
+  System --> AIFR004 : "Generate Analyses"
+
+  rectangle "Client" {
+    usecase "CFR001: View Financial Insights Dashboard" as CFR001
+    usecase "SAFR005: Manage Recommendations Preferences" as SAFR005
+
+    Client --> CFR001 : "View Dashboard"
+    Client --> SAFR005 : "Manage Preferences"
+  }
+
+  rectangle "Financial Advisor" {
+    usecase "FAFR002: View Client Intervention Alerts" as FAFD002
+    usecase "FAFR003: View Predictive Analytics" as FAFD003
+
+    FinancialAdvisor --> FAFD002 : "Review Alerts"
+    FinancialAdvisor --> FAFD003 : "View Analytics"
+  }
+
+  rectangle "System Admin" {
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+    usecase "SFR004: Request Personalized Recommendations" as SFR004
+
+    SystemAdmin --> SAFR001 : "Manage Parameters"
+    SystemAdmin --> SFR004 : "Request Recommendations"
+  }
+
+  rectangle "User (Client, Financial Advisor, or System Administrator)" {
+    usecase "CFR011: Send Feedback" as CFR011
+    usecase "FAFR002: View Client Intervention Alerts" as FAFD002
+
+    User --> CFR011 : "Send Feedback"
+    User --> FAFD002 : "Review Alerts"
+  }
+}
+
+@enduml

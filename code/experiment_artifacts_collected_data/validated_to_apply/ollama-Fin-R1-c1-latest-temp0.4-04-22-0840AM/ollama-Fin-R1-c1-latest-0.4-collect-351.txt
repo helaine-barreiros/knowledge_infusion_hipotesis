@@ -1,0 +1,73 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Notification Channels" as SAFR002
+  
+  Client --> CFR001 : "View financial data, alerts, and recommendations"
+  
+  SysAdmin -> SAFR002 : "Configure system settings, including alert preferences"
+
+  rectangle Professional {
+    actor FinancialAdvisor as FA
+    usecase "FAFR001: Manage Mentoring Sessions" as FAFR001
+    usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+    usecase "FAFR003: Review Predictive Analytics" as FAFR003
+  }
+  
+  rectangle System {
+    actor User as U
+    usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+    usecase "SFR20: Manage Feedback for Continuous Improvement" as SFR20
+
+    user U --> CFR001 : "Access personalized dashboards and recommendations"
+  }
+  
+  rectangle AI {
+    actor AIFRSystem as AIS
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Identify Investment Opportunities" as AIFR004
+    usecase "AIFR005: Detect Anomalies in Transactions" as AIFR005
+
+    AIS --> SAFR002 : "Provide data for system administrator to manage"
+  }
+  
+  SysAdmin <|-- (SAFR001) : "Manage analysis parameters"
+
+  Client -> CFR003 : "View financial predictions based on historical and market trends"
+  Client -> CFR004 : "Receive personalized recommendations aligned with goals"
+  Client -> CFR005 : "Adjust preferences for recommendations relevance"
+  
+  SysAdmin -> SAFR001 : "Set up system parameters, ensuring compliance"
+
+  FAFR002 <|-- (FA) : "Financial Advisor receives alerts when needed"
+  
+  User --> SFR018 : "Track financial goals and progress"
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire diagram is enclosed within a rectangle labeled "System" to represent the system's components.
+- **Actors**:
+  - `Client`: Represents end-users (financial clients, advisors, or admins).
+  - `SysAdmin`: System administrator for managing parameters and alerts.
+  - `FinancialAdvisor` (`FA`): Financial advisor role with specific use cases.
+- **Use Cases**:
+  - Client-related uses include viewing dashboards/predictions/recommendations/alerts.
+  - SysAdmin manages system settings, like notifications or analysis parameters.
+  - Financial Advisor handles mentoring sessions and client alerts.
+- **Relationships**:
+  - Direct interactions (e.g., `Client` to `CFR001`, `SysAdmin` to `SAFR002`).
+  - Inheritance (`FAFR002 <|-- FA`) indicates the advisor role uses this use case.
+
+This structure ensures all requirements are mapped accurately, with proper categorization and relationships. Adjustments may be needed based on further analysis of dependencies or additional context from the problem statement.
+
+[Done: True
+Done Reason: stop
+Eval Count: 735]

@@ -1,0 +1,75 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System: as Sys
+:Financial Advisor: as FAdvisor
+:System Administrator: as SAAdmin
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+
+  Client --> CFR001
+  Client --> SAFR001
+  FAdvisor --> FAFR001
+  SAAdmin --> SAFR001
+  
+  :User (Client, Financial Advisor, or System Administrator): as User -> Sys: "Send Feedback" : SFR002 <|-- AIFR002
+}
+
+rectangle "Financial Insights Dashboard" {
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  
+  Client --> CFR009
+}
+
+rectangle "Alerts and Notifications" {
+  usecase "SFR013: Generate Client Alerts" as SFR013
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  Client --> SFR013
+  FAdvisor --> SFR013
+  SAAdmin --> SAFR001
+  
+}
+
+rectangle "Investment Opportunities and Recommendations" {
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+  usecase "FAFR002: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR002
+  
+  Client --> CFR007
+  Financial Advisor --> FAFR002
+
+}
+
+rectangle "News and Information" {
+  usecase "CFR008: View News Related to My Investment Portfolio" as CFR008
+  usecase "SFR010: Process Contextualized News for Users' Financial Situations" as SFR010
+  
+  Client --> CFR008
+
+}
+
+rectangle "Spending Limits and Budget Management" {
+  usecase "CFR006: View Spending Limit Alerts When I Exceed Predefined Thresholds in Specific Expense Categories" as CFR006
+  usecase "SFR005: Request Spending Limit Alerts from the AI Component" as SFR005
+  
+  Client --> CFR006
+
+}
+
+rectangle "Financial Health and Wellness Reports" {
+  usecase "AIFR017: Generate Financial Health Reports Assessing Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as AIFR017
+  usecase "SFR018: Manage Users' Financial Goals To Track Progress and Provide Relevant Recommendations" as SFR018
+  
+  Client --> AIFR017
+
+}
+
+@enduml

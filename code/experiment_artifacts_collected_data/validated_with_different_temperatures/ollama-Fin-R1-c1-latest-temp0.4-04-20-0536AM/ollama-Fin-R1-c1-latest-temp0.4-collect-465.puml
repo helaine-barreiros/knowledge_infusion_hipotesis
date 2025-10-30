@@ -1,0 +1,66 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR003: Request Financial Predictions from AI Component" as SAFR003
+  usecase "SFR007: Generate Client Dashboards for Users" as SFR007
+  
+  Client --> CFR001 : "View financial data in a comprehensive format"
+  
+  SysAdmin <|-- (CFR005) : Manage preferences for personalized recommendations
+
+  rectangle "Client Interface" {
+    usecase "SFR002: Receive Personalized Recommendations from System" as SFR002
+    usecase "SFR013: Request Client Alerts Based on Predefined Conditions" as SFR013
+    
+    Client --> SFR002 : "Receive personalized recommendations"
+  }
+  
+  rectangle "Financial Advisor Interface" {
+    usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as FAFR004
+    usecase "SFR015: Request Predictive Intervention Analyses from AI Component" as SFR015
+    
+    FinancialAdvisor --> FAFR004 : "Set analysis parameters"
+  }
+  
+  rectangle "System Administrator Interface" {
+    usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+    usecase "SFR020: Maintain Historical Record of User Insights" as SFR020
+    
+    SysAdmin --> SAFR001 : "Manage system parameters"
+  }
+  
+  rectangle "AI Component Interface" {
+    usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+    usecase "SFR018: Manage User Financial Goals Tracking" as SFR018
+    
+    System --> AIFR003 : "Identify unusual spending patterns"
+  }
+  
+  rectangle "Notification Component Interface" {
+    usecase "SFR006: Request Spending Limit Alerts from AI Component" as SFR006
+    usecase "SFR009: Find Contextualized News Relevant to Portfolios" as SFR009
+    
+    System --> SFR006 : "Alert when spending exceeds thresholds"
+  }
+  
+  rectangle "News Processing Interface" {
+    usecase "AIFR007: Generate Contextualized News Insights for Users" as AIFR007
+    usecase "SFR019: Maintain Historical Record of AI Insights" as SFR019
+    
+    System --> AIFR007 : "Extract relevant news based on portfolios"
+  }
+  
+  rectangle "Feedback Interface" {
+    usecase "CFR011: Send Feedback to Improve Recommendations" as CFR011
+    usecase "SFR020: Process User Feedback for Improvement" as SFR020
+    
+    Client --> CFR011 : "Provide feedback"
+  }
+  
+}
+
+@enduml

@@ -1,0 +1,77 @@
+```plantuml
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Fraud Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Adjust Recommendation Preferences" as CFR005
+  usecase "CFR006: Monitor Spending Limits" as CFR006
+  usecase "CFR007: Discover Investment Opportunities" as CFR007
+  usecase "CFR008: Stay Informed with News" as CFR008
+  usecase "CFR009: Access Consolidated Dashboard" as CFR010 (Note: Requirement ID mismatch, corrected to CFR010)
+  usecase "CFR010: Manage Data Sharing Permissions" as CFR010
+
+  actor Client as cClient {
+    --> CFR001
+    --> SAFR002 : "View Alerts"
+    --> CFR003
+    --> CFR004
+    --> CFR005
+    --> CFR006
+    --> CFR007
+    --> CFR008
+    --> CFR009
+    --> CFR010
+
+  }
+
+  actor SysAdmin as cSysAdmin {
+    --> SAFR002 : "Manage Fraud Alerts"
+    --> AIFR003: Manage Spending Limit Alerts (Note: Requirement not explicitly mentioned, inferred from context)
+  }
+
+  actor FinancialAdvisor as cFAFR001 {
+    --> FAFR001
+    --> FAFR002
+    --> FAFR003
+    --> AIFR008 : "Intervention Recommendations"
+    --> AIFR009: Predictive Insights
+
+  }
+
+  actor AI as cAIFR {
+    <|-- CFR004: Generate Personalized Recommendations (Note: Requirement not explicitly mentioned, inferred from context)
+    <|-- SAFR001
+    <|-- AIFR002 : "Predictions"
+    <|-- AIFR003: Manage Spending Limits
+    <|-- AIFR006: Fraud Alerts
+    <|-- AIFR007: News Insights
+  }
+
+}
+
+@enduml
+```
+
+### Key Observations:
+1. **Client Actor**: Represents all client-related use cases (CFRs). The "Access Consolidated Dashboard" was corrected from CFR009 to CFR010 due to a duplicate ID in the requirements.
+2. **SysAdmin Actor**: Manages system-level tasks like fraud alerts and spending limit management via AI components.
+3. **FinancialAdvisor Actor**: Handles advisor-specific use cases (FAFRs) related to mentoring, client interventions, predictive analytics, etc., using AI-generated insights.
+4. **AI Component**: Synthesizes financial predictions, recommendations, and other analyses from user data and market trends.
+5. **Relationships**:
+   - Clients interact with most use cases directly via the system.
+   - SysAdmin manages fraud alerts (SAFR002) through the system.
+   - Financial Advisors leverage AI-generated insights for client interactions.
+
+### Notes on Inferences:
+- Some requirements were inferred to ensure completeness, such as "Generate Personalized Recommendations" under the Client actor and related activities in the AI component. These are marked with "(Note: Requirement not explicitly mentioned)" annotations. Adjustments may be needed based on further clarification of ambiguous requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 800]

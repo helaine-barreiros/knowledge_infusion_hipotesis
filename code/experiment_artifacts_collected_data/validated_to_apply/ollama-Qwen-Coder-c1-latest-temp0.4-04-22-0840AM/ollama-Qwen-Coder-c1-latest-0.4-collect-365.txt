@@ -1,0 +1,127 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts About Anomalous Transactions" as SAFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Current Market Trends" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as SAFR004
+  usecase "CFR005: Manage Personalized Recommendations Preferences to Ensure Relevance Based on KYC Profile" as SAFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds in Specific Expense Categories" as SAFR006
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as SAFR007
+  usecase "CFR008: View News Related to My Investment Portfolio" as SAFR008
+  usecase "CFR009: Access a Personalized Dashboard That Consolidates Financial Information in One View" as SAFR012
+  
+  CFR001 --> SAFR002
+  CFR001 --> SAFR003
+  CFR001 --> SAFR004
+  CFR001 --> SAFR005
+  CFR001 --> SAFR006
+  CFR001 --> SAFR007
+  CFR001 --> SAFR008
+  CFR001 --> SAFR012
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts When Patterns Require Professional Attention" as SAFR007
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations to Provide Data-Driven Recommendations During Consultations" as FAFR016
+  
+  FinancialAdvisor --> FAFR001
+  FinancialAdvisor --> SAFR002
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR001
+  
+  usecase "SAFR001: Manage Analysis Parameters for the AI System to Ensure Compliance with Regulatory Standards such as Basel III" as SAFR001
+  
+  SystemAdmin --> SAFR001
+}
+
+rectangle "AI System Components" {
+  package "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions Based on Historical Data, Market Trends, and Economic Indicators" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Profiles and Goals" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts by Identifying Unusual Deviations from Established Patterns" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users Based on Their Risk Profiles, Time Horizons, and Financial Goals" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities by Identifying Instruments Aligning with User Strategies and Modern Portfolio Theory Principles" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts Using Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance with FinCEN Requirements" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News With Specific User Portfolios" as AIFR007
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations Based on Patterns Indicating Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR009
+  }
+  
+  package "System Component" {
+    usecase "SFR001: Deliver Alerts to Users Through Appropriate Notification Channels" as SFR001
+    usecase "SFR002: Deliver Personalized Recommendations Based on Financial Profiles" as SFR002
+    usecase "SFR003: Request Financial Predictions from the AI Component for Forward-Looking Insights" as SFR003
+    usecase "SFR004: Request Personalized Recommendations from the AI Component Based on User Data and Preferences" as SFR004
+    usecase "SFR005: Request Spending Limit Alerts from the AI Component When Exceeding Defined Thresholds" as SFR005
+    usecase "SFR006: Request Investment Opportunity Analysis from the AI Component to Identify Suitable Investments Based on User Risk Profiles" as SFR008
+    usecase "SFR007: Request Specific Investment Opportunities Matching User Criteria and ESG Preferences From the AI Component" as SAFR013
+    usecase "SFR008: Request Anomaly Transaction Alerts from the AI Component to Detect Potentially Fraudulent Activities in Accordance with AML Regulations" as SFR009
+    usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios From Trusted Sources" as SAFR014
+    usecase "SFR010: Process Contextualized News To Extract Relevant Information for User Situations" as AIFR007
+    usecase "SFR011: Request Contextualized News Insights from the AI Component to Identify Potential Impacts on Users' Investments" as SFR015
+  }
+}
+
+rectangle "System Boundaries" {
+  rectangle "Client System" {
+    CFR001 --> SAFR002
+    CFR001 --> SAFR003
+    CFR001 --> SAFR004
+    CFR001 --> SAFR005
+    CFR001 --> SAFR006
+    CFR001 --> SAFR007
+    CFR001 --> SAFR008
+  }
+  
+  rectangle "Financial Advisor System" {
+    FinancialAdvisor --> FAFR001
+    FinancialAdvisor --> SAFR002
+  }
+  
+  rectangle "System Administrator System" {
+    SystemAdmin --> SAFR001
+  }
+}
+
+rectangle "AI Component" {
+  AIFR001 <|-- SFR003
+  AIFR002 <|-- SFR004
+  AIFR003 <|-- SFR005
+  AIFR004 <|-- SAFR006
+  AIFR005 <|-- SAFR017
+  AIFR006 <|-- SFR008
+  AIFR007 <|-- SAFR009
+  AIFR008 <|-- FAFR002
+}
+
+rectangle "System Component" {
+  SFR001 --> CFR002
+  SFR005 --> SAFR006
+  SFR003 --> SAFR007
+  SFR004 --> SAFR008
+  SFR010 --> AIFR007
+}
+
+rectangle "User Feedback" {
+  usecase "CFR011: Send Feedback About System's Recommendations and Insights to Improve Future Outputs" as CFR011
+  
+  Client --> CFR011
+  FinancialAdvisor --> CFR011
+  SystemAdmin --> CFR011
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1679]

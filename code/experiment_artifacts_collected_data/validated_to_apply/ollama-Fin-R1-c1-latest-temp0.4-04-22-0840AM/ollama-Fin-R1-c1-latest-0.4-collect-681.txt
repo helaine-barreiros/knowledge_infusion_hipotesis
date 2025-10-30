@@ -1,0 +1,73 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR003: Request Financial Predictions from AI Component" as SAFR003
+  usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+  usecase "CFR004: Receive Personalized Recommendations Aligned with Profile" as CFR004
+  usecase "SAFR005: Request Spending Limit Alerts from AI Component" as SAFR005
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "SAFR004: Configure Analysis Parameters for Specific Segments" as SAFR004
+  usecase "SFR008: Request Investment Opportunity Analysis from AI Component" as SFR008
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as CFR007
+  usecase "SAFR015: Generate Predictive Intervention Analyses for Financial Advisors" as SAFR015
+  usecase "SFR009: Request Contextualized News Insights from AI Component" as SFR009
+  usecase "CFR008: View News Related to Investment Portfolio" as CFR008
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+}
+
+rectangle "Client" {
+  actor Client as C1
+  client --> CFR001 : "View Financial Insights Dashboard"
+  client --> SFR002 : "Receive Personalized Recommendations Aligned with Profile"
+  client --> CFR004 : "Manage Preferences for Personalized Recommendations"
+  client --> SAFR005 : "Monitor Spending Limits Against Thresholds"
+  client --> CFR006 : "View Alerts When Exceeding Budgets"
+  client --> SFR013 : "Receive Timely Notifications on Financial Events"
+  client --> CFR007 : "Explore Investment Opportunities Based on Risk Profile"
+}
+
+rectangle "Financial Advisor" {
+  actor FAFR as FA
+  FAFR --> SAFR015 : "Identify When to Engage Clients via Predictive Interventions"
+  FAFR --> AIFR008 : "Request Client-Specific Intervention Recommendations"
+}
+
+rectangle "System Administrator" {
+  SysAdmin as SA
+  SA --> SAFR004 : "Adjust Analysis Parameters for Segments"
+  SA --> CFR005 : "Manage User Preferences in KYC Profiles"
+}
+
+client --> SFR012 : "Access Consolidated Client Dashboards"
+
+SysAdmin <|-- (CFR003) as SystemConfig
+SAFSys --> SAFR006: "Request Investment Opportunity Analysis Based on Risk Tolerance"
+SAFSys --> AIFR007: "Generate Contextualized News Insights for Portfolios"
+
+@enduml
+```
+
+### Explanation:
+1. **System Boundary**: The entire system is enclosed within a rectangle labeled "System". This includes all use cases and actors related to the AI-powered analysis.
+2. **Use Cases**:
+   - Client-related use cases (CFR001–CFR011) are grouped under the client actor.
+   - System Administrator actions (SAFR004, CFR005) are handled by SysAdmin.
+   - Financial Advisor interactions (FAFR001–FAFR004) involve FAFR.
+3. **Actors**:
+   - `Client` represents end-users like clients or system administrators interacting with the application.
+   - `FinancialAdvisor` and `SystemAdministrator` are distinct roles performing specific tasks.
+4. **Relationships**:
+   - Arrows denote direct interactions between actors and use cases (e.g., Client → CFR001).
+   - Inheritance relationships (`<|--`) link system administrators to configuration-related use cases like SAFR003.
+
+This diagram ensures all functional requirements are represented accurately with proper categorization and relationships. Adjustments can be made if additional details or dependencies arise from the context.
+
+[Done: True
+Done Reason: stop
+Eval Count: 944]

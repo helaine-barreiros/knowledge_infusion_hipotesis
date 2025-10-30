@@ -1,0 +1,64 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:User (Client): as UserC
+:User (Financial Advisor): as UserFA
+:System Administrator: as SysAdmin
+:AIFR001: as AIFR001
+:SFR020: as SFR020
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "SFR020: Process User Feedback" as SFR020
+  
+  UserC --> CFR001
+  UserC --> (CFR003)
+  UserC --> (CFR004)
+  UserC --> (SAFR005)
+  
+  UserFA --> FAFR001
+  UserFA --> (FAFR002)
+  UserFA --> (FAFR007)
+  
+  SysAdmin --> SAFR001
+  
+  AIFR001 <|-- CFR003
+  AIFR001 <|-- CFR004
+  AIFR001 <|-- FAFR002
+  AIFR001 <|-- SFR017
+}
+
+rectangle "Notifications" {
+  usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+  
+  UserC --> (SFR008)
+  UserFA --> (SFR008)
+}
+
+rectangle "Investment Opportunities" {
+  usecase "CFR012: View Investment Opportunities" as CFR012
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  
+  UserC --> (CFR012)
+  FAFR001 --> (FAFR007)
+}
+
+rectangle "News and Analytics" {
+  usecase "SFR009: Request Contextualized News Insights" as SFR009
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  
+  UserC --> (SFR009)
+}
+
+rectangle "Recommendations and Predictions" {
+  usecase "CFR012: View Investment Opportunities" as CFR012
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  
+  UserC --> (SFR016)
+}
+
+@enduml

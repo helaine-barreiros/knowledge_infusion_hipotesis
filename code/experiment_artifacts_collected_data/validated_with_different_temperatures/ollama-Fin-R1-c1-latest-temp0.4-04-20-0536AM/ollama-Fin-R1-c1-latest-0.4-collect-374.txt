@@ -1,0 +1,129 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: View News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: Personalized Dashboard for Financial Information Consolidation" as CFR009
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+
+  // System Admin Use Cases
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  // Financial Advisor Use Cases (FAFR)
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Segment" as FAFR004
+
+  // System Use Cases (SFR)
+  usecase "SFR001: Deliver Alerts Through Notification Channels" as SFR001
+  usecase "SFR002: Provide Personalized Recommendations Based on Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations From AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts When Exceeding Thresholds" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis Based on Risk Profile" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities Matching Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts for Fraud Detection" as SFR008
+  usecase "SFR009: Find Contextualized News Relevant to Portfolio" as SFR009
+  usecase "SFR010: Generate Client Dashboards Intuitively" as SFR010
+  usecase "SFR011: Extract Relevance from Contextualized News for Users" as SFR011
+  usecase "SFR012: Request Predictive Intervention Analyses From AI Component" as SFR012
+  usecase "SFR013: Track Financial Goals and Progress" as SFR013
+  usecase "SFR014: Maintain Historical Record of Insights for Trend Analysis" as SFR014
+  usecase "SFR015: Manage User Feedback to Improve System Outputs" as SFR015
+
+  // AI Component Use Cases (AIFR)
+  usecase "AIFR001: Generate Financial Predictions Based on Data and Trends" as AIFR001
+  usecase "AIFR002: Create Personalized Recommendations Aligning with Profiles" as AIFR002
+  usecase "AIFR003: Issue Spending Limit Alerts for Unusual Activity Detection" as AIFR003
+  usecase "AIFR004: Analyze Investment Opportunities Against Risk Tolerance and Goals" as AIFR004
+  usecase "AIFR005: Identify Financial Instruments Aligning with Investment Strategies" as AIFR005
+  usecase "AIFR006: Detect Anomalies in Transactions for Fraud Prevention" as AIFR006
+  usecase "AIFR007: Correlate News With Portfolios to Provide Relevant Insights" as AIFR007
+  usecase "AIFR008: Recommend Proactive Actions Based on Client Patterns" as AIFR008
+  usecase "AIFR009: Offer Forward-Looking Analysis for Financial Planning" as AIFR009
+
+  // Actors
+  actor "Client" as Client
+  actor "Financial Advisor (FA)" as FA
+  actor "System Administrator (SA)" as SA
+  
+  Client --> CFR001 : View financial insights dashboard
+  Client --> CFR002 : Receive alerts on anomalous transactions
+  Client --> CFR003 : View financial predictions based on data and trends
+  Client --> CFR004 : Personalized recommendations aligned with profile
+  Client --> CFR005 : Manage preferences for recommendations
+  Client --> CFR006 : View spending limit alerts when thresholds exceeded
+  Client --> CFR007 : Access investment opportunities matching risk profile
+  Client --> CFR008 : View news related to portfolio
+  Client --> CFR009 : Personalized dashboard consolidation
+  Client --> CFR010 : Manage relationship with financial advisors
+
+  SA --> SAFR001 : Manage analysis parameters for system accuracy and compliance
+  
+  FA --> FAFR001 : Manage client mentoring sessions based on insights
+  FA --> FAFR002 : View client intervention alerts for proactive assistance
+  FA --> FAFR003 : View predictive analytics about clients' financial situations
+  FA --> FAFR004 : Configure analysis parameters by segment
+
+  // System Use Cases (SFR)
+  
+  SFR001 <|-- Client, SA, FA: Deliver alerts through channels
+  
+  SFR002 <|-- Client, SA, FA: Personalized recommendations based on profiles
+  SFR003 <|-- Client, SA, FA: Request financial predictions from AI component
+  SFR004 <|-- Client, SA, FA: Request personalized recommendations from AI component
+  SFR005 <|-- Client, SA, FA: Request spending limit alerts when thresholds exceeded
+  SFR006 <|-- Client, SA, FA: Request investment opportunity analysis based on risk profile
+  SFR007 <|-- Client, SA, FA: Request specific opportunities matching criteria and ESG preferences
+  SFR008 <|-- Client, SA, FA: Request anomaly transaction alerts for fraud detection
+  SFR009 <|-- Client, SA, FA: Find contextualized news relevant to portfolio
+  SFR010 <|-- Client, SA, FA: Generate client dashboards intuitively
+  SFR011 <|-- Client, SA, FA: Extract relevance from contextualized news for users
+  SFR012 <|-- Client, SA, FA: Request predictive intervention analyses from AI component
+  SFR013 <|-- Client, SA, FA: Track financial goals and progress
+  SFR014 <|-- Client, SA, FA: Maintain historical record of insights for trend analysis
+  SFR015 <|-- Client, SA, FA: Manage user feedback to improve system outputs
+
+  // AI Component Use Cases (AIFR)
+  
+  AIFR001 <|-- SFR003 : Generate financial predictions
+  AIFR002 <|-- SFR004 : Create personalized recommendations
+  AIFR003 <|-- SFR005 : Issue spending limit alerts for detection
+  AIFR004 <|-- SFR006, SFR007: Analyze investment opportunities and ESG preferences
+  AIFR005 <|-- SFR006: Identify financial instruments aligning with strategies
+  AIFR006 <|-- SFR008 : Detect transactional anomalies for fraud prevention
+  AIFR007 <|-- SFR009, SFR11 : Correlate news and extract insights
+  AIFR008 <|-- SFR12: Recommend proactive actions based on patterns
+  AIFR009 <|-- SFR13: Offer forward-looking financial planning analysis
+
+  // Client to System Communication (SFR)
+  
+  Client --> SFR001 : Trigger alert delivery via SA or FA
+  
+  Client --> SFR002 : Request recommendations from system based on profile
+  Client --> SFR003 : Ask for predictions using historical data and trends
+  Client --> SFR004 : Seek personalized AI-generated advice aligned with goals
+  Client --> SFR005 : Check spending limits against thresholds set by system
+  
+  // Financial Advisor to System Communication (SFR)
+  
+  FA --> SFR12: Engage in predictive analysis for client guidance
+
+  // System to User Feedback Loop (SFR)
+
+  S
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

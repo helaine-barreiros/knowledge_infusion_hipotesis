@@ -1,0 +1,77 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor FinancialAdvisor as FA1
+actor SysAdmin as SA1
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR020: Maintain Historical Record of User Insights" as SFR020
+
+  C1 --> CFR001 : "View Financial Dashboard"
+  
+  SA1 --> SAFR001 : "Manage AI Params"
+
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Investment Opportunity Analyses" as AIFR004
+
+  SAFR001 <|-- (AIFR002) : Configures AI for user profiles
+
+}
+
+rectangle "Contextual News Component" {
+  usecase "SFR009: Request Contextualized News Insights" as SFR009
+  usecase "AIFR007: Generate Contextualized News" as AIFR007
+  
+  SFR020 <|-- (AIFR007) : Uses historical data for news relevance
+
+}
+
+rectangle "Client Feedback Component" {
+  usecase "CFR011: Send User Feedback to System" as CFR011
+}
+  
+SFR020 --> AIFR009 : Generates reports based on user goals and history
+
+@enduml
+```
+
+**Explanation of the Diagram Structure:**
+
+- **System Boundary:** The entire system is enclosed within a rectangle labeled "System," which includes multiple components like AI, contextual news, client feedback, etc.
+  
+- **Actors:** 
+  - `Client` (C1) represents users interacting with the system. They can view dashboards and receive recommendations.
+  - `FinancialAdvisor` (FA1) is another actor that interacts through specific use cases related to mentoring or alerts.
+  - `SysAdmin` (SA1) manages administrative tasks like parameter settings.
+
+- **Use Cases:**
+  - `CFR001`, `SFR020`: Client-related activities. The client views dashboards and maintains a historical record of insights.
+  - `SAFR001`: System Administrator manages AI parameters via the SysAdmin role.
+  
+- **AI Component:** This includes several use cases such as generating financial predictions, personalized recommendations, spending limit alerts, investment analyses, etc.
+
+- **Contextual News Component:** Handles requests for relevant news based on user portfolios and historical data from client dashboards (SFR020).
+
+- **Client Feedback Component:** Allows users to provide feedback which is used by the system to improve its outputs (`CFR011`).
+
+**Key Relationships:**
+- The `SysAdmin` can manage AI parameters, influencing how recommendations are generated.
+- Historical records from client dashboards (SFR020) affect contextualized news insights via AIFR007.
+- User feedback is captured in the system for continuous improvement.
+
+This structure ensures all functional requirements are mapped accurately to their respective actors and use cases. Each component interacts as described, forming a coherent model of the AI-powered financial analysis system.
+
+[Done: True
+Done Reason: stop
+Eval Count: 771]

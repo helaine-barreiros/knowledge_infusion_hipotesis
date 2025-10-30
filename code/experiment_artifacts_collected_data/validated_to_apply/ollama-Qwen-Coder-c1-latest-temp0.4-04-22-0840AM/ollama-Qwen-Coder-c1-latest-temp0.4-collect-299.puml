@@ -1,0 +1,50 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FAFR001
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  
+  Client --> CFR001
+  Client --> SAFR001
+  Client --> FAFR003
+  Client --> SFR002
+  Client --> AIFR002
+
+  SysAdmin --> SAFR001
+
+  FinancialAdvisor --> FAFR001
+}
+
+rectangle "Client Dashboard" {
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  
+  Client --> CFR009
+}
+
+rectangle "Financial Advisor Features" {
+  usecase "FAFR002: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Clients" as FAFR004
+  
+  FinancialAdvisor --> FAFR003
+  FinancialAdvisor --> FAFR004
+}
+
+rectangle "System Features" {
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR019: Maintain Historical Record of Users' Insights" as SFR019
+  
+  SystemAdmin --> SAFR001
+
+  FinancialAdvisor --> FAFR003
+}
+@enduml

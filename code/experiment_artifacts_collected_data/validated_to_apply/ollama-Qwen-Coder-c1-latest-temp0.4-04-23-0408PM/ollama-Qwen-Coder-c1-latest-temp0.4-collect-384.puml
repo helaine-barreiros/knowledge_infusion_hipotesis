@@ -1,0 +1,89 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts About Anomalous Transactions" as SAFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as SAFR004
+  usecase "CFR005: Manage Personalized Recommendations Preferences to Ensure Relevant Insights" as SAFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds in Specific Expense Categories" as SAFR006
+  usecase "CFR012: Generate Client Dashboards That Present Financial Information Intuitively and Actionably" as SFR012
+  
+  CFR001 --> (SAFR002)
+  CFR001 --> (SAFR003)
+  CFR001 --> (SAFR004)
+  CFR001 --> (SAFR005)
+  CFR001 --> (SAFR006)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts When Patterns Require Professional Attention" as SAFR007
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations to Provide Data-Driven Recommendations During Consultations" as SAFR008
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments Based on Different Profiles and Regulatory Requirements" as SAFR015
+  
+  FAFR001 --> (SAFR007)
+  FAFR001 --> (SAFR008)
+  FAFR001 --> (SAFR015)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR009
+  
+  usecase "SAFR006: Manage Analysis Parameters for the AI System to Ensure Accuracy, Relevance, and Compliance with Financial Regulations" as SAFR001
+  usecase "CFR011: Send Feedback About the System's Recommendations and Insights" as SFR020
+  
+  SAFR009 --> (SAFR006)
+}
+
+package "System Components" {
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations from Established Spending Patterns" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users by Evaluating Potential Investments Against Their Risk Profiles, Time Horizons, and Financial Goals" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities for Users by Identifying Financial Instruments That Align with Their Investment Strategies and Modern Portfolio Theory Principles" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts by Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance with FinCEN Requirements" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News With Specific User Portfolios to Identify Relevant Impacts" as AIFR007
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations by Identifying Patterns That Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR008
+    usecase "AIFR009: Generate Client Predictive Insights that Provide Forward-Looking Analysis of Financial Situations to Support More Effective Financial Planning" as AIFR009
+    
+    SAFR001 --> (AIFR006)
+  }
+  
+  rectangle "Notification Component" {
+    usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR002
+    usecase "SFR003: Request Financial Predictions from the AI Component" as SFR001
+    usecase "SFR004: Request Personalized Recommendations from the AI Component Based on Each User's Financial Data and Preferences" as SFR007
+    usecase "SFR005: Request Spending Limit Alerts From the AI Component When User Spending Patterns Exceed Defined Thresholds" as SAFR012
+    usecase "SFR006: Request Investment Opportunity Analysis from the AI Component to Identify Suitable Investments for Users Based on Their Risk Profiles" as SFR014
+    
+    CFR001 --> (SFR003)
+    FAFR001 --> (SFR005)
+  }
+  
+  rectangle "News Component" {
+    usecase "SFR008: Find Contextualized News Relevant to Users' Financial Portfolios From Trusted Financial News Sources" as SFR027
+    usecase "SFR009: Process Contextualized News to Extract Relevant Information for Users' Financial Situations" as SFR031
+    
+    CFR001 --> (SFR008)
+  }
+  
+  rectangle "Dashboard Component" {
+    usecase "SFR012: Generate Client Dashboards That Present Financial Information Intuitively and Actionably" as SAFR015
+    usecase "CFR019: Maintain a Historical Record of Users' Insights to Enable Trend Analysis and Effectiveness Measurement" as SFR034
+    
+    CFR001 --> (SFR012)
+  }
+  
+  rectangle "Feedback Component" {
+    usecase "SFR020: Manage User Feedback to Continuously Improve the Quality and Relevance of Financial Insights" as SAFR018
+    CFR011 --> (SAFR020)
+  }
+}
+@enduml

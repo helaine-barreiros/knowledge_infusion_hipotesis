@@ -1,0 +1,53 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FAFR001
+:AIFR001: as AIFR001
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Deliver Personalized Recommendations" as SFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+  Client --> CFR001
+  SysAdmin --> SAFR001
+  FAFR002 <|-- (FAFR001)
+  SFR003 <|-- (CFR001, SAFR001, FAFR001)
+  AIFR004 <|-- (SFR003)
+
+  Client --> CFR011
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Deliver Personalized Recommendations" as SFR003
+
+  FinancialAdvisor --> (FAFR001, FAFR002)
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+
+  SystemAdmin --> (SAFR001, SFR005)
+}
+
+rectangle "AI Component" {
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+  (SFR003, FAFR002) --> (AIFR002)
+  SAFR001 --> (AIFR004, AIFR005)
+}
+
+@enduml

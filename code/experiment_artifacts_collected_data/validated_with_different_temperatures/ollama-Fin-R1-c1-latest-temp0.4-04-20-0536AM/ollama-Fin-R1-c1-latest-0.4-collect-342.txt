@@ -1,0 +1,104 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sa
+actor FinancialAdvisor as fa
+system SFR021: "System" as sys
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Historical Data Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations Based on Financial Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008
+  usecase "CFR009: View Consolidated Financial Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+
+  c1 --> CFR001 : "View financial data"
+  c1 --> CFR002 : "Receive alerts for anomalies"
+  c1 --> CFR003 : "Get predictions based on history and trends"
+  c1 --> CFR004 : "Personalized recommendations aligned with profile"
+  c1 --> CFR005 : "Adjust recommendation settings per KYC info"
+  c1 --> CFR006 : "Alerts when exceeding spending limits in categories"
+  c1 --> CFR007 : "View suitable investments based on risk"
+  c1 --> CFR008 : "Stay informed about market events affecting portfolio"
+  c1 --> CFR009 : "Single view of all financial info for efficiency"
+  c1 --> CFR10 : "Manage data sharing with advisors"
+
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Intervention Alerts for Clients" as FAFR002
+  usecase "FAFR003: Review Predictive Analytics of Clients' Finances" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+
+  fa --> FAFR001 : "Schedule and track mentoring sessions"
+  fa --> FAFR002 : "Respond to client alerts proactively"
+  fa --> FAFR003 : "Analyze clients' financial data for recommendations"
+  fa --> FAFR004 : "Set segment-specific analysis rules"
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  sa --> SAFR001 : "Adjust AI system parameters to ensure accuracy and compliance"
+}
+  
+system sys <|-- CFR001 : "Delivers financial insights via client interface"
+sys <|-- CFR002 : "Sends alerts through appropriate channels"
+sys <|-- CFR003 : "Requests predictions from the AI component"
+sys <|-- CFR004 : "Generates personalized recommendations based on user data and preferences"
+sys <|-- CFR005 : "Manages recommendation settings per KYC profile"
+sys <|-- CFR006 : "Sends spending limit alerts when thresholds are exceeded"
+sys <|-- CFR007 : "Identifies investment opportunities matching risk profiles"
+sys <|-- CFR008 : "Retrieves and presents relevant financial news to clients"
+sys <|-- CFR009 : "Generates consolidated dashboards for client monitoring"
+sys <|-- CFR10 : "Handles data sharing permissions with advisors"
+
+system sys <|-- FAFR001 : "Schedules mentoring sessions based on system-generated insights"
+system sys <|-- FAFR002 : "Triggers alerts when clients need professional attention"
+system sys <|-- FAFR003 : "Provides predictive analytics for advisor guidance during consultations"
+system sys <|-- FAFR004 : "Customizes analysis parameters according to client segments"
+
+system sys <|-- SAFR001 : "Adjusts AI system's parameter settings under admin control"
+
+@enduml
+```
+
+### Key Observations:
+- **Actors**: The diagram includes three main actors: `Client`, `SysAdmin` (System Administrator), and `FinancialAdvisor`. Each actor corresponds to different user roles within the system.
+  
+- **Use Cases**:
+  - **Client Use Cases**: All CFR-related use cases are grouped under client interactions. These include viewing dashboards, receiving alerts, making predictions, personalizing recommendations, managing preferences, etc.
+  - **System Administrator Use Case**: SAFR001 manages analysis parameters for the AI system to ensure compliance and accuracy.
+  - **Financial Advisor Use Cases**: FAFR-related use cases focus on mentoring clients based on insights, viewing intervention alerts, reviewing predictive analytics, and configuring segment-specific analysis parameters.
+
+- **Relationships**:
+  - The `System` (represented by SFR021) is the central component that interacts with all client-facing use cases. It handles requests from clients for financial predictions, recommendations, spending limits, etc.
+  - For example, when a client wants to view their financial dashboard (`CFR001`), the system delivers this via its interface. Similarly, it generates personalized recommendations (`CFR004`) and sends alerts about anomalies or exceedances (`CFR002`, `CFR006`).
+  - The Financial Advisor uses FAFR-related use cases to manage client interactions more effectively by scheduling mentoring sessions, reviewing predictive analytics, etc.
+  
+- **Inheritance**:
+  - There are no explicit inheritance relationships between actors in this diagram. Each actor operates independently but collaborates with the system through its interfaces.
+
+### Diagram Structure:
+The PlantUML code organizes use cases into logical groups within rectangles (packages) for clarity. The main components (`Client`, `SysAdmin`, and `FinancialAdvisor`) each have their own set of use cases, which are linked to the central `System` component via relationships. This structure ensures that all functional requirements are represented accurately without redundancy or ambiguity.
+
+### Validation:
+- All use case IDs match those provided in the requirements.
+- Actor-to-use-case relationships align with the described functionalities (e.g., clients can view dashboards and receive alerts, while advisors manage mentoring sessions).
+- The system’s role as a mediator between actors and its components is clearly defined through inheritance-like associations.  
+
+This diagram provides a comprehensive overview of how users interact with the AI-powered analysis & insights system across different roles and their associated functionalities. Each use case is precisely mapped to its corresponding actor, ensuring alignment with the provided requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1497]

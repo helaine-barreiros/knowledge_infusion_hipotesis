@@ -1,0 +1,49 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin -> SAFR001 : "Manage System-Wide Analysis Parameters"
+  SysAdmin -> FAFR004 : "Configure Client-Specific Analysis Parameters"
+}
+
+rectangle "Client" {
+  actor "User (Client)" as User
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Spending Limit Alerts for Budget Control" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access Portfolio-Related News" as CFR008
+  usecase "CFR009: Consolidated Financial Dashboard" as CFR010 (Note: Requirement ID mismatch, corrected to CFR009)
+  
+  SysAdmin -> SAFR002 : "Manage System-Wide Analysis Parameters"
+}
+
+rectangle "Financial Advisor" {
+  actor "FAFR003: View Client Intervention Alerts" as FAFR003
+  usecase "FAFR001: Manage Mentoring Sessions Based on Insights" as FAFR001
+  SysAdmin -> FAFR004 : "Configure Analysis Parameters for Specific Segments"
+}
+
+rectangle "System Administrator (SysAdmin)" {
+  actor "SysAdmin" 
+  usecase "SAFR002: System-Wide Alert Management" as SAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  
+}
+
+rectangle "AI Component (AIFR)" {
+  actor "AIFR008: Predictive Insights Generation" as AIFR008
+  usecase "AIFR009: Intervention Recommendations for Advisors" as AIFR009
+
+}
+@enduml

@@ -1,0 +1,91 @@
+```plantuml
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System: as Sys
+:Financial Advisor: as FinancialAdvisor
+:System Administrator: as SysAdmin
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+  rectangle "Client Functions" {
+    Client --> CFR001
+    Client --> SAFR001
+    Client --> FAFR002
+    Client --> SFR003
+    Client --> AIFR004
+  }
+
+  rectangle "Financial Advisor Functions" {
+    FinancialAdvisor --> FAFR001
+    FinancialAdvisor --> FAFR002
+    FinancialAdvisor --> FAFR003
+    FinancialAdvisor --> SAFR001
+    FinancialAdvisor --> SFR005
+    FinancialAdvisor --> AIFR004
+  }
+
+  rectangle "System Administrator Functions" {
+    SysAdmin --> SAFR001
+    SysAdmin --> SFR020
+  }
+}
+
+rectangle "External Systems & Components" {
+  usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  rectangle "Notification Channels" {
+    Sys --> (Email)
+    Sys --> (SMS)
+    Sys --> (Push Notification)
+
+    Client --> (Email)
+    FinancialAdvisor --> (Email)
+    SysAdmin --> (Email)
+  }
+
+  usecase "SFR12: Generate Client Dashboards" as SFR12
+  usecase "AIFR08: Generate Contextualized News Insights" as AIFR08
+
+  rectangle "News Sources & AI Integration" {
+    System --> SFR009 : Request contextualized news
+    SFR009 --> (Financial News API)
+    FinancialAdvisor --> AIFR07 : Request specific investment opportunities
+    Client --> AIFR12 : Generate client dashboards
+
+    rectangle "AI Components" {
+      usecase "AIFR04: Generate Investment Opportunity Analyses" as AIFR04
+      usecase "AIFR05: Generate Financial Health Reports" as AIFR05
+      usecase "AIFR16: Generate Client Predictive Insights" as AIFR16
+
+      System --> SFR03 : Request financial predictions
+      SysAdmin --> SAFR02 : Manage analysis parameters
+    }
+  }
+
+  rectangle "Feedback Loop" {
+    Client --> (CFR11) : Send feedback
+    FinancialAdvisor --> (FAFR11) : Send feedback
+    SysAdmin --> (SAFR11) : Send feedback
+
+    usecase "SFR020: Manage User Feedback" as SFR020
+    System --> SFR020 : Process user feedback
+  }
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 736]

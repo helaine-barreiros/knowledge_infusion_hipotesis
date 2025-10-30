@@ -1,0 +1,105 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FinancialAdvisor
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  Client --> (SFR012) : "View"
+  
+  rectangle "Financial Insights" {
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004
+    usecase "SAFR001: Manage Analysis Parameters for Clients" as SAFR002
+    
+    Client --> (SFR003) : "View"
+    Client --> (SFR004) : "Receive"
+  }
+  
+  rectangle "Alerts and Notifications" {
+    usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+    usecase "SAFR001: Deliver Alerts to Users through Notification Channels" as SFR005
+    
+    Client --> (SFR002) : "Receive"
+  }
+  
+  rectangle "Spending Limits and Budget Management" {
+    usecase "CFR006: View Spending Limit Alerts" as CFR006
+    usecase "SAFR001: Request Spending Limit Alerts from AI Component" as SFR005
+    
+    Client --> (SFR006) : "View"
+  }
+  
+  rectangle "Investment Opportunities and Recommendations" {
+    usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+    usecase "SAFR001: Request Investment Opportunity Analysis from AI Component" as SFR006
+    
+    Client --> (SFR007) : "View"
+  }
+  
+  rectangle "News and Market Updates" {
+    usecase "CFR008: View News Related to My Investment Portfolio" as CFR008
+    usecase "SAFR001: Request Contextualized News Insights from AI Component" as SFR007
+    
+    Client --> (SFR008) : "View"
+  }
+  
+  rectangle "Client Relationship Management" {
+    usecase "CFR10: Manage My Relationship with Financial Advisors" as CFR10
+    usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as FAFR003
+    
+    Client --> (CFR10) : "Manage"
+  }
+  
+  rectangle "User Feedback and Improvement" {
+    usecase "CFR011: Send Feedback About the System's Recommendations and Insights" as CFR011
+    usecase "SFR020: Manage User Feedback to Continuously Improve Outputs" as SFR020
+    
+    Client --> (CFR011) : "Send"
+  }
+}
+
+rectangle "Financial Advisor Functions" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts When the System Detects Patterns Requiring Professional Attention" as FAFR002
+  
+  FinancialAdvisor --> (FAFR001) : "Manage"
+  FinancialAdvisor --> (FAFR002) : "View"
+}
+
+rectangle "System Functions" {
+  usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios from Trusted Financial News Sources" as SFR009
+  usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as AIFR007
+  
+  System --> (SFR009) : "Find"
+  System --> (AIFR007) : "Generate"
+}
+
+rectangle "AI Functions" {
+  usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance as Defined by Industry Standards Like FINRA Guidelines" as AIFR002
+  
+  System --> (AIFR001) : "Generate"
+  System --> (AIFR002) : "Generate"
+}
+
+rectangle "System Administrator Functions" {
+  usecase "SAFR003: Configure Analysis Parameters for Specific Client Segments to Customize the System's Behavior According to Different Client Profiles and Regulatory Requirements Such as GDPR or CCPA" as SAFR004
+  
+  SysAdmin --> (SFR012) : "Manage"
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1084]

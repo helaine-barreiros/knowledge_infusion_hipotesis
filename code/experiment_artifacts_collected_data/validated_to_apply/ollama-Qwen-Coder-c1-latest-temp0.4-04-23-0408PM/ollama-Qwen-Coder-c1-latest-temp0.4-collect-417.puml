@@ -1,0 +1,58 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:User (Client): as Client
+:User (Financial Advisor): as FAdvisor
+:System Admin: as SysAdmin
+:AIFR001: as AIFR001
+:SFR009: as SFR009
+:SFR020: as SFR020
+
+rectangle "Client System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR005: Manage Recommendations Preferences" as SAFR005
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  
+  Client --> (CFR001)
+  SysAdmin --> (SAFR005)
+}
+
+rectangle "Financial Advisor System" {
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "SFR016: Enhance Financial Guidance Insights" as SFR016
+  
+  FAdvisor --> (FAFR002)
+  SysAdmin --> (SAFR005) <|-- (FAFR002)
+}
+
+rectangle "System" {
+  usecase "SFR003: Request Predictive Analytics" as SFR003
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  
+  System --> (SFR003)
+  System --> (SFR014)
+}
+
+rectangle "AI Component" {
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR006: Detect Anomaly Transactions" as AIFR006
+  
+  System --> (AIFR002)
+  System --> (AIFR006)
+}
+
+rectangle "News Component" {
+  usecase "SFR008: Request Contextualized News Insights" as SFR008
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  
+  System --> (SFR008)
+  System --> (AIFR007)
+}
+
+rectangle "Feedback Component" {
+  usecase "CFR011: Send Feedback" as CFR011
+  SFR020 <|-- (CFR011)
+}
+@enduml

@@ -1,0 +1,71 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Consolidated Financial Dashboard" as CFR012
+  usecase "CFR009: Manage Relationship with Advisors" as CFR009
+
+  rectangle "Client" {
+    actor Client as C
+    C --> (CFR001) : View financial insights dashboard\n(CFR003)\n(CFR004)\n(CFR006)\n(CFR007)\n(CFR008)
+    C --> CFR005: Manage recommendation preferences\n(CFR012)\n(CFR009)
+  }
+
+  rectangle "Financial Advisor" {
+    actor FinancialAdvisor as FA
+    FA --> (CFR003) : View financial predictions\n(CFR007)\n(AIFR008)
+    FA --> CFR004: Receive personalized recommendations\n(SAFR002)
+    FA --> SAFR001: Manage analysis parameters for AI system\n(FAFR003)
+  }
+
+  rectangle "System Administrator" {
+    actor SysAdmin as SA
+    SA --> (CFR005) : Manage recommendation preferences\n(CFR012)\n(SAFR001)
+    SA --> SAFR001: Manage analysis parameters for AI system\n(FSAFR004)
+  }
+
+  rectangle "System" {
+    usecase "SFR003: Request Financial Predictions" as SFR003
+    usecase "SFR005: Request Spending Limit Alerts" as SFR005
+    usecase "SFR012: Generate Client Dashboards" as SFR012
+
+    SysAdmin --> (SAFR001) : Manage analysis parameters\n(SAFR003)
+  }
+
+  rectangle "AI System" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+
+    SysAdmin --> (SAFR003) : Manage analysis parameters\n(AIFR005)
+  }
+
+  Client --> CFR008: View consolidated financial dashboard\n(CFR012)\n(SFR009)
+
+  FinancialAdvisor --> SAFR004: Receive personalized recommendations from system\n(FAFR002)
+
+}
+
+@enduml
+```
+
+**Note:**  
+- The `Client` actor includes use cases related to viewing various dashboards, receiving alerts, making predictions, and managing relationships.  
+- The `Financial Advisor` focuses on predictive analyses, investment opportunities, and client mentoring sessions.  
+- The `System Administrator` handles system-level tasks like parameter management for the AI components.  
+- Inheritance is implied where a single actor (e.g., Client) can access multiple related use cases within their role.  
+
+This structure ensures clarity in associating actors with specific functional requirements while maintaining logical groupings and relationships as per the provided specifications. Adjustments may be needed based on further analysis of dependencies or additional context from the requirements list.
+
+[Done: True
+Done Reason: stop
+Eval Count: 836]

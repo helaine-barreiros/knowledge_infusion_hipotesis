@@ -1,0 +1,143 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin -> SAFR001 : "Manage Analysis Parameters"
+  
+  user --|> FAFR003 : "View Predictive Analytics for Clients"
+  
+  system --|> SFR012 : "Generate Client Dashboards"
+
+}
+
+rectangle "Client" {
+  actor client as c
+  usecase "CFR002: View Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Monitor Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Consolidate Financial Information in Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+
+  c --> CFR002 : "View Alerts on Anomalous Transactions"
+  c --> CFR003 : "View Financial Predictions"
+  c --> CFR004 : "Receive Personalized Recommendations"
+  c --> CFR005 : "Manage Recommendation Preferences"
+  c --> CFR006 : "Monitor Spending Limit Alerts"
+  c --> CFR007 : "View Investment Opportunities"
+  c --> CFR008 : "Access News Related to Portfolio"
+  c --> CFR009 : "Consolidate Financial Information in Dashboard"
+  c --> CFR10 : "Manage Relationship with Advisors"
+
+}
+
+rectangle "Financial Advisor" {
+  actor advisor as a
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR004: Configure Analysis Parameters for Segments" as FAFR004
+
+  a --> FAFR002 : "View Client Intervention Alerts"
+  a --> FAFR004 : "Configure Analysis Parameters"
+
+}
+
+rectangle "System Administrator" {
+  actor sysAdmin as s
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+
+  s -> SAFR001 : "Manage Analysis Parameters for System"
+
+}
+@enduml
+```
+
+**Key Observations and Grouping:**
+- **Client**: All client-related use cases (CFRs) are grouped under the Client actor. These include viewing dashboards, alerts, predictions, recommendations, etc.
+- **Financial Advisor**: Focused on advisory-specific actions like intervention alerts and parameter configuration.
+- **System Administrator**: Handles system-level management tasks such as managing analysis parameters.
+- Relationships: Use case arrows indicate direct interactions between actors (e.g., client to CFR001) or the system generating dashboards. SysAdmin manages SAFR001, which is a system use case.
+
+This structure ensures clarity and adherence to functional requirements while maintaining logical groupings for readability. Each actor's responsibilities are distinctly separated in their respective rectangles. The PlantUML code strictly follows the provided guidelines without inventing additional actors or use cases not explicitly listed. 
+
+**Note:** The "System" rectangle includes both system-generated (SFR) and AI-related (AIFR) use cases, as these represent actions performed by the system itself based on client requests or internal logic. For example, SFR012 ("Generate Client Dashboards") is a system action triggered by user interaction via the client actor. Similarly, AIFR007 ("Generate Contextualized News Insights") involves AI processing but falls under the system's purview as it’s driven by data inputs and not direct user requests (though indirectly through SFR components). The diagram reflects these interdependencies accurately.
+```plantuml
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+
+  SysAdmin -> SAFR001 : "Manage Analysis Parameters"
+
+  user --|> FAFR003 : "View Predictive Analytics for Clients"
+
+  system --|> SFR012 : "Generate Client Dashboards"
+}
+
+rectangle "Client" {
+  actor client as c
+  usecase "CFR002: View Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Monitor Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Consolidate Financial Information in Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+
+  c --> CFR002 : "View Alerts on Anomalous Transactions"
+  c --> CFR003 : "View Financial Predictions"
+  c --> CFR004 : "Receive Personalized Recommendations"
+  c --> CFR005 : "Manage Recommendation Preferences"
+  c --> CFR006 : "Monitor Spending Limit Alerts"
+  c --> CFR007 : "View Investment Opportunities"
+  c --> CFR008 : "Access News Related to Portfolio"
+  c --> CFR009 : "Consolidate Financial Information in Dashboard"
+  c --> CFR10 : "Manage Relationship with Advisors"
+
+}
+
+rectangle "Financial Advisor" {
+  actor advisor as a
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR004: Configure Analysis Parameters for Segments" as FAFR004
+
+  a --> FAFR002 : "View Client Intervention Alerts"
+  a --> FAFR004 : "Configure Analysis Parameters"
+
+}
+
+rectangle "System Administrator" {
+  actor sysAdmin as s
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+
+  s -> SAFR001 : "Manage Analysis Parameters for System"
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1639]

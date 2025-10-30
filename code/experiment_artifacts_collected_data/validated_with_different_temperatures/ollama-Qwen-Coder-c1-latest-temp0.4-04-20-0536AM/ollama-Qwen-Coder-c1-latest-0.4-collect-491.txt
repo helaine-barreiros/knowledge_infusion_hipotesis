@@ -1,0 +1,66 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor (FA): as FAdvisor
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+  
+  rectangle "Client Use Cases" {
+    Client --> CFR001 : "View Financial Insights Dashboard"
+    Client --> SAFR001 : "Manage Analysis Parameters"
+    Client --> SFR002
+    Client --> SFR004
+    Client --> SFR005
+    Client --> SFR006
+    Client --> AIFR003
+  }
+  
+  rectangle "Financial Advisor Use Cases" {
+    FAdvisor --> SAFR001 : "Manage Analysis Parameters"
+    FAdvisor --> FAFR002 : "View Client Intervention Alerts"
+    FAdvisor --> FAFR003 : "View Predictive Analytics about Clients' Financial Situations"
+    FAdvisor --> AIFR004
+  }
+  
+  rectangle "System Admin Use Cases" {
+    SysAdmin --> SAFR001
+  }
+}
+
+rectangle "Notifications and Alerts" {
+  usecase "SFR009: Request Contextualized News from AI Component" as SFR009
+  usecase "AIFR007: Generate Contextualized News Insights for Users" as AIFR007
+  
+  Client --> SFR009 : "Request Financial News"
+  System Admin --> SAFR001 : "Manage Analysis Parameters"
+}
+
+rectangle "Feedback and Improvement" {
+  usecase "CFR011: Send Feedback about Recommendations and Insights" as CFR011
+  SysAdmin --> CFR011
+  
+  Client --> CFR011
+  FAdvisor --> CFR011
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 635]

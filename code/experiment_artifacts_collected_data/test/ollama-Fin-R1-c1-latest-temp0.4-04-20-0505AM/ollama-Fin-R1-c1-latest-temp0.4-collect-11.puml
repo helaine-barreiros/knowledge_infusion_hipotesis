@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access Portfolio News" as CFR008
+  usecase "CFR009: Consolidated Personalized Dashboard" as CFR010
+  usecase "CFR010: Manage Relationship with Financial Advisors" as SAFR02
+
+  package Professional {
+    actor Client as cClient
+    actor SystemAdmin as SysAdm
+    actor FinancialAdvisor as FinAdv
+  }
+
+  client --> (cClient) : "View Financial Insights Dashboard", "Receive Alerts on Anomalous Transactions", "View Financial Predictions", "Personalized Recommendations Based on Profile", "Manage Preferences for Recommendations", "View Spending Limit Alerts", "View Investment Opportunities Based on Risk Profile", "Access Portfolio News", "Consolidated Personalized Dashboard"
+  SysAdm --> (cClient) : "Receive Alerts on Anomalous Transactions" 
+  FinAdv --> (FinAdv) : "Manage Client Mentoring Sessions", "View Intervention Alerts", "View Predictive Analytics for Clients", "Configure Analysis Parameters for Specific Segments"
+
+  rectangle Professional {
+    usecase "CFR011: Send Feedback to System" as CFR011
+    cClient <|-- (CFR011)
+  }
+
+  SysAdm --> SAFR02 : "Manage Relationship with Financial Advisors"
+}
+
+@enduml

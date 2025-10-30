@@ -1,0 +1,90 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as fa1
+actor SysAdmin as sa1
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile and Goals" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds in Specific Expense Categories" as CFR006
+  usecase "CFR007: Access Investment Opportunities Suitable to Risk Profile (MiFID II)" as CFR007
+  usecase "CFR008: Receive News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: Consolidated Personalized Dashboard for Efficient Financial Monitoring" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as CFR10
+
+  c1 --> CFR001 : View financial insights dashboard
+  c1 --> CFR002 : Receive alerts about anomalous transactions
+  c1 --> CFR003 : View financial predictions based on data and trends
+  c1 --> CFR004 : Personalized recommendations aligned with profile
+  c1 --> CFR005 : Manage recommendation preferences
+  c1 --> CFR006 : View spending limit alerts when thresholds exceeded
+  c1 --> CFR007 : Access investment opportunities suitable to risk profile
+  c1 --> CFR008 : Receive news related to portfolio
+  c1 --> CFR009 : Consolidated personalized dashboard for monitoring finances
+  c1 --> CFR10 : Manage relationship with financial advisors, including data sharing
+
+}
+
+rectangle "FinancialAdvisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+
+  fa1 --> FAFR001 : Manage client mentoring sessions based on insights
+  fa1 --> FAFR002 : View intervention alerts for proactive assistance
+  fa1 --> FAFR003 : View predictive analytics about clients' financial situations
+}
+
+rectangle "SysAdmin" {
+  usecase "SAFR001: Manage Analysis Parameters to Ensure Accuracy and Compliance with Financial Regulations (Basel III)" as SAFR001
+
+  sa1 --> SAFR001 : Manage analysis parameters for AI system compliance
+}
+
+rectangle "System" {
+  usecase "SFR002: Deliver Personalized Recommendations Based on User Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations From AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts When User Exceeds Thresholds" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis for Users Based on Risk Profiles" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities Matching User Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts to Detect Fraudulent Activities (AML)" as SFR008
+  usecase "SFR009: Find Contextualized News Relevant to Users' Portfolios from Trusted Sources" as SFR009
+  usecase "SFR12: Generate Client Dashboards for Intuitive Financial Monitoring" as SFR12
+
+  SysAdmin --> SAFR001 : Manage analysis parameters (SysAdmin)
+}
+
+rectangle "AI System" {
+  usecase "AIFR003: Identify Unusual Spending Patterns to Trigger Alerts When Exceeding Thresholds" as AIFR003
+  usecase "AIFR004: Evaluate Potential Investments Against User's Risk Profile and Goals for Recommendations" as AIFR004
+  usecase "AIFR005: Identify Financial Instruments Aligning with Investment Strategies (Modern Portfolio Theory)" as AIFR005
+
+}
+
+rectangle "Client-Specific Use Cases" {
+  c1 --> SFR002 : Receive personalized recommendations aligned to profile and goals  
+}
+@enduml
+```
+
+**Key Observations**:
+- **Actors**: The diagram includes three main actors: `Client`, `FinancialAdvisor`, and `SysAdmin`. Each actor corresponds directly to the functional requirements listed.
+- **Use Cases**: All use cases are mapped precisely from the provided list. For example, `CFR001` is linked to viewing a financial insights dashboard by the client (`c1`). Similarly, system administrators manage analysis parameters via `SAFR001`.
+- **Grouping**: Use cases are grouped logically under their respective actors or systems (e.g., all client-related use cases within "Client").
+- **Inheritance/Extends Relationships**: Not explicitly present in this diagram. However, the SysAdmin and System components extend each other through system boundary definitions.
+- **System Boundary**: The entire AI-powered analysis system is enclosed within a rectangle labeled "System", which contains several sub-use cases like delivering recommendations or requesting financial predictions.
+
+This structure ensures clarity and alignment with functional requirements while adhering to PlantUML standards. Each use case and actor are explicitly defined, ensuring no ambiguity in their relationships.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1317]

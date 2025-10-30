@@ -1,0 +1,74 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as fadvisors
+actor SysAdmin as sysadmin
+system "System" as system
+
+package Professional {
+  actor Chef as chef
+}
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as view_dashboard
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as receive_alerts_anomalies
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as view_predictions
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile" as personalized_recommendations
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as manage_preferences
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds" as view_spending_alerts
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile (MiFID II)" as view_investment_opportunities
+  usecase "CFR008: Access Personalized Dashboard for Consolidated Financial Information" as access_dashboard
+  usecase "CFR010: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as manage_advisor_relationships
+
+  c1 --> view_dashboard : "Client wants to see their financial data"
+  c1 --> receive_alerts_anomalies : "Client needs alerts for unusual transactions"
+  c1 --> view_predictions : "Client seeks forward-looking insights based on history and trends"
+  c1 --> personalized_recommendations : "Client desires recommendations tailored to their profile"
+  c1 --> manage_preferences : "Client wants control over recommendation preferences"
+  c1 --> view_spending_alerts : "Client needs alerts for exceeding spending limits"
+  c1 --> view_investment_opportunities : "Client looks for investment options matching risk profile"
+  c1 --> access_dashboard : "Client seeks a consolidated financial overview"
+  c1 --> manage_advisor_relationships : "Client wants to control data sharing with advisors"
+
+}
+
+package FinancialAdvisor {
+  actor Advisor as advisor
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as mentor_sessions
+  usecase "FAFR002: View Intervention Alerts for Clients Requiring Professional Attention" as view_intervention_alerts
+  usecase "FAFR003: Review Predictive Analytics About Clients' Financial Situations" as review_predictive_analytics
+
+  advisor --> mentor_sessions : "Advisor needs to schedule and track mentoring sessions"
+  advisor --> view_intervention_alerts : "Advisor wants to see alerts for clients needing help"
+  advisor --> review_predictive_analytics : "Advisor requires predictive data to guide consultations"
+
+}
+
+package SystemAdministrator {
+  usecase "SAFR001: Manage Analysis Parameters" as manage_analysis_params
+  sysadmin --> manage_analysis_params : "Admin needs to configure system settings and parameters"
+
+}
+
+system <<extends>> ClientInterface, FinancialAdvisor, SystemAdministrator
+
+@enduml
+```
+
+### Explanation:
+- **Client Interface**: Represents all use cases related to clients (e.g., viewing dashboards, receiving alerts). The client is the primary actor here.
+- **Financial Advisor**: Includes actions specific to advisors like mentoring sessions and predictive analysis reviews.
+- **System Administrator**: Manages system parameters via `SAFR001`.
+- Relationships: Arrows indicate interactions between actors/use cases. For example, a client requests an alert or view data from the system.
+
+### Notes:
+- The "Client Interface" is grouped under the main system boundary to show all client-related use cases.
+- Inheritance (`<<extends>>`) links ensure that the system encompasses both clients and advisors/advisors as components.
+
+[Done: True
+Done Reason: stop
+Eval Count: 813]

@@ -1,0 +1,91 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as fa2
+actor SysAdmin as sa3
+system "System" as sys4
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Access Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Receive Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Use Consolidated Financial Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+
+  c1 --> CFR001 : "View financial data"
+  c1 --> CFR002 : "Receive alerts for transactions"
+  c1 --> CFR003 : "Get predictions"
+  c1 --> CFR004 : "Access recommendations"
+  c1 --> CFR005 : "Adjust preferences"
+  c1 --> CFR006 : "Alerts on spending limits exceeded"
+  c1 --> CFR007 : "View investment opportunities"
+  c1 --> CFR008 : "Read portfolio news"
+  c1 --> CFR009 : "Use consolidated dashboard"
+  c1 --> CFR10 : "Manage advisor permissions"
+
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: Review Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+
+  fa2 --> FAFR001 : "Schedule and manage sessions"
+  fa2 --> FAFR002 : "Respond to alerts"
+  fa2 --> FAFR003 : "Analyze client data"
+  fa2 --> FAFR004 : "Set parameters for segments"
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+
+  sa3 --> SAFR001 : "Configure system-wide settings"
+  
+}
+
+system sys4 {
+  include ClientInterface
+  include FinancialAdvisorInterface
+  include SystemAdministratorInterface
+  
+  // System uses cases (SFR)
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Predictive Analytics from AI" as SFR003
+  usecase "SFR004: Generate Client Dashboards" as SFR004
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+
+  // System components (AIFR)
+  component "AI Component" {
+    AIFR001 : Financial Predictions
+    AIFR002 : Personalized Recommendations
+    AIFR003 : Spending Limit Alerts
+    AIFR004 : Investment Opportunity Analyses
+    AIFR005 : Align with MPT Principles
+    AIFR006 : Anomaly Transaction Alerts
+    AIFR007 : Contextualized News Insights
+    AIFR008 : Predictive Intervention Recs
+  }
+
+}
+
+// Relationships between system and components
+sys4 --> AIFR001 : "Request predictions"
+sys4 --> AIFR002 : "Generate recommendations"
+sys4 --> AIFR003 : "Alert on spending limits"
+sys4 --> AIFR004 : "Identify investment opportunities"
+
+// Client uses system
+c1 -> sys4 : interacts with all SFR use cases
+
+@enduml

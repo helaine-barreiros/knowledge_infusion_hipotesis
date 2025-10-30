@@ -1,0 +1,107 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "SFR004: Request Personalized Recommendations" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+
+  actor "Client" as Client {
+    --> CFR001 : View Financial Insights Dashboard
+    --> FAFR002 : Receive Alerts for Proactive Assistance
+    --> SFR004 : Get Personalized Recommendations
+    --> SFR005 : Monitor Spending Limits
+    --> SFR006 : Explore Investment Opportunities
+  }
+
+  actor "Financial Advisor" as FinancialAdvisor {
+    --> FAFR002 : Manage Client Interventions
+    --> FAFR003: View Predictive Analytics for Clients
+    --> AIFR008: Generate Intervention Recommendations
+  }
+
+  actor "System Administrator" as SysAdmin {
+    --> SAFR001 : Configure Analysis Parameters
+  }
+  
+  package "AI System Components" {
+    usecase "AIFR001: Financial Predictions" as AIFR001
+    usecase "AIFR002: Personalized Recommendations" as AIFR002
+    usecase "AIFR006: Anomaly Transaction Alerts" as AIFR006
+
+    SysAdmin <|-- (SAFR001)
+  }
+
+  package "Client-System Interactions" {
+    Client --> CFR001 : View Dashboard
+    Client --> SFR004 : Get Recommendations
+    Client --> SFR005: Check Spending Limits
+    Client --> SFR006: Explore Investments
+
+    FinancialAdvisor --> FAFR002 : Manage Alerts
+  }
+
+  package "System-Client Notifications" {
+    SysAdmin <|-- (SFR013) : Generate Alerts for Clients
+  }
+  
+}
+
+@enduml
+```
+
+### Explanation:
+The provided PlantUML code represents a detailed use case diagram based on the functional requirements. Here's how it breaks down:
+
+#### **Key Components:**
+- **System Boundary:** The entire system is enclosed within a rectangle labeled "System."
+- **Use Cases (UC):** Various client, advisor, and administrative interactions are defined as UCs.
+- **Actors:** Clients, Financial Advisors, System Administrators, and the AI components.
+
+#### **Grouping by Actor:**
+1. **Client Actors:**
+   - Views financial insights dashboard (CFR001).
+   - Receives alerts about anomalous transactions (CFR002).
+   - Sees predictions based on historical data/market trends (CFR003).
+   - Gets personalized recommendations aligned with their profile (CFR004/SAFR007/SFR006).
+   - Manages recommendation preferences (CFR005).
+   - Monitors spending limit alerts when exceeding thresholds (CFR006).
+   - Views investment opportunities based on risk profiles (CFR007/SAFR009/AIFR004).
+   - Accesses a consolidated financial dashboard (CFR009/SFR12).
+
+2. **Financial Advisor Actors:**
+   - Manages client mentoring sessions using system-generated insights (FAFR001).
+   - Views client intervention alerts for proactive assistance (FAFR002/SAFR015).
+   - Sees predictive analytics about clients’ financial situations (FAFR003/AIFR08).
+
+3. **System Administrator Actor:**
+   - Manages analysis parameters to ensure algorithm accuracy and compliance with regulations like Basel III (SAFR001/SFR021).
+
+#### **AI System Components:**
+- The AI components are grouped under "AI System Components" package, including:
+  - Financial predictions generation (AIFR001).
+  - Personalized recommendations creation (AIFR002).
+  - Anomaly transaction alerts (AIFR006).
+
+#### **Interactions and Relationships:**
+- Clients interact with the system through various UCs like viewing dashboards, receiving alerts, etc.
+- Financial Advisors use specific UCs for client management and predictive insights.
+- System Administrators configure parameters via SAFR001.
+
+### Diagram Structure:
+The diagram is structured to show clear relationships between actors (Client, Advisor, SysAdmin) and their respective UCs. The AI components are isolated within a package to maintain clarity. Each actor’s interactions with the system are explicitly linked using arrows labeled appropriately for readability.
+
+This structure ensures all functional requirements are represented accurately in PlantUML format. Adjustments can be made based on further refinements or additional details from the requirements document.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1165]

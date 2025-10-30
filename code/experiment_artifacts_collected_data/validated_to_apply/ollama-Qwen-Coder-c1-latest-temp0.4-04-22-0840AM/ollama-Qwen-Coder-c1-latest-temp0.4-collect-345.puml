@@ -1,0 +1,88 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR009
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as SAFR014
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as SAFR021
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as SAFR036
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds in Specific Expense Categories" as SAFR047
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile (as Defined Under MiFID II or Equivalent Standards)" as SAFR058
+  usecase "CFR008: View News Related to My Investment Portfolio" as SAFR069
+  usecase "CFR009: Access a Personalized Dashboard That Consolidates My Financial Information in a Single View" as SAFR072
+  usecase "CFR10: Manage Relationship with Financial Advisors, Including Permissions for Sharing My Financial Data" as SAFR083
+  
+  CFR001 --> SAFR009
+  CFR001 --> SAFR014
+  CFR001 --> SAFR021
+  CFR001 --> SAFR036
+  CFR001 --> SAFR047
+  CFR001 --> SAFR058
+  CFR001 --> SAFR069
+  CFR001 --> SAFR072
+  CFR001 --> SAFR083
+  
+  rectangle "Client Dashboard" {
+    usecase "CFR001: View Financial Insights Dashboard" as SAFR001
+    usecase "SAFR005: Request Spending Limit Alerts from the AI Component" as SAFR047
+    usecase "SFR020: Manage User Feedback to Continuously Improve System Outputs" as SAFR089
+    
+    CFR001 --> (CFR001)
+  }
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR003
+  
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as SAFR025
+  usecase "FAFR006: View Predictive Analytics About My Clients' Financial Situations" as SAFR017
+  usecase "FAFR008: Manage Client Mentoring Sessions Based on System-Generated Insights" as SAFR034
+  
+  FAFR003 --> (SAFR025)
+  FAFR003 --> (SAFR017)
+  FAFR003 --> (SAFR034)
+  
+  rectangle "Financial Advisor Dashboard" {
+    usecase "FAFR009: View Client Intervention Alerts When the System Detects Patterns Requiring Professional Attention to Proactively Assist Clients with Potential Financial Issues" as SAFR026
+    usecase "SFR15: Request Predictive Intervention Analyses from the AI Component to Identify When Financial Advisors Should Engage With Clients" as SAFR093
+    
+    FAFR003 --> (FAFR009)
+  }
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR027
+  
+  usecase "SAFR018: Manage Users' Financial Goals to Track Progress and Provide Relevant Recommendations" as SAFR045
+  usecase "SAFR019: Maintain a Historical Record of Users' Insights to Enable Trend Analysis and Effectiveness Measurement" as SAFR063
+  
+  SystemAdmin --> (SAFR027)
+  
+  rectangle "System Admin Dashboard" {
+    usecase "SAFR001: Manage Analysis Parameters for the AI System to Ensure Algorithms Remain Accurate, Relevant, and Compliant with Financial Regulations Such As Basel III for Risk Management" as SAFR046
+    usecase "SFR20: Generate Client Predictive Insights That Provide Forward-Looking Analysis of Financial Situations to Support More Effective Financial Planning" as SAFR105
+    
+    SystemAdmin --> (SAFR001)
+  }
+}
+
+package "System Components" {
+  rectangle "AI Component" {
+    usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance As Defined by Industry Standards Like FINRA Guidelines" as SAFR035
+    usecase "AIFR004: Generate Spending Limit Alerts for Users By Identifying Unusual Deviations from Established Spending Patterns" as SAFR067
+    
+  }
+  
+  rectangle "News Component" {
+    usecase "SFR12: Request Contextualized News to Extract Relevant Information for Users' Financial Situations" as SAFR084
+    usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as SAFR096
+    
+  }
+  
+}
+
+@enduml

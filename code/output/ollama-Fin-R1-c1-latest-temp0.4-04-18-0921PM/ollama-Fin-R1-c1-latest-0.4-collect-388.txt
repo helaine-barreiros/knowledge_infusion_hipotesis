@@ -1,0 +1,218 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sa
+actor FinancialAdvisor as fa
+system SFR002 as sfr2  // Personalized recommendations system component
+system AIFR002 as aifr2  // AI-generated personalized recommendations component
+system SFR003 as sfr3  // Predictive analysis requestor (AI)
+system AIFR001 as aifr1  // Financial prediction generator
+
+rectangle "Client" {
+    usecase "CFR001: View Financial Insights Dashboard" as cfr001
+    usecase "CFR002: Receive Alerts for Anomalous Transactions" as cfr002
+    usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as cfr003
+    usecase "CFR004: Personalized Recommendations Aligned with Financial Profile" as cfr004
+    usecase "CFR005: Manage Preferences for Personalized Recommendations" as cfr005
+    usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as cfr006
+    usecase "CFR007: View Investment Opportunities Based on Risk Profile" as cfr007
+    usecase "CFR008: Access News Related to Portfolio" as cfr008
+    usecase "CFR009: Consolidated Personalized Dashboard for Monitoring Finances" as cfr009
+    usecase "CFR10: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as cfr10
+
+    Client --> (cfr001)
+    Client --> (cfr002)
+    Client --> (cfr003)
+    Client --> (cfr004)
+    Client --> (cfr005)
+    Client --> (cfr006)
+    Client --> (cfr007)
+    Client --> (cfr008)
+    Client --> (cfr009)
+    Client --> (cfr10)
+
+}
+
+rectangle "System Administrator" {
+    usecase "SAFR001: Manage Analysis Parameters for AI System" as safr001
+
+    SysAdmin --> (safr001)
+}
+
+rectangle "Financial Advisor" {
+    usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as fafa01
+    usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as fafa02
+    usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as fafa03
+    usecase "FAFR004: Configure Analysis Parameters by Client Segment" as fafa04
+
+    FinancialAdvisor --> (fafa01)
+    FinancialAdvisor --> (fafa02)
+    FinancialAdvisor --> (fafa03)
+    FinancialAdvisor --> (fafa04)
+
+}
+
+rectangle "System Components - SFR" {
+    system sfr2
+    usecase "SFR002: Deliver Personalized Recommendations Based on User Profiles" as sfr002
+
+    Client <|-- (sfr002)  // System component delivering recommendations to client
+}
+
+system aifr1  
+usecase "AIFR001: Generate Financial Predictions via AI Analysis of Data and Trends" as afr001  
+
+aifr1 --> (afr001)
+
+rectangle "System Components - AIFR" {
+    system aifr2  // Personalized recommendations generation
+    usecase "AIFR002: Create Personalized Recommendations Based on Financial Profiles" as aifr002
+
+    sfr2 <|-- (aifr002)  
+}
+
+system sfr3 
+usecase "SFR003: Request Predictive Analysis from AI Component" as sfr003  
+
+sfr3 --> (aifr1)
+
+rectangle "System Components - SFR and AIFR Integration" {
+    system aifr2
+    usecase "AIFR004: Generate Investment Opportunities Based on Risk Profiles" as aifr004
+
+    Client <|-- (aifr004)
+}
+
+system sfr3  
+usecase "SFR005: Request Spending Limit Alerts from AI Component" as sfr005  
+
+sfr3 --> (aifr1)
+
+rectangle "System Components - SFR and AIFR Integration for Spent Limits" {
+    system aifr2
+    usecase "AIFR006: Generate Spending Limit Alerts Based on User Data" as aifr006
+
+    Client <|-- (aifr006)
+}
+
+system sfr3  
+usecase "SFR007: Request Investment Opportunity Analysis from AI Component" as sfr007  
+
+sfr3 --> (aifr1)
+
+rectangle "System Components - SFR and AIFR Integration for Investments" {
+    system aifr2
+    usecase "AIFR005: Generate Suitable Investments Based on Risk Profiles" as aifr005
+
+    Client <|-- (aifr005)
+}
+
+system sfr3  
+usecase "SFR008: Request Specific Investment Opportunities from AI Component" as sfr008  
+
+sfr3 --> (aifr1)
+
+rectangle "System Components - SFR and AIFR Integration for ESG Investments" {
+    system aifr2
+    usecase "AIFR007: Identify Investments Aligning with User's Risk Profile and ESG Preferences" as aifr007
+
+    Client <|-- (aifr007)
+}
+
+system sfr3  
+usecase "SFR009: Request Anomaly Transaction Alerts from AI Component" as sfr009  
+
+sfr3 --> (aifr1)
+
+rectangle "System Components - SFR and AIFR Integration for Fraud Detection" {
+    system aifr2
+    usecase "AIFR008: Detect Potential Financial Frauds via Pattern Recognition" as aifr008
+
+    Client <|-- (aifr008)
+}
+
+system sfr3  
+usecase "SFR010: Request Contextualized News from AI Component" as sfr010  
+
+sfr3 --> (aifr2)
+
+rectangle "System Components - SFR and AIFR Integration for News" {
+    system aifr2
+    usecase "AIFR009: Extract Relevant Financial News Based on Portfolio Context" as aifr009
+
+    Client <|-- (aifr009)
+}
+
+system sfr3  
+usecase "SFR011: Request Predictive Intervention Analyses from AI Component for Advisors" as sfr011  
+
+sfr3 --> (aifr2)
+
+rectangle "System Components - SFR and AIFR Integration for Advisor Guidance" {
+    system aifr2
+    usecase "AIFR010: Identify When Financial Advisors Should Engage Based on Client Data" as aifr010
+
+    FinancialAdvisor <|-- (aifr010)
+}
+
+system sfr3  
+usecase "SFR012: Generate Client Dashboards for Intuitive Presentation of Finances" as sfr012  
+
+sfr3 --> (aifr2)
+
+rectangle "System Components - SFR and AIFR Integration for Dashboards" {
+    system aifr2
+    usecase "AIFR011: Create Financial Health Reports Based on Data Analysis" as aifr011
+
+    Client <|-- (aifr011)
+}
+
+system sfr3  
+usecase "SFR013: Generate Timely Alerts for Users via Predefined Conditions" as sfr013  
+
+sfr3 --> (aifr2)
+
+rectangle "System Components - SFR and AIFR Integration for Alert Generation" {
+    system aifr2
+    usecase "AIFR012: Analyze Client Data to Trigger Relevant Alerts" as aifr012
+
+    Client <|-- (aifr012)
+}
+
+system sfr3  
+usecase "SFR014: Generate Meaningful Analytics for Financial Behavior and Performance" as sfr014  
+
+sfr3 --> (aifr2)
+
+rectangle "System Components - SFR and AIFR Integration for Analytics" {
+    system aifr2
+    usecase "AIFR013: Provide Forward-Looking Analysis Based on Historical Data" as aifr013
+
+    Client <|-- (aifr013)
+}
+
+system sfr3  
+usecase "SFR015: Request Predictive Intervention Analyses from AI Component for Advisors" as sfr015  
+
+sfr3 --> (aifr2)
+
+rectangle "System Components - SFR and AIFR Integration for Advisor Guidance II" {
+    system aifr2
+    usecase "AIFR014: Recommend Actions Based on Predictive Models to Enhance Client Experience" as aifr014
+
+    FinancialAdvisor <|-- (aifr014)
+}
+
+system sfr3  
+usecase "SFR016: Manage Users' Financial Goals for Progress Tracking and Recommendations" as sfr016  
+
+sfr3 --> (aifr2)
+
+rectangle "System Components - SFR and AIFR Integration for Goal Management"
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

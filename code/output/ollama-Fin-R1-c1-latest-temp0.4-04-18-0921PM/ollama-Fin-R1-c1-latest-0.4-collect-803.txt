@@ -1,0 +1,95 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin -> SAFR001 : "Manage System Analysis Parameters"
+  SysAdmin -> FAFR004 : "Configure Analysis Parameters for Specific Segments"
+  
+  FAFR003 -> SFR012 : "Request Client Analytics"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Mentoring Sessions Based on System Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  
+  SysAdmin -> FAFR004 : "Request System Analysis Parameters"
+  
+  client --> FAFR001 : "Mentor Client Based on Insights"
+}
+
+rectangle "Client" {
+  usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Advisors" as CFR009
+  
+  client -> SFR012 : "View Client Dashboards"
+}
+
+rectangle "System Administrator (SysAdmin)" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  SysAdmin --> SAFR001 : "Manage System Analysis Parameters"
+  
+  SysAdmin -> FAFR004 : "Configure Segments' Analysis Parameters"
+}
+
+rectangle "Financial Advisor (FAfr)" {
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  
+  SysAdmin -> FAFR004 : "Request Segments' Analysis Parameters"
+}
+
+client --> CFR001 : "View Financial Insights Dashboard"
+
+SysAdmin -->> SAFR001 : "Manage System's AI Algorithms and Data Sources"
+
+FAfr --> FAFR003 : "Analyze Client Predictive Analytics"
+
+CFR002 -> SFR008 : "Request Anomaly Transaction Alerts"
+SFR008 --> AIFR006 : "Generate Anomaly Alerts Based on Patterns"
+
+CFR004 -> AIFR002 : "Personalized Recommendations Engine"
+
+client -->> CFR005 : "Adjust Recommendation Preferences"
+
+CFR007 -> SFR013 : "View Investment Opportunities"
+SFR013 --> AIFR004 : "Identify Suitable Investments Based on Risk Profile"
+
+CFR009 -->> client : "Manage Advisor Relationship via System"
+
+client -->> CFR006 : "Set Spending Limits and Get Alerts"
+
+client -->> SFR007 : "View Investment Opportunities with ESG Preferences"
+SFR007 --> AIFR005 : "Find Investments Matching Criteria & ESG Values"
+
+CFR011 -> client : "Send Feedback to System for Improvement"
+
+@enduml
+```
+
+**Explanation:**
+- The diagram groups actors (Client, SysAdmin, Financial Advisor) and their respective use cases. 
+- Each use case is linked to the appropriate actor with relationships indicating action direction.
+- Inheritance or delegation between use cases isn't explicitly shown here but follows from the requirement descriptions where applicable.
+- System components like AI systems are referenced through interactions with actors (e.g., `AIFR006` generating alerts).
+- The structure ensures readability by aligning related use cases under their respective actor categories.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1011]

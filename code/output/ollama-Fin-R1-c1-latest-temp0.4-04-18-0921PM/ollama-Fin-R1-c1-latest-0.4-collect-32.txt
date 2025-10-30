@@ -1,0 +1,97 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as faa
+actor SysAdmin as sa
+system "System" as sys
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile and Goals" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Personalized Dashboard Consolidating Financial Information" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as CFR10
+
+  c1 --> CFR001 : "View"
+  c1 --> CFR002 : "Receive Alerts"
+  c1 --> CFR003 : "Predictions Based on Historical and Market Trends"
+  c1 --> CFR004 : "Personalized Recommendations"
+  c1 --> CFR005 : "Manage Preferences for Recos"
+  c1 --> CFR006 : "View Spending Limit Alerts"
+  c1 --> CFR007 : "Investment Opportunities Based on Risk Profile"
+  c1 --> CFR008 : "Access News Related to Portfolio"
+  c1 --> CFR009 : "Personalized Dashboard"
+  c1 --> CFR10 : "Manage Relationship with Advisors"
+
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+
+  faa --> FAFR001 : "Manage Mentoring Sessions"
+  faa --> FAFR002 : "View Intervention Alerts"
+  faa --> FAFR003 : "View Predictive Analytics"
+  faa --> FAFR004 : "Configure Analysis Parameters"
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage AI System's Analysis Parameters for Accuracy and Compliance" as SAFR001
+
+  sa --> SAFR001 : "Manage Analysis Params"
+}
+
+system sys <|-- (CFR001) 
+system sys <|-- (CFR002)
+system sys <|-- (CFR003)
+system sys <|-- (CFR004)
+system sys <|-- (CFR005)
+system sys <|-- (CFR006)
+system sys <|-- (CFR007)
+system sys <|-- (CFR008)
+system sys <|-- (CFR009)
+system sys <|-- (CFR10)
+
+system sys <|-- (FAFR001) 
+system sys <|-- (FAFR002)
+system sys <|-- (FAFR003)
+system sys <|-- (FAFR004)
+
+system sys <|-- (SAFR001)
+
+@enduml
+```
+
+### Explanation:
+- **Client Interface**: Represents all use cases related to clients, including viewing dashboards, receiving alerts, making predictions, etc. Each client-related use case is linked directly to the "System" component.
+  
+- **Financial Advisor Interface**: Includes managing mentoring sessions, intervention alerts, predictive analytics, and parameter configuration for specific segments.
+
+- **System Administrator Interface**: Only includes managing AI system parameters (SAFR001).
+
+### Key Relationships:
+- All client-use cases are handled by the main system (`sys`).
+- Financial advisors interact with certain use cases related to their role.
+- System administrators manage a single use case (SAFR001) for parameter adjustments.
+
+This structure ensures clarity and adheres strictly to the provided requirements. Each actor is explicitly linked to its respective use cases, maintaining logical groupings within each interface category. The system boundary encompasses all client-related interactions but separates financial advisor and admin interfaces as needed. 
+
+### Notes:
+- Inheritance relationships are not present in this scenario since no role extends another; they operate independently.
+- All components (actors and usecases) follow the exact IDs and names provided in the requirements, ensuring precision.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1099]

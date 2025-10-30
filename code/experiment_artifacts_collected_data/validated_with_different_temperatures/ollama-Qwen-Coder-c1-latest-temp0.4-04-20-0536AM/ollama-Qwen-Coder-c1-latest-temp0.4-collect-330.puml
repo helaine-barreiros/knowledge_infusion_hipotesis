@@ -1,0 +1,65 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SFR002
+  usecase "CFR005: Manage Recommendation Preferences" as CFR010
+  
+  Client --> (SAFR003)
+  Client --> (SFR002)
+  Client --> (CFR010)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as SAFR004
+  usecase "FAFR003: View Predictive Analytics" as SFR016
+  
+  FinancialAdvisor --> (SAFR004)
+  FinancialAdvisor --> (SFR016)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR005
+
+  usecase "SAFR007: Manage Analysis Parameters for AI System" as SAFR007
+  usecase "CFR011: Send Feedback about Recommendations and Insights" as SFR20
+  
+  SystemAdmin --> (SAFR007)
+  SystemAdmin --> (SFR20)
+}
+
+package "System" {
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  }
+  
+  rectangle "News Component" {
+    usecase "SFR015: Request Contextualized News Insights from AI" as SFR28
+    usecase "SFR017: Find Relevant News for Users' Portfolios" as SFR30
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR07
+  }
+  
+  rectangle "Dashboard Component" {
+    usecase "SFR12: Generate Client Dashboards" as SFR48
+    usecase "SFR13: Request Alerts from AI for Users" as SFR59
+  }
+
+  SystemAdmin --> (SAFR007)
+  FinancialAdvisor --> (AIFR001)
+  FinancialAdvisor --> (AIFR002)
+  Client --> (SFR48)
+
+  SAFR003 <|-- (AIFR003)
+  SFR016 <|-- (AIFR009)
+  AIFR07 <|-- (SFR28)
+}
+
+@enduml

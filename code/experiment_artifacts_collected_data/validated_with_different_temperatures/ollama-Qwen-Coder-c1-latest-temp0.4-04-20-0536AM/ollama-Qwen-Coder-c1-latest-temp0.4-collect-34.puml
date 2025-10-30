@@ -1,0 +1,90 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR004
+  usecase "CFR005: Manage Recommendation Preferences" as SAFR005
+  usecase "CFR006: View Spending Limit Alerts" as SAFR006
+  usecase "CFR007: View Investment Opportunities" as SAFR007
+  usecase "CFR008: View News Related to Portfolio" as SAFR008
+  usecase "CFR009: Access Personalized Dashboard" as SAFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as SAFR10
+  
+  CFR001 --> (SAFR002)
+  CFR001 --> (SAFR003)
+  CFR001 --> (SAFR004)
+  CFR001 --> (SAFR005)
+  CFR001 --> (SAFR006)
+  CFR001 --> (SAFR007)
+  CFR001 --> (SAFR008)
+  CFR001 --> (SAFR009)
+  CFR001 --> (SAFR10)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics" as SAFR007
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as SAFR015
+  usecase "FAFR006: Manage Client Mentoring Sessions" as FAFR001
+  
+  FinancialAdvisor --> (SAFR003)
+  FinancialAdvisor --> (FAFR001)
+  FinancialAdvisor --> (SAFR014)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR001
+  
+  usecase "SFR020: Manage User Feedback" as SAFR020
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  
+  SystemAdmin --> (SAFR001)
+  SystemAdmin --> (SAFR020)
+}
+
+package "System Components" {
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions" as SAFR03
+    usecase "AIFR002: Generate Personalized Recommendations" as SAFR04
+    usecase "AIFR005: Generate Investment Opportunity Analyses" as SAFR07
+    usecase "AIFR010: Generate Contextualized News Insights" as SAFR08
+    
+    System --> (SAFR03)
+    System --> (SAFR04)
+    System --> (SAFR07)
+    System --> (SAFR08)
+  }
+  
+  rectangle "Notification Component" {
+    usecase "SFR013: Generate Client Alerts" as SAFR02
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    
+    System --> (SAFR02)
+    System --> (AIFR006)
+  }
+  
+  rectangle "Dashboard Component" {
+    usecase "SFR12: Generate Client Dashboards" as SAFR09
+    usecase "SFR03: Generate Financial Predictions" as SAFR03
+    
+    System --> (SAFR09)
+    System --> (SAFR03)
+  }
+  
+  rectangle "Recommendation Component" {
+    usecase "AIFR002: Generate Personalized Recommendations" as SAFR04
+    usecase "SFR18: Manage Users' Financial Goals" as SFR18
+    
+    System --> (SAFR04)
+    System --> (SFR18)
+  }
+}
+
+@enduml

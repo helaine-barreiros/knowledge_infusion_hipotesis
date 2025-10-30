@@ -1,0 +1,105 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Permissions and Data Sharing" as SAFR002
+  
+  Client --> CFR001 : "View Financial Health"
+  
+  SysAdmin --> SAFR002 : "Manage System Admin Tasks"
+}
+
+rectangle "Financial Advisor (FA)" {
+  actor "Client" as C
+  usecase "CFR003: View Historical Data and Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+  
+  C --> CFR003 : "View Historical Data"
+  
+}
+
+rectangle "System Admin (SA)" {
+  actor SysAdmin as SA
+  usecase SAFR002 as SAFR002
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  
+  SysAdmin --> SAFR002 : "Manage Analysis Parameters"
+  
+}
+
+rectangle "Financial Advisor (FA)" {
+  actor FAFR001 as FA1
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  
+}
+
+rectangle "System (S)" {
+  actor Sys as S
+  usecase SFR002 as SFR002
+  usecase SFR004 as SFR004
+  usecase SFR019 as SFR019
+  usecase AIFR003 as AIFR003
+  
+  Sys --> CFR006 : "View Spending Limit Alerts"
+  
+}
+
+rectangle "AI System (A)" {
+  actor AIFR001 as AI1
+  usecase AIFR002 as AIFR002
+  usecase AIFR004 as AIFR004
+  
+  Sys --> SFR008 : "Request Investment Opportunity Analysis"
+  
+}
+
+rectangle "Client" {
+  actor Client as C2
+  usecase CFR011: Send Feedback to System
+  
+}
+@enduml
+
+**Explanation of the Diagram Structure**
+
+The diagram is divided into several rectangles representing different subsystems or roles within the system. Here's a breakdown:
+
+### Main System Boundary (Rectangle)
+- **Client**: Represents end-users, including clients and financial advisors.
+- **System Admin (SA)**: Manages administrative tasks like user permissions and data sharing.
+- **Financial Advisor (FA)**: Includes both client-specific interactions and advisor roles.
+
+#### Subsystems
+1. **Client-Specific Interactions**:
+   - `CFR003` & `CFR004`: View historical data/predictions, receive recommendations.
+   - `SAFR002`: Manage preferences for personalized recommendations (e.g., KYC details).
+   
+2. **System Admin Tasks**:
+   - `SAFR001`, `CFR005`: System admin-specific use cases.
+
+3. **Financial Advisor Interactions**:
+   - Mentoring sessions (`FAFR001`), predictive analytics for clients (`FAFR003`).
+
+4. **AI-Driven Services (A)**:
+   - Prediction generation, investment opportunity analysis.
+   
+### Key Relationships
+- Clients interact directly with the system via `CFR001`, while financial advisors use their own set of use cases like mentoring sessions and predictive analytics.
+- System administrators manage backend tasks through `SAFR002`.
+- The AI component (`A`) handles predictions, recommendations, etc., which are requested by or provided to other actors/systems.
+
+### Use Case Grouping
+Use cases are grouped under appropriate actors/subsystems for clarity. For example:
+- All client-related use cases (e.g., viewing dashboards) fall within the "Client" rectangle.
+- System admin tasks like managing permissions are isolated in their own section.
+
+This structure ensures that each role's responsibilities and interactions with the system are clearly defined, making it easier to understand how different components of the system work together.
+
+[Done: True
+Done Reason: stop
+Eval Count: 931]

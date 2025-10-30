@@ -1,0 +1,80 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FAFR001
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure analysis parameters for specific client segments" as FAFR004
+  usecase "SFR002: Deliver personalized recommendations to users based on their financial profiles" as SFR002
+  usecase "AIFR002: Generate personalized recommendations for users based on their financial profiles, goals, and risk tolerance" as AIFR002
+
+  Client --> CFR001
+  SysAdmin --> SAFR001
+  FAFR004 <|-- SAFR001
+  Client -> SFR002 : "View personalized recommendations"
+  System -> AIFR002 : "Request personalized recommendations from AI component"
+
+  rectangle "Client Dashboard" {
+    usecase "CFR009: Access a personalized dashboard that consolidates my financial information in a single view to efficiently monitor my finances." as CFR009
+    Client --> CFR009
+  }
+
+  rectangle "Spending Limits" {
+    usecase "CFR010: View spending limit alerts when I exceed predefined thresholds in specific expense categories to maintain better control over my budget." as CFR010
+    System -> AIFR003 : "Request spending limit alerts from AI component"
+    Client --> CFR010
+  }
+
+  rectangle "Investment Opportunities" {
+    usecase "CFR007: View investment opportunities suitable to my risk profile (as defined under MiFID II or equivalent standards) to diversify my portfolio and maximize returns." as CFR007
+    System -> AIFR004 : "Request investment opportunity analysis from AI component"
+    Client --> CFR007
+  }
+
+  rectangle "News" {
+    usecase "CFR008: View news related to my investment portfolio to stay informed about market events that might affect my assets." as CFR008
+    System -> AIFR007 : "Request contextualized news insights from AI component"
+    Client --> CFR008
+  }
+
+  rectangle "Financial Health" {
+    usecase "SFR17: Generate financial health reports that assess users' overall financial wellbeing according to standard financial ratios and metrics." as SFR17
+    System -> AIFR017 : "Generate financial health reports"
+    Client --> SFR17
+  }
+
+  rectangle "Feedback" {
+    usecase "CFR11: Send feedback about the system's recommendations and insights to help improve the accuracy and relevance of future outputs." as CFR11
+    System -> AIFR020 : "Manage user feedback"
+    Client --> CFR11
+  }
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR003: View predictive analytics about my clients' financial situations to provide data-driven recommendations during consultations." as FAFR003
+  usecase "SFR024: Deliver client mentoring sessions based on system-generated insights to provide more valuable guidance aligned with each client's financial goals." as SFR015
+
+  FinancialAdvisor --> FAFR003
+  System -> AIFR016 : "Request predictive insights from AI component"
+  FinancialAdvisor --> SFR024
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage analysis parameters for the AI system to ensure the algorithms remain accurate, relevant, and compliant with financial regulations such as Basel III for risk management." as SAFR001
+
+  SystemAdmin --> SAFR001
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 858]

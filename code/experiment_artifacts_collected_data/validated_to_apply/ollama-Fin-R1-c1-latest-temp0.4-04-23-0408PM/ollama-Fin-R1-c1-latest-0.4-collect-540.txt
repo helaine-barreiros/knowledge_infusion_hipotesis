@@ -1,0 +1,67 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "SFR004: Request Personalized Recommendations" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+  usecase "SFR009: Request Contextualized News Insights" as SFR009
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunities" as AIFR005
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "CFR011: Send Feedback" as CFR011
+
+  SysAdmin --> SAFR001 : Manage system parameters for compliance and accuracy.
+
+  Client --> CFR001, SFR003, SFR004, SFR005, SFR006, SFR007, SFR008, SFR009
+  FinancialAdvisor --> FAFR002, AIFR007 : View and act on client intervention alerts.
+  
+  SysAdmin <|-- SAFR001 : Extends system administration capabilities.
+
+  Client <|-- CFR001 : Direct access to the financial insights dashboard.
+
+  SFR003 --o (AIFR001) : Request predictions from AI for clients.
+
+  SFR004 --o (AIFR002) : Request recommendations based on client profiles and goals.
+
+  SFR005 --o (AIFR003) : Alert when spending exceeds thresholds per user categories.
+
+  SFR006 --o (AIFR004) : Analyze investment opportunities matching risk profiles.
+
+  SFR007 --o (AIFR005) : Find specific investments aligned with criteria and ESG preferences.
+
+  SFR008 --o (AIFR006) : Detect potential fraud through anomaly transaction alerts.
+
+  SFR009 --o (AIFR007) : Extract relevant news for portfolios from AI insights.
+
+  Client <|-- CFR011 : Send feedback to improve system outputs.
+  
+}
+
+@enduml
+```
+
+**Key Observations:**
+- The diagram groups use cases by their primary actors or functional areas. For example, client-related use cases (CFR series) are linked directly with the System boundary and other components like AIFR systems for requests and actions.
+- SysAdmin has a direct relationship with SAFR001 to manage analysis parameters, ensuring regulatory compliance through AI-generated insights.
+- Financial Advisors interact via FAFR002 and AIFR007 (contextualized news) but do not directly extend other use cases beyond their defined scope for mentoring or alerts.
+- The System boundary encompasses all components like SFRs and AIFS to show how the client, system, and AI collaborate. Each request from a user is processed by corresponding AI systems before returning results through the same channel.
+
+This structure ensures clarity in relationships between actors, use cases, and their interactions within the system framework. Adjustments may be needed based on further analysis of requirement nuances not explicitly covered here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 977]

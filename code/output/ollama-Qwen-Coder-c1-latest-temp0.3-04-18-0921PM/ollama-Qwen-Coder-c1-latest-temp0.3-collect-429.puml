@@ -1,0 +1,70 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics about My Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+}
+
+package System {
+  actor "System Administrator" as SAFR001
+  
+  usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from the AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from the AI Component Based on Each User's Financial Data and Preferences" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts from the AI Component When User Spending Patterns Exceed Defined Thresholds" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from the AI Component to Identify Suitable Investments for Users Based on Their Risk Profiles" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities from the AI Component That Match User Investment Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts From the AI Component to Detect Potentially Fraudulent Activities in Accordance with AML Regulations" as SFR008
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions to Ensure Timely Notification of Important Financial Events" as SFR013
+}
+
+package AI {
+  actor "AI System" as AIFR002
+  
+  usecase "AIFR004: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations from Established Spending Patterns" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunity Analyses for Users by Evaluating Potential Investments Against Their Risk Profiles, Time Horizons, and Financial Goals" as AIFR005
+  usecase "AIFR016: Generate Client Predictive Insights That Provide Forward-Looking Analysis of Financial Situations to Support More Effective Financial Planning" as AIFR016
+}
+
+package User {
+  actor "User (Client, Financial Advisor, or System Administrator)" as CFR011
+  
+  usecase "CFR011: Send Feedback About the System's Recommendations and Insights to Help Improve the Accuracy and Relevance of Future Outputs" as CFR011
+}
+
+rectangle Client {
+  CFR001 --> SFR012 : View Financial Insights Dashboard
+  CFR001 --> SFR013 : Receive Alerts about Anomalous Transactions
+  CFR001 --> SFR014 : View Predictive Analytics for My Portfolio
+  CFR001 --> SFR015 : Receive Personalized Recommendations Based on My Profile and Goals
+  CFR001 --> SAFR005 : Manage Recommendation Preferences
+  CFR001 --> SFR020 : Send Feedback About System's Insights
+}
+
+rectangle FinancialAdvisor {
+  FAFR002 --> AIFR004 : Generate Spending Limit Alerts for Clients
+  FAFR002 --> AIFR005 : Generate Investment Opportunity Analyses for Clients
+  FAFR003 --> SFR016 : View Predictive Insights During Consultations
+}
+
+rectangle System {
+  SAFR001 --> AIFR004 : Manage Analysis Parameters
+  SAFR002 --> CFR011 : Send Feedback About Recommendations and Insights
+  
+  rectangle "AI Component" {
+    AIFR003 --> SFR008 : Generate Anomaly Transaction Alerts
+    AIFR006 --> SFR008 : Detect Potentially Fraudulent Activities
+    AIFR007 --> SFR017 : Correlate Financial News with User Portfolios
+  }
+}
+
+@enduml

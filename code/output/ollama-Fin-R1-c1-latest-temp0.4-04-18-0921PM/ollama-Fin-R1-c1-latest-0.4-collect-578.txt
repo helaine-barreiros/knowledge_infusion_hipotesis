@@ -1,0 +1,95 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage AML Alerts" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR006: Manage Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities" as CFR007
+  usecase "CFR008: View Portfolio News" as CFR008
+  usecase "CFR009: Consolidate Financial Information" as CFR009
+  usecase "CFR010: Manage Data Sharing with Advisors" as CFR010
+
+  rectangle "Client" {
+    actor Client as client
+    client --> CFR001 : View financial insights dashboard
+    client --> CFR003 : View predictions
+    client --> CFR004 : Receive recommendations
+    client --> CFR006 : Manage spending limits
+    client --> CFR007 : Access investment opportunities
+    client --> CFR008 : View portfolio news
+    client --> CFR009 : Consolidate info
+  }
+
+  rectangle "Financial Advisor" {
+    actor FinancialAdvisor as advisor
+    advisor --> FAFR005 : Schedule mentoring sessions
+    advisor --> FAFR002 : Manage client alerts
+    advisor --> FAFR003 : View predictive analytics
+    advisor --> FAFR004 : Configure analysis parameters
+  }
+
+  rectangle "System Administrator" {
+    actor SysAdmin as admin
+    admin --> SAFR001 : Manage AI system params
+    admin --> SAFR002 : Manage AML alerts
+  }
+  
+  usecase "SFR001: Deliver Alerts" as SFR001
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "SFR004: Request Recommendations" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "SFR006: Request Investment Opportunities" as SFR006
+  usecase "SFR007: Request ESG-Specific Investments" as SFR007
+  usecase "SFR008: Request AML Alerts" as SFR008
+  usecase "SFR009: Find Contextualized News" as SFR009
+  usecase "SFR010: Generate Dashboards" as SFR010
+  usecase "SFR012: Manage Client Alerts" as SFR012
+
+  rectangle "System" {
+    system --> SFR003 : Request predictions
+    system --> SFR004 : Request recommendations
+    system --> SFR005 : Request spending limits alerts
+    system --> SFR006 : Request investment opportunities
+    system --> SFR007 : Request ESG-specific investments
+    system --> SFR008 : Request AML alerts
+    system --> SFR009 : Find news insights
+    system --> SFR10: Generate dashboards
+  }
+
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunities" as AIFR004
+
+  rectangle "AI System" {
+    ai --> AIFR001 : Predictions
+    ai --> AIFR002 : Recommendations
+    ai --> AIFR003 : Spending limit alerts
+    ai --> AIFR004 : Investment opportunities
+    ai --> AIFR005 : ESG-aligned investments
+  }
+
+}
+
+@enduml
+```
+
+**Key Observations:**
+1. **Actors**: The diagram includes three primary actors - Client, Financial Advisor (FA), and System Administrator (SA). Each actor is linked to specific use cases they can perform.
+2. **Use Cases**: Use cases are categorized into client-related (CFR series), advisor-specific (FAFR series), system administration tasks (SAFR series), and AI-generated services (AIFR series).
+3. **System Components**: The "System" rectangle groups all service requests handled by the platform, such as delivering alerts, requesting predictions/recommendations, generating dashboards, etc.
+4. **Inheritance/Extensions**:
+   - Financial Advisor extends Client capabilities for certain actions like mentoring sessions (FAFR005).
+   - System Administrator manages AI system parameters and AML-related tasks.
+   - The "System" component requests services from the AI to fulfill client needs.
+
+This structure ensures clarity in how different entities interact within the system, adhering strictly to provided functional requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1121]

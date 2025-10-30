@@ -1,0 +1,48 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+  usecase "CFR006: Manage Spending Limit Alerts" as CFR006
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  usecase "SFR008: Request Investment Opportunity Analysis from AI Component" as SFR008
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "AIFR005: Generate Investment Opportunities for Users by Identifying Instruments Aligning with Strategies" as AIFR005
+  usecase "SFR012: Generate Client Dashboards Present Financial Information Intuitively" as SFR012
+}
+
+actor "Client" as Client
+actor "Financial Advisor (FA)" as FA
+actor "System Administrator (SA)" as SA
+
+Client --> CFR001 : View financial insights dashboard
+Client --> AIFR008 : Generate client predictive intervention recommendations
+Client --> CFR006 : Manage spending limit alerts
+Client --> SFR002 : Receive personalized recommendations
+Client --> SAFR001 : Adjust analysis parameters for AI system
+
+FA --> FAFR003 : View predictive analytics to guide clients
+FA --> AIFR008 : Generate client intervention alerts and guidance
+FA --> FAQR004: Configure analysis parameters per client segment 
+
+SA --> SAFR001 : Manage system-wide analysis settings
+Client --> SFR002 : Receive personalized recommendations (from the system)
+Client --> CFR003 : View financial predictions
+
+rectangle "AI System" {
+  usecase AIFR001 
+  usecase AIFR005  
+  usecase AIFR006  
+}
+
+FAQR004 <|-- SAFR001: Adjust parameters for specific client segments
+Client --> SFR002 : Receive recommendations (from AI)
+SA --> Client : Share data with clients as per permissions
+
+@enduml

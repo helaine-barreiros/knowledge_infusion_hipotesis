@@ -1,0 +1,166 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor SysAdmin as sysadmin
+actor FinancialAdvisor as advisor
+system "System" as system
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as view_dashboard
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as receive_alerts
+  usecase "CFR003: View Financial Predictions Based on Data and Trends" as view_predictions
+  usecase "CFR004: Get Personalized Recommendations Aligned with Profile" as get_recommendations
+  usecase "CFR005: Manage Recommendation Preferences" as manage_preferences
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as view_spending_alerts
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as access_investment_opportunities
+  usecase "CFR008: Receive News Related to Portfolio" as receive_news
+  usecase "CFR009: View Consolidated Personalized Dashboard" as view_consolidated_dashboard
+  usecase "CFR10: Manage Relationship with Financial Advisors" as manage_relationships
+
+  client --> (view_dashboard)
+  client --> (receive_alerts)
+  client --> (view_predictions)
+  client --> (get_recommendations)
+  client --> (manage_preferences)
+  client --> (view_spending_alerts)
+  client --> (access_investment_opportunities)
+  client --> (receive_news)
+  client --> (view_consolidated_dashboard)
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as manage_params
+  sysadmin --> (manage_params)
+  
+  // Inheritance relationship between SysAdmin and Client/Advisor?
+  // Assuming no explicit inheritance, but possible extension.
+}
+package Professional {
+  actor FinancialAdvisor as advisor
+}
+
+rectangle "System Components" {
+  usecase "SFR001: Deliver Alerts Through Notification Channels" as deliver_alerts
+  usecase "SFR002: Provide Personalized Recommendations Based on Profiles" as provide_recommendations
+  usecase "SFR003: Request Financial Predictions from AI Component" as request_predictions
+  usecase "SFR004: Request Personalized Recommendations From AI" as request_ai_recos
+  usecase "SFR005: Manage Spending Limit Alerts Based on Thresholds" as manage_spending_alerts
+  usecase "SFR006: Analyze Investment Opportunities for Users" as analyze_investment_opps
+  usecase "SFR007: Find Contextualized News Relevant to Portfolios" as find_news
+  usecase "SFR008: Extract Insights from Contextualized News" as extract_insights
+  usecase "SFR009: Generate Client Dashboards for Intuitive Presentation" as generate_dashboards
+  usecase "SFR010: Ensure Timely Notifications Based on Predefined Conditions" as ensure_notifications
+  usecase "SFR011: Analyze Financial Health Using Ratios and Metrics" as analyze_financial_health
+  usecase "SFR020: Manage User Feedback for Continuous Improvement" as manage_feedback
+
+  system --> (deliver_alerts)
+  system --> (provide_recommendations)
+  system --> (request_predictions)
+  system --> (request_ai_recos)
+  system --> (manage_spending_alerts)
+  system --> (analyze_investment_opps)
+  system --> (find_news)
+  system --> (extract_insights)
+  system --> (generate_dashboards)
+  system --> (ensure_notifications)
+  system --> (analyze_financial_health)
+}
+
+rectangle "AI System" {
+  usecase "AIFR001: Generate Financial Predictions Using Data and Trends" as generate_predictions
+  usecase "AIFR002: Create Personalized Recommendations Based on Profiles" as create_recommendations
+  usecase "AIFR003: Identify Spending Limit Alerts via Pattern Recognition" as identify_spending_alerts
+  usecase "AIFR004: Analyze Investment Opportunities Against Risk Tolerance" as analyze_investment_opps_ai
+  usecase "AIFR005: Recommend Financial Instruments Based on Strategies and MPT" as recommend_financial_instruments
+  usecase "AIFR006: Detect Anomalous Transactions Using Pattern Recognition" as detect_anomalies
+  usecase "AIFR007: Correlate News with Portfolios for Insights" as correlate_news
+  usecase "AIFR008: Recommend Intervention Based on Client Patterns" as recommend_intervention
+  usecase "AIFR009: Provide Forward-Looking Analysis via AI" as provide_forward_analysis
+
+  system --> (generate_predictions)
+  system --> (create_recommendations)
+}
+
+// Relationships between components and actors/systems
+client <|-- view_dashboard : client uses dashboard to visualize data
+client <|-- receive_alerts : client receives alerts about transactions
+client <|-- view_predictions : client views future financial trends
+client <|-- get_recommendations : client gets tailored advice based on profile
+advisor <|-- manage_relationships : advisor manages user interactions
+
+// System components and their relationships with the system
+system --> deliver_alerts : system delivers notifications to clients
+system --> provide_recommendations : system provides recommendations via AI
+system --> request_predictions : system requests predictions from AIFR001
+system --> request_ai_recos : system asks for personalized recos using AIFR02 (maybe typo? SFR004 vs. AIFR)
+system --> manage_spending_alerts : system handles spending limit alerts based on thresholds
+system --> analyze_investment_opps : system evaluates investment opportunities
+
+// AI System and its components
+AIFR001 <|-- generate_predictions : AI generates predictions using data analysis
+AIFR002 <|-- create_recommendations : AI creates recommendations aligned with user profiles
+AIFR003 <|-- identify_spending_alerts : AI detects spending limits via pattern recognition
+
+// Additional relationships (assuming some may be inferred from the requirements)
+client --> AIFR001 : client indirectly uses predictions through system's request
+advisor --> receive_news : advisor receives portfolio-related news for clients?
+
+@enduml
+```
+
+**Key Observations:**
+- **Client Interface**: All Client use cases are grouped under "Client Interface" and linked to the `Client` actor. This includes viewing dashboards, receiving alerts, making recommendations, etc.
+- **System Administrator Interface**: The SysAdmin's main interaction is managing analysis parameters (`SAFR001`). No explicit inheritance from other actors here but possible extension points (e.g., client or advisor).
+- **Professional Package**: Financial Advisors are grouped under this package. They can manage relationships with clients and receive alerts.
+- **System Components**: These represent the system's functional components like delivering alerts, generating recommendations, etc. Each is linked to the main `system` component.
+- **AI System**: AI-specific use cases (e.g., predictions, recommendations) are grouped under this package. They interact directly with the system and indirectly via client requests.
+
+**Potential Improvements:**
+1. Ensure all actor-use case relationships align strictly with requirements (no assumptions beyond what's stated).
+2. Verify that "advisor" is correctly linked to receiving news or other components as per their role.
+3. Confirm consistency in component names vs. requirement IDs, especially for AI-related use cases.
+
+This diagram provides a comprehensive view of the system’s interactions and internal processes based on provided functional requirements. Adjustments may be needed if specific relationships are not explicitly stated but inferred logically from context (e.g., advisor receiving news). However, strictly following the given text ensures no discrepancies with original inputs.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor SysAdmin as sysadmin
+actor FinancialAdvisor as advisor
+system "System" as system
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as view_dashboard
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as receive_alerts
+  usecase "CFR003: View Financial Predictions Based on Data and Trends" as view_predictions
+  usecase "CFR004: Get Personalized Recommendations Aligned with Profile" as get_recommendations
+  usecase "CFR005: Manage Recommendation Preferences" as manage_preferences
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as view_spending_alerts
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as access_investment_opportunities
+  usecase "CFR008: Receive News Related to Portfolio" as receive_news
+  usecase "CFR009: View Consolidated Personalized Dashboard" as view_consolidated_dashboard
+  usecase "CFR10: Manage Relationship with Financial Advisors" as manage_relationships
+
+  client --> (view_dashboard)
+  client --> (receive_alerts)
+  client --> (view_predictions)
+  client --> (get_recommendations)
+  client --> (manage_preferences)
+  client --> (view_spending_alerts)
+  client --> (access_investment_opportunities)
+  client --> (receive_news)
+  client --> (view_consolidated_dashboard)
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

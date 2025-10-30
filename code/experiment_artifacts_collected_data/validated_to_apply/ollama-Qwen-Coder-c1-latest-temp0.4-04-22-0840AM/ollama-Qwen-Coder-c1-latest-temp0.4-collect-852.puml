@@ -1,0 +1,92 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FAFR001
+:User: as User
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "AIFR009: Generate Contextualized News Insights" as AIFR009
+  
+  CFR001 --> Client
+  SAFR001 --> SysAdmin
+  FAFR002 --> FinancialAdvisor
+  User --> (CFR001)
+}
+
+rectangle "Client Dashboards" {
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  CFR009 --> SFR012
+  SAFR005 --> SFR012
+  FAFR003 --> SFR012
+}
+
+rectangle "Personalized Recommendations" {
+  usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  
+  CFR004 --> SFR002
+  SAFR005 --> SFR002
+  FAFR003 --> SFR002
+}
+
+rectangle "Spending Limits and Alerts" {
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  
+  CFR006 --> SFR005
+  SAFR014 --> SFR005
+  FAFR013 --> SFR005
+}
+
+rectangle "Investment Opportunities and News" {
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+  usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+  
+  CFR007 --> SFR006
+  SAFR15 --> SFR006
+  FAFR03 --> SFR006
+
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as SFR008
+  usecase "AIFR006: Generate Anomaly Transaction Alerts by Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance with FinCEN Requirements" as AIFR006
+  
+  CFR013 --> SFR008
+  SAFR15 --> SFR008
+  FAFR03 --> SFR008
+
+  usecase "SFR009: Request Contextualized News from AI Component to Extract Relevant Information for Users' Financial Situations" as SFR009
+  
+  CFR008 --> SFR009
+  SAFR15 --> SFR009
+  FAFR03 --> SFR009
+
+}
+
+rectangle "Financial Health and Goals Management" {
+  usecase "SFR024: Generate Financial Health Reports that Assess Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as SFR017
+  
+  CFR016 --> SFR017
+  SAFR15 --> SFR017
+  FAFR03 --> SFR017
+
+  usecase "SFR028: Manage Users' Financial Goals to Track Progress and Provide Relevant Recommendations" as SFR018
+  
+  CFR016 --> SFR018
+  SAFR15 --> SFR018
+  FAFR03 --> SFR018
+
+}
+
+rectangle "Feedback Management" {
+  usecase "CFR011: Send Feedback about the System's Recommendations and Insights to Help Improve Future Outputs" as CFR011
+  
+  User --> (CFR011)
+}
+@enduml

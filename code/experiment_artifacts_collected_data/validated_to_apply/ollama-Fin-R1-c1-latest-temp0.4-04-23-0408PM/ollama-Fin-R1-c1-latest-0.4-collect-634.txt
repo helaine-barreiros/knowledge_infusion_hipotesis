@@ -1,0 +1,70 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage AML Alerts" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR006: Detect Anomaly Transaction Patterns for Fraud Detection" as AIFR006
+
+  Client --> CFR001 : View Financial Insights Dashboard
+  SysAdmin --> SAFR002 : Manage System Parameters (e.g., AML)
+  FAFD --> FAFR005 : Schedule Mentoring Sessions Based on AI Recommendations
+  SFR013 <|-- (System) : Deliver Alerts to Users
+  CFR011 --> All: Send Feedback for Improvement
+
+  Client ->> AIFR006 : Trigger Anomaly Detection
+  SysAdmin -->> SAFR002 : Configure System-Wide Parameters
+  
+}
+
+rectangle "Financial Advisor" {
+  actor FAFD as FinancialAdvisor
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+
+  FinancialAdvisor --> FAFR001 : Schedule and Track Mentoring Sessions
+  FinancialAdvisor --> FAFR003 : Review Client-Specific Predictions
+  
+}
+
+rectangle "Client" {
+  actor Client as User
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR004: Personalized Financial Recommendations" as CFR004
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+
+  Client --> CFR002 : View AML Alerts
+  Client --> CFR004 : Access Personalized Recos
+  Client -->> SFR013 : Trigger Alert Generation (e.g., spending limits)
+  
+}
+
+rectangle "System Administrator" {
+  actor SysAdmin as Admin
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+
+  Admin --> SAFR001 : Configure and Monitor AI Algorithms
+  
+}
+@enduml
+```
+
+### Key Observations:
+- **Actors** are categorized into `Client`, `Financial Advisor (FAFD)`, and `System Administrator`.
+- Each use case is tied to its corresponding functional requirement ID.
+- Relationships between actors and use cases reflect the flow of interactions, e.g., clients receiving alerts or managing relationships with advisors.
+- Inheritance/extension (`<|--`) is used where applicable, such as system delivering alerts (SFR013).
+- Logical grouping within rectangles helps organize related entities. For example, all financial-related activities are grouped under "System" and "Client".
+  
+### Notes:
+- The `CFR011` use case for feedback was included but not explicitly linked to a specific actor in the requirements list. It's assumed here that clients can provide feedback via any channel (e.g., system interface, advisor), hence connecting it broadly.
+- Some use cases from requirements were omitted if they didn't fit into standard interactions or were implied by others. For example, `SFR019` and `SFR20` about historical records and user feedback are not explicitly represented here due to space constraints but could be added as needed.
+
+[Done: True
+Done Reason: stop
+Eval Count: 797]

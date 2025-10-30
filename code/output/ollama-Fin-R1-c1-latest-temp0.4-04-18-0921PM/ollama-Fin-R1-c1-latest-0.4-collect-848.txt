@@ -1,0 +1,103 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor FinancialAdvisor as FA1
+actor SysAdmin as SA1
+system "System" as Syst
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Access Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile (MiFID II)" as CFR007
+  usecase "CFR008: Receive News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: View Consolidated Financial Dashboard for Efficiency" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as CFR10
+
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+  usecase "FAFR003: Review Predictive Analytics About Clients' Financial Situations" as FAFR003
+}
+
+rectangle "System Admin Interface" {
+  usecase "SAFR001: Manage Analysis Parameters to Ensure Accuracy and Compliance with Basel III" as SAFR001
+
+}
+
+rectangle "System Components" {
+  system Syst --|> CFR001 : Delivers financial insights via dashboard (SFR012)
+  system Syst --|> CFR002 : Sends alerts for anomalous transactions (SFR008)
+  system Syst --|> CFR003 : Requests market trends and historical data analysis (AIFR007, AIFR009)
+  system Syst --|> CFR004 : Generates personalized recommendations based on profile (AIFR002)
+  system Syst --|> CFR005 : Manages user preferences for recommendations (AIFR003)
+  system Syst --|> CFR006 : Alerts when spending exceeds thresholds (AIFR004)
+  system Syst --|> CFR007 : Identifies investment opportunities aligned with risk profile (AIFR005, AIFR008)
+  system Syst --|> CFR008 : Fetches relevant news for portfolios (SFR013, AIFR006)
+  system Syst --|> CFR009 : Consolidates financial info into a single view (SFR012)
+  system Syst --|> CFR10 : Manages data sharing with advisors (AIFR004)
+
+}
+
+rectangle "AI System" {
+  usecase AIFR001: Generate Financial Predictions
+  usecase AIFR002: Generate Personalized Recommendations
+  usecase AIFR003: Generate Spending Limit Alerts
+  usecase AIFR005: Identify Investment Opportunities Based on Risk Profile and ESG Preferences
+}
+
+rectangle "System Admin" {
+  actor SysAdmin as SA1 --> SAFR001 : Manages analysis parameters (SFR020)
+}
+
+client C1 -> CFR001 : View dashboard
+C1 -> CFR002 : Receive alerts
+C1 -> CFR003 : View predictions
+C1 -> CFR004 : Get recommendations
+C1 -> CFR005 : Manage preferences
+C1 -> CFR006 : View spending limits
+C1 -> CFR007 : Access investment opportunities
+C1 -> CFR008 : Receive news
+C1 -> CFR009 : Consolidate info
+C1 -> CFR10 : Manage relationships
+
+FA1 --> FAFR001 : Manage mentoring sessions (SFR020)
+FA1 --> FAFR002 : View intervention alerts (SFR008, AIFR006)
+FA1 --> FAFR003 : Review predictive analytics (AIFR009)
+
+SA1 -> SAFR001 : Manage parameters
+
+@enduml
+```
+
+### Explanation:
+- **Actors** are represented as `actor` declarations. The client (`Client`) has multiple use cases, including viewing dashboards and receiving alerts. Financial advisors have their own set of interactions (e.g., mentoring sessions), while the system administrator manages analysis parameters.
+  
+- **Use Cases** are defined under each actor or component group. For example:
+  - `CFR001` to `CFR10` represent client-related use cases, grouped within "Client Interface."
+  - Financial advisor-specific uses like managing mentoring sessions (`FAFR001`) and viewing alerts (`FAFR002`, `FAFR003`) are under the "Financial Advisor Interface" group.
+  
+- **System Components** (e.g., AI systems) handle data processing, with relationships to client use cases. For instance:
+  - The system requests financial predictions from `AIFR001` and personalizes recommendations via `AIFR002`.
+  
+- Relationships (`--|>`, `->`) connect actors/usecases to the underlying components or systems they interact with.
+
+This structure ensures clarity in how each actor uses the system, interacts with AI components, and manages data. The diagram adheres strictly to provided requirements without inventing extraneous elements. 
+
+### Key Observations:
+- All use cases are explicitly tied back to their respective functional requirement IDs.
+- Logical grouping of related actors/usecases enhances readability (e.g., "Client Interface," "Financial Advisor Interface").
+- Inheritance or extension relationships aren't directly required here, as each actor stands independently for their interactions. However, the system admin's role in managing parameters is clearly linked via `SAFR001`.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1384]

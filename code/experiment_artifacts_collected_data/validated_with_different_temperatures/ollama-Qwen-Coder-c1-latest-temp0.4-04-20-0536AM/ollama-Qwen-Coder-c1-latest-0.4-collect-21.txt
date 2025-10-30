@@ -1,0 +1,74 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+' Define actors
+actor Client as CFR001
+actor FinancialAdvisor as FAFR002
+actor SysAdmin as SAFR003
+actor User as CFR011 ' General actor for all user types (Client, Financial Advisor, SysAdmin)
+
+rectangle "Financial Services" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Analysis Parameters" as SAFR002
+  
+  ' Client specific use cases
+  CFR001 --> (View Alerts)
+  CFR001 --> (Manage Recommendations Preferences)
+  
+  rectangle "Client Dashboards & Insights" {
+    usecase "CFR009: Access Personalized Dashboard" as CFR009
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR008: View News Related to Portfolio" as CFR008
+  }
+  
+  rectangle "Spending Limits & Alerts" {
+    usecase "CFR006: Manage Spending Limit Alerts" as CFR006
+  }
+
+  ' Financial Advisor specific use cases
+  FAFR002 --> (Manage Client Sessions)
+  FAFR002 --> (View Predictive Analytics)
+
+  rectangle "Financial Recommendations & Insights" {
+    usecase "FAFR004: Configure Analysis Parameters for Clients" as FAFR004
+    usecase "FAFR001: Manage Mentoring Sessions"
+  }
+
+  ' System specific use cases
+  SAFR002 --> (Deliver Alerts)
+  SAFR002 --> (Generate Recommendations)
+
+  rectangle "System Operations & Maintenance" {
+    usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+    usecase "SFR020: Manage User Feedback" as SFR020
+  }
+}
+
+rectangle "AI System Components" {
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Identify Financial Instruments for Users" as AIFR005
+  
+  rectangle "AI Predictive Insights & Recommendations" {
+    usecase "AIFR012: Generate Client Dashboards" as AIFR012
+    usecase "AIFR013: Generate Client Alerts Based on Conditions" as AIFR013
+    usecase "AIFR014: Provide Predictive Insights to Advisors" as AIFR016
+  }
+  
+  rectangle "AI News & Analytics" {
+    usecase "AIFR007: Correlate Financial News with User Portfolios" as AIFR007
+    usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR015
+    usecase "AIFR009: Provide Forward-Looking Analysis for Planning" as AIFR009
+  }
+}
+
+' User (Client, Financial Advisor, SysAdmin) sends feedback to the system
+User --> CFR011
+
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 728]

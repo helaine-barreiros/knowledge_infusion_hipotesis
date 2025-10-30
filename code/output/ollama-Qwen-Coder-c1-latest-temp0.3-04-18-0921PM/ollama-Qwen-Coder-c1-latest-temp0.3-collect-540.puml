@@ -1,0 +1,76 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System: as Sys
+:Financial Advisor: as FAdvisor
+:System Administrator: as SAdmin
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+
+  Client --> CFR001
+  Client --> FAFR002
+  Client --> SAFR001
+  
+  Financial Advisor --> FAFR002
+  Financial Advisor --> SFR003
+  Financial Advisor --> AIFR004
+  
+  System Administrator --> SAFR001
+
+  rectangle "Client" {
+    usecase "CFR009: Access Personalized Dashboard" as CFR009
+    Client --> CFR009
+  }
+
+  rectangle "Financial Advisor" {
+    usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as FAFR003
+    Financial Advisor --> FAFR003
+
+    usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+    Financial Advisor --> FAFR004
+  }
+
+  rectangle "System" {
+    usecase "SFR012: Generate Client Dashboards" as SFR012
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+
+    System --> SFR012
+    System --> SFR013
+  }
+
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+
+    System --> AIFR001
+    System --> AIFR002
+    System --> AIFR003
+  }
+
+  rectangle "News Component" {
+    usecase "SFR008: Request Contextualized News Relevant to Users' Financial Portfolios" as SFR008
+    usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios" as AIFR007
+
+    System --> SFR008
+    System --> AIFR007
+  }
+
+  rectangle "Feedback Component" {
+    usecase "CFR11: Send Feedback about the System's Recommendations and Insights" as CFR11
+    
+    Client --> CFR11
+    Financial Advisor --> CFR11
+    System Administrator --> SAFR005
+  }
+}
+
+@enduml

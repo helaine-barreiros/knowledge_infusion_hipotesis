@@ -1,0 +1,67 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+' Define actors
+actor Client as CFR001
+actor FinancialAdvisor as FAFR002
+actor SysAdmin as SAFR003
+actor User as CFR011
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+  usecase "CFR008: View News Related to My Investment Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+
+  CFR001 --> (View)
+  CFR002 --> (Alerts)
+  CFR003 --> (Predictions)
+  CFR004 --> (Recommendations)
+  CFR005 --> (Preferences)
+  CFR006 --> (Spending Alerts)
+  CFR007 --> (Investment Opportunities)
+  CFR008 --> (News)
+  CFR009 --> (Dashboard)
+  CFR10 --> (Relationship Management)
+
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+
+  FAFR001 --> (Sessions)
+  FAFR002 --> (Intervention Alerts)
+  FAFR003 --> (Predictive Analytics)
+  FAFR004 --> (Configuration)
+
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+
+  SAFR001 --> (Parameters Management)
+
+}
+
+' Define system
+system System as Sys
+
+SysAdmin -> SAFR001 : <<SFR>>
+
+CFR002, CFR004, FAFR002, FAFR003, SFR008, SFR017 -> Sys : <<SFR>>
+CFR006, CFR009, SFR015, SFR016 -> Sys : <<SFR>>
+
+User --> (Send Feedback)
+
+@enduml

@@ -1,0 +1,57 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Spending Limit Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Investment Opportunities" as CFR006
+  usecase "CFR007: Access Consolidated Financial Dashboard" as CFR012
+  usecase "SAFR003: Deliver Alerts to Users" as SAFR008
+  usecase "SFR009: Process Contextualized News" as SFR009
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+  rectangle "Client" {
+    actor Client as client1
+    client1 --> CFR001 : "View Financial Insights Dashboard"
+    client1 --> CFR003 : "View Financial Predictions"
+    client1 --> CFR006 : "View Investment Opportunities"
+    client1 --> SAFR002 : "Manage Spending Limit Alerts"
+  }
+
+  rectangle "Financial Advisor" {
+    actor FAFR001 as advisor
+    advisor --> CFR004 : "Receive Personalized Recommendations"
+    advisor --> AIFR008 : "Generate Client Predictive Intervention Recommendations"
+  }
+
+  rectangle "System Administrator" {
+    actor SysAdmin as admin
+    admin --> SAFR002 : "Manage Spending Limit Alerts"
+    admin --> SAFR001 : "Manage Analysis Parameters (AI)"
+  }
+
+  rectangle "Client, Financial Advisor, System Admin" {
+    client1 <|-- CFR005: "Manage Recommendation Preferences"
+    advisor <|-- AIFR004: "Generate Investment Opportunity Analyses"
+    SysAdmin <|-- SAFR003: "Deliver Alerts to Users (System)"
+  }
+
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR005: Generate Investment Opportunities" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+    client1 --> AIFR002 : "Receive Personalized Recommendations"
+    advisor --> AIFR008 : "Generate Client Predictive Intervention Recommendations (AI)"
+  }
+
+}
+
+@enduml

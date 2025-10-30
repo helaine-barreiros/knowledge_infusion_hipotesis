@@ -1,0 +1,82 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Clients" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR005
+  usecase "CFR006: Manage Recommendation Preferences" as SAFR018
+  usecase "CFR009: Access Consolidated Financial Dashboard" as SFR023
+  
+  CFR001 --> (SAFR003)
+  CFR001 --> (SAFR004)
+  CFR001 --> (SAFR005)
+  CFR001 --> (SFR023)
+}
+
+package "Financial Advisors" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts" as SAFR006
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as AIFR008
+  usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as SFR015
+  
+  FAFR001 --> (SAFR002)
+  FAFR001 --> (AIFR004)
+  FAFR001 --> (SFR015)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR007
+  
+  usecase "SAFR008: Manage Analysis Parameters for the AI System" as AIFR009
+  usecase "SAFR009: Process Contextualized News to Extract Relevant Information" as SFR12
+  
+  SAFR007 --> (AIFR008)
+  SAFR007 --> (SFR12)
+}
+
+package "System Functions" {
+  rectangle System as Sys
+  
+  usecase "SFR003: Deliver Personalized Recommendations to Users" as AIFR002
+  usecase "SFR004: Request Financial Predictions from the AI Component" as AIFR018
+  usecase "SFR005: Request Spending Limit Alerts from the AI Component" as AIFR03
+  usecase "SFR006: Request Investment Opportunity Analysis from the AI Component" as AIFR04
+  usecase "SFR007: Request Specific Investment Opportunities from the AI Component" as AIFR05
+  
+  Sys --> (AIFR02)
+  Sys --> (AIFR18)
+  Sys --> (AIFR03)
+  Sys --> (AIFR04)
+  Sys --> (AIFR05)
+}
+
+package "AI Functions" {
+  rectangle AI as AIFR
+  
+  usecase "AIFR009: Generate Client Predictive Intervention Recommendations" as SAFR016
+  usecase "AIFR012: Generate Contextualized News Insights by Correlating Financial News with User Portfolios" as SFR14
+  usecase "AIFR013: Generate Client Predictive Insights for Forward-Looking Analysis of Financial Situations" as SAFR017
+  
+  AIFR --> (SAFR016)
+  AIFR --> (SFR14)
+  AIFR --> (SAFR017)
+}
+
+package "General Functions" {
+  rectangle GeneralFunctions as GF
+  
+  usecase "GF001: Generate Financial Health Reports" as SAFR021
+  usecase "GF003: Manage Users' Feedback to Improve System Quality and Relevance" as AIFR06
+  usecase "GF004: Send User Feedback about Recommendations and Insights" as CFR011
+  
+  GF --> (SAFR021)
+  GF --> (AIFR06)
+  GF --> (CFR011)
+}
+
+@enduml

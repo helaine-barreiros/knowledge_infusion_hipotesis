@@ -1,0 +1,86 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001  
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  CFR001 --> Client : "Client requests financial insights"
+  SAFR001 <|-- SysAdmin : "SysAdmin manages analysis parameters"
+
+  rectangle "Client Interface" {
+    actor Client
+  }
+
+  rectangle "System Admin Interface" {
+    actor SysAdmin  
+  }
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR002: View Intervention Alerts for Clients" as FAFR002
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  Client --> FAFR002 : "Client shares data with advisor"
+  
+  SysAdmin <-- FAFR003 : "Advisor requests predictive analytics"
+
+  rectangle "Financial Advisor" {
+    actor FinancialAdvisor
+  }
+}
+
+rectangle "AI System Interface" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002  
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+  SysAdmin --> SAFR001 : "SysAdmin configures parameters for AI"
+
+  Client <|-- AIFR002, AIFR003, AIFR006 : "Client receives recommendations/alerts"
+  
+  rectangle "AI System" {
+    actor AISystem
+  }
+}
+
+rectangle "Notification Interface" {
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+
+  SysAdmin --> SFR013 : "SysAdmin configures alert conditions"
+  
+  rectangle "Notifications" {
+    actor NotificationSystem
+  }
+}
+
+@enduml
+```
+
+### Explanation:
+- **Client Interface**: Represents the interactions with clients (CFR series use cases).
+- **System Admin Interface**: Manages system parameters and configurations.
+- **Financial Advisor Interface**: Includes advisory-related features like viewing alerts, predictive analytics requests from advisors to AI.
+- **AI System Interface**: Core functionalities of the AI component generating predictions, recommendations, etc.
+- **Notification Interface**: Handles alert generation based on conditions set by SysAdmin.
+
+### Key Relationships:
+1. **Client** interacts with the system via dashboards and receives personalized services (CFR001–CFR020).
+2. **SysAdmin** configures parameters for analysis and alerts, managing AI components.
+3. **Financial Advisor** views client-specific data, requests predictive analyses from the AI, and shares data back to clients.
+
+### Logical Grouping:
+- Use cases are grouped by their primary actors (Client, SysAdmin, FinancialAdvisor) within respective rectangles.
+- Inheritance relationships exist where applicable (e.g., SysAdmin managing parameters for SAFR001). 
+
+This structure ensures clarity in representing the system's interactions and roles. Adjustments can be made based on additional requirements or specific use case details not explicitly covered here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 777]

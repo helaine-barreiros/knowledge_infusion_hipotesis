@@ -1,0 +1,49 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FInancialAdvisor: as FAdvisor
+:AISystem: as AISys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Personalized Dashboard" as CFR008
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+
+  SysAdmin --> SAFR001 : Configure system parameters for compliance.
+
+  Client -> CFR001 : View dashboard.
+  Client -> CFR003 : View predictions.
+  Client -> CFR004 : Receive recommendations.
+  Client -> CFR005 : Manage preferences.
+  Client -> CFR006 : View alerts.
+  Client -> CFR007 : View opportunities.
+  Client -> CFR008 : Access dashboard.
+  Client -> SAFR001 : Adjust parameters (via SysAdmin).
+  
+  FAdvisors --> FAFR002: Manage client alerts and mentoring sessions.
+  FAdvisors --> FAFR003: View predictive analytics for clients.
+  FAdvisors --> AIFR008: Generate intervention recommendations.
+
+  AISys <|-- SAFR001 : Implements analysis parameter management.
+  AISys <|-- CFR004 : Generates personalized recommendations.
+  AISys <|-- CFR006 : Alerts on spending limits.
+  AISys <|-- CFR007 : Analyzes investment opportunities.
+  AISys <|-- AIFR003: Spends limit alerts based on patterns.
+  AISys <|-- AIFR004: Personalized recommendations aligned with profiles.
+  AISys <|-- AIFR005: Investment opportunity analyses per risk profile.
+  
+  Client --> AISys : Provide data for analysis (e.g., spending, investments).
+}
+
+@enduml

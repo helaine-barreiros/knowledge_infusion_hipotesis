@@ -1,0 +1,47 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  FAFR004 <|-- SysAdmin : "Configure parameters for segments"
+
+  SFR003 <|-- SysAdmin : "Request financial predictions"
+  SFR005 <|-- SysAdmin : "Request spending limit alerts"
+  SFR006 <|-- SysAdmin : "Request investment opportunity analysis"
+
+  AIFR001 --> SFR003 : Generate Predictions
+  AIFR002 --> SFR004 : Configure parameters for segments
+
+  client --> SFR012 : Request dashboards
+  
+  SysAdmin --> SAFR001 | "Manage system settings"
+
+}
+
+actor Client as c
+actor SysAdmin as sa
+actor FinancialAdvisor as faa
+actor System as s
+
+client -> CFR001: View financial data
+SysAdmin -> SAFR001: Manage analysis parameters
+Faa -> FAFR004: Configure client segments
+Sfr003 -> Aifr001: Request predictions
+Sfr005 -> Aifr003: Request spending alerts
+Sfr006 -> Aifr004: Request investment analyses
+
+@enduml

@@ -1,0 +1,88 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR009: Request Contextualized News Insights" as SFR009
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+  Client --> CFR001 : "View Financial Dashboard"
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  
+  // Clients and Users can view financial insights
+  rectangle "Client/User Interface" {
+    usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+    usecase "SAFR006: Manage Spending Limit Alerts" as SAFR006
+    usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+
+    Client --> CFR002 : "View Anomaly Alerts"
+    SysAdmin --> SAFR006 : "Set Spending Limits"
+  }
+
+  // Financial Advisors can view and manage clients
+  rectangle "Financial Advisor Interface" {
+    usecase "FAFR001: Manage Mentoring Sessions Based on Insights" as FAFR001
+    usecase "SAFR004: Configure Analysis Parameters for Client Segments" as SAFR004
+
+    FinancialAdvisor --> FAFR001 : "Schedule/Monitor Mentorship"
+  }
+
+  // System components handling requests and delivering services
+  rectangle "System Services" {
+    usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+
+    Sys --> SFR002 : "Request Recommendations"
+  }
+
+  // System components for alerts and notifications
+  rectangle "Alert Management" {
+    usecase "SFR013: Deliver Alerts Based on Predefined Conditions" as SFR013
+    usecase "AIFR006: Generate Spending Limit Alerts" as AIFR006
+
+    Sys --> SFR013 : "Trigger User Alert"
+  }
+
+  // AI components generating insights and recommendations
+  rectangle "AI Processing" {
+    usecase "CFR010: Manage Data Sharing with Advisors" as CFR010
+    usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+
+    Client --> CFR010 : "Share Financial Data"
+  }
+
+  // System components for goal management and feedback
+  rectangle "Goal Management & Feedback" {
+    usecase "SFR020: Manage User Feedback" as SFR020
+    usecase "CFR011: Send Feedback to Improve Outputs" as CFR011
+
+    Client --> SFR020 : "Provide Feedback"
+  }
+
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Actors**: The main actors are `Client`, `System Administrator`, and `Financial Advisor`. Each has specific use cases tied to their roles.
+- **Use Cases**:
+  - Clients focus on viewing dashboards, alerts (e.g., CFR002), spending limits (SAFR006).
+  - Financial Advisors manage mentoring sessions (FAFR001) and client segments (FAFR004).
+  - System Administrators handle analysis parameter management (SAFR001).
+- **System Components**:
+  - The system includes services like delivering recommendations (`SFR002`), generating alerts (`AIFR006`, `SFR013`), and processing user feedback (`SFR020`).
+  - AI components generate insights (e.g., contextualized news, predictive analytics) via use cases like `AIFR007` and `AIFR009`.
+- **Grouping**:
+  - Use cases are grouped by actor type or system function to maintain clarity.
+  
+This diagram ensures all functional requirements are represented accurately with their respective IDs and relationships. Adjustments can be made based on further analysis if needed.
+
+[Done: True
+Done Reason: stop
+Eval Count: 961]

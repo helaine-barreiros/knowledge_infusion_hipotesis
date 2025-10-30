@@ -1,0 +1,68 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:User (Client): as User
+:System Admin: as SysAdmin
+:Financial Advisor: as FAdvisor
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure analysis parameters for specific client segments" as FAFR004
+  
+  User --> CFR001
+  SysAdmin --> SAFR001
+  FAdvisor --> FAFR004
+}
+
+rectangle "Client Dashboard Features" {
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  
+  User --> CFR002
+  User --> CFR003
+  User --> CFR004
+  User --> CFR005
+}
+
+rectangle "Financial Advisor Features" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+  
+  FAdvisor --> FAFR001
+  FAdvisor --> FAFR002
+  FAdvisor --> FAFR003
+}
+
+rectangle "System Notifications and Recommendations" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  
+  System Admin --> SFR001
+  User --> SFR002
+}
+
+rectangle "AI Component Functions" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  
+  System Admin --> AIFR001
+  User --> AIFR002
+  FAdvisor --> AIFR003
+  User --> AIFR004
+}
+
+rectangle "Feedback Management" {
+  usecase "CFR11: Send Feedback about the System's Recommendations and Insights" as CFR11
+  
+  User --> CFR11
+}
+@enduml

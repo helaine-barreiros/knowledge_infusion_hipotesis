@@ -1,0 +1,57 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage AML Alerts" as SAFR002
+  usecase "SFR003: Request Predictive Analytics from AI" as SFR003
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+  Client --> CFR001 : View Financial Dashboard  
+  SysAdmin -> SAFR002 : Manage Alerts  
+  FAFR001 -->> SFR003 : Configure Analysis Parameters for Clients
+  System --> AIFR007 : Generate News Insights Based on Portfolio
+  
+  // Relationships between components within the system boundary
+  rectangle "AI Component" {
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+
+    SFR002 <|-- SAFR001 : Manage Parameters  
+    AIFR007 --> CFR008 : Deliver News Related to Portfolio  
+
+  }
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire system is enclosed within a rectangle labeled "System". This includes all use cases and actors.
+- **Use Cases**:
+  - `CFR001: View Financial Insights Dashboard` (Client): A client can view their financial data in a dashboard format.
+  - `SAFR002: Manage AML Alerts` (SysAdmin): System Administrator manages alerts related to anti-money laundering regulations.
+  - `SFR003: Request Predictive Analytics from AI`: The system requests predictive analytics from the AI component for clients.
+  - `AIFR007: Generate Contextualized News Insights`: The AI generates news relevant to a client's portfolio based on their investments.
+- **Actors**:
+  - Client, SysAdmin (System Administrator), FAFR001 (Financial Advisor).
+- **Relationships**:
+  - Clients can view the financial dashboard (`Client --> CFR001`).
+  - System Administrators manage AML alerts (`SysAdmin -> SAFR002`).
+  - Financial Advisors configure analysis parameters for clients via `SFR003`.
+  - The AI component generates contextualized news insights based on client portfolios, which are delivered to the system and then to users (`AIFR007 --> CFR008`).
+
+This diagram aligns with all provided requirements while ensuring clarity and logical grouping of use cases. Adjustments can be made as needed for further refinement or additional details. 
+
+---
+
+### Note:
+- The AI component is represented within its own sub-system (denoted by another rectangle) to show internal interactions between the system's components.
+- Other use cases like `CFR011` and others are not included here because they either repeat existing functionalities or relate to feedback mechanisms that might be better handled outside this specific diagram. However, if required, these can be added following similar patterns.
+
+[Done: True
+Done Reason: stop
+Eval Count: 692]

@@ -1,0 +1,122 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as CFR007
+  usecase "CFR008: View News Related to Financial Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  CFR001 --> (View Alerts about Anomalous Transactions)
+  CFR001 --> (View Financial Predictions)
+  CFR001 --> (Receive Personalized Recommendations)
+  CFR001 --> (Manage Recommendation Preferences)
+  CFR001 --> (View Spending Limit Alerts)
+  CFR001 --> (View Investment Opportunities Suitable to Risk Profile)
+  CFR001 --> (View News Related to Financial Portfolio)
+  CFR001 --> (Access Personalized Dashboard)
+  CFR001 --> (Manage Relationship with Financial Advisors)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics about Client's Financial Situation" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  FinancialAdvisor --> (View Predictive Analytics about Client's Financial Situation)
+  FinancialAdvisor --> (Configure Analysis Parameters for Specific Client Segments)
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR001
+  
+  usecase "SAFR002: Manage Analysis Parameters" as SAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  
+  SAFR001 --> (Manage Analysis Parameters)
+  SAFR001 --> (Generate Client Alerts Based on Predefined Conditions)
+}
+
+package "System Components" {
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunities Based on User's Risk Profile and Strategies" as AIFR005
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights for Users' Portfolios" as AIFR007
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+  usecase "AIFR009: Generate Client Predictive Insights to Support Forward-Looking Analysis" as AIFR009
+  
+  AIFR001 --> (Generate Financial Predictions for Users)
+  AIFR002 --> (Generate Personalized Recommendations for Users)
+  AIFR003 --> (Generate Spending Limit Alerts for Users)
+  AIFR004 --> (Generate Investment Opportunity Analyses for Users)
+  AIFR005 --> (Generate Investment Opportunities Based on User's Risk Profile and Strategies)
+  AIFR006 --> (Generate Anomaly Transaction Alerts)
+  AIFR007 --> (Generate Contextualized News Insights for Users' Portfolios)
+  AIFR008 --> (Generate Client Predictive Intervention Recommendations)
+  AIFR009 --> (Generate Client Predictive Insights to Support Forward-Looking Analysis)
+
+}
+
+package "System" {
+  usecase "SFR012: Generate Client Dashboards with Financial Information in an Intuitive Format" as SFR012
+  usecase "SFR014: Generate Client Analytics Providing Meaningful Insights into Financial Behavior and Performance" as SFR014
+  
+  System --> (Generate Client Dashboards with Financial Information in an Intuitive Format)
+  System --> (Generate Client Analytics Providing Meaningful Insights into Financial Behavior and Performance)
+}
+
+package "Notifications" {
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  
+  Notifications --> (Generate Client Alerts Based on Predefined Conditions)
+}
+
+rectangle "System" {
+  SystemAdministrator
+  SAFR002
+  FAFR004
+  CFR005
+  AIFR006
+  AIFR007
+  AIFR008
+  AIFR019
+  
+  Client --> (View Alerts about Anomalous Transactions)
+  FinancialAdvisor --> (View Predictive Analytics about Client's Financial Situation)
+  SystemAdministrator --> (Manage Analysis Parameters)
+  
+}
+
+rectangle "AI Components" {
+  AIFR001
+  AIFR002
+  AIFR003
+  AIFR004
+  AIFR005
+  AIFR006
+  AIFR007
+  AIFR008
+  AIFR009
+  
+}
+
+rectangle "User Interface" {
+  CFR001 --> (View Alerts about Anomalous Transactions)
+  CFR002 --> (Receive Personalized Recommendations)
+  FAFR003 --> (Configure Analysis Parameters for Specific Client Segments)
+  
+}
+@enduml

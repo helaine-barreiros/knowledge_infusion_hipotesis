@@ -1,0 +1,79 @@
+```plantuml
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Current Trends" as SFR004
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as AIFR002
+  usecase "CFR005: Manage Personalized Recommendations Preferences to Ensure Insights Relevant to My Financial Objectives and Risk Tolerance" as SAFR006
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds in Specific Expense Categories" as SFR014
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile (as Defined Under MiFID II or Equivalent Standards)" as AIFR005
+  usecase "CFR008: View News Related to My Investment Portfolio to Stay Informed About Market Events" as SFR016
+  usecase "CFR009: Access a Personalized Dashboard That Consolidates My Financial Information in a Single View" as AIFR012
+  usecase "CFR010: Manage Relationship with Financial Advisors, Including Permissions for Sharing My Financial Data to Maintain Privacy and Control Over My Financial Information" as SAFR005
+  
+  CFR001 --> SAFR003
+  CFR001 --> SFR004
+  CFR001 --> AIFR002
+  CFR001 --> SAFR006
+  CFR001 --> SFR014
+  CFR001 --> AIFR005
+  CFR001 --> SFR016
+  CFR001 --> AIFR012
+  CFR001 --> SAFR005
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations to Provide Data-Driven Recommendations During Consultations" as AIFR009
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments to Customize the System's Behavior According to Different Client Profiles and Regulatory Requirements Such As GDPR or CCPA" as SAFR013
+  
+  FinancialAdvisor --> AIFR009
+  FinancialAdvisor --> SAFR013
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR001
+  
+  usecase "SAFR002: Manage Client Mentoring Sessions Based on System-Generated Insights to Provide More Valuable Guidance Aligned with Each Client's Financial Goals" as AIFR008
+  usecase "SAFR004: Configure Analysis Parameters for Specific Client Segments to Customize the System's Behavior According to Different Client Profiles and Regulatory Requirements Such As GDPR or CCPA" as SAFR013
+  
+  SystemAdministrator --> AIFR008
+  SystemAdministrator --> SAFR013
+}
+
+package "System Components" {
+  usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles to Support Better Financial Decision-Making" as SFR002
+  usecase "AIFR004: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations from Established Spending Patterns" as AIFR003
+  
+  SFR002 --> SAFR015
+  SFR002 --> AIFR003
+}
+
+rectangle "System Boundary" {
+    :Client:
+    :Financial Advisor:
+    :System Administrator:
+
+    CFR001 <|-- SAFR006
+    FAFR001 <|-- AIFR008
+    SAFR001 <|-- SAFR015
+
+    Client --> SFR002
+    FinancialAdvisor --> AIFR004
+    SystemAdministrator --> SAFR013
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 911]

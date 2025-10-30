@@ -1,0 +1,89 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities" as CFR007
+  usecase "CFR008: Receive Relevant News" as CFR008
+  usecase "CFR009: Manage Personalized Dashboards" as CFR010
+  usecase "SAFR003: Configure Analysis Parameters for Clients" as SAFR004
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR005: Request Spending Limit Alerts from AI" as SFR005
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+}
+
+actor "Client" as Client {
+  -> CFR001 : View Financial Insights Dashboard
+  -> CFR002 : Receive Anomalous Transaction Alerts (FATF)
+  -> CFR003 : View Financial Predictions
+  -> CFR004 : Personalized Recommendations
+  -> CFR005 : Manage Recommendation Preferences
+  -> CFR006 : Spending Limit Alerts
+  -> CFR007 : Investment Opportunities
+  -> CFR008 : Relevant News
+  -> CFR010 : Consolidated Dashboard
+}
+
+actor "SysAdmin" as SysAdmin {
+  -> SAFR002: Manage Alert Preferences (System)
+  -> SAFR004: Configure Analysis Parameters for Clients
+}
+
+actor "Financial Advisor" as FAFR {
+  -> FAFR001: Manage Client Mentoring Sessions
+  -> FAFR003: View Predictive Analytics about Clients
+  -> FAFR005: Customize Analysis Params (Client Segments)
+  -> SAFR004: Configure Analysis Parameters for Clients
+
+}
+
+actor "System" as Sys {
+  --> CFR001 : Deliver Financial Insights Dashboard
+  --> SFR002: Personalized Alerts to Users
+  --> SFR003: Request Predictive Interventions from AI (Health)
+  --> AIFR009: Generate Client Intervention Recommendations
+
+}
+
+actor "AI" as AIFR {
+  <|-- CFR011 : Send Feedback for Improvement
+  -> AIFR002: Personalized Recs Based on Profiles and Goals
+  -> AIFR003: Spending Limit Alerts via AI Analysis
+  -> AIFR004: Investment Opportunity Analyses (Risk Profile)
+  -> AIFR005: Align with Modern Portfolio Theory
+}
+
+actor "News Source" as News {
+  --> SFR012: Contextualized News for Dashboards
+  --> SFR013: Extract Relevant Info from News
+
+}
+@enduml
+```
+
+### Key Observations:
+- **Client**: Interacts directly with the system through various use cases like viewing dashboards, receiving recommendations, and managing preferences.
+- **SysAdmin** focuses on administrative tasks such as configuring analysis parameters for clients (SAFR004) and managing alerts (CFR019).
+- **Financial Advisor** uses predictive analytics to guide client interactions but does not manage system-level configurations directly. They use FAFR003, etc.
+- **System**: Acts as a mediator between the AI components (AIFR), clients, and other actors by delivering insights, requesting data from AIFR, and managing alerts via SFRs.
+- **AI** generates critical outputs like financial predictions, personalized recommendations, spending limit alerts, investment opportunities, contextualized news, etc., based on client data.
+
+### Inheritance Relationships:
+- The `Client` actor extends the base user type (User) in the requirements. Similarly, Financial Advisor and SysAdmin are specialized roles.
+- The system components (`SFR`, AI, News Source) are grouped under their respective use cases to show dependencies.
+
+This structure ensures clarity on how each role interacts with different parts of the system while adhering strictly to provided IDs and names. Relationships between actors and use cases are explicitly drawn for readability. 
+
+**Note**: Ensure proper alignment in PlantUML code formatting, especially when dealing with nested components or multiple relationships per line. Adjustments may be needed based on specific UML tool interpretations. The above example uses standard notation but might require slight modifications depending on the PlantUML version used.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1067]

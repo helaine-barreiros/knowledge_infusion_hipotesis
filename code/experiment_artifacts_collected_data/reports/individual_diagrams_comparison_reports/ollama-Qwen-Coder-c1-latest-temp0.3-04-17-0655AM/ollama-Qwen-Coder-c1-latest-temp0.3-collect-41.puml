@@ -1,0 +1,97 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Anomaly Transaction Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  C --> (SAFR005) : Manage Recommendation Preferences
+  C -> (SFR02) : Receive Personalized Recommendations
+  C -> (AIFR004) : View Investment Opportunities
+  C -> (CFR008) : View News Related to Portfolio
+  C -> (CFR010) : Manage Relationship with Financial Advisors
+  
+  C --> CFR001
+  C --> CFR002
+  C --> CFR003
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as FAFR004
+  
+  FA --> (SAFR005) : Manage Recommendation Preferences
+  FA -> (SFR02) : Receive Personalized Recommendations
+  FA -> (AIFR004) : View Investment Opportunities
+  FA -> (CFR010) : Manage Relationship with Financial Advisors
+
+  FAFR003 --> (FAFR001)
+  FAFR002 --> (SFR08)
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SysAdmin
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunities Based on Strategies and MPT Principles" as AIFR005
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "AIFR008: Generate Predictive Intervention Recommendations for Clients" as AIFR008
+  usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+  
+  SAFR001 --> (AIFR002)
+  
+  CFR003 <|-- (SFR03) : Request Financial Predictions from AI Component
+  CFR004 <|-- (SFR04) : Request Personalized Recommendations from AI Component
+  CFR006 <|-- (SFR05) : Request Spending Limit Alerts from AI Component
+  CFR007 <|-- (SFR06) : Request Investment Opportunity Analysis from AI Component
+  CFR011 --> (AIFR002)
+}
+
+rectangle "System" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "SFR004: Request Personalized Recommendations" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities Matching User Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as SFR008
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  
+  C --> (SFR01) : Deliver Alerts to Users
+}
+
+rectangle "News Processing System" {
+  usecase "SFR009: Find Contextualized News Relevant to User's Financial Portfolio" as SFR009
+  usecase "SFR010: Process Contextualized News to Extract Information for User's Financial Situation" as SFR010
+  
+  C --> (SFR009)
+}
+
+rectangle "Client Dashboard Generator" {
+  usecase "SFR012: Generate Client Dashboards in an Intuitive and Actionable Format" as SFR012
+}
+@enduml

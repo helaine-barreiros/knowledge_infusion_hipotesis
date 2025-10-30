@@ -1,0 +1,60 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage System-Wide Analysis Parameters"
+  SysAdmin --> FAFR004 : "Configure Segment-Specific Analysis Parameters"
+
+  rectangle "Client" {
+    actor Client as c
+    usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004
+    usecase "CFR005: Manage Recommendation Preferences" as CFR005
+    usecase "CFR006: View Spending Limit Alerts" as CFR006
+    usecase "CFR007: View Investment Opportunities" as CFR007
+    usecase "CFR008: Access News Related to Portfolio" as CFR008
+    usecase "CFR009: Manage Relationship with Financial Advisors" as CFR009
+
+    c --> CFR002 : "View Alerts for Anomalous Transactions"
+    c --> CFR003 : "View Financial Predictions"
+    c --> CFR004 : "Receive Personalized Recommendations"
+    c --> CFR005 : "Manage Recommendation Preferences"
+    c --> CFR006 : "View Spending Limit Alerts"
+    c --> CFR007 : "View Investment Opportunities"
+    c --> CFR008 : "Access News Related to Portfolio"
+    c --> CFR009 : "Manage Relationship with Financial Advisors"
+
+  }
+
+  rectangle "Financial Advisor" {
+    actor FAFR as fa
+    usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+    usecase "FAFR002: View Intervention Alerts for Clients" as FAFR002
+    usecase "FAFR003: View Predictive Analytics About Client Situations" as FAFR003
+
+    fa --> FAFR001 : "Manage Mentoring Sessions"
+    fa --> FAFR002 : "View Intervention Alerts"
+    fa --> FAFR003 : "Review Predictive Analytics"
+
+  }
+
+  rectangle "System Administrator" {
+    actor SysAdmin as sa
+    usecase "SAFR001: Manage Analysis Parameters for System" as SAFR001
+
+    sa --> SAFR001 : "Manage AI-Driven Analysis Parameters"
+    
+  }
+  
+}
+
+@enduml

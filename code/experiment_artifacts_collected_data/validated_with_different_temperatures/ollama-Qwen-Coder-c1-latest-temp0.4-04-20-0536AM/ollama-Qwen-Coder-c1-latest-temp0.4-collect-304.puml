@@ -1,0 +1,47 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System: as Sys
+:Financial Advisor: as FAFR001
+:System Administrator: as SAFR001
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Analysis Parameters" as SAFR002
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR003
+  usecase "CFR002: View Alerts about Anomalous Transactions" as CFR004
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR006
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR007
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Current Trends" as CFR008
+  usecase "SFR002: Request Personalized Recommendations from AI Component" as SFR014
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR015
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR006
+  usecase "SFR017: Request Client Dashboards from AI Component" as SFR024
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR025
+}
+
+Client --> CFR001 : "View Financial Insights Dashboard"
+Client --> CFR002 : "Receive Alerts about Anomalous Transactions"
+Client --> CFR003 : "View Financial Predictions Based on Historical Data and Current Trends"
+
+FAFR001 --> FAFR003 : "Manage Client Mentoring Sessions"
+FAFR001 --> FAFR006 : "View Predictive Analytics About Clients' Financial Situations"
+
+System Administrator --> SAFR002 : "Manage Analysis Parameters"
+SAFR001 <|-- SAFR002
+
+Client --> SFR005 : "Request Spending Limit Alerts from AI Component"
+FAFR001 --> AIFR003 : "Generate Anomaly Transaction Alerts for Users"
+
+System --> SFR006 : "Deliver Personalized Recommendations to Users Based on Their Financial Profiles"
+SFR002 <|-- SFR005
+SFR004 <|-- SFR007
+
+FAFR01 --> AIFR008 : "Generate Client Predictive Intervention Recommendations"
+
+Client --> CFR011 : "Send Feedback about the System's Recommendations and Insights"
+
+@enduml

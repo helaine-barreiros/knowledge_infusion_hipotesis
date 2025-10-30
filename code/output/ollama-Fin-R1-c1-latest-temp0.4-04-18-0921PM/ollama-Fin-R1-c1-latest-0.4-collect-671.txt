@@ -1,0 +1,65 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor FinancialAdvisor as FA1
+actor SysAdmin as SA1
+system Boundary as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Params for Client Segments" as FAFR004
+  
+  C1 --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin -> (Sys) <|-- (SAFR001)
+  FA1 -> (Sys) <|-- (CFR002)
+  SA1 -> (Sys) <|-- (FAFR003)
+}
+
+rectangle "Client" {
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  C1 --> CFR006 : "View Spending Limit Alerts"
+  
+  SysAdmin -> (Sys) <|-- (SAFR005)
+}
+ 
+rectangle "FinancialAdvisor" {
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  FA1 --> FAFR002 : "View Client Intervention Alerts"
+  
+  SysAdmin -> (Sys) <|-- (SAFR006)
+}
+
+rectangle "SystemAdministrator" {
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as CFR005
+  SA1 --> CFR005 : "Manage Personalized Recommendations Preferences"
+  
+  SysAdmin -> (Sys) <|-- (SFR020)
+}
+ 
+rectangle "FinancialAdvisor and Client" {
+  usecase "CFR011: Send Feedback" as CFR011
+  FA1, C1 --> CFR011 : "Send Feedback"
+}
+
+@enduml
+```
+
+**Key Explanation:**
+- The diagram is structured into four main sections (Client, Financial Advisor, System Administrator, and a combined section for both advisor and client) to logically group related use cases.
+- Each actor corresponds directly to their respective functional requirements. For example, `CFR001` under the Client's view of financial insights dashboard.
+- Use case relationships are established via arrows indicating directionality (e.g., user requests from an actor to a system or another component).
+- System administrators interact with administrative use cases like managing analysis parameters (`SAFR001`) and client recommendations preferences (`CFR005`), while clients handle viewing dashboards, spending alerts, etc.
+- Financial advisors are linked to their specific needs such as intervention alerts (`FAFR002`) and predictive analyses. 
+- The system boundary encompasses all core functionalities (e.g., `SAFR001`, `SFR0XX series`). 
+
+This structure ensures clarity in how different actors engage with the system, adhering strictly to provided requirements without inventing additional elements or relationships. Adjustments can be made if further details emerge from context.
+
+[Done: True
+Done Reason: stop
+Eval Count: 658]

@@ -1,0 +1,77 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Access and Permissions" as SAFR002
+  
+  Client --> (CFR001)
+  
+  SysAdmin --> (SAFR002) : "Manage System Admin Actions"
+}
+
+rectangle "Client" {
+  actor "User" as U
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Preferences for Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Financial Advisors" as CFR009
+  
+  U --> (CFR003)
+  U --> (CFR004)
+  U --> (CFR005)
+  U --> (CFR006)
+  U --> (CFR007)
+  U --> (CFR008)
+  U --> (CFR009)
+}
+
+rectangle "Financial Advisor" {
+  actor "FAFR001: Financial Advisor" as FAFRA
+  usecase "FAFR002: Manage Client Mentoring Sessions" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Segment" as FAFR004
+  
+  FAFRA --> (FAFR002)
+  FAFRA --> (FAFR003)
+}
+
+rectangle "System Administrator" {
+  actor "SysAdmin" as SA
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SAFR006: Configure System-Wide Settings" as SAFR006
+  
+  SysAdmin --> (SAFR001)
+}
+
+rectangle "AI Component" {
+  actor "AIFR001: AI Prediction Model" as AIPM
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Identify Investment Opportunities" as AIFR004
+  usecase "AIFR005: Analyze Portfolio Against ESG Criteria" as AIFR005
+  usecase "AIFR006: Detect Anomalies in Transactions" as AIFR006
+  usecase "AIFR007: Correlate News with Portfolios" as AIFR007
+  
+  SysAdmin --> (SAFR003)
+  
+  AIPM <|-- (CFR001) : "Provides data for dashboard"
+}
+
+rectangle "System Functions" {
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR004: Request Predictive Analysis from AI" as SFR004
+  
+  SysAdmin --> (SAFR003)
+  
+  Client --> (CFR001) : "Interacts with system"
+}
+
+rectangle "User Feedback Loop" {
+  actor "U" <|-- (CFR011: Send Feedback) as UFB
+}
+@enduml

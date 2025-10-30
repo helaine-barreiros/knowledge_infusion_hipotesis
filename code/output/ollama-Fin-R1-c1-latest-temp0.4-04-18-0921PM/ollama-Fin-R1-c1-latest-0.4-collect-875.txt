@@ -1,0 +1,94 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor FinancialAdvisor as fa
+actor SysAdmin as sysadmin
+system "System" as system
+
+rectangle Professional {
+  usecase "CFR001: View Financial Insights Dashboard" as cfr001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as cfr002
+  usecase "CFR003: View Financial Predictions" as cfr003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as cfr004
+  usecase "CFR005: Manage Recommendation Preferences" as cfr005
+  usecase "CFR006: View Spending Limit Alerts" as cfr006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as cfr007
+  usecase "CFR008: Receive News Related to Portfolio" as cfr008
+  usecase "CFR009: Consolidated Financial Dashboard" as cfr009
+  usecase "CFR10: Manage Relationship with Advisors" as cfr10
+
+  client --> cfr001 : View Insights\nDashboard  
+  client --> cfr002 : Receive Alerts\nfor Anomalous Transactions  
+  client --> cfr003 : View Financial Predictions  
+  client --> cfr004 : Personalized Recommendations\nBased on Profile  
+  client --> cfr005 : Manage Recommendation Preferences  
+  client --> cfr006 : View Spending Limit Alerts  
+  client --> cfr007 : Access Investment Opportunities  
+  client --> cfr008 : Receive News Related to Portfolio  
+  client --> cfr009 : Consolidated Financial Dashboard  
+  client --> cfr10 : Manage Relationship with Advisors  
+
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as safr001
+  sysadmin --> safr001 : Configure\nAnalysis Parameters  
+}
+safr001 <|-- system : System uses analysis parameters
+
+rectangle FinancialAdvisor {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as f Afr001
+  usecase "FAFR002: View Client Intervention Alerts" as fAfr002  
+  usecase "FAFR003: View Predictive Analytics for Clients" as fAfr003
+  usecase "FAFR004: Configure Analysis Parameters by Segment" as fAfr004
+
+  fa --> f Afr001 : Manage Mentoring\nSessions  
+  fa --> fAfr002 : View Intervention\nAlerts  
+  fa --> fAfr003 : View Predictive\nAnalytics  
+  fa --> fAfr004 : Configure Parameters by Segment  
+
+}
+
+system <|-- cfr001: Delivers Insights
+system <|-- cfr002: Sends Alerts
+system <|-- cfr003: Provides Predictions
+system <|-- cfr004: Generates Recommendations  
+system <|-- cfr005: Manages Preferences  
+system <|-- cfr006: Issues Spending Limit\nAlerts  
+system <|-- cfr007: Identifies Investment Opportunities  
+system <|-- cfr008: Fetches News
+system <|-- cfr009: Generates Dashboards  
+system <|-- cfr10: Manages Relationships  
+
+system <|-- safr001 : Uses Analysis Parameters
+
+safr001 <|-- system : System uses parameters for analysis
+
+system <|-- fAfr001 : Delivers Mentoring\nSessions
+system <|-- fAfr002 : Sends Intervention\nAlerts  
+system <|-- fAfr003 : Provides Predictive\nAnalytics  
+
+fAfr004 <|-- system: Configures parameters for segments
+
+@enduml
+```
+
+### Explanation:
+1. **Actors** are defined as `Client`, `FinancialAdvisor` (FA), and `SysAdmin`. Each has their respective use cases.
+2. The main system is represented within a rectangle, with individual components like AI systems (`AIFR...`) embedded inside it for clarity but not explicitly drawn here since the focus is on client interactions.
+3. **Use Cases** are categorized under each actor:
+   - Clients (CFRs): View dashboards, receive alerts, make predictions, etc.
+   - SysAdmin: Manage analysis parameters.
+   - FA: Mentor clients, view alerts/predictions/configure segments.
+4. Relationships (`-->`) show how actors interact with use cases. For example, a `Client` uses multiple CFRs (e.g., viewing dashboards or receiving alerts).
+5. The system itself interacts with all client-related use cases and the SysAdmin’s SAFR001.
+
+This structure ensures that each functional requirement is mapped to its corresponding actor-use case relationship accurately. Adjustments can be made based on further details in the requirements if needed.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1100]

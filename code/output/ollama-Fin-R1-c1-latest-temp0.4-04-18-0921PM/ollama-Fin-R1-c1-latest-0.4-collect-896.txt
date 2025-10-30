@@ -1,0 +1,66 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Notification Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR001: Monitor Spending Limits" as SAFR001
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Advisors" as CFR009
+  usecase "SAFR013: Generate Client Alerts Based on Conditions" as SAFR013
+
+  usecase "AIFR002: Analyze Financial Data for Predictions" as AIFR002
+  usecase "AIFR004: Evaluate Investment Opportunities" as AIFR004
+  usecase "AIFR005: Identify Aligning Investments" as AIFR005
+  usecase "AIFR006: Detect Anomalies in Transactions" as AIFR006
+  usecase "AIFR007: Correlate News with Portfolios" as AIFR007
+
+  actor Client as client
+  actor FinancialAdvisor as advisor
+  actor SystemAdmin as admin
+}
+
+client --> CFR001 : View financial data in a dashboard.
+advisor --> CFR004, CFR007, SAFR002, AIFR005 : Receive and act on recommendations, view opportunities, manage preferences.
+
+admin --> SAFR001: Manage spending limits for clients.
+
+client --> CFR003 : View financial predictions based on data.
+client --> CFR004 : Get personalized recommendations aligned with profile goals.
+client --> CFR005 : Adjust personalization settings as per KYC info.
+client --> SAFR002, SAFR013: Configure and receive alerts.
+
+advisor --> AIFR007: Review news relevant to portfolio.
+advisor --> CFR009: Manage client relationships including data sharing permissions.
+
+CFR008 <|-- (AIFR007) : Client accesses news via AI-generated insights.
+
+client, advisor, admin all use SFR components for system interactions like feedback or alerts management. 
+
+@enduml
+```
+
+### Explanation:
+1. **Actors**: The diagram includes three main actors: `Client`, `FinancialAdvisor`, and `SystemAdmin`. Each has specific use cases tied to their roles.
+2. **Use Cases**:
+   - Client-related use cases (CFR001–9) focus on viewing dashboards, receiving alerts, making predictions, getting recommendations, managing preferences, etc.
+   - System Administrator uses SAFR001 and SAFR002 for system management tasks like spending limit monitoring and notification preference adjustments.
+   - Financial Advisor interacts with AIFR components (e.g., investment opportunities) but also some client-related use cases via the system interface.
+3. **System Boundaries**: The "System" rectangle groups all AI-generated functionalities, ensuring clarity in how different actors interact with the system versus each other.
+4. **Relationships**:
+   - Direct interactions between clients and their desired actions (e.g., viewing dashboards).
+   - Financial advisors using specific tools like investment opportunity analyses or news correlation via AIFR components.
+   - System administrators managing parameters through SAFR001.
+
+This structure ensures all functional requirements are represented accurately, with proper relationships and groupings. Adjustments may be needed based on further analysis of the system's architecture but adheres strictly to provided use cases and actors.
+
+[Done: True
+Done Reason: stop
+Eval Count: 871]

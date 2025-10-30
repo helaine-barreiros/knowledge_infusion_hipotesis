@@ -1,0 +1,66 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "SFR016: Request Predictive Insights for Client Guidance" as SFR016
+}
+
+actor "Client" as C
+actor "Financial Advisor (FA)" as FA
+actor "System Administrator (SA)" as SA
+
+C --> CFR001 : "View Financial Insights Dashboard"
+C --> FAFR002 : "Receive Alerts about Anomalous Transactions"
+C --> SFR003 : "Request Financial Predictions from AI Component"
+C --> SFR004 : "Request Personalized Recommendations from AI Component"
+C --> CFR005: Manage Recommendation Preferences
+C --> SAFR001: Not applicable (SA only)
+FA --> FAFR002 : "View Client Intervention Alerts"
+FA --> FAFR003 : "View Predictive Analytics for Clients"
+FA --> AIFR007 : Generate Contextualized News Insights
+
+SA --> SAFR001 : Manage Analysis Parameters
+SA --> SFR005: Request Spending Limit Alerts from AI Component (via System)
+SA --> SFR006: Request Investment Opportunity Analyses from AI Component
+SA --> SFR008: Request Anomaly Transaction Alerts from AI Component
+
+system boundary {
+  rectangle "Client" { C }
+  rectangle "Financial Advisor" { FA }
+  rectangle "System Administrator" { SA }
+
+  usecase "CFR001: View Financial Insights Dashboard"
+  usecase "SAFR001: Manage Analysis Parameters"
+  usecase "FAFR002: View Client Intervention Alerts"
+  usecase "SFR003: Request Financial Predictions from AI Component"
+  usecase "SFR004: Request Personalized Recommendations from AI Component"
+  usecase "AIFR007: Generate Contextualized News Insights"
+
+  C --> SAFR001 : Not applicable (SA only)
+}
+
+@enduml
+```
+
+### Explanation:
+- **Use Cases** are categorized under the system boundary and grouped by their primary actors.
+- **Client**, **Financial Advisor**, and **System Administrator** are represented as distinct actors with specific use case interactions.
+- Relationships between actors and use cases follow the requirements, ensuring precise mapping. For example, Clients interact with `CFR001`, while Financial Advisors engage in `FAFR002` and others via their role-specific needs.
+
+### Key Observations:
+- Inheritance relationships (e.g., a Client being an actor) are not explicitly required here since each use case is directly linked to its intended user.
+- The system boundary encapsulates all actors and use cases, ensuring clarity in the diagram’s scope. 
+
+This structure adheres strictly to the provided functional requirements while maintaining readability and alignment with PlantUML standards. Adjustments can be made if additional context or relationships are clarified later.
+
+[Done: True
+Done Reason: stop
+Eval Count: 736]

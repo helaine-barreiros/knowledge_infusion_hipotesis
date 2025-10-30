@@ -1,0 +1,75 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Anomaly Detection Parameters" as SAFR002
+  
+  Client --> CFR001 : "View financial data and insights"
+  
+  SysAdmin --> SAFR002 : "Manage system parameters for anomaly detection"
+
+  rectangle "Client Interface" {
+    actor Client as C
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "SAFR004: Adjust Personalized Recommendations Preferences" as SAFR004
+
+    C --> CFR001 : "Request dashboard"
+    C --> CFR002 : "Receive alerts about anomalous transactions"
+    C --> CFR003 : "View financial predictions"
+    C --> SAFR004 : "Manage preferences for recommendations"
+
+  }
+
+  rectangle "Financial Advisor Interface" {
+    actor FinancialAdvisor as FA
+    usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+    usecase "SAFR003: View Predictive Analytics About Clients" as SAFR003
+
+    FA --> FAFR001 : "Schedule and manage mentoring sessions"
+    FA --> SAFR003 : "Review predictive analytics for clients"
+
+  }
+
+  rectangle "System Administrator Interface" {
+    actor SysAdmin as SA
+    usecase "SAFR005: Configure System-Wide Parameters" as SAFR005
+
+    SA --> SAFR001 : "Manage analysis parameters"
+    SA --> SAFR002 : "Adjust anomaly detection settings"
+    SA --> SAFR004 : "Set up user preferences"
+
+  }
+
+  rectangle "System Core" {
+    usecase "SFR006: Deliver Personalized Recommendations to Users" as SFR006
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+
+    SysAdmin <|-- SAFR004 : "Configure user preferences"
+  }
+
+}
+
+@enduml
+```
+
+### Explanation:
+1. **System Boundary**: The entire system is enclosed within a rectangle labeled "System". This includes all use cases and actors relevant to the system.
+2. **Client Interface** (rectangle): Represents interactions with clients, including viewing financial dashboards, receiving alerts, etc.
+3. **Financial Advisor Interface** (rectangle): Includes managing client mentoring sessions and predictive analytics for advisors.
+4. **System Administrator Interface** (rectangle): Handles administrative tasks like configuring parameters across the system.
+5. **Use Cases**: Each functional requirement is mapped to a specific use case with its ID. For example, "CFR001: View Financial Insights Dashboard" corresponds directly to the client's need for dashboards.
+
+### Key Relationships:
+- **Client** (actor) interacts with multiple use cases within their interface.
+- **SysAdmin** and other administrators manage system parameters through specific use cases like `SAFR002` or `SAFR004`.
+- Inheritance relationships are shown using `<|--`, such as how SysAdmin configures user preferences via SAFR004.
+
+This structure ensures all requirements are represented accurately, with proper grouping by role and logical flow. Adjustments can be made based on further analysis of the system's architecture or additional requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 746]

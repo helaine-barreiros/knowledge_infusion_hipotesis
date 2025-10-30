@@ -1,0 +1,66 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR009: Request Contextualized News Insights from AI Component" as SFR009
+  usecase "AIFR007: Generate Contextualized News Insights Based on Portfolio" as AIFR007
+
+  Client --> CFR001 : "View Financial Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  FAFR003 <|-- (CFR002) : "Client Intervention Alerts", "Anomalous Transactions"
+  
+  SFR009 -> AIFR007 : "Request Contextualized News Insights"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+
+  FinancialAdvisor --> FAFR001 : "Manage Clients"
+  
+  SysAdmin -->> SAFR003 : "View Predictive Analytics", "Analyze Data"
+
+}
+
+rectangle "Client" {
+  usecase "CFR004: Receive Personalized Recommendations Based on Profile and Goals" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+
+  Client --> CFR004 : "Receive Recommendations"
+  
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SysAdmin --> SAFR001 : "Configure System"
+
+}
+@enduml
+```
+
+**Description of the Diagram Structure:**
+- **Client**: The primary user interacts with the system through various use cases like viewing financial dashboards, receiving alerts, and personalized recommendations.
+- **Financial Advisor (FA)**: Manages client mentoring sessions using insights from the AI component. They also view intervention alerts to proactively assist clients.
+- **System Administrator (SA)**: Configures analysis parameters for the AI system to ensure compliance with regulations like Basel III or GDPR.
+- **AI Component**: Generates financial predictions, personalized recommendations, spending limit alerts, investment opportunities, contextualized news insights, and predictive analyses.
+
+**Key Relationships:**
+1. The client uses `CFR001` (viewing a dashboard) directly via the system boundary.
+2. System administrators manage analysis parameters (`SAFR001`) within the system.
+3. Financial advisors use FAFR-related cases to interact with clients and receive alerts from the AI component.
+4. The system requests contextualized news insights from AIFR components, which are then provided by the AI.
+
+This structure ensures that all actors (Client, FA, SA) and their associated use cases are accurately represented according to the requirements. Relationships between these entities and the system boundary are clearly defined for clarity.
+
+[Done: True
+Done Reason: stop
+Eval Count: 707]

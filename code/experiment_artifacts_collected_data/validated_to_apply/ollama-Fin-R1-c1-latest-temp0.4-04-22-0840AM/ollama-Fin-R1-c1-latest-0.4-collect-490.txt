@@ -1,0 +1,105 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as fa
+actor SysAdmin as sa
+system "System" as sys
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Access Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Receive Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Financial Advisors" as CFR009
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+}
+
+rectangle "System Components" {
+  usecase "SFR001: Deliver Alerts Through Channels" as SFR001
+  usecase "SFR002: Generate Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts from AI" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from AI" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities from AI" as SFR007
+}
+
+rectangle "AI System Components" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+}
+
+client c1 --> CFR001 : "View Financial Insights Dashboard"
+c1 --> CFR002 : "Receive Alerts on Anomalous Transactions"
+c1 --> CFR003 : "View Financial Predictions"
+c1 --> CFR004 : "Access Personalized Recommendations"
+c1 --> CFR005 : "Manage Recommendation Preferences"
+c1 --> CFR006 : "Receive Spending Limit Alerts"
+c1 --> CFR007 : "View Investment Opportunities"
+c1 --> CFR008 : "Access News Related to Portfolio"
+c1 --> CFR009 : "Manage Relationship with Financial Advisors"
+
+sa --> SAFR001 : "Manage Analysis Parameters for AI System"
+
+fa --> FAFR001 : "Manage Client Mentoring Sessions Based on Insights"
+fa --> FAFR002 : "View Intervention Alerts from System"
+fa --> FAFR003 : "View Predictive Analytics for Clients"
+
+sysAdmin sa -> sys
+financialAdvisor fa -> sys
+
+system sys {
+  usecase SFR001, SFR002, SFR003, SFR004, SFR005, SFR006, SFR007
+  
+  system "AI" as ai {
+    usecase AIFR001, AIFR002, AIFR003
+  }
+}
+
+@enduml
+```
+
+### Explanation:
+- **Actors**: The diagram includes three main actors: `Client`, `FinancialAdvisor`, and `SysAdmin` (System Administrator).
+- **Use Cases**:
+  - **Client Interface**: All use cases related to clients, such as viewing dashboards, receiving alerts, etc.
+  - **System Administrator Interface**: Use case for managing analysis parameters (`SAFR001`).
+  - **Financial Advisor Interface**: Use cases like mentoring sessions and intervention alerts.
+- **System Components**:
+  - `SFR*`: System functionalities (e.g., delivering alerts, generating recommendations).
+  - `AIFR*`: AI-specific use cases for predictions, recommendations, etc.
+- **Relationships**:
+  - Clients interact with the system through various interfaces (`CFR*`).
+  - SysAdmin and Financial Advisors manage parts of the system via their respective use cases.
+
+This structure ensures clarity in how different actors engage with the system's components. The nested rectangles help group related functionalities logically, improving readability. Each relationship is clearly defined using arrows to show interactions between actors, systems, and AI components. 
+
+### Key Observations:
+1. **Client** has multiple interfaces (e.g., viewing dashboards vs. managing relationships).
+2. **SysAdmin** focuses on system-level management (`SAFR001`).
+3. **Financial Advisors** use predictive tools to support clients.
+4. The `System` and its components are grouped logically, with AI nested inside the main system for clarity.
+
+This diagram aligns all functional requirements precisely into PlantUML notation while maintaining readability and structure. Adjustments can be made based on further refinements in the requirement set or specific use case elaborations.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1257]

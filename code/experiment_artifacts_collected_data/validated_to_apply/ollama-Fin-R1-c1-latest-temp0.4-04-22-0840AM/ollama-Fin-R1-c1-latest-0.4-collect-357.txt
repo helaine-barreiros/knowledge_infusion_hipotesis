@@ -1,0 +1,166 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+}
+
+rectangle "System" {
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Receive Anomaly Alerts (FATF)" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences (KYC)" as CFR005
+  usecase "CFR006: Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities (MiFID II)" as CFR007
+  usecase "CFR008: Access Portfolio News" as CFR008
+  usecase "CFR009: Consolidated Financial Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors (KYC)" as CFR10
+
+  
+}
+
+rectangle "Financial Advisor" {
+  actor FAFR001: Financial Advisor as FA
+}
+usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+usecase "FAFR003: Predictive Analytics for Clients" as FAFR003
+usecase "FAFR004: Configure Analysis Parameters (Client Segments)" as FAFR004
+
+rectangle "System Administrator" {
+  actor SysAdmin as SA
+}
+usecase "SAFR001: Manage AI System Parameters" as SAFR001
+
+package "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions (Historical Data, Market Trends)" as AIFR001
+  usecase "AIFR002: Personalized Recommendations Based on Profiles" as AIFR002
+  usecase "AIFR003: Spending Limit Alerts via Pattern Recognition" as AIFR003
+  usecase "AIFR004: Investment Opportunity Analysis (Risk Profile)" as AIFR004
+  usecase "AIFR005: Align Investments with Strategies & Modern Portfolio Theory" as AIFR005
+  usecase "AIFR006: Fraud Detection via Anomaly Recognition" as AIFR006
+  usecase "AIFR007: Contextualized News Insights for Portfolios" as AIFR007
+  usecase "AIFR008: Predictive Intervention Recommendations (Client Engagement)" as AIFR008
+}
+
+usecase "SFR012: Generate Client Dashboards" as SFR012
+
+C --> CFR001 : View Dashboard  
+C --> SAFR002 : Receive Alerts  
+C --> CFR003 : Predictions  
+C --> CFR004 : Recommendations  
+C --> CFR005 : Manage Preferences (KYC)  
+C --> CFR006 : Spending Limits  
+C --> CFR007 : Investment Opportunities (MiFID II)  
+C --> CFR008 : Portfolio News  
+C --> CFR009 : Consolidated Dashboard  
+C --> CFR10 : Relationship Management  
+
+FA --> FAFR002 : View Alerts  
+FA --> FAFR003 : Predictive Analytics  
+FA --> FAFR004 : Configure Parameters  
+
+SA --> SAFR001 : Manage AI Params  
+
+AIFR001 <|-- AIFR006 : Generates Fraud Alerts (via pattern recognition)  
+AIFR002 <|-- AIFR005 : Aligns Recommendations with MPT  
+AIFR003 <|-- AIFR004 : Identifies Spending Limits via Analysis  
+
+SFR012 --> SFR009 : Generates News Insights for Portfolios  
+
+' Relationships between components and system
+SysAdmin -> SAFR001 : Manages System Parameters  
+Client -> Sys: as Sys  
+rectangle "System" { ... } -->> Client: as C  
+C <|-- CFR003 : Personalized Predictions (AIFR002)  
+C <|-- AIFR004 : Investment Opportunities  
+
+@enduml
+```
+
+**Key Observations and Relationships in the Diagram:**  
+1. **Client Actors**: All client-related use cases are grouped under "Client" package, including viewing dashboards, receiving alerts, personalized recommendations, etc.
+2. **Financial Advisor (FA)**: This role includes managing client mentoring sessions, viewing intervention alerts, predictive analytics, and configuring analysis parameters for specific segments.
+3. **System Administrator (SA)**: Manages AI system parameters to ensure compliance with regulations like Basel III or KYC standards.
+4. **AI Component**: The core logic is represented here, generating predictions, recommendations, fraud detection, etc., linked via inheritance where appropriate (e.g., AIFR006 inherits from pattern recognition).
+5. **System-Specific Use Cases** (SFR): These are system-level operations like generating dashboards or news insights.
+6. **Inheritance**: For example, `AIFR003` (Spending Limit Alerts) uses the same underlying technology as fraud detection (`AIFR006`), so they share a relationship via inheritance.
+
+This structure ensures clarity and adherence to functional requirements while maintaining logical groupings of actors and use cases. Each actor’s responsibilities are clearly mapped, ensuring no overlap or missing components from the provided list.  
+
+**Note**: The diagram uses PlantUML's packages for better organization but could be further refined by adding more detailed relationships (e.g., aggregation vs composition) if needed. However, based on the requirements, inheritance and simple directed relationships suffice here.
+```plantuml
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+}
+
+rectangle "System" {
+
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Receive Anomaly Alerts (FATF)" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences (KYC)" as CFR005
+  usecase "CFR006: Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities (MiFID II)" as CFR007
+  usecase "CFR008: Access Portfolio News" as CFR008
+  usecase "CFR009: Consolidated Financial Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors (KYC)" as CFR10
+
+}
+
+rectangle "Financial Advisor" {
+  actor FAFR001: Financial Advisor as FA
+}
+usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+usecase "FAFR003: Predictive Analytics for Clients" as FAFR003
+usecase "FAFR004: Configure Analysis Parameters (Client Segments)" as FAFR004
+
+rectangle "System Administrator" {
+  actor SysAdmin as SA
+}
+usecase "SAFR001: Manage AI System Parameters" as SAFR001
+
+package "AI Component" {
+
+  usecase "AIFR001: Generate Financial Predictions (Historical Data, Market Trends)" as AIFR001
+  usecase "AIFR002: Personalized Recommendations Based on Profiles" as AIFR002
+  usecase "AIFR003: Spending Limit Alerts via Pattern Recognition" as AIFR003
+  usecase "AIFR004: Investment Opportunity Analysis (Risk Profile)" as AIFR004
+  usecase "AIFR005: Align Investments with Strategies & Modern Portfolio Theory" as AIFR005
+  usecase "AIFR006: Fraud Detection via Anomaly Recognition" as AIFR006
+  usecase "AIFR007: Contextualized News Insights for Portfolios" as AIFR007
+  usecase "AIFR008: Predictive Intervention Recommendations (Client Engagement)" as AIFR008
+
+}
+
+usecase "SFR012: Generate Client Dashboards" as SFR012
+
+C --> CFR001 : View Dashboard  
+C --> SAFR002 : Receive Alerts  
+C --> CFR003 : Predictions  
+C --> CFR004 : Recommendations  
+C --> CFR005 : Manage Preferences (KYC)  
+C --> CFR006 : Spending Limits  
+C --> CFR007 : Investment Opportunities (MiFID II)  
+C --> CFR008 : Portfolio News  
+C --> CFR009 : Consolidated Dashboard  
+C --> CFR10 : Relationship Management  
+
+FA --> FAFR002 : View Alerts  
+FA --> FAFR003 : Predictive Analytics  
+FA --> FAFR
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

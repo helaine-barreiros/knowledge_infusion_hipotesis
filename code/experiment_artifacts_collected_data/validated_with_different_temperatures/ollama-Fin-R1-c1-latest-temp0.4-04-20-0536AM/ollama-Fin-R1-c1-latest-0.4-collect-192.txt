@@ -1,0 +1,101 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as fa
+actor SysAdmin as sa
+system SFR023: "System" as sys
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+}
+
+rectangle "Alert Management" {
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+}
+
+rectangle "Recommendation & Prediction" {
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "SAFR002: Manage Analysis Parameters for AI System" as SAFR002
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+}
+
+rectangle "Investment & Portfolio Management" {
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as CFR007
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+}
+
+rectangle "News & Information" {
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "SFR012: Generate Client Dashboards with Financial Info" as SFR012
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+}
+
+rectangle "User Management & Feedback" {
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+  usecase "SFR020: Manage User Feedback for Improvements" as SFR020
+  usecase "CFR011: Send System Recommendations/Insights Feedback" as CFR011
+}
+
+rectangle "System Administration & Compliance" {
+  usecase "SAFR001: Manage Analysis Parameters (Regulatory)" as SAFR001
+  usecase "SFR023: Ensure System Accuracy and Relevance" as SFR023
+}
+
+client c1 --> CFR001 : "View Financial Insights"
+c1 --> CFR009 : "Access Personalized Dashboard"
+
+fa -> CFR007 : "View Investment Opportunities"
+fa -> AIFR004 : "Request Investment Opportunity Analysis"
+
+sa -> SAFR002 : "Manage AI Parameters (Regulatory)"
+
+sys <|-- SFR006
+SFR006 --> AIFR001
+
+c1 --> CFR002 : "Receive Alerts on Anomalous Transactions"
+c1 --> CFR004: "Get Personalized Recommendations"
+
+fa -> SAFR003: "Request Financial Predictions from AI"
+sa -> SFR005: "Request Spending Limit Alerts (AI)"
+
+c1 --> AIFR008 : "Receive Client Intervention Recommendations"
+
+sys <|-- SFR023
+SFR023 --> AIFR009
+
+fa -> CFR010 : "Manage Relationship with Advisors"
+sa --> SFR020: "Collect User Feedback for System Improvements"
+
+@enduml
+```
+
+### Explanation:
+- **Client Interface**: Contains use cases related to viewing dashboards, financial insights, and personalized recommendations.
+- **Alert Management**: Includes receiving alerts on transactions, spending limits, and system-generated client alerts.
+- **Recommendation & Prediction**: Features generating predictions, managing analysis parameters (for compliance), and AI-driven recommendation systems.
+- **Investment & Portfolio Management**: Covers investment opportunities tailored to risk profiles, portfolio management tools like dashboards, and contextualized news insights.
+- **News & Information**: Includes viewing relevant financial news for portfolios and system-generated alerts based on user data.
+- **User Management & Feedback**: Handles client-advisor relationships, feedback mechanisms, and system improvements through user input.
+- **System Administration & Compliance**: Ensures regulatory compliance via analysis parameter management.
+
+### Key Relationships:
+1. **Client** interacts with the system to view dashboards, receive recommendations/alerts, etc., represented by direct arrows from `c1` (Client) to specific use cases.
+2. **Financial Advisor** uses various components like investment opportunity analyses and client alerts through interactions with AI systems (`AIFR004`, `SFR006`).
+3. **SysAdmin** manages system parameters via `SAFR002`.
+4. The **System** itself is represented by the composite use case `SFR023`, which includes components like financial prediction generation and alert management.
+
+### Note:
+- Use cases are grouped logically under their respective categories (e.g., client interface, alerts) to maintain clarity.
+- Arrows indicate direct interactions between actors/clients and system functionalities. Indirect relationships through the AI component (`AIFR`) are also modeled where applicable.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1136]

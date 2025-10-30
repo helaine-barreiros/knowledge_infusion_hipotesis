@@ -1,0 +1,79 @@
+```plantuml
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "SAFR008: Deliver AML Alert Requests to AI Component" as SAFR008
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "CFR006: View Spending Limit Alerts Exceeding Thresholds" as CFR006
+  usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+  usecase "SFR008: Request Investment Opportunity Analysis from AI Component" as SFR008
+  usecase "CFR010: Manage Relationship with Financial Advisors Including Data Sharing Permissions" as CFR010
+  usecase "FAFR002: View Client Intervention Alerts Based on System-Detected Patterns" as FAFR002
+  usecase "AIFR006: Generate Anomaly Transaction Alerts for Users in Compliance with FinCEN Requirements" as AIFR006
+  usecase "SFR014: Generate Financial Health Reports Using Standard Ratios and Metrics" as SFR014
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "AIFR002: Generate Personalized Recommendations for Users Based on Profiles, Goals, Risk Tolerance" as AIFR002
+  usecase "SFR015: Request Intervention Analysis from AI Component to Identify When Advisors Should Engage Clients" as SFR015
+}
+
+actor "Client" as Client {
+  --> CFR001 : "View Financial Insights Dashboard"
+  --> SAFR008 : "Receive AML Alerts via System"
+  --> SFR002 : "Get Personalized Recommendations from System"
+  --> CFR006 : "Check Spending Limit Exceedances"
+}
+
+actor "Financial Advisor" as FAdvisor {
+  --> FAFR001: "Manage Client Mentoring Sessions Based on Insights"
+  --> FAFR003: "View Predictive Analytics for Clients"
+  --> FAFR004: "Configure Analysis Parameters for Segments"
+  --> AIFR008: "Generate Intervention Recommendations from AI Component"
+}
+
+actor "System Administrator" as SysAdmin {
+  --> SAFR001 : "Manage System's Analysis Parameters"
+  --> FAFR004: "Set Up Client-Specific Parameter Configurations"
+}
+
+actor "User (Client, Financial Advisor)" as User {
+  --> CFR002 : "Get Alerts for Anomalous Transactions"
+  --> AIFR006: "Receive Transaction Alert via System"
+  --> SFR013: "View Predefined Condition-Triggered Alerts"
+}
+
+actor "AI Component" as AIComp {
+  <|-- SAFR008 : "Process AML Requests from System"
+  <|-- AIFR004 : "Generate Investment Opportunity Analyses for Users"
+  <|-- SFR013: "Produce Client-Specific Alerts Based on Rules"
+}
+
+actor "System" as Sys {
+  --> CFR002 : "Deliver Transaction Alert to User via Notifications"
+  --> SAFR008 : "Forward AML Requests to AI Component"
+  --> FAFR004: "Interact with System for Parameter Configurations"
+  --> SFR013: "Generate and Distribute Alerts Based on Rules"
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Client**: Interacts primarily through use cases like viewing dashboards, receiving recommendations, alerts (e.g., `CFR002`, `SAFR008`), etc.
+- **Financial Advisor**: Engages in mentoring sessions (`FAFR001`), views predictive analytics (`FAFR003`), and configures parameters (`FAFR004`).
+- **System Administrator**: Manages system-level tasks such as parameter management (`SAFR001`) and client-specific configurations (`FAFR004`).
+- **AI Component** handles critical alerts (e.g., AML, investment opportunities) by processing requests from the system.
+- **Relationships**: Use cases are linked to actors via arrows. For example, `Client` uses `CFR001` and `SAFR008`, while `System Administrator` manages parameters (`SAFR001`). Inheritance relationships (e.g., `<|--`) show dependencies between components.
+
+This diagram ensures all functional requirements are represented accurately with their respective IDs and actors. The structure is organized logically by actor type, ensuring clarity in the interactions within the system.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1116]

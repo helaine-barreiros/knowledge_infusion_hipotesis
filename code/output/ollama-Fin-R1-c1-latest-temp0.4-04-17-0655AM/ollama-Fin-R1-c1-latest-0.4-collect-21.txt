@@ -1,0 +1,86 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002  
+  usecase "SFR009: Generate Contextualized News Alerts" as SFR009 
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005  
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019 
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "CFR006: View Spending Limit Alerts" as CFR006  
+  usecase "SFR013: Generate Client Alerts Based on Conditions" as SFR013 
+  usecase "AIFR004: Generate Investment Opportunity Analysis" as AIFR004
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as CFR007  
+  usecase "SFR020: Manage User Feedback" as SFR020 
+  usecase "AIFR005: Generate Investment Opportunity Recommendations Based on Strategies" as AIFR005
+  usecase "CFR011: Send System Feedback" as CFR011  
+}
+
+actor Client as c
+actor FinancialAdvisor as faa
+actor SysAdmin as sa
+
+c --> CFR001 : View financial insights dashboard
+c --> SFR009 : Receive contextualized news alerts 
+c --> CFR003 : Request financial predictions
+c --> CFR004 : Request personalized recommendations  
+c --> SAFR002 : Manage alert preferences (for client)
+c --> AIFR002: Receive AI-generated recommendations
+c --> SFR019 : Maintain historical record of insights
+c --> CFR006 : View spending limit alerts 
+faa --> SFR003 : Request financial predictions for clients  
+faa --> AIFR004: Review investment opportunity analyses
+faa --> SAFR002: Manage client alert preferences (for advisor)
+sa --> SAFR001: Configure analysis parameters
+
+rectangle "System" {
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003  
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001 
+}
+
+SFR003 --> AIFR001 : Deliver financial predictions to system  
+SFR004 --> AIFR002 : Deliver recommendations to system  
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  usecase "AIFR003: Generate Spending Limit Alerts Based on Spent Patterns" as AIFR003  
+}
+
+SFR004 --> AIFR002 : Deliver recommendations to AI component  
+
+rectangle "Client-Specific Services" {
+  usecase "CFR011: Send System Feedback" as CFR011
+}
+c --> CFR011 : Provide feedback
+
+@enduml
+```
+
+### Explanation:
+- **Actors**: The diagram includes three main actors – `Client`, `FinancialAdvisor` (FAA), and `SysAdmin`. Each actor corresponds to a role in the system.
+  
+- **Use Cases**:
+  - **CFR001–CFR011**: These are client-related use cases, covering viewing dashboards, receiving alerts, personalized recommendations, etc. 
+  - **SAFR001**: System Administrator manages analysis parameters for compliance and accuracy.
+  - **AIFR001–AIFR009**: AI-generated services include financial predictions, recommendations, spending limit alerts, investment opportunities, contextualized news insights, predictive interventions, client health reports, etc.
+
+- **Relationships**:
+  - Clients interact with the system via use cases like viewing dashboards (`CFR001`), receiving personalized recommendations (`CFR004`), and managing preferences (`SAFR002`).
+  - Financial Advisors request financial predictions for clients (`SFR003`) and review investment analyses from AI (`AIFR004`).
+  - SysAdmin configures system parameters (`SAFR001`).
+
+- **System Boundaries**:
+  The "System" rectangle groups all use cases, ensuring clarity. Subcomponents like the "AI Component" are nested within to show its role in generating predictions and recommendations.
+
+This structure ensures that each requirement is represented accurately with proper relationships between actors and system components. Adjustments can be made based on further analysis or additional requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1113]

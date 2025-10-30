@@ -1,0 +1,60 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  C1 --> CFR001 : "View Financial Insights Dashboard"
+  SA --> SAFR001 : "Manage Analysis Parameters"
+  FA --> FAFR003 : "View Predictive Analytics for Clients"
+}
+
+rectangle "AI System" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+  SFR012 <|-- (CFR001) : "Delivers dashboards to client"
+  SAFR001 <|-- (SA) : "Configures parameters for system"
+}
+
+rectangle "Contextualized News Component" {
+  usecase "SFR009: Request Contextualized News Insights" as SFR009
+  AIFR007 --> SFR009 : "Provides relevant financial news to client"
+
+  SFR012 <|-- (CFR008) : "Delivers contextualized news"
+}
+
+rectangle "Client Feedback Management" {
+  usecase "CFR011: Send Feedback" as CFR011
+  AIFR009 --> CFR011 : "Collects and processes client feedback"
+
+  SFR002 <|-- (CFR011) : "Implements user preferences based on feedback"
+}
+
+@enduml
+```
+
+### Explanation:
+- **Actors** are represented as `actor` declarations. The main actors here are `Client`, `SysAdmin`, and `FinancialAdvisor`.
+- **Use Cases** correspond to the functional requirements, each labeled with their exact IDs (e.g., "CFR001", "SAFR001").
+- Relationships between actors and use cases are drawn using arrows (`-->`). For example, a client uses the financial insights dashboard.
+- The system is enclosed within a rectangle to denote its boundaries. Use cases related to the AI system (like generating predictions or recommendations) are grouped under this boundary.
+- Inheritance relationships `<|--` show how components like contextualized news and feedback management interact with other use cases.
+
+This diagram ensures all specified actors and their interactions with relevant use cases are accurately represented according to the provided requirements. Adjustments can be made based on further analysis, but this structure aligns closely with the given functional descriptions.
+
+[Done: True
+Done Reason: stop
+Eval Count: 684]

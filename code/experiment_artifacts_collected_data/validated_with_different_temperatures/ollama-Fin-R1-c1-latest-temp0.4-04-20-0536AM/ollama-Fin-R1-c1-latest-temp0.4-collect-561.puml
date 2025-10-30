@@ -1,0 +1,74 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Anomaly Alerts Thresholds" as SAFR002
+  usecase "CFR003: View Historical Data Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Adjust Recommendation Preferences" as CFR005
+  usecase "CFR006: Monitor Spending Limits Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities" as CFR007
+  usecase "CFR008: Stay Informed with News" as CFR008
+  usecase "CFR009: Consolidate Financial Info in Dashboard" as CFR010
+  usecase "SAFR003: Configure Analysis Parameters for Segments" as SAFR004
+
+  
+  rectangle "Client" {
+    actor Client as C
+    
+    Client --> CFR001 : View financial insights dashboard\n(CFR009)
+    Client --> CFR002 : Receive alerts about anomalous transactions (CFR006)\n(FATF compliance)
+    Client --> CFR003 : View historical data predictions for future expenses (CFR007)
+    Client --> CFR004 : Get personalized recommendations aligned with goals (CFR008)
+    Client --> CFR005 : Manage preferences for recommendations (CFR010)
+    Client --> CFR006 : Monitor spending limits alerts when thresholds exceeded\n(FXR002)
+    Client --> CFR007 : View investment opportunities suitable to risk profile (CFR009)
+    Client --> CFR008 : Access news related to portfolio (CFR011)
+  }
+
+  
+  rectangle "Financial Advisor" {
+    actor FinancialAdvisor as FA
+    FA --> FAFR002: View client intervention alerts\n(FXR003)
+    FA --> FAFR004: View predictive analytics for clients' financial situations\n(FXR005)
+    FA --> FAFR001: Manage mentoring sessions based on system insights (CFR012)
+  }
+
+  
+  rectangle "System Administrator" {
+    actor SysAdmin as SA
+    SA --> SAFR001: Manage analysis parameters for AI algorithms (SAFR006)\n(Basel III compliance)
+    SA --> SAFR004: Configure segment-specific analysis parameters\n(GDPR/CCPA alignment)
+  }
+
+  
+  rectangle "System" {
+    usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR003: Send Spending Limit Alerts" as AIFR003
+    usecase "SFR004: Request AI Personalized Recommendations" as SFR004
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+
+    
+    SysAdmin --> SAFR001 : Manage analysis parameters\n(SAFR006)
+    Client --> CFR009 : Consolidate info in dashboards (SFR007)
+  }
+
+  
+  rectangle "AI System" {
+    actor AI as A
+    usecase "AIFR005: Identify Investment Opportunities" as AIFR004
+    usecase "AIFR006: Detect Anomalies" as AIFR003
+    usecase "AIFR007: Generate News Insights" as AIFR008
+
+    
+    Client --> CFR002 : Receive alerts (AIFR006)
+  }
+
+  
+}
+
+@enduml

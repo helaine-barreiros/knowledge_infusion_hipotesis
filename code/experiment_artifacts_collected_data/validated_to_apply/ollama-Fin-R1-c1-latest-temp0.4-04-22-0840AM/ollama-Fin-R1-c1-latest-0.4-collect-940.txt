@@ -1,0 +1,70 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Settings" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR001: Monitor Spending Limits" as SAFR001
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Financial Advisors" as CFR009
+
+  SysAdmin --> SAFR002 : Configure system parameters for alerts and recommendations.
+  
+  Client --> (CFR001, CFR003, CFR004, CFR005, SAFR001, CFR007, CFR008, CFR009) 
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: Review Predictive Analytics for Clients" as FAFR003
+
+  SysAdmin --> (FAFR001, FAFR002, FAFR003)
+}
+
+rectangle "System" {
+  usecase "SFR006: Deliver Personalized Recommendations" as SFR006
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+  SysAdmin --> (SFR006, AIFR004)
+}
+
+rectangle "AI System" {
+  usecase "AIFR001: Predict Financial Outcomes" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Alert on Spending Limits" as AIFR003
+  usecase "AIFR005: Identify Investment Opportunities" as AIFR005
+  usecase "AIFR006: Detect Anomalies in Transactions" as AIFR006
+
+  SysAdmin --> (AIFR001, AIFR002, AIFR003, AIFR005, AIFR006)
+}
+
+rectangle "Client" {
+  usecase "CFR011: Send Feedback on Insights and Recommendations" as CFR011
+}
+
+@enduml
+
+**Key Observations:**
+- **Actors**: The system includes clients (for viewing dashboards, predictions, etc.), financial advisors for mentoring sessions and client interactions, a system administrator to manage parameters, and the AI system itself.
+- **Use Cases Grouping by Actor/Functionality**:
+  - **Client Use Cases**: Viewing financial data/predictions/recommendations/alerts; managing preferences/settings. These are grouped under "System" as they all relate directly to client interactions with the system.
+  - **Financial Advisor Use Cases**: Managing mentoring sessions, viewing alerts/interventions/analytics. These are isolated in their own rectangle due to specific role requirements.
+  - **AI System Use Cases**: Generating predictions/recommendations/alerts/opportunities. The AI is a separate component but interacts closely with the system for requests and processing.
+- **Inheritance/Extensions**:
+  - No explicit inheritance relationships between actors or use cases are implied in the provided requirements, so no `<|--` notation was used beyond grouping within rectangles.
+- **System Boundaries**: The "System" rectangle encapsulates all client-facing functionality. Financial Advisor interactions are separate but still part of the system's extended functionalities via `SysAdmin`.
+- **Relationships**:
+  - Client and System Administrator (via SysAdmin) have direct relationships with various use cases, reflecting their roles in initiating or managing those features.
+  - The AI system is a component within the larger system, handling critical calculations but not directly interacting as an actor. Its interactions are through `SysAdmin` for parameter management.
+
+This structure ensures clarity and aligns strictly with the provided functional requirements while adhering to PlantUML guidelines.
+
+[Done: True
+Done Reason: stop
+Eval Count: 998]

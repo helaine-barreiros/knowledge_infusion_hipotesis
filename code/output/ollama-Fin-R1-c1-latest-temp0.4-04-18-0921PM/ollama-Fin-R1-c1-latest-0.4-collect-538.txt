@@ -1,0 +1,93 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR006: Manage Spending Limit Alerts" as SAFR006
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  actor "Client" as client
+  actor "Financial Advisor (FA)" as fa
+  actor "System Administrator (SA)" as sa
+  
+  
+  client --> CFR001 : View Financial Insights Dashboard\n(client)
+  client --> SAFR006 : Manage Spending Limit Alerts\n(client)\n(sa)\n(fa) [label="Can be managed by all"]
+  client --> SFR012 : Generate Client Dashboards\n(client)
+
+  fa --> FAFR003: View Predictive Analytics about Clients' Financial Situations (fa)
+  
+  sa --> SAFR001: Manage Analysis Parameters \n(sa) [label="System Admin only"]
+
+}
+
+@enduml
+```plantuml
+
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR006: Manage Spending Limit Alerts" as SAFR006
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  client --> CFR001 : View Financial Insights Dashboard\n(client)
+  client --> SAFR006 : Manage Spending Limit Alerts\n(client)\n(sa)\n(fa) [label="Can be managed by all"]
+  client --> SFR012 : Generate Client Dashboards\n(client)
+
+}
+
+rectangle "Financial Advisor (FA)" {
+  usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as FAFR003
+  fa --> FAFR003 
+}
+  
+rectangle "System Administrator (SA)" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  sa --> SAFR001 [label="Admin only"]
+}
+
+@enduml
+
+```
+
+**Explanation:**  
+
+The provided PlantUML code represents the functional requirements in a structured UML diagram. Here's how it breaks down:
+
+### Key Components:
+- **System Boundary**: The entire system is enclosed within a rectangle labeled "System."
+- **Actors**:
+  - `Client` (CFR001, SAFR006, SFR012)
+  - `Financial Advisor (FA)` (`FAFR003`)
+  - `System Administrator (SA)` (`SAFR001`)
+  
+### Use Cases:
+- **Client**: 
+  - View Financial Insights Dashboard (CFR001): Directly accessed by the client.
+  - Manage Spending Limit Alerts (SAFR006): Accessible to all actors, but labeled as "Can be managed by all."
+  - Generate Client Dashboards (SFR012): Also directly accessible to clients.
+
+- **Financial Advisor**:
+  - View Predictive Analytics about Clients' Financial Situations (`FAFR003`).
+
+- **System Administrator**:
+  - Manage Analysis Parameters (`SAFR001`), restricted to SA only.
+
+### Relationships:
+- Each use case is linked to its respective actor with appropriate labels indicating access permissions. For example, `Client` can manage spending limit alerts (SAFR006) but the label clarifies that it's accessible across all actors.
+  
+This structure ensures clarity and compliance with the provided requirements while adhering strictly to PlantUML syntax rules. The use of nested rectangles helps group related entities logically for better readability.
+
+---
+
+**Note:** Ensure no redundant or missing relationships exist between actors and use cases, as per the functional descriptions. Adjustments may be needed based on additional context not explicitly stated here but inferred from typical system interactions (e.g., permissions). However, sticking strictly to the given requirements is critical.
+
+[Done: True
+Done Reason: stop
+Eval Count: 879]

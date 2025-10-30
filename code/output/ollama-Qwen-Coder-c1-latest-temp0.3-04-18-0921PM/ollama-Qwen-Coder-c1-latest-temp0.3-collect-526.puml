@@ -1,0 +1,105 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as SAFR004
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as SAFR005
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as SAFR006
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds in Specific Expense Categories" as SAFR012
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as SAFR013
+  usecase "CFR008: View News Related to My Investment Portfolio" as SAFR014
+  usecase "CFR009: Access a Personalized Dashboard Consolidating Financial Information in a Single View" as SAFR027
+  
+  CFR001 --> (SAFR003)
+  CFR001 --> (SAFR004)
+  CFR001 --> (SAFR005)
+  CFR001 --> (SAFR006)
+  CFR001 --> (SAFR012)
+  CFR001 --> (SAFR013)
+  CFR001 --> (SAFR014)
+  CFR001 --> (SAFR027)
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts When System Detects Patterns Requiring Professional Attention" as SAFR015
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations to Provide Data-Driven Recommendations During Consultations" as SAFR016
+  
+  FAFR001 --> (SAFR015)
+  FAFR001 --> (SAFR016)
+}
+
+package System {
+  actor "System Administrator" as SAFR007
+  usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as AIFR002
+  
+  SAFR007 --> (AIFR002)
+  
+  rectangle "AI System" {
+    usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+    usecase "AIFR003: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations from Established Spending Patterns" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users by Evaluating Potential Investments Against Their Risk Profiles, Time Horizons, and Financial Goals" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities for Users by Identifying Financial Instruments That Align with Their Investment Strategies and Modern Portfolio Theory Principles" as AIFR018
+    usecase "AIFR006: Generate Anomaly Transaction Alerts by Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance With FinCEN Requirements" as AIFR024
+    usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as AIFR031
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations by Identifying Patterns That Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR042
+    usecase "AIFR009: Generate Client Predictive Insights that Provide Forward-Looking Analysis of Financial Situations to Support More Effective Financial Planning" as AIFR051
+    
+    SAFR007 --> (AIFR001)
+    SAFR007 --> (AIFR003)
+    SAFR007 --> (AIFR004)
+    SAFR007 --> (AIFR018)
+    SAFR007 --> (AIFR024)
+    SAFR007 --> (AIFR031)
+    SAFR007 --> (AIFR042)
+    SAFR007 --> (AIFR051)
+  }
+}
+
+package System {
+  usecase "SFR008: Find Contextualized News Relevant to Users' Financial Portfolios from Trusted Financial News Sources" as AIFR039
+  usecase "SFR009: Process Contextualized News to Extract Relevant Information for Users' Financial Situations" as AIFR047
+  
+  SAFR007 --> (AIFR039)
+  SAFR007 --> (AIFR047)
+}
+
+package System {
+  usecase "SFR10: Request Contextualized News Insights from the AI Component to Identify Potential Impacts on Users' Investments" as AIFR058
+  
+  SAFR007 --> (AIFR058)
+}
+
+package System {
+  usecase "SFR12: Generate Client Dashboards That Present Financial Information in an Intuitive and Actionable Format" as AIFR063
+  usecase "SFR14: Generate Client Analytics that Provide Meaningful Insights into Financial Behavior and Performance" as AIFR075
+  
+  SAFR007 --> (AIFR063)
+  SAFR007 --> (AIFR075)
+}
+
+package System {
+  usecase "SFR18: Manage Users' Financial Goals to Track Progress and Provide Relevant Recommendations" as AIFR092
+  usecase "SFR20: Maintain a Historical Record of Users' Insights to Enable Trend Analysis and Effectiveness Measurement" as AIFR104
+  
+  SAFR007 --> (AIFR092)
+  SAFR007 --> (AIFR104)
+}
+
+package System {
+  usecase "SFR23: Generate Financial Health Reports That Assess Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as AIFR156
+  
+  SAFR007 --> (AIFR156)
+}
+
+rectangle "User Feedback Management" {
+  usecase "CFR11: Send Feedback About the System's Recommendations and Insights" as CFR11
+  SAFR007 --> (CFR11)
+}
+@enduml

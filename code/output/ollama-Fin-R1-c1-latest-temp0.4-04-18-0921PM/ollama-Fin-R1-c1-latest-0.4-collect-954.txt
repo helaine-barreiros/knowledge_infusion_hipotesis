@@ -1,0 +1,86 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  CFR001 --> User : "Client"
+  
+  SAFR001 <|-- (SysAdmin)
+  SysAdmin -> SAFR001
+  
+  FAFR003 <|-- (FAFR004)
+  FAFR004 -> FAFR003
+
+  SFR012 --> User : "Client"
+  
+  rectangle "User" {
+    actor Client as c
+    usercase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+    usecase "CFR006: View Spending Limit Alerts" as CFR006
+    usecase "CFR011: Send Feedback on Recommendations/Insights" as CFR011
+    
+    c --> CFR002 : "Client"
+    c --> CFR003 : ""
+    c --> CFR004 : ""
+    c --> CFR005 : ""
+    c --> CFR006 : ""
+    c --> CFR007 : ""
+    c --> CFR008 : ""
+    c --> CFR009 : "Consolidated View"
+    c --> SAFR001 : ""
+    
+  }
+  
+  rectangle "Financial Advisor" {
+    actor FAFRA as f
+    usecase "FAFR002: Manage Client Intervention Alerts" as FAFR002
+    usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+    usecase "SFR015: Request Predictive Interventions from AI" as SFR015
+    
+    f --> FAFR002 : ""
+    f --> FAFR003 : ""
+  }
+  
+  rectangle "System Administrator" {
+    actor SysAdmin as s
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+    s --> SAFR001 : ""
+  }
+
+}
+
+@enduml
+```
+
+**Key Observations and Explanations:**
+- **Actors:** The system includes three main actors: `Client`, `Financial Advisor (FAFRA)`, and `System Administrator`. Each actor corresponds to the functional requirements provided.
+  
+- **Use Cases Grouping by Actor/Functionality:**
+  - **Clients** (`CFR001`–`CFR011`) are grouped under "User" in the system. These use cases relate directly to client interactions, such as viewing dashboards, receiving alerts, and providing feedback.
+  
+  - **Financial Advisors (FAFRA)** handle advisory-related tasks like managing intervention alerts (`FAFR002`), viewing predictive analytics for clients (`FAFR003`), and requesting specific analyses from the AI system (`SFR015`).
+  
+  - **System Administrators** manage analysis parameters (`SAFR001`) to ensure regulatory compliance.
+
+- **Inheritance/Extensions:** 
+  - The `Financial Advisor` role extends use cases related to predictive analytics. For example, `FAFR003: View Predictive Analytics for Clients` is extended by the advisor’s need to see such insights during consultations.
+  
+- **Relationships Between Actors and Use Cases:**
+  - Each actor points directly to their respective use cases (e.g., Client → CFR001).
+  - System Administrator interacts with `SAFR001`, while Financial Advisors interact with FAFR-related use cases.
+
+This structure ensures clarity in associating actors with specific functionalities, adhering strictly to the provided requirements. The system boundary encapsulates all relevant use cases and their relationships within a logical framework. 
+
+**Note:** Ensure that PlantUML syntax is correctly formatted for readability and validation. Adjustments may be needed based on further analysis or requirement changes.
+
+[Done: True
+Done Reason: stop
+Eval Count: 915]

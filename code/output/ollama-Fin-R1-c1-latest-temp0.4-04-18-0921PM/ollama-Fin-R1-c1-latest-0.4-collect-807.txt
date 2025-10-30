@@ -1,0 +1,135 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+system "System" as S
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as VFD
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as RAT
+  usecase "CFR003: View Historical Predictions" as VHP
+  usecase "CFR004: Personalized Recommendations Based on Profile" as PRP
+  usecase "CFR005: Manage Recommendation Preferences" as MRP
+  usecase "CFR006: Spending Limit Alerts for Budget Control" as SLA
+  usecase "CFR007: View Investment Opportunities Matching Risk Profile" as VIO
+  usecase "CFR008: Access Portfolio-Related News" as APN
+  usecase "CFR009: Consolidated Financial Dashboard" as CFD
+  usecase "CFR10: Manage Relationship with Advisors" as MRA
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters" as MAP
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as MCSI
+  usecase "FAFR002: View Client Intervention Alerts" as VCA
+  usecase "FAFR003: View Predictive Analytics for Clients" as VPA
+  usecase "FAFR004: Configure Analysis Parameters by Segment" as CAPS
+
+}
+
+rectangle "System Core Components" {
+  usecase "SFR001: Deliver Alerts Through Notification Channels" as DACN
+  usecase "SFR002: Generate Personalized Recommendations Based on Profiles" as GPRP
+  usecase "SFR003: Request Financial Predictions from AI Component" as RFP
+  usecase "SFR004: Request Personalized Recommendations From AI" as RPPR
+  usecase "SFR005: Request Spending Limit Alerts Based on Patterns" as RSLLA
+  usecase "SFR006: Request Investment Opportunity Analysis from AI" as RIOPA
+  usecase "SFR007: Find Specific Investment Opportunities Matching Criteria and ESG Preferences" as FIOCEP
+  usecase "SFR008: Request Anomaly Transaction Alerts Based on AML Compliance" as RATA
+  usecase "SFR009: Extract Contextualized News Relevant to Portfolios" as ECNRPF
+  usecase "SFR010: Process Contextualized News for User Insights" as PCNUI
+  usecase "SFR011: Request AI-Generated Client Alerts Based on Predefined Conditions" as RACBPCC
+  usecase "SFR012: Generate Client Dashboards with Financial Information" as GCDFI
+  usecase "SFR013: Manage User Feedback for System Improvement" as MUSI
+
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions Based on Data and Trends" as GPFDT
+  usecase "AIFR002: Personalized Recommendations Aligning with Profiles and Goals" as PPRPGG
+  usecase "AIFR003: Spending Limit Alerts for Unusual Activity Detection" as SLLAUD
+  usecase "AIFR004: Investment Opportunity Analysis Based on Risk Profile" as IOABRRP
+  usecase "AIFR005: Generate Investment Opportunities Matching Strategies and Portfolio Theory" as GIOMPST
+  usecase "AIFR006: Anomaly Transaction Alerts for Fraud Detection in Compliance with FinCEN" as ATAFDCWFC
+  usecase "AIFR007: Contextualized News Insights Correlated to Portfolios" as CNICPF
+  usecase "AIFR008: Client Predictive Intervention Recommendations Based on Patterns" as CPIRBOPP
+  usecase "AIFR009: Generate Forward-Looking Analysis for Financial Planning" as GFLAFP
+
+}
+
+C1 --> VFD : "View comprehensive financial data"
+C1 --> RAT : "Receive alerts about anomalous transactions"
+C1 --> VHP : "Review historical predictions"
+C1 --> PRP : "Get personalized recommendations based on profile"
+C1 --> MRP : "Adjust recommendation preferences"
+C1 --> SLA : "Monitor spending limits for budget control"
+C1 --> VIO : "Explore investment opportunities aligned with risk profile"
+C1 --> APN : "Stay updated with portfolio-related news"
+C1 --> CFD : "Access consolidated financial dashboard"
+C1 --> MRA : "Interact with advisors and share data"
+
+SA --> MAP : "Manage analysis parameters for system accuracy and compliance"
+
+FA --> MCSI : "Plan mentoring sessions using insights"
+FA --> VCA : "Monitor client alerts requiring attention"
+FA --> VPA : "Analyze predictive trends in clients' financials"
+FA --> CAPS : "Fine-tune AI behavior by segment"
+
+DACN <|-- S
+GPRP <|-- S
+RFP <|-- AIFD
+RPPR <|-- AIFD
+RSLLA <|-- AIFD
+RIOPA <|-- AIFD
+FIOCEP <|-- AIFD
+RATA <|-- AIFD
+ECNRPF <|-- AIFD
+PCNUI <|-- AIFD
+GCDFI <|-- S
+
+GPFDT <|-- AIFD
+PPRPGG <|-- AIFD
+SLLAUD <|-- AIFD
+IOABRRP <|-- AIFD
+GIOMPST <|-- AIFD
+ATALFDCWFC <|-- AIFD
+CNICPF <|-- AIFD
+CPIRBOPP <|-- AIFD
+GFLAFP <|-- AIFD
+
+AIFD : "AI Functionality"
+
+@enduml
+```
+
+### Explanation:
+1. **Actors**: The diagram includes three main actors: `Client`, `SysAdmin` (System Administrator), and `FinancialAdvisor`. Each corresponds to the user types defined in the requirements.
+2. **Use Cases**:
+   - Client-related use cases (`CFR00x`) are grouped under "Client Interface" for actions like viewing dashboards, receiving alerts, etc.
+   - SysAdmin is linked exclusively to managing analysis parameters (`SAFR001`).
+   - FinancialAdvisor interacts with mentoring sessions and client-specific analyses (`FAFR00x`).
+3. **System Core Components**:
+   - These are grouped under "System" and include use cases like delivering alerts, generating recommendations, requesting predictions from the AI component.
+4. **AI Component**:
+   - This group contains all AI-related functionalities such as financial prediction generation, personalized recommendations, anomaly detection, etc.
+5. **Relationships**: Arrows connect actors to their respective use cases. For example, Clients can view dashboards (`VFD`), receive alerts (`RAT`), and manage preferences (`MRP`). The System Admin manages analysis parameters (`MAP`), while Financial Advisors handle mentoring sessions (`MCSI`) and client-specific analyses.
+6. **Inheritance**: Not explicitly used here but could be applied if a use case extends another (e.g., `CFR004` extending from another use case). However, in this scenario, each use case is standalone.
+
+This structure ensures clarity by segregating user interactions into distinct interfaces and linking them logically to the system components. The AI component’s role is central, processing requests from clients and advisors through its various sub-use cases. 
+
+### Note:
+- All use case IDs are strictly adhered to as per the requirements.
+- Relationships between actors and use cases are clearly defined with proper labels where necessary (e.g., "View comprehensive financial data" for `VFD`).
+- The system boundary is represented by a rectangle encompassing all core components, ensuring encapsulation of internal logic.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1744]

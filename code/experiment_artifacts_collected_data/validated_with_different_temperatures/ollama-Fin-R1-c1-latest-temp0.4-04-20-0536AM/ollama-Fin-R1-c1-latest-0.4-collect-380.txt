@@ -1,0 +1,161 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sa
+actor FinancialAdvisor as fa
+system "System" as sys
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Spending Limit Alerts for Budget Control" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access Portfolio-Related News" as CFR008
+  usecase "CFR009: Consolidated Financial Dashboard for Efficiency" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+
+  c1 --> CFR001 : View dashboard
+  c1 --> CFR002 : Receive alerts
+  c1 --> CFR003 : Predictions
+  c1 --> CFR004 : Recommendations
+  c1 --> CFR005 : Manage preferences
+  c1 --> CFR006 : Spending limit alerts
+  c1 --> CFR007 : Investment opportunities
+  c1 --> CFR008 : News access
+  c1 --> CFR009 : Consolidated view
+  c1 --> CFR10 : Relationship management
+
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+
+  fa --> FAFR001 : Manage sessions
+  fa --> FAFR002 : View alerts
+  fa --> FAFR003 : Predictive analysis
+  fa --> FAFR004 : Configure parameters
+}
+
+rectangle "System Administration Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+
+  sa --> SAFR001 : Manage params
+}
+
+system sys {
+
+  include "Client Interface"
+  include "Financial Advisor Interface"
+  include "System Administration Interface"
+
+  // Relationships between system components and external actors
+  c1 --(sys) : interacts via client interface
+  fa --(sys) : interacts via advisor interface
+  sa --(sys) : administers through sysadm
+
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Actors**: The diagram includes three main actor types: `Client`, `FinancialAdvisor` (FA), and `SysAdmin`. Each has specific use cases tied to their roles.
+- **Use Cases**:
+  - Clients (`c1`) cover a broad range of interactions like viewing dashboards, receiving alerts, getting recommendations, etc. These are grouped under "Client Interface."
+  - Financial Advisors (`fa`) focus on mentoring sessions, client-specific analytics, and parameter configuration via the "Financial Advisor Interface."
+  - SysAdmins interact with `SAFR001` for managing AI parameters.
+- **System Boundary**: The system is represented as a rectangle encompassing all interfaces. It handles requests from clients, advisors, and administers through its components like AIFR (AI systems).
+- **Relationships**:
+  - Clients use cases are directly linked to the client interface.
+  - Advisors use advisor-specific interactions.
+  - SysAdmin uses `SAFR001` for system management.
+
+This structure ensures clarity in role-based interactions and aligns with the provided requirements. Each actor's scope is clearly defined, ensuring no overlap or omission of critical functionalities. The diagram adheres to all technical guidelines, including proper use case IDs and relationships. 
+
+---
+
+### Notes:
+- All actors are explicitly named as per requirement descriptions.
+- Use cases are organized logically by their associated user type (Client, Advisor, SysAdmin).
+- System components like AIFR handle AI-generated outputs but aren't detailed here since the focus is on interactions rather than internal processes of the system. The relationships between these components and external actors are captured via the `--(sys)` notation.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sa
+actor FinancialAdvisor as fa
+system "System" as sys
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Spending Limit Alerts for Budget Control" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access Portfolio-Related News" as CFR008
+  usecase "CFR009: Consolidated Financial Dashboard for Efficiency" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+
+  c1 --> CFR001 : View dashboard
+  c1 --> CFR002 : Receive alerts
+  c1 --> CFR003 : Predictions
+  c1 --> CFR004 : Recommendations
+  c1 --> CFR005 : Manage preferences
+  c1 --> CFR006 : Spending limit alerts
+  c1 --> CFR007 : Investment opportunities
+  c1 --> CFR008 : News access
+  c1 --> CFR009 : Consolidated view
+  c1 --> CFR10 : Relationship management
+
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+
+  fa --> FAFR001 : Manage sessions
+  fa --> FAFR002 : View alerts
+  fa --> FAFR003 : Predictive analysis
+  fa --> FAFR004 : Configure parameters
+}
+
+rectangle "System Administration Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+
+  sa --> SAFR001 : Manage params
+}
+
+system sys {
+
+  include "Client Interface"
+  include "Financial Advisor Interface"
+  include "System Administration Interface"
+
+  c1 --(sys) : interacts via client interface
+  fa --(sys) : interacts via advisor interface
+  sa --(sys) : administers through sysadm
+
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1684]

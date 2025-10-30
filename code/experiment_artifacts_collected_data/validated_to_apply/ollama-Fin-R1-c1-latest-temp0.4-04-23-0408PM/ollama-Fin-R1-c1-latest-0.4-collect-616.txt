@@ -1,0 +1,72 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as SFR008
+  usecase "AIFR006: Generate Investment Opportunities Based on Risk Profiles" as AIFR006
+  
+  Client --> CFR001 : View Financial Insights Dashboard
+  SysAdmin --> SAFR001 : Manage Analysis Parameters
+  FAFR004 <|-- (System) : Configure Analysis Params for Segments
+  SFR008 <|-- System : Request Anomaly Alerts from AI
+  AIFR006 <|-- System : Generate Investment Opportunities
+  
+  Client --> SAFR001 : Manage Analysis Parameters (via SysAdmin)
+}
+
+rectangle "Client" {
+  actor "User: Client, Financial Advisor, or System Administrator"
+  
+  User -> CFR001 : View Financial Insights Dashboard
+  User -> SFR008 : Request Anomaly Transaction Alerts from AI Component
+  FAFR004 <|-- User : Configure Analysis Params for Segments (via SysAdmin)
+}
+
+rectangle "Financial Advisor" {
+  actor "FAFR002: View Client Intervention Alerts"
+  actor "FAFR003: View Predictive Analytics about Clients' Financial Situations"
+  
+  FAFR002 -> System : View Client Intervention Alerts
+  FAFR003 -> System : View Predictive Analytics
+  
+}
+
+rectangle "System Administrator" {
+  actor SysAdmin as SAAS
+
+  SAAS --> SAFR001 : Manage Analysis Parameters for the AI system
+}
+@enduml
+```
+
+This PlantUML code represents a use case diagram based on the provided functional requirements. The key components are:
+
+- **Client**: Represents all user types (Client, Financial Advisor, System Administrator) interacting with the system.
+- **System**: Contains core functionalities like financial insights dashboards and AI-generated recommendations/analyses.
+- **Use Cases**:
+  - CFR001: View a comprehensive financial dashboard.
+  - SAFR001: Manage analysis parameters for the AI component (e.g., risk management, compliance).
+  - FAFR004: Configure analysis parameters specific to client segments (via System Administrator).
+  - SFR008: Request anomaly transaction alerts from the AI system.
+  - AIFR006: Generate investment opportunities based on user’s risk profile.
+
+**Relationships**:
+- Clients can view dashboards and request alerts through direct interactions with the system or via Financial Advisors (e.g., FAFR004).
+- System Administrators manage analysis parameters directly within the system.
+- Financial Advisors receive specific reports/alerts but do not configure parameters themselves, as that is handled by SAAS.
+
+The diagram adheres to the guidelines by using exact IDs and names from requirements, ensuring logical grouping (e.g., under "System"), and defining clear actor-to-use case relationships. The structure maintains readability with proper indentation and directionality. 
+
+**Note**: Some use cases like FAFR004 are linked through System Administrator actions since they involve sensitive parameter management. Other interactions flow directly between Clients/Advisors and the system components (e.g., AIFR006 for generating investment opportunities). The "User" actor encompasses all roles, allowing flexibility in role-switching during usage scenarios. 
+
+This setup ensures a comprehensive yet organized representation of the functional requirements provided. Adjustments can be made based on further clarification or additional details from the requirements list if needed.
+
+[Done: True
+Done Reason: stop
+Eval Count: 824]

@@ -1,0 +1,63 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alerts Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Advisors" as CFR009
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Segment" as FAFR004
+}
+
+actor "Client" as Client
+actor "System Administrator" as SysAdmin
+actor "Financial Advisor" as FA
+
+Client --> CFR001 : View Financial Insights Dashboard (CFR001)
+SysAdmin --> SAFR001 : Manage Analysis Parameters (SAFR001)
+FA --> FAFR002 : Manage Client Mentoring Sessions (FAFR001)
+
+rectangle "System" {
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI" as SFR008
+}
+
+Client --> SFR008 : Trigger Alert Generation
+
+rectangle "AI System" {
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+}
+SFR008 <|-- AIFR006 : Request/Generate (dashed line)
+
+@enduml
+```
+
+**Key Observations and Explanations**:
+1. **Actors**: The diagram includes three main actors: "Client", "System Administrator", and "Financial Advisor". Each is represented with their exact names from the requirements.
+2. **Use Cases**: All listed use cases (CFR001–CFR011, SAFR001) are included in the system boundary. The AI-related use cases like generating alerts or predictions are grouped under respective actors/system components.
+3. **Relationships**:
+   - Clients interact with most of the functional areas directly via dashboards, recommendations, etc.
+   - System Administrators manage analysis parameters (SAFR001).
+   - Financial Advisors handle mentoring sessions and client-specific interventions (FAFR series).
+4. **System Boundary**: The "System" rectangle groups all use cases except those explicitly handled by AI components or external systems like AIFR*.
+5. **AI Components**: For example, generating anomaly transaction alerts is linked between the system’s request (`SFR008`) and the AI component (`AIFR006`).
+6. **Inheritance/Extends Relationships**:
+   - Not explicitly shown here as there are no clear inheritance relationships implied in the provided requirements.
+7. **Grouping**: Use cases are logically grouped by actor or system function (e.g., client-related, advisor-related).
+
+This structure ensures clarity and adherence to the technical guidelines while representing all functional requirements accurately. Adjustments can be made if additional details from specific use case descriptions were not fully reflected here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 842]

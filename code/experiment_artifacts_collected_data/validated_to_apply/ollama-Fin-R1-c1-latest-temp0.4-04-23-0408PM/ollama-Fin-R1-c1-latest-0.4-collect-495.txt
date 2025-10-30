@@ -1,0 +1,132 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: Access Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: Discover Investment Opportunities Based on Risk Profile (MiFID II)" as CFR007
+  usecase "CFR008: Receive News Related to My Portfolio" as CFR008
+  usecase "CFR009: Consolidated Personalized Dashboard for Financial Monitoring" as CFR009
+  usecase "CFR010: Manage Relationship with Financial Advisors Including Data Sharing Permissions" as CFR010
+
+  package Professional {
+    actor Client as C
+    actor SystemAdministrator as SA
+    actor FinancialAdvisor as FA
+  }
+
+  client -> (C) : View Alerts, Predictions, Dashboards\nReceive Recommendations, News\nManage Preferences and Thresholds
+  client --> (FA): Manage Relationship with Advisors, Share Data for Insights
+
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  SA --> SAFR001 : Configure System Algorithms to Ensure Accuracy and Compliance
+
+  package AI {
+    actor AIFR001 as PredictionAI
+    actor AIFR002 as RecommendationAI
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Identify Investment Opportunities Based on Risk Profile" as AIFR004
+    usecase "AIFR005: Analyze Spots for Anomaly Transactions (AML)" as AIFR006
+  }
+
+  PredictionAI <|-- SAFR001 : Use Parameters\nRequest Predictions from AI
+
+  client --> PredictionAI : Request Financial Predictions, Personalized Recommendations\nView Spending Limit Alerts, Investment Opportunities, News\nManage Feedback to Improve Accuracy
+
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR003: Request AI Predictive Interventions for Advisors" as SFR015
+
+  client --> RecommendationAI : Generate Client-Specific Insights\nManage Preferences and Feedback
+
+}
+
+@enduml
+```
+
+**Explanation of the Diagram Structure:**
+- **System Boundary:** The entire system is enclosed within a rectangle labeled "System."
+- **Actors Grouped by Roles:** 
+  - `Client` (CFR001–CFR010): Represents end-users including clients, financial advisors, and system administrators.
+  - `FinancialAdvisor`: Manages client relationships and receives insights from the AI system.
+  - `SystemAdministrator`: Configures analysis parameters for compliance and accuracy.
+- **Use Cases:** 
+  - Client-related use cases (CFR series) focus on viewing dashboards, receiving alerts, making predictions, etc. These are linked to the appropriate actors within their roles.
+  - System Administrator (`SAFR001`) manages AI parameter settings.
+  - Financial Advisor interacts with `SFR002` for recommendations and `AIFR008`/`AIFR009` for predictive insights.
+- **AI Components:** 
+  - `PredictionAI`, `RecommendationAI`: Core components generating financial predictions, personalized recommendations, spending alerts, etc. They are linked to client interactions through use cases like `CFR003–CFR010`.
+  - Subsystem (`AIFR`): Contains specific AI functionalities (e.g., AML detection) that can be extended or modified via parameters managed by the System Administrator.
+- **Inheritance and Relationships:** 
+  - The system ensures compliance with regulations like FATF, MiFID II, GDPR through parameter management in `SAFR001`.
+  - Clients receive alerts from both AI components (`AIFR`) and the main system (`SFR`).
+  
+This structure adheres to all provided requirements while maintaining clarity and logical grouping. Each use case is precisely tied to its corresponding actor or subsystem role. 
+
+**Key Observations:**
+- The diagram emphasizes separation of concerns between client interactions, administrative controls (via System Administrator), and AI processing.
+- Inheritance relationships are implied through the hierarchy of actors (e.g., FinancialAdvisor extending Client capabilities).
+- All use cases align with their respective functional requirements IDs for precision.
+
+\boxed{UseCaseDiagram}
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: Access Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: Discover Investment Opportunities Based on Risk Profile (MiFID II)" as CFR007
+  usecase "CFR008: Receive News Related to My Portfolio" as CFR008
+  usecase "CFR009: Consolidated Personalized Dashboard for Financial Monitoring" as CFR009
+  usecase "CFR010: Manage Relationship with Financial Advisors Including Data Sharing Permissions" as CFR010
+
+  package Professional {
+    actor Client as C
+    actor SystemAdministrator as SA
+    actor FinancialAdvisor as FA
+  }
+
+  client -> (C) : View Alerts, Predictions, Dashboards\nReceive Recommendations, News\nManage Preferences and Thresholds
+  client --> (FA): Manage Relationship with Advisors, Share Data for Insights
+
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  SA --> SAFR001 : Configure System Algorithms to Ensure Accuracy and Compliance
+
+  package AI {
+    actor AIFR001 as PredictionAI
+    actor AIFR002 as RecommendationAI
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Identify Investment Opportunities Based on Risk Profile" as AIFR004
+    usecase "AIFR005: Analyze Spots for Anomaly Transactions (AML)" as AIFR006
+  }
+
+  PredictionAI <|-- SAFR001 : Use Parameters\nRequest Predictions from AI
+
+  client --> PredictionAI : Request Financial Predictions, Personalized Recommendations\nView Spending Limit Alerts, Investment Opportunities, News\nManage Feedback to Improve Accuracy
+
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR003: Request AI Predictive Interventions for Advisors" as SFR015
+
+  client --> RecommendationAI : Generate Client-Specific Insights\nManage Preferences and Feedback
+
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1693]

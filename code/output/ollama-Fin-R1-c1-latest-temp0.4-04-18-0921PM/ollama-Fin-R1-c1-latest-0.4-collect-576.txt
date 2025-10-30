@@ -1,0 +1,79 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Notification Channels" as SAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  
+  Client --> CFR001 : "View Financial Insights"
+  
+  SysAdmin -> (CFR001) <|-- (SAFR002)
+  SysAdmin -> (SFR013)
+}
+
+rectangle "Client" {
+  actor "User: Client, Advisor or Admin" as User
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as CFR005
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+  
+  User --> (CFR002) : "Receive Alerts"
+  
+  SysAdmin -> (CFR005)
+}
+
+rectangle "Financial Advisor" {
+  actor "FAFR003: View Client Intervention Alerts" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Segments" as FAFR004
+  
+  SysAdmin --> (FAFR003)
+}
+
+rectangle "System Administrator" {
+  actor "SysAdmin" : System Admin
+  usecase "SAFR001: Manage AI Analysis Parameters" as SAFR001
+  usecase "SFR020: Maintain Historical Record of Insights" as SFR020
+  
+  SysAdmin --> (CFR005)
+}
+
+rectangle "AI Component" {
+  actor "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  
+  SysAdmin --> (AIFR003)
+}
+
+@enduml
+```
+
+**Explanation of the Diagram Structure:**
+
+1. **System Boundary**: The entire system is enclosed within a rectangle labeled "System". This includes all use cases and actors related to the AI-powered analysis.
+
+2. **Client Actor**: Represents users including Clients, Financial Advisors (FAs), and System Administrators. Each has specific interactions:
+   - **CFR001** (View Financial Insights Dashboard): Directly accessible by Users.
+   - **SAFR002** (Manage Notification Channels) and **SFR013** (Generate Client Alerts Based on Predefined Conditions): Accessible via System Administrator.
+
+3. **Financial Advisor Actor**: FAs can access:
+   - **FAFR004** (Configure Analysis Parameters for Segments).
+
+4. **System Administrator Actor**: Has administrative control over:
+   - **SAFR001** (Manage AI Analysis Parameters).
+   - **SFR020** (Maintain Historical Record of Insights), which is also related to the system's feedback loop.
+
+5. **AI Component Actors**: These are part of the System and include components like AIFR003 (Spending Limit Alerts) and AIFR004 (Investment Opportunity Analyses). They interact with SysAdmin for parameter management but operate within the system boundary.
+
+6. **Use Case Relationships**:
+   - Users directly access **CFR001**, while others require System Admin or AI Component interactions.
+   - The SysAdmin manages multiple use cases and components, ensuring compliance and data integrity.
+
+This structure ensures all functional requirements are represented accurately with their respective actors and relationships within the system. Adjustments may be needed based on further clarification of role overlaps or additional requirements not explicitly listed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 826]

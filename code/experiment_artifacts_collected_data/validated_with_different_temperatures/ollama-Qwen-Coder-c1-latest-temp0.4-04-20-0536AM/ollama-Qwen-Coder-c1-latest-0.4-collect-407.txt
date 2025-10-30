@@ -1,0 +1,83 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FAFD
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "AIFR009: Generate Contextualized News Insights" as AIFR009
+  
+  Client --> CFR001 : "View Alerts"
+  Client --> SAFR001 : "Manage Analysis Parameters"
+  Client --> FAFD : "View Predictive Analytics"
+  
+  SysAdmin --> SAFR001
+  SysAdmin --> SFR020 : "Manage User Feedback"
+  
+  FinancialAdvisor --> AIFR004 : "Generate Investment Opportunity Analyses"
+  FinancialAdvisor --> FAFR003
+  
+  System --> CFR001 : "Deliver Alerts"
+  System --> SAFR001
+  System --> SFR002 : "Deliver Personalized Recommendations"
+  System --> AIFR004
+  System --> AIFR009
+}
+
+rectangle "Client" {
+  Client --> FAFD : "Manage Relationship with Financial Advisors"
+  Client --> CFR010 : "View News Related to Investment Portfolio"
+  Client --> CFR012 : "Generate Client Dashboards"
+  
+  rectangle "Financial Insights Dashboard" {
+    usecase "CFR009: Access Personalized Dashboard" as CFR009
+    usecase "SFR017: Generate Financial Health Reports" as SFR017
+    
+    Client --> CFR009 : "View Spending Limit Alerts"
+  }
+  
+  rectangle "Investment Opportunities" {
+    usecase "CFR006: View Investment Opportunities Suitable to My Risk Profile" as CFR006
+    usecase "SFR005: Request Specific Investment Opportunities from AI Component" as SFR005
+    
+    Client --> CFR006 : "View News Related to Investment Portfolio"
+  }
+}
+
+rectangle "Financial Advisor" {
+  FinancialAdvisor --> FAFR01 : "Manage Client Mentoring Sessions"
+  
+  rectangle "Client Intervention Alerts" {
+    usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+    usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as SFR008
+    
+    FinancialAdvisor --> FAFR002 : "View Predictive Insights"
+  }
+}
+
+rectangle "System Administrator" {
+  SystemAdmin --> SAFR001 : "Manage Analysis Parameters"
+  
+  rectangle "Analysis Parameter Management" {
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+    usecase "SFR024: Request Predictive Intervention Analyses from AI Component" as SFR024
+    
+    SystemAdmin --> SAFR001 : "Configure Analysis Parameters for Specific Client Segments"
+  }
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 730]

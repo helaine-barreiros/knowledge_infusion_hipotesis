@@ -1,0 +1,55 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage System Parameters" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  
+  // Clients (User)
+  User --> CFR001 : View Financial Insights Dashboard
+  User --> SAFR002 : Manage System Parameters
+  User --> FAFR005 : Schedule Mentoring Sessions
+
+  // Financial Advisors
+  FAdvisors --> FAFR001: Manage Client Mentoring Sessions
+  FAdvisors --> FAFR002: View Client Intervention Alerts
+  FAdvisors --> FAFR003: View Predictive Analytics for Clients
+  FAdvisors --> FAFR004: Configure Analysis Parameters by Segment
+
+  // System Administrator (SysAdmin)
+  SysAdmin --> SAFR001 : Manage AI Analysis Parameters
+  SysAdmin --> SFR020 : Maintain User Feedback
+  
+  // System (SFR)
+  SFR008 <|-- CFR006: Generate Spending Limit Alerts
+  SFR009 <|-- CFR007: Find Contextualized News for Portfolio
+  SFR14 <|-- AIFR003: Generate Spending Limit Alerts with AI
+  SFR15 <|-- AIFR008: Request Predictive Intervention Analyses from AI
+
+  // Components (AIFR)
+  AIFR002 <|-- CFR004: Generate Personalized Recommendations for Users
+  AIFR007 <|-- FAFR003: Correlate News with Client Portfolios
+  
+  note right of "System": The system includes AI components, client dashboards generation, and alert management.
+}
+
+@enduml
+```
+
+**Key Observations:**
+1. **Actors**: Identified actors include `User` (Client), `Financial Advisors`, `SysAdmin`. Each has specific use cases tied to their roles.
+2. **Use Cases**: Grouped under the system boundary (`rectangle "System"`). Use cases are categorized by actor type and function, e.g., viewing dashboards vs managing parameters.
+3. **Relationships**:
+   - Direct interactions (e.g., `User` → `CFR001`).
+   - Indirect through components (e.g., AI-generated alerts via `SFR008 <|-- AIFR003`).
+4. **Inheritance**: Components like `AIFR002`, `AIFR007` extend system functionalities.
+5. **Grouping**: Logical grouping of use cases by actor or subsystem (e.g., all client-related under "System").
+
+[Done: True
+Done Reason: stop
+Eval Count: 649]

@@ -1,0 +1,94 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Alerts Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Personalized Dashboard" as CFR008
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+
+  rectangle "Client" {
+    actor Client as c
+    client --> (CFR001)
+    client --> (SAFR002)
+    client --> (CFR003)
+    client --> (CFR004)
+    client --> (CFR005)
+    client --> (CFR006)
+    client --> (CFR007)
+    client --> (CFR008)
+    client --> (CFR010)
+  }
+
+  rectangle "System Administrator" {
+    actor SysAdmin as sa
+    sysadmin --> (SAFR002) : Manage Analysis Parameters
+  }
+
+  rectangle "Financial Advisor" {
+    actor FAFR as fa
+    fadvisors --> (FAFR003): View Predictive Analytics for Clients
+    fadvisors --> (FAFR004): Configure Client-Specific Analysis Params
+    fadvisors --> (SFR015): Request Intervention Analyses from AI Component
+  }
+
+  rectangle "AI System" {
+    usecase AIFR001: Generate Financial Predictions as AIFR001
+    usecase AIFR002: Generate Personalized Recommendations as AIFR002
+    usecase AIFR003: Generate Spending Limit Alerts as AIFR003
+    usecase AIFR004: Generate Investment Opportunity Analyses as AIFR004
+    usecase AIFR005: Generate Investment Opportunities as AIFR005
+    usecase AIFR006: Generate Anomaly Transaction Alerts as AIFR006
+    usecase AIFR007: Generate Contextualized News Insights as AIFR007
+    usecase AIFR008: Generate Client Predictive Intervention Recs as AIFR008
+
+    aifrs --> (CFR001) : Provide Financial Data for Dashboards
+    aifrs --> (SAFR002): Update Alert Preferences via System
+    aifrs --> (AIFR003): Send Spending Limit Alerts to Users
+    aifrs --> (AIFR004): Offer Investment Opportunities Based on Risk Profiles
+  }
+
+  rectangle "System" {
+    usecase SFR001: Deliver User Notifications as SFR001
+    usecase SFR002: Provide Personalized Recommendations via System as SFR002
+    usecase SFR003: Request Financial Predictions from AI Component as SFR003
+    usecase SFR004: Request Personalized Recs Based on User Data and Preferences as SFR004
+    usecase SFR005: Request Spending Limit Alerts for Exceeding Thresholds as SFR005
+    usecase SFR006: Analyze Investment Opportunities per Risk Profile as SFR006
+    usecase SFR007: Identify Specific Investments Matching User Criteria and ESG Preferences as SFR007
+    usecase SFR008: Detect Anomaly Transactions via AI for AML Compliance as SFR008
+    usecase SFR009: Extract Relevant News Based on Portfolio Contexts as SFR009
+    usecase SFR10: Generate Client Dashboards with Financial Info as SFR12 (Note typo in requirement)
+    usecase SFR11: Manage User Feedback for System Improvement as SFR13
+
+    system --> (CFR008): Create Personalized Dashboard
+  }
+
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Client**: The primary user interacts with various features like viewing dashboards, receiving recommendations, and managing personal data. They are linked to multiple use cases.
+- **System Administrator**: Manages system parameters (e.g., alerts) but does not directly interact with AI components beyond parameter management.
+- **Financial Advisor**: Interacts more closely with the system for client-specific analyses, such as predictive insights or intervention recommendations.
+- **AI System**: Generates core outputs like predictions, recommendations, and alerts. It receives inputs from clients/systems through various interfaces (e.g., SFR003) to generate these outputs.
+- **System**: Handles notifications, personalization requests, data retrieval for AI components, etc.
+
+### Notes:
+1. Some use case IDs in the requirements have typographical errors (e.g., "SFR012" vs. "CFR008"). These were corrected based on context to ensure logical grouping.
+2. The system boundary includes all relevant actors and their interactions with the AI components, ensuring comprehensive coverage of the defined functionalities.
+
+This diagram adheres strictly to the provided requirements while maintaining readability and clarity in actor-use case relationships. Adjustments may be needed if additional details or corrections are found in future reviews.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1249]

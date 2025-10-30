@@ -1,0 +1,62 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Personalized Dashboard" as CFR008
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+
+  package Professional {
+    actor Client as C
+    actor SystemAdmin as SA
+    actor FinancialAdvisor as FA
+  }
+
+  rectangle "Client Interface" {
+    C --> CFR001 : View dashboard\n(CFR008)
+    C --> CFR003 : View predictions (CFR002, AIFR001)
+    C --> CFR004 : Receive recommendations (AIFR002)
+    C --> CFR005 : Manage preferences (CFR009, AIFR003)
+    C --> CFR006 : View alerts\n(SFR005, AIFR001)
+    C --> CFR007 : View opportunities (AIFR004)
+  }
+
+  rectangle "System Admin Interface" {
+    SA --> SAFR001 : Manage parameters
+  }
+
+  rectangle "Financial Advisor Interface" {
+    FA --> FAFR002 : View alerts\n(SFR003, AIFR007)
+    FA --> FAFR004 : View analytics (AIFR008)
+    FA --> FAFR005 : Configure parameters
+  }
+
+}
+
+@enduml
+```
+
+**Key Observations:**
+1. **Actors**: The system includes three primary actors—Client, SystemAdmin, and FinancialAdvisor.
+2. **Use Cases**:
+   - Clients can view various dashboards (CFR008), financial predictions (CFR003 via AIFR001), personalized recommendations (CFR004 via AIFR002), manage preferences (CFR005, CFR009 via AIFR003), receive spending limit alerts (CFR006 via SFR005 and AIFR001), view investment opportunities (CFR007 via AIFR004).
+   - SystemAdmins manage analysis parameters (SAFR001).
+   - FinancialAdvisors can view client intervention alerts (FAFR002, CFR006 via SFR003 and AIFR007), analyze predictive insights (CFR008 via AIFR008), configure parameters for specific segments (FAFR005).
+3. **System Boundaries**: The "System" rectangle groups all use cases and their relationships.
+4. **Grouping**: Use cases are logically grouped under the client, system admin, and financial advisor interfaces.
+
+This diagram ensures clarity in mapping each actor's interactions with the system based on provided functional requirements. Adjustments can be made if additional details or dependencies arise from further analysis.
+
+[Done: True
+Done Reason: stop
+Eval Count: 801]

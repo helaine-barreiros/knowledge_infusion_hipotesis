@@ -1,7 +1,45 @@
-import re
-from collections import defaultdict
-from typing import Dict, List, Tuple, Any
 from src.utils.logger import Logger
+from plantuml import PlantUML
+from pathlib import Path
+from src.utils.system_parametrization import SYSTEM_CONFIG
+
+import subprocess
+import json
+import os
+
+
+class Actor:
+    def __init__(self, id, name):
+        self.id = id
+        self.name = name
+
+
+class UseCase:
+    def __init__(self, id, name):
+        self.id = id
+        self.name = name
+
+
+class Relationship:
+    def __init__(self, source, target, relationship_type, label):
+        self.source = source
+        self.target = target
+        self.type = relationship_type
+        self.label = label
+
+
+class Package:
+    def __init__(self, id, name, elements):
+        self.id = id
+        self.name = name
+        self.elements = elements
+
+
+class Rectangle:
+    def __init__(self, id, name, elements):
+        self.id = id
+        self.name = name
+        self.elements = elements
 
 
 class PlantUMLUseCaseParser:
@@ -9,19 +47,103 @@ class PlantUMLUseCaseParser:
     Parser for PlantUML use case diagrams.
     This class performs detailed analysis of PlantUML code.
     """
-    def __init__(self):
+    def __init__(self, fullname_plantuml_file: str):
         self.LOGGER = Logger
+        self.plantuml_code = fullname_plantuml_file
+        self.fullname_plantuml_file = fullname_plantuml_file
+        self.PLANT_UML_URL = SYSTEM_CONFIG.get("artifacts.plantuml_png_url", "http://www.plantuml.com/plantuml/png/")
+        self.PLANTUML_SERVER = PlantUML(url=self.PLANT_UML_URL)
 
-    def parse(self, plantuml_code: str) -> Tuple[Dict[str, List[Dict[str, Any]]], Dict[str, int]]:
-        """
-        Analyzes PlantUML code and extracts diagram elements.
+        self.json = self._call_external_plantuml_parser(fullname_plantuml_file)
 
-        Args:
-            plantuml_code (str): PlantUML code to analyze
+        self._parse(self.json)
 
-        Returns:
-            Tuple: (extracted elements, element counts)
-        """
+    def get_use_case_diagram(self):
+        return self.diagram
+
+    def get_actors(self) -> None:
+        return self.diagram['actors'], len(self.diagram['actors'])
+
+    def get_use_cases(self) -> None:
+        return self.diagram['usecases'], len(self.diagram['usecases'])
+
+    def get_rectangles(self) -> None:
+        return self.diagram['rectangles'], len(self.diagram['rectangles'])
+
+    def get_relationships(self) -> None:
+        return self.diagram['relationships'], len(self.diagram['relationships'])
+
+    def generate_image_bytes(self):
+        diagram_image = None
+
+        try:
+            diagram_image = self.PLANTUML_SERVER.processes(self.plantuml_code)
+
+        except Exception as e:
+            self.LOGGER.info(f"Could not generate usecase diagram byte image: {str(e)}")
+
+        return diagram_image
+
+    def _parse_element(self, element):
+        type = element.get("type")
+
+        if type == "Actor":
+            return Actor(id=element["name"], name=element["title"])
+        elif type == "UseCase":
+            return UseCase(id=element["name"], name=element["title"])
+        elif type == "Package":
+            subelements = [self.parse_element(e) for e in element.get("elements", [])]
+            return Package(id=element["name"], name=element["title"], elements=subelements)
+        elif type == "Rectangle":
+            subelements = [self.parse_element(e) for e in element.get("elements", [])]
+            return Rectangle(id=element["name"], name=element["title"], elements=subelements)
+        elif type == "Relationship":
+            return Relationship(
+                source=element["source"],
+                target=element["target"],
+                relationship_type=element["relationshipType"],
+                label=element["label"]
+            )
+        else:
+            raise ValueError(f"Unrecognized Type: {type}")
+
+    def _parse_rectangles(self, rectangles_data):
+        rectangles = []
+
+        for rect in rectangles_data:
+            elements = [self._parse_element(el) for el in rect.get("elements", [])]
+            rectangles.append(Rectangle(id=rect["name"], name=rect["title"], elements=elements))
+
+        return rectangles
+
+    def _parse_packages(self, packages_data):
+        packages = []
+
+        for pkg in packages_data:
+            elements = [self._parse_element({**el, "type": "UseCase"}) for el in pkg.get("elements", [])]
+            packages.append(Package(id=pkg["name"], name=pkg["title"], elements=elements))
+
+        return packages
+
+    def _parse_actors(self, actors_data):
+        return [Actor(id=el["name"], name=el["title"]) for el in actors_data]
+
+    def _parse_usecases(self, usecases_data):
+        return [UseCase(id=el["name"], name=el["title"]) for el in usecases_data]
+
+    def _parse_relationships(self, relationships_data):
+        return [
+            Relationship(
+                source=el["source"],
+                target=el["target"],
+                relationship_type=el["relationshipType"],
+                label=el["label"]
+            )
+            for el in relationships_data
+        ]
+
+    def _parse(self, data: dict):
+
         diagram = {
             'type': 'use case',
             'title': "",
@@ -30,391 +152,117 @@ class PlantUMLUseCaseParser:
             'detailed_count': {}
         }
 
-        if not plantuml_code:
-            return diagram
+        if not data:
+            diagram['compile'] = "Error"
+            self.LOGGER.info(f"Error compiling diagram {self.plantuml_code}")
+            self.diagram = diagram
+        else:
 
-        # Convert multiple lines to a single line if the code is compacted
-        if '\n' not in plantuml_code and len(plantuml_code.strip()) > 100:
-            plantuml_code = plantuml_code.replace('@startuml', '@startuml\n')
-            plantuml_code = plantuml_code.replace('@enduml', '\n@enduml')
-            plantuml_code = re.sub(r'([^\s])\s*rectangle', r'\1\nrectangle', plantuml_code)
-            plantuml_code = re.sub(r'}\s*([^\s])', r'}\n\1', plantuml_code)
-            plantuml_code = re.sub(r'(actor|usecase|note|rectangle)(\s+)', r'\n\1\2', plantuml_code)
+            plantuml_basename = os.path.basename(self.fullname_plantuml_file)
+            diagram_base_name, _ = os.path.splitext(plantuml_basename)
 
-        # Clean code by removing configuration lines
-        cleaned_lines = []
-        for line in plantuml_code.strip().split('\n'):
-            line = line.strip()
-            if line and not line.startswith('@startuml') and not line.startswith('@enduml'):
-                cleaned_lines.append(line)
+            diagram['base_name'] = diagram_base_name
 
-        # Extract title if exists
-        for line in cleaned_lines:
-            if line.startswith('title '):
-                diagram['title'] = line[6:].strip()
-                break
+            diagram['compile'] = True if len(self.plantuml_code) > 0 else False
+            self.LOGGER.info(f"Compiled diagram {diagram['compile']} existent source code:{len(self.plantuml_code) > 0}")
 
-        actors, qtd_actors = self.get_actors(cleaned_lines)
-        use_cases, qtd_use_cases = self.get_use_cases(cleaned_lines)
-        rectangles, qtd_rectangles = self.get_rectangles(cleaned_lines)
-        relationships, qtd_relationships = self.get_relationships(cleaned_lines)
-        notes, qtd_notes = self.get_notes(cleaned_lines)
+            if diagram['compile']:
+                try:
+                    self.LOGGER.info("Compiling diagram")
+                    diagram['compile'] = self._verify_diagram_compilation()
+                    self.LOGGER.info(f"Compiled diagram {self.plantuml_code}")
+                except Exception:
+                    diagram['compile'] = False
 
-        diagram['actors'] = actors
-        diagram['use_cases'] = use_cases
-        diagram['rectangles'] = rectangles
-        diagram['relationships'] = relationships
-        diagram['notes'] = notes
+            diagram['actors'] = self._parse_actors(data["actors"])
+            diagram['usecases'] = self._parse_usecases(data["usecases"])
+            diagram['relationships'] = self._parse_relationships(data["relationships"])
+            diagram['packages'] = self._parse_packages(data["packages"])
+            diagram['rectangles'] = self._parse_rectangles(data["rectangles"])
 
-        elements = []
-        elements.extend(actors)
-        elements.extend(use_cases)
-        elements.extend(rectangles)
-        elements.extend(relationships)
-        elements.extend(notes)
+            diagram['detailed_count'] = {
+                'actors': len(diagram['actors']),
+                'use_cases': len(diagram['usecases']),
+                'relationships': len(diagram['relationships']),
+                'rectangles': len(diagram['rectangles']),
+                'packages': len(diagram['packages'])
+            }
 
-        diagram['elements'] = elements
+            diagram['count'] = len(diagram['actors']) + len(diagram['usecases']) + len(diagram['relationships']) + len(diagram['rectangles']) + len(diagram['packages'])
 
-        diagram['count'] = len(elements)
+            self.diagram = diagram
 
-        diagram['detailed_count'] = {
-            'actors': qtd_actors,
-            'use_cases': qtd_use_cases,
-            'relationships': qtd_relationships,
-            'notes': qtd_notes,
-            'rectangles': qtd_rectangles
-        }
+    def _call_external_plantuml_parser(self, fullname_plantuml_file):
+        result = []
 
-        return diagram
+        command = ['plantuml-parser-hsl', '-i', fullname_plantuml_file, '-f', "usecase_structured"]
 
-    def get_actors(self, lines: List[str]) -> None:
+        try:
+            completed_process = subprocess.run(
+                command,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                check=True,
+                timeout=30  # Prevent indefinite hang
+            )
+
+            try:
+                parsed_json = json.loads(completed_process.stdout)
+                return parsed_json
+            except json.JSONDecodeError as e:
+                self.LOGGER.error(f"Failed to parse JSON output from PlantUML parser error: {e}")
+                self.LOGGER.debug(f"Raw output from parser:\n{completed_process.stdout}")
+   
+        except subprocess.TimeoutExpired as e:
+            self.LOGGER.critical(f"Timeout expired while executing external parser: {e}")
+
+        except FileNotFoundError as e:
+            self.LOGGER.critical(f"Command not found: {command[0]} — {e}")
+
+        except subprocess.CalledProcessError as e:
+            self.LOGGER.error("Subprocess returned non-zero exit status.")
+            self.LOGGER.debug(f"Standard error output:\n{e.stderr}")
+
+        except Exception as e:
+            self.LOGGER.exception(f"Unexpected error while executing external parser: {e}")
+
+        return result
+
+    import subprocess
+
+    def _verify_diagram_compilation(self):
         """
-        Extracts actors from diagram.
-        Args:
-            lines (List[str]): Cleaned PlantUML code lines
+        Verifica se o diagrama PlantUML compila corretamente utilizando a opção -checkonly.
+
+        Retorna:
+            bool: True se o diagrama compilar corretamente, False caso contrário.
         """
-        actors = []
-        qtd_actors = 0
-        
-        # Pattern for directly defined actors
-        actor_pattern = re.compile(r'actor\s+:?([^:]+?)(?::\s*as\s+([^\s]+)|$)')
-        # Pattern for actors in inheritance relationships
-        inheritance_pattern = re.compile(r'([^\s]+)\s+<\|--\s+([^\s]+)')
+        ROOT_DIR = Path(__file__).resolve().parent
+        PROJECT_ROOT = ROOT_DIR.parent
+        caminho_plantuml_jar = PROJECT_ROOT / 'utils' / 'plantuml.jar'
 
-        for line in lines:
-            # Look for direct actor definitions
-            match = actor_pattern.search(line)
-            if match:
-                actor_name = match.group(1).strip()
-                actor_alias = match.group(2) if match.group(2) else actor_name
+        evaluation = False
 
-                # For actors with special format like ":Name:"
-                if actor_name.startswith(':') and actor_name.endswith(':'):
-                    actor_name = actor_name[1:-1].strip()
+        try:
+            result = subprocess.run(
+                ['java', '-jar', caminho_plantuml_jar, '-checkonly', self.fullname_plantuml_file],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True
+            )
 
-                actors.append({'name': actor_name, 'alias': actor_alias, 'type': 'actor'})
-                qtd_actors += 1
-
-        # Second pass to identify actors in inheritance relationships that weren't explicitly defined
-        for line in lines:
-            if '<|--' in line:
-                match = inheritance_pattern.search(line)
-                if match:
-                    parent = match.group(1).strip()
-                    child = match.group(2).strip()
-
-                    # Check if actors are already in the list
-                    parent_exists = False
-                    child_exists = False
-
-                    for actor in actors:
-                        if actor['alias'] == parent:
-                            parent_exists = True
-                        if actor['alias'] == child:
-                            child_exists = True
-
-                    # Add actors to the list if not present
-                    if not parent_exists:
-                        actors.append({'name': parent, 'alias': parent, 'type': 'actor'})
-                        qtd_actors += 1
-
-                    if not child_exists:
-                        actors.append({'name': child, 'alias': child, 'type': 'inherited actor'})
-                        qtd_actors += 1
-
-        return actors, qtd_actors
-
-    def get_use_cases(self, lines: List[str]) -> None:
-        """
-        Extracts use cases from diagram.
-        Args:
-            lines (List[str]): Cleaned PlantUML code lines
-        """
-        use_cases = []
-        qtd_use_cases = 0
-
-        # Pattern for directly defined use cases
-        usecase_pattern1 = re.compile(r'\(([^)]+)\)(?:\s+as\s+([^\s]+))?')
-        usecase_pattern2 = re.compile(r'usecase\s+"([^"]+)"(?:\s+as\s+([^\s]+))?')
-
-        # Pattern for use cases in relationships
-        relation_usecase_pattern = re.compile(r'\(([^)]+)\)\s+\.>\s+')
-
-        # First, look for directly defined use cases
-        for line in lines:
-            # Ignore lines that are clearly relationships
-            if ('<|--' in line) or ('-->' in line and '(' not in line) or ('->' in line and '(' not in line):
-                continue
-
-            # Look for use cases in format (Case Name)
-            for match in usecase_pattern1.finditer(line):
-                usecase_name = match.group(1).strip()
-                usecase_alias = match.group(2) if match.group(2) else usecase_name
-
-                # Check if this use case has already been added
-                if not any(uc['name'] == usecase_name for uc in use_cases):
-                    use_cases.append({'name': usecase_name, 'alias': usecase_alias, 'type': 'use case'})
-                    qtd_use_cases += 1
-
-            # Look for use cases in format usecase "Case Name"
-            for match in usecase_pattern2.finditer(line):
-                usecase_name = match.group(1).strip()
-                usecase_alias = match.group(2) if match.group(2) else usecase_name
-
-                if not any(uc['name'] == usecase_name for uc in use_cases):
-                    use_cases.append({'name': usecase_name, 'alias': usecase_alias, 'type': 'use case'})
-                    qtd_use_cases += 1
-
-        # Now, look for use cases in extension/inclusion relationships
-        for line in lines:
-            if '.>' in line and '(' in line:
-                match = relation_usecase_pattern.search(line)
-                if match:
-                    usecase_name = match.group(1).strip()
-
-                    # Check if this use case has already been added
-                    if not any(uc['name'] == usecase_name for uc in use_cases):
-                        use_cases.append({'name': usecase_name, 'alias': usecase_name,
-                                          'type': 'extensio/inclusion use case'})
-                        qtd_use_cases += 1
-
-        return use_cases, qtd_use_cases
-
-    def get_rectangles(self, lines: List[str]) -> None:
-        """
-        Extracts rectangles (systems/packages) from diagram.
-        Args:
-            lines (List[str]): Cleaned PlantUML code lines
-        """
-        rectangles = []
-        qtd_rectangles = 0
-
-        in_rectangle = False
-        rectangle_name = ""
-        rectangle_content = []
-        open_braces = 0
-
-        for i, line in enumerate(lines):
-            # Detect the start of a rectangle
-            if 'rectangle ' in line and '{' in line:
-                in_rectangle = True
-                open_braces = 1
-                rectangle_name = line.split('rectangle ')[1].split(' {')[0].strip()
-                continue
-
-            # Track opening and closing braces to handle nested rectangles
-            if in_rectangle:
-                if '{' in line:
-                    open_braces += line.count('{')
-                if '}' in line:
-                    open_braces -= line.count('}')
-
-                # When all braces are closed, end the rectangle
-                if open_braces == 0:
-                    rectangles.append({
-                        'name': rectangle_name,
-                        'content': rectangle_content,
-                        'type': 'rectangle'
-                    })
-                    qtd_rectangles += 1
-                    in_rectangle = False
-                    rectangle_name = ""
-                    rectangle_content = []
+            # Verifica se a execução foi bem-sucedida
+            if result.returncode == 0:
+                # Mesmo com código 0, checamos se há mensagens de erro não críticas em stderr
+                if not result.stderr.strip():
+                    evaluation = True
                 else:
-                    # Add line to rectangle content if it's not the closing line
-                    if not line.strip() == '}':
-                        rectangle_content.append(line)
+                    self.LOGGER.warning(f"Diagram compiled with messages on stderr: {result.stderr.strip()}")
+            else:
+                self.LOGGER.error(f"PlantUML compilation error (code {result.returncode}):\nSTDOUT:\n{result.stdout}\nSTDERR:\n{result.stderr}")
 
-        return rectangles, qtd_rectangles
+        except Exception as e:
+            self.LOGGER.exception(f'Exception when checking diagram compilation: {e}')
 
-    def get_relationships(self, lines: List[str]) -> None:
-        """
-        Extracts relationships from diagram.
-        Args:
-            lines (List[str]): Cleaned PlantUML code lines
-        """
-        relationships = []
-        qtd_relationships = 0
-
-        # Patterns for different types of relationships
-        relationship_patterns = {
-            'extension': re.compile(r'\(([^)]+)\)\s+\.+>\s+\(?([^)\s:]+).*?:\s*extends?'),
-            'inclusion': re.compile(r'\(([^)]+)\)\s+\.+>\s+\(?([^)\s:]+).*?:\s*includes?'),
-            'generalization': re.compile(r'([^\s]+)\s+<\|--\s+([^\s]+)')
-        }
-
-        # Define association patterns
-        association_patterns = [
-            re.compile(r'([^\s(]+)\s+-->\s+\(?([^)\s:]+)'),
-            re.compile(r'([^\s(]+)\s+->\s+\(?([^)\s:]+)'),
-            re.compile(r'([^\s(]+)\s+--\s+\(?([^)\s:]+)'),
-            re.compile(r'\(([^)]+)\)\s+-->\s+([^\s:]+)'),
-            re.compile(r'\(([^)]+)\)\s+->\s+([^\s:]+)'),
-            re.compile(r'\(([^)]+)\)\s+--\s+([^\s:]+)')
-        ]
-
-        for line in lines:
-            # Process extensions and inclusions
-            for rel_type, pattern in relationship_patterns.items():
-                for match in pattern.finditer(line):
-                    source = match.group(1).strip()
-                    target = match.group(2).strip()
-
-                    # Remove parentheses if any
-                    if target.startswith('(') and target.endswith(')'):
-                        target = target[1:-1].strip()
-
-                    relationships.append({
-                        'source': source,
-                        'target': target,
-                        'type': 'relationship',
-                        'kind': rel_type
-                    })
-                    qtd_relationships += 1
-
-            # Process associations using all patterns
-            for pattern in association_patterns:
-                for match in pattern.finditer(line):
-                    # Skip if it's an extend/include relationship
-                    if '.>' in line and ':' in line:
-                        continue
-                        
-                    source = match.group(1).strip()
-                    target = match.group(2).strip()
-
-                    # Remove parentheses if any
-                    if target.startswith('(') and target.endswith(')'):
-                        target = target[1:-1].strip()
-
-                    relationships.append({
-                        'source': source,
-                        'target': target,
-                        'type': 'relationship',
-                        'kind': 'association'
-                    })
-                    qtd_relationships += 1
-
-        return relationships, qtd_relationships
-
-    def get_notes(self, lines: List[str]) -> None:
-        """
-        Extracts notes from diagram.
-        Args:
-            lines (List[str]): Cleaned PlantUML code lines
-        """
-        notes = []
-        qtd_notes = 0
-        
-        in_note = False
-        note_content = []
-        note_target = ""
-
-        for i, line in enumerate(lines):
-            # Detect the start of a note
-            if line.startswith('note ') and 'of ' in line:
-                in_note = True
-                parts = line.split('of ')
-                if len(parts) >= 2:
-                    note_target = parts[1].strip()
-                continue
-
-            # Detect the end of a note
-            if in_note and line == 'end note':
-                notes.append({
-                    'target': note_target,
-                    'type': 'note',
-                    'content': '\n'.join(note_content)
-                })
-                qtd_notes += 1
-                in_note = False
-                note_content = []
-                note_target = ""
-                continue
-
-            # Add content to the note
-            if in_note:
-                note_content.append(line)
-
-        return notes, qtd_notes
-
-    def get_summary_text(self, lines: List[str]) -> str:
-        """
-        Generates a text summary of diagram components.
-        Returns:
-            str: Summary text
-        """
-        diagram = self.parse(lines)
-
-        total = diagram.count
-
-        lines = ["\n=== USE CASE DIAGRAM ANALYSIS ===\n"]
-
-        if diagram.title:
-            lines.append(f"|DIAGRAM TITLE: {diagram.title:<13}|")
-
-        # Count table
-        lines.append("ELEMENT COUNT:")
-        lines.append("-" * 30)
-        lines.append(f"| {'Element':<15} | {'Count':<10} |")
-        lines.append("-" * 30)
-        lines.append(f"| actors: | {diagram.detailed_count['actors']:<10} |")
-        lines.append(f"| use cases: | {diagram.detailed_count['use_cases']:<10} |")
-        lines.append(f"| relationships: | {diagram.detailed_count['relationships']:<10} |")
-        lines.append(f"| notes: | {diagram.detailed_count['notes']:<10} |")
-        lines.append(f"| rectangles: | {diagram.detailed_count['rectangles']:<10} |")
-        lines.append("-" * 30)
-        lines.append(f"| {'Total':<15} | {total:<10} |")
-        lines.append("-" * 30)
-
-        # Element details
-        lines.append("\nELEMENT DETAILS:")
-
-        if diagram['actors']:
-            lines.append("\nACTORS:")
-            for i, actor in diagram['actors']:
-                lines.append(f"  {i}. {actor['name']} (alias: {actor['alias']}) (type: {actor['type']})")
-
-        if diagram['use_cases']:
-            lines.append("\nUSE CASES:")
-            for i, use_cases in diagram['use_cases']:
-                lines.append(f"  {i}. {use_cases['use_cases']} (alias: {use_cases['use_cases']}) (type: {
-                    use_cases['use_cases']})")
-
-        if diagram['relationships']:
-            lines.append("\nRELATIONSHIPS:")
-            for i, rel in diagram['relationships']:
-                lines.append(f"  {i}. {rel['source']} --> {rel['target']} [{rel['type']}] [{rel['kind']}]")
-
-        if diagram['notes']:
-            lines.append("\nNOTES:")
-            for i, note in enumerate(diagram['notes'], 1):
-                lines.append(f"  {i}. Note for {note['target']}:")
-                for line in note['content'].split('\n'):
-                    lines.append(f"     {line}")
-
-        if diagram['rectangles']:
-            lines.append("\nSYSTEMS/PACKAGES:")
-            for i, rect in enumerate(diagram['rectangles'], 1):
-                lines.append(f"  {i}. {rect['name']}")
-
-        return '\n'.join(lines)
+        return evaluation

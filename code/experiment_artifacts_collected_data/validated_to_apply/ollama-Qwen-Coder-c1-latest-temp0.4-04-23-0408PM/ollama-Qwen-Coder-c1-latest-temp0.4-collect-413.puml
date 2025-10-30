@@ -1,0 +1,46 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System: as Sys
+:Financial Advisor: as FAdvisor
+:System Administrator: as SA
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  Client --> (SFR012) : Generate client dashboards
+  Client --> (SFR013) : Generate client alerts based on predefined conditions
+  Client --> (AIFR004) : Generate investment opportunity analyses for users by evaluating potential investments against their risk profiles, time horizons, and financial goals.
+  
+  FAdvisor --> (FAFR002) : View client intervention alerts when the system detects patterns requiring professional attention to proactively assist clients with potential financial issues.
+  FAdvisor --> (AIFR001) : Generate financial predictions for users by analyzing historical transaction data, market trends, and economic indicators.
+  
+  SA --> SAFR001
+}
+
+rectangle "Client" {
+  usecase "CFR002: View Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Current Market Trends" as CFR003
+  usecase "CFR011: Send Feedback About the System's Recommendations and Insights" as CFR011
+  
+  Client --> (SFR008) : Request contextualized news to extract relevant information for users' financial situations.
+  Client --> (AIFR006) : Generate anomaly transaction alerts by employing pattern recognition to detect potentially fraudulent activities in compliance with FinCEN requirements.
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations to Provide Data-Driven Recommendations During Consultations" as FAFR003
+  
+  FAdvisor --> (AIFR002) : Generate personalized recommendations for users based on their financial profiles, goals, and risk tolerance as defined by industry standards like FINRA guidelines.
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SA --> (SFR019) : Maintain a historical record of users' insights to enable trend analysis and effectiveness measurement.
+}
+@enduml

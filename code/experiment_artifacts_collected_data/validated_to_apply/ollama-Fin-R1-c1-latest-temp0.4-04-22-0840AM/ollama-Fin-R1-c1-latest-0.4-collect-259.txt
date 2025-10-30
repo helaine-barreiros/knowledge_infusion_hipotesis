@@ -1,0 +1,83 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Advisors" as CFR009
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR004: Request Personalized Recommendations from AI" as SFR004
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "SFR005: Request Spending Limit Alerts from AI" as SFR005
+  usecase "SAFR003: Configure Analysis Parameters for Segments" as SAFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+}
+
+actor Client as C1, C2, C3 {
+  'Client types (User, Advisor, Admin)
+}
+actor SystemAdmin as SA
+actor FinancialAdvisor as FA
+
+C1 --> CFR001 : "View Financial Insights Dashboard"
+SA --> SAFR001 : label="Manage Analysis Parameters for AI"
+FA --> FAFR002 : "View Client Intervention Alerts"
+
+SFR004 <|-- AIFR002
+CFR003 --> AIFR001
+
+C1 --> CFR006 : "Receive Spending Limit Alerts"
+C1 --> CFR007 : "Access Investment Opportunities"
+C1 --> CFR008 : "Read News Related to Portfolio"
+
+FA --> FAFR001 : label="Manage Client Mentoring Sessions Based on AI Insights"
+
+SAFR002 <|-- SAFR003
+SFR005 <|-- AIFR004
+
+CFR009 --> SFR007: "Share Financial Data with Advisors"
+FA --> FAFR001 : label="Manage Client Mentoring Sessions Based on AI Insights"
+
+' System components (not actors)
+rectangle "System Components" {
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI" as SFR003
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+}
+
+SFR004 <|-- AIFR002
+CFR003 --> AIFR001
+
+' Relationships between System and Components
+SFR003 --(AIFR001)
+SFR004 --(AIFR002)
+
+@enduml
+```
+
+This PlantUML code represents the use case diagram for an AI-powered analysis & insights system. It includes all specified actors (Client, SystemAdmin, FinancialAdvisor) and their interactions with various use cases. The relationships between different components are established to show how data flows through the system. Actors like "Client" interact with specific use cases such as viewing financial dashboards or receiving recommendations, while others like "SystemAdmin" manage analysis parameters for AI systems. The diagram is structured logically by grouping related use cases and ensuring clarity in actor-to-use case relationships. 
+
+**Key Observations:**
+- **Actors:** Clients (C1-C3), System Admin (SA), Financial Advisor (FA).
+- **Use Cases:** CFR series represent client functionalities, SAFR/FAFR/AIFR/SFR for system administrators, financial advisors, AI components.
+- **Relationships:** Use cases are linked to their respective actors and systems. For example, clients use "View Financial Insights Dashboard" (`CFR001`), while the system admin manages analysis parameters (`SAFR001`). The diagram also includes indirect relationships through components like AIFR (AI functions) which generate predictions or recommendations.
+- **Inheritance/Composition:** Some use cases are linked to others via composition, e.g., `SFR004` requests personalized recommendations from AI (`AIFR002`), and the system generates these based on client data. This reflects how components within the system collaborate.
+
+This structure ensures that all functional requirements are captured accurately in a readable format. Adjustments may be needed to refine specific relationships or groupings further, but this initial model provides a comprehensive overview of interactions within the system.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1193]

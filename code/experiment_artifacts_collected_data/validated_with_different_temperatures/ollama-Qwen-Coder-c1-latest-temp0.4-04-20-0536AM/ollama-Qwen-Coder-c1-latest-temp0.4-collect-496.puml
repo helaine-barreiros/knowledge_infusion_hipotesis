@@ -1,0 +1,66 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SFR002
+  usecase "CFR005: Manage Recommendation Preferences" as CFR010
+  usecase "CFR006: View Spending Limit Alerts" as SFR005
+  
+  CFR001 --> SAFR003 : "View"
+  CFR001 --> SFR002 : "Receive"
+  CFR001 --> CFR010 : "Manage"
+  CFR001 --> SFR005 : "Check"
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR003: View Predictive Analytics" as SAFR004
+  usecase "FAFR002: Manage Client Mentoring Sessions" as AIFR008
+  usecase "FAFR005: Configure Analysis Parameters for Specific Segments" as SFR016
+  
+  FinancialAdvisor --> SAFR003 : "View"
+  FinancialAdvisor --> FAFR002 : "Manage"
+  FinancialAdvisor --> SAFR004 : "Review"
+  FinancialAdvisor --> AIFR008 : "Configure"
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR001
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR020: Manage User Feedback" as SFR020
+  
+  SystemAdministrator --> SAFR001 : "Manage"
+  SystemAdministrator --> SFR020 : "Receive and Process"
+}
+
+package "System" {
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "AIFR012: Generate Client Dashboards" as SFR12
+  }
+  
+  rectangle "Notification Component" {
+    usecase "SFR003: Deliver Alerts to Users" as SFR003
+  }
+  
+  CFR001 --> AIFR004 : "Request"
+  SAFR003 --> AIFR006 : "Detect"
+  FAFR002 --> AIFR008 : "Identify Patterns"
+  SystemAdministrator --> SFR020 : "Receive and Process Feedback"
+  
+  CFR011 --> (User) : "Send Feedback"
+}
+
+@enduml

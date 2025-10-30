@@ -1,0 +1,83 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Thresholds" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR001: Manage Analysis Parameters (Basel III)" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR006: Receive Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities (MiFID II)" as CFR007
+  usecase "CFR008: View Portfolio News" as CFR008
+  usecase "CFR009: Manage Personalized Dashboards" as CFR009
+  usecase "SAFR013: Generate Client Alerts (System)" as SAFR013
+  usecase "SFR012: Generate Client Dashboards (System)" as SFR012
+
+  actor "Client" as Client
+  actor "Financial Advisor" as FAdvisor
+  actor "System Administrator" as SysAdmin
+
+  Client --> CFR001 : View Financial Insights Dashboard
+  Client --> SAFR002: Manage Alert Thresholds (for own accounts)
+  Client --> CFR003: View Financial Predictions
+  Client --> CFR004: Receive Personalized Recommendations
+  Client --> CFR005: Manage Recommendation Preferences
+  SysAdmin --> SAFR001: Adjust Analysis Parameters for System Integrity
+  FAdvisor --> FAFR002: Review Intervention Alerts from Clients
+  FAdvisor --> CFR007: Recommend Investment Opportunities (based on client's risk profile)
+  Client --> CFR006: Receive Spending Limit Alerts when thresholds exceeded
+  Client --> CFR007: View Suitable Investments for their Risk Profile
+  Client --> CFR008: Access Portfolio News
+  Client --> CFR009: Manage Personalized Dashboards (consolidate info)
+  SysAdmin --> SAFR013: Configure System-Wide Alerts
+  SFR012 <|-- Client : Provide Consolidated View
+
+  rectangle "Client Subsystem" {
+    usecase "CFR001"
+    usecase "SAFR002"
+    usecase "CFR003"
+    usecase "CFR004"
+    usecase "CFR005"
+    Client <|-- (SFR012)
+  }
+
+  rectangle "System Admin Subsystem" {
+    usecase "SAFR001"
+    SysAdmin <|-- SAFR001
+  }
+
+  rectangle "FAF Advisor Subsystem" {
+    usecase "FAFR002"
+    FAdvisor <|-- (FAFR002)
+  }
+  
+}
+
+@enduml
+```
+
+### Explanation:
+- **Actors**: The system has three main actors: `Client`, `Financial Advisor` (`FAdvisor`), and `System Administrator` (`SysAdmin`). Each actor is associated with specific use cases.
+- **Use Cases**:
+  - **Client Use Cases (CFR001–CFR009)**: These are client-specific functionalities like viewing dashboards, receiving alerts, making recommendations, etc. Some of these include interaction with the system through `SFR012` for generating personalized dashboards.
+  - **System Administrator Use Case (SAFR001)**: Manages analysis parameters to ensure regulatory compliance and algorithm accuracy.
+  - **Financial Advisor Use Cases**: Includes monitoring client alerts (`FAFR002`) and recommending investments based on risk profiles (`CFR007`).
+- **Relationships**:
+  - Clients interact directly with the system for most use cases (e.g., viewing dashboards, receiving recommendations).
+  - System Administrator manages parameters affecting all users.
+  - Financial Advisors can view client-specific alerts but also generate their own insights like investment opportunities based on risk profiles.
+
+### Diagram Structure:
+- The main rectangle represents the "System" containing all use cases and actors. Subsystems are grouped logically to show different administrative, advisor, and client functionalities. Each actor is linked to relevant use cases via arrows indicating interaction points. Relationships between system components (e.g., `SFR012` generating dashboards) are also shown.
+
+This diagram ensures clarity in how each role interacts with the system and what features they access. Adjustments can be made based on further requirements or specific relationships not yet considered here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1061]

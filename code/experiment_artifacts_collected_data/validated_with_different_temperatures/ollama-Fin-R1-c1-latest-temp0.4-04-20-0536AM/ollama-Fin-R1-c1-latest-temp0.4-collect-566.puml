@@ -1,0 +1,76 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+system SFR003 as SFRAI
+system AIFR002 as AIFAIRecommendations
+system AIFR006 as AIFRAntiFraud
+system AIFR007 as AIFRCustomNews
+
+rectangle "Client System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Predictive Analytics Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008
+  usecase "CFR009: Consolidated Personalized Dashboard for Financial Monitoring" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors, Including Data Sharing Permissions" as CFR10
+
+  C1 --> CFR001 : "View"
+}
+
+rectangle "System Administrator System" {
+  usecase "SAFR001: Manage Analysis Parameters for AI Algorithms" as SAFR001
+  SA --> SAFR001 : "Manage"
+}
+
+rectangle "Financial Advisor System" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Intervention Alerts for Clients in Need of Professional Attention" as FAFR002
+  usecase "FAFR003: Review Predictive Analytics About Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+
+  FA --> (FAFR001, FAFR002, FAFR003, FAFR004)
+}
+
+rectangle "AI System - Recommendations & Predictions" {
+  SFRAI <|-- AIFAIRecommendations : generates
+  usecase "AIFR002: Generate Personalized Recommendations Based on Financial Profiles and Goals" as AIFR002
+
+  C1 --> AIFAIRecommendations : requests
+}
+
+rectangle "AI System - Anti-Fraud & Alerts" {
+  SFRAI <|-- AIFRAntiFraud : generates
+  usecase "AIFR006: Generate Anomaly Transaction Alerts Based on Pattern Recognition" as AIFR006
+
+  C1 --> AIFRAntiFraud : requests
+}
+
+rectangle "AI System - News & Contextualization" {
+  SFRAI <|-- AIFRCustomNews : generates
+  usecase "AIFR007: Generate Contextualized News Insights Based on Portfolio" as AIFR007
+
+  C1 --> AIFRCustomNews : requests
+}
+
+rectangle "Client-Specific Systems Integration" {
+  SFRAI <|-- CFR002 : triggers (via SFR008)
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component for Fraud Detection" as SFR008
+
+  C1 --> AIFRAntiFraud : requests
+}
+
+rectangle "User Feedback Loop" {
+  usecase "CFR11: Send Feedback to Improve System Outputs" as CFR11
+
+  C1 --> CFR11 : provides feedback
+}
+@enduml

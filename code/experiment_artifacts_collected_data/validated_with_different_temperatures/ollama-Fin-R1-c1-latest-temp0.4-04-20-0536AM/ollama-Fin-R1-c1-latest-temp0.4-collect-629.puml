@@ -1,0 +1,68 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR004: Personalized Recommendations Based on Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008
+  usecase "CFR009: Consolidated Financial Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+}
+
+rectangle "Client" {
+  actor Client as c
+  client --> CFR001 : View financial data in a dashboard.
+  client --> CFR002 : Receive alerts about anomalous transactions.
+  client --> CFR003 : View financial predictions based on historical and market trends.
+  client --> CFR004 : Get personalized recommendations aligned with their profile.
+  client --> CFR005 : Manage preferences for those recommendations.
+  client --> CFR006 : See spending limit alerts when exceeding thresholds.
+  client --> CFR007 : Access investment opportunities suitable to risk profile.
+  client --> CFR008 : Receive portfolio-related news.
+  client --> CFR009 : View consolidated financial dashboard.
+}
+
+rectangle "Financial Advisor" {
+  actor FinancialAdvisor as fa
+  fa --> FAFR003 : Review predictive analytics for clients during consultations.
+  fa --> FAFR002 : Manage alerts requiring professional attention from the system.
+}
+
+rectangle "System Administrator" {
+  actor SysAdmin as sa
+  sa --> SAFR001 : Adjust analysis parameters to ensure compliance with regulations like Basel III and GDPR.
+}
+
+package Professional {
+  rectangle "AI System" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Personalized Recommendations Based on Profiles" as AIFR002
+    usecase "AIFR003: Spending Limit Alerts via AI" as AIFR003
+    usecase "AIFR004: Investment Opportunity Analysis for Users" as AIFR004
+    usecase "AIFR005: Align Investments with Risk Profiles and MPT" as AIFR005
+    usecase "AIFR006: Anomaly Transaction Alerts via AI" as AIFR006
+    usecase "AIFR007: Contextualized News Insights for Portfolios" as AIFR007
+  }
+}
+
+package Professional {
+  rectangle "System Functions" {
+    usecase "SFR012: Generate Client Dashboards" as SFR012
+    usecase "SFR013: Deliver Alerts Based on Predefined Conditions" as SFR013
+    usecase "SFR014: Provide Client Analytics" as SFR014
+  }
+}
+
+rectangle "User (Client, Advisor)" {
+  actor User as u
+  user --> CFR011 : Send feedback to improve system outputs.
+}
+@enduml

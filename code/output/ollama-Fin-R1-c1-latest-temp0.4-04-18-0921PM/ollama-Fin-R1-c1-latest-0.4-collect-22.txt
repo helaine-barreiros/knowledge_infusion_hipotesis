@@ -1,0 +1,83 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Profiles and Permissions" as SAFR002
+  
+  Client --> CFR001 : "View"
+  
+  SysAdmin -> (User) : label="Manage Users, Roles & Access"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "SAFR003: View Client Intervention Alerts" as SAFR003
+
+  FinancialAdvisor --> (User) : label="Mentor Clients, Review Interventions"
+}
+
+rectangle "System Administrator" {
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as CFR005
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+
+  SysAdmin --> (User) : label="Adjust System Settings, Monitor Compliance"
+}
+
+rectangle "Client" {
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations" as CFR004
+  usecase "CFR006: Manage Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Financial News" as CFR008
+  usecase "CFR009: Consolidated Dashboard" as CFR010
+
+  Client --> (User) : label="Interact with System, Review Alerts"
+}
+
+rectangle "System" {
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Analyze Investment Opportunities" as AIFR004
+  usecase "SFR019: Manage Historical Records" as SFR019
+
+  System --> (User) : label="Process Requests, Generate Insights"
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Predict Financial Outcomes" as AIFR001
+  usecase "AIFR002: Personalize Recommendations" as AIFR002
+
+  System --> (User) : label="Analyze Data, Provide Insights"
+}
+
+rectangle "Client Feedback Loop" {
+  usecase "CFR011: Send User Feedback" as CFR011
+  Client --> SysAdmin : label="Report Issues or Suggestions"
+
+  SysAdmin -> (System) : label="Improve System Based on Feedback"
+}
+@enduml
+```
+
+### Explanation:
+- **Client**: Represents the end-users, including clients and financial advisors. They interact with various use cases like viewing dashboards, receiving alerts, making recommendations.
+- **SysAdmin**: Manages system settings, user profiles, and compliance checks (e.g., SAFR001).
+- **Financial Advisor**: Engages in client mentoring sessions, reviews intervention alerts, etc. (FAFR001–3).
+- **System** and **AI Component**: Handle core functionalities like delivering recommendations, generating insights, processing requests.
+- **Client Feedback Loop**: Allows users to provide feedback for system improvement.
+
+### Key Relationships:
+- Clients use cases are linked directly or through the System/Financial Advisor roles. SysAdmins manage parameters affecting these interactions (e.g., SAFR001).
+- Financial Advisors have specific tasks like mentoring and reviewing alerts.
+- The AI Component is a critical subsystem generating predictions, recommendations, etc.
+
+This structure ensures clarity in actor-to-use case relationships while grouping related use cases logically under their respective actors or systems. Adjustments can be made based on further analysis of the requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 886]

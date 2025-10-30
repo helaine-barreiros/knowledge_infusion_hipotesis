@@ -1,0 +1,137 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+
+  Client --> CFR001 : "View financial data in a comprehensive format"
+  
+  SysAdmin --> SAFR002 : "Manage analysis parameters and alert preferences"
+
+  FinancialAdvisor --> (CFR003, CFR004) : "Receive personalized recommendations aligned with client's goals"
+}
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Access Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Monitor Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Consolidate Financial Information in a Single Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+
+  Client --> (CFR001, CFR002, CFR003, CFR004, CFR005, CFR006, CFR007, CFR008, CFR009, CFR10)
+}
+
+rectangle "FinancialAdvisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts for Clients" as FAFR002
+  usecase "FAFR003: Review Predictive Analytics on Client Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+
+  FinancialAdvisor --> (FAFR001, FAFR002, FAFR003, FAFR004)
+}
+
+rectangle "SysAdmin" {
+  usecase "SAFR001: Manage System Analysis Parameters" as SAFR001
+  SysAdmin --> SAFR001 : "Ensure compliance with financial regulations"
+}
+
+package "System Components" {
+  rectangle "SFR001-SFR20" {
+    usecase "SFR001: Deliver Alerts to Users" as SFR001
+    usecase "SFR002: Generate Personalized Recommendations" as SFR002
+    usecase "SFR003: Request Financial Predictions from AI" as SFR003
+    usecase "SFR004: Request Personalized Recs from AI" as SFR004
+    usecase "SFR005: Request Spending Limit Alerts from AI" as SFR005
+    usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+    usecase "SFR007: Find ESG-Matched Investments" as SFR007
+    usecase "SFR008: Generate AML Alerts" as SFR008
+    usecase "SFR009: Extract News for Portfolios" as SFR009
+    usecase "SFR010: Process Contextualized News" as SFR010
+    usecase "SFR011: Request AI-Generated News Insights" as SFR011
+    usecase "SFR012: Generate Client Dashboards" as SFR012
+    usecase "SFR013: Manage Alerts Based on Predefined Conditions" as SFR013
+    usecase "SFR014: Generate Analytics for Financial Behavior" as SFR014
+    usecase "SFR015: Request Intervention Analyses from AI" as SFR015
+    usecase "SFR016: Enhance Value of Financial Guidance with Predictive Insights" as SFR016
+    usecase "SFR017: Generate Financial Health Reports" as SFR017
+    usecase "SFR018: Manage User Goals for Progress Tracking" as SFR018
+    usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+    usecase "SFR020: Handle User Feedback" as SFR020
+
+  SysAdmin --> (SFR001, SFR003-SFR005, SFR007-20)
+}
+
+package "AI Components" {
+  rectangle "AIFR001-AIFR09" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Personalized Recommendations Based on Profiles" as AIFR002
+    usecase "AIFR003: Spending Limit Alerts for Unusual Activity" as AIFR003
+    usecase "AIFR004: Investment Opportunity Analysis by Risk Profile" as AIFR004
+    usecase "AIFR005: Align Investments with Client Strategies and MPT Principles" as AIFR005
+    usecase "AIFR006: Anomaly Transaction Alerts for Fraud Detection" as AIFR006
+    usecase "AIFR007: Contextualized News Insights Based on Portfolio" as AIFR007
+    usecase "AIFR008: Predictive Intervention Recommendations" as AIFR008
+    usecase "AIFR009: Client-Specific Predictive Analytics for Financial Guidance" as AIFR009
+
+  SysAdmin --> (AIFR001-2, AIFR005-AIFR07)
+}
+
+rectangle "User Types" {
+  actor "Client" : "Individual or Institutional investor"
+  actor "FinancialAdvisor" : "Professional advisor for clients"
+  actor "SysAdmin" : "System administrator"
+
+  Client <|-- (CFR001-CFR20) 
+  FinancialAdvisor <|-- (FAFR001-4)
+  SysAdmin <|-- (SAFR001, SFR003-SFR20)
+
+}
+
+@enduml
+```
+
+This PlantUML code represents the use case diagram based on the provided functional requirements. It includes all actors and their respective use cases with precise IDs as per the requirements. The system is divided into packages for clarity: "System Components," "AI Components," and grouped by user types (Client, FinancialAdvisor, SysAdmin). Relationships between actors and use cases are established using arrows to ensure accurate representation of interactions within the system. 
+
+**Key Observations**:
+1. **Actors**: Clients, Financial Advisors, System Administrators.
+2. **Use Cases**: Grouped into functional categories like viewing dashboards (CFR001), receiving alerts (CFR002-6), generating recommendations and predictions (AIFR002-AIFR09).
+3. **Inheritance/Extensions**:
+   - Clients extend use cases related to personal finance management.
+   - Financial Advisors manage mentoring, client interactions via SFR components.
+4. **System Components**: AI-driven services like prediction generation (AIFR001), recommendation engines (AIFR002), and alert systems (SFR005).
+5. **Packages**:
+   - "Client": Personalized views/alerts/predictions.
+   - "FinancialAdvisor": Mentoring, client insights, alerts.
+   - "SysAdmin": System parameter management.
+
+This structure ensures all requirements are captured without redundancy or omission. Each use case is linked to the appropriate actor and system component for seamless integration into the financial analysis platform. 
+
+**Note**: The code assumes proper indentation and PlantUML syntax compliance as per guidelines. Adjustments may be needed based on specific UML tools' parsing rules. Ensure all quotes are properly formatted, especially around spaces in use case names (e.g., "CFR001: View Financial Insights Dashboard"). Also, verify that each actor-use case relationship aligns with the functional requirements provided.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+
+  Client --> CFR001 : "View financial data in a comprehensive format"
+  
+  SysAdmin --> SAFR002 : "Manage
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

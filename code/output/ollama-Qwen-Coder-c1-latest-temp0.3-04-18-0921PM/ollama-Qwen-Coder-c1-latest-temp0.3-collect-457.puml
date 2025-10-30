@@ -1,0 +1,75 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FinancialAdvisor
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  Client --> (SFR012) : "View"
+  
+  rectangle "Client Features" {
+    usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004
+    usecase "CFR005: Manage Recommendation Preferences" as CFR005
+    usecase "CFR006: View Spending Limit Alerts" as CFR006
+    usecase "CFR007: View Investment Opportunities" as CFR007
+    usecase "CFR008: View News Related to Portfolio" as CFR008
+    usecase "CFR009: Access Personalized Dashboard" as CFR009
+    usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+    
+    Client --> (SFR003) : "Request Predictions"
+    Client --> (AIFR002) : "Receive Recommendations"
+    Client --> (SAFR001) : "Manage Parameters"
+    Client --> (SFR005) : "Request Spending Alerts"
+    Client --> (AIFR004) : "View Opportunities"
+    Client --> (AIFR006) : "Detect Anomalies"
+    Client --> (AIFR007) : "Correlate News Insights"
+    Client --> (SFR13) : "Generate Alerts"
+  }
+  
+  rectangle "Financial Advisor Features" {
+    usecase "FAFR001: Manage Mentoring Sessions" as FAFR001
+    usecase "FAFR002: View Intervention Alerts" as FAFR002
+    usecase "FAFR003: View Predictive Analytics" as FAFR003
+    usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+    
+    FinancialAdvisor --> (SFR16) : "Enhance Guidance"
+  }
+  
+  rectangle "System Features" {
+    usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+    usecase "SFR008: Request Contextualized News Insights" as SFR008
+    
+    System --> (AIFR001) : "Generate Predictions"
+    System --> (AIFR003) : "Provide Recommendations"
+    System --> (SAFR001) : "Manage Parameters"
+    System --> (SFR005) : "Request Spending Alerts"
+    System --> (AIFR004) : "View Opportunities"
+    System --> (AIFR006) : "Detect Anomalies"
+    System --> (AIFR007) : "Correlate News Insights"
+    System --> (SFR13) : "Generate Alerts"
+  }
+  
+  rectangle "AI Features" {
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR004: View Opportunities" as AIFR004
+    usecase "AIFR006: Detect Anomalies" as AIFR006
+    usecase "AIFR007: Correlate News Insights" as AIFR007
+    
+    System --> (AIFR002) : "Provide Recommendations"
+    FinancialAdvisor --> (AIFR004) : "View Opportunities"
+  }
+  
+}
+
+Client --> (CFR11) : "Send Feedback"
+
+@enduml

@@ -1,0 +1,82 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  CFR001 -|> SysAdmin : Manage access to dashboard features  
+  SAFR001 --> SysAdmin : Configure system parameters  
+
+  Client --> CFR001 : View financial data and insights
+  SysAdmin --> SAFR001 : Adjust analysis settings for accuracy
+  
+  FAFR002 --> FinancialAdvisor : Monitor client alerts, take actions
+  AIFR006 --> System: Detect and report potential fraud
+
+  rectangle "Client" {
+    actor Client as c
+    usecase "CFR002: View Alerts About Anomalous Transactions" as CFR002
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004
+    usecase "CFR005: Manage Recommendation Preferences" as CFR005
+    usecase "CFR006: View Spending Limit Alerts" as CFR006
+    usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+    usecase "CFR008: Receive News Related to Portfolio" as CFR008
+    usecase "CFR009: View Consolidated Financial Dashboard" as CFR009
+    usecase "CFR10: Manage Relationship with Advisors" as CFR10
+
+    c --> CFR002 : Review alerts for fraud prevention  
+    c --> CFR003 : Analyze future financial trends  
+    c --> CFR004 : Get tailored investment advice  
+    c --> CFR005 : Adjust personalization settings  
+    c --> CFR006 : Monitor budget adherence  
+    c --> CFR007 : Explore suitable investments  
+    c --> CFR008 : Stay informed on portfolio-related news  
+    c --> CFR009 : Oversee all financial data at once  
+    c --> CFR10 : Control sharing of sensitive information  
+
+  }
+
+  rectangle "FinancialAdvisor" {
+    actor FinancialAdvisor as fa
+    usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+    usecase "FAFR03: Provide Guidance Based on Insights" as FAFR03
+
+    fa --> FAFR002 : Act upon alerts  
+    fa --> FAFR03 : Deliver personalized advice  
+
+  }
+
+  rectangle "SysAdmin" {
+    actor SysAdmin as sa
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+    usecase "SFR017: Generate Financial Health Reports" as SFR017
+
+    sa --> SAFR001 : Tune system for compliance  
+    sa --> SFR017 : Produce health assessments  
+
+  }
+
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Client** actors (e.g., CFR002, CFR003) are grouped under the "Client" rectangle.
+- **FinancialAdvisor** and **SysAdmin** roles have their own rectangles with respective use cases.
+- Inheritance relationships like `CFR001 -|> SysAdmin` indicate that system administrators manage access to certain features (e.g., dashboard management).
+- Use case dependencies are established, such as alerts being viewed by clients (`Client --> CFR002`) and financial advisors managing those alerts (`SysAdmin --> SAFR001` for parameter control).
+
+### Notes:
+The diagram adheres strictly to the provided requirements. Each use case is linked appropriately based on functional descriptions. The system boundary encompasses all components, ensuring clarity in relationships between actors and use cases. Adjustments may be needed if additional context from the problem statement alters role interactions or scope.
+
+[Done: True
+Done Reason: stop
+Eval Count: 914]

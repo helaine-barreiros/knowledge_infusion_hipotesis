@@ -1,0 +1,54 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Fraud Alerts" as SAFR002
+  usecase "CFR003: View Predictive Analytics" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Adjust Recommendation Preferences" as CFR005
+  usecase "CFR006: Monitor Spending Limits" as CFR006
+  usecase "CFR007: Discover Investment Opportunities" as CFR007
+  usecase "CFR008: Stay Informed with News" as CFR008
+  usecase "CFR009: Access Consolidated Dashboard" as CFR010
+  usecase "CFR010: Manage Data Sharing with Advisors" as CFR010
+
+  usecase "SAFR003: Adjust Analysis Parameters for Clients" as SAFR003
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR004: Configure Segmented Analysis" as FAFR004
+
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  usecase "AIFR003: Detect Unusual Spending Patterns" as AIFR003
+  usecase "AIFR005: Identify Investment Opportunities" as AIFR005
+
+  Client --> CFR001 : View financial data in a dashboard.
+  SysAdmin -> SAFR002 : Manage fraud alerts settings for the system.
+  
+  // Financial Advisor to FAFR
+  FAFR004 <|-- (FAFR) : Configure analysis parameters based on client segments.
+
+  Client --> CFR003 : View predictive financial trends and market insights.
+  Client -> AIFR001: Request predictions from AI for future financial scenarios.
+  
+  Client -> SFR002: Receive personalized recommendations aligned with their profile.
+  SysAdmin --+> SAFR004 : Adjust system-wide analysis parameters.
+
+  // System to other use cases
+  Sys --> CFR005 : Allow clients to adjust personalization settings via the system.
+  Sys --> AIFR006: Generate spending limit alerts when thresholds are exceeded by users.
+  
+  Client --+> SFR019 : Historical data is managed for trend analysis.
+
+  // Financial Advisor interactions
+  FAFR002 <|-- (FAFR) : View client-specific intervention alerts generated via the system.
+  Sys --> AIFR008: Generate predictive interventions based on user financial behavior patterns.
+  
+  Client -> CFR010 : Manage data sharing permissions with advisors through the system.
+
+  // AI System use cases
+  AIFR007 <|-- (AIFR) : Extract relevant news for portfolios from the system's knowledge base.
+}
+
+@enduml

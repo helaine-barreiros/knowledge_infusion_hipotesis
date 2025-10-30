@@ -1,0 +1,61 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR008: Deliver Anomaly Transaction Alerts to Users" as SFR008
+  usecase "AIFR006: Generate Investment Opportunity Analyses Based on Risk Profiles" as AIFR006
+
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  # Clients and Advisors can view predictive analytics
+  FAFR003 <<|-- (Client)
+  FAFR003 <<|-- (FinancialAdvisor)
+
+  SFR008 <|-- (User) : "Deliver Anomaly Transaction Alerts"
+  
+  AIFR006 <|-- (InvestmentOpportunityAnalysis)
+}
+
+rectangle "Clients" {
+  actor Client as c
+}
+rectangle "Financial Advisors" {
+  actor FinancialAdvisor as fad
+}
+rectangle "System Administrators" {
+  actor SysAdmin as sa
+}
+
+@enduml
+```
+
+### Explanation:
+1. **Use Cases**:
+   - `CFR001: View Financial Insights Dashboard` (Client)
+   - `SAFR001: Manage Analysis Parameters` (SysAdmin)
+   - `FAFR003: View Predictive Analytics for Clients` (Client, FAF)
+   - `SFR008: Deliver Anomaly Transaction Alerts to Users` (User)
+   - `AIFR006: Generate Investment Opportunity Analyses Based on Risk Profiles`
+
+2. **Actors**:
+   - Client
+   - FinancialAdvisor
+   - SysAdmin
+
+3. **Relationships**:
+   - Clients and Advisors can view predictive analytics (`FAFR003`).
+   - Alerts are delivered to users via `SFR008`.
+   - AI-generated analyses flow into investment opportunities through `AIFR006`.
+
+This diagram groups related use cases under their respective actors or systems, ensuring clarity in the interactions. The system boundary encapsulates all components and relationships defined above. Adjustments can be made based on further requirements details if needed.
+
+[Done: True
+Done Reason: stop
+Eval Count: 530]

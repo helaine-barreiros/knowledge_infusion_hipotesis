@@ -1,0 +1,75 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:User (Client): as User
+:Financial Advisor: as FAdvisor
+:System Admin: as SysAdmin
+:AIFR001: as AIFR001
+:SFR020: as SFR020
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR005: Manage Analysis Parameters Preferences" as SAFR005
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  User --> CFR001
+  User --> SAFR005
+  FAdvisor --> FAFR004
+}
+
+rectangle "Financial Advisor Module" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  
+  FAdvisor --> FAFR001
+  FAdvisor --> FAFR002
+}
+
+rectangle "Client Module" {
+  usecase "CFR002: Receive Anomaly Transaction Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  
+  User --> CFR002
+  User --> CFR003
+}
+
+rectangle "Investment Module" {
+  usecase "FAFR007: View Investment Opportunities Suitable to Risk Profile" as FAFR007
+  usecase "CFR010: Access Personalized Dashboard" as CFR010
+  
+  User --> FAFR007
+  User --> CFR010
+}
+
+rectangle "News Module" {
+  usecase "FAFR008: View News Related to Investment Portfolio" as FAFR008
+  usecase "SFR009: Request Contextualized News Insights" as SFR009
+  
+  User --> FAFR008
+  System Admin --> SFR009
+}
+
+rectangle "System Module" {
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  
+  System Admin --> SFR013
+  User --> AIFR006
+}
+
+rectangle "AI Module" {
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "SFR014: Request Client Analytics" as SFR014
+  
+  System Admin --> AIFR002
+  User --> SFR014
+}
+
+rectangle "Feedback Module" {
+  usecase "CFR11: Send Feedback About Recommendations and Insights" as CFR11
+
+  User --> CFR11
+}
+@enduml

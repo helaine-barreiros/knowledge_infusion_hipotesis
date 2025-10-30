@@ -1,0 +1,79 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FInancialAdvisor: as FAdvisor
+:AISystem: as AISys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Personalized Dashboard" as CFR008
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+
+  SysAdmin --> SAFR001 : Configure system parameters for compliance.
+
+  Client -> CFR001 : View dashboard.
+  Client -> CFR003 : View predictions.
+  Client -> CFR004 : Receive recommendations.
+  Client -> CFR005 : Manage preferences.
+  Client -> CFR006 : View alerts.
+  Client -> CFR007 : View opportunities.
+  Client -> CFR008 : Access dashboard.
+  Client -> SAFR001 : Adjust parameters (via SysAdmin).
+  
+  FAdvisors --> FAFR002: Manage client alerts and mentoring sessions.
+  FAdvisors --> FAFR003: View predictive analytics for clients.
+  FAdvisors --> AIFR008: Generate intervention recommendations.
+
+  AISys <|-- SAFR001 : Implements analysis parameter management.
+  AISys <|-- CFR004 : Generates personalized recommendations.
+  AISys <|-- CFR006 : Alerts on spending limits.
+  AISys <|-- CFR007 : Analyzes investment opportunities.
+  AISys <|-- AIFR003: Spends limit alerts based on patterns.
+  AISys <|-- AIFR004: Personalized recommendations aligned with profiles.
+  AISys <|-- AIFR005: Investment opportunity analyses per risk profile.
+  
+  Client --> AISys : Provide data for analysis (e.g., spending, investments).
+}
+
+@enduml
+```
+
+### Key Components:
+1. **System Actors**:
+   - **Client**: Represents end-users including clients and financial advisors.
+   - **SysAdmin**: System Administrator responsible for managing system parameters.
+   - **FAdvisors**: Financial Advisors who interact with the system to manage client relationships, alerts, etc.
+
+2. **Use Cases**:
+   - **CFR001–CFR008**, **SAFR001** and others are categorized under Clients’ interactions (e.g., viewing dashboards, receiving recommendations).
+   - System-level use cases like managing analysis parameters (**SAFR001**) or generating alerts (**AIFR003**) involve the AI system.
+
+3. **System Structure**:
+   - The "System" rectangle groups all use cases and their relationships.
+   - Inheritance is shown using `<|--` to indicate components (e.g., AISys) implementing specific use cases.
+
+4. **Relationships**:
+   - Clients can trigger most user-facing use cases directly or indirectly via the system.
+   - SysAdmin configures parameters for compliance, which affects how the AI operates (**SAFR001**).
+   - Financial Advisors manage client interactions and alerts (**FAFR002**, **AIFR008**) but rely on the AISystem’s recommendations.
+
+5. **AI System Integration**:
+   - The AISystem (represented as a component) handles critical logic for predictions, recommendations, spending limits, etc., ensuring compliance with regulations like Basel III and MiFID II.
+   
+This diagram provides a comprehensive view of how different actors interact within the system to achieve their goals while adhering to regulatory requirements. Adjustments can be made based on further details in the requirements or specific business rules not covered here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 945]

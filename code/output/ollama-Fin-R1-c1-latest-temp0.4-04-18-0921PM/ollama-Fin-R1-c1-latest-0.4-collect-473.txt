@@ -1,0 +1,63 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  
+  actor "Client" as client {
+    client --> CFR001 : "View Financial Insights Dashboard"
+    client --> SFR012 : "Generate Client Dashboards"
+    client --> SFR013 : "Generate Client Alerts Based on Predefined Conditions"
+    
+    usecase "CFR005: Manage Personalized Recommendations Preferences" as CFR005
+    client --> CFR005 : "Manage Personalized Recommendations Preferences"
+  }
+  
+  actor "Financial Advisor (FA)" as fa {
+    fa --> FAFR001 : "Manage Client Mentoring Sessions Based on System-Generated Insights"
+    fa --> FAFR002 : "View Client Intervention Alerts"
+    fa --> FAFR003 : "View Predictive Analytics About Clients' Financial Situations"
+  }
+  
+  actor "System Administrator (SA)" as sa {
+    sa --> SAFR001 : "Manage Analysis Parameters for the AI System"
+    sa --> FAFR004 : "Configure Analysis Parameters for Specific Client Segments"
+  }
+
+  usecase "SFR020: Manage User Feedback" as SFR020
+  client <|-- SFR020
+  
+  
+}
+
+@enduml
+```
+
+### Explanation:
+1. **System Boundary**: The entire system is enclosed within a rectangle labeled "System".
+2. **Use Cases**:
+   - `CFR001: View Financial Insights Dashboard` (Client)
+   - `SAFR001: Manage Analysis Parameters` (Admin)
+   - `FAFR004: Configure Analysis Parameters for Client Segments` (Financial Advisor and Admin share this use case).
+3. **Actors**:
+   - **Client**: Can view dashboards, alerts, manage preferences.
+   - **Financial Advisor (FA)**: Manages mentoring sessions, views intervention/alerts/predictive analytics.
+   - **System Administrator (SA)**: Manages analysis parameters and configures client segments for advisors.
+
+### Key Relationships:
+- Clients interact with the system to view data, receive recommendations, etc. (`CFR001`, `SFR012`, `SFR013`).
+- Financial Advisors use predictive tools (`FAFR001`, `FAFR002`, `FAFR003`), and Admins handle parameter management.
+- Feedback is managed by the system for all actors.
+
+### Notes:
+- The diagram groups related use cases under their respective actors. Inheritance relationships are implied (e.g., Client extends SFR020). Ensure no redundant components or conflicting IDs/labels.
+
+[Done: True
+Done Reason: stop
+Eval Count: 645]

@@ -1,0 +1,88 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "System" {
+  usecase "SFR001: Deliver Alerts" as SFR001
+  usecase "SFR002: Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities Matching User Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+  usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR009
+  usecase "SFR010: Process Contextualized News" as SFR010
+  usecase "SFR011: Request Contextualized News Insights from AI" as SFR011
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "SFR014: Generate Client Analytics Providing Meaningful Insights into Financial Behavior and Performance" as SFR014
+  usecase "SFR015: Request Predictive Intervention Analyses from AI" as SFR015
+  usecase "SFR016: Request Predictive Insights From the AI Component to Enhance Value of Financial Guidance Provided to Clients" as SFR016
+  usecase "SFR017: Generate Financial Health Reports Assessing Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as SFR017
+  usecase "SFR018: Manage User Goals Tracking Progress and Providing Relevant Recommendations" as SFR018
+  usecase "SFR019: Maintain a Historical Record of Users' Insights for Trend Analysis and Effectiveness Measurement" as SFR019
+  usecase "SFR020: Manage User Feedback to Continuously Improve the Quality and Relevance of Financial Insights" as SFR020
+
+  rectangle "System Components" {
+    AIFR001 --> (AIFR001)
+    AIFR002 --> (AIFR002)
+    AIFR003 --> (AIFR003)
+    AIFR004 --> (AIFR004)
+    AIFR005 --> (AIFR005)
+    AIFR006 --> (AIFR006)
+    AIFR007 --> (AIFR007)
+    AIFR008 --> (AIFR008)
+    AIFR009 --> (AIFR009)
+  }
+}
+
+package "Client" {
+  actor Client as CFR001
+  usecase "CFR002: View Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Current Market Trends" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as CFR004
+  usecase "CFR005: Manage Personalized Recommendations Preferences to Ensure Insights Relevant to My Financial Objectives and Risk Tolerance" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds in Specific Expense Categories" as CFR006
+  usecase "CFR007: View Investment Opportunities Suitable for My Risk Profile (as Defined Under MiFID II or Equivalent Standards)" as CFR007
+  usecase "CFR008: View News Related to My Investment Portfolio" as CFR008
+  usecase "CFR009: Access a Personalized Dashboard That Consolidates Financial Information in a Single View" as CFR009
+
+  Client --> (SFR001)
+  Client --> (SFR002)
+  Client --> (SFR003)
+  Client --> (SFR004)
+  Client --> (SFR005)
+  Client --> (SFR006)
+  Client --> (SFR007)
+  Client --> (SFR008)
+  Client --> (SFR012)
+
+  CFR011 --> SFR020
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts When System Detects Patterns Requiring Professional Attention to Proactively Assist Clients with Potential Financial Issues" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations To Provide Data-Driven Recommendations During Consultations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments to Customize System's Behavior According to Different Client Profiles and Regulatory Requirements Such As GDPR or CCPA" as FAFR004
+
+  FinancialAdvisor --> (SFR015)
+  FinancialAdvisor --> (SFR016)
+
+  CFR011 --> SFR20
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR001
+  
+  SAFR001 --> (SAFR001) <|-- (AIFR003)
+  
+  CFR011 --> SFR20
+}
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 1302]

@@ -1,0 +1,43 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR013: Generate Client Alerts" as SFR013
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  usecase "SFR015: Request Predictive Intervention Analyses" as SFR015
+  usecase "SFR016: Request Predictive Insights" as SFR016
+  usecase "SFR017: Generate Financial Health Reports" as SFR017
+  usecase "SFR018: Manage Users' Financial Goals" as SFR018
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  usecase "SFR020: Manage User Feedback" as SFR020
+
+  rectangle "Client" {
+    actor Client as C
+    C --> (SAFR005)
+    C --> CFR006 : "View Spending Limit Alerts"
+    C --> SAFR019
+    C --> CFR007 : "View Investment Opportunities"
+    C --> SFR020
+  }
+
+  rectangle "Financial Advisor" {
+    actor FinancialAdvisor as FA
+    FA --> (FAFR04)
+    FA --> FAFR03
+    FA --> SAFR015
+    FA --> FAFR08
+    FA --> FAFR06 : "View Predictive Insights"
+  }
+
+  rectangle "System Administrator" {
+    actor SystemAdmin as SA
+    SA --> (SAFR001)
+    SA --> SFR020
+  }
+}
+
+@enduml

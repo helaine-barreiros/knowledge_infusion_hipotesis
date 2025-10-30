@@ -1,0 +1,61 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage AML Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR001: Adjust Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+}
+
+actor "Client" as C {
+  --> CFR001 : "View Financial Insights Dashboard"
+  --> CFR003 : "View Financial Predictions"
+  --> CFR004 : "Receive Personalized Recommendations"
+  --> SAFR002 : "Manage AML Alerts"
+  --> SFR013 : "Generate Client Alerts Based on Predefined Conditions"
+}
+
+actor "Financial Advisor" as FA {
+  --> FAFR001: Manage client mentoring sessions
+  --> FAFR002: View Client Intervention Alerts
+  --> FAFR004: Configure analysis parameters for specific segments
+  --> AIFR008: Generate predictive intervention recommendations
+}
+
+actor "System Administrator" as SA {
+  --> SAFR001 : Adjust Analysis Parameters
+  --> SFR013 : Generate Client Alerts Based on Predefined Conditions
+}
+
+package Professional {
+  actor FinancialAdvisor as FA
+}
+system boundary rectangle "Professional System" {
+  C, FA, SA
+}
+
+@enduml
+```
+
+**Key Observations:**
+- **Actors**: The diagram includes three main actors - *Client*, *Financial Advisor* (FA), and *System Administrator* (SA).
+- **Use Cases**: Each functional requirement is mapped to a use case with its exact ID. For example, CFR001 corresponds to viewing the financial insights dashboard.
+- **Actor-to-Usecase Relationships**:
+  - Clients interact directly with most of the system’s features like viewing dashboards, predictions, recommendations, and alerts (CFR001–4, SAFR002).
+  - Financial Advisors use specific tools for mentoring sessions, client intervention alerts, predictive analyses (FAFR001–3, AIFR008), and parameter adjustments.
+  - System Administrators manage analysis parameters via SAFR001 and generate system-wide alerts through SFR013.
+- **Grouping**: Use cases are grouped logically under the "System" boundary. Professional services (Financial Advisor) are nested within a package for clarity.
+
+**Note:** The diagram adheres strictly to provided requirements, ensuring no extraneous actors or use cases are introduced. Relationships between actors and their respective functionalities are clearly defined. Adjustments were made in structure based on logical groupings but retained the original requirement IDs intact.
+
+[Done: True
+Done Reason: stop
+Eval Count: 689]

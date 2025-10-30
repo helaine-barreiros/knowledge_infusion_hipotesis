@@ -1,5 +1,0 @@
-```plantuml
-@startuml
-
-@enduml
-```

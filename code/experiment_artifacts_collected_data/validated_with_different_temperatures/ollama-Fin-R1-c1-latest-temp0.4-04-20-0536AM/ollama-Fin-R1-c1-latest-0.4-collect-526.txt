@@ -1,0 +1,84 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+
+  // Client Use Cases
+  Client --> CFR001 : View financial data, consolidate info in a single dashboard.
+  
+  // System Administrator Use Cases
+  SysAdmin --> SAFR001 : Manage analysis parameters to ensure accuracy and compliance.
+
+  // Financial Advisor Use Cases
+  FAFR002 <|-- (Client) : Receive alerts when system detects patterns needing professional attention. 
+
+  // AI Component Use Cases
+  AIFR001 <|-- (SFR003, SAFR001) : Generate financial predictions and manage parameters.
+  
+}
+
+@enduml
+```
+
+**Explanation:**
+- The PlantUML code defines a use case diagram for the "AI-Powered Analysis & Insights System" based on provided functional requirements. 
+- **System Boundary:** A rectangle labeled "System" encapsulates all internal components (use cases) of the system, distinguishing them from external actors.
+- **Actors:**
+  - `Client` corresponds to end-users like clients or financial advisors seeking specific functionalities.
+  - `SysAdmin` represents System Administrators managing backend settings.
+  - `Financial Advisor` (FAFR001–4) and other roles are grouped under the system’s use cases but not explicitly modeled as separate actors since their interactions are through the system's components.
+- **Use Cases:**
+  - CFR-related use cases focus on client-facing features like viewing dashboards, receiving alerts, etc.
+  - SAFR001 is managed by SysAdmins to adjust analysis parameters for compliance and accuracy.
+  - AIFR001 handles AI-generated predictions, which are requested via SFR components (e.g., `SFR003`).
+- **Relationships:**
+  - Clients interact directly with the system through use cases like viewing dashboards (`CFR001`) or receiving alerts (`SAFR002`, indirectly linked via FAFR).
+  - SysAdmins manage parameters affecting AI components (e.g., `AIFR001` uses `SAFR001` for parameter adjustments).
+- **Grouping:** Use cases are logically grouped within the system boundary, with clients and admins having distinct paths of interaction.
+
+This structure adheres strictly to the provided requirements without inventing additional actors or use cases. All relationships align precisely with the described functionalities. 
+
+**Note:** The diagram assumes implicit inheritance where necessary (e.g., `AIFR001` extends both `SFR003` and `SAFR001`). Adjustments may be needed based on further clarification of requirements. However, given the scope here, this representation is accurate. 
+
+\boxed{UseCaseDiagram}
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+
+  // Client Use Cases
+  Client --> CFR001 : View financial data, consolidate info in a single dashboard.
+  
+  // System Administrator Use Cases
+  SysAdmin --> SAFR001 : Manage analysis parameters to ensure accuracy and compliance.
+
+  // Financial Advisor Use Cases
+  FAFR002 <|-- (Client) : Receive alerts when system detects patterns needing professional attention. 
+
+  // AI Component Use Cases
+  AIFR001 <|-- (SFR003, SAFR001) : Generate financial predictions and manage parameters.
+  
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 976]

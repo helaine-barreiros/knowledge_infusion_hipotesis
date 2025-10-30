@@ -1,0 +1,129 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+}
+
+package "System Administrator" {
+  actor SysAdmin as SAFR003
+}
+
+rectangle "System" {
+  usecase "CFR004: Receive personalized recommendations aligned with financial profile and goals" as CFR004
+  usecase "SAFR005: Manage analysis parameters preferences for clients" as SAFR005
+  
+  Client --> (CFR001)
+  FinancialAdvisor --> (FAFR002)
+  SysAdmin --> (SAFR003)
+
+  rectangle "Financial Insights Dashboard" {
+    usecase "CFR009: View personalized dashboard consolidating financial information in a single view" as CFR009
+    Client --> (CFR009)
+    
+    usecase "SFR12: Generate client dashboards presenting financial info in an intuitive format" as SFR12
+  }
+
+  rectangle "Alerts and Notifications" {
+    usecase "SAFR007: Deliver alerts to users through appropriate notification channels" as SAFR007
+    
+    Client --> (CFR008)
+    FinancialAdvisor --> (FAFR004)
+    SysAdmin --> (SFR13)
+
+    rectangle "Spending Limit Alerts" {
+      usecase "SAFR025: Request spending limit alerts from AI component when user exceeds thresholds" as SAFR025
+      Client --> (CFR006)
+      
+      usecase "AIFR004: Generate spending limit alerts for users by identifying unusual deviations" as AIFR004
+      
+    }
+
+    rectangle "Investment Opportunities Alerts" {
+      usecase "SAFR031: Request investment opportunity analysis from AI component to identify suitable investments based on risk profiles" as SAFR031
+      FinancialAdvisor --> (FAFR027)
+      
+      usecase "AIFR005: Generate investment opportunities for users by identifying financial instruments that align with their strategies and Modern Portfolio Theory principles" as AIFR005
+      
+    }
+
+    rectangle "Anomaly Transactions Alerts" {
+      usecase "SAFR036: Request anomaly transaction alerts from AI component to detect potentially fraudulent activities in compliance with FinCEN requirements" as SAFR036
+      FinancialAdvisor --> (FAFR029)
+      
+      usecase "AIFR007: Generate anomaly transaction alerts by employing pattern recognition for fraud detection" as AIFR007
+      
+    }
+  }
+
+  rectangle "Recommendations and Insights" {
+    usecase "SFR15: Request personalized recommendations from AI component based on financial data and preferences" as SFR15
+    FinancialAdvisor --> (FAFR023)
+    
+    usecase "AIFR002: Generate personalized recommendations for users based on their profiles, goals, and risk tolerance" as AIFR002
+    
+  }
+
+  rectangle "Predictive Analytics" {
+    usecase "SFR16: Request predictive insights from AI component to enhance financial guidance provided by advisors" as SFR16
+    FinancialAdvisor --> (FAFR037)
+    
+    usecase "AIFR009: Generate client predictive intervention recommendations based on patterns indicating potential difficulties or opportunities requiring advisor engagement" as AIFR009
+    
+  }
+
+  rectangle "News and Information" {
+    usecase "SFR18: Request contextualized news insights from AI component to identify impacts relevant to user investments" as SFR18
+    FinancialAdvisor --> (FAFR035)
+    
+    usecase "AIFR007: Generate contextualized news insights by correlating financial news with specific portfolios" as AIFR007
+    
+  }
+
+  rectangle "Financial Health and Reports" {
+    usecase "SFR19: Request predictive analytics about clients' financial situations to provide data-driven recommendations during consultations" as SFR19
+    FinancialAdvisor --> (FAFR033)
+    
+    usecase "AIFR020: Generate financial health reports that assess users' overall financial wellbeing according to standard ratios and metrics" as AIFR020
+    
+  }
+
+}
+
+rectangle "Client Relationship Management" {
+  usecase "CFR10: Manage relationship with Financial Advisors, including permissions for sharing data" as CFR10
+  Client --> (CFR10)
+  
+  rectangle "System Admin Role in CRM" {
+    SysAdmin --> (SAFR028)
+    
+    usecase "AIFR034: Generate client predictive intervention recommendations based on patterns indicating potential difficulties or opportunities requiring advisor engagement" as AIFR034
+    
+  }
+}
+
+rectangle "Feedback Management" {
+  usecase "CFR11: Send feedback about system's recommendations and insights to improve future outputs" as CFR11
+  Client --> (CFR11)
+  
+  rectangle "System Admin Role in Feedback" {
+    SysAdmin --> (SAFR032)
+    
+    usecase "AIFR040: Generate client predictive intervention recommendations based on patterns indicating potential difficulties or opportunities requiring advisor engagement" as AIFR040
+    
+  }
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1140]

@@ -1,0 +1,101 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "SFR002: Deliver Personalized Recommendations Based on Financial Profiles" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations Using AI" as AIFR002
+
+  Client --> CFR001 : View Dashboard  
+  SysAdmin --> SAFR001 : Manage Parameters  
+  FAFR004 <|-- (SAFR001) : Configure Segments  
+  SFR002 <-- (CFR005: Manage Recommendations Preferences) : Adjust Settings  
+
+  rectangle "Client" {
+    actor Client as C
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004
+    usecase "CFR005: Manage Recommendations Preferences" as CFR005  
+    usecase "CFR010: Manage Relationship with Advisors" as CFR010  
+
+    C --> CFR003 : View Predictions  
+    C --> CFR004 : Get Recs  
+    C --> CFR005 : Adjust Settings  
+    C --> CFR010 : Share Data  
+
+  }
+
+  rectangle "Advisor" {
+    actor FinancialAdvisor as FA
+    usecase "FAFR002: Manage Client Intervention Alerts" as FAFR002
+    usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003  
+    usecase "AIFR008: Generate Intervention Recommendations Using AI" as AIFR008  
+
+    FA --> FAFR002 : Manage Alerts  
+    FA --> FAFR003 : Analyze Data  
+  }
+
+  rectangle "SysAdmin" {
+    actor SysAdmin as SA
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+    usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004  
+
+    SA --> SAFR001 : Adjust System Params  
+    SA --> FAFR004 : Set Segment Rules  
+  }
+
+  rectangle "AI" {
+    actor AI as A
+    usecase "AIFR002: Generate Personalized Recommendations Using AI" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts Based on Patterns" as AIFR003  
+    usecase "AIFR004: Identify Investment Opportunities for Users" as AIFR004  
+
+    A --> AIFR002 : Create Recs  
+    A --> AIFR003 : Alert On Spending  
+    A --> AIFR004 : Find Investments  
+  }
+
+  rectangle "System Components" {
+    usecase "SFR001: Deliver Alerts Through Notification Channels" as SFR001
+    usecase "SFR002: Generate Personalized Recommendations Based on AI" as SFR002  
+    usecase "SFR003: Request Financial Predictions from AI Component" as SFR003  
+
+    SysAdmin --> SFR001 : Manage Alerts  
+    Client --> SFR002 : Receive Recs  
+  }
+
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire system is enclosed within a rectangle labeled "System". This includes all use cases and actors related to the AI-powered analysis.
+- **Actors**:
+  - `Client`: Represents individual clients (CFR001–CFR011).
+  - `SysAdmin`: System Administrator for managing parameters (SAFR001, FAFR004).
+  - `FinancialAdvisor` (FA): Financial advisors using the system (FAFR002–FAFR003).
+- **Use Cases**:
+  - Client-related use cases like viewing dashboards (`CFR001`), receiving alerts (`SAFR008`, etc.), and managing preferences (`CFR005`) are linked to their respective actors.
+  - Advisor-specific use cases (e.g., `FAFR002`, `AIFR008`) connect advisors with AI-generated recommendations or alerts.
+  - SysAdmin-related management tasks like parameter adjustment (`SAFR001`), segment configuration (`FAFR004`).
+- **AI Component**: The "AI" rectangle includes use cases for generating personalized recommendations, spending limit alerts, and investment opportunities using the system's intelligence (e.g., `AIFR002`, `AIFR003`, etc.).
+- **System Components**:
+  - Use cases like delivering alerts (`SFR001`), requesting financial predictions (`SFR003`) are part of the system’s operational flow.
+
+### Key Relationships:
+- Clients interact with the system via dashboards, recommendations, and personalization settings.
+- Advisors use predictive analytics to guide clients or receive automated alerts for proactive interventions.
+- SysAdmins manage parameters across different components (e.g., AI models, client segments).
+- The AI component drives most of the intelligent outputs by generating predictions, recommendations, and alerts.
+
+This diagram ensures all functional requirements are represented accurately with their respective actors and use cases. Adjustments can be made based on further details or evolving requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1239]

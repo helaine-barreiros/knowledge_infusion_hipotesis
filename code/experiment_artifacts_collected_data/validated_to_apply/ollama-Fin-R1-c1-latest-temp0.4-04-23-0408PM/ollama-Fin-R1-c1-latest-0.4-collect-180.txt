@@ -1,0 +1,84 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters for AI System"
+
+  FAFR002 <|-- (Client) : "Financial Advisor or User"
+}
+
+rectangle "User Interface" {
+  actor "Client" as C
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+
+  C --> CFR003 : "View Financial Predictions"
+  C --> CFR004 : "Receive Personalized Recommendations"
+  C --> CFR005 : "Manage Recommendation Preferences"
+  C --> CFR010 : "Manage Relationship with Advisors"
+
+}
+
+rectangle "System" {
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI" as SFR003
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+
+  Sys --> SFR002 : "Deliver Personalized Recommendations to Client"
+  
+  Sys --> SFR003 : "Request Financial Predictions from AI System"
+
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+
+  Sys --> AIFR001 : "Request Financial Predictions"
+  
+}
+
+rectangle "Client Alerts System" {
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI" as SFR008
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  Sys --> SFR008 : "Request Anomaly Transaction Alerts"
+  
+}
+
+rectangle "Financial Advisor Interface" {
+  actor "FAFR001: Financial Advisor" as FAFR
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+
+  FAFR --> FAFR002 : "View Client Intervention Alerts"
+}
+
+@enduml
+```
+
+**Description of the Diagram Structure:**
+- The main system boundary contains all use cases related to financial analysis, recommendations, and alerts.
+- **Client**: Can view dashboards (CFR001), receive predictions (CFR003), personalized recommendations (CFR004), manage preferences (CFR005), and handle relationships with advisors (CFR010).
+- **SysAdmin** can configure analysis parameters for the AI system via SAFR001.
+- The **System** includes components like SFR002, which handles personalized recommendations; AIFR003 generates spending limit alerts (AIFR006 is a related use case but not directly mentioned here).
+- The **AI Component** focuses on generating predictions and recommendations using data from the system.
+- Alerts are managed through separate components like SFR008, which requests anomaly transaction alerts from AIFR006.
+- Financial Advisors can view client-specific intervention alerts via FAFR002.
+
+This structure ensures all actors and use cases are represented accurately based on provided requirements. Adjustments may be needed if additional relationships or dependencies arise during review.
+
+[Done: True
+Done Reason: stop
+Eval Count: 899]

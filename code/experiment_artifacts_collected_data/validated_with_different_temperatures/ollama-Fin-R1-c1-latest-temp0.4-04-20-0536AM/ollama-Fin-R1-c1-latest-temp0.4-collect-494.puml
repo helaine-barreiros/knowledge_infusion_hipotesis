@@ -1,0 +1,60 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor FinancialAdvisor as advisor
+actor SysAdmin as sysadmin
+system "System" as system
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as cfr001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as cfr002
+  usecase "CFR003: View Financial Predictions" as cfr003
+  usecase "CFR004: Personalized Recommendations" as cfr004
+  usecase "CFR005: Manage Recommendation Preferences" as cfr005
+  usecase "CFR006: Spending Limit Alerts" as cfr006
+  usecase "CFR007: Investment Opportunities Based on Risk Profile" as cfr007
+  usecase "CFR008: View Portfolio News" as cfr008
+  usecase "CFR009: Personalized Dashboard" as cfr009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as cfr10
+
+  client --> cfr001 : "View"
+  client --> cfr002 : "Receive Alerts for Anomalous Transactions (FATF)"
+  client --> cfr003 : "View Predictions"
+  client --> cfr004 : "Personalized Recommendations"
+  client --> cfr005 : "Manage Preferences"
+  client --> cfr006 : "Spending Limit Alerts"
+  client --> cfr007 : "Investment Opportunities (Risk Profile)"
+  client --> cfr008 : "View News"
+  client --> cfr009 : "Personalized Dashboard"
+  client --> cfr10 : "Manage Relationship"
+
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as fafr001
+  usecase "FAFR002: View Intervention Alerts" as fafr002
+  usecase "FAFR003: View Predictive Analytics for Clients" as fafr003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as fafr004
+
+  advisor --> fafr001 : "Manage"
+  advisor --> fafr002 : "View Alerts"
+  advisor --> fafr003 : "View Predictive Analytics"
+  advisor --> fafr004 : "Configure Parameters"
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as safr001
+
+  sysadmin --> safr001 : "Manage"
+
+}
+
+system <<-- (cfr002, cfr006) : SFR008
+system <<-- (cfr003, cfr004, cfr007, cfr009) : AIFR001
+system <<-- (cfar005, cfar006, safr002) : AIFR002
+
+@enduml

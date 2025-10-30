@@ -1,0 +1,77 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002  
+  usecase "SAFR008: Deliver AML Compliance Alerts" as SAFR008  
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "CFR006: Manage Spending Limit Alerts" as CFR006  
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004 
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003  
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005 
+  usecase "CFR004: Receive Personalized Recommendations Aligned with Financial Profile and Goals" as CFR004  
+  usecase "AIFR003: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations" as AIFR003
+  usecase "SFR012: Generate Client Dashboards That Present Financial Information Intuitively" as SFR012 
+  usecase "CFR011: Send Feedback to Improve System Outputs" as CFR011  
+  usecase "AIFR007: Generate Contextualized News Insights by Correlating with User Portfolios" as AIFR007
+}
+
+actor "Client" as Client  
+actor "Financial Advisor (FA)" as FA  
+actor "System Administrator (SA)" as SA
+
+Client --> CFR001 : View financial insights dashboard  
+Client --> SAFR008 : Receive AML compliance alerts  
+Client --> SFR013 : Manage system-generated client alerts  
+
+Client --> FAFR004 : Configure analysis parameters for specific segments  
+
+FA --> FAFR002 : Provide personalized recommendations to clients  
+FA --> FAFR003 : View predictive analytics about clients' financial situations  
+FA --> SAFR004 : Request AI-generated personalization based on user data  
+
+SA --> SAIFR001: Manage system parameters for accuracy and compliance  
+
+Client <-- AIFR002: Receive personalized recommendations  
+Client <|-- CFR003: View predictions (AIFR001)  
+Client <|-- SAFR005: Request spending limit alerts from AI  
+Client --> SFR012 : Access consolidated dashboards  
+
+Client --> AIFR007: Get contextualized news insights  
+
+' Relationship between system and use cases
+SysAdmin --> SAIFR003: Configure analysis parameters for client segments (SA)  
+FA <|-- FAFR004: Client segment configuration by FA  
+
+SFR012 <|-- SFR005: Spending limit alerts integration into dashboards  
+AIFR007 <|-- AIFR008: Anomaly transaction detection via news correlation  
+
+@enduml
+```
+
+**Key Observations and Relationships in the Diagram:**
+- **Client**: Interacts with most use cases related to viewing dashboards, receiving alerts (AML, spending limits), financial predictions, personalized recommendations. 
+- **Financial Advisor (FA)**: Engages with generating and reviewing client-specific recommendations, predictive analytics.
+- **System Administrator (SA)**: Manages system parameters for accuracy and compliance (e.g., AIFR001).
+- **Use Cases**: Grouped by actor or functional area to maintain clarity. For example:
+  - Client-related use cases are under "Client" interactions like viewing dashboards, receiving alerts.
+  - System Administrator handles parameter management (SAFR001).
+  - Financial Advisor focuses on client mentoring and system-generated insights.
+
+**Inheritance/Extends Relationships:**
+- Not explicitly shown in the above diagram but inferred from requirements. For example:
+  - `CFR002` extends AML compliance alerts (`SAIFR008`) through the relationship between Client and SAFR008.
+  
+This structure ensures all functional requirements are represented accurately with their respective actors and use cases, adhering to the provided guidelines. Adjustments may be needed based on further analysis of requirement nuances not explicitly covered here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1050]

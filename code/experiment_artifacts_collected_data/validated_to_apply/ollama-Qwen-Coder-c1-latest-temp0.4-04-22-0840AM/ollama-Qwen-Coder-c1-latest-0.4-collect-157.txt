@@ -1,0 +1,51 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor (FA): as FA
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+  usecase "SFR009: Find Contextualized News Relevant to User's Portfolio" as SFR009
+  usecase "SFR12: Generate Client Dashboards" as SFR12
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  
+  rectangle "Client Features" {
+    CFR001 --> (CFR009)
+    CFR006 <|-- SAFR005
+  }
+  
+  rectangle "Financial Advisor Features" {
+    FAFR003 --> SFR024
+    FAFR007 --> AIFR007
+    FAFR018 --> (AIFR009)
+  }
+
+  rectangle "System Admin Features" {
+    SAFR001 <|-- SysAdmin
+    CFR011 --> (SFR025)
+  }
+}
+
+Client -> CFR001 : View Financial Insights Dashboard
+Client -> SFR004 : Request Personalized Recommendations from AI
+FA -> FAFR003 : View Predictive Analytics about Client's Financial Situations
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 504]

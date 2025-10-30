@@ -1,0 +1,83 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+}
+
+actor "Client" as Client {
+  --> CFR001 : View Financial Insights Dashboard
+  --> FAFR002 : View Client Intervention Alerts
+  --> SFR004 : Request Personalized Recommendations from AI Component
+  --> SFR013 : Generate Client Alerts Based on Predefined Conditions
+}
+
+actor "Financial Advisor" as FA {
+  --> FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights
+  --> FAFR002: View Client Intervention Alerts
+  --> FAFR004: Configure Analysis Parameters for Specific Client Segments
+  --> AIFR008: Generate Client Predictive Intervention Recommendations
+}
+
+actor "System Administrator" as SysAdmin {
+  --> SAFR001 : Manage Analysis Parameters for AI System
+  --> SFR003: Request Financial Predictions from AI Component
+  --> SFR004: Request Personalized Recommendations from AI Component
+  --> SFR005: Request Spending Limit Alerts from AI Component
+}
+
+actor "AI" as AI {
+  <|-- AIFR001 : Generate Financial Predictions for Users
+  <|-- AIFR002 : Generate Personalized Recommendations Based on User Profiles and Risk Tolerance
+  <|-- AIFR003: Generate Spending Limit Alerts by Identifying Unusual Deviations from Established Patterns
+  <|-- AIFR004: Generate Investment Opportunity Analyses for Users Against Their Risk Profiles
+  <|-- AIFR005: Identify Financial Instruments Aligning with User Strategies and Portfolio Theory Principles
+  <|-- AIFR006: Detect Anomaly Transaction Alerts Using Pattern Recognition Compliance with FinCEN Requirements
+  <|-- AIFR007: Generate Contextualized News Insights Correlated to Specific Portfolios for Relevant Impacts
+  <|-- AIFR008: Identify Patterns Indicating Financial Difficulties or Opportunities Requiring Advisor Engagement
+}
+
+actor "Client, System Administrator" as User {
+  --> CFR001 : View Financial Insights Dashboard
+  --> SAFR001 : Manage Analysis Parameters for AI System (for SysAdmin)
+  --> FAFR002: View Client Intervention Alerts
+  --> SFR003: Request Financial Predictions from AI Component
+}
+
+actor "Client, Financial Advisor" as User {
+  --> CFR001: View Financial Insights Dashboard
+  --> AIFR008: Generate Client Predictive Intervention Recommendations (for FA)
+}
+
+package Professional {
+  actor Chef as c
+}
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire system is enclosed within a rectangle labeled "System" to represent the AI-Powered Analysis & Insights System.
+- **Use Cases**:
+  - `CFR001` (Client): View Financial Insights Dashboard, Alerts, Predictions, Recommendations, Spending Limit Alerts, Investment Opportunities, News, Personalized Dashboards, Relationship Management with Advisors.
+  - `SAFR001`: Manage AI Analysis Parameters by System Administrators.
+  - `FAFR002`, `SFR003`, etc., are other use cases tied to specific components or actors.
+- **Actors**:
+  - **Client**: Can view dashboards, receive alerts/recommendations, and manage relationships with advisors.
+  - **Financial Advisor (FA)**: Manages client mentoring sessions, views intervention/alerts, configures parameters for clients.
+  - **System Administrator (SysAdmin)**: Manages AI analysis parameters.
+- **AI System** (`AIFR001`–`AIFR009`): Represents the AI components generating predictions, recommendations, alerts, etc., which are linked to use cases via inheritance relationships.
+- **User**: A general role that could be either a Client or SysAdmin depending on context (e.g., `CFR001`, `SAFR001`).
+  
+This structure ensures all requirements are represented accurately with their respective actors and relationships. The system boundary clarifies the scope of interactions within the AI framework. Adjustments can be made based on further analysis, but this covers the provided functional requirements comprehensively.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1048]

@@ -1,0 +1,71 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C1
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAdvisors
+}
+
+package "System Administrator" {
+  actor SysAdmin as SA
+}
+
+rectangle "System Boundary" {
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+  
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Financial Advisors" as CFR009
+  
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR013: Deliver Alerts Based on Predefined Conditions" as SFR013
+  usecase "SFR014: Provide Client Analytics" as SFR014
+  
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Deliver Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Issue Spending Limit Alerts" as AIFR003
+  
+  usecase "CFR011: Send Feedback for Improvement" as CFR011
+
+  
+  C1 --> CFR001 : View Financial Insights Dashboard
+  SA -> SAFR001 : Manage Analysis Parameters (SysAdmin)
+  FAdvisors --> FAFR001 : Manage Client Mentoring Sessions
+  
+  SysAdmin --> SFR012 : Generate Client Dashboards
+  SysAdmin --> AIFR001 : Request Predictive Interventions for Users
+
+  C1 --> CFR003 : View Financial Predictions
+  C1 --> CFR004 : Receive Personalized Recommendations
+  C1 --> CFR005 : Manage Recommendation Preferences
+  C1 --> CFR006 : View Spending Limit Alerts
+  
+  FAdvisors --> AIFR002 : Deliver Personalized Recommendations for Clients
+
+  SysAdmin --> SFR013 : Issue Timely Alerts Based on Conditions (Sys)
+  
+  FAdvisors --> SAFR004 : Configure Analysis Parameters by Client Segment
+  C1 --> CFR007 : View Investment Opportunities
+  
+  SysAdmin --> AIFR005 : Generate Investment Opportunity Analyses for Users
+
+  C1 --> SFR008 : Receive Contextualized News Insights (Client)
+  
+}
+
+@enduml

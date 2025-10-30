@@ -1,0 +1,61 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "SFR019: Maintain Historical Record of Users' Insights" as SFR019
+
+  Client --> CFR001
+  SysAdmin --> SAFR001
+  FinancialAdvisor --> FAFR002
+}
+
+rectangle "AI Component" {
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+  SFR005 <|-- (AIFR003)
+}
+
+rectangle "System Notifications" {
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+
+  SysAdmin --> SAFR001
+}
+
+rectangle "Contextualized News Processing" {
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "SFR020: Manage User Feedback for System Improvements" as SFR020
+
+  Client --> CFR001
+}
+
+rectangle "Client Relationship Management" {
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+
+  SysAdmin --> SAFR001
+}
+@enduml
+```
+
+**Key Observations and Relationships:**
+- **Clients (User)** are the primary actors for most use cases, such as viewing dashboards (`CFR001`), receiving alerts (`SAFR002`, `SFR005`), personalized recommendations (`SFR004`), etc.
+- **System Administrators** manage analysis parameters (`SAFR001`) and possibly other system-level tasks like maintaining historical records (`SFR019`).
+- **Financial Advisors (FA)** are involved in client mentoring sessions, viewing alerts (`FAFR002`), generating predictive insights (`AIFR008`), etc.
+- The **AI Component** generates specific outputs like spending limit alerts (`AIFR003`), investment analyses (`AIFR004`), and contextualized news insights (`AIFR007`).
+- Use cases are grouped into logical categories (e.g., System, AI Component) to maintain clarity.
+- Relationships between actors/usecases are established through directed arrows indicating interactions. For example, clients interact with the system via dashboards/alerts/recommendations.
+
+This structure ensures all functional requirements are represented accurately within their respective contexts and relationships. Adjustments can be made based on further analysis or additional use cases not explicitly listed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 725]

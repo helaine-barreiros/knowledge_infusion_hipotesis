@@ -1,0 +1,75 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SFR002
+  usecase "CFR005: Manage Recommendation Preferences" as CFR010
+  
+  Client --> (SAFR003)
+  Client --> (SFR002)
+  Client --> (CFR010)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as SAFR004
+  usecase "FAFR003: View Predictive Analytics" as SFR016
+  
+  FinancialAdvisor --> (SAFR004)
+  FinancialAdvisor --> (SFR016)
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR001
+  
+  usecase "SAFR002: Manage Analysis Parameters" as SAFR001
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  
+  SAFR001 --> (AIFR001)
+  SAFR002 --> (AIFR002)
+  SAFR003 --> (AIFR003)
+  SAFR004 --> (AIFR004)
+}
+
+rectangle "Notification System" {
+  usecase "SFR005: Deliver Alerts to Users" as SFR013
+  usecase "SFR006: Request Financial Predictions from AI Component" as AIFR001
+  
+  SAFR002 --> (AIFR001)
+}
+
+rectangle "News System" {
+  usecase "SFR007: Find Contextualized News Relevant to Users' Portfolios" as SFR009
+  usecase "SFR008: Process Contextualized News to Extract Information for Users' Financial Situations" as AIFR007
+  
+  SAFR002 --> (AIFR007)
+}
+
+rectangle "Dashboard System" {
+  usecase "SFR12: Generate Client Dashboards" as SFR12
+  usecase "SFR13: Request Predictive Insights from AI Component to Enhance Financial Guidance Provided to Clients" as AIFR009
+  
+  SAFR004 --> (AIFR009)
+}
+
+rectangle "Feedback System" {
+  usecase "CFR011: Send Feedback about Recommendations and Insights" as CFR011
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 689]

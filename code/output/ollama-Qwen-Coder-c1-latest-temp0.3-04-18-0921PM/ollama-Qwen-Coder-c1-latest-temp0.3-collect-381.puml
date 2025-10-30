@@ -1,0 +1,97 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Clients" {
+  actor Client as CFR001
+}
+
+package "Financial Advisors" {
+  actor FinancialAdvisor as FAFR002
+}
+
+package "System Administrators" {
+  actor SysAdmin as SAFR003
+}
+
+rectangle "Client Dashboard" {
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  
+  CFR001 --> (CFR009)
+}
+
+rectangle "Financial Insights" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Analysis Parameters" as SAFR002
+  usecase "SFR003: Deliver Alerts to Users" as SFR003
+  
+  CFR001 --> (CFR001)
+  SysAdmin --> (SAFR002)
+  SysAdmin --> (SFR003)
+}
+
+rectangle "Anomaly Detection & Fraud Prevention" {
+  usecase "FAFR004: View Predictive Analytics" as FAFR004
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  
+  CFR001 --> (FAFR004)
+  SysAdmin --> (AIFR006)
+}
+
+rectangle "Personalized Recommendations & Insights" {
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "SAFR005: Manage Recommendation Preferences" as SAFR005
+  
+  CFR001 --> (CFR002)
+  CFR001 --> (CFR003)
+  CFR001 --> (CFR004)
+  SysAdmin --> (SAFR005)
+}
+
+rectangle "Spending Limits & Budget Management" {
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  
+  CFR001 --> (CFR006)
+}
+
+rectangle "Investment Opportunities & Diversification" {
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  
+  CFR001 --> (CFR007)
+  SysAdmin --> (AIFR004)
+}
+
+rectangle "News & Market Insights" {
+  usecase "CFR008: View News Related to My Investment Portfolio" as CFR008
+  usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR009
+  
+  CFR001 --> (CFR008)
+  SysAdmin --> (SFR009)
+}
+
+rectangle "Relationship Management & Feedback" {
+  usecase "FAFR005: Manage Client Mentoring Sessions" as FAFR005
+  usecase "SAFR020: Manage User Feedback to Continuously Improve the Quality and Relevance of Financial Insights" as SAFR020
+  
+  CFR001 --> (FAFR005)
+  SysAdmin --> (SFR020)
+}
+
+rectangle "AI System Functions" {
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  
+  SysAdmin --> (AIFR001)
+  SysAdmin --> (AIFR002)
+}
+
+rectangle "System Operations & Maintenance" {
+  usecase "SFR019: Maintain a Historical Record of Users' Insights to Enable Trend Analysis and Effectiveness Measurement" as SFR019
+  
+  SysAdmin --> (SFR019)
+}
+@enduml

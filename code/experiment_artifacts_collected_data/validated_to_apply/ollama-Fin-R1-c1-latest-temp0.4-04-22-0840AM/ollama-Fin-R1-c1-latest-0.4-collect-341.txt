@@ -1,0 +1,68 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  
+  C1 --> CFR001 : "View Financial Insights Dashboard"
+  SA --> SAFR001 : "Manage Analysis Parameters"
+  FA --> FAFR002 : "View Client Intervention Alerts"
+  
+  SysAdmin <|-- (CFR001, SAFR001) : admin
+}
+
+rectangle "AI System" {
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Identify Financial Instruments for Users" as AIFR005
+  usecase "AIFR006: Detect Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  
+  CFR001 <|-- (CFR003, SFR008) : generate predictions and recommendations
+  SAFR001 <|-- (SAFR002, SAFA004) : manage parameters for compliance checks
+}
+
+rectangle "Client" {
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  C1 --> SFR019 : "Access historical data"
+  
+  SysAdmin <|-- (CFR005, CFR006) : manage preferences and spending limits
+}
+
+rectangle "FinancialAdvisor" {
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  FA --> FAFR003 : view analytics
+  
+  SysAdmin <|-- (CFR010, SFR020) : manage client relationships and feedback processing
+}
+
+@enduml
+
+**Explanation of the Diagram Structure:**
+
+- **Client Actor:** Represents users including clients, financial advisors, or system administrators. They interact with various use cases like viewing dashboards, receiving alerts, etc.
+  
+- **SysAdmin Actor:** Manages administrative tasks such as managing analysis parameters and client relationships.
+
+- **FinancialAdvisor Actor:** Interacts with specific features related to mentoring sessions, client interactions, and predictive analytics.
+
+- **System Boundary (Rectangle):** Contains the core functionalities of the system. Use cases within this boundary represent automated processes like generating alerts, predictions, etc., which are driven by inputs from actors or other use cases.
+  
+- **Use Case Relationships:** Arrows indicate actor-to-use-case relationships. For example, a client uses "View Financial Insights Dashboard" (CFR001), while the system generates spending limit alerts via "AIFR003."
+  
+- **Inheritance/Extends Relationship:** The SysAdmin role extends management over multiple use cases like CFR005 and SFR020 for historical records.
+  
+This structure ensures clarity in how different actors interact with various components of the AI-powered system, adhering strictly to provided functional requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 775]

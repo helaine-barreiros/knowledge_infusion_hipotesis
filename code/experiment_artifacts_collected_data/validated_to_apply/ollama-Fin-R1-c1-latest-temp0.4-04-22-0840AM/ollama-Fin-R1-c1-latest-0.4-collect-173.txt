@@ -1,0 +1,76 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Notification Channels" as SAFR002
+  
+  Client --> CFR001 : "View"
+  
+  SysAdmin -->> SAFR002 : "Manage"
+
+}
+
+rectangle "Financial Advisor (FA)" {
+  actor FinancialAdvisor as FA
+
+  FA ->> AIFR007 : "Request Contextualized News Insights" 
+  FA ->> AIFR008 : "Request Predictive Intervention Recommendations"
+  
+  package Professional { 
+    usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+    usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+    usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  }
+
+  FA --> FAFR001 : "Manage"
+  FA --> FAFR002 : "View"
+  FA --> FAFR003 : "View"
+
+}
+
+rectangle "Client (User)" {
+  actor Client as C
+  
+  C ->> AIFR001 : "Request Financial Predictions" 
+  C ->> AIFR004 : "Request Personalized Recommendations"
+  
+  package User { 
+    usecase "CFR002: View Alerts About Anomalous Transactions" as CFR002
+    usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations Aligned with Financial Profile" as CFR004
+  }
+
+  C --> CFR001 : "View"
+  
+}
+
+rectangle "System Administrator (SysAdmin)" {
+  actor SysAdmin
+  
+  SysAdmin ->> SAFR001 : "Manage Analysis Parameters"
+
+}
+@enduml
+
+**Key Explanations:**
+- **Client**: Can view financial dashboards, alerts, and recommendations. They can also manage their relationship with Financial Advisors.
+- **Financial Advisor (FA)**: Manages client mentoring sessions, views intervention alerts, and requests contextualized news insights or predictive analyses from the AI system.
+- **System Administrator (SysAdmin)**: Manages analysis parameters for the AI system to ensure compliance with regulations like Basel III.
+  
+**Use Cases Grouping by Actor/Functionality:**
+1. **Client**: CFR001–CFR004, FAFR002, SAFR002
+2. **Financial Advisor (FA)**: FAFR001–FAFR003, AIFR007–AIFR009
+3. **System Administrator**: SAFR001
+
+**Notes on Inheritance and Relationships:**
+- The Financial Advisor actor extends the Client role in some interactions but maintains distinct use cases.
+- System components (e.g., AI systems) are represented as usecases within their respective packages, ensuring clarity.
+
+This structure ensures all requirements are mapped accurately to actors and use cases while adhering to PlantUML syntax rules.
+
+[Done: True
+Done Reason: stop
+Eval Count: 704]

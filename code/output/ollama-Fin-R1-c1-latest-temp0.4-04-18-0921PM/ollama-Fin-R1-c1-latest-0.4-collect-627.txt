@@ -1,0 +1,109 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor FinancialAdvisor as FA
+actor SysAdmin as SA
+system "System" as S
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds in Expense Categories" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile (MiFID II)" as CFR007
+  usecase "CFR008: Access News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Financial Advisors Including Data Sharing Permissions" as CFR009
+}
+
+rectangle "System Admin Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System Compliance (Basel III)" as SAFR001
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+}
+
+rectangle "System Core Components (S)" {
+  usecase "SFR001: Deliver Alerts Through Notification Channels" as SFR001
+  usecase "SFR002: Generate Personalized Recommendations Based on Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations From AI" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts When Exceeding Thresholds" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis Based on Risk Profile (MiFID II)" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities Matching ESG Preferences and Criteria" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts for AML Compliance" as SFR008
+  usecase "SFR009: Find Contextualized News Relevant to Portfolio" as SFR009
+  usecase "SFR010: Extract Relevance from Contextualized News" as SFR010
+  usecase "SFR012: Generate Client Dashboards for Financial Information Consolidation" as SFR012
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "SFR014: Generate Client Analytics with Meaningful Insights into Financial Behavior and Performance" as SFR014
+  usecase "SFR015: Request Predictive Intervention Analyses for Advisor Engagement Timing" as SFR015
+  usecase "SFR016: Enhance Value of Financial Guidance via AI-Generated Predictions" as SFR016
+}
+
+rectangle "AI System (AIFR)" {
+  usecase "AIFR001: Generate Financial Predictions Using Historical Data and Market Trends" as AIFR001
+  usecase "AIFR002: Create Personalized Recommendations Based on User Profiles, Goals, Risk Tolerance" as AIFR002
+  usecase "AIFR003: Issue Spending Limit Alerts for Unusual Activity Detection (AML)" as AIFR003
+  usecase "AIFR004: Analyze Investment Opportunities Against Risk Profile and Modern Portfolio Theory Principles" as AIFR004
+}
+
+rectangle "User Feedback Management" {
+  usecase "CFR011: Send System Recommendations/Insights Improvements Based on User Experience" as CFR011
+}
+
+C1 --> CFR001 : View Financial Insights Dashboard  
+C1 --> CFR002 : Receive Alerts for Anomalous Transactions  
+C1 --> CFR003 : View Predictions from Historical Data and Market Trends  
+C1 --> CFR004 : Personalized Recommendations Based on Profile  
+C1 --> CFR005 : Manage Recommendation Preferences  
+C1 --> CFR006 : Spending Limit Alerts Exceeding Thresholds  
+C1 --> CFR007 : Investment Opportunities Matching Risk Profile (MiFID II)  
+C1 --> CFR008 : Access Relevant News for Portfolio  
+C1 --> CFR009 : Relationship Management with Advisors Including Data Sharing  
+
+FA --> FAFR001 : Manage Client Mentoring Sessions Based on Insights  
+FA --> FAFR002 : View Intervention Alerts Proactively Assist Clients  
+FA --> FAFR003 : Predictive Analytics for Consultations  
+
+SA --> SAFR001 : Compliance Management of AI Analysis Parameters (Basel III)  
+
+SFR001 <|-- S : Deliver Alerts via Notification Channels  
+SFR002 <|-- S : Generate Personalized Recommendations Based on Profiles  
+SFR003 <|-- AIFR001 : Request Financial Predictions from AI Component  
+SFR004 <|-- AIFR002 : Request Personalized Recommendations From AI  
+SFR005 <|-- AIFR003 : Request Spending Limit Alerts Based on Thresholds Exceeded  
+SFR006 <|-- AIFR004 : Request Investment Opportunity Analysis for Risk Profile (MiFID II)  
+
+AIFR001 --> S : Generate Financial Predictions Using Historical Data and Market Trends  
+AIFR002 --> S : Create Personalized Recommendations Based on User Profiles, Goals, Risk Tolerance  
+AIFR003 --> S : Issue Spending Limit Alerts for Unusual Activity Detection (AML)  
+
+SFR007 <|-- AIFR004 : Request Specific Investment Opportunities Matching ESG Criteria and Client's Portfolio  
+
+CFR011 --> S : Send Feedback to Improve System Accuracy/Relevance
+@enduml
+```
+
+### Explanation:
+- **Actors**: The diagram includes clients, financial advisors (FA), system administrators (SA), the client interface, advisor interfaces, etc.
+- **Use Cases**: Each functional requirement is mapped as a use case with its ID and description. For example, "CFR001: View Financial Insights Dashboard" corresponds to viewing comprehensive financial data.
+- **System Components**: The system core components (`SFR`), AI systems (`AIFR`), and user feedback management are grouped under their respective rectangles for clarity.
+- **Relationships**: Arrows indicate the flow of interactions between actors, use cases, and system components. For instance, clients interact with specific features (e.g., viewing dashboards or receiving alerts).
+- **Inheritance/Extends**: Some relationships like `SFR003` extending from AI (`AIFR`) show dependencies where core systems request data from the AI component.
+  
+This structure ensures all requirements are represented accurately and logically grouped for easy understanding. The PlantUML code adheres strictly to the provided guidelines, including proper formatting, indentation, and use of aliases. 
+
+**Note**: Ensure that each actor and use case is correctly referenced by their exact IDs as per the functional requirements list. Adjustments may be needed based on additional context or implied relationships not explicitly stated here. However, given the scope of this task, these are all valid representations derived directly from the provided inputs.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1753]

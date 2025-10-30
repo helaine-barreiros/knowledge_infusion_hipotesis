@@ -1,0 +1,72 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR002: Deliver Alerts Through Notification Channels" as SAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as FAFR004
+  usecase "SFR007: Request Investment Opportunity Analysis Based on Risk Profile" as SFR007
+  usecase "AIFR001: Generate Financial Predictions from Historical Data and Market Trends" as AIFR001
+  usecase "CFR002: Receive Anomaly Transaction Alerts for Fraud Detection" as CFR002
+  usecase "SFR008: Request Anomaly Transaction Alerts Based on Spent Limits" as SFR008
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+  usecase "CFR010: Manage Relationship with Financial Advisors Including Data Sharing Permissions" as CFR010
+}
+
+actor Client as C
+actor SystemAdministrator as SA
+actor FinancialAdvisor as FA
+
+C --> SAFR002 : "Deliver Alerts Through Notification Channels"
+C --> SFR013 : "Generate Client Alerts Based on Predefined Conditions"
+FA --> FAFR004 : Configure Analysis Parameters for Specific Segments (Client)
+SA --> CFR005 : Manage Recommendation Preferences
+C --> AIFR002 : Generate Personalized Recommendations Based on Financial Profiles and Goals
+
+// Relationships between System components:
+rectangle "System" {
+  usecase SAFR001 <|-- (CFR003) 
+  usecase FAFR004 <|-- (SAFR001)
+}
+
+// Grouping actors by role
+package Professional {
+  actor FinancialAdvisor as FA
+}
+package ClientManagement {
+  actor Client as C
+}
+package SystemAdmin {
+  actor SystemAdministrator as SA
+}
+
+@enduml
+```
+
+### Explanation:
+- **Actors**: The diagram includes three main actors: `Client`, `System Administrator`, and `Financial Advisor`. Each is represented by their exact names from the requirements.
+- **Use Cases**:
+  - Financial-related use cases (e.g., viewing dashboards, receiving alerts) are grouped under the client role (`Client`).
+  - System administration tasks like managing analysis parameters are handled by the system administrator (`SystemAdministrator`).
+  - Financial advisor-specific activities such as mentoring sessions and predictive analytics fall into their own package.
+- **Relationships**:
+  - The `Client` interacts with multiple use cases, including receiving alerts via notifications (via `SAFR002`) and generating client alerts based on conditions (via `SFR013`).
+  - The system administrator manages analysis parameters (`CFR005`) which are used by the AI to generate financial predictions.
+- **System Components**:
+  - Use cases like `AIFR001` for financial prediction and `SAFR002` for alert delivery show relationships with other components, such as managing parameters or delivering alerts through channels.
+
+This structure ensures clarity in how actors interact with the system’s various functionalities. Adjustments can be made to further refine groupings if needed based on specific requirements interactions.
+
+[Done: True
+Done Reason: stop
+Eval Count: 882]

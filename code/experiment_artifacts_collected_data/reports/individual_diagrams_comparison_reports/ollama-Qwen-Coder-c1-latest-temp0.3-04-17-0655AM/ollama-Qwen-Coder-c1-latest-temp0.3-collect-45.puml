@@ -1,0 +1,98 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  Client --> (SAFR001)
+  Client --> (SFR002)
+  Client --> (SFR003)
+  Client --> (SFR004)
+  Client --> (SFR005)
+  Client --> (SFR006)
+  Client --> (SFR007)
+  Client --> (SFR008)
+  Client --> (SFR12)
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  FinancialAdvisor --> (SAFR001)
+  FinancialAdvisor --> (SFR002)
+  FinancialAdvisor --> (SFR006)
+  FinancialAdvisor --> (SFR007)
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  SystemAdmin --> (SAFR001)
+}
+
+package "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunities Based on Modern Portfolio Theory" as AIFR005
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+  usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+  
+  (SAFR001) --> (AIFR003)
+  (SFR002) --> (AIFR002)
+  (SFR004) --> (AIFR005)
+  (SFR006) --> (AIFR003)
+  (SFR007) --> (AIFR004)
+  (FAFR001) --> (AIFR002)
+  (FAFR002) --> (AIFR008)
+}
+
+rectangle "System" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities Based on ESG Preferences from AI Component" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as SFR008
+  usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR009
+  usecase "SFR10: Process Contextualized News for Users" as SFR10
+  usecase "SFR11: Request Contextualized News Insights from AI Component" as SFR11
+  usecase "SFR12: Generate Client Dashboards in an Intuitive Format" as SFR12
+  usecase "SFR13: Generate Client Alerts Based on Predefined Conditions" as SFR13
+  usecase "SFR14: Generate Client Analytics Providing Meaningful Insights" as SFR14
+  usecase "SFR15: Request Predictive Intervention Analyses from AI Component" as SFR15
+  usecase "SFR16: Request Predictive Insights from AI Component to Enhance Financial Guidance" as SFR16
+  usecase "SFR17: Generate Financial Health Reports Assessing Users' Wellbeing" as SFR17
+  usecase "SFR18: Manage Users' Financial Goals and Track Progress" as SFR18
+  usecase "SFR19: Maintain Historical Record of Insights for Trend Analysis" as SFR19
+  usecase "SFR20: Manage User Feedback to Improve System Outputs" as SFR20
+  
+  (Client) --> (SFR001)
+  (FinancialAdvisor) --> (SFR008)
+  (SystemAdmin) --> (SAFR001)
+}
+
+rectangle "User (Client, Financial Advisor, or System Administrator)" {
+  usecase "CFR11: Send Feedback" as CFR11
+  
+  User --> (CFR11)
+}
+@enduml

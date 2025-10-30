@@ -1,0 +1,78 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  user --> FAFR003 : "View Predictive Analytics for Clients"
+}
+
+rectangle "Client" {
+  actor Client as c
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR004: Personalized Recommendations Based on Financial Profile" as CFR004
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+
+  c --> CFR002 : "Receive Alerts"
+  
+}
+
+rectangle "Financial Advisor (FA)" {
+  actor FAdvisor as fad
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Intervention Alerts for Clients" as FAFR002
+
+  fad --> FAFR001 : "Manage Client Mentoring"
+  
+}
+
+rectangle "System Administrator (SA)" {
+  actor SysAdmin as sa
+  usecase "SFR013: Generate Client Analytics" as SFR013
+  
+  sa --> SAFR001 : "Manage Analysis Parameters"
+
+}
+
+rectangle "AI System (AIS)" {
+  usecase "AIFR002: Generate Personalized Recommendations Based on Financial Profiles" as AIFR002
+  usecase "SFR004: Request AI Component for Personalized Recommendations" as SFR004
+
+  AIS --> AIFR002 : "Generate Recommendations"
+}
+
+rectangle "Notification System (NS)" {
+  actor Client as c, FAdvisor as fad, SysAdmin as sa
+  usecase "SFR013: Generate Analytics" as SFR013
+  
+  NS --> CFR002 : "Send Alerts to Clients/FAs/SAs"
+  
+}
+
+@enduml
+```
+
+**Key Observations and Explanations:**
+- The system includes multiple actors (Client, Financial Advisor [FA], System Administrator [SA]) with their respective use cases.
+- Use case relationships are established based on the functional requirements provided. For example:
+  - **Client**: View dashboards, receive alerts, manage recommendations/preferences.
+  - **Financial Advisor**: Manage mentoring sessions, view intervention/analytic insights.
+  - **System Admin**: Manage analysis parameters for AI systems.
+- The system itself handles requests from clients (e.g., personalized recommendations) and integrates with the AI to generate outputs. Alerts are managed through a notification channel.
+- Inheritance or extension relationships aren't explicitly mentioned in requirements, so direct interactions via arrows were used instead of `<|--`.
+- Logical grouping was done using rectangles for different subsystems (Client, FA, SA, System, AIS). Not all components from the list might be directly represented as use cases but are referenced through their actors and system interactions. For example, "SFR013: Generate Client Analytics" is a separate use case related to analytics generation.
+- The diagram adheres strictly to provided requirements without inventing additional entities or relationships not explicitly stated in functional descriptions.
+
+[Done: True
+Done Reason: stop
+Eval Count: 794]

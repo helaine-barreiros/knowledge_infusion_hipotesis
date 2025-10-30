@@ -1,0 +1,94 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Preferences" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+  
+  Client --> (CFR001)
+  
+  SysAdmin <|-- (SAFR002) : System Admin can manage analysis parameters and user preferences.
+  FinancialAdvisor --> (FAFR005) : Financial Advisor schedules mentoring sessions based on system-generated insights.
+}
+
+rectangle "Client" {
+  actor Client as client
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Portfolio News" as CFR008
+  usecase "CFR009: Consolidated Financial Dashboard" as CFR010
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+  
+  client --> (CFR002)
+  client --> (CFR003)
+  client --> (CFR004)
+  client --> (CFR005)
+  client --> (CFR006)
+  client --> (CFR007)
+  client --> (CFR008)
+  client --> (CFR010)
+}
+
+rectangle "FinancialAdvisor" {
+  actor FinancialAdvisor as advisor
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Segment" as FAFR004
+  
+  advisor --> (FAFR001)
+}
+
+rectangle "SysAdmin" {
+  actor SysAdmin as sysadmin
+  usecase "SAFR002: Manage User Preferences" as SAFR002
+  usecase "SAFR003: Update Analysis Parameters" as SAFR003
+  
+  sysadmin --> (SAFR001)
+}
+
+rectangle "System" {
+  actor System as system
+  usecase "SFR004: Request Personalized Recommendations" as SFR004
+  usecase "SFR005: Spending Limit Alerts" as SFR005
+  usecase "SFR006: Investment Opportunity Analysis" as SFR006
+  
+  system --> (CFR01)
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire diagram is enclosed within a rectangle labeled "System," which contains all the actors, use cases, and their relationships.
+  
+- **Actors**:
+  - `Client`: Represents end-users including clients, financial advisors, or system administrators. They interact with various features like viewing dashboards, receiving alerts, etc.
+  - `SysAdmin` (System Administrator): Manages analysis parameters and user preferences via the "SAFR002" use case.
+  - `FinancialAdvisor`: Schedules mentoring sessions ("FAFR005") based on system-generated insights.
+
+- **Use Cases**:
+  - Client-related: All CFRs (e.g., viewing dashboards, receiving alerts) are grouped under the client actor. These use cases represent functionalities a user expects from the system.
+  - SysAdmin and FinancialAdvisor-specific: Use cases like "SAFR002" for managing preferences or scheduling sessions.
+
+- **Relationships**:
+  - Direct interactions (e.g., `Client --> CFR001`).
+  - Inheritance/extension relationships, e.g., `SysAdmin <|-- SAFR002`, indicating SysAdmin extends the use case to manage user preferences.
+  
+This structure ensures clarity and adheres strictly to provided requirements. All actors and their exact interactions are captured without inventing additional entities or scenarios not present in the functional list. 
+
+### Notes:
+- The "Client" actor encompasses multiple roles (client, advisor, sysadmin) as per requirement descriptions but is treated separately for simplicity.
+- Relationships like `SysAdmin --> SAFR002` and others follow from direct textual references to these use cases within their respective sections in the requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1057]

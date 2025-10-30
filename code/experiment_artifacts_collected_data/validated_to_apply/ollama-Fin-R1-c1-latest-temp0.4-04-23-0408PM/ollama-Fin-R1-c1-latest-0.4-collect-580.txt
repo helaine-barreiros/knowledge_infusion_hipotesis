@@ -1,0 +1,192 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as Client1
+}
+
+rectangle "System" {
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  
+  usecase "SAFR002: Manage Alert Thresholds" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+
+  
+  Client1 --> CFR001 : View Financial Insights Dashboard
+}
+
+rectangle "Financial Advisor" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  
+  
+  FA --> FAFR001 : Manage Client Mentoring Sessions
+}
+
+rectangle "System Administrator" {
+  actor SysAdmin as SA
+
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFAF004: Configure System-Wide Settings" as SFAF004
+  
+  
+  SA --> SAFR001 : Manage Analysis Parameters
+}
+
+rectangle "System Components" {
+  package "AI Component" {
+    actor AI as AIF
+
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Investment Opportunity Analysis" as AIFR004
+    usecase "AIFR005: ESG-Compliant Investments" as AIFR005
+    usecase "AIFR006: Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR007: Contextualized News Insights" as AIFR007
+    usecase "AIFR008: Predictive Intervention Recs." as AIFR008
+  }
+
+  
+  package "System Functions" {
+    actor SystemFunctions as SysFunc
+
+    usecase "SFR001: Deliver Alerts" as SFR001
+    usecase "SFR002: Personalized Recommendations" as SFR002
+    usecase "SFR003: Request Financial Predictions" as SFR003
+    usecase "SFR004: Request Personalized Recs." as SFR004
+    usecase "SFR005: Spending Limit Alerts" as SFR005
+    usecase "SFR006: Investment Opportunity Analysis" as SFR006
+    usecase "SFR007: Specific Investment Opportunities" as SFR007
+    usecase "SFR008: Anomaly Transaction Alerts" as SFR008
+    usecase "SFR009: Contextualized News" as SFR009
+    usecase "SFR010: Client Dashboards" as SFR010
+    usecase "SFR013: Generate Client Alerts" as SFR013
+  }
+
+  
+  SysFunc <|-- AIF : Request Financial Predictions, Personalized Recommendations, Spending Limit Alerts, Investment Opportunity Analysis, ESG-Compliant Investments, Anomaly Transaction Alerts
+
+}
+
+Client1 --> CFR002 : View Alerts (Anomalous Transactions)
+CFR002 --|> SFR008
+Client1 --> CFR003 : Financial Predictions
+SFR003 --> AIFR001
+Client1 --> CFR004 : Personalized Recommendations
+SFR002 --> AIFR002
+
+SysAdmin --> SAFR001 : Manage Analysis Parameters (AI Component)
+SAFR001 <|-- AIF : Configure AI parameters for accuracy, relevance, and compliance.
+
+FA --> FAFR005 : Schedule Mentoring Sessions via System Functions
+SFR010 --> SysFunc : Generate Client Dashboards
+
+Client1 --> CFR006: Spending Limit Alerts (Threshold Exceeded)
+SFR005 --> AIFR003
+
+Client1 --> CFR007: Investment Opportunities Based on Risk Profile
+AIFR004 --> SFAF004 : Configure for specific client segments under MiFID II or equivalent.
+
+Client1 --> CFR008: News Related to Portfolio
+SFR009 --> AIFR007
+
+Client1 --> CFR009: Personalized Dashboard (Consolidated View)
+SysFunc <|-- SFR010 : Generate dashboards for clients.
+
+Client1 --> SAFR002: Manage Alert Thresholds via System Functions
+SFR005 --> SysFunc : Handle spending limit alerts through system functions.
+
+CFR009 --|> SFR013
+
+SAFAdmin --> SAFR004 : Configure system-wide settings (AI Component)
+SFAF004 <|-- AIF: Manage global parameters for all clients and segments.
+```
+
+This PlantUML code represents the use case diagram based on the provided functional requirements. It includes actors such as Client, Financial Advisor, System Administrator, and their interactions with various use cases across different packages (Client, Financial Advisor, System Components). The relationships between actors and use cases are clearly defined using arrows and inheritance where applicable. The system components like AI Component and System Functions are grouped logically to show how they interact with each other and the clients.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as Client1
+}
+
+rectangle "System" {
+
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  
+  usecase "SAFR002: Manage Alert Thresholds" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+
+  
+  Client1 --> CFR001 : View Financial Insights Dashboard
+}
+
+rectangle "Financial Advisor" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  
+  
+  FA --> FAFR001 : Manage Client Mentoring Sessions
+}
+
+rectangle "System Administrator" {
+  actor SysAdmin as SA
+
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFAF004: Configure System-Wide Settings" as SFAF004
+  
+  
+  SA --> SAFR001 : Manage Analysis Parameters
+}
+
+rectangle "System Components" {
+  package "AI Component" {
+    actor AI as AIF
+
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Investment Opportunity Analysis" as AIFR004
+    usecase "AIFR005: ESG-Compliant Investments" as AIFR005
+    usecase "AIFR006: Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR007: Contextualized News Insights" as AIFR007
+    usecase "AIFR008: Predictive Intervention Recs." as AIFR008
+  }
+
+  
+  package "System Functions" {
+    actor SystemFunctions as SysFunc
+
+    usecase "SFR001: Deliver Alerts" as SFR001
+    usecase "SFR002: Personalized Recommendations" as SFR002
+    usecase "SFR003: Request Financial Predictions" as SFR003
+    usecase "SFR004: Request Personalized Recs." as SFR004
+    usecase "SFR005: Spending Limit Alerts" as SFR005
+    usecase "SFR006: Investment Opportunity Analysis" as SFR006
+    usecase "SFR007: Specific Investment Opportunities" as SFR007
+    usecase "SFR008: Anomaly Transaction Alerts" as SFR008
+    usecase "SFR009: Contextualized News" as SFR009
+    usecase "SFR010: Client Dashboards" as SFR010
+    usecase "SFR013: Generate Client Alerts" as SFR013
+  }
+
+  
+  SysFunc <|-- AIF : Request Financial Predictions, Personalized
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

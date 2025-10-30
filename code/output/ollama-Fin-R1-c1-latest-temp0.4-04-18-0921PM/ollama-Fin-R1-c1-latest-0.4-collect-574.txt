@@ -1,0 +1,115 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Preferences" as SAFR002
+  usecase "SFR009: Deliver Contextualized News" as SFR009
+  
+  Client --> CFR001 : "View financial data in consolidated format"
+  
+  SysAdmin --> SAFR002 : "Adjust system parameters for compliance and accuracy"
+  
+  FinancialAdvisor -> SAFR003 : "Monitor client alerts based on AI insights"
+  FinancialAdvisor -> AIFR007 : "Receive contextualized news recommendations"
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Predictive Insights" as AIFR001
+  usecase "AIFR002: Personalize Recommendations" as AIFR002
+  
+  Client --> AIFR001 : "Request financial predictions"
+  
+  SysAdmin <|-- SAFR003 : "Configure analysis parameters for clients and segments"
+}
+
+rectangle "Notification System" {
+  usecase "SFR008: Send Alerts Based on Spending Limits" as SFR008
+  usecase "AIFR006: Generate Anomaly Alerts" as AIFR006
+  
+  Client --> SFR008 : "Receive spending limit alerts"
+  
+  SysAdmin <|-- SAFR004 : "Set up thresholds and categories for alerts"
+}
+
+rectangle "Client Management System" {
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+  usecase "SFR018: Track Financial Goals Progress" as SFR018
+  
+  Client --> CFR010 : "Share data and set permissions"
+  
+  SysAdmin <|-- SAFR005 : "Manage user access levels for advisors"
+}
+
+rectangle "Data Processing System" {
+  usecase "AIFR003: Detect Spending Anomalies" as AIFR003
+  usecase "AIFR004: Analyze Investment Opportunities" as AIFR004
+  
+  Client --> AIFR003 : "Report spending patterns"
+  
+  SysAdmin <|-- SAFR006 : "Define investment criteria and ESG preferences"
+}
+
+rectangle "Contextualization System" {
+  usecase "AIFR007: Correlate News with Portfolios" as AIFR007
+  usecase "SFR019: Maintain Historical Insights" as SFR019
+  
+  Client --> AIFR007 : "Request portfolio-specific news"
+  
+  SysAdmin <|-- SAFR008 : "Update historical data for trend analysis"
+}
+
+rectangle "Feedback System" {
+  usecase "CFR011: Provide Feedback to AI" as CFR011
+  usecase "SFR20: Improve System Based on User Input" as SFR20
+  
+  Client --> CFR011 : "Submit feedback for recommendations and insights"
+  
+  SysAdmin <|-- SAFR009 : "Analyze user feedback trends to refine models"
+}
+
+@enduml
+```
+
+**Description of the Diagram Components:**
+
+- **System Boundary:** The entire system is enclosed within a rectangle labeled "System," which contains multiple sub-systems (AI Component, Notification System, Client Management System, Data Processing System, Contextualization System, Feedback System). Each sub-system represents different functional areas contributing to the overall use case.
+
+1. **Client Interactions:**
+   - Clients interact with various services like viewing financial dashboards (`CFR001`), receiving alerts (`SFR008`, `AIFR006`), and managing relationships (`CFR010`). These are grouped under the "System" boundary.
+
+2. **SysAdmin Interactions:**
+   - SysAdmins manage system parameters, such as adjusting analysis settings (`SAFR003`), configuring thresholds for alerts (`SFR008`, `AIFR006`), and setting user permissions (`CFR010`). These are also part of the "System" boundary.
+
+3. **AI Component:**
+   - The AI system generates predictive insights, personalizes recommendations (`AIFR002`), detects spending anomalies (`AIFR003`), analyzes investment opportunities (`AIFR004`), and provides contextualized news (`AIFR007`). It receives inputs from clients (e.g., financial data) and delivers outputs to the system for further processing.
+
+4. **Notification System:**
+   - Handles alert generation based on spending limits (`SFR008`) or AI-detected anomalies (`AIFR006`), ensuring timely delivery of critical information via appropriate channels.
+
+5. **Client Management System:**
+   - Manages client relationships, tracks financial goals progress (`SFR018`), and handles user feedback (`CFR011`). This ensures that the system remains responsive to client needs and regulatory requirements.
+
+6. **Data Processing System:**
+   - Processes transaction data for anomaly detection (`AIFR003`) or investment opportunity analysis (`AIFR004`). It also defines criteria for portfolio-specific insights (`SFR019`).
+
+7. **Contextualization System:**
+   - Correlates financial news with clients' portfolios to provide relevant updates (`AIFR007`). Maintains historical data for trend analysis and effectiveness measurement.
+
+8. **Feedback System:**
+   - Collects user feedback on recommendations and insights, which is used by the system (via SysAdmin) to refine its models over time (`SFR20`).
+
+**Key Relationships:**
+
+- Clients are connected directly to use cases like viewing dashboards or receiving alerts.
+- SysAdmins interact with administrative tasks within the "System" boundary but also extend into sub-systems for parameter management.
+- The AI Component is a critical subsystem that generates insights and recommendations, which flow through other systems (e.g., notification system) before reaching clients.
+
+This structure ensures clarity in how different actors use the system and highlights dependencies between components. Each use case is precisely mapped to its functional requirement ID from the provided list.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1357]

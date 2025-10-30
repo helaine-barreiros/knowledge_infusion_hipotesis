@@ -1,0 +1,65 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR002
+}
+
+package SystemAdmin {
+  actor "System Administrator" as SAFR003
+}
+
+rectangle "User Interface" {
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  
+  CFR001 --> (View Financial Insights Dashboard) : CFR001
+  CFR001 --> (Receive Alerts for Anomalous Transactions) : CFR002
+  CFR001 --> (View Financial Predictions) : CFR003
+  CFR001 --> (Receive Personalized Recommendations) : CFR004
+  CFR001 --> (Manage Recommendation Preferences) : CFR005
+  CFR001 --> (View Spending Limit Alerts) : CFR006
+  CFR001 --> (View Investment Opportunities) : CFR007
+  CFR001 --> (View News Related to Portfolio) : CFR008
+  
+  FAFR002 --> (Manage Client Mentoring Sessions) : FAFR001
+  FAFR002 --> (Receive Alerts for Client Intervention) : FAFR002
+  FAFR002 --> (View Predictive Analytics about Financial Situations) : FAFR003
+  
+  SAFR003 --> (Manage Analysis Parameters) : SAFR001
+}
+
+rectangle "System" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  
+  CFR009 --> (Generate Client Dashboards) : SFR012
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  
+  CFR004 --> (Generate Personalized Recommendations) : AIFR002
+  
+  FAFR003 --> (Receive Predictive Insights from AI Component) : SFR16
+}
+
+rectangle "News Processing" {
+  usecase "SFR008: Request Contextualized News" as SFR008
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  
+  CFR008 --> (Find Relevant Financial News) : SFR009
+}
+
+rectangle "Feedback Management" {
+  usecase "CFR11: Send Feedback about Recommendations and Insights" as CFR11
+  
+  CFR11 --> (Manage User Feedback) : SFR20
+}
+@enduml

@@ -1,0 +1,81 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR002
+}
+
+package SystemAdmin {
+  actor "System Administrator" as SAFR003
+}
+
+rectangle "Core System Functions" {
+  usecase "SFR009: Find Contextualized News Relevant to Users' Portfolios" as SFR009
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  
+  CFR001 --> (SFR009)
+  FAFR002 --> (SFR009)
+  
+  CFR001 --> (AIFR007)
+}
+
+rectangle "Financial Insights and Recommendations" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR004: Manage Analysis Parameters for Specific Client Segments" as SAFR004
+  
+  CFR001 --> (SFR020)
+  
+  FAFR002 --> (FAFR003)
+}
+
+rectangle "Alerts and Notifications" {
+  usecase "CFR002: Receive Alerts About Anomalous Transactions" as CFR002
+  usecase "SAFR018: Generate Client Analytics" as SAFR018
+  
+  CFR002 --> (SFR013)
+  
+  FAFR002 --> (FAFR004)
+}
+
+rectangle "Spending Limits and Budget Management" {
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds" as CFR006
+  
+  CFR006 --> (SFR015)
+  
+  FAFR002 --> (FAFR004)
+}
+
+rectangle "Investment Opportunities and Diversification" {
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+  usecase "AIFR006: Generate Investment Opportunities for Users by Identifying Financial Instruments That Align with Their Investment Strategies and Modern Portfolio Theory Principles" as AIFR006
+  
+  CFR007 --> (SFR014)
+  
+  FAFR002 --> (FAFR003)
+}
+
+rectangle "Personalized Recommendations and Preferences Management" {
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as CFR004
+  usecase "SAFR005: Manage Personalized Recommendations Preferences to Ensure the System Provides Insights Relevant to My Financial Objectives and Risk Tolerance" as SAFR005
+  
+  CFR004 --> (SFR021)
+  
+  FAFR002 --> (FAFR003)
+}
+
+rectangle "System Management Functions" {
+  usecase "SAFR006: Manage Analysis Parameters for the AI System to Ensure Algorithms Remain Accurate, Relevant, and Compliant with Financial Regulations Such as Basel III for Risk Management" as SAFR001
+  
+  SAFR001 --> (SFR023)
+}
+
+rectangle "User Feedback and Continuous Improvement" {
+  usecase "CFR11: Send Feedback About the System's Recommendations and Insights to Help Improve Future Outputs" as CFR11
+}
+@enduml

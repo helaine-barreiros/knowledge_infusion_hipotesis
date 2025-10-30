@@ -1,0 +1,61 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Anomaly Detection Parameters" as SAFR002
+  usecase "FAFR005: Schedule Client Mentoring Sessions" as FAFR005
+  usecase "SFR013: Generate Alerts Based on Predefined Conditions" as SFR013
+  
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  SysAdmin -> SAFR002 : "Manage Analysis Parameters for AI System (e.g., AML, FATF)"
+  
+  rectangle Professional {
+    actor User as U
+    actor FinancialAdvisor as FA
+    actor SystemAdministrator as SA
+    
+    User <|-- CFR001
+    User --> SFR013 : "Receive Alerts"
+    
+    FinancialAdvisor <|-- FAFR005
+    FinancialAdvisor -> SAFR002 : "Manage Client-Specific Parameters (e.g., risk tolerance)"
+  }
+  
+  rectangle System {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    
+    SFR013 <|-- AIFR003 : "Request Spent Limit Alerts"
+    
+    SysAdmin --> SAFR002 : "Adjust AI System Parameters (e.g., model thresholds)"
+  }
+  
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire system is enclosed within a rectangle labeled "System" to denote the scope.
+- **Use Cases**:
+  - `CFR001: View Financial Insights Dashboard` for clients. This use case allows users (including Clients, Advisors) to view consolidated financial data.
+  - `SAFR002: Manage Anomaly Detection Parameters` and related sub-use cases like `AIFR006: Generate Anomaly Transaction Alerts`. These are managed by System Administrators.
+- **Actors**:
+  - **Client**: Can interact with the system through various use cases (e.g., viewing dashboards, receiving alerts).
+  - **FinancialAdvisor**: Manages client mentoring sessions and schedules using `FAFR005`.
+  - **SystemAdministrator**: Configures analysis parameters via `SAFR002` or adjusts AI components.
+- **Relationships**:
+  - Clients use cases like `CFR001`, which are directly related to the system through `SFR013: Generate Alerts Based on Predefined Conditions`.
+  - Financial Advisors and System Administrators have their own specialized interactions (e.g., scheduling sessions, managing parameters).
+- **Inheritance/Grouping**:
+  - The Professional rectangle groups actors like User, Advisor, Admin for clarity.
+  
+This structure ensures all requirements are represented accurately with proper relationships between actors and use cases. Adjustments can be made based on further analysis or additional details in the requirements list.
+
+[Done: True
+Done Reason: stop
+Eval Count: 666]

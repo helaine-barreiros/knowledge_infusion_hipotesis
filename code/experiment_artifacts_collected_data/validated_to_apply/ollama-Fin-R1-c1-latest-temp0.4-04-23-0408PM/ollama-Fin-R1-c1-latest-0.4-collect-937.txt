@@ -1,0 +1,73 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  user --> FAFR003 : "View Predictive Analytics for Clients"
+  advisor --> FAFR003 : "View Predictive Analytics for Clients"
+
+  system --> SFR012 : "Generate Client Dashboards"
+}
+
+rectangle "Financial Advisor" {
+  actor FinancialAdvisor as advisor
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  user --> FAFR001 : "Manage Client Mentoring Sessions"
+
+  user --> FAFR002 : "View Intervention Alerts"
+  
+  advisor --> FAFR003 : "View Predictive Analytics for Clients"
+}
+
+rectangle "Client" {
+  actor client as client
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+
+  client --> SFR012 : "Generate Client Dashboards"
+
+  user --> FAFR003 : "View Predictive Analytics for Clients"
+}
+
+rectangle "System Administrator" {
+  actor SysAdmin
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  SysAdmin --> SFR012 : "Generate Client Dashboards"
+}
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire system is enclosed within a rectangle labeled "System".
+- **Use Cases**:
+  - `CFR001: View Financial Insights Dashboard`: Accessible by the client.
+  - `SAFR001: Manage Analysis Parameters`: For System Administrators to adjust parameters.
+  - `FAFR003: View Predictive Analytics for Clients`: Used by both clients and financial advisors.
+- **Actors**:
+  - **Client**: Can view dashboards, receive recommendations, etc.
+  - **Financial Advisor (advisor)**: Manages mentoring sessions, views client alerts/predictions.
+  - **System Administrator (SysAdmin)**: Manages analysis parameters and generates dashboards.
+
+### Relationships:
+1. Clients interact with the system via `CFR001` to view dashboards.
+2. System Administrators manage parameters (`SAFR001`) and generate dashboards (`SFR012`).
+3. Financial Advisors use predictive analytics (`FAFR003`) for clients.
+
+This structure ensures all functional requirements are mapped accurately, with proper actor-to-use case relationships defined within the system boundary. Adjustments can be made if additional details or dependencies arise from further analysis of the provided requirements list.
+
+[Done: True
+Done Reason: stop
+Eval Count: 694]

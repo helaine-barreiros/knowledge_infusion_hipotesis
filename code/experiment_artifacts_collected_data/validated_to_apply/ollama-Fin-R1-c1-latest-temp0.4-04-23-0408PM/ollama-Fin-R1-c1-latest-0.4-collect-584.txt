@@ -1,0 +1,130 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sa
+actor FinancialAdvisor as fa
+system "System" as sys
+
+package Professional {
+  actor Chef as chef <|-- (sa)
+}
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Access Personalized Recommendations Aligned with Financial Profile and Goals" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds in Expense Categories" as CFR006
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as CFR009
+
+  c1 --> CFR001 : "View"
+  c1 --> CFR002 : "Receive Alerts"
+  c1 --> CFR003 : "View Predictions"
+  c1 --> CFR004 : "Access Recommendations"
+  c1 --> CFR005 : "Manage Preferences"
+  c1 --> CFR006 : "View Spending Limit Alerts"
+  c1 --> CFR007 : "View Investment Opportunities"
+  c1 --> CFR008 : "Access News"
+  c1 --> CFR009 : "Manage Relationship"
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+  sa -> SAFR001 : "Manage"
+
+}
+  
+package AdvisorTools {
+  actor Mentor as mentor <|-- (fa)
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as FAFR004
+
+  fa --> FAFR001 : "Manage"
+  fa --> FAFR002 : "View Alerts"
+  fa --> FAFR003 : "View Predictive Analytics"
+  fa --> FAFR004 : "Configure"
+
+}
+
+rectangle "System Core" {
+  usecase "SFR001: Deliver Alerts Through Notification Channels" as SFR001
+  usecase "SFR002: Provide Personalized Recommendations Based on Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts From AI Component" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis From AI Component" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities Based on Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts Compliant with AML Regulations" as SFR008
+  usecase "SFR009: Find Contextualized News for Users' Portfolios From Trusted Sources" as SFR009
+  usecase "SFR010: Process Contextualized News to Extract Relevant Information" as SFR010
+  usecase "SFR011: Request AI-Generated Insights on Portfolio Impacts of Financial News" as SFR011
+  usecase "SFR012: Generate Client Dashboards for Intuitive Presentation" as SFR012
+  usecase "SFR013: Generate Alerts Based On Predefined Conditions" as SFR013
+  usecase "SFR014: Provide Financial Analytics to Users" as SFR014
+  usecase "SFR015: Request Predictive Intervention Analyses From AI Component" as SFR015
+  usecase "SFR016: Enhance Value of Financial Guidance With Predictive Insights" as SFR016
+  usecase "SFR017: Generate Financial Health Reports Using Standard Metrics" as SFR017
+  usecase "SFR018: Track Users' Financial Goals and Progress" as SFR018
+  usecase "SFR019: Maintain Historical Record of Insights for Trend Analysis" as SFR019
+  usecase "SFR020: Manage User Feedback to Improve System Quality" as SFR020
+
+  sys --> (all SFRs)
+}
+
+package AIComponent {
+  actor AIFR as aifr
+  usecase "AIFR001: Generate Financial Predictions Based on Data and Trends" as AIFR001
+  usecase "AIFR002: Create Personalized Recommendations Aligning with Profiles" as AIFR002
+  usecase "AIFR003: Issue Spending Limit Alerts for Unusual Activity Detection" as AIFR003
+  usecase "AIFR004: Analyze Investment Opportunities Against Risk Profiles and Goals" as AIFR004
+  usecase "AIFR005: Identify Aligning Financial Instruments Based on Portfolio Theory" as AIFR005
+  usecase "AIFR006: Detect Anomalous Transactions Using Pattern Recognition" as AIFR006
+  usecase "AIFR007: Correlate News With Portfolios for Relevant Insights" as AIFR007
+  usecase "AIFR008: Recommend Proactive Financial Interventions Based on Patterns" as AIFR008
+  usecase "AIFR009: Provide Forward-Looking Analysis to Support Effective Planning" as AIFR009
+
+  aifr <|-- (all AIFRs)
+}
+
+usecase "CFR011: Send Feedback About System Outputs for Improvement" as CFR011
+c1 --> CFR011 : "Send"
+
+@enduml
+```
+
+### Key Observations:
+- **Client Interface**: Directly interacts with use cases like viewing dashboards, receiving alerts, and personalized recommendations. The client is represented by the `Client` actor (`c1`) which has multiple relationships to different use cases.
+  
+- **System Administrator Interface**: Manages analysis parameters for AI systems via `SAFR001`. This role uses a separate system boundary labeled "Professional" with inheritance from SysAdmin.
+
+- **Advisor Tools**: Financial advisors interact through tools like mentoring session management, client alerts viewing, and predictive analytics. These are grouped under the advisor package (`AdvisorTools`).
+
+- **System Core**: Centralized logic for delivering recommendations, generating reports, processing news, etc., encapsulated within a rectangle labeled "System Core".
+
+- **AI Component**: AI-driven use cases (e.g., predictions, anomaly detection) are organized into their own component. The system requests these from the AI component via `SFR` use cases.
+
+### Diagram Structure:
+1. **Client** and **SysAdmin/Advisor** actors have distinct interfaces.
+2. Use cases for each role are logically grouped under their respective packages (Professional, AdvisorTools).
+3. System components (`System Core`, `AI Component`) handle internal logic but interact with external roles through defined use cases.
+
+This structure ensures clarity in how different stakeholders engage with the system and its underlying AI capabilities. Each package is self-contained yet interlinked via relationships like requests from the client to the system, which then processes data using the AI component before delivering back to clients or advisors. The SysAdmin role provides administrative control over parameters affecting these interactions. 
+
+### Notes:
+- Ensure all use case IDs match those in the requirements (e.g., `CFR001`, `SAFR001`).
+- Relationships between actors and use cases are explicitly defined using arrows (`-->`) to indicate directionality.
+- Packages help organize related entities, improving readability by segmenting complex systems into manageable components.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1914]

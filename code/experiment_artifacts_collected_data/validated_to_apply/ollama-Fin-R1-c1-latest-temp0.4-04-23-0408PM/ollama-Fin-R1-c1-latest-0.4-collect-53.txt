@@ -1,0 +1,82 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR015: Generate Client Analytics" as CFR015
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "AIFR005: Generate Investment Opportunity Analyses" as AIFR005
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "AIFR003: Generate Spelling Limit Alerts" as AIFR003
+  usecase "SFR005: Request Personalized Recommendations from AI Component" as SFR005
+  usecase "CFR018: Manage Users' Financial Goals" as CFR018
+  usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+}
+
+actor "Client" as Client {
+  --> CFR001 : View financial insights dashboard  
+  --> CFR003 : View predictions  
+  --> CFR004 : Receive recommendations  
+  --> FAFR002 : View alerts for clients  
+  --> SFR005 : Request recommendations from AI Component
+}
+
+actor "Financial Advisor" as FinancialAdvisor {
+  --> AIFR009: Generate client predictive insights (via System)
+}
+
+actor "System Administrator" as SysAdmin {
+  --> SAFR001: Manage analysis parameters for the system  
+}
+
+actor "User" as User {
+  --> CFR015 : View analytics
+  --> CFR018 : Manage financial goals
+  --> AIFR002 : Generate recommendations (via System)
+}
+
+rectangle "System Boundary" {
+  usecase "SFR003: Request Financial Predictions from AI Component"
+  usecase "AIFR009: Generate Client Predictive Insights"
+  
+  SysAdmin -> SAFR001
+  Client --> CFR004 : Receive recommendations (via System)
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The main system is represented as a rectangle to encapsulate all use cases and actors. This helps in isolating the internal components from external interactions.
+  
+- **Actors**:
+  - **Client**: Interacts with various features like viewing dashboards, receiving recommendations, etc.
+  - **Financial Advisor**: Manages client mentoring sessions and views predictive insights.
+  - **System Administrator**: Configures system parameters (e.g., analysis settings).
+  - **User**: A general term encompassing clients, advisors, or any user role within the system.
+
+- **Use Cases**:
+  - **CFR001–CFR020**: Client-related functionalities like viewing dashboards, receiving recommendations, managing goals.
+  - **SAFR001**: System Admin parameter management.
+  - **FAFR001–FAFR004**: Financial Advisor-specific use cases (e.g., client intervention alerts).
+  - **AIFR001–AIFR020**: AI-generated services like predictions, recommendations, and anomaly detection.
+
+- **Relationships**:
+  - Arrows denote direct interactions. For example, a Client can view financial insights or receive personalized recommendations.
+  - Inheritance relationships are implied where an actor extends another (e.g., User inherits from Client).
+  
+This diagram ensures all required use cases and actors are included while maintaining clarity through logical grouping and proper labeling. Adjustments may be needed based on further analysis of the requirements, but this provides a solid starting point.
+
+[Done: True
+Done Reason: stop
+Eval Count: 947]

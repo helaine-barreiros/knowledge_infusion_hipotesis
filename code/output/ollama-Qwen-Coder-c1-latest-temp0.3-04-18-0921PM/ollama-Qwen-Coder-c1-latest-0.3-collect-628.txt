@@ -1,0 +1,181 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Anomaly Transaction Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View Financial News" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+  
+  C --> CFR001 : "View"
+  C --> CFR002 : "Receive Alerts"
+  C --> CFR003 : "Predictions"
+  C --> CFR004 : "Recommendations"
+  C --> CFR005 : "Manage Preferences"
+  C --> CFR006 : "Spending Limits"
+  C --> CFR007 : "Investment Opportunities"
+  C --> CFR008 : "News"
+  C --> CFR009 : "Dashboard"
+  C --> CFR10 : "Relationship Management"
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  FA --> FAFR001 : "Manage Sessions"
+  FA --> FAFR002 : "View Alerts"
+  FA --> FAFR003 : "Predictive Analytics"
+  FA --> FAFR004 : "Configure Parameters"
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SA
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR020: Manage User Feedback" as SFR020
+  
+  SA --> SAFR001 : "Manage"
+  SA --> SFR020 : "Feedback Management"
+}
+
+package "System" {
+  rectangle "AI System" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+    
+    C --> (AIFR001) : "Request"
+    C --> (AIFR002) : "Recommendations Request"
+    C --> (AIFR003) : "Spending Alerts Request"
+    C --> (AIFR004) : "Investment Analysis Request"
+    C --> (AIFR005) : "Opportunities Generation Request"
+    C --> (AIFR006) : "Anomaly Detection Request"
+    C --> (AIFR007) : "News Insights Request"
+    C --> (AIFR008) : "Predictive Recommendations Request"
+    C --> (AIFR009) : "Client Predictive Insights Request"
+    
+    FA --> (AIFR001)
+    FA --> (AIFR002)
+    FA --> (AIFR003)
+    FA --> (AIFR004)
+    FA --> (AIFR005)
+    FA --> (AIFR006)
+    FA --> (AIFR007)
+    FA --> (AIFR008)
+    FA --> (AIFR009)
+    
+    SA --> (SAFR001) : "Manage"
+  }
+}
+
+package "Notifications" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  
+  C --> SFR001
+  FA --> SFR001
+  SA --> SFR001
+}
+
+package "Recommendations" {
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  
+  C --> SFR002
+  FA --> SFR002
+  SA --> SFR002
+}
+
+package "Predictions" {
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  
+  C --> (SFR003)
+  FA --> (SFR003)
+  SA --> (SFR003)
+  
+  (SFR003) --> (AIFR001)
+}
+
+package "Recommendations AI Component" {
+  usecase "AIFR002: Generate Personalized Recommendations for Users based on Financial Profiles, Goals and Risk Tolerance as Defined by Industry Standards like FINRA Guidelines" as AIFR002
+  
+  C --> (SFR004) : "Request"
+  FA --> (SFR004)
+  SA --> (SFR004)
+  
+  (SFR004) --> (AIFR002)
+}
+
+package "Spending Limit Alerts" {
+  usecase "SFR005: Request Spending Limit Alerts from AI Component when User Spending Patterns Exceed Defined Thresholds" as SFR005
+  usecase "AIFR003: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations from Established Spending Patterns" as AIFR003
+  
+  C --> (SFR005)
+  FA --> (SFR005)
+  SA --> (SFR005)
+  
+  (SFR005) --> (AIFR003)
+}
+
+package "Investment Opportunities" {
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component to Identify Suitable Investments for Users Based on Their Risk Profiles, Time Horizons and Financial Goals" as SFR006
+  usecase "AIFR004: Generate Investment Opportunity Analyses for Users by Evaluating Potential Investments Against their Risk Profiles, Time Horizons, and Financial Goals" as AIFR004
+  
+  C --> (SFR006)
+  FA --> (SFR006)
+  SA --> (SFR006)
+  
+  (SFR006) --> (AIFR004)
+}
+
+package "Investment Opportunities AI Component" {
+  usecase "AIFR005: Generate Investment Opportunities for Users by Identifying Financial Instruments that Align with their Investment Strategies and Modern Portfolio Theory Principles" as AIFR005
+  
+  C --> (SFR012) : "Request"
+  FA --> (SFR012)
+  SA --> (SFR012)
+  
+  (SFR012) --> (AIFR005)
+}
+
+package "Anomaly Transaction Alerts" {
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component to Detect Potentially Fraudulent Activities in Accordance with AML Regulations" as SFR008
+  usecase "AIFR006: Generate Anomaly Transaction Alerts by Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance with FinCEN Requirements" as AIFR006
+  
+  C --> (SFR008)
+  FA --> (SFR008)
+  SA --> (SFR008)
+  
+  (SFR008) --> (AIFR006)
+}
+
+package "Contextualized News Insights" {
+  usecase "SFR017: Request Contextualized News from AI Component to Identify Relevant Impacts on Users' Investments" as SFR017
+  usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as AIFR007
+  
+  C --> (S
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

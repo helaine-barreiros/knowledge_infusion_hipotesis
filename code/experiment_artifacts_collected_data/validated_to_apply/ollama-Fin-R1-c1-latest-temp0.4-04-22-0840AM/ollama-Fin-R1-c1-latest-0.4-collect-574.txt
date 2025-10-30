@@ -1,0 +1,87 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Personalized Dashboard" as CFR008
+  usecase "SAFR002: Manage Client Data Sharing Permissions" as SAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+
+  actor "Client" as clientActor {
+    user --> CFR001 : View Financial Insights Dashboard
+    user --> SAFR002 : Manage Data Sharing Permissions
+    user --> FAFR002 : View Intervention Alerts
+    user --> SFR013 : Generate Client Alerts Based on Predefined Conditions (client)
+  }
+  
+  actor "Financial Advisor" as advisorActor {
+    user --> CFR008 : Access Personalized Dashboard
+    user --> FAFR001: Manage Client Mentoring Sessions
+    user --> FAFR002: View Intervention Alerts
+    user --> AIFR009: Generate Predictive Insights (advisor)
+  }
+  
+  actor "System Administrator" as adminActor {
+    SysAdmin --> SAFR001 : Manage Analysis Parameters
+  }
+
+  usecase "CFR002: Receive Anomaly Transaction Alerts" as CFR002 {
+    client --> SFR008 : Request Anomaly Alerts (client)
+  }
+  
+  usecase "AIFR006: Generate Spending Limit Alerts" as AIFR006 {
+    SysAdmin --> AIFR006 : Manage Thresholds
+  }
+
+  usecase "CFR011: Send Feedback" as CFR011 {
+    client --> SFR020 : Provide User Feedback (client)
+    advisorActor --> SFR020 : Provide Advisor Feedback (advisor)
+    adminActor --> SFR020 : Provide Admin Feedback (admin)
+  }
+}
+
+@enduml
+```
+
+### Explanation:
+- **Client**: Can view financial dashboards, receive alerts, make recommendations, manage spending limits, etc.
+- **Financial Advisor**: Accesses personalized dashboards, manages mentoring sessions, views intervention alerts, and receives predictive insights.
+- **System Administrator**: Manages analysis parameters for the AI system.
+  
+**Use Cases**:
+1. **CFR001 (Client)**: View Financial Insights Dashboard
+2. **SAFR001 (Admin)**: Manage Analysis Parameters
+3. **FAFR002 (Advisor/Client)**: View Client Intervention Alerts (e.g., for advisors or clients)
+4. **CFR003**: View Financial Predictions  
+5. **CFR004**: Receive Personalized Recommendations  
+6. **CFR005**: Manage Recommendation Preferences  
+7. **CFR006**: View Spending Limit Alerts  
+8. **CFR007**: View Investment Opportunities  
+9. **CFR008 (Client)**: Access Personalized Dashboard  
+10. **SAFR002 (Admin)**: Manage Data Sharing Permissions for clients
+11. **SFR013 (System)**: Generate Client Alerts Based on Predefined Conditions  
+12. **AIFR009**: Generate Predictive Insights  
+
+**Relationships**:
+- Clients interact with most use cases directly.
+- Advisors can view certain alerts and dashboards, while also managing mentoring sessions.
+- Admins manage system parameters but don't typically access client data unless for security/permission management.
+
+This structure ensures all actors and their interactions are accurately represented. Adjustments may be needed based on further clarification of requirements or additional use cases not listed here. 
+
+\boxed{UseCaseDiagram}
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 981]

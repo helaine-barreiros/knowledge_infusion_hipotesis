@@ -1,0 +1,100 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  client --> CFR001 : View Financial Insights Dashboard\nClient wants to see consolidated financial data.
+  
+  SysAdmin --> SAFR001 : Manage System Settings\nSys Admin needs control over AI parameters.\n\n
+}
+
+rectangle "Financial Advisor (FA)" {
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+
+  client --> FAFR002 : Receive alerts\nClient needs to be informed of potential issues.\n\n
+}
+
+rectangle "System (S)" {
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  usecase "AIFR005: Generate Investment Opportunities Based on Risk Profiles" as AIFR005
+
+  SysAdmin --> SFR019 : Manage historical data\nSys Admin needs access to past insights.\n\nClient --> AIFR005 : Get investment opportunities tailored for risk profile.
+}
+
+rectangle "AI System (A)" {
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "CFR011: Send Feedback to Improve Recommendations" as CFR011
+
+  client --> AIFR007 : Request news related to investments\nClient wants updates on portfolio.\n\nSysAdmin --> CFR011 : Collect feedback for system improvement.
+}
+
+@enduml
+```
+
+### Explanation:
+- **System (S)**: Contains use cases like `Maintain Historical Record of Insights` and `Generate Investment Opportunities Based on Risk Profiles`. These are managed by the System Administrator (`SysAdmin`) via a direct relationship. The client also interacts with these through indirect relationships, such as receiving investment opportunities from AI.
+  
+- **Financial Advisor (FA)**: Includes use cases like `View Client Intervention Alerts` and `View Predictive Analytics for Clients`, which directly relate to clients needing alerts or advice.
+
+- **AI System (A)**: Contains use cases related to generating contextualized news insights (`Generate Contextualized News Insights`) and client feedback collection. The SysAdmin can provide feedback, while the client requests such insights.
+  
+- **Client**: Directly interacts with `View Financial Insights Dashboard` via the system. Other interactions are through other actors (e.g., receiving alerts from FA or AI).
+
+This structure ensures all functional requirements are represented accurately within their respective roles and systems. Relationships between actors and use cases follow the defined guidelines, ensuring clarity in dependencies and permissions. 
+
+### Key Observations:
+- **Inheritance**: Not explicitly required here since each actor is distinct (Client, SysAdmin, Financial Advisor). However, if a role had multiple subtypes (e.g., different types of clients), inheritance could be applied.
+  
+- **Grouping**: Use cases are grouped by their primary actors or systems they belong to. For example, all client-related use cases under the "System" rectangle and advisor-specific ones in another box.
+
+This diagram adheres strictly to provided requirements without inventing additional elements. Each line represents a direct interaction between an actor and a use case as per the functional descriptions.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  client --> CFR001 : View Financial Insights Dashboard\nClient wants to see consolidated financial data.
+  
+  SysAdmin --> SAFR001 : Manage System Settings\nSys Admin needs control over AI parameters.\n
+}
+
+rectangle "Financial Advisor (FA)" {
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+
+  client --> FAFR002 : Receive alerts\nClient needs to be informed of potential issues.\n
+}
+
+rectangle "System (S)" {
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  usecase "AIFR005: Generate Investment Opportunities Based on Risk Profiles" as AIFR005
+
+  SysAdmin --> SFR019 : Manage historical data\nSys Admin needs access to past insights.\nClient --> AIFR005 : Get investment opportunities tailored for risk profile.
+}
+
+rectangle "AI System (A)" {
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "CFR011: Send Feedback to Improve Recommendations" as CFR011
+
+  client --> AIFR007 : Request news related to investments\nClient wants updates on portfolio.\nSysAdmin --> CFR011 : Collect feedback for system improvement.
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1198]

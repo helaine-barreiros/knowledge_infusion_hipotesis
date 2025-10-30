@@ -1,0 +1,76 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts" as SAFR004
+  usecase "CFR003: View Financial Predictions" as SAFR009
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR016
+  usecase "CFR005: Manage Recommendation Preferences" as SAFR020
+  usecase "CFR006: View Spending Limit Alerts" as SAFR008
+  usecase "CFR007: View Investment Opportunities" as SAFR014
+  usecase "CFR008: View News Related to Portfolio" as SFR009
+  usecase "CFR009: Access Personalized Dashboard" as AIFR026
+  
+  CFR001 --> (SFR013)
+  CFR001 --> (SAFR004)
+  CFR001 --> (SAFR009)
+  CFR001 --> (SAFR016)
+  CFR001 --> (SAFR020)
+  CFR001 --> (SFR008)
+  CFR001 --> (AIFR026)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts" as SAFR007
+  usecase "FAFR003: View Predictive Analytics" as SAFR015
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as AIFR004
+  
+  FinancialAdvisor --> (SAFR002)
+  FinancialAdvisor --> (SFR016)
+  FinancialAdvisor --> (AIFR003)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR005
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "CFR011: Send Feedback to AI System" as AIFR027
+  
+  SystemAdmin --> (SFR008)
+}
+
+package "System" {
+  rectangle "AI Component" {
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as SFR005
+    usecase "AIFR014: Generate Client Analytics" as SAFR017
+    usecase "AIFR023: Process Contextualized News to Extract Relevant Information" as AIFR010
+  }
+  
+  rectangle "News Source Integration" {
+    usecase "SFR009: Find Contextualized News Related to Users' Portfolios" as SFR006
+    usecase "AIFR024: Generate Client Predictive Insights Based on AI Analysis" as AIFR013
+  }
+  
+  rectangle "Dashboard Generation" {
+    usecase "SFR012: Generate Client Dashboards in an Intuitive Format" as SAFR018
+    usecase "AIFR025: Generate Financial Health Reports Based on User Insights" as AIFR017
+  }
+  
+  rectangle "Feedback Management" {
+    usecase "SFR020: Manage User Feedback for Continuous Improvement" as SFR020
+    usecase "SAFR023: Process Contextualized News to Extract Relevant Information" as SAFR015
+  }
+
+  CFR001 --> (AIFR006)
+  FAFR001 --> (SFR007)
+  SystemAdmin --> (SAFR001)
+
+}
+
+@enduml

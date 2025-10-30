@@ -1,0 +1,51 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Preferences and Alerts" as SAFR002  
+  usecase "SFR009: Deliver Contextualized News" as SFR009
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  
+  Client --> CFR001 : "View Financial Dashboard"
+  Client --> SAFR002 : "Manage Alerts and Preferences"
+  
+  SysAdmin -> (CFR001) : "Configure System Settings"
+  SysAdmin -> (SAFR002) : "Set Up Notifications"
+
+  FAFR003 -> (AIFR007) : "Request News Correlation for Client"
+}
+
+rectangle "Client" {
+  actor "User: Client, Financial Advisor, or System Administrator" as User
+}
+  
+@enduml
+```
+
+**Explanation of the Diagram Structure:**
+
+1. **System Boundary:** The entire system is enclosed within a rectangle labeled "System," which contains all use cases and actors relevant to its functionality.
+2. **Use Cases (within System):**
+   - `CFR001` (Client wants to view financial insights dashboard).
+   - `SAFR002` (SysAdmin wants to manage user preferences and alerts for the system).
+   - `SFR009` (System delivers contextualized news based on client portfolios).
+   - `AIFR007` (AI generates contextualized news insights by correlating financial data with clients' portfolios).
+3. **Actors:**
+   - The main actor is "User," which represents the Client, Financial Advisor, or System Administrator depending on context.
+4. **Actor-to-Use Case Relationships:**
+   - Clients can access `CFR001` and `SAFR002`.
+   - SysAdmins interact with system settings (`SysAdmin -> CFR001`) but not directly with client-related use cases unless specified otherwise (e.g., managing alerts in SAFR002).
+5. **Use Case Inheritance/Extensions:** The FAFR003 Financial Advisor role requests `AIFR007` for news correlation, showing a relationship between the advisor's actions and AI-generated insights.
+6. **Grouping by Actor/Subsystem:** While all use cases are under the system boundary, they are logically grouped into client interactions (`CFR`, `SAFR`) versus administrative/system management (`SFR`, `AIFR`).
+
+**Key Omissions/Clarifications:**
+- The requirements mention other actors (e.g., FAFR001 for Financial Advisors), but their specific use cases aren't detailed here due to the focus on client interactions and system administration. These could be expanded if needed.
+- Relationships between different components (like AI systems generating data) are implied through use case descriptions, such as `AIFR007` delivering insights used by others (`SFR009`).
+
+[Done: True
+Done Reason: stop
+Eval Count: 675]

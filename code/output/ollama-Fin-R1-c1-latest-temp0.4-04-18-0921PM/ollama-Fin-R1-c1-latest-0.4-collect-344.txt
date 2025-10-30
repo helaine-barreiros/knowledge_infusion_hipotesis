@@ -1,0 +1,65 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "AIFR002: Generate Personalized Recommendations Based on Financial Profiles" as AIFR002
+
+  Client --> CFR001 : View financial data in a consolidated dashboard.
+  
+  SysAdmin -> SAFR001 : Manage analysis parameters for the AI system to ensure compliance with regulations like Basel III.
+
+  FAFR003 <|-- (SFR004) : Financial Advisor requests predictive analytics from the system, which is delivered by SFR004 through AIFR002.
+  
+  Client --> SFR015: Request client predictive intervention analyses to identify when advisors should engage with clients.
+
+  FAFR003 <|-- (SFR008) : Financial Advisor requests investment opportunity analysis based on risk profiles via SFR008 and AIFR004.
+  
+  Client --> CFR006: View spending limit alerts when exceeding predefined thresholds in expense categories, managed by SFR015.
+
+  FAFR002 <|-- (SFR007) : Financial Advisor requests investment opportunities matching user criteria via SFR007 and AIFR004.
+  
+  Client --> CFR008: View news related to their portfolio from SFR009, delivered by AIFR007.
+
+  FAFR001 <|-- (AIFR003) : AI system generates spending limit alerts based on user data and thresholds set in SAFR001.
+  
+  SysAdmin --> CFR005: Manage personalized recommendation preferences for clients as per their KYC profile, affecting AIFR002's output.
+
+  Client --> SFR006: Request investment opportunity analysis from the system via AIFR04 (AIFR003).
+  
+  FAFR001 <|-- (SFR017) : AI system generates financial health reports using data from SAFR001 and other components.
+
+  Client --> CFR009: Access a consolidated personalized dashboard through SFR012, which is managed by AIFR003.
+  
+  FAFR004 <|-- (SFR015) : Financial Advisor configures analysis parameters for specific client segments via SAFR001 and AIFR008.
+
+  Client --> CFR010: Manage relationship with financial advisors, including data sharing permissions through SFR020.
+  
+  SysAdmin -> SAFR006: Manage spending limit thresholds in the system to ensure compliance (via SAFR003).
+  
+  FAFR004 <|-- (SFR018) : Financial Advisor manages user financial goals via AIFR009, affecting SFR020's output.
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Client** actors interact with the system through various use cases like viewing dashboards (`CFR001`), receiving alerts (`CFR006`, `SFR007`), and personalized recommendations (`SFR004`). They also manage their relationship with advisors (`CFR010`) and feedback mechanisms.
+- **SysAdmin** focuses on system administration tasks such as managing analysis parameters (`SAFR001`).
+- **Financial Advisor (FAFR)** use cases include mentoring clients, viewing alerts/predictive analytics (`FAFR003`, `SFR007`), generating recommendations/analyses via the AI component.
+- **System** components handle requests from actors to generate insights/recommendations/alerts. For example:
+  - `AIFR002`: Generates personalized recommendations based on financial profiles (requested by FAFR or SFR).
+  - `SFR015` and others manage specific request flows for different use cases.
+- **Inheritance/Extensions**: Use case relationships are established through `<|--`, indicating extensions. For instance, `FAFR003` extends both the system (`SFR004`) and AI component (`AIFR002`).  
+
+This structure ensures all functional requirements are represented accurately with precise IDs and names while maintaining readability via logical groupings and relationships.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1000]

@@ -1,0 +1,82 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Consolidated Financial Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+  
+  C --> (View Alerts about Anomalous Transactions)
+  C --> (Receive Personalized Recommendations)
+  C --> (Manage Recommendation Preferences)
+  C --> (Access Consolidated Financial Dashboard)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  
+  FA --> (Manage Client Mentoring Sessions)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SA
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR020: Manage User Feedback" as SFR020
+  
+  SA --> (Manage Analysis Parameters)
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Generate Anomaly Transaction Alerts" as AIFR005
+  
+  C --> (Generate Financial Predictions)
+  FA --> (Generate Personalized Recommendations)
+  SA --> (Generate Spending Limit Alerts)
+}
+
+rectangle "System" {
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR013: Generate Client Alerts" as SFR013
+  
+  C --> (Generate Client Dashboards)
+  FA --> (Generate Client Alerts)
+}
+
+rectangle "News Component" {
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "SFR009: Find Contextualized News Relevant to Portfolio" as SFR009
+  
+  C --> (Find Contextualized News Relevant to Portfolio)
+}
+
+rectangle "Predictive Component" {
+  usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+  usecase "SFR15: Request Predictive Insights from AI Component" as SFR15
+  
+  FA --> (Generate Predictive Intervention Recommendations)
+}
+
+rectangle "Health Report Component" {
+  usecase "AIFR017: Generate Financial Health Reports" as AIFR017
+}
+@enduml

@@ -1,0 +1,61 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Notification Preferences" as SAFR002
+  usecase "CFR003: View Historical Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Adjust Recommendation Preferences" as CFR005
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+}
+
+actor "Client" as Client {
+  --> CFR001 : "View Financial Insights Dashboard"
+  --> SAFR002 : "Manage Notification Preferences"
+  --> CFR004 : "Receive Personalized Recommendations"
+  --> CFR005 : "Adjust Recommendation Preferences"
+  --> SFR013 : "Generate Client Alerts Based on Predefined Conditions"
+}
+
+actor "Financial Advisor" as FAFRA {
+  --> FAFR002 : "View Client Intervention Alerts"
+  --> FAFR004 : "Configure Analysis Parameters for Specific Segments"
+}
+
+actor "System Administrator" as SysAdmin {
+  --> SAFR001 : "Manage Analysis Parameters"
+}
+
+package Professional {
+  actor FinancialAdvisor as FA
+  actor SystemAdministrator as SA
+
+  FA <|-- FAFRA: configures
+  SA <|-- SysAdmin: manages
+}
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire system is enclosed within a rectangle labeled "System".
+- **Use Cases**:
+  - `CFR001`, `SAFR002`, `CFR003`, etc., are mapped to their respective functional requirements.
+- **Actors**:
+  - Clients, Financial Advisors (FA), and System Administrators (SysAdmin) are defined as separate entities.
+- **Relationships**:
+  - Clients interact with multiple use cases related to viewing dashboards, receiving recommendations, adjusting preferences, etc.
+  - Financial Advisors can view alerts and configure parameters for specific segments.
+  - SysAdmin manages analysis parameters via `SAFR001`.
+- **Grouping**: The Professional package groups actors logically by role (Financial Advisor vs. System Administrator).
+
+This diagram ensures all requirements are represented accurately with proper relationships between actors and use cases. Adjustments may be needed based on further clarification of any implicit dependencies or additional details from the requirements list.
+
+[Done: True
+Done Reason: stop
+Eval Count: 598]

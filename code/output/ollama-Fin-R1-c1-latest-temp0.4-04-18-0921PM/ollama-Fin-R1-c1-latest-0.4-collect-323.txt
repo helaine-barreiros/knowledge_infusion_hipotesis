@@ -1,0 +1,90 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage System Settings" as SAFR002
+  
+  Client --> CFR001 : "View financial data and insights"
+  
+  SysAdmin -> (SFR003) : "Request AI-generated predictions from the system"
+  SysAdmin -> (AIFR009) : "Generate client predictive intervention recommendations based on patterns in user behavior or market trends."
+}
+
+rectangle "Client" {
+  usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008
+  usecase "CFR009: View Consolidated Financial Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+
+  Client --> (SFR002) : "Request system-generated alerts and recommendations"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Schedule Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Intervention Alerts for Clients" as FAFR002
+  usecase "FAFR003: Review Predictive Analytics of Client Financial Situations" as FAFR003
+
+  SysAdmin --> (SFR004) : "Request personalized recommendations from the system"
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+  usecase "FAFR005: Configure Analysis Parameters by Client Segment" as FAFR004
+
+  SysAdmin --> (AIFR003) : "Generate spending limit alerts based on user activity"
+}
+
+rectangle "AI System" {
+  usecase "AIFR001: Generate Financial Predictions from Historical Data and Market Trends" as AIFR001
+  usecase "AIFR002: Provide Personalized Recommendations Based on User Profiles" as AIFR002
+  usecase "AIFR003: Alert Users When Spending Exceeds Predefined Limits in Specific Categories" as AIFR003
+  usecase "AIFR004: Identify Suitable Investment Opportunities Matching Risk Tolerance and Goals" as AIFR004
+  usecase "AIFR005: Analyze Market Trends to Inform Financial Recommendations" as AIFR005
+  usecase "AIFR006: Detect Anomalous Transactions for Fraud Prevention" as AIFR006
+  usecase "AIFR007: Correlate News with User Portfolios for Relevance" as AIFR007
+
+  SysAdmin --> (SFR019) : "Maintain historical records of insights to measure effectiveness"
+}
+
+rectangle "System Functions" {
+  usecase "SFR002: Deliver Personalized Recommendations Based on AI Analysis" as SFR002
+  usecase "SFR003: Request Predictive Interventions from the System" as SFR003
+
+  SysAdmin --> (AIFR008) : "Generate predictive insights to enhance advisor guidance"
+}
+
+rectangle "Client Feedback Loop" {
+  usecase "CFR11: Send User Feedback for Improvement" as CFR11
+}
+@enduml
+```
+
+**Key Observations and Explanations:**
+- **System Boundary:** The entire diagram is enclosed within a rectangle labeled "System," which contains all the actors, use cases, and their relationships. This ensures clarity in understanding how different components interact.
+  
+- **Actors Grouping:** Actors are categorized into distinct groups (Client, Financial Advisor, System Administrator) to simplify navigation through complex interactions.
+
+- **Use Case Relationships:**
+  - Clients primarily engage with `CFR001` for dashboards and other financial views. They also use `SFR002` to request system-generated recommendations.
+  - SysAdmins manage parameters via `SAFR001`, configure client segments through `FAFR004`, and handle alerts like spending limits (`AIFR003`) or anomaly detection (`AIFR006`).
+  
+- **Inheritance/Extension:** For example, the Financial Advisor role extends from SysAdmin in terms of managing analysis parameters (e.g., `FAFR005` inherits from `SAFR001`). This reflects real-world delegation.
+
+- **Cross-Actor Interactions:** The AI system (`AIFRXXX`) generates insights and recommendations that flow back to clients, advisors, or the system itself for further processing. For instance, personalized recommendations are delivered via `SFR002` (a system function) but initiated by client requests or advisor actions.
+
+- **Feedback Loop (`CFR11`):** This use case allows users to provide feedback on the system’s outputs, which is critical for iterative improvement and alignment with user needs. It's a separate component outside primary interactions.
+  
+This structure ensures all functional requirements are represented accurately while maintaining readability through logical grouping and explicit relationships. Adjustments may be needed based on further analysis or specific implementation details not captured in this initial model.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1277]

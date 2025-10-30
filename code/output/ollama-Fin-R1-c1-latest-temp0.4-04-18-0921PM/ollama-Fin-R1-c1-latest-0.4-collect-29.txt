@@ -1,0 +1,62 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR006: Manage Spending Limit Alerts" as SAFR006
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "AIFR009: Generate Contextualized News Insights" as AIFR009
+
+  user --> CFR001 : Client wants to view financial data in a comprehensive format.
+  user --> SAFR006 : System Administrator needs to manage spending limit alerts for compliance and control.
+  SysAdmin --> SFR012 : System must generate client dashboards consolidating all info.
+
+  // Financial Advisor Use Cases
+  usecase "FAFR004: Configure Analysis Parameters" as FAFR004
+  user --> FAFR004 : Financial Advisor wants to customize system behavior for specific segments.
+  
+  // Client - System Interactions
+  client --> SFR013 : System must generate alerts based on predefined conditions (e.g., spending limits).
+  client --> AIFR007 : AI needs to provide contextualized news relevant to the user's portfolio.
+
+  // System Components
+  SysAdmin <|-- SAFR006 : System Administrator extends management of spending limit alerts.
+  
+}
+
+// Grouping Actors and Use Cases
+package "Client" {
+  actor Client as client
+}
+actor User as user
+actor SysAdmin as SysAdmin
+
+@enduml
+```
+
+### Explanation:
+1. **Use Case Diagram Structure**:
+   - The system is represented within a rectangle labeled `System`.
+   - Each use case (e.g., viewing dashboards, managing alerts) is defined with its ID and name.
+   - Actors are categorized under their respective roles: Client (`client`), User (`user`), SysAdmin (`SysAdmin`).
+
+2. **Use Case Relationships**:
+   - Clients interact directly with the system to view financial data (CFR001, CFR003) or receive personalized recommendations (SFR004).
+   - System Administrators manage parameters like spending limits (SAFR006), which are extended by SysAdmin.
+   - Financial Advisors use FAFR-related use cases for customizing system behavior.
+
+3. **Grouping**:
+   - The `Client` actor is grouped into a package to logically separate client-specific interactions from other actors.
+
+4. **Inheritance and Extensions**:
+   - SysAdmin extends management of spending limit alerts (SAFR006), indicated by the `<|--` notation.
+   
+This diagram ensures all functional requirements are mapped accurately, with precise relationships between actors and use cases. Adjustments may be needed based on further clarifications or additional requirements not listed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 637]

@@ -1,0 +1,92 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "SFR004: Request Personalized Recommendations" as SFR004
+  usecase "SFR018: Manage Users' Financial Goals" as SFR018
+
+  client --> CFR001 : "View financial data and insights"
+  
+  SysAdmin -> SAFR001 : "Manage system parameters"
+
+  FAFR002 <|-- (CFR001, SAFA003) : "Alerts for clients or advisors"
+  
+  SFR003 --> CFR001 : "Provide financial predictions to client dashboard"
+  SFR004 --> CFR001 : "Deliver personalized recommendations"
+
+  user --> FAFR002 : "View alerts about potential fraud/abnormal transactions"
+}
+
+rectangle "Client" {
+  actor Client as client
+}
+ 
+rectangle "System Administrator (SysAdmin)" {
+  actor SysAdmin as sysadmin
+}
+
+rectangle "Financial Advisor (FAFR)" {
+  package Professional {  
+    actor FinancialAdvisor1 as fafr1 : "Advisors managing clients and alerts"
+    usecase FAFR002: View Client Intervention Alerts
+    usecase FAFR003: View Predictive Analytics about Clients' Situations
+  }
+}
+
+rectangle "AI System (AIFR)" {
+  package AI {  
+    actor AIFR as aifr : "Generating insights and recommendations"
+    usecase AIFR001: Generate Financial Predictions
+    usecase AIFR002: Generate Personalized Recommendations
+    usecase AIFR003: Generate Spending Limit Alerts
+    usecase AIFR004: Generate Investment Opportunity Analyses
+  }
+}
+
+rectangle "System Functions (SFR)" {
+  package SystemFunctions {  
+    actor SFR as sfr : "Executing system-level tasks"
+    usecase SFR018: Manage Users' Financial Goals
+  }
+}
+
+@enduml
+```
+
+### Explanation:
+- **Client**: Represents the end-users, including clients and financial advisors. They interact with the system through various use cases like viewing dashboards or receiving recommendations.
+  
+- **System Administrator (SysAdmin)**: Manages analysis parameters for ensuring compliance and accuracy of AI algorithms.
+
+- **Financial Advisor (FAFR)**: A specialized role within the client group that handles mentoring, alerts, and predictive analytics. They are grouped under a "Professional" package to emphasize their expertise.
+
+- **AI System (AIFR)**: The core component responsible for generating financial predictions, personalized recommendations, spending limit alerts, investment analyses, etc., based on historical data and market trends.
+
+- **System Functions (SFR)**: Handles system-level operations like goal management and feedback processing. 
+
+### Key Relationships:
+1. **Client** interacts directly with the "View Financial Insights Dashboard" (`CFR001`) and receives recommendations or alerts via other use cases.
+2. The `SysAdmin` manages analysis parameters for AI systems, ensuring regulatory compliance (e.g., Basel III).
+3. **Financial Advisors** view client intervention alerts (`FAFR002`) and predictive analytics (`FAFR003`). They also manage clients' financial goals through the system’s goal management feature.
+4. The `AIFR` generates critical outputs like predictions, recommendations, spending limits, investment opportunities, anomaly detection, contextualized news, etc., which are consumed by other actors or components.
+
+### Diagram Structure:
+- **System** boundary contains all use cases and their interrelations with external actors (client, sysadmin).
+- Use case grouping follows logical roles: clients/users (`CFR`), system administrators (`SAFR`), financial advisors (`FAFR`), AI systems (`AIFR`), and system functions (`SFR`).
+
+This structure ensures clarity in the interactions between different stakeholders and components of the system. Each use case is precisely mapped to its corresponding requirement ID, ensuring alignment with functional requirements provided. 
+
+### Notes:
+- The `CFR011: Send Feedback` was not included as it's a cross-cutting concern but could be added if needed.
+- All relationships are directional (`-->`) or bidirectional (if applicable), adhering to the direction specified in the requirements where possible.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1003]

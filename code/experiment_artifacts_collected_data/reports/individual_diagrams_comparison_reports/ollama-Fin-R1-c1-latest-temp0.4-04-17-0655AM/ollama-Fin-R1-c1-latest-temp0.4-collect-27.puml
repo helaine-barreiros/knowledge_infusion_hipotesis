@@ -1,0 +1,68 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "CFR003: View Predictive Analytics" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Adjust Recommendation Preferences" as CFR005
+  usecase "CFR006: Monitor Spending Limits" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Portfolio News" as CFR008
+  usecase "CFR009: Consolidate Financial Dashboard" as CFR010
+  usecase "CFR010: Manage Data Sharing with Advisors" as SAFR003
+
+  // System Administrator Use Cases
+  usecase "SAFR001: Configure Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR004: Customize Analysis Parameters by Segment" as FAFR004
+
+  // System Use Cases (SFR)
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "SFR012: Create Client Dashboards" as SFR012
+  usecase "AIFR009: Generate Contextualized News Insights" as AIFR009
+
+  // AI System Use Cases (AIFR)
+  usecase "AIFR007: Analyze News for Portfolio Impact" as AIFR007
+}
+
+actor Client as C1, C2, C3 {
+  C1 --> CFR001 : View Financial Insights Dashboard
+  C1 --> CFR004 : Receive Personalized Recommendations
+  C1 --> CFR006 : Monitor Spending Limits
+  C1 --> CFR008 : Access Portfolio News
+  C1 --> CFR009: Consolidate Financial Dashboard
+}
+
+actor Client2 as C4, C5 {
+  C4 --> SAFR003 : Manage Data Sharing with Advisors
+  C5 --> SFR013 : Generate Client Alerts Based on Predefined Conditions
+}
+
+actor SystemAdmin as SA1 {
+  SA1 --> SAFR001: Configure Analysis Parameters for Compliance (Basel III)
+  SA1 --> FAFR004: Customize Segments under GDPR/CCPA
+}
+
+actor FinancialAdvisor as FA1, FA2 {
+  FA1 --> FAFR002 : View Client Intervention Alerts
+  FA1 --> AIFR009 : Generate Contextualized News Insights for Clients
+}
+
+// Relationships between actors and use cases within the system boundary
+
+C1 --|> CFR003: View Predictive Analytics (historical data, market trends)
+C1 --|> SAFR002: Manage Alert Preferences (FATF regulations)
+
+FA1 --|> FAFR004 : Customize Analysis Parameters for Specific Segments
+FA2 --> AIFR007 : Analyze News Impact on Portfolios
+
+// System boundary definitions
+rectangle "System" {
+  usecase "CFR003: View Predictive Analytics"
+}
+
+@enduml

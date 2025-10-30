@@ -1,0 +1,77 @@
+```plantuml
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  client --> CFR001 : "View"
+  
+  SysAdmin --> SAFR001 : "Manage"
+}
+
+rectangle "Client" {
+  actor "User (Client)" as UserClient
+
+  userClient --> CFR001 : "View Financial Insights Dashboard", 
+               --> SFR013 : "Receive Alerts",
+               --> AIFR002 : "Personalized Recommendations",
+               --> AIFR004 : "Investment Opportunities"
+}
+
+rectangle "Financial Advisor" {
+  actor "User (Advisor)" as UserAdvisor
+
+  userAdvisor --> FAFR001 : "Manage Client Mentoring Sessions", 
+                --> SFR013 : "View Alerts", 
+                --> FAFR002 : "Client Intervention Alerts",
+                --> AIFR008 : "Predictive Interventions"
+}
+
+rectangle "System Administrator" {
+  actor "SysAdmin" as SysAdmin
+
+  sysadmin --> SAFR001 : "Manage Analysis Parameters"
+              ,--> SFR019 : "Maintain Historical Record"
+              ,--> SFR20 : "Manage User Feedback"
+}
+
+rectangle "AI System" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+  sysAdmin <|-- SAFR001 : "Configure Parameters"
+  
+  SysAdmin --> SFR020 : "Manage User Feedback"
+
+  userClient --(AIFR001) : "Request Predictions", 
+             -(SFR013): "Receive Alerts",
+             -(AIFR004): "Investment Opportunities"
+
+  userAdvisor -- (AIFR008): "Intervention Recommendations"
+}
+
+@enduml
+```
+
+### Explanation:
+- **Client**: Represents the end-users, including Clients and Financial Advisors. They interact with various use cases like viewing dashboards, receiving alerts, etc.
+- **SysAdmin**: Manages system-level tasks such as configuring analysis parameters (SAFR001) and maintaining feedback logs (SFR20).
+- **AI System**: Contains AI-generated services for predictions (AIFR001), investment opportunities (AIFR004), anomaly alerts, etc.
+- **Financial Advisor**: Interacts with advisory-specific use cases like mentoring sessions (FAFR001) and predictive interventions (AIFR008).
+  
+### Key Relationships:
+- `UserClient` interacts directly with the system through dashboards (`CFR001`) and receives recommendations/notifications from AI.
+- `SysAdmin` configures parameters for analysis via `SAFR001`.
+- The AI components generate insights/predictions which are consumed by both clients and advisors.
+
+This structure ensures clarity in role-based interactions while adhering to the provided functional requirements. Adjustments may be needed based on further details or dependencies not explicitly stated here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 724]

@@ -1,0 +1,122 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+' Define actors
+actor Client as C
+actor FinancialAdvisor as FA
+actor SysAdmin as SA
+actor User as U
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View Financial News" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+  
+  C --> CFR001 : "View"
+  C --> CFR002 : "Receive"
+  C --> CFR003 : "View"
+  C --> CFR004 : "Receive"
+  C --> CFR005 : "Manage"
+  C --> CFR006 : "View"
+  C --> CFR007 : "View"
+  C --> CFR008 : "View"
+  C --> CFR009 : "Access"
+  C --> CFR10 : "Manage"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  FA --> FAFR001 : "Manage"
+  FA --> FAFR002 : "View"
+  FA --> FAFR003 : "View"
+  FA --> FAFR004 : "Configure"
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+  
+  SA --> SAFR001 : "Manage"
+}
+
+' Define system components
+package "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunities Based on Strategies" as AIFR005
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+  usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+  
+  C --> (AIFR001) : "Request"
+  FA --> (AIFR002) : "Request"
+  U --> (AIFR003) : "Request"
+  C --> (AIFR004) : "Request"
+  C --> (AIFR005) : "Request"
+  U --> (AIFR006) : "Request"
+  C --> (AIFR007) : "Request"
+  FA --> (AIFR008) : "Request"
+  SA --> (AIFR009) : "Request"
+}
+
+' Define system boundary
+rectangle "System" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities Based on Criteria and Preferences" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as SFR008
+  usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR009
+  usecase "SFR010: Process Contextualized News for User's Financial Situations" as SFR010
+  usecase "SFR011: Request Contextualized News Insights from AI Component" as SFR011
+  usecase "SFR012: Generate Client Dashboards with Financial Information" as SFR012
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "SFR014: Generate Client Analytics for Insights into Behavior and Performance" as SFR014
+  usecase "SFR015: Request Predictive Intervention Analyses from AI Component" as SFR015
+  usecase "SFR016: Request Predictive Insights from AI Component to Enhance Guidance" as SFR016
+  usecase "SFR017: Generate Financial Health Reports Assessing Users' Wellbeing" as SFR017
+  usecase "SFR018: Manage Users' Financial Goals and Track Progress" as SFR018
+  usecase "SFR019: Maintain Historical Record of Insights for Trend Analysis" as SFR019
+  usecase "SFR020: Manage User Feedback to Improve Outputs" as SFR020
+  
+  C --> (SFR001) : "Receive"
+  FA --> (SFR002) : "Receive"
+  U --> (SFR003) : "Request"
+  C --> (SFR004) : "Request"
+  U --> (SFR005) : "Request"
+  C --> (SFR006) : "Request"
+  FA --> (SFR007) : "Request"
+  SA --> (SFR008) : "Request"
+  C --> (SFR009) : "Find"
+  U --> (SFR010) : "Process"
+  C --> (SFR011) : "Request"
+  C --> (SFR012) : "Generate"
+  FA --> (SFR013) : "Receive"
+  SA --> (SFR014) : "Generate"
+  U --> (SFR015) : "Request"
+  FA --> (SFR016) : "Request"
+  C --> (SFR017) : "Generate"
+  C --> (SFR018) : "Manage"
+  SA --> (SFR019) : "Maintain"
+  U --> (SFR020) : "Send Feedback"
+}
+
+@enduml

@@ -1,0 +1,76 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as c
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR005: Manage Recommendations Preferences" as SAFR005
+  usecase "SFR009: Request Contextualized News" as SFR009
+  
+  c --> CFR001
+  c --> SAFR005
+  c --> SFR009
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as fa
+
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  
+  fa --> FAFR002
+  fa --> FAFR003
+}
+
+package "System Administrator" {
+  actor SystemAdmin as sa
+
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  sa --> SAFR001
+}
+
+rectangle "AI Component" {
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR004: Generate Spending Limit Alerts" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunity Analyses" as AIFR005
+  
+  c --> (AIFR002)
+  fa --> (AIFR003)
+}
+
+rectangle "System" {
+  usecase "SFR016: Request Predictive Insights" as SFR016
+  usecase "SFR017: Generate Financial Health Reports" as SFR017
+  
+  c --> (SFR016)
+  fa --> (SFR016)
+}
+
+package "Notifications" {
+  usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+  usecase "SFR013: Generate Client Alerts" as SFR013
+  
+  c --> (SFR008)
+  fa --> (SFR008)
+}
+
+package "Feedback Management" {
+  actor User as u
+
+  usecase "CFR011: Send Feedback" as CFR011
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  
+  u --> (SAFR019)
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 565]

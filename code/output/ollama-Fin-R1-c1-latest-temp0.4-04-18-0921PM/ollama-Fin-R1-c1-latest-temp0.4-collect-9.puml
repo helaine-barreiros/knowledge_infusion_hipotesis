@@ -1,0 +1,101 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor FinancialAdvisor as advisor
+actor SysAdmin as sysadmin
+system "System" as system
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as view_dashboard
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as receive_alerts
+  usecase "CFR003: View Financial Predictions" as view_predictions
+  usecase "CFR004: Personalized Recommendations Based on Profile" as rec_profile
+  usecase "CFR005: Manage Recommendation Preferences" as manage_prefs
+  usecase "CFR006: Spending Limit Alerts for Budget Control" as spend_alerts
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as view_investments
+  usecase "CFR008: Access Portfolio-Related News" as access_news
+  usecase "CFR009: Consolidated Personalized Dashboard" as consolidated_dashboard
+  usecase "CFR10: Manage Relationship with Financial Advisors" as manage_relationships
+
+  client --> view_dashboard : View financial data.
+  client --> receive_alerts : Receive alerts for anomalous transactions.
+  client --> view_predictions : Review future forecasts.
+  client --> rec_profile : Get personalized recommendations aligned to goals.
+  client --> manage_prefs : Adjust recommendation settings per KYC profile.
+  client --> spend_alerts : Monitor spending against limits.
+  client --> view_investments : Explore investment options matching risk profile.
+  client --> access_news : Stay informed on market events affecting portfolio.
+  client --> consolidated_dashboard : Access a single-view dashboard for finance.
+  client --> manage_relationships : Control data sharing with advisors.
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters" as manage_params
+  sysadmin --> manage_params : Adjust system parameters to ensure accuracy and compliance (Basel III, etc.).
+  
+}
+manage_params <|-- view_dashboard
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as mentor_sessions
+  usecase "FAFR002: View Intervention Alerts for Clients" as view_interventions
+  usecase "FAFR003: Review Predictive Analytics About Clients' Situations" as review_analytics
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as config_params
+  
+  advisor --> mentor_sessions : Schedule and track mentoring sessions.
+  advisor --> view_interventions : Monitor client alerts for proactive support.
+  advisor --> review_analytics : Analyze predictive data to guide clients.
+  advisor --> config_params : Customize system settings per segment.
+
+}
+
+rectangle "System Core Functions" {
+  usecase "SFR001: Deliver Alerts Through Channels" as deliver_alerts
+  usecase "SFR002: Personalized Recommendations Based on Profiles" as rec_profilesystem
+  usecase "SFR003: Request Financial Predictions from AI" as request_predictions
+  usecase "SFR004: Request Personalized Recos From AI" as req_personal_rec
+  usecase "SFR005: Spending Limit Alerts Based on Thresholds" as spend_limit_alerts
+  usecase "SFR006: Investment Opportunity Analysis for Users" as invest_analysis
+  usecase "SFR007: Specific Investments Matching Criteria and ESG" as specific_investments
+  usecase "SFR008: Anomaly Transaction Alerts Based on AML Rules" as anamly_alerts
+  usecase "SFR009: Contextualized News for Portfolios" as contextual_news
+  usecase "SFR010: Client Dashboards Generation" as client_dashboards
+  usecase "SFR011: Generate Insights From AI on News" as gen_insights_news
+  usecase "SFR012: Predictive Intervention Analysis for Advisors" as predict_interventions
+  usecase "SFR013: Financial Health Reports" as fin_health_reports
+  usecase "SFR014: Track Users' Goals Progress" as track_goals
+  usecase "SFR015: Manage Historical Records of Insights" as hist_records
+  usecase "SFR016: Process User Feedback for Improvements" as process_feedback
+
+}
+
+system --> deliver_alerts : Send alerts via channels.
+system --> rec_profilesystem : Provide personalized recommendations to clients.
+system --> request_predictions : Request financial predictions from AI component.
+system --> req_personal_rec : Ask AI for personal recomms based on profiles and goals.
+system --> spend_limit_alerts : Trigger spending limit alerts when thresholds exceeded.
+system --> invest_analysis : Identify investment opportunities matching user risk profile.
+system --> specific_investments : Find investments aligned with ESG criteria.
+system --> anamly_alerts : Detect AML-related anomalies in transactions.
+system --> contextual_news : Extract relevant news for portfolios from sources.
+system --> client_dashboards : Generate consolidated dashboards per user.
+system --> gen_insights_news : Create insights on portfolio-relevant news using AI.
+system --> predict_interventions : Predict when advisors need to engage with clients.
+system --> fin_health_reports : Assess users' financial health via metrics.
+system --> track_goals : Monitor progress towards set financial goals.
+system --> hist_records : Maintain a history of generated insights for analysis.
+system --> process_feedback : Collect and analyze user feedback.
+
+usecase "AIFR001: Generate Financial Predictions" as pred_fin
+usecase "AIFR002: Personalized Recommendations Based on AI" as rec_ai
+
+system --> pred_fin : Provide historical data, market trends for predictions.
+pred_fin <|-- request_predictions
+rec_profilesystem <|-- req_personal_rec
+client --> view_dashboard : Use generated dashboards and reports.
+
+@enduml

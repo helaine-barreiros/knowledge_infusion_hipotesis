@@ -1,0 +1,81 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR002: Deliver Alerts to Users" as SAFR002
+  usecase "SFR010: Generate Client Dashboards" as SFR010
+  usecase "SFR013: Generate Client Analytics" as SFR013
+  usecase "AIFR009: AI System Generates Contextualized News Insights" as AIFR009
+
+  // Clients (User)
+  actor "Client" as client {
+    client --> CFR001 : "View Financial Insights Dashboard"
+    client --> CFR002 : "Receive Alerts for Anomalous Transactions"
+    client --> CFR003 : "View Financial Predictions"
+    client --> CFR004 : "Receive Personalized Recommendations"
+    client --> CFR005 : "Manage Recommendation Preferences"
+    client --> SAFR002 : "Receive Spending Limit Alerts"
+    client --> SFR010 : "Access Consolidated Dashboard"
+  }
+
+  // Financial Advisors
+  actor "Financial Advisor" as advisor {
+    advisor --> FAFR001 : "View Client Mentoring Sessions Based on Insights"
+    advisor --> FAFR002 : "View Intervention Alerts for Clients"
+    advisor --> SFR013 : "Review Client Analytics"
+  }
+
+  // System Administrators
+  actor "System Administrator" as admin {
+    admin --> SAFR001 : "Manage Analysis Parameters"
+  }
+  
+  // AI Systems (AIFR)
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Identify Suitable Investments" as AIFR005
+  usecase "AIFR006: Detect Anomalous Transactions" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "AIFR008: Recommend Predictive Interventions for Advisors" as AIFR008
+
+  client --> AIFR001 : "Request Financial Predictions"
+  client --> AIFR002 : "Receive Personalized Recommendations"
+  client --> AIFR003 : "Get Spending Limit Alerts"
+  client --> AIFR004 : "Identify Investment Opportunities"
+  admin --> SAFR001 <|-- (AIFR006) : "Adjust Parameters for Fraud Detection"
+
+  advisor --> FAFR002 <|-- (AIFR008) : "Use Predictive Interventions"
+  
+  SysAdmin --> AIFR003 <|-- (CFR005) : "Set Preferences for Alerts"
+
+}
+
+@enduml
+```
+
+### Key Observations:
+1. **Actors** are categorized into three main types: *Client*, *Financial Advisor*, and *System Administrator*.
+2. **Use Cases** represent functionalities required by each actor or the system itself (e.g., generating insights, managing parameters).
+3. Relationships between actors and use cases are established using arrows (`-->`), indicating that an actor can trigger a specific use case.
+4. The `rectangle "System"` groups related use cases under it to emphasize their collective role within the system.
+
+### Notes:
+- **CFR011** (User Feedback) is not explicitly represented here because its implementation details are less critical for this diagram, which focuses on primary interactions and functionalities.
+- Inheritance relationships like `SAFR002 <|-- AIFR006` indicate that the System Administrator's role in managing analysis parameters influences how the AI system detects anomalies. This reflects a hierarchical relationship where administrative settings affect automated alerts.
+
+This structure ensures clarity while adhering to the provided requirements, using PlantUML syntax effectively for readability and maintainability.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1049]

@@ -1,0 +1,103 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics about My Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+}
+
+package SystemAdministrator {
+  actor "System Administrator" as SAFR001
+  
+  usecase "SAFR002: Manage Analysis Parameters for the AI System" as SAFR002
+}
+
+rectangle "Client Dashboard" {
+  usecase "CFR009: Access a Personalized Dashboard that Consolidates My Financial Information in a Single View to Efficiently Monitor My Finances" as CFR009
+  
+  package ClientDashboardUseCases {
+    usecase "SFR12: Generate Client Dashboards That Present Financial Information in an Intuitive and Actionable Format" as SFR12
+    usecase "CFR010: Manage My Relationship with Financial Advisors, Including Permissions for Sharing My Financial Data, to Maintain Privacy and Control Over My Financial Information" as CFR010
+    
+    CFR009 --> (SFR12)
+  }
+}
+
+rectangle "Alerts & Notifications" {
+  usecase "SFR08: Request Anomaly Transaction Alerts from the AI Component to Detect Potentially Fraudulent Activities in Accordance with AML Regulations" as SFR08
+  usecase "CFR006: View Spending Limit Alerts When I Exceed Predefined Thresholds in Specific Expense Categories to Maintain Better Control Over My Budget" as CFR006
+  
+  package AlertUseCases {
+    usecase "SFR13: Generate Client Alerts Based on Predefined Conditions to Ensure Timely Notification of Important Financial Events" as SFR13
+    
+    SFR08 --> (SFR13)
+    CFR006 --> (SFR13)
+  }
+}
+
+rectangle "Recommendations & Insights" {
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals to Optimize My Financial Strategies and Investment Portfolio" as CFR004
+  usecase "FAFR002: Manage Client Mentoring Sessions Based on System-Generated Insights to Provide More Valuable Guidance Aligned With Each Client's Financial Goals" as FAFR002
+  
+  package RecommendationUseCases {
+    usecase "SFR16: Request Predictive Insights from the AI Component to Enhance the Value of Financial Guidance Provided to Clients" as SFR16
+    
+    CFR004 --> (SFR16)
+    FAFR002 --> (SFR16)
+  }
+}
+
+rectangle "Investment Opportunities & News" {
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile (as Defined Under MiFID II or Equivalent Standards) to Diversify My Portfolio and Maximize Returns" as CFR007
+  usecase "FAFR012: Find Contextualized News Relevant to Users' Financial Portfolios from Trusted Financial News Sources" as FAFR012
+  
+  package InvestmentUseCases {
+    usecase "SFR06: Request Investment Opportunity Analysis from the AI Component to Identify Suitable Investments for Users Based on Their Risk Profiles" as SFR06
+    usecase "AIFR005: Generate Financial Instruments That Align with My Investment Strategies and Modern Portfolio Theory Principles" as AIFR005
+    
+    CFR007 --> (SFR06)
+    FAFR012 --> (FAFR012)
+  }
+}
+
+rectangle "AI System Components" {
+  usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+  usecase "AIFR003: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations from Established Spending Patterns" as AIFR003
+  
+  package AISystemUseCases {
+    usecase "SFR24: Request Predictive Insights From the AI Component to Enhance the Value of Financial Guidance Provided to Clients" as SFR16
+    
+    AIFR001 --> (AISystemUseCases)
+    AIFR003 --> (AISystemUseCases)
+  }
+}
+
+rectangle "Feedback & Improvement" {
+  usecase "CFR11: Send Feedback About the System's Recommendations and Insights to Help Improve the Accuracy and Relevance of Future Outputs" as CFR11
+  
+  package FeedbackUseCase {
+    usecase "SFR20: Manage User Feedback to Continuously Improve the Quality and Relevance of Financial Insights" as SFR20
+    
+    CFR11 --> (SFR20)
+  }
+}
+
+CFR001 --> (CFR009)
+FAFR003 --> (SFR16)
+SAFR002 --> (AISystemUseCases)
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1105]

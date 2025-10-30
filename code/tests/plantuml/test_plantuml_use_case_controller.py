@@ -90,13 +90,13 @@ class TestPlantUMLUseCaseController(unittest.TestCase):
         with patch.object(self.controller, "extract_plantuml_use_case_components") as mock_extract:
             # Configure o mock para retornar um dicionário válido
             mock_extract.return_value = {"actors": [{"name": "Actor"}], "relations": [{"source": "Actor", "target": "UseCase"}]}
-            result = self.controller.extract_excel_report(plantuml_code, "output.xlsx")
+            result = self.controller.extract_excel_diagram_component_detailed_report(plantuml_code, "output.xlsx")
             self.assertEqual(result, b"fake_excel_bytes")
             
         # Caso de falha: componentes é None
         with patch.object(self.controller, "extract_plantuml_use_case_components") as mock_extract:
             mock_extract.return_value = None
-            result = self.controller.extract_excel_report("Invalid code", "output.xlsx")
+            result = self.controller.extract_excel_diagram_component_detailed_report("Invalid code", "output.xlsx")
             self.assertIsNone(result)
 
 

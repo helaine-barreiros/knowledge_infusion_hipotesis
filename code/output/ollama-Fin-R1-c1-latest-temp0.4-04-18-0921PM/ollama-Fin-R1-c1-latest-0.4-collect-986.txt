@@ -1,0 +1,66 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage System's AI Parameters"
+  SysAdmin --> FAFR004 : "Configure Analysis Params by Segment"
+
+  rectangle "Client Interface" {
+    user as Client
+    user -> CFR001: View Financial Data
+    user -> SFR012: Access Personalized Dashboard
+    user -> SFR013: Receive Alerts
+    user -> SFR014: Review Analytics
+    user -> SFR015: Get Predictive Interventions
+  }
+
+  rectangle "Advisor Interface" {
+    advisor as FinancialAdvisor
+    advisor -> FAFR002: View Client Intervention Alerts
+    advisor -> FAFR003: Access Predictive Analytics
+    advisor -> FAFR004 : Configure Analysis Params for Segments
+  }
+  
+  SysAdmin --> SFR019: Manage Historical Records
+
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire diagram is enclosed within a system boundary to represent the AI-Powered Analysis & Insights System.
+- **Client Use Cases** (CFR series):
+  - `CFR001` allows clients to view financial insights dashboards.
+  - Other client-related use cases like alerts, predictions, recommendations are grouped under client interactions (`SFR0XX`).
+  
+- **System Administrator Use Cases**:
+  - `SAFR001`: Manages system parameters for the AI component (e.g., ensuring compliance with regulations like Basel III or FATF standards).
+  - `FAFR004`: Configures analysis parameters tailored to specific client segments, aligning with GDPR/CCPA requirements.
+
+- **Financial Advisor Use Cases**:
+  - `FAFR002` and `FAFR003` relate to managing alerts and predictive analytics for clients.
+  
+- **Relationships**:
+  - Clients interact directly with the system through dashboards (`SFR012`) and receive personalized recommendations (`SFR014`).
+  - System Administrators manage AI parameters via `SAFR001`.
+  - Financial Advisors use tools like alerts, predictive analytics, and segment-specific configurations.
+
+This structure ensures clarity in separating client-facing functionalities from administrative/system-level controls. The diagram adheres to the provided requirements by explicitly linking actors (Client, SysAdmin, Advisor) with their respective use cases. 
+
+### Notes:
+- Some use case IDs (`SFR0XX`) are inferred based on the context of system functionality but aren't directly listed in the original requirements. These were added logically to complete interactions within the system.
+- The `client` and `advisor` actors represent different user types (Client, FinancialAdvisor) with distinct permissions and interfaces. SysAdmin is a separate role managing system-level parameters.
+
+[Done: True
+Done Reason: stop
+Eval Count: 693]

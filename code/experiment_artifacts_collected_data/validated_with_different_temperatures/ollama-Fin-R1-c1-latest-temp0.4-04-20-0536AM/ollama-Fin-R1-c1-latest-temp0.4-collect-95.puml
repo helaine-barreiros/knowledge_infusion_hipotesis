@@ -1,0 +1,105 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sa
+actor FinancialAdvisor as fa
+system "System" as sys
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Spent Limit Alerts for Budget Control" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access Portfolio-Related News" as CFR008
+  usecase "CFR009: Consolidated Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+
+  c1 --> CFR001 : "View"
+  c1 --> CFR002 : "Alerts for Anomalous Transactions"
+  c1 --> CFR003 : "Financial Predictions"
+  c1 --> CFR004 : "Personalized Recommendations"
+  c1 --> CFR005 : "Manage Preferences"
+  c1 --> CFR006 : "Spent Limit Alerts"
+  c1 --> CFR007 : "Investment Opportunities Based on Risk Profile"
+  c1 --> CFR008 : "Portfolio-Related News"
+  c1 --> CFR009 : "Consolidated Personalized Dashboard"
+  c1 --> CFR10 : "Manage Relationship with Advisors"
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+
+  sa --> SAFR001 : "Manage"
+}
+  
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Segment" as FAFR004
+
+  fa --> FAFR001 : "Manage"
+  fa --> FAFR002 : "Intervention Alerts"
+  fa --> FAFR003 : "Predictive Analytics"
+  fa --> FAFR004 : "Configure Parameters"
+
+}
+
+rectangle "System (SFR)" {
+  usecase "SFR001: Deliver Alerts" as SFR001
+  usecase "SFR002: Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI" as SFR004
+  usecase "SFR005: Spent Limit Alerts Based on Analysis" as SFR005
+  usecase "SFR006: Investment Opportunity Analysis for Users" as SFR006
+  usecase "SFR007: Specific Investment Opportunities Matching Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Anomaly Transaction Alerts Based on AI" as SFR008
+  usecase "SFR009: Contextualized News for Portfolios" as SFR009
+  usecase "SFR010: Generate Client Dashboards" as SFR010
+  usecase "SFR013: Manage Alerts Based on Predefined Conditions" as SFR013
+
+  sys --> SFR001 : "Deliver"
+  sys --> SFR002 : "Personalized Recommendations"
+  sys --> SFR003 : "Request Predictions"
+  sys --> SFR004 : "Request Recos"
+  sys --> SFR005 : "Spent Limit Alerts"
+  sys --> SFR006 : "Investment Opportunity Analysis"
+  sys --> SFR007 : "Specific Opportunities"
+  sys --> SFR008 : "Anomaly Alerts"
+  sys --> SFR009 : "Contextualized News"
+  sys --> SFR10 : "Generate Dashboards"
+  sys --> SFR13 : "Manage Alerts"
+
+}
+
+rectangle "AI System (AIFR)" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Personalized Recommendations Based on Profile and Goals" as AIFR002
+  usecase "AIFR003: Spent Limit Alerts for Users" as AIFR003
+  usecase "AIFR004: Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Investment Opportunities Based on Strategies and MPT" as AIFR005
+  usecase "AIFR006: Anomaly Transaction Alerts for Fraud Detection" as AIFR006
+  usecase "AIFR007: Contextualized News Insights Correlated to Portfolios" as AIFR007
+  usecase "AIFR008: Client Predictive Intervention Recommendations" as AIFR008
+
+  sys --> AIFR001 : "Generate"
+  sys --> AIFR002 : "Personalized Recos"
+  sys --> AIFR003 : "Spent Limit Alerts"
+  sys --> AIFR004 : "Investment Opportunity Analyses"
+  sys --> AIFR005 : "Specific Opportunities"
+  sys --> AIFR006 : "Anomaly Alerts"
+  sys --> AIFR007 : "Contextualized News Insights"
+
+}
+
+actor User as u1 extends Client
+User <|-- (Client)
+
+@enduml

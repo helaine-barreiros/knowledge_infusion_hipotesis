@@ -1,0 +1,75 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as c1, c2, c3
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: Access Investment Opportunities Suitable to Risk Profile" as CFR007
+  usecase "CFR008: Receive News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: View Consolidated Financial Information in a Single Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors Including Data Sharing Permissions" as CFR10
+  
+  c1 --> CFR001 : "Client wants to view financial insights."
+  c2 --> CFR002 : "Client seeks alerts on anomalous transactions."
+  c3 --> CFR004 : "Client requires personalized recommendations based on profile."
+  
+  Client <|-- (c1)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as fa
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions Based On System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Intervention Alerts for Clients Requiring Professional Attention" as FAFR002
+  usecase "FAFR003: Access Predictive Analytics About Client Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters For Specific Client Segments" as FAFR004
+  
+  fa --> FAFR001 : "Financial Advisor wants to manage mentoring."
+}
+
+package "System Administrator" {
+  actor SysAdmin
+
+  usecase "SAFR001: Manage Analysis Parameters for AI System Compliance With Financial Regulations" as SAFR001
+  SysAdmin --> SAFR001 : "Sys Admin needs to configure parameters."
+}
+
+package "System" {
+  usecase "SFR002: Deliver Personalized Recommendations Based On User Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions From AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations From AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts When Exceeding Thresholds" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis For User Based On Risk Profile" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities Matching User Criteria And ESG Preferences" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts To Detect Fraudulent Activities In AML Compliance" as SFR008
+  usecase "SFR009: Find Contextualized News Relevant To Users' Portfolios From Trusted Sources" as SFR009
+  usecase "SFR13: Generate Client Alerts Based On Predefined Conditions For Timely Notification" as SFR13
+  
+  SysAdmin --> SAFR001 : "Sys Admin manages analysis parameters."
+  
+}
+
+package "AI System" {
+  usecase "AIFR002: Generate Personalized Recommendations Based on Financial Profiles and Goals" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts For Unusual Deviations From Established Patterns" as AIFR003
+  usecase "AIFR004: Analyze Investment Opportunities Against Risk Profiles And Time Horizons" as AIFR004
+  usecase "AIFR005: Identify Financial Instruments Aligning With User's Investment Strategies and Modern Portfolio Theory Principles" as AIFR005
+  
+}
+
+package "Feedback System" {
+  actor Client as feedbackClient
+
+  usecase "CFR11: Send Feedback About Recommendations And Insights To Improve Future Outputs" as CFR11
+  feedbackClient --> CFR11 : "User provides feedback."
+  
+}
+@enduml

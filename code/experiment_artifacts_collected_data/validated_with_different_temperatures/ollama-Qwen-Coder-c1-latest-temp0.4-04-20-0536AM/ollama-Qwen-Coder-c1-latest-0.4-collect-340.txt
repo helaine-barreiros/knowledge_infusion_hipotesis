@@ -1,0 +1,82 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FAFR001
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  Client --> (SFR012) : "View Alerts"
+  Client --> (SFR013) : "Receive Recommendations"
+  
+  rectangle "Client Functions" {
+    Client --> CFR001
+    Client --> CFR006
+    Client --> CFR007
+    Client --> CFR008
+    Client --> CFR009
+    Client --> SAFR005
+    Client --> FAFR002
+  }
+  
+  rectangle "System Functions" {
+    SystemAdmin --> (SAFR001)
+    
+    FinancialAdvisor --> (FAFR003) : "View Predictive Analytics"
+    FinancialAdvisor --> (FAFR004) : "Configure Analysis Parameters for Client Segments"
+    FinancialAdvisor --> FAFR002
+  }
+  
+  rectangle "System Operations" {
+    System --> SFR017
+    System --> SFR018
+    System --> SFR019
+    System --> SFR020
+    
+    System --> (AIFR006) : "Generate Anomaly Transaction Alerts"
+    System --> (AIFR003) : "Generate Spending Limit Alerts"
+    
+    FinancialAdvisor --> FAFR004
+  }
+  
+  rectangle "AI Operations" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  }
+  
+  rectangle "News Operations" {
+    System --> (SFR015) : "Request Contextualized News Insights"
+    
+    FinancialAdvisor --> FAFR007
+    
+    Client --> CFR008
+  }
+  
+  rectangle "Feedback Loop" {
+    usecase "CFR011: Send Feedback" as CFR011
+    
+    SystemAdmin --> (SAFR005)
+    FinancialAdvisor --> (FAFR004)
+    
+    Client --> SAFR005
+    FAFR002
+  }
+  
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 577]

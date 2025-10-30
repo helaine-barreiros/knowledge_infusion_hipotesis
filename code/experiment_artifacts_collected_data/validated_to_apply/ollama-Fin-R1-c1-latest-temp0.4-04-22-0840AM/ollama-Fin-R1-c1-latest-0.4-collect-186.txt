@@ -1,0 +1,208 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sas
+actor FinancialAdvisor as faa
+system "System" as sys
+
+rectangle Professional {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  
+  c1 --> CFR001 : "View Financial Insights Dashboard"
+  
+  sas --> SAFR001 : "Manage Analysis Parameters"
+  
+  faa --> FAFR002 : "View Client Intervention Alerts"
+  
+  sys --> SFR013 : "Generate Client Alerts Based on Predefined Conditions"
+}
+
+rectangle System {
+  usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  
+  sys --> SFR008 : "Request Anomaly Transaction Alerts"
+  
+  sas <|-- (CFR001) : "Manage Client Access to System Features"
+}
+
+rectangle FinancialAdvisor {
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "AIFR009: Generate Client Predictive Intervention Recommendations" as AIFR009
+  
+  faa --> FAFR003 : "View Predictive Analytics"
+  
+  sys <|-- (FAFR002) : "Integrate with System for Alerts"
+}
+
+rectangle AI {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  
+  sys --> AIFR001 : "Request Financial Predictions"
+  
+  sys --> AIFR004 : "Request Investment Opportunity Analysis"
+}
+
+rectangle Client {
+  usecase "CFR002: View Alerts About Anomalous Transactions" as CFR002
+  usecase "SFR007: Request Specific Investment Opportunities" as SFR007
+  
+  c1 --> CFR002 : "View Alerts for Fraud"
+  
+  sys <|-- (CFR008) : "Request Contextualized News Insights"
+}
+
+rectangle SystemAdministrator {
+  usecase "SAFR004: Configure Analysis Parameters by Client Segment" as SAFR004
+  usecase "SFR015: Request Predictive Intervention Analyses from AI Component" as SFR015
+  
+  sas --> SAFR004 : "Configure Segments"
+  
+  sys <|-- (SAFR003) : "Request Financial Predictions"
+}
+
+rectangle Client {
+  usecase "CFR009: Access Consolidated Dashboard" as CFR009
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  c1 --> CFR009 : "Access Combined View"
+  
+  sys <|-- (SFR012) : "Generate Dashboards for Clients"
+}
+
+rectangle System {
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "CFR011: Send Feedback to Improve Recommendations" as CFR011
+  
+  sys --> AIFR007 : "Request News Correlation"
+  
+  c1 <|-- (CFR011) : "Provide User Input for Improvement"
+}
+
+@enduml
+```
+
+**Description of the Diagram Structure:**
+
+- **Professional Actors:** Clients, System Administrators, and Financial Advisors are grouped under a professional system boundary. Each has specific use cases:
+  - *Client:* View financial dashboards (CFR001), view alerts (CFR002), manage recommendations preferences (not directly in list but inferred from requirements).
+  - *System Administrator:* Manage analysis parameters (SAFR001) and configure segments for advisors.
+  - *Financial Advisor:* View predictive analytics, client intervention alerts.
+
+- **System Component:** The system itself handles requests like generating alerts, predictions, etc., through AI components. It also integrates with clients via dashboards and news services.
+
+- **AI Components:** Specialized in financial prediction (AIFR001), investment analysis (AIFR004), anomaly detection (AIFR006), contextualized news insights (AIFR007).
+
+This structure ensures all actors' interactions with the system are clearly mapped, including how they request services and receive outputs. The use cases are logically grouped by their primary stakeholders or functional areas within the system architecture.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sas
+actor FinancialAdvisor as faa
+system "System" as sys
+
+rectangle Professional {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  
+  c1 --> CFR001 : "View Financial Insights Dashboard"
+  
+  sas --> SAFR001 : "Manage Analysis Parameters"
+  
+  faa --> FAFR002 : "View Client Intervention Alerts"
+  
+  sys --> SFR013 : "Generate Client Alerts Based on Predefined Conditions"
+}
+
+rectangle System {
+  usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  
+  sys --> SFR008 : "Request Anomaly Transaction Alerts"
+  
+  sas <|-- (CFR001) : "Manage Client Access to System Features"
+}
+
+rectangle FinancialAdvisor {
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "AIFR009: Generate Client Predictive Intervention Recommendations" as AIFR009
+  
+  faa --> FAFR003 : "View Predictive Analytics"
+  
+  sys <|-- (FAFR002) : "Integrate with System for Alerts"
+}
+
+rectangle AI {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  
+  sys --> AIFR001 : "Request Financial Predictions"
+  
+  sys --> AIFR004 : "Request Investment Opportunity Analysis"
+}
+
+rectangle Client {
+  usecase "CFR002: View Alerts About Anomalous Transactions" as CFR002
+  usecase "SFR007: Request Specific Investment Opportunities" as SFR007
+  
+  c1 --> CFR002 : "View Alerts for Fraud"
+  
+  sys <|-- (CFR008) : "Request Contextualized News Insights"
+}
+
+rectangle SystemAdministrator {
+  usecase "SAFR004: Configure Analysis Parameters by Client Segment" as SAFR004
+  usecase "SFR015: Request Predictive Intervention Analyses from AI Component" as SFR015
+  
+  sas --> SAFR004 : "Configure Segments"
+  
+  sys <|-- (SAFR003) : "Request Financial Predictions"
+}
+
+rectangle Client {
+  usecase "CFR009: Access Consolidated Dashboard" as CFR009
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  c1 --> CFR009 : "Access Combined View"
+  
+  sys <|-- (SFR012) : "Generate Dashboards for Clients"
+}
+
+rectangle System {
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "CFR011: Send Feedback to Improve Recommendations" as CFR011
+  
+  sys --> AIFR007 : "Request News Correlation"
+  
+  c1 <|-- (CFR011) : "Provide User Input for Improvement"
+}
+
+@enduml
+```
+
+**Key Observations:**  
+
+- **Client Interactions**: Clients primarily use cases related to viewing dashboards, alerts, and personalized recommendations. They also manage their preferences through the system.
+- **System Administrator Tasks**: Focuses on managing analysis parameters (both globally and by client segment) and integrating with AI components for predictive analyses.
+- **Financial Advisor Role**: Includes generating specific reports like predictive analytics and intervention recommendations tied to clients’ needs.
+- **AI System Capabilities**: Centralized in handling complex tasks such as financial predictions, investment opportunities, anomaly detection, contextual news analysis, and more.
+
+This structure ensures clarity in how different actors interact with the system across various functional areas. Each use case is linked
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

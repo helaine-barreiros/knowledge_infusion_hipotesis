@@ -1,0 +1,54 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Anomaly Transaction Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View Financial News" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as FAFR004
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+}
+
+system System
+
+Client --> (SFR02)
+FinancialAdvisor --> (FAFR06)
+SystemAdmin --> (SAFR001)
+
+CFR001 --> (SFR12)
+CFR002 --> (AIFR06) : "Generate Alerts"
+CFR003 --> (AIFR009) : "Request Predictions"
+CFR004 --> (AIFR002) : "Generate Recommendations"
+CFR005 --> (SFR18)
+CFR006 --> (AIFR003) : "Generate Alerts"
+CFR007 --> (AIFR005) : "Request Opportunities"
+CFR008 --> (AIFR007) : "Request Insights"
+CFR009 --> (SFR12)
+CFR10 --> (FAFR004)
+
+FAFR003 --> (AIFR016) : "Enhance Recommendations"
+
+SAFR001 --> (AIFR008) : "Configure Parameters"
+
+System --> (SFR07)
+FinancialAdvisor --> (FAFR02)
+Client --> (CFR11)
+@enduml

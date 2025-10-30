@@ -1,0 +1,133 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+system "System" as S
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Receive Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Personalized Dashboard Consolidation" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+
+  C1 --> CFR001 : View dashboard\nwith financial data\nand insights.
+  C1 --> CFR002 : Receive alerts on anomalous transactions.\nCompliant with FATF regulations.
+  C1 --> CFR003 : Access future projections based on history and trends.\nFor informed decisions.
+  C1 --> CFR004 : Get tailored recommendations aligned to personal goals.\nOptimize financial strategies.
+  SA --> CFR005 : Adjust client's preference settings for relevance.\nEnsure alignment with KYC profile.
+  C1 --> CFR006 : Trigger alerts when exceeding spending limits in categories.\nBudget control.
+  FA --> CFR007 : Review investment options matching risk profile.\nDiversify and maximize returns.
+  C1 --> CFR008 : Stay updated on portfolio-related news.\nMarket event awareness.
+  C1 --> CFR009 : Consolidate all financial info in one view.\nEfficient monitoring.
+  FA --> CFR10 : Share data with advisors, manage permissions for privacy.\nControl over financial info.
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+
+  SA --> SAFR001 : Configure system parameters\nfor accuracy and compliance (e.g., Basel III).\nEnsure regulatory adherence.
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Schedule Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: Review Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Customize Analysis Parameters by Client Segment" as FAFR004
+
+  FA --> FAFR001 : Plan sessions based on system-generated insights.\nProactive client support.
+  SA --> FAFR002 : Monitor alerts for clients needing immediate attention.\nPrevent financial issues.
+  FA --> FAFR003 : Use predictive data to guide consultations.\nData-driven recommendations.
+  SA --> FAFR004 : Adjust system settings per segment\nfor tailored client experiences and compliance with standards like GDPR/CCPA.
+
+}
+
+rectangle "System Core" {
+  usecase "SFR001: Deliver Alerts Through Channels" as SFR001
+  usecase "SFR002: Provide Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI" as SFR003
+  usecase "SFR004: Request Personalized Recs Based on Profiles" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "SFR006: Analyze Investment Opportunities by Risk Profile" as SFR006
+  usecase "SFR007: Identify Specific Investments Matching Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Detect Anomalous Transactions for AML Compliance" as SFR008
+  usecase "SFR009: Extract Relevant News Contextual to Portfolios" as SFR009
+  usecase "SFR010: Generate Client Dashboards" as SFR010
+  usecase "SFR013: Generate Alerts Based on Predefined Conditions" as SFR013
+
+  S --> SFR001 : Notify clients of critical financial events.\nEnsure timely awareness.
+  C1 --> SFR002 : Receive personalized recs based on profile data.\nSupport decision-making.
+  S --> SFR003 : Request predictions from AI for future insights.\nIntegrate into client dashboards.
+  FA --> SFR004 : Ask system to generate recommendations tailored per user.\nImprove guidance quality.
+  C1 --> SFR005 : Trigger spending limit alerts when thresholds are exceeded.\nMaintain budget control.
+  SA --> SFR006 : Request investment options aligned with client risk profiles.\nDiversify portfolios effectively.
+  FA --> SFR007 : Identify investments matching client's ESG preferences and time horizons.\nSustainable investing.
+  C1 --> SFR008 : Detect potential fraud via transaction patterns.\nCompliance with AML regulations.
+  SA --> SFR009 : Pull news relevant to user portfolios for context.\nStay informed about market impacts.
+  FA --> SFR013 : Generate alerts based on client-specific conditions (e.g., portfolio changes).\nProactive advisory.
+
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Personalized Recommendations Based on Profiles" as AIFR002
+  usecase "AIFR003: Spending Limit Alerts for Unusual Patterns" as AIFR003
+  usecase "AIFR004: Investment Opportunity Analysis by Risk Profile" as AIFR004
+  usecase "AIFR005: Align Investments with Portfolio Theory" as AIFR005
+  usecase "AIFR006: Anomaly Transaction Alerts for Fraud Detection" as AIFR006
+  usecase "AIFR007: Contextualized News Insights by Portfolio" as AIFR007
+  usecase "AIFR008: Predictive Intervention Recs Based on Client Data" as AIFR008
+
+  S --> AIFR001 : Analyze transaction data, market trends for predictions.\nSupport client dashboards.
+  C1 --> AIFR002 : Request recs based on personal financial profile and goals.\nOptimize strategies.
+  SA --> AIFR003 : Identify spending limits exceeding thresholds in categories.\nCompliance with internal policies.
+  FA --> AIFR004 : Evaluate investments against client risk profiles for portfolio management.\nDiversify holdings effectively.
+  C1 --> AIFR005 : Align investment choices per Modern Portfolio Theory principles.\nMaximize returns while managing risks.
+  S --> AIFR006 : Detect patterns of fraudulent transactions using pattern recognition.\nCompliance with regulatory standards like FinCEN.
+  FA --> AIFR007 : Correlate financial news to client portfolios for relevance.\nStay informed about market events affecting investments.
+  SA --> AIFR008 : Identify when advisors should intervene based on predictive analysis of clients' financial situations.\nProactive advisory support.
+
+}
+
+rectangle "User Feedback Management" {
+  usecase "CFR11: Send System Recommendations/Insights Feedback" as CFR11
+
+  C1, FA, SA --> CFR11 : Provide input to improve system accuracy and relevance over time.
+}
+@enduml
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+system "System" as S
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Receive Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Personalized Dashboard Consolidation" as CFR009
+  usecase "CFR10: Manage Relationship with
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

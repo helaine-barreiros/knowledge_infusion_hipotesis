@@ -1,0 +1,79 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Preferences (Client)" as SAFR002
+  usecase "SFR009: Request Contextualized News for Users" as SFR009
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "SAFR005: Manage Client-Dashboard Permissions (System Administrator)" as SAFR005
+  usecase "SFR019: Maintain Historical Record of User Insights for Trend Analysis" as SFR019
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds" as CFR006
+  usecase "AIFR004: Generate Investment Opportunity Analyses Based on Risk Profiles and Goals" as AIFR004
+  usecase "SFR018: Manage Users' Financial Goals to Track Progress" as SFR018
+}
+
+rectangle "Client" {
+  actor Client as C
+}
+rectangle "Financial Advisor (FA)" {
+  actor FAFR002 as FA
+}
+rectangle "System Administrator (SA)" {
+  actor SysAdmin as SA
+}
+
+C --> CFR001 : View Financial Insights Dashboard  
+C --> SAFR002 : Manage Personalized Recommendations Preferences  
+C --> SFR009 : Request Contextualized News for Users  
+C --> CFR003 : View Financial Predictions Based on Historical Data and Market Trends  
+C --> CFR004 : Receive Personalized Recommendations Aligned with Financial Profile  
+SA --> SAFR005 : Manage Client-Dashboard Permissions (System Administrator)  
+FA --> FAFR001: Manage Client-Mentoring Sessions  
+FA --> FAFR002: View Intervention Alerts for Clients  
+FA --> AIFR008: Generate Predictive Intervention Recommendations  
+
+rectangle "AI System" {
+  usecase "AIFR001: Generate Financial Predictions Based on Historical Data and Market Trends" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002  
+  usecase "AIFR003: Generate Spending Limit Alerts Based on User Activity" as AIFR003  
+  usecase "AIFR004: Generate Investment Opportunity Analyses Based on Risk Profiles and Goals" as AIFR004
+}
+
+SysAdmin <|-- SAFR001 : Manage Analysis Parameters for AI System (SAFR001)  
+
+SFR019 <|-- SFR020 : Maintain User Feedback Record  
+SFR018 <|-- SFR019 : Track Financial Goals Progress
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire system is enclosed within a rectangle labeled "System".
+- **Use Cases**:
+  - All client-related use cases (CFR IDs) are grouped under the Client actor.
+  - System Administrator and Financial Advisor-specific use cases are categorized accordingly.
+  - AI-generated services like financial predictions, recommendations, etc., are part of the AI system component.
+- **Actors**: 
+  - `Client` for CFR001–CFR011 interactions.
+  - `Financial Advisor (FA)` for FAFR-related activities.
+  - `System Administrator (SA)` for management tasks like permissions and analysis parameter adjustments.
+- **Relationships**:
+  - Direct client-to-use case relationships, e.g., viewing dashboards or receiving alerts.
+  - Indirect system interactions via the AI component (e.g., generating predictions).
+  - Management flows between System Admin and use cases requiring administrative access.
+
+This structure ensures clarity in mapping each requirement to its corresponding actor/use case while maintaining logical groupings. Adjustments were made based on implied relationships, such as the SA managing analysis parameters (`SAFR001`). The AI system’s internal components are represented through nested rectangles for modularity. 
+
+### Key Observations:
+- **Inheritance**: Not explicitly required here but noted in `SysAdmin <|-- SAFR001` to show administrative control over parameter management.
+- **Grouping**: Logical aggregation of similar use cases (e.g., client-facing, system-administrative).
+- **Directional Flow**: Ensures readability from left-to-right with minimal crossing lines.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1002]

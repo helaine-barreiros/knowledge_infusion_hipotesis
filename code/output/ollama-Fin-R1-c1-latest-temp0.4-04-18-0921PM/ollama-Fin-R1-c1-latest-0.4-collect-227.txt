@@ -1,0 +1,158 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as fa
+actor SysAdmin as sa
+system SFR002 as sysrec
+system AIFR002 as aifprec
+usecase "CFR001: View Financial Insights Dashboard" as CFR001
+usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+usecase "CFR003: View Financial Predictions Based on Historical Data and Trends" as CFR003
+usecase "CFR004: Personalized Recommendations Aligned with Financial Profile" as CFR004
+usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+usecase "CFR008: Receive News Related to Investment Portfolio" as CFR008
+usecase "CFR009: Consolidated Dashboard for Financial Information" as CFR009
+usecase "CFR10: Manage Relationship with Financial Advisors Including Data Sharing Permissions" as CFR10
+
+usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+usecase "FAFR003: View Predictive Analytics for Clients' Financial Situations" as FAFR003
+usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+
+system SFR001 as sysalert
+system AIFR006 as aifanomaly
+system AIFR007 as aifnews
+system AIFR008 as aifintervene
+system AIFR009 as aifinsights
+system AIFR010 as aifdash
+
+// Client use cases relationships
+c1 --> CFR001 : "View Financial Insights Dashboard"
+c1 --> CFR002 : "Receive Alerts for Anomalous Transactions"
+c1 --> CFR003 : "View Financial Predictions Based on Historical Data and Trends"
+c1 --> CFR004 : "Personalized Recommendations Aligned with Financial Profile"
+c1 --> CFR005 : "Manage Preferences for Personalized Recommendations"
+c1 --> CFR006 : "View Spending Limit Alerts When Exceeding Thresholds"
+c1 --> CFR007 : "Access Investment Opportunities Based on Risk Profile"
+c1 --> CFR008 : "Receive News Related to Investment Portfolio"
+c1 --> CFR009 : "Consolidated Dashboard for Financial Information"
+c1 --> CFR10 : "Manage Relationship with Financial Advisors Including Data Sharing Permissions"
+
+// System Administrator use cases relationships
+sa --> SAFR001 : "Manage Analysis Parameters for AI System"
+
+// Financial Advisor use cases relationships
+fa --> FAFR001 : "Manage Client Mentoring Sessions Based on Insights"
+fa --> FAFR002 : "View Client Intervention Alerts"
+fa --> FAFR003 : "View Predictive Analytics for Clients' Financial Situations"
+fa --> FAFR004 : "Configure Analysis Parameters by Client Segment"
+
+// System components relationships
+sysrec <|-- CFR001, CFR002, CFR003, CFR004, CFR005, CFR006, CFR007, CFR008, CFR009, CFR10 : "Deliver personalized recommendations and financial insights"
+aifprec <|-- CFR004, FAFR002, FAFR003, FAFR004 : "Generate recommendations based on user profiles"
+
+// System components for alerts
+sysalert --> AIFR006 : "Anomaly transaction detection"
+AIFR006 --> aifanomaly
+
+// News system component relationships
+aifnews <|-- CFR008, FAFR001: "Extract and present relevant financial news"
+
+// Investment opportunities analysis components
+aifdash <|-- AIFR009 : "Generate investment dashboards"
+AIFR007 --> aifinsights
+
+// Client management system component relationships
+sfr020 <|-- CFR10 : "Manage user permissions for data sharing"
+
+rectangle "Client" {
+  c1
+}
+rectangle "Financial Advisor" {
+  fa
+}
+rectangle "System Administrator" {
+  sa
+}
+
+@enduml
+```
+
+This PlantUML code creates a use case diagram based on the provided functional requirements. The system includes clients, financial advisors, and system administrators as actors interacting with various use cases. Each use case is linked to its respective actor or component through relationships indicated by arrows. The structure groups related components under their appropriate categories (e.g., client-related uses) for clarity. Relationships between systems and subcomponents are also defined where applicable. This ensures a comprehensive representation of the system’s functionality as per the requirements. 
+
+**Key Observations:**
+- **Client Actors:** Interact with most use cases, such as viewing dashboards, receiving alerts, making recommendations.
+- **Financial Advisor & SysAdmin:** Have specific roles like managing mentoring sessions or configuring parameters.
+- **System Components (e.g., SFR001):** Represent system-level functionalities tied to delivering personalized insights and alerts.
+- **AI Systems (AIFRxxx):** Handle data analysis and generating reports/predictions.
+
+The diagram adheres strictly to the provided requirements, ensuring no extraneous elements are included. Relationships between actors/use cases/components are clearly defined using PlantUML syntax. 
+
+\boxed{UseCaseDiagram}
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as fa
+actor SysAdmin as sa
+system SFR002 as sysrec
+system AIFR002 as aifprec
+usecase "CFR001: View Financial Insights Dashboard" as CFR001
+usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+usecase "CFR003: View Financial Predictions Based on Historical Data and Trends" as CFR003
+usecase "CFR004: Personalized Recommendations Aligned with Financial Profile" as CFR004
+usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+usecase "CFR008: Receive News Related to Investment Portfolio" as CFR008
+usecase "CFR009: Consolidated Dashboard for Financial Information" as CFR009
+usecase "CFR10: Manage Relationship with Financial Advisors Including Data Sharing Permissions" as CFR10
+
+usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+usecase "FAFR003: View Predictive Analytics for Clients' Financial Situations" as FAFR003
+usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+
+system SFR001 as sysalert
+system AIFR006 as aifanomaly
+system AIFR007 as aifnews
+system AIFR008 as aifintervene
+system AIFR009 as aifdash
+
+// Client use cases relationships
+c1 --> CFR001 : "View Financial Insights Dashboard"
+c1 --> CFR002 : "Receive Alerts for Anomalous Transactions"
+c1 --> CFR003 : "View Financial Predictions Based on Historical Data and Trends"
+c1 --> CFR004 : "Personalized Recommendations Aligned with Financial Profile"
+c1 --> CFR005 : "Manage Preferences for Personalized Recommendations"
+c1 --> CFR006 : "View Spending Limit Alerts When Exceeding Thresholds"
+c1 --> CFR007 : "Access Investment Opportunities Based on Risk Profile"
+c1 --> CFR008 : "Receive News Related to Investment Portfolio"
+c1 --> CFR009 : "Consolidated Dashboard for Financial Information"
+c1 --> CFR10 : "Manage Relationship with Financial Advisors Including Data Sharing Permissions"
+
+// System Administrator use cases relationships
+sa --> SAFR001 : "Manage Analysis Parameters for AI System"
+
+// Financial Advisor use cases relationships
+fa --> FAFR001 : "Manage Client Mentoring Sessions Based on Insights"
+fa --> FAFR002 : "View Client Intervention Alerts"
+fa --> FAFR003 : "View Predictive Analytics for Clients' Financial Situations"
+fa --> FAFR004 : "Configure Analysis Parameters by Client Segment"
+
+// System components relationships
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

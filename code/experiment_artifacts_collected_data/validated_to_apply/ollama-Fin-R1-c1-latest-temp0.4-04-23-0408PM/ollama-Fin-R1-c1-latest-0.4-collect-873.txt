@@ -1,0 +1,100 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C1, C2
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts About Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Financial Advisors Including Data Sharing Permissions" as CFR009
+}
+
+package "Financial Advisor" {
+  actor FAFR01, FAFR02
+
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+}
+
+package "System Administrator" {
+  actor SysAdmin
+
+  usecase "SAFR001: Manage Analysis Parameters for AI System Compliance with Basel III and Other Regulations" as SAFR001
+}
+
+package "System" {
+  rectangle "System Boundary" {
+    usecase "SFR002: Deliver Personalized Recommendations Based on Financial Profiles" as SFR002
+    usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+    usecase "SFR004: Request Personalized Recommendations From AI Component" as SFR004
+    usecase "SFR005: Request Spending Limit Alerts When Exceeding Thresholds" as SFR005
+    usecase "SFR006: Request Investment Opportunity Analysis for Users Based on Risk Profiles" as SFR006
+    usecase "SFR007: Find Specific Investment Opportunities Matching User Criteria and ESG Preferences" as SFR007
+    usecase "SFR008: Request Anomaly Transaction Alerts Compliant with AML Regulations" as SFR008
+    usecase "SFR009: Process Contextualized News for Users' Portfolios" as SFR009
+    usecase "SFR010: Generate Client Dashboards Intuitively" as SFR010
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  }
+}
+
+package "AI System" {
+  actor AIFR01, AIFR02
+
+  usecase "AIFR001: Generate Financial Predictions by Analyzing Historical Data and Market Trends" as AIFR001
+  usecase "AIFR004: Generate Investment Opportunity Analyses Based on Risk Profiles" as AIFR004
+  usecase "AIFR005: Identify Investments Aligning with User Strategies Using MPT Principles" as AIFR005
+}
+
+package "User (Client, Advisor)" {
+  actor U1
+
+  usecase "CFR011: Send Feedback to Improve System Outputs" as CFR011
+}
+
+SysAdmin --> SAFR001 : Configures analysis parameters for compliance.
+
+C1 -> CFR001 : Views financial insights dashboard.
+C2 -> CFR003 : Receives personalized recommendations based on historical data and trends.
+CFR004: Personalized recs aligned with profile. (No direct actor here, but inferred from client's use cases)
+SFR007: Finds specific investment opportunities matching criteria.
+
+FAFR01 --> FAFR002 : Views alerts for proactive assistance.
+FAFR02 -> FAFR003 : Sees predictive analytics on clients' financials.
+
+AIFR01 --> AIFR004 : Analyzes investments based on risk profiles and user goals (part of SFR006).
+
+SFR009: Generates news insights for portfolios. (Part of system's use cases)
+
+CFR002: Receives alerts about anomalous transactions.
+C1 -> CFR008: Accesses portfolio-related news.
+
+U1 --> CFR011 : Sends feedback to the system.
+
+@enduml
+```
+
+### Key Observations:
+- **Client** actors (e.g., `C1`, `C2`) are linked to use cases like viewing dashboards, receiving recommendations, and managing preferences.
+- **Financial Advisor** (`FAFR01`, `FAFR02`) interacts with predictive alerts and client mentoring sessions.
+- **System Administrator** manages AI parameters via `SAFR001`.
+- The system itself handles requests from clients (e.g., personalized recs) through its components like `SFR003` for financial predictions or `AIFR004` for investment analyses.
+- Inheritance relationships are inferred where applicable, e.g., `SysAdmin` configures parameters (`SAFR001`) affecting the system's compliance.
+
+### Notes:
+- The "User (Client, Advisor)" category includes a placeholder actor (`U1`) to represent interactions like feedback. This is implied by the requirements but not explicitly listed.
+- Relationships between actors and use cases are established using arrows with labels where necessary. For example, `C2` uses `CFR003`, which involves receiving recommendations based on historical data and trends (even though no explicit actor is mentioned in the requirement for this specific use case). This aligns with typical UML assumptions about implicit actors linked to client-facing features.
+- Packages group related entities logically. The system boundary ensures clarity around external interactions versus internal components like AI systems or databases.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1370]

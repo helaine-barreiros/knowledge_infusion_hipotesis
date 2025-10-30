@@ -1,0 +1,157 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+system SFR012: "System" {
+  usecase CFR001: View Financial Insights Dashboard as VFD
+  usecase CFR002: Receive Alerts on Anomalous Transactions as RAT
+  usecase CFR003: View Financial Predictions based on Historical Data and Market Trends as FPTV
+  usecase CFR004: Personalized Recommendations aligned with Financial Profile and Goals as PRG
+  usecase CFR005: Manage Preferences for Personalized Recommendations as MPRP
+  usecase CFR006: Spending Limit Alerts when Exceeding Predefined Thresholds in Expense Categories as SLA
+  usecase CFR007: View Investment Opportunities based on Risk Profile (MiFID II) as VIO
+  usecase CFR008: Access News Related to Investment Portfolio as ANP
+  usecase CFR009: Personalized Dashboard Consolidating Financial Information as PDCFI
+  usecase CFR010: Manage Relationship with Financial Advisors including Data Sharing Permissions as MRA
+
+  SysAdmin --> VFD : Configure System Parameters (SFR003)
+  Client -> RAT : Trigger Alerts on Anomalous Transactions (SFR008)
+  Client -> FPTV : Request Predictive Analysis from AI (AIFR001)
+  Client -> PRG : Generate Personalized Recommendations (AIFR002)
+  Client -> MPRP : Adjust Recommendation Preferences (AIFR004)
+  Client -> SLA : Set Spending Thresholds and Alerts (SFR005)
+  Client -> VIO : Identify Investment Opportunities Based on Risk Profile (AIFR006)
+  Client -> ANP : Access News (SFR009)
+  Client -> PDCFI : View Consolidated Dashboard (SFR12)
+  
+  SysAdmin --> RAT: Manage Alert Thresholds and Rules (SAFR007)
+  SysAdmin --> PRG: Configure AI for Personalization (AIFR004)
+  SysAdmin --> SLA: Set System-Wide Spending Limits (SFR005)
+  SysAdmin -> MRA: Control Data Sharing Permissions (CFR010)
+
+  FinancialAdvisor -> VFD: Review Client Dashboards (SFR12)
+  FinancialAdvisor -> RAT: Monitor Alerts for Clients (SAFR008)
+  FinancialAdvisor -> FPTV: Analyze Predictive Insights (AIFR003)
+  FinancialAdvisor -> PRG: Provide Recommendations Based on AI Outputs (AIFR005)
+  FinancialAdvisor -> MRA: Share Client Data with Advisors (CFR010)
+
+  system SFR020: "System" {
+    usecase AIFR009: Generate Predictive Intervention Analyses as PIA
+    usecase AIFR008: Generate Intervention Recommendations for Advisors as IAR
+
+    SFR020 --> VFD : Update Dashboards with New Insights (SFR12)
+  }
+
+  Client -> CFR011: Provide Feedback to System Improvements (AIFR004)
+
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Actors**: The system involves multiple actors, including `Client`, `SysAdmin`, and `FinancialAdvisor`. Each actor corresponds to different user types with specific needs.
+  
+- **Use Cases**:
+  - Client-related use cases (CFR001–CFR010) focus on viewing dashboards, receiving alerts, making predictions, getting recommendations, managing preferences, etc. These are linked directly or indirectly through the system (`SFR` components).
+  - SysAdmin and FinancialAdvisor-specific use cases relate to administrative tasks like managing parameters, generating reports, sharing data.
+  
+- **System Components**:
+  - The `system SFR012: "System"` aggregates core functionalities (e.g., VFD, RAT). Other systems (`SFR`, AIFR) handle specific services. For example, `AIFR` components generate financial predictions and recommendations.
+
+### Relationships:
+- Clients interact with the system via use cases like viewing dashboards or receiving alerts.
+- SysAdmins manage parameters and thresholds (e.g., spending limits).
+- Financial Advisors leverage predictive insights to advise clients but don't directly trigger AI-generated outputs unless through client interactions.
+
+This structure ensures clarity in how each actor uses the system, adhering strictly to provided functional requirements. The use case diagram is organized logically by grouping related actors under their respective responsibilities and ensuring all required relationships are captured accurately.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+
+system SFR012: "System" {
+  usecase CFR001: View Financial Insights Dashboard as VFD
+  usecase CFR002: Receive Alerts on Anomalous Transactions as RAT
+  usecase CFR003: View Financial Predictions based on Historical Data and Market Trends as FPTV
+  usecase CFR004: Personalized Recommendations aligned with Financial Profile and Goals as PRG
+  usecase CFR005: Manage Preferences for Personalized Recommendations as MPRP
+  usecase CFR006: Spending Limit Alerts when Exceeding Predefined Thresholds in Expense Categories as SLA
+  usecase CFR007: View Investment Opportunities based on Risk Profile (MiFID II) as VIO
+  usecase CFR008: Access News Related to Investment Portfolio as ANP
+  usecase CFR009: Personalized Dashboard Consolidating Financial Information as PDCFI
+  usecase CFR010: Manage Relationship with Financial Advisors including Data Sharing Permissions as MRA
+
+  SysAdmin --> VFD : Configure System Parameters (SFR003)
+  Client -> RAT : Trigger Alerts on Anomalous Transactions (SFR008)
+  Client -> FPTV : Request Predictive Analysis from AI (AIFR001)
+  Client -> PRG : Generate Personalized Recommendations (AIFR002)
+  Client -> MPRP : Adjust Recommendation Preferences (AIFR004)
+  Client -> SLA : Set Spending Thresholds and Alerts (SFR005)
+  Client -> VIO : Identify Investment Opportunities Based on Risk Profile (AIFR006)
+  Client -> ANP : Access News (SFR009)
+  Client -> PDCFI : View Consolidated Dashboard (SFR12)
+
+  SysAdmin --> RAT: Manage Alert Thresholds and Rules (SAFR007)
+  SysAdmin --> PRG: Configure AI for Personalization (AIFR004)
+  SysAdmin --> SLA: Set System-Wide Spending Limits (SFR005)
+  SysAdmin -> MRA: Control Data Sharing Permissions (CFR010)
+
+  FinancialAdvisor -> VFD: Review Client Dashboards (SFR12)
+  FinancialAdvisor -> RAT: Monitor Alerts for Clients (SAFR008)
+  FinancialAdvisor -> FPTV: Analyze Predictive Insights (AIFR003)
+  FinancialAdvisor -> PRG: Provide Recommendations Based on AI Outputs (AIFR005)
+  FinancialAdvisor -> MRA: Share Client Data with Advisors (CFR010)
+
+  system SFR020: "System" {
+    usecase AIFR009: Generate Predictive Intervention Analyses as PIA
+    usecase AIFR008: Generate Intervention Recommendations for Advisors as IAR
+
+    SFR020 --> VFD : Update Dashboards with New Insights (SFR12)
+  }
+
+  Client -> CFR011: Provide Feedback to System Improvements (AIFR004)
+}
+
+@enduml
+```
+
+### Explanation:
+- **Client**: Interacts directly with the system through use cases like viewing dashboards (`VFD`), receiving alerts (`RAT`), generating predictions (`FPTV`), etc.
+- **SysAdmin**: Manages system parameters (e.g., thresholds, rules) and data sharing permissions. They also configure AI components for personalization.
+- **FinancialAdvisor**: Uses the system to review dashboards, monitor client alerts, analyze predictive insights, generate recommendations based on AI outputs, and share client data.
+
+### Key Relationships:
+1. **Client** → **System**: Direct interactions via use cases (e.g., `VFD`, `RAT`).
+2. **SysAdmin** → **System**: Administrative tasks like configuring parameters (`SFR003`) or managing thresholds (`SAFR007`).
+3. **FinancialAdvisor** → **Client**: Reviewing dashboards and sharing data with clients.
+4. **AI Components (AIFR)**: Generate insights, recommendations, etc., which are consumed by other components.
+
+This structure ensures all functional requirements are represented accurately in the use case diagram. Each actor’s role is clearly defined, and relationships between actors and system components are explicit. The `system` boundary groups related functionalities logically for clarity.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+
+rectangle "System" {
+  usecase CFR001: View Financial Insights Dashboard as VFD
+  usecase CFR002: Receive Alerts on Anomalous Transactions as RAT
+  usecase CFR003: View Financial Predictions based on Historical Data and
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

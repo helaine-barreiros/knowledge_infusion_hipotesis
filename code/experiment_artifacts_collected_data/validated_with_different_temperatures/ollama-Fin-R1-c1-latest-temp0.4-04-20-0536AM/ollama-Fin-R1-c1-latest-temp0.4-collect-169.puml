@@ -1,0 +1,92 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor SysAdmin as sysadmin
+actor FinancialAdvisor as advisor
+system SFR012: "Generate Client Dashboards" as sfr12
+usecase CFR001: View Financial Insights Dashboard as cfr001
+usecase CFR002: Receive Alerts for Anomalous Transactions as cfr002
+usecase CFR003: View Financial Predictions Based on Historical Data and Market Trends as cfr003
+usecase CFR004: Personalized Recommendations Aligned with Financial Profile and Goals as cfr004
+usecase CFR005: Manage Preferences for Personalized Recommendations as cfr005
+usecase CFR006: Spending Limit Alerts When Exceeding Predefined Thresholds as cfr006
+usecase CFR007: View Investment Opportunities Based on Risk Profile (MiFID II) as cfr007
+usecase CFR008: View News Related to Portfolio as cfr008
+usecase CFR009: Personalized Dashboard Consolidating Financial Info as cfr009
+usecase CFR010: Manage Relationship with Advisors, Including Data Sharing Permissions as cfr010
+
+system SFR004: "Request Personalized Recommendations" as sfr004
+system SFR003: "Request Financial Predictions" as sfr003
+system SFR005: "Request Spending Limit Alerts" as sfr005
+system SFR006: "Request Investment Opportunity Analysis" as sfr006
+
+usecase SAFR001: Manage AI System Parameters for Accurate Risk Management (Basel III) as safr001
+usecase FAFR001: Manage Client Mentoring Sessions Based on Insights as fafr001
+usecase FAFR002: View Client Intervention Alerts When Patterns Require Professional Attention as fafr002
+usecase AIFR007: Generate Contextualized News Insights Correlated with Portfolios as aifr007
+
+client --> cfr001 : "View Financial Dashboard"
+client --> cfr002 : "Receive Anomalous Transaction Alerts (FATF)"
+client --> cfr003 : "View Predictions Based on Data and Trends"
+client --> cfr004 : "Personalized Recommendations Aligning with Profile & Goals"
+client --> cfr005 : "Manage Recommendation Preferences (KYC)"
+client --> cfr006 : "Spending Limit Alerts for Budget Control"
+client --> cfr007 : "View Investment Opportunities Based on Risk Profile"
+client --> cfr008 : "News Related to Portfolio"
+client --> cfr009 : "Personalized Dashboard Consolidating Info"
+client --> cfr010 : "Manage Relationship with Advisors, Data Sharing"
+
+sysadmin --> safr001 : "Manage AI Parameters for Accuracy & Compliance (Basel III)"
+
+advisor --> fafr001 : "Mentoring Sessions Based on Insights"
+advisor --> fafr002 : "View Client Intervention Alerts"
+advisor --> aifr007 : "Contextualized News Insights"
+
+sfr003 --> AIFR008: "Request Predictive Interventions for Advisors to Engage Clients"
+aifr008 <|-- sfr015: "AI Component Generates Predictive Interventions Based on Client Data and Analysis"
+
+sfr004 --> aifr002: "Personalized Recommendations from AI"
+aifr002 <|-- cfr004: "Client Receives Personalized Recos"
+
+sfr003 --> AIFR001: "Financial Predictions for Users (Historical + Market Trends)"
+AIFR001 <|-- sfr003: "SFR Requests AI to Generate Predictions"
+cfr003 <-- aifr001 : "Client Views Predictions"
+
+sfr005 --> AIFR003: "Spending Limit Alerts Based on User Patterns"
+AIFR003 <|-- sfr005: "SFR Requests AI to Generate Alerts"
+cfr006 <-- aifr003 : "Client Receives Spending Limit Alerts"
+
+sfr006 --> AIFR004: "Investment Opportunity Analysis Based on Risk Profile (MiFID II)"
+AIFR004 <|-- sfr006: "SFR Requests AI to Analyze Opportunities"
+cfr007 <-- aifr004 : "Client Views Investment Opportunities"
+
+sfr12 --> AIFR005: "Investment Opportunity Generation Based on Strategies & MPT"
+AIFR005 <|-- sfr12: "SFR Requests AI to Generate Opportunities"
+cfr007 <-- aifr005 : "Client Receives Investment Recommendations"
+
+sfr008 --> AIFR006: "Anomaly Transaction Alerts for Compliance (FinCEN)"
+AIFR006 <|-- sfr008: "SFR Requests AI to Detect Anomalies"
+cfr002 <-- aifr006 : "Client Receives Fraud Alerts"
+
+sfr007 --> AIFR009: "Contextualized News Insights for Portfolios"
+AIFR009 <|-- sfr007: "SFR Requests AI to Extract Relevant News"
+cfr008 <-- aifr009 : "Client Views Portfolio-Related News"
+
+sfr15 --> AIFR008: "Predictive Intervention Recommendations for Advisors"
+AIFR008 <|-- sfr15: "SFR Requests AI to Generate Interventions"
+advisor --> fafr002 <-- aifr008 : "Advisor Receives Alerts"
+
+sfr13 --> AIFR007: "Contextualized News Correlation for Portfolios (AI Component)"
+AIFR007 <|-- sfr13: "SFR Requests AI to Generate Insights"
+cfr008 <-- aifr007 : "Client Views Contextualized News"
+
+sfr14 --> AIFR009: "Client Analytics from AI for Financial Performance (AI Component)"
+AIFR009 <|-- sfr14: "SFR Requests AI to Generate Client Metrics"
+cfr003 <-- aifr009 : "Client Views Predictive Analytic Reports"
+
+client --> cfr010 : "Manage Relationship with Advisors, Including Data Sharing Permissions (KYC)"
+
+@enduml

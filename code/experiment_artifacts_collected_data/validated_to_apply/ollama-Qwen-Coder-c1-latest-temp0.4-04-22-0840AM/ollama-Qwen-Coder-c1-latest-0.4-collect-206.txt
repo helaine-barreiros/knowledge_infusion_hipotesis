@@ -1,0 +1,100 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR004
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as SAFR005
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as SAFR006
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as SAFR007
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds in Specific Expense Categories" as SAFR008
+  usecase "CFR009: Access a Personalized Dashboard That Consolidates My Financial Information in a Single View" as SAFR13
+  
+  CFR001 --> SAFR004 : "View Alerts"
+  CFR001 --> SAFR005 : "View Predictions"
+  CFR001 --> SAFR006 : "Receive Recommendations"
+  CFR001 --> SAFR007 : "Manage Preferences"
+  CFR001 --> SAFR008 : "View Spending Alerts"
+  CFR001 --> SAFR13 : "Access Dashboard"
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as AIFR009
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations" as SAFR005
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as SAFR17
+  
+  FAFR002 --> AIFR009 : "Manage Sessions"
+  FAFR002 --> SAFR005 : "View Predictive Analytics"
+  FAFR002 --> SAFR17 : "Configure Parameters"
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR001
+  
+  usecase "SAFR001: Manage Analysis Parameters for the AI System" as AIFR003
+  usecase "SFR016: Request Predictive Insights From the AI Component to Enhance the Value of Financial Guidance Provided to Clients" as AIFR015
+  
+  SAFR001 --> AIFR003 : "Manage Parameters"
+  SAFR001 --> AIFR015 : "Request Predictive Insights"
+}
+
+package "System Components" {
+  usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions From the AI Component to Provide Users With Forward-Looking Financial Insights" as AIFR017
+  
+  rectangle System {
+    SFR002 --> SAFR006 : "Deliver Recommendations"
+    SFR003 --> AIFR017 : "Request Predictions"
+  }
+}
+
+package "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR017
+  usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance As Defined By Industry Standards Like FINRA Guidelines" as SAFR006
+  
+  rectangle AI {
+    AIFR017 --> SFR003 : "Generate Predictions"
+    AIFR002 --> SFR002 : "Generate Recommendations"
+  }
+}
+
+package "Notifications and Alerts" {
+  usecase "SFR014: Generate Client Analytics That Provide Meaningful Insights Into Financial Behavior and Performance" as SAFR014
+  usecase "AIFR006: Generate Anomaly Transaction Alerts by Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance With FinCEN Requirements" as AIFR006
+  
+  rectangle Notifications {
+    SFR014 --> SAFR013 : "Generate Analytics"
+    AIFR006 --> SAFR008 : "Generate Alerts"
+  }
+}
+
+package "News and Insights" {
+  usecase "SFR009: Request Contextualized News Relevant to Users' Financial Portfolios From Trusted Financial News Sources" as SFR009
+  usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News With Specific User Portfolios To Identify Relevant Impacts" as AIFR018
+  
+  rectangle News {
+    SFR009 --> SAFR012 : "Request News"
+    AIFR007 --> SAFR014 : "Generate Insights"
+  }
+}
+
+package "User Feedback" {
+  usecase "CFR011: Send Feedback About the System's Recommendations and Insights to Help Improve the Accuracy and Relevance of Future Outputs" as SFR020
+  
+  rectangle Feedback {
+    CFR011 --> SAFR20 : "Send Feedback"
+  }
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1163]

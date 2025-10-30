@@ -1,0 +1,247 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as c
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  c --> CFR001
+  c --> CFR002
+  c --> CFR003
+  c --> CFR004
+  c --> CFR005
+  c --> CFR006
+  c --> CFR007
+  c --> CFR008
+  c --> CFR009
+  c --> CFR10
+  
+  rectangle "Client System" {
+    usecase "SFR02: Manage Users' Financial Goals" as SFR02
+    usecase "SFR03: Maintain Historical Record of Insights" as SFR03
+    
+    c --> SFR02
+    c --> SFR03
+  }
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as fa
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  fa --> FAFR001
+  fa --> FAFR002
+  fa --> FAFR003
+  fa --> FAFR004
+  
+  rectangle "Financial Advisor System" {
+    usecase "SFR05: Request Predictive Intervention Analyses" as SFR05
+    
+    fa --> SFR05
+  }
+}
+
+package "System Administrator" {
+  actor SysAdmin as sa
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  sa --> SAFR001
+  
+  rectangle "System Admin System" {
+    usecase "SFR20: Manage User Feedback" as SFR20
+    
+    sa --> SFR20
+  }
+}
+
+package "AI System" {
+  actor AI as ai
+  
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunities" as AIFR005
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+  usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+  
+  ai --> AIFR001
+  ai --> AIFR002
+  ai --> AIFR003
+  ai --> AIFR004
+  ai --> AIFR005
+  ai --> AIFR006
+  ai --> AIFR007
+  ai --> AIFR008
+  ai --> AIFR009
+  
+  rectangle "AI System" {
+    usecase "SFR12: Generate Client Dashboards" as SFR12
+    usecase "SFR13: Generate Client Alerts Based on Predefined Conditions" as SFR13
+    usecase "SFR14: Generate Client Analytics" as SFR14
+    
+    ai --> SFR12
+    ai --> SFR13
+    ai --> SFR14
+  }
+}
+
+package "System Components" {
+  rectangle "Notifications System" {
+    usecase "SFR01: Deliver Alerts to Users" as SFR01
+  
+    c --> SFR01
+    fa --> SFR01
+    sa --> SFR01
+    
+    ai --> SFR01
+  }
+  
+  rectangle "Recommendations Engine" {
+    usecase "SFR02: Deliver Personalized Recommendations to Users" as SFR02
+  
+    c --> SFR02
+    fa --> SFR02
+    sa --> SFR02
+    
+    ai --> SFR02
+  }
+  
+  rectangle "Predictive Analytics Module" {
+    usecase "SFR03: Request Financial Predictions from AI Component" as SFR03
+  
+    c --> SFR03
+    fa --> SFR03
+    sa --> SFR03
+    
+    ai --> SFR03
+  }
+  
+  rectangle "Recommendations Module" {
+    usecase "SFR04: Request Personalized Recommendations from AI Component" as SFR04
+  
+    c --> SFR04
+    fa --> SFR04
+    sa --> SFR04
+    
+    ai --> SFR04
+  }
+  
+  rectangle "Spending Limit Alerts Module" {
+    usecase "SFR05: Request Spending Limit Alerts from AI Component" as SFR05
+  
+    c --> SFR05
+    fa --> SFR05
+    sa --> SFR05
+    
+    ai --> SFR05
+  }
+  
+  rectangle "Investment Opportunity Analysis Module" {
+    usecase "SFR06: Request Investment Opportunity Analysis from AI Component" as SFR06
+  
+    c --> SFR06
+    fa --> SFR06
+    sa --> SFR06
+    
+    ai --> SFR06
+  }
+  
+  rectangle "ESG Alignment Module" {
+    usecase "SFR07: Request Specific Investment Opportunities from AI Component Matching User Criteria and ESG Preferences" as SFR07
+  
+    c --> SFR07
+    fa --> SFR07
+    sa --> SFR07
+    
+    ai --> SFR07
+  }
+  
+  rectangle "Anomaly Detection Module" {
+    usecase "SFR08: Request Anomaly Transaction Alerts from AI Component in Compliance with AML Regulations" as SFR08
+  
+    c --> SFR08
+    fa --> SFR08
+    sa --> SFR08
+    
+    ai --> SFR08
+  }
+  
+  rectangle "News Processing Module" {
+    usecase "SFR09: Find Contextualized News Relevant to Users' Financial Portfolios from Trusted Sources" as SFR09
+  
+    c --> SFR09
+    fa --> SFR09
+    sa --> SFR09
+    
+    ai --> SFR09
+  }
+  
+  rectangle "News Insights Module" {
+    usecase "SFR10: Request Contextualized News Insights from AI Component to Identify Potential Impacts on Users' Investments" as SFR10
+  
+    c --> SFR10
+    fa --> SFR10
+    sa --> SFR10
+    
+    ai --> SFR10
+  }
+  
+  rectangle "Predictive Intervention Recommendations Module" {
+    usecase "SFR15: Request Predictive Intervention Analyses from AI Component to Identify When Advisors Should Engage with Clients" as SFR15
+  
+    c --> SFR15
+    fa --> SFR15
+    sa --> SFR15
+    
+    ai --> SFR15
+  }
+  
+  rectangle "Predictive Insights Module" {
+    usecase "SFR16: Request Predictive Insights from AI Component to Enhance Financial Guidance Provided to Clients" as SFR16
+  
+    c --> SFR16
+    fa --> SFR16
+    sa --> SFR16
+    
+    ai --> SFR16
+  }
+  
+  rectangle "Financial Health Reporting Module" {
+    usecase "SFR17: Generate Financial Health Reports Based on Standard Ratios and Metrics" as SFR17
+  
+    c --> SFR17
+    fa --> SFR17
+    sa --> SFR17
+    
+    ai --> SFR17
+  }
+  
+  rectangle "User Feedback Management Module" {
+    usecase "SFR20: Manage User Feedback to Improve Future Outputs" as SFR20
+  
+    c --> S
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

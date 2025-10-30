@@ -1,0 +1,104 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C
+actor FinancialAdvisor as FA
+actor SysAdmin as SA
+system "System" as S
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to My Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Financial Advisors Including Data Sharing Permissions" as CFR009
+
+  C --> CFR001 : View Dashboard
+  C --> CFR002 : Receive Alerts (FATF)
+  C --> CFR003 : Predictions Based on Historical & Market Trends
+  C --> CFR004 : Personalized Recommendations
+  C --> CFR005 : Manage Preferences for Recs
+  C --> CFR006 : Spending Limit Alerts
+  C --> CFR007 : Investment Opportunities (Risk Profile)
+  C --> CFR008 : Portfolio News
+  C --> CFR009 : Relationship Management
+
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+
+  FA --> FAFR001 : Manage Mentoring Sessions (Insights)
+  FA --> FAFR002 : Intervention Alerts
+  FA --> FAFR003 : Client Predictive Analytics
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System to Ensure Accuracy and Compliance with Basel III" as SAFR001
+  
+  SA --> SAFR001 : Manage Params (Basel III)
+  
+}
+ 
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions by Analyzing Historical Data, Market Trends, Economic Indicators" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations Based on User's Profile and Goals (FINRA)" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts by Identifying Unusual Deviations" as AIFR003
+  usecase "AIFR004: Identify Investment Opportunities That Match Risk Profiles (MPT)" as AIFR004
+  usecase "AIFR005: Generate Contextualized News Insights Correlated with Portfolio" as AIFR005
+  usecase "AIFR006: Detect Anomalies in Transactions via Pattern Recognition (FinCEN)" as AIFR006
+
+  S --> AIFR001 : Historical Data, Market Trends, Economic Indicators
+  S --> AIFR002 : User Profile & Goals (FINRA)
+  S --> AIFR003 : Spending Patterns Deviations
+  S --> AIFR004 : Risk Profiles, MPT Principles
+  S --> AIFR005 : Portfolio Correlation
+  S --> AIFR006 : Transaction Analysis
+
+}
+
+rectangle "System Services" {
+  usecase "SFR012: Generate Client Dashboards Intuitively" as SFR012
+  usecase "SFR013: Deliver Contextualized News Based on Predefined Conditions" as SFR013
+  usecase "SFR014: Provide Financial Health Reports Using Standard Metrics (e.g., Ratios)" as SFR014
+
+  S --> SFR012 : Intuitive Dashboards
+  S --> SFR013 : Contextualized News Extraction
+  S --> SFR014 : Financial Health Reports
+  
+}
+
+rectangle "User Feedback" {
+  usecase "CFR011: Send Feedback to Improve System Accuracy and Relevance" as CFR011
+
+  C --> CFR011 : Provide Feedback (Improvement)
+  
+}
+ 
+@enduml
+```
+
+### Key Observations:
+- **Actors** are categorized into `Client`, `FinancialAdvisor`, and `SysAdmin` with their respective use cases.
+- The system itself is represented as a boundary, containing components like the AI component (`AIFR`), system services (`SFR`), and user feedback mechanisms (`CFR011`).
+- Use case relationships are established between actors (e.g., Client to View Dashboard) and system components/services. For example:
+  - The `Client` uses cases include viewing dashboards, receiving alerts, etc.
+  - Financial Advisors use cases involve mentoring sessions, client intervention alerts, predictive analytics.
+  - System Administrators manage AI parameters for compliance.
+- Inheritance relationships (e.g., a Client can also be an Advisor or SysAdmin) are not explicitly defined here but could imply role-based access if required. However, the requirements specify distinct actors without overlap in this context.
+
+This diagram ensures all functional requirements are mapped accurately to their corresponding use cases and actor interactions within the system. Adjustments might be needed based on further analysis of requirement nuances (e.g., specific relationships or dependencies).
+
+[Done: True
+Done Reason: stop
+Eval Count: 1311]

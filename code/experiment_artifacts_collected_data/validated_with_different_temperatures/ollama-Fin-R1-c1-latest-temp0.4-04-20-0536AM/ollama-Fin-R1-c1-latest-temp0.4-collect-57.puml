@@ -1,0 +1,53 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  client --> CFR001 : "Client requests dashboard view"
+  
+  SysAdmin --> SAFR001 : "System Administrator manages parameters"
+  SysAdmin --> FAFR004 : "Configures analysis params based on segments"
+
+  rectangle "User Interface" {
+    usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004
+    usecase "CFR005: Manage Recommendation Preferences" as CFR005
+    usecase "CFR006: View Spending Limit Alerts" as CFR006
+    usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+    usecase "CFR008: Access News Related to Portfolio" as CFR008
+    usecase "CFR009: Manage Relationship with Financial Advisors" as CFR009
+
+    client --> CFR002 : "Client receives alerts"
+    client --> CFR003 : "Client views predictions"
+    client --> CFR004 : "Client gets recommendations"
+    client --> CFR005 : "Client adjusts preferences"
+    client --> CFR006 : "Client checks spending limits"
+    client --> CFR007 : "Client explores investments"
+    client --> CFR008 : "Client reads portfolio news"
+    client --> CFR009 : "Client interacts with advisors"
+
+  }
+
+  rectangle "System Services" {
+    usecase "SFR012: Generate Client Dashboards" as SFR012
+    usecase "SFR013: Send Alerts Based on Predefined Conditions" as SFR013
+
+    SysAdmin --> SFR012 : "Sys Admin requests dashboards"
+  }
+
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+    SysAdmin --> AIFR001 : "Sys Admin requests predictions"
+  }
+
+}
+
+@enduml

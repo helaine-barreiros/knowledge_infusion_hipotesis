@@ -1,0 +1,66 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "AIFR009: Generate Client Intervention Recommendations Based on Patterns" as AIFR009
+
+  User --> CFR001 : "Client"
+}
+
+rectangle "Financial Advisors" {
+  actor FinancialAdvisor as FA
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+
+  FA --> FAFR002 : "Financial Advisor"
+}
+
+rectangle "System Administrators" {
+  actor SysAdmin as SA
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+
+  SA --> SAFR001 : "Sys Admin"
+}
+
+rectangle "Client Relationship Management" {
+  actor ClientRelationshipManager as CRM
+  usecase "CFR010: Manage Relationships with Financial Advisors" as CFR010
+
+  CRM --> CFR010 : "CRM"
+}
+
+rectangle "AI System" {
+  component AIFR001: Generate Predictive Insights from Data and Models
+  component AIFR002: Personalized Recommendations Based on Profiles
+  component AIFR003: Spending Limit Alerts via Pattern Recognition
+  component AIFR004: Investment Opportunity Analysis Matching Risk Tolerance
+
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Investment Opportunity Analysis" as AIFR004
+
+  Sys --> (AIFR001) : "System"
+}
+
+rectangle "Notification System" {
+  component SFR008: Anomaly Transaction Alerts via AI Component
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as SFR008
+
+  Sys --> SFR008 : "System"
+}
+
+rectangle "Client Dashboards and Reports" {
+  actor ClientUser as CU
+  component SFR12: Generate Client Dashboards
+  usecase "SFR12: Generate Client Dashboards" as SFR12
+
+  CU --> (SFR12) : "Client User"
+}
+
+@enduml

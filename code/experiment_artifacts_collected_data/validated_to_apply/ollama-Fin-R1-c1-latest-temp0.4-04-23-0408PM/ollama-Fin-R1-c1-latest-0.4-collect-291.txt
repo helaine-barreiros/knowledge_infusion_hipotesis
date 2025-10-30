@@ -1,0 +1,68 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alerts Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Consolidated Financial Dashboard" as CFR012
+  usecase "CFR009: Manage Relationship with Advisors" as CFR009
+  usecase "SAFR003: Adjust Analysis Parameters for Clients" as SAFR004
+  usecase "FAFR001: Schedule Client Mentoring Sessions" as FAFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+
+  // Relationships between Actors and Use Cases
+  Client --> CFR001 : View Financial Insights Dashboard
+  Client --> SAFR002 : Manage Alerts Preferences
+  Client --> CFR003 : View Financial Predictions
+  Client --> CFR004 : Receive Personalized Recommendations
+  Client --> CFR005 : Manage Recommendation Preferences
+  Client --> CFR006 : View Spending Limit Alerts
+  Client --> CFR007 : View Investment Opportunities
+  Client --> CFR012 : Access Consolidated Financial Dashboard
+  Client --> SAFR004 : Adjust Analysis Parameters for Clients (via System)
+  Client --> FAFR001 : Schedule Client Mentoring Sessions
+  SysAdmin --> SAFR003 : Manage Analysis Parameters (for all clients?)
+  Advisor --> FAFR002 : View Intervention Alerts
+  Advisor --> FAFR003 : View Predictive Analytics
+  Advisor --> FAFR004 : Configure Analysis Params for Segments
+
+  // System Use Cases
+  Sys --> CFR001 : Process Client Requests (via UI)
+  Sys --> SAFR002 : Manage Alerts Preferences (for clients)
+  Sys --> SFR003 : Request Predictions from AI
+  Sys --> SFR004 : Request Recommendations from AI
+  Sys --> AIFR003 : Generate Spending Limit Alerts
+
+}
+
+@enduml
+```
+
+### Key Observations:
+1. **Actors**: The main actors are "Client", "SysAdmin" (System Administrator), and "Advisor" (Financial Advisor). Each has specific use cases they interact with.
+2. **Use Cases**:
+   - Clients can view dashboards, receive recommendations, manage alerts/preferences, etc.
+   - SysAdmins manage system parameters for analysis.
+   - Advisors schedule mentoring sessions and view client data.
+3. **System Components**: The "System" rectangle groups all use cases that the AI-driven components (like AIFR) interact with via the UI or backend services.
+4. **Relationships**:
+   - Clients directly access most features except those managed by SysAdmins/Advisors, which require indirect interactions through the system.
+
+### Notes for Improvement:
+- Ensure "Sys" is a placeholder for all system-related use cases and that it correctly aggregates components like AIFR001–AIFR020.
+- Verify if some relationships (e.g., SysAdmin managing analysis params) should be direct or indirect. For example, SysAdmin might adjust parameters via the System UI rather than directly controlling AI logic.
+
+This diagram provides a structured view of how different actors interact with various use cases within the system. Adjustments may be needed based on further clarification in requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 879]

@@ -1,0 +1,89 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  // Clients (Users)
+  actor User as UClient {
+    --> CFR001 : "View Financial Insights Dashboard"
+    --> SAFR001 : "Manage Analysis Parameters"
+    --> FAFR002 : "View Client Intervention Alerts"
+    --> AIFR006 : "Generate Anomaly Transaction Alerts"
+  }
+
+  // System Administrator
+  actor SysAdmin as SA {
+    --> CFR005: Manage Personalized Recommendations Preferences
+    --> SAFR001: Manage Analysis Parameters
+  }
+
+  // Financial Advisor (FA)
+  actor FAdvisor as FA {
+    --> FAFR002: View Client Intervention Alerts
+    --> FAFR003: View Predictive Analytics
+    --> FAFR004: Configure Analysis Parameters for Specific Segments
+  }
+}
+
+// System Components
+usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+
+SysAdmin <|-- (SA)
+User <|-- (UClient)
+
+rectangle "System Boundary" {
+  SysAdmin --> UClient : Manage User Data and Permissions
+  FAdvisor --> UClient : Provide Financial Guidance Based on System-Generated Insights
+  
+  // Notifications from System to Users
+  SFR013: Generate Client Alerts --> UClient
+
+  // AI Components (AIFR)
+  AIFR008: Generate Predictive Interventions <|-- FA
+  AIFR009: Generate Predictive Insights <|-- FA
+  
+  // Historical Record and Feedback Management
+  SFR019 --> CFR005 : Track User Preferences Over Time
+
+}
+@enduml
+```
+
+### Explanation:
+- **Actors**:  
+  - `User` (Client): Represents all end-users, including clients, financial advisors, and system administrators.  
+  - `SysAdmin`: System Administrator for managing parameters and settings.  
+  - `FAdvisor`: Financial Advisor who uses the system to provide guidance.  
+
+- **Use Cases**:
+  - Client-related use cases (`CFR001`–`CFR011`) are linked directly to the user actor, representing their interactions with the system (e.g., viewing dashboards, receiving alerts).  
+  - System Administrator uses `SAFR001: Manage Analysis Parameters`.  
+  - Financial Advisor uses use cases like `FAFR002`, `AIFR008`, and others.  
+
+- **System Boundary**: The rectangle groups all system components (use cases) within the "system" boundary, ensuring clarity in relationships.  
+
+### Key Relationships:
+1. **User-to-Use Cases**  
+   - Users interact with multiple use cases for viewing dashboards (`CFR001`), managing recommendations (`SAFR005`), and receiving alerts (`AIFR006`).  
+
+2. **SysAdmin-to-Use Cases**:  
+   - SysAdmin manages analysis parameters (`SAFR001`) and client preferences (`CFR005`).  
+
+3. **FAdvisor-to-Use Cases**:  
+   - Financial Advisors view intervention alerts, generate predictive insights, etc.  
+
+4. **System Components (AIFR)**:  
+   - AI components like `AIFR008` and `AIFR009` are linked to their respective user actors for generating interventions and insights.  
+
+This diagram ensures all functional requirements are represented accurately with precise relationships between actors, use cases, and system boundaries. Adjustments can be made based on further analysis or specific project needs.
+
+[Done: True
+Done Reason: stop
+Eval Count: 860]

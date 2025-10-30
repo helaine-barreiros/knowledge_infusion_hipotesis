@@ -1,0 +1,114 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as CFR005
+  usecase "AIFR009: Generate Anomaly Transaction Alerts" as AIFR009
+
+  client --> CFR001 : View Financial Insights Dashboard  
+  sysAdmin --> SAFR001 : Manage Analysis Parameters  
+  financialAdvisor --> FAFR002 : View Client Intervention Alerts
+  system --> SFR013 : Generate Client Alerts Based on Predefined Conditions  
+  client --> AIFR009 : Receive Anomaly Transaction Alerts  
+
+  package "Client" {
+    actor User as u
+    user --> CFR001 : View Financial Insights Dashboard  
+    user --> SAFR001 : Manage Analysis Parameters (via SysAdmin) ? 
+    user --> SFR013 : Generate Client Alerts Based on Predefined Conditions  
+    user --> AIFR009 : Receive Anomaly Transaction Alerts  
+
+  }
+  
+  package "Financial Advisor" {
+    actor FAFRA as fa
+    fa --> FAFR002 : View Client Intervention Alerts  
+    fa --> SFR013 : Generate Client Alerts Based on Predefined Conditions  
+  }
+
+  package "System Administrator" {
+    actor SysAdmin as sa
+    sa --> SAFR001 : Manage Analysis Parameters  
+
+  }
+}
+
+@enduml
+```
+
+### Explanation:
+- **Client**: Represents the end-users (e.g., clients, financial advisors) who interact with the system. They can view dashboards and receive alerts.
+- **System Administrator**: Manages analysis parameters for the AI system to ensure compliance and accuracy.
+- **Financial Advisor**: Views client-specific alerts and interventions provided by the system.
+
+### Use Cases:
+1. **CFR001: View Financial Insights Dashboard** (Client): Allows clients to see their financial data in a consolidated format.
+2. **SAFR001: Manage Analysis Parameters** (SysAdmin): System administrator adjusts parameters for AI algorithms.
+3. **FAFR002: View Client Intervention Alerts** (Financial Advisor): Advisors receive alerts about client issues needing attention.
+4. **SFR013: Generate Client Alerts Based on Predefined Conditions** (System): The system creates alerts when specific conditions are met.
+5. **CFR005: Manage Personalized Recommendations Preferences** (Client): Clients adjust their preferences for recommendations.
+6. **AIFR009: Generate Anomaly Transaction Alerts** (AI System): AI detects and reports unusual transactions.
+
+### Relationships:
+- **User**: Interacts with the system via dashboards, alerts, etc.
+- **SysAdmin**: Manages parameters indirectly through the SAFR use case.
+- **Financial Advisor**: Receives client-specific alerts from SFR013 and AIFR009.
+
+This structure ensures all functional requirements are represented accurately in a readable UML diagram. Each actor-use case relationship is clearly defined, aligning with the provided requirements. The system boundary groups related components logically for clarity. 
+
+**Note**: Ensure that "client" here refers to both clients and financial advisors as they share similar interactions (e.g., viewing alerts). Adjustments may be needed based on further clarification of role-specific actions.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as CFR005
+  usecase "AIFR009: Generate Anomaly Transaction Alerts" as AIFR009
+
+  client --> CFR001 : View Financial Insights Dashboard  
+  sysAdmin --> SAFR001 : Manage Analysis Parameters  
+  financialAdvisor --> FAFR002 : View Client Intervention Alerts
+  system --> SFR013 : Generate Client Alerts Based on Predefined Conditions  
+  client --> AIFR009 : Receive Anomaly Transaction Alerts  
+
+  package "Client" {
+    actor User as u
+    user --> CFR001 : View Financial Insights Dashboard  
+    user --> SAFR001 : Manage Analysis Parameters (via SysAdmin) ? 
+    user --> SFR013 : Generate Client Alerts Based on Predefined Conditions  
+    user --> AIFR009 : Receive Anomaly Transaction Alerts  
+
+  }
+  
+  package "Financial Advisor" {
+    actor FAFRA as fa
+    fa --> FAFR002 : View Client Intervention Alerts  
+    fa --> SFR013 : Generate Client Alerts Based on Predefined Conditions  
+  }
+
+  package "System Administrator" {
+    actor SysAdmin as sa
+    sa --> SAFR001 : Manage Analysis Parameters  
+
+  }
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1207]

@@ -1,0 +1,153 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as Client
+}
+
+rectangle "System" {
+  
+  package Professional {
+    actor FinancialAdvisor as FA
+    actor SysAdmin as SA
+    
+    usecase "CFR001: View Financial Insights Dashboard" as CFR001
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+    usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+    usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+    usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+    usecase "FAFR004: Configure Analysis Parameters by Specific Client Segments" as FAFR004
+    
+    client --> CFR001 : "View financial insights dashboard"
+    
+    SysAdmin <|-- SAFR001 : "Manage analysis parameters for AI system compliance with regulations like Basel III."
+  }
+  
+  package System {
+    usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+    usecase "AIFR006: Generate Anomaly Transaction Alerts Using Pattern Recognition" as AIFR006
+    
+    client --> SFR008 : "Receive anomaly transaction alerts."
+  }
+  
+  package AI {
+    actor AISystem as AIS
+    
+    usecase "AIFR001: Generate Financial Predictions Based on Historical Data and Market Trends" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations Aligned with Client Profiles" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts for Unusual Deviations in Spent Amounts" as AIFR003
+    usecase "AIFR004: Identify Investment Opportunities Based on Risk Tolerance and Market Analysis" as AIFR004
+    usecase "AIFR005: Align Investment Recommendations with Modern Portfolio Theory Principles" as AIFR005
+    usecase "AIFR006: Detect Potentially Fraudulent Transactions via Pattern Recognition" as AIFR006
+    usecase "AIFR007: Correlate Financial News With Client Portfolios for Relevant Insights" as AIFR007
+    usecase "AIFR008: Recommend Proactive Engagement with Advisors Based on Predictive Analysis" as AIFR008
+    
+    AIS --> SFR001 : "Deliver personalized recommendations."
+    AIS --> SFR002 : "Generate financial predictions for clients."
+  }
+  
+}
+
+client --> CFR001
+SysAdmin -> SAFR001
+
+' Client and System interactions
+Client --> AIFR001: "Request financial predictions"
+Client --> AIFR002: "Receive personalized recommendations"
+
+AIS <|-- SFR008 : "Generate anomaly transaction alerts."
+SFR008 --> client : "Notify of potential fraud."
+
+'AIFR006 is part of the AI system
+AIFR006 --> AIS
+
+'Other use cases in System and Professional packages are linked as per requirements.
+@enduml
+```
+
+This PlantUML code creates a comprehensive Use Case Diagram for an AI-Powered Analysis & Insights System. It organizes actors, use cases, and their relationships into logical groups (Client, Professional, System, and AI). The diagram adheres to the provided functional requirements by accurately representing each actor's interactions with specific use cases. Key components include:
+
+1. **Client**: Represents end-users such as Clients, Financial Advisors, or System Administrators.
+2. **Professional** Package: Contains actors like SysAdmin, FinancialAdvisor (FA), and their associated use cases for managing system parameters, client mentoring, predictive analytics, etc.
+3. **System** Package: Includes use cases related to generating alerts, requests from the AI component, and other system functionalities.
+4. **AI** Package: Houses the AI System's capabilities in generating financial predictions, personalized recommendations, spending limit alerts, investment opportunities, anomaly detection, news insights, predictive interventions, etc.
+
+The diagram ensures clarity through proper indentation, grouping of related elements (e.g., Professional actors under one package), and explicit relationships between actors and use cases. It also includes cross-package interactions where necessary, such as the AI System delivering recommendations to clients or generating alerts for the system to process. The final structure aligns with all provided functional requirements without inventing additional entities not explicitly listed in the inputs. 
+
+\boxed{UseCaseDiagram}
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as Client
+}
+
+rectangle "System" {
+
+  package Professional {
+    actor SysAdmin as SA
+    actor FinancialAdvisor as FA
+    
+    usecase "CFR001: View Financial Insights Dashboard" as CFR001
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+    usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+    usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+    usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+    usecase "FAFR004: Configure Analysis Parameters by Specific Client Segments" as FAFR004
+    
+    client --> CFR001 : "View financial insights dashboard"
+    
+    SysAdmin <|-- SAFR001 : "Manage analysis parameters for AI system compliance with regulations like Basel III."
+  }
+  
+  package System {
+    usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+    usecase "AIFR006: Generate Anomaly Transaction Alerts Using Pattern Recognition" as AIFR006
+    
+    client --> SFR008 : "Receive anomaly transaction alerts."
+  }
+  
+  package AI {
+    actor AISystem as AIS
+    
+    usecase "AIFR001: Generate Financial Predictions Based on Historical Data and Market Trends" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations Aligned with Client Profiles" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts for Unusual Deviations in Spent Amounts" as AIFR003
+    usecase "AIFR004: Identify Investment Opportunities Based on Risk Tolerance and Market Analysis" as AIFR004
+    usecase "AIFR005: Align Investment Recommendations with Modern Portfolio Theory Principles" as AIFR005
+    usecase "AIFR006: Detect Potentially Fraudulent Transactions via Pattern Recognition" as AIFR006
+    usecase "AIFR007: Correlate Financial News With Client Portfolios for Relevant Insights" as AIFR007
+    usecase "AIFR008: Recommend Proactive Engagement with Advisors Based on Predictive Analysis" as AIFR008
+    
+    AIS --> SFR001 : "Deliver personalized recommendations."
+    AIS --> SFR002 : "Generate financial predictions for clients."
+  }
+  
+}
+
+client --> CFR001
+SysAdmin -> SAFR001
+
+' Client and System interactions
+Client --> AIFR001: "Request financial predictions"
+Client --> AIFR002: "Receive personalized recommendations"
+
+AIS <|-- SFR008 : "Generate anomaly transaction alerts."
+SFR008 --> client : "Notify of potential fraud."
+
+'AIFR006 is part of the AI system
+AIFR006 --> AIS
+
+'Other use cases in System and Professional packages are linked as per requirements.
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1770]

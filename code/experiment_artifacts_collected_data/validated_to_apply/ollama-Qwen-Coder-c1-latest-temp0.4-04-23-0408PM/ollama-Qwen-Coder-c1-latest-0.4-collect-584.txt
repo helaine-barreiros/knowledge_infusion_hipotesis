@@ -1,0 +1,72 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+rectangle "System" {
+  usecase "SFR012: Generate client dashboards" as SFR012
+  usecase "SFR013: Generate client alerts" as SFR013
+  usecase "SFR014: Generate client analytics" as SFR014
+  usecase "SFR015: Request predictive intervention analyses from the AI component" as SFR015
+  usecase "SFR016: Request predictive insights from the AI component" as SFR016
+  usecase "SFR017: Generate financial health reports" as SFR017
+  usecase "SFR020: Manage user feedback to continuously improve the quality and relevance of financial insights" as SFR020
+  
+  CFR001 --> (SFR012)
+  CFR001 --> (SFR013)
+  CFR001 --> (SFR014)
+  CFR001 --> (SFR015)
+  CFR001 --> (SFR016)
+  CFR001 --> (SFR017)
+  CFR001 --> (SFR020)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+}
+
+rectangle "System Admin" {
+  usecase "SAFR001: Manage analysis parameters for the AI system to ensure compliance with financial regulations such as Basel III" as SAFR001
+  
+  SAFR001 --> (SFR003)
+  SAFR001 --> (SFR004)
+}
+
+rectangle "System" {
+  usecase "AIFR007: Generate contextualized news insights by correlating financial news with specific user portfolios to identify relevant impacts" as AIFR007
+  usecase "AIFR008: Generate client predictive intervention recommendations by identifying patterns that indicate potential financial difficulties or opportunities requiring advisor engagement" as AIFR008
+  
+  FAFR001 --> (SFR015)
+  FAFR001 --> (SFR016)
+}
+
+package "System" {
+  usecase "SFR009: Request contextualized news from the AI component to find relevant information for users' financial situations" as SFR009
+  usecase "AIFR007: Generate contextualized news insights by correlating financial news with specific user portfolios to identify relevant impacts" as AIFR007
+  
+  FAFR001 --> (SFR009)
+}
+
+package "System Admin" {
+  actor SystemAdmin as SAFR002
+}
+
+rectangle "User Feedback" {
+  usecase "CFR011: Send feedback about the system's recommendations and insights to help improve accuracy and relevance of future outputs" as CFR011
+  
+  CFR001 --> (SAFR002)
+  FAFR001 --> (SAFR002)
+  SAFR001 --> (SAFR002)
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 708]

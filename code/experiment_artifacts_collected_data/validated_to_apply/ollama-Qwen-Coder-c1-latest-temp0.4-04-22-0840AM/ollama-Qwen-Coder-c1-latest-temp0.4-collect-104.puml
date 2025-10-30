@@ -1,0 +1,72 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Financial Insights & Analytics System
+
+package Client {
+  actor "Client" as CFR001
+}
+
+package Advisor {
+  actor "Financial Advisor" as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics about My Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+}
+
+package Admin {
+  actor "System Administrator" as SAFR001
+  
+  usecase "SAFR002: Manage Analysis Parameters for the AI System" as SAFR002
+}
+
+rectangle "Financial Insights & Analytics System" {
+  
+  package ClientUseCases {
+    usecase "CFR001: View Financial Insights Dashboard" as CFR001
+    usecase "CFR002: Receive Alerts about Anomalous Transactions in My Accounts" as CFR002
+    usecase "CFR003: View Financial Predictions Based on Historical Data and Current Market Trends" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as CFR004
+    usecase "CFR005: Manage Personalized Recommendations Preferences" as CFR005
+    usecase "CFR006: View Spending Limit Alerts When I Exceed Predefined Thresholds in Specific Expense Categories" as CFR006
+    usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile (as Defined Under MiFID II or Equivalent Standards)" as CFR007
+    usecase "CFR008: View News Related to My Investment Portfolio" as CFR008
+    usecase "CFR009: Access a Personalized Dashboard That Consolidates My Financial Information in a Single View" as CFR009
+    usecase "CFR10: Manage Relationship with Financial Advisors, Including Permissions for Sharing My Financial Data" as CFR10
+    
+    Client --> CFR001
+    Client --> CFR002
+    Client --> CFR003
+    Client --> CFR004
+    Client --> CFR005
+    Client --> CFR006
+    Client --> CFR007
+    Client --> CFR008
+    Client --> CFR009
+    Client --> CFR10
+    
+  }
+  
+  package AdvisorUseCases {
+    
+    FAFR002 --> (FAFR003)
+    FAFR002 --> (FAFR004)
+
+    FinancialAdvisor --> FAFR002
+    FinancialAdvisor --> FAFR003
+    FinancialAdvisor --> FAFR004
+    
+  }
+  
+  package AdminUseCases {
+    
+    SAFR001 --> (SAFR002)
+    
+    SystemAdministrator --> SAFR001
+    SystemAdministrator --> SAFR002
+
+  }
+
+}
+
+@enduml

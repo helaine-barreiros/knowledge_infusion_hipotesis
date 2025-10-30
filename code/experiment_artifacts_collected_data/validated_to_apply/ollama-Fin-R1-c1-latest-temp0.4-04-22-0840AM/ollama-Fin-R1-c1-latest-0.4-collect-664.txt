@@ -1,0 +1,112 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  // Relationship between System and Use Cases within the rectangle
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  
+  SysAdmin --> FAFR003 : "View Predictive Analytics for Clients"
+  
+}
+
+rectangle "Client" {
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR011: Send Feedback" as CFR011
+  
+}
+
+rectangle "System Administrator" {
+  usecase "SFR020: Maintain Historical Record of Insights" as SFR020
+
+}
+
+// Relationships between actors and use cases outside the System rectangle
+SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+client --> CFR004 : "Receive Personalized Recommendations"
+CFR005 <|-- client : "Manage Recommendation Preferences"
+
+@enduml
+```
+
+### Explanation:
+- **System Rectangle**: Contains core system-related use cases like viewing financial dashboards (`CFR001`), managing analysis parameters (`SAFR001`), generating dashboards (`SFR012`). The `client` actor interacts with the system via these use cases.
+  
+- **Financial Advisor Rectangle**: Includes activities specific to advisors, such as mentoring sessions (`FAFR001`) and viewing client intervention alerts (`FAFR002`). These are linked to the system's predictive analytics.
+
+- **Client Rectangle**: Represents user interactions like receiving recommendations (`CFR004`), managing preferences (`CFR005`), and providing feedback (`CFR011`).
+
+- **System Administrator Rectangle**: Manages historical records of insights (`SFR020`). No direct interaction with the client but oversees system-wide data.
+
+### Key Relationships:
+- `client` uses `CFR001`, `SAFR001`, and others within the System.
+- `SysAdmin` manages parameters via `SAFR001`.
+- `Financial Advisor` views analytics (`FAFR003`) and interacts with clients through mentoring/sessions.
+
+This structure ensures clarity in how different actors engage with system components, adhering strictly to provided requirements. Adjustments can be made based on further analysis or additional details from the functional list. 
+
+**Note**: Ensure all use case IDs are correctly referenced as per the original text (e.g., `CFR001` instead of abbreviated forms like "Client"). This maintains consistency and avoids ambiguity in the diagram.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  
+  SysAdmin --> FAFR003 : "View Predictive Analytics for Clients"
+  
+}
+
+rectangle "Client" {
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR011: Send Feedback" as CFR011
+  
+}
+
+rectangle "System Administrator" {
+  usecase "SFR020: Maintain Historical Record of Insights" as SFR020
+
+}
+
+// Relationships between actors and use cases outside the System rectangle
+SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+client --> CFR004 : "Receive Personalized Recommendations"
+CFR005 <|-- client : "Manage Recommendation Preferences"
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1095]

@@ -1,0 +1,68 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  Client --> (SFR012) : Generate client dashboards that present financial information in an intuitive and actionable format.
+  Client --> (SFR013) : Generate client alerts based on predefined conditions to ensure timely notification of important financial events.
+  Client --> (SAFR005) : Request spending limit alerts from the AI component when user spending patterns exceed defined thresholds.
+  Client --> (AIFR004) : Generate investment opportunity analyses for users by evaluating potential investments against their risk profiles, time horizons, and financial goals.
+  Client --> (SFR017) : Generate financial health reports that assess users' overall financial wellbeing according to standard financial ratios and metrics.
+  
+  SysAdmin --> SAFR001
+  SysAdmin --> (AIFR002) : Generate personalized recommendations for users based on their financial profiles, goals, and risk tolerance as defined by industry standards like FINRA guidelines.
+  SysAdmin --> (SFR019) : Maintain a historical record of users' insights to enable trend analysis and effectiveness measurement.
+  
+  FAFD --> (FAFR002) : View client intervention alerts when the system detects patterns requiring professional attention to proactively assist clients with potential financial issues.
+  FAFD --> (AIFR001) : Generate financial predictions for users by analyzing historical transaction data, market trends, and economic indicators.
+  
+  Client -> CFR001
+  SysAdmin -> SAFR001
+  FinancialAdvisor -> FAFR002
+  
+}
+
+rectangle "Client" {
+  usecase "CFR002: View Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  
+  Client --> (SFR018) : Manage users' financial goals to track progress and provide relevant recommendations.
+  
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  FinancialAdvisor --> (AIFR008) : Generate anomaly transaction alerts by employing pattern recognition to detect potentially fraudulent activities in compliance with FinCEN requirements.
+  
+}
+
+rectangle "System" {
+  usecase "SFR001: Deliver Alerts to Users through Appropriate Notification Channels" as SFR001
+  usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR002
+  
+  System --> (SAFR005) : Request spending limit alerts from the AI component when user spending patterns exceed defined thresholds.
+  
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  
+  AIComponent --> (SAFR005) : Request spending limit alerts from the AI component when user spending patterns exceed defined thresholds.
+  
+}
+
+@enduml

@@ -1,0 +1,78 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+  Client --> (CFR001)
+  SysAdmin --> (SAFR001, FAFR004)
+
+  rectangle "Client Interface" {
+    actor User as U
+    usecase "View Financial Predictions" as VFP
+    usecase "Receive Personalized Recommendations" as RPR
+
+    U -> VFP : "CFR003: View financial predictions based on historical data and market trends."
+    U -> RPR : "CFR004: Receive personalized recommendations aligned with their goals."
+
+  }
+
+  rectangle "Client Alerts & Notifications" {
+    usecase "Receive Anomaly Transaction Alerts" as ATA
+    usecase "View Spending Limit Alerts" as VSLA
+
+    Client --> (ATA)
+    SysAdmin --> (VSLA)
+
+  }
+
+  rectangle "Financial Advisor Tools" {
+    actor FinancialAdvisor as FA
+    usecase "Manage Client Mentoring Sessions" as MCLS
+    usecase "View Intervention Alerts" as VIA
+    usecase "View Predictive Analytics for Clients" as VPA
+
+    FA --> (MCLS)
+    SysAdmin --> (VIA, FAFR004)
+
+  }
+
+  rectangle "System Management & Monitoring" {
+    actor SystemAdministrator as SA
+    usecase "Manage Analysis Parameters" as MAP
+    usecase "Generate Client Dashboards" as GCD
+    usecase "Request News Insights for Portfolio" as RNP
+
+    SA --> (MAP)
+    SysAdmin --> (GCD, RNP)
+
+  }
+
+}
+
+@enduml
+```
+
+**Explanation:**
+- The diagram is structured into four main sections within the system boundary:
+  - **Client Interface**: Handles user interactions like viewing financial predictions and receiving recommendations.
+  - **Client Alerts & Notifications**: Manages alerts for anomalies and spending limits.
+  - **Financial Advisor Tools**: Includes tools for advisors to manage client sessions, view intervention alerts, etc.
+  - **System Management & Monitoring**: Deals with system-level tasks such as managing parameters, generating dashboards, requesting news insights.
+
+- Actors are categorized based on their roles (Client/User, FinancialAdvisor/FA, SystemAdministrator/SysAdmin).
+  
+- Use cases are linked to actors through directed arrows. For example:
+  - Clients interact directly with `CFR003` and `CFR004`.
+  - Advisors use tools like `MCLS`, while admins manage parameters via `SAFR001`.
+
+This structure ensures clarity in mapping requirements to their respective functional areas within the system. Adjustments can be made based on further analysis of relationships or additional requirements not explicitly listed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 641]

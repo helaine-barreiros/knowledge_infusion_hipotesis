@@ -1,0 +1,60 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "System" {
+  rectangle "System Boundary" {
+    usecase "CFR001: View Financial Insights Dashboard" as CFR001
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+    usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+    usecase "SFR012: Generate Client Dashboards" as SFR012
+    usecase "AIFR009: Generate Client Predictive Intervention Recommendations" as AIFR009
+
+    user Client --> CFR001, SAFR001, FAFR003, SFR012, AIFR009 : "View and interact with financial insights"
+    
+    SysAdmin --> SAFR001
+  }
+  
+  package "Financial Advisor" {
+    actor FinancialAdvisor as FA
+    
+    usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+    usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+    usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+    
+    FA --> FAFR001, FAFR002, FAFR004 : "Perform advisory tasks"
+  }
+  
+  package "System Administrator" {
+    actor SysAdmin as SA
+    usecase SAFR001: Manage Analysis Parameters for AI System Compliance
+
+    SA --> SAFR001 : "Configure system settings and parameters"
+  }
+
+  package "Client" {
+    actor Client as C
+    
+    usecases = [CFR001, CFR002, CFR003, CFR004, CFR005, CFR006, CFR007, CFR008, CFR009, CFR010]
+    
+    C --> all(usecases) : "Access and manage personal financial insights"
+  }
+
+  package "AI System" {
+    actor AI as A
+    usecase = [AIFR001: Generate Financial Predictions,
+               AIFR002: Generate Personalized Recommendations, 
+               AIFR003: Generate Spending Limit Alerts,  
+               AIFR004: Generate Investment Opportunity Analyses,  
+               AIFR005: Generate Specific Investment Opportunities,  
+               AIFR006: Generate Anomaly Transaction Alerts,
+               AIFR007: Generate Contextualized News Insights, 
+               AIFR008: Generate Client Predictive Intervention Recommendations]
+    
+    AI --> all(usecase) : "Process and generate insights"
+  }
+
+}
+
+@enduml

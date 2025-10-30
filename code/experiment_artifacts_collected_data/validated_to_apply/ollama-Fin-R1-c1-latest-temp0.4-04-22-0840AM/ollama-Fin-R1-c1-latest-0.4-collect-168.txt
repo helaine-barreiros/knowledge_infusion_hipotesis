@@ -1,0 +1,62 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR014: Generate Client Analytics" as SFR014
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  financialAdvisor --> (FAFR002) <|-- (CFR007)
+  financialAdvisor --> FAFR003
+}
+
+rectangle "Client" {
+  client as Client
+  
+  Client -> CFR001 : "View Financial Insights Dashboard"
+  Client -> SFR014 : "Generate Client Analytics"
+  
+  SysAdmin -> SAFR001 : "Manage Analysis Parameters"
+
+  financialAdvisor --> FAFR002
+}
+
+rectangle "Financial Advisor" {
+  financialAdvisor as advisor
+  
+  client --> CFR007 : "View Investment Opportunities Suitable to Risk Profile"
+  client --> SFR008 : "Request Specific Investment Opportunities Based on Criteria and ESG Preferences"
+  
+  SysAdmin -> SAFR001 : "Manage Analysis Parameters"
+
+  advisor <|-- FAFR002
+}
+
+rectangle "System Administrator" {
+  SysAdmin as admin
+  
+  admin --> SAFR001 : "Manage Analysis Parameters for AI System Compliance with Basel III and Other Regs"
+  
+  client --> CFR008 : "View News Related to Investment Portfolio"
+}
+
+@enduml
+
+**Key Observations:**
+- **Client**: Can view financial dashboards, receive alerts (CFR002), personalized recommendations (CFR004), manage preferences (CFR005), and more. Also interacts with the system for news.
+- **Financial Advisor**: Manages client mentoring sessions, views predictive analytics (FAFR003), generates specific investment opportunities (SFR008). They also view alerts like transaction anomalies (CFR007).
+- **System Administrator**: Handles analysis parameter management (SAFR001) to ensure regulatory compliance.
+- Relationships: Clients and advisors use system services; SysAdmin configures the AI for compliance. The diagram groups related actors under their respective roles, ensuring clarity in interactions.
+
+**Note:** This structure aligns with the provided requirements by mapping each actor's needs to specific use cases while respecting inheritance (e.g., Financial Advisor extends advisory actions). Adjustments may be needed based on further analysis of dependencies and system architecture details.
+
+[Done: True
+Done Reason: stop
+Eval Count: 586]

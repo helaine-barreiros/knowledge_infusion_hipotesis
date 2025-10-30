@@ -1,0 +1,81 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Feedback" as SAFR002
+  
+  Client --> CFR001 : "Request"
+  
+  SysAdmin --> SAFR002 : "Configure System Parameters, Review Feedback"
+}
+
+rectangle "Client" {
+  actor "User (Client)" as U
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Preferences for Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access Personalized Dashboard" as CFR008
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+  
+  U --> CFR003 : "Request"
+  U --> CFR004 : "Request"
+  U --> CFR005 : "Adjust Preferences"
+  U --> CFR006 : "Check Alerts"
+  U --> CFR007 : "View Opportunities"
+  U --> CFR008 : "Access Dashboard"
+  SysAdmin --> CFR010 : "Set Permissions, Share Data"
+
+}
+
+rectangle "Financial Advisor" {
+  actor "FAFR002: Financial Advisor (Client Intervention)" as FAFR
+  usecase "CFR009: View News Related to Portfolio" as CFR009
+  
+  SysAdmin --> FAFR : "Share Client Insights, Schedule Sessions"
+  
+}
+
+rectangle "System Administrator" {
+  actor "SysAdmin" as SA
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR020: Maintain Historical Record of User Insights" as SFR020
+  
+  SysAdmin --> SAFR001 : "Set, Review"
+  SysAdmin --> SFR020 : "Manage Records"
+
+}
+
+rectangle "AI System" {
+  actor "AIFR003: AI (Spending Limit Alerts)" as AIFR
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  
+  
+}
+@enduml
+```
+
+**Key Observations and Clarifications for the Diagram:**
+1. **System Boundary**: The entire system is enclosed within a rectangle labeled "System," which contains all relevant actors, use cases, and their relationships.
+2. **Actors Grouping**:
+   - **Client**: Represents users (including clients, financial advisors, or system administrators) with specific interactions like viewing dashboards, receiving recommendations, etc.
+   - **Financial Advisor (FAFR)**: Interacts via user intervention alerts and news requests.
+   - **System Administrator (SysAdmin)**: Manages analysis parameters, reviews feedback, shares data, maintains historical records.
+3. **Use Cases**:
+   - Client-related use cases include viewing financial insights, predictions, recommendations, managing preferences, etc.
+   - Financial Advisor uses case includes accessing client-specific news and interventions.
+4. **Relationships**:
+   - Clients request various services (e.g., CFR001 for dashboards).
+   - SysAdmin configures parameters or reviews feedback through SAFR002.
+5. **Inheritance/Extends**: Not explicitly used here, but relationships are direct via arrows.
+
+This structure ensures all requirements are mapped accurately without redundancy. Adjustments can be made if additional details arise from the context.
+
+[Done: True
+Done Reason: stop
+Eval Count: 826]

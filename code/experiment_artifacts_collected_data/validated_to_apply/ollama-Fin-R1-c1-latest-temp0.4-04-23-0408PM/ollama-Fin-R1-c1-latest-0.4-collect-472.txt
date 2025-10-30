@@ -1,0 +1,116 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sa
+actor FinancialAdvisor as faa
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: Access Financial Predictions" as CFR003
+  usecase "CFR004: Get Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Receive Portfolio-Related News" as CFR008
+  usecase "CFR009: Use Consolidated Financial Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+
+  c1 --> CFR001 : "View"
+  c1 --> CFR002 : "Receive Alerts for Anomalous Transactions (FATF)"
+  c1 --> CFR003 : "Access Financial Predictions"
+  c1 --> CFR004 : "Get Personalized Recommendations"
+  c1 --> CFR005 : "Manage Preferences"
+  c1 --> CFR006 : "View Spending Limit Alerts"
+  c1 --> CFR007 : "Access Investment Opportunities Based on Risk Profile (MiFID II)"
+  c1 --> CFR008 : "Receive Portfolio-Related News"
+  c1 --> CFR009 : "Use Consolidated Financial Dashboard"
+  c1 --> CFR10 : "Manage Relationship with Advisors"
+
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Intervention Alerts for Clients" as FAFR002
+  usecase "FAFR003: Access Predictive Analytics About Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+
+  faa --> FAFR001 : "Manage"
+  faa --> FAFR002 : "View Intervention Alerts (AML)"
+  faa --> FAFR003 : "Access Predictive Analytics"
+  faa --> FAFR004 : "Configure Analysis Parameters"
+
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage AI System's Analysis Parameters for Accuracy and Compliance" as SAFR001
+
+  sa --> SAFR001 : "Manage"
+
+}
+ 
+package "Client-Related Use Cases" {
+  CFR001
+  CFR002
+  CFR003
+  CFR004
+  CFR005
+  CFR006
+  CFR007
+  CFR008
+  CFR009
+  CFR10
+
+}
+
+package "Financial Advisor-Related Use Cases" {
+  FAFR001
+  FAFR002
+  FAFR003
+  FAFR004
+
+}
+
+package "System Administrator-Related Use Cases" {
+  SAFR001
+
+}
+@enduml
+```
+
+### Explanation:
+The provided PlantUML code creates a use case diagram for the AI-Powered Analysis & Insights System. The system includes three main actors: **Client**, **Financial Advisor (FAA)**, and **System Administrator**. Each actor is associated with specific use cases derived from the functional requirements.
+
+#### Key Components:
+1. **Clients**: Represented by `c1`, they can view various financial dashboards, receive alerts, access predictions, get recommendations, manage preferences, etc.
+2. **Financial Advisors (FAA)**: Can manage client mentoring sessions, view intervention alerts, access predictive analytics, and configure analysis parameters for specific segments.
+3. **System Administrators**: Responsible for managing AI system's analysis parameters to ensure compliance with financial regulations.
+
+#### Use Cases Grouping:
+- **Client-related use cases** are grouped under the "Client" package (e.g., viewing dashboards, receiving alerts).
+- **Financial Advisor-related use cases** fall into their own package.
+- **System Administrator-related use case** is isolated in its own group.
+
+This structure ensures clarity and logical separation of responsibilities among different user types. The relationships between actors and use cases are explicitly defined using arrows (`-->`). For example:
+- Clients interact with multiple financial services (e.g., viewing dashboards, receiving alerts).
+- Financial Advisors manage client interactions via system-generated insights.
+- System Administrators oversee the AI components to maintain accuracy.
+
+### Notes on PlantUML Syntax:
+- **Actor Definitions**: Actors are declared using `actor` followed by their name and alias. For example:  
+  ```plantuml
+  actor Client as c1
+  ```
+- **Use Case Definitions**: Use cases use the `usecase` keyword with ID and name, enclosed in double quotes if needed (e.g., "CFR002").
+- **Relationships**: Relationships are drawn using arrows (`-->`) between actors and use cases. Labels can be added to describe interactions.
+- **Packages**: Logical grouping of related use cases is achieved via `package` blocks.
+
+This diagram adheres strictly to the provided requirements, ensuring no extraneous elements or relationships are included. The structure supports easy navigation and understanding of system functionalities across different user roles.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1238]

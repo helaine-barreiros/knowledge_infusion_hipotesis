@@ -1,0 +1,79 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  
+  FinancialAdvisor --> FAFR003 : "View Predictive Analytics for Clients"
+  
+  System <|-- (CFR001, SFR012) : Delivers
+}
+
+rectangle "Client" {
+  actor Client as C
+  
+  C -> CFR001 : View Financial Insights Dashboard
+  C --> SAFR001 : Manage Analysis Parameters via SysAdmin
+  C -->> FAFR003 : Receive Predictive Analytics (via System)
+  
+  package Personalization { 
+    usecase "CFR005: Manage Recommendations Preferences" as CFR005
+    Client -> CFR005 : Adjust preferences for recommendations
+  }
+}
+
+rectangle "FinancialAdvisor" {
+  actor FinancialAdvisor as FA
+  
+  FA --> FAFR003 : View Predictive Analytics (via System)
+  
+  package Mentoring { 
+    usecase "FAFR001: Manage Client Sessions" as FAFR001
+    FA -->> FAFR001 : Schedule and track mentoring sessions based on system insights
+  }
+}
+
+rectangle "SysAdmin" {
+  actor SysAdmin as SA
+  
+  SA --> SAFR001 : Configure analysis parameters (via System)
+  
+  package RegulatoryCompliance { 
+    usecase "SAFR002: Ensure Compliance with Financial Regulations" as SAFR002
+    SysAdmin -> SAFR002 : Verify compliance settings for risk management and data protection
+  }
+}
+
+@enduml
+```
+
+### Explanation:
+1. **System Boundary**: The main system is represented by a rectangle containing all use cases.
+2. **Client Actor**:
+   - Can view the Financial Insights Dashboard (CFR001).
+   - Manage their recommendations preferences (CFR005) to ensure personalized insights align with their goals and risk tolerance.
+3. **Financial Advisor Actor**:
+   - Views predictive analytics for clients via FAFR003, which is delivered by the system.
+   - Manages client mentoring sessions based on generated insights through FAFR001.
+4. **SysAdmin Actor**:
+   - Manages analysis parameters (SAFR001) to ensure algorithm accuracy and compliance with regulations like Basel III or GDPR via SAFR002.
+5. **Use Case Relationships**:
+   - Use cases are linked directly between actors and the system where applicable.
+   - For example, Client interacts with CFR001 through direct calls or via SysAdmin for parameter management (CFR004).
+6. **Packages**: Logical grouping of related use cases to maintain clarity.
+
+This structure ensures all functional requirements are represented accurately while adhering to the provided guidelines. Adjustments can be made based on further analysis, but this should cover most scenarios outlined in the requirements list.
+
+[Done: True
+Done Reason: stop
+Eval Count: 733]

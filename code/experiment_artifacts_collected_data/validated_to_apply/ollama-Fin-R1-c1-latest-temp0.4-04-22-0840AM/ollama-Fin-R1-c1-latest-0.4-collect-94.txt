@@ -1,0 +1,137 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:User: as User
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Client Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR001: Generate Spending Limit Alerts" as SAFR001
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Portfolio News" as CFR008
+  usecase "CFR009: Manage Relationship with Advisors" as CFR009
+
+  SysAdmin --> SAFR001 : Configure system parameters for compliance (Basel III)
+}
+
+User -->> CFR001 : View financial data in dashboard
+User -->> SAFR002 : Receive alerts about transactions, spending limits, investment opportunities
+User -->> CFR003 : See future projections based on history and trends
+User -->> CFR004 : Get tailored advice aligned with profile goals
+User -->> CFR005 : Adjust personalization settings for recommendations
+User --> SAFR001 : Set up or adjust spending limit alerts (exceedance)
+User -->> CFR007 : Explore investment options suitable to risk profile
+User -->> CFR008 : Stay informed about market news related to portfolio
+
+SysAdmin --> SAFR002 : Manage client-specific alert thresholds, types
+FinancialAdvisor --> FAFR001: Schedule and manage mentoring sessions based on system insights
+FinancialAdvisor --> FAFR003: View predictive analytics for clients (e.g., risk factors)
+FinancialAdvisor --> FAFR004: Customize analysis parameters per client segment
+
+Sys -->> SFR002: Deliver alerts via channels like email, app notifications
+Sys -->> SFR003: Request AI-generated predictions from AIFR001 for user dashboards
+Sys -->> SFR004: Fetch personalized recommendations using AIFR002 (FINRA-compliant)
+Sys -->> SAFR005: Trigger spending limit alerts when thresholds are breached by AIFR003
+Sys -->> CFR007: Request investment opportunities from AIFR004 based on user's risk profile and ESG criteria
+Sys -->> SFR009: Find relevant news articles for portfolio context using AIFR006 (ESG-aligned)
+Sys --> AIFR001 : Analyze data to generate financial predictions
+Sys --> AIFR002 : Generate personalized recommendations aligned with user's KYC profile and goals
+Sys --> AIFR003: Create spending limit alerts based on historical patterns
+Sys --> AIFR004: Identify investment opportunities matching risk profiles (Modern Portfolio Theory)
+Sys --> AIFR005: Find specific investments that fit criteria like ESG standards or time horizons
+Sys --> AIFR006 : Detect potential fraud through anomaly transaction analysis per FinCEN rules
+Sys --> AIFR007: Correlate news with user portfolios for relevance (ESG, market trends)
+Sys --> AIFR008: Recommend when advisors should intervene based on client data patterns
+Sys --> AIFR009 : Provide forward-looking financial insights to support planning
+
+User -->> CFR011: Send feedback to improve system outputs
+
+@enduml
+```
+
+**Key Observations and Clarifications**:
+- **Actors**: The primary actors are "Client", "System Administrator", "Financial Advisor". These are represented as `User` in the PlantUML diagram, but it's important to note that different user types (e.g., Client vs. FinancialAdvisor) have distinct use cases.
+  
+- **Use Cases**:
+  - CFR001–CFR009: Represent client-facing features like viewing dashboards, receiving alerts, personalized recommendations, etc.
+  - SAFR001–SAFR002: System administration and management of parameters/alerts (e.g., spending limits).
+  
+- **Inheritance/Delegation**:
+  - The "System" component uses various AI systems (`AIFR00X`) to generate insights. For example, `Sys` delegates financial predictions to AIFR001.
+  
+- **Relationships**:
+  - Clients interact directly with the system via use cases like viewing dashboards or receiving alerts.
+  - Financial Advisors and System Administrators manage settings (e.g., FAFR004 for advisors; SAFR002 for admins).
+  - The AI components (`AIFR00X`) are internal to the system but perform critical calculations.
+
+This structure ensures that all functional requirements are mapped accurately, with proper relationships between actors and use cases. Adjustments were made based on logical groupings (e.g., client-specific vs. admin/financial advisor actions) for clarity in the diagram. 
+
+**Note**: The "User" alias is used here to represent multiple roles (Client, FinancialAdvisor, SysAdmin), as per requirement examples where these are interchanged but share similar interactions with the system. In a production environment, this might need further differentiation via separate actor definitions if distinct behaviors exist between client and advisor types.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:User: as User
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Client Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR001: Generate Spending Limit Alerts" as SAFR001
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Portfolio News" as CFR008
+  usecase "CFR009: Manage Relationship with Advisors" as CFR009
+
+  SysAdmin --> SAFR002 : Configure system parameters for compliance (Basel III)
+}
+
+User -->> CFR001 : View financial data in dashboard
+User -->> SAFR002 : Receive alerts about transactions, spending limits, investment opportunities
+User -->> CFR003 : See future projections based on history and trends
+User -->> CFR004 : Get tailored advice aligned with profile goals
+User -->> CFR005 : Adjust personalization settings for recommendations
+User --> SAFR001 : Set up or adjust spending limit alerts (exceedance)
+User -->> CFR007 : Explore investment options suitable to risk profile
+User -->> CFR008 : Stay informed about market news related to portfolio
+
+SysAdmin --> SAFR002 : Manage client-specific alert thresholds, types
+FinancialAdvisor --> FAFR001: Schedule and manage mentoring sessions based on system insights
+FinancialAdvisor --> FAFR003: View predictive analytics for clients (e.g., risk factors)
+FinancialAdvisor --> FAFR004: Customize analysis parameters per client segment
+
+Sys -->> SFR002: Deliver alerts via channels like email, app notifications
+Sys -->> SFR003: Request AI-generated predictions from AIFR001 for user dashboards
+Sys -->> SFR004: Fetch personalized recommendations using AIFR002 (FINRA-compliant)
+Sys -->> SAFR005: Trigger spending limit alerts when thresholds are breached by AIFR003
+Sys -->> CFR007: Request investment opportunities from AIFR004 based on user's risk profile and ESG criteria
+Sys -->> SFR009: Find relevant news articles for portfolio context using AIFR006 (ESG-aligned)
+Sys --> AIFR001 : Analyze data to generate financial predictions
+Sys --> AIFR002 : Generate personalized recommendations aligned with user's KYC profile and goals
+Sys --> AIFR003: Create spending limit alerts based on historical patterns
+Sys --> AIFR004: Identify investment opportunities matching risk profiles (Modern Portfolio Theory)
+Sys --> AIFR005: Find specific investments that fit criteria like ESG standards or time horizons
+Sys --> AIFR006 : Detect potential fraud through anomaly transaction analysis per FinCEN rules
+Sys --> AIFR007: Correlate news with user portfolios for relevance (ESG, market trends)
+Sys --> AIFR008: Recommend when advisors should intervene based on client data patterns
+Sys --> AIFR009 : Provide forward-looking financial insights to support planning
+
+User -->> CFR011: Send feedback to improve system outputs
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 2015]

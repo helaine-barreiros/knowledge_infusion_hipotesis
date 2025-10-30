@@ -1,0 +1,109 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Clients" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Anomalous Transaction Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  C --> (CFR001)
+  C --> (CFR002)
+  C --> (CFR003)
+  C --> (CFR004)
+  C --> (CFR005)
+  C --> (CFR006)
+  C --> (CFR007)
+  C --> (CFR008)
+  C --> (CFR009)
+  C --> (CFR10)
+}
+
+package "Financial Advisors" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  FA --> (FAFR001)
+  FA --> (FAFR002)
+  FA --> (FAFR003)
+  FA --> (FAFR004)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SA
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SA --> (SAFR001)
+}
+
+rectangle "AI Component" {
+  package "Recommendations and Insights Generation" {
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  }
+  
+  package "Predictive Analytics and Intervention" {
+    usecase "AIFR009: Generate Predictive Insights for Clients" as AIFR009
+    usecase "AIFR15: Generate Client Predictive Interventions Recommendations" as AIFR15
+  }
+  
+  package "Alerts Generation" {
+    usecase "AIFR06: Generate Anomaly Transaction Alerts" as AIFR06
+    usecase "SFR013: Request Client Alerts Based on Predefined Conditions" as SFR013
+  }
+
+  package "News and Insights Processing" {
+    usecase "AIFR07: Generate Contextualized News Insights" as AIFR07
+    usecase "SFR09: Find Contextualized News Relevant to Users' Portfolios" as SFR09
+  }
+}
+
+rectangle "System Functions" {
+  package "Alert Delivery and Management" {
+    usecase "SFR013: Request Client Alerts Based on Predefined Conditions" as SFR013
+    usecase "AIFR06: Generate Anomaly Transaction Alerts" as AIFR06
+    usecase "CFR11: Send Feedback about Recommendations and Insights" as CFR11
+  }
+  
+  package "Personalized Content Generation" {
+    usecase "SFR02: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR02
+    usecase "AIFR03: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations from Established Spending Patterns" as AIFR03
+  }
+  
+  package "Financial Predictions and Analytics" {
+    usecase "SFR014: Request Client Analytics That Provide Meaningful Insights into Financial Behavior and Performance" as SFR014
+    usecase "AIFR05: Generate Investment Opportunities for Users by Identifying Financial Instruments that Align with Their Investment Strategies and Modern Portfolio Theory Principles" as AIFR05
+  }
+  
+  package "Dashboard Generation" {
+    usecase "SFR12: Request Client Dashboards That Present Financial Information in an Intuitive and Actionable Format" as SFR12
+    usecase "CFR09: Access Personalized Dashboard" as CFR09
+  }
+
+  package "Historical Record Management" {
+    usecase "AIFR08: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as AIFR08
+    usecase "SFR19: Maintain a Historical Record of Users' Insights to Enable Trend Analysis and Effectiveness Measurement" as SFR19
+  }
+  
+  package "Feedback Management" {
+    usecase "CFR11: Send Feedback about Recommendations and Insights" as CFR11
+  }
+
+}
+
+@enduml

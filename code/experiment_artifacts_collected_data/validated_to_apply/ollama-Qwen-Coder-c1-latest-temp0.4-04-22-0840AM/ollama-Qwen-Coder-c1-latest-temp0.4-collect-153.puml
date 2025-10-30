@@ -1,0 +1,109 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR003: View Financial Predictions" as SAFR004
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR005
+  usecase "CFR006: Manage Personalized Recommendations Preferences" as SAFR007
+  usecase "CFR012: View Client Dashboards" as SFR013
+  
+  
+  CFR001 --> SAFR003 : "View Alerts"
+  CFR001 --> SAFR004 : "View Predictions"
+  CFR001 --> SAFR005 : "Receive Recommendations"
+  CFR001 --> SAFR007 : "Manage Preferences"
+  CFR001 --> SFR013 : "Access Dashboards"
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as AIFR008
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as SAFR006
+  
+  
+  FinancialAdvisor --> AIFR008 : "Manage Sessions"
+  FinancialAdvisor --> SAFR006 : "Configure Parameters"
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR001
+  
+  usecase "SAFR002: Manage Analysis Parameters for AI System" as SFR004
+  usecase "SFR018: Manage Users' Financial Goals" as AIFR013
+  
+  
+  SystemAdministrator --> SFR004 : "Manage Parameters"
+  SystemAdministrator --> AIFR013 : "Manage Goals"
+}
+
+package "System" {
+  rectangle "Alerts and Notifications" {
+    usecase "SFR002: Deliver Alerts to Users" as SAFR008
+    usecase "SFR019: Maintain Historical Record of Insights" as AIFR014
+    
+    CFR001 --> SAFR008 : "Receive Alerts"
+    SystemAdministrator --> SFR019 : "Maintain Records"
+  }
+  
+  rectangle "Personalized Recommendations and Predictions" {
+    usecase "SFR002: Deliver Personalized Recommendations to Users" as AIFR007
+    usecase "AIFR003: Generate Financial Predictions for Users" as SFR014
+    
+    CFR001 --> AIFR007 : "Receive Recommendations"
+    SystemAdministrator --> SFR014 : "Generate Predictions"
+  }
+  
+  rectangle "Spending Limits and Investment Opportunities" {
+    usecase "SFR005: Request Spending Limit Alerts from AI Component" as SAFR009
+    usecase "AIFR003: Generate Spending Limit Alerts for Users" as SFR016
+    
+    CFR001 --> SAFR009 : "Request Alerts"
+    SystemAdministrator --> SFR016 : "Generate Alerts"
+  }
+  
+  rectangle "Investment Opportunities and News Insights" {
+    usecase "SFR007: Request Investment Opportunity Analysis from AI Component" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities for Users" as SFR018
+    
+    CFR001 --> AIFR004 : "Request Analyses"
+    SystemAdministrator --> SFR018 : "Generate Opportunities"
+  }
+  
+  rectangle "Anomaly Detection and Predictive Insights" {
+    usecase "SFR006: Request Anomaly Transaction Alerts from AI Component" as SAFR002
+    usecase "AIFR004: Generate Anomaly Transaction Alerts for Users" as SFR19
+    
+    CFR001 --> SAFR002 : "Request Alerts"
+    SystemAdministrator --> SFR19 : "Generate Alerts"
+  }
+  
+  rectangle "Contextualized News and Predictive Interventions" {
+    usecase "SFR008: Request Contextualized News from AI Component" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights for Users" as SFR21
+    
+    CFR001 --> AIFR006 : "Request News"
+    SystemAdministrator --> SFR21 : "Generate Insights"
+  }
+  
+  rectangle "Client Predictive Intervention Recommendations and Financial Health Reports" {
+    usecase "SFR015: Request Client Predictive Intervention Analyses from AI Component" as SAFR003
+    usecase "AIFR008: Generate Client Predictive Interventions for Users" as SFR24
+    
+    CFR001 --> SAFR003 : "Request Recommendations"
+    SystemAdministrator --> SFR24 : "Generate Recommendations"
+  }
+  
+  rectangle "User Feedback Management and Continuous Improvement" {
+    usecase "SFR020: Manage User Feedback to Improve Outputs" as AIFR019
+    
+    CFR011 --> AIFR019 : "Send Feedback"
+  }
+}
+
+@enduml

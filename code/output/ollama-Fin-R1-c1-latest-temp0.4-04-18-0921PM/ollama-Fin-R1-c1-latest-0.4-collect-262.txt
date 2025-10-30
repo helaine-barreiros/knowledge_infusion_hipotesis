@@ -1,0 +1,116 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as faa
+actor SysAdmin as sa
+system "System" as sys
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Spending Limit Alerts for Budget Control" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access Portfolio-Related News" as CFR008
+  usecase "CFR009: Consolidated Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+
+  c1 --> CFR001 : View dashboard
+  c1 --> CFR002 : Receive alerts
+  c1 --> CFR003 : View predictions
+  c1 --> CFR004 : Get recommendations
+  c1 --> CFR005 : Manage preferences
+  c1 --> CFR006 : Budget control
+  c1 --> CFR007 : Investment opportunities
+  c1 --> CFR008 : News access
+  c1 --> CFR009 : Consolidated view
+  c1 --> CFR10 : Manage advisors
+
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Schedule Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: Review Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+
+  faa --> FAFR001 : Schedule sessions
+  faa --> FAFR002 : View alerts
+  faa --> FAFR003 : Review analytics
+  faa --> FAFR004 : Configure parameters
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+  sa --> SAFR001 : Administer settings
+
+}
+
+package "AI-Generated Services" {
+  system sys
+  
+  rectangle "Client-Specific Alerts & Recommendations" {
+    usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+    usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+    usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+    usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+    usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+
+  }
+
+  rectangle "Financial Advisor Support Services" {
+    usecase "FAFR005: Configure Analysis Parameters for Specific Segments" as FAFR005
+    usecase "SAFR002: Monitor System Performance and Compliance" as SAFR002
+    usecase "SFR014: Generate Client Analytics from AI Insights" as SFR014
+
+  }
+
+}
+
+package "AI Component" {
+  
+  system sys
+  
+  rectangle "Predictive Analysis Engine" {
+    usecase "AIFR001: Generate Financial Predictions Based on Data and Trends" as AIFR001
+    usecase "AIFR002: Personalized Recommendations Using User Profiles" as AIFR002
+    usecase "AIFR003: Spending Limit Alerts via Pattern Recognition" as AIFR003
+    usecase "AIFR004: Investment Opportunity Analysis Based on Risk Profile" as AIFR004
+  }
+
+}
+
+package "User Feedback Management" {
+  
+  system sys
+  
+  usecase "CFR11: Send System Recommendations/Insights Feedback" as CFR11
+
+}
+
+@enduml
+```
+
+**Key Observations and Explanations:**
+- **Actors**: The diagram includes three main actors - `Client`, `FinancialAdvisor`, and `SysAdmin`. Each actor is linked to specific use cases they can perform.
+- **Use Cases Grouping**: Use cases are categorized into packages for better organization. For example, client-related services (e.g., viewing dashboards, receiving alerts) versus financial advisor tools like mentoring session scheduling or predictive analytics reviews.
+- **Inheritance and Relationships**:
+  - The `Client` actor is linked to all use cases under the "Client Interface" package, indicating their broad access across various functionalities.
+  - Similarly, the `FinancialAdvisor` interacts with services related to client management (e.g., mentoring sessions) and system-generated insights like predictive analytics or alerts.
+- **System Components**: The "AI Component" represents the core logic generating recommendations, predictions, etc. It's divided into sub-packages for clarity:
+  - Predictive Analysis Engine handles financial forecasts, personalized recs, spending limits, investments, etc.
+  - Other services include alert generation and client-specific insights processing.
+
+This structure ensures all requirements are covered while maintaining readability through logical grouping and clear relationships between actors/use cases. Adjustments can be made based on further analysis or specific implementation details not captured here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1301]

@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR006: Manage Spending Limit Alerts" as SAFR006
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "AIFR009: Generate Contextualized News Insights" as AIFR009
+
+  user --> CFR001 : Client wants to view financial data in a comprehensive format.
+  user --> SAFR006 : System Administrator needs to manage spending limit alerts for compliance and control.
+  SysAdmin --> SFR012 : System must generate client dashboards consolidating all info.
+
+  // Financial Advisor Use Cases
+  usecase "FAFR004: Configure Analysis Parameters" as FAFR004
+  user --> FAFR004 : Financial Advisor wants to customize system behavior for specific segments.
+  
+  // Client - System Interactions
+  client --> SFR013 : System must generate alerts based on predefined conditions (e.g., spending limits).
+  client --> AIFR007 : AI needs to provide contextualized news relevant to the user's portfolio.
+
+  // System Components
+  SysAdmin <|-- SAFR006 : System Administrator extends management of spending limit alerts.
+  
+}
+
+// Grouping Actors and Use Cases
+package "Client" {
+  actor Client as client
+}
+actor User as user
+actor SysAdmin as SysAdmin
+
+@enduml

@@ -1,0 +1,145 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Anomaly Detection Parameters" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access Portfolio-Related News" as CFR008
+  usecase "CFR009: Consolidate Financial Information in a Personalized Dashboard" as CFR010
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+}
+
+rectangle "Client" {
+  actor Client as client
+  client --> CFR001 : View financial insights dashboard
+  client --> CFR003 : View financial predictions
+  client --> CFR004 : Receive personalized recommendations
+  client --> CFR005 : Manage recommendation preferences
+  client --> CFR006 : View spending limit alerts
+  client --> CFR007 : View investment opportunities based on risk profile
+  client --> CFR008 : Access portfolio-related news
+  client --> CFR010 : Consolidate financial information in a personalized dashboard
+}
+
+rectangle "Financial Advisor" {
+  actor FinancialAdvisor as advisor
+  advisor --> FAFR002: Manage client mentoring sessions
+  advisor --> FAFR003: View predictive analytics about clients' financial situations
+  advisor --> CFR010 : Access consolidated financial information for advisory purposes
+}
+
+rectangle "System Administrator" {
+  actor SystemAdmin as admin
+  admin --> SAFR001: Manage analysis parameters (for AI system)
+  admin --> FAFR004: Configure analysis parameters by client segment
+}
+
+package "AI Components" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Analyze Investment Opportunities Based on Risk Profile" as AIFR004
+  usecase "AIFR005: Identify Suitable Investments for Users" as AIFR005
+  usecase "AIFR006: Detect Anomaly Transactions" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+}
+
+rectangle "System Functions" {
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR013: Deliver Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "SFR014: Provide Client Analytics for Financial Behavior/Performance" as SFR014
+
+  client --> SFR012 : Access generated dashboards
+}
+
+client -- (System) : Use system services through API or UI
+admin -- (System) : Configure and manage system settings via admin panel
+
+@enduml
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "Client" {
+  actor Client as client
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Anomaly Detection Parameters" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access Portfolio-Related News" as CFR008
+  usecase "CFR010: Consolidate Financial Information in a Personalized Dashboard" as CFR010
+
+  client --> CFR001 : View financial insights dashboard
+  client --> SAFR002 : Manage anomaly detection parameters (via system)
+}
+
+rectangle "Financial Advisor" {
+  actor FinancialAdvisor as advisor
+  usecase "FAFR002: Manage Client Mentoring Sessions" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+
+  advisor --> CFR010 : Access consolidated financial information (via system)
+}
+
+rectangle "System Administrator" {
+  actor SystemAdmin as admin
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Client-Specific Analysis Parameters" as FAFR004
+
+  admin --> CFR002 : (Not directly related; perhaps indirect via system)
+}
+
+rectangle "AI Components" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Detect Anomaly Transactions" as AIFR003
+  usecase "AIFR004: Analyze Investment Opportunities Based on Risk Profile" as AIFR004
+
+}
+
+rectangle "System Functions" {
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  client --> SFR012 : Access generated dashboards (via system)
+}
+
+client -- (System) : Use services through API or UI
+admin -- (System) : Configure via admin panel
+
+@enduml
+```
+
+### Key Observations:
+- **Client**: Interacts with multiple use cases related to viewing financial insights, receiving recommendations, managing preferences, etc.
+- **Financial Advisor**: Uses predictive analytics and mentoring session management features.
+- **System Administrator**: Manages system parameters (like anomaly detection) but not directly linked to client-facing use cases like alerts or dashboards.
+- **AI Components** handle core computations for predictions, recommendations, etc., which are then delivered via the system.
+
+### Diagram Structure:
+1. **Client Actor**: Central role with multiple interactions.
+2. **Financial Advisor and System Admin Actors**: Specialized roles managing specific features (advisor mentoring vs admin config).
+3. **System Functions**: Handles dashboard generation and alerts distribution.
+4. **AI Components**: Core logic for generating insights, recommendations, etc.
+
+### Relationships:
+- Clients use system services to view dashboards, receive recommendations, manage preferences, etc.
+- Financial Advisors access client data via the system but don't directly configure it (except indirectly through admin).
+- System Admin configures parameters used by AI and clients. Not all client features are under direct admin control; some require advisor or user input.
+
+### Inheritance/Grouping:
+No explicit inheritance here beyond logical grouping of related use cases within their respective actors/system components.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1655]

@@ -1,0 +1,89 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SFR002
+  usecase "CFR005: Manage Recommendation Preferences" as CFR010
+  
+  Client --> (SAFR003)
+  Client --> (SFR002)
+  Client --> (CFR010)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as SAFR005
+  
+  FinancialAdvisor --> (FAFR001)
+  FinancialAdvisor --> (SAFR005)
+}
+
+package "System Admin" {
+  actor SystemAdmin as SAFR001
+  usecase "SAFR002: Manage Analysis Parameters for AI System" as SAFR002
+  
+  SystemAdmin --> (SAFR001)
+  SystemAdmin --> (SAFR002)
+}
+
+rectangle "AI Component" {
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Generate Anomaly Transaction Alerts" as AIFR006
+  
+  Client --> (AIFR003)
+  FinancialAdvisor --> (AIFR004)
+  SystemAdmin --> (AIFR002)
+}
+
+rectangle "News Component" {
+  usecase "SFR010: Process Contextualized News to Extract Relevant Information" as SFR010
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR008
+  
+  Client --> (SFR010)
+  FinancialAdvisor --> (AIFR008)
+}
+
+rectangle "Dashboard Component" {
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  
+  Client --> (SFR012)
+  FinancialAdvisor --> (SFR012)
+}
+
+rectangle "Alert Component" {
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "SAFR004: View Predictive Analytics About Clients' Financial Situations" as SAFR007
+  
+  Client --> (SFR013)
+  FinancialAdvisor --> (SAFR007)
+}
+
+rectangle "Predictive Component" {
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR009
+  usecase "AIFR009: Generate Client Predictive Insights" as AIFR10
+  
+  FinancialAdvisor --> (AIFR009)
+}
+
+rectangle "Health Component" {
+  usecase "SFR017: Generate Financial Health Reports" as SFR017
+  usecase "CFR018: Manage Users' Financial Goals" as CFR018
+  
+  Client --> (SFR017)
+  FinancialAdvisor --> (SFR017)
+}
+
+rectangle "Feedback Component" {
+  usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Profiles, Goals, and Risk Tolerance" as AIFR002
+  
+  Client -> (AIFR002) : CFR011
+  FinancialAdvisor --> (AIFR002)
+}
+@enduml

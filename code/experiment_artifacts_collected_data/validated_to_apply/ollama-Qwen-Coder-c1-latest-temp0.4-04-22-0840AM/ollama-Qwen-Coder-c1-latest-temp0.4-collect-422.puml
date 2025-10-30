@@ -1,0 +1,120 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFI
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  
+  :Client:
+    --> (CFR001)
+    --> (SAFR001)
+  
+  SysAdmin -->
+    (SFR003)
+    <|-- SAFR001
+
+  FAFI -->
+    (FAFR002)
+
+}
+
+rectangle "Financial Insights" {
+  usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as SFR008
+  usecase "AIFR006: Generate Anomaly Transaction Alerts by Employing Pattern Recognition" as AIFR006
+  
+  :Client:
+    --> (CFR002)
+  
+  SysAdmin -->
+    (SFR008)
+    <|-- SAFR001
+
+}
+
+rectangle "Investment Opportunities" {
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Trends" as CFR003
+  usecase "FAFR007: Configure Analysis Parameters for Specific Client Segments" as FAFR007
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+  usecase "AIFR004: Generate Investment Opportunity Analyses for Users by Evaluating Potential Investments Against Their Risk Profiles, Time Horizons, and Financial Goals" as AIFR004
+  
+  :Client:
+    --> (CFR003)
+  
+  SysAdmin -->
+    (SFR006)
+    
+  FAFI -->
+    (FAFR007)
+
+}
+
+rectangle "Personalized Recommendations" {
+  usecase "CFR004: Receive Personalized Recommendations Aligned with Financial Profile and Goals" as CFR004
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR002: Request Personalized Recommendations from AI Component Based on Each User's Financial Data and Preferences" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance As Defined by Industry Standards Like FINRA Guidelines" as AIFR002
+  
+  :Client:
+    --> (CFR004)
+  
+  SysAdmin -->
+    (SFR002)
+    
+}
+
+rectangle "Spending Limits" {
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds in Specific Expense Categories" as CFR006
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  usecase "AIFR003: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations From Established Spending Patterns" as AIFR003
+  
+  :Client:
+    --> (CFR006)
+  
+  SysAdmin -->
+    (SFR005)
+
+}
+
+rectangle "News and Updates" {
+  usecase "CFR008: View News Related to Investment Portfolio to Stay Informed About Market Events That Might Affect Assets" as CFR008
+  usecase "FAFR012: Request Contextualized News Insights from AI Component to Identify Potential Impacts on Users' Investments" as FAFR012
+  usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios From Trusted Financial News Sources" as SFR009
+  
+  :Client:
+    --> (CFR008)
+  
+}
+
+rectangle "Relationship Management" {
+  usecase "CFR10: Manage Relationship with Financial Advisors, Including Permissions for Sharing My Financial Data, to Maintain Privacy and Control Over My Financial Information" as CFR10
+  usecase "FAFR010: Generate Client Dashboards That Present Financial Information in an Intuitive and Actionable Format" as FAFR010
+  
+  :Client:
+    --> (CFR10)
+  
+}
+
+rectangle "Feedback Management" {
+  usecase "CFR11: Send Feedback About the System's Recommendations and Insights to Help Improve the Accuracy and Relevance of Future Outputs" as CFR11
+
+  SysAdmin -->
+    (SFR20)
+
+  :Client:
+    --> (CFR11)
+}
+
+@enduml

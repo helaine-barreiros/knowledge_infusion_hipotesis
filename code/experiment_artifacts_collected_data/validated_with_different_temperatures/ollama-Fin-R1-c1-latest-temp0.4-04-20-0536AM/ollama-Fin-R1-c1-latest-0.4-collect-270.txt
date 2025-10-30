@@ -1,0 +1,70 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Anomaly Alerts Thresholds" as SAFR002
+  usecase "CFR003: View Historical Data Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Financial Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Receive Portfolio-Related News" as CFR008
+  usecase "CFR009: View Consolidated Financial Dashboard" as CFR010
+  usecase "CFR010: Manage Data Sharing with Advisors" as SAFR003
+  
+  package Professional {
+    actor Client as C
+    actor SystemAdmin as SA
+    actor FinancialAdvisor as FA
+    
+    C --> CFR001 : View financial insights dashboard
+    C --> CFR002 : Receive alerts about anomalous transactions (FATF)
+    C --> CFR003 : View predictions based on historical data and trends
+    C --> CFR004 : Get personalized recommendations aligned with profile
+    C --> CFR005 : Manage personalization preferences for recommendations
+    C --> CFR006 : Receive spending limit alerts when exceeding thresholds
+    C --> CFR007 : Access investment opportunities suitable to risk profile (MiFID II)
+    C --> CFR008 : View news related to portfolio
+    C --> CFR010 : Manage data sharing with advisors
+    
+    SA --> SAFR002 : Manage anomaly alerts threshold settings
+    FA --> FAFR001 : Manage client mentoring sessions based on insights
+    FA --> FAFR003 : View predictive analytics about clients' financial situations
+  }
+  
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "CFR011: Send Feedback on Insights and Recommendations" as CFR011
+  
+  SystemAdmin --> SAFR003 : Manage system parameters for alerts, predictions, etc.
+  
+  Client <|-- (C)
+  SysAdmin <|-- (SA)
+  FinancialAdvisor <|-- (FA)
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire diagram is enclosed within a rectangle labeled "System" to represent the AI-Powered Analysis & Insights System.
+- **Use Cases**:
+  - Client-related use cases (CFR001–CFR010) are grouped under `Client` actors and include viewing dashboards, receiving alerts, making recommendations, etc.
+  - System Administrator (`SysAdmin`) handles system-level management like thresholds for anomaly detection in `SAFR002`.
+- **Professional Package**: This package groups Professional-related use cases and actors (e.g., Client, Financial Advisor).
+- **Relationships**:
+  - Clients interact with most of the use cases directly.
+  - System Administrators manage administrative settings (`SAFR003`).
+  - Financial Advisors handle mentoring sessions (`FAFR001`) and predictive analytics for clients (`FAFR002`, `FAFR003`).
+
+### Key Observations:
+- The system is structured to ensure clear separation between client-facing features, admin management, and advisor-specific interactions.
+- Use of inheritance (`Client <|-- (C)`) ensures that all actors are properly linked within the context.
+
+[Done: True
+Done Reason: stop
+Eval Count: 838]

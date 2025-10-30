@@ -1,0 +1,67 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  
+  Client --> CFR001 : View financial data in a consolidated dashboard.
+  
+  SysAdmin -> SAFR001 : Manage system parameters for accuracy and compliance (e.g., Basel III).
+  
+  FAFR003 -->> SFR002 : Financial advisors view predictive analytics to inform client guidance.
+
+  AIFR002 --> SFR002 : AI generates personalized recommendations based on user profiles.
+}
+
+rectangle "Client" {
+  actor Client as C
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Consolidated Financial Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+
+  C --> CFR001 : View financial insights.
+  
+}
+
+rectangle "Financial Advisor (FA)" {
+  actor FAFR002 as FA
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Segments" as FAFR004
+
+  FA --> FAFR003 : Review predictive analytics.
+  
+}
+
+rectangle "System Administrator (SA)" {
+  actor SysAdmin as SA
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SA --> SAFR001 : Adjust system parameters for compliance and accuracy.
+
+}
+
+rectangle "AI System (AIS)" {
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Investment Opportunity Analyses" as AIFR004
+
+}
+
+rectangle "News Processing (NP)" {
+  usecase "SFR019: Generate Financial Health Reports" as SFR019
+  
+}
+@enduml

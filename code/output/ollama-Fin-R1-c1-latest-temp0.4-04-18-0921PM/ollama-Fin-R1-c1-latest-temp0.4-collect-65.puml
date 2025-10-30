@@ -1,0 +1,98 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+
+  Client --> CFR001 : View financial data in a consolidated format.
+  
+  SysAdmin --> SAFR001 : Manage system parameters for compliance and accuracy.
+
+  User (Client, Financial Advisor) -> SFR002 : Request personalized recommendations based on profiles.
+  User (Client, Financial Advisor) -> AIFR002 : Receive AI-generated personalized recommendations.
+}
+
+rectangle "Financial Advisors" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+
+  FinancialAdvisor --> FAFR001 : Schedule and manage mentoring sessions.
+  FinancialAdvisor --> FAFR003 : Review predictive analytics for clients.
+
+}
+
+rectangle "System Components" {
+  usecase "SFR004: Request AI Predictions" as SFR004
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+
+  System --> SFR004 : Request financial predictions from the system.
+  AIFR001 <|-- (SFR004) : AI component generates predictions based on requests.
+
+}
+
+rectangle "Client Alerts & Notifications" {
+  usecase "CFR002: View Anomaly Alerts" as CFR002
+  usecase "AIFR006: Generate Spending Limit Alerts" as AIFR006
+
+  Client --> CFR002 : Receive alerts about anomalous transactions.
+  
+  System --> AIFR006 : Request spending limit alerts when thresholds are exceeded.
+
+}
+
+rectangle "Investment Analysis & Opportunities" {
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+
+  Client --> CFR007 : Access investment opportunities aligned with risk profile.
+  
+  System --> AIFR004 : Request analysis of specific investments based on user criteria.
+
+}
+
+rectangle "Contextualized News & Portfolio Management" {
+  usecase "CFR008: View Financial News" as CFR008
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+  Client --> CFR008 : Stay informed about market events affecting investments.
+  
+  System --> AIFR007 : Extract relevant news for clients' portfolios.
+
+}
+
+rectangle "Client Dashboards & Analytics" {
+  usecase "CFR009: View Personalized Dashboard" as CFR009
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  Client --> CFR009 : Access consolidated financial information.
+  
+  System --> SFR012 : Create dashboards for clients.
+
+}
+
+rectangle "Client Relationship Management" {
+  usecase "CFR010: Manage Data Sharing with Advisors" as CFR010
+  usecase "SFR018: Track Financial Goals Progress" as SFR018
+
+  Client --> CFR010 : Share data and set permissions for advisors.
+  
+  System --> SFR018 : Monitor progress towards financial goals.
+
+}
+
+rectangle "Feedback & Improvement Loop" {
+  usecase "CFR011: Send Feedback to the System" as CFR011
+  usecase "SFR020: Manage User Feedback" as SFR020
+
+  Client --> CFR011 : Provide feedback on recommendations and insights.
+  
+  System --> SFR020 : Collect user feedback for system improvement.
+
+}
+
+@enduml

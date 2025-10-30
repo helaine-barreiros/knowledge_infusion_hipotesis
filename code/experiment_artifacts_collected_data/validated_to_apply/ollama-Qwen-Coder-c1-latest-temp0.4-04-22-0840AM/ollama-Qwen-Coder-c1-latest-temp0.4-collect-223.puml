@@ -1,0 +1,101 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+' Define actors
+actor Client as CFR001
+actor FinancialAdvisor as FAFR002
+actor SysAdmin as SAFR003
+actor User as CFR011
+
+package "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001_view_dashboard
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002_receive_alerts
+  usecase "CFR003: View Financial Predictions" as CFR003_view_predictions
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004_receive_recommendations
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005_manage_preferences
+  usecase "CFR006: View Spending Limit Alerts" as CFR006_view_spending_alerts
+  usecase "CFR007: View Investment Opportunities" as CFR007_view_investment_opportunities
+  usecase "CFR008: View News Related to Portfolio" as CFR008_view_news
+  usecase "CFR009: Access Personalized Dashboard" as CFR009_access_dashboard
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR010_manage_relationships
+  
+  ' Relationships between Client and Use Cases
+  CFR001 --> CFR001_view_dashboard : "View"
+  CFR002 --> CFR002_receive_alerts : "Receive Alerts"
+  CFR003 --> CFR003_view_predictions : "View Predictions"
+  CFR004 --> CFR004_receive_recommendations : "Receive Recommendations"
+  CFR005 --> CFR005_manage_preferences : "Manage Preferences"
+  CFR006 --> CFR006_view_spending_alerts : "View Alerts"
+  CFR007 --> CFR007_view_investment_opportunities : "View Opportunities"
+  CFR008 --> CFR008_view_news : "View News"
+  CFR009 --> CFR009_access_dashboard : "Access Dashboard"
+  CFR010 --> CFR010_manage_relationships : "Manage Relationships"
+}
+
+package "Financial Advisor" {
+  usecase "FAFR002: Manage Client Mentoring Sessions" as FAFR002_manage_sessions
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003_view_analytics
+  
+  ' Relationships between Financial Advisor and Use Cases
+  FAFR001 --> FAFR002_manage_sessions : "Manage Sessions"
+  FAFR001 --> FAFR003_view_analytics : "View Analytics"
+}
+
+package "System" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001_deliver_alerts
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002_deliver_recommendations
+  usecase "SFR003: Request Financial Predictions from AI" as SFR003_request_predictions
+  usecase "SFR004: Request Personalized Recommendations from AI" as SFR004_request_recs
+  usecase "SFR005: Request Spending Limit Alerts from AI" as SFR005_request_spending_alerts
+  usecase "SFR006: Request Investment Opportunity Analysis from AI" as SFR006_request_investment_analysis
+  usecase "SFR007: Request Specific Investment Opportunities from AI" as SFR007_request_specific_opportunities
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI" as SFR008_request_anomaly_alerts
+  usecase "SFR009: Find Contextualized News Relevant to Users' Portfolios" as SFR009_find_news
+  usecase "SFR10: Process Contextualized News for Users" as SFR010_process_news
+  usecase "SFR11: Request Contextualized News Insights from AI" as SFR011_request_contextual_insights
+  usecase "SFR12: Generate Client Dashboards" as SFR012_generate_dashboards
+  usecase "SFR13: Generate Client Alerts Based on Conditions" as SFR013_generate_alerts
+  usecase "SFR14: Generate Client Analytics for Insights" as SFR014_generate_analytics
+  usecase "SFR15: Request Predictive Intervention Analyses from AI" as SFR015_request_intervention_analyses
+  usecase "SFR16: Request Predictive Insights from AI" as SFR016_request_predictive_insights
+  usecase "SFR17: Generate Financial Health Reports for Users" as SFR017_generate_health_reports
+  usecase "SFR18: Manage Users' Financial Goals and Track Progress" as SFR018_manage_goals
+  usecase "SFR19: Maintain Historical Record of Insights" as SFR019_maintain_record
+  usecase "SFR20: Manage User Feedback for Improvement" as SFR020_manage_feedback
+  
+  ' Relationships between System and Use Cases
+  SAFR001 --> SFR003_request_predictions : "Request Predictions"
+  SAFR001 --> SFR004_request_recs : "Request Recommendations"
+  SAFR001 --> SFR005_request_spending_alerts : "Request Spending Alerts"
+  SAFR001 --> SFR006_request_investment_analysis : "Request Analysis"
+  SAFR001 --> SFR007_request_specific_opportunities : "Request Specific Opportunities"
+  SAFR001 --> SFR008_request_anomaly_alerts : "Request Alerts"
+  SAFR001 --> SFR009_find_news : "Find News"
+  SAFR001 --> SFR012_generate_dashboards : "Generate Dashboards"
+  
+  FAFR003 --> SFR015_request_intervention_analyses : "Request Analyses"
+  FAFR003 --> SFR016_request_predictive_insights : "Request Insights"
+}
+
+package "AI System" {
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001_generate_predictions
+  usecase "AIFR002: Generate Personalized Recommendations Based on Profiles and Goals" as AIFR002_generate_recs
+  usecase "AIFR003: Generate Spending Limit Alerts by Identifying Unusual Deviations" as AIFR003_generate_spending_alerts
+  usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004_generate_investment_analysis
+  usecase "AIFR005: Generate Investment Opportunities Based on User Strategies and MPT Principles" as AIFR005_generate_opportunities
+  usecase "AIFR006: Generate Anomaly Transaction Alerts by Employing Pattern Recognition" as AIFR006_generate_anomaly_alerts
+  usecase "AIFR007: Generate Contextualized News Insights Correlating with User Portfolios" as AIFR007_generate_contextual_insights
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations by Identifying Patterns" as AIFR008_generate_intervention_recs
+  usecase "AIFR009: Generate Client Predictive Insights Providing Forward-Looking Analysis of Financial Situations" as AIFR009_generate_predictive_insights
+  
+  ' Relationships between AI System and Use Cases
+  SFR013 --> AIFR006_generate_anomaly_alerts : "Generate Alerts"
+  SFR022 --> AIFR007_generate_contextual_insights : "Generate Insights"
+}
+
+' User Feedback Relationship
+User --> CFR011_send_feedback : "Send Feedback"
+
+@enduml

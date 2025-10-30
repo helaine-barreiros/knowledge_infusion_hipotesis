@@ -1,0 +1,78 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Clients" {
+  actor Client as CFR001
+  
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as SAFR003
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as SAFR004
+  usecase "CFR006: View Spending Limit Alerts" as SAFR008
+  
+  CFR001 --> (View Financial Insights Dashboard)
+  CFR001 --> SAFR003
+  CFR001 --> SAFR005
+  CFR001 --> SAFR004
+}
+
+package "Financial Advisors" {
+  actor Advisor as FAFR002
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR003
+  usecase "FAFR007: Configure Analysis Parameters for Specific Segments" as SAFR004
+  usecase "FAFR008: View Predictive Analytics About Clients' Financial Situations" as FAFR016
+  
+  Advisor --> (View Client Intervention Alerts)
+  Advisor --> FAFR003
+  Advisor --> FAFR007
+}
+
+package "System Administrator" {
+  actor SysAdmin as SAFR002
+  
+  usecase "SAFR005: Manage Analysis Parameters for the AI System" as SAFR018
+  
+  SysAdmin --> (Manage Client Relationship with Financial Advisors)
+  SysAdmin --> SAFR005
+}
+
+package "System Components" {
+  rectangle "AI Component" {
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR007
+    usecase "AIFR008: Generate Contextualized News Insights" as AIFR014
+    
+    CFR002 --> (SFR009)
+    SAFR003 --> (SFR006)
+    FAFR001 --> (SFR015)
+  }
+  
+  rectangle "Notification System" {
+    usecase "SFR001: Deliver Alerts to Users Through Appropriate Notification Channels" as SFR001
+    
+    CFR002 --> SFR001
+    SAFR003 --> SFR001
+    FAFR001 --> SFR001
+  }
+  
+  rectangle "Dashboard Generator" {
+    usecase "SFR012: Generate Client Dashboards That Present Financial Information in an Intuitive and Actionable Format" as SFR012
+    
+    CFR009 --> (SFR012)
+  }
+}
+
+package "System Management" {
+  actor User as SAFR007
+  
+  usecase "CFR011: Send Feedback About System's Recommendations and Insights" as AIFR008
+  usecase "SAFR015: Manage Users' Financial Goals to Track Progress and Provide Relevant Recommendations" as SFR024
+  
+  User --> (SFR013)
+  User --> SAFR019
+}
+
+@enduml

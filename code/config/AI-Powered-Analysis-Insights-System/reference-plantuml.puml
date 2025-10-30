@@ -1,0 +1,79 @@
+@startuml "AI-Powered Analysis & Insights System"
+
+' Atores
+:Client: as Client
+:Financial Advisor: as FinancialAdvisor
+:System Administrator: as SysAdmin
+
+' Sistema
+rectangle "AI-Powered Analysis & Insights System" {
+  ' Casos de uso primários
+  usecase "FR001: View Financial Insights Dashboard" as FR001
+  usecase "FR002: Receive Anomaly Alerts" as FR002
+  usecase "FR003: Visualize Financial Predictions" as FR003
+  usecase "FR004: Receive Personalized Recommendations" as FR004
+  usecase "FR005: Manage Preferences" as FR005
+  usecase "FR006: Receive Spending Limit Alerts" as FR006
+  usecase "FR007: Visualize Investment Opportunities" as FR007
+  usecase "FR008: View News Insights on Portfolio" as FR008
+  usecase "FR009: Access Client Dashboard" as FR009
+  usecase "FR010: Receive Client Alerts" as FR010
+  usecase "FR011: View Client Predictive Analytics" as FR011
+  usecase "FR012: Configure Analysis Parameters" as FR012
+  usecase "FR013: Process Financial Data Integration" as FR013
+  usecase "FR014: Execute ML Model Analysis" as FR014
+  usecase "FR015: Process News-Portfolio Correlation" as FR015
+  usecase "FR016: Deliver Notifications" as FR016
+  usecase "FR017: Access Financial Goals" as FR017
+  usecase "FR018: Apply Feedback Learning" as FR018
+  usecase "FR019: Generate Financial Health Reports" as FR019
+  usecase "FR020: Maintain Historical Insights" as FR020
+
+  ' Relacionamentos de extensão
+  FR006 .> FR002 : <<extend>>
+  FR004 .> FR018 : <<extend>>
+
+  ' Relacionamentos de inclusão
+  FR003 ..> FR014 : <<include>>
+  FR002 ..> FR014 : <<include>>
+  FR002 ..> FR016 : <<include>>
+  FR018 ..> FR014 : <<include>>
+  FR004 ..> FR017 : <<include>>
+  FR007 ..> FR015 : <<include>>
+  FR008 ..> FR015 : <<include>>
+  FR001 ..> FR013 : <<include>>
+  FR013 ..> FR020 : <<include>>
+  FR013 ..> FR011 : <<include>>
+  FR020 ..> FR011 : <<include>>
+  FR011 ..> FR010 : <<include>>
+  FR010 ..> FR016 : <<include>>
+}
+
+' Associações entre atores e casos de uso
+Client --> FR001
+Client --> FR004
+Client --> FR005
+Client --> FR006
+Client --> FR007
+Client --> FR008
+
+FinancialAdvisor --> FR009
+FinancialAdvisor --> FR010
+FinancialAdvisor --> FR019
+
+SysAdmin --> FR012
+
+' Notas
+note bottom of FR009
+  Financial Advisors can
+  view client data only with
+  permissions set in FR005
+end note
+
+note right of FR020
+  System functionality (FR013-FR020)
+  is always triggered through
+  user-initiated actions
+end note
+
+@enduml

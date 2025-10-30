@@ -1,0 +1,71 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFD001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  FAFD --> FAFD001 : "Manage Client Mentoring Sessions"
+}
+
+rectangle "Client Functions" {
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  
+  Client --> CFR002 : "Receive Alerts for Anomalous Transactions"
+  Client --> CFR003 : "View Financial Predictions"
+  Client --> CFR004 : "Receive Personalized Recommendations"
+  Client --> CFR005 : "Manage Recommendation Preferences"
+  Client --> CFR006 : "View Spending Limit Alerts"
+}
+
+rectangle "Financial Advisor Functions" {
+  usecase "FAFR002: View Intervention Alerts" as FAFD002
+  usecase "FAFR003: View Predictive Analytics" as FAFD003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFD004
+  
+  Financial Advisor --> FAFD002 : "View Intervention Alerts"
+  Financial Advisor --> FAFD003 : "View Predictive Analytics"
+  Financial Advisor --> FAFD004 : "Configure Analysis Parameters for Client Segments"
+}
+
+rectangle "System Functions" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  
+  System Admin --> SAFR001 : "Manage Analysis Parameters"
+  
+  Client --> CFR002 : "Receive Alerts for Anomalous Transactions"
+  Financial Advisor --> FAFD002 : "View Intervention Alerts"
+}
+
+rectangle "AI Functions" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunities for Users" as AIFR005
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  
+  Client --> CFR002 : "Receive Alerts for Anomalous Transactions"
+  Financial Advisor --> FAFD002 : "View Intervention Alerts"
+}
+
+rectangle "User Feedback" {
+  usecase "CFR11: Send Feedback about Recommendations and Insights" as CFR11
+  User -> CFR11 : "Send Feedback"
+}
+@enduml

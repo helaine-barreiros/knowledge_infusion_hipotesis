@@ -1,0 +1,150 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+  usecase "CFR008: View News Related to My Investment Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  Client --> (View Alerts on Anomalous Transactions)
+  Client --> (Receive Alerts on Spending Limit Alerts)
+  Client --> (Manage Recommendation Preferences)
+}
+
+package "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts When Required Professional Attention Is Detected" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations to Provide Data-Driven Recommendations During Consultations" as FAFR003
+  
+  FinancialAdvisor --> (Manage Client Mentoring Sessions Based on System-Generated Insights)
+}
+
+package "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters for the AI System to Ensure Compliance and Accuracy" as SAFR001
+  system_admin --> (Manage Analysis Parameters for the AI System to Ensure Compliance and Accuracy)
+}
+
+system "AI Component" as AIF
+
+rectangle "System Components" {
+  package "Alerts" {
+    usecase "SFR001: Deliver Alerts to Users Through Appropriate Notification Channels" as SFR001
+    system --> (Deliver Alerts to Users Through Appropriate Notification Channels)
+    
+    rectangle "Anomaly Detection" {
+      usecase "AIFR006: Generate Anomaly Transaction Alerts by Employing Pattern Recognition Compliance with FinCEN Requirements" as AIFR006
+      AIComponent --> (Generate Anomaly Transaction Alerts by Employing Pattern Recognition Compliance with FinCEN Requirements)
+    }
+  }
+
+  package "Recommendations" {
+    usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR002
+    system --> (Deliver Personalized Recommendations to Users Based on Their Financial Profiles)
+
+    rectangle "Personalization Engine" {
+      usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance As Defined by Industry Standards Like FINRA Guidelines" as AIFR002
+      AIComponent --> (Generate Personalized Recommendations for Users Based On Their Financial Profiles, Goals, And Risk Tolerance As Defined By Industry Standards Like FINRA Guidelines)
+    }
+  }
+
+  package "Predictive Analytics" {
+    usecase "SFR014: Generate Client Analytics That Provide Meaningful Insights Into Financial Behavior and Performance" as SFR014
+    system --> (Generate Client Analytics That Provide Meaningful Insights Into Financial Behavior And Performance)
+
+    rectangle "Prediction Engine" {
+      usecase "AIFR009: Generate Predictive Insights From the AI Component to Support More Effective Financial Planning" as AIFR009
+      AIComponent --> (Generate Predictive Insights From The AI Component To Support More Effective Financial Planning)
+      
+      usecase "SFR015: Request Predictive Intervention Analyses from the AI Component When Required Advisor Engagement Is Detected" as SFR015
+      system --> (Request Predictive Intervention Analyses from the AI Component When Required Advisor Engagement Is Detected)
+
+      rectangle "Intervention Engine" {
+        usecase "AIFR008: Generate Client Predictive Intervention Recommendations by Identifying Patterns That Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR008
+        AIComponent --> (Generate Client Predictive Intervention Recommendations By Identifying Patterns That Indicate Potential Financial Difficulties Or Opportunities Requiring Advisor Engagement)
+      }
+    }
+  }
+
+  package "Spending Limits" {
+    usecase "SFR005: Request Spending Limit Alerts from the AI Component When User Spending Patterns Exceed Defined Thresholds" as SFR005
+    system --> (Request Spending Limit Alerts From The AI Component When User Spending Patterns Exceed Defined Thresholds)
+
+    rectangle "Spending Engine" {
+      usecase "AIFR003: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations from Established Spending Patterns" as AIFR003
+      AIComponent --> (Generate Spending Limit Alerts For Users By Identifying Unusual Deviations From Established Spending Patterns)
+    }
+  }
+
+  package "Investment Opportunities" {
+    usecase "SFR016: Generate Investment Opportunity Analyses for Users by Evaluating Potential Investments Against Their Risk Profiles, Time Horizons, and Financial Goals" as SFR016
+    system --> (Generate Investment Opportunity Analyses For Users By Evaluating Potential Investments Against Their Risk Profiles, Time Horizons, And Financial Goals)
+
+    rectangle "Investment Engine" {
+      usecase "AIFR004: Generate Investment Opportunity Analysis for Users by Evaluating Potential Investments Against their Risk Profiles, Time Horizons and Financial Goals" as AIFR004
+      AIComponent --> (Generate Investment Opportunity Analysis For Users By Evaluating Potential Investments Against Their Risk Profiles, Time Horizons And Financial Goals)
+      
+      usecase "SFR017: Request Specific Investment Opportunities from the AI Component That Match User Investment Criteria and ESG Preferences" as SFR017
+      system --> (Request Specific Investment Opportunities From The AI Component That Match User Investment Criteria And ESG Preferences)
+
+      rectangle "ESG Engine" {
+        usecase "AIFR005: Generate Investment Opportunities for Users by Identifying Financial Instruments that Align with Their Investment Strategies and Modern Portfolio Theory Principles" as AIFR005
+        AIComponent --> (Generate Investment Opportunities For Users By Identifying Financial Instruments That Align With Their Investment Strategies And Modern Portfolio Theory Principles)
+      }
+    }
+  }
+
+  package "News Insights" {
+    usecase "SFR019: Find Contextualized News Relevant to Users' Financial Portfolios from Trusted Financial News Sources" as SFR019
+    system --> (Find Contextualized News Relevant To Users' Financial Portfolios From Trusted Financial News Sources)
+
+    rectangle "News Engine" {
+      usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News With Specific User Portfolios to Identify Relevant Impacts" as AIFR007
+      AIComponent --> (Generate Contextualized News Insights By Correlating Financial News With Specific User Portfolios To Identify Relevant Impacts)
+      
+      usecase "SFR10: Request Contextualized News Insights from the AI Component to Identify Potential Impacts on Users' Investments" as SFR10
+      system --> (Request Contextualized News Insights From The AI Component To Identify Potential Impacts On Users' Investments)
+
+      rectangle "Impact Engine" {
+        usecase "AIFR07: Generate Client Predictive Intervention Recommendations by Identifying Patterns That Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR01
+        AIComponent --> (Generate Client Predictive Intervention Recommendations By Identifying Patterns That Indicate Potential Financial Difficulties Or Opportunities Requiring Advisor Engagement)
+      }
+    }
+  }
+
+  package "Health Reports" {
+    usecase "SFR24: Generate Health Reports that Assess Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as SFR017
+    system --> (Generate Health Reports That Assess Users' Overall Financial Wellbeing According To Standard Financial Ratios And Metrics)
+
+    rectangle "Health Engine" {
+      usecase "AIFR24: Generate Client Predictive Intervention Recommendations by Identifying Patterns That Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR01
+      AIComponent --> (Generate Client Predictive Intervention Recommendations By Identifying Patterns That Indicate Potential Financial Difficulties Or Opportunities Requiring Advisor Engagement)
+    }
+  }
+
+  package "Goals Management" {
+    usecase "SFR25: Manage Users' Financial Goals to Track Progress and Provide Relevant Recommendations" as SFR018
+    system --> (Manage Users' Financial Goals To Track Progress And Provide Relevant Recommendations)
+
+    rectangle "Goal Engine" {
+      usecase "AIFR25: Generate Client Predictive Intervention Recommendations by Identifying Patterns That Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR01
+      AIComponent --> (Generate Client Predictive Intervention Recommendations By Identifying Patterns That Indicate Potential Financial Difficulties Or Opportunities Requiring Advisor Engagement)
+    }
+  }
+
+  package "Feedback Management" {
+    usecase "SFR26: Manage User Feedback to Continuously Improve the Quality and Relevance of Financial Insights" as SFR019
+    system --> (
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

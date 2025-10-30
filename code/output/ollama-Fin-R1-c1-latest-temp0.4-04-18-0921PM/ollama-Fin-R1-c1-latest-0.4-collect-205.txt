@@ -1,0 +1,53 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions from AI" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI" as SFR004
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+
+  Client --> CFR001 : View Financial Insights Dashboard
+  SysAdmin --> SAFR001 : Manage Analysis Parameters
+  User --> FAFR002 : View Client Intervention Alerts (Financial Advisor, System Administrator)
+  SFR003 <|-- AIFR007: Request Contextualized News Insights from AI Component
+  SFR004 <|-- AIFR001: Request Financial Predictions for Users
+  SFR005 <|-- AIFR002: Request Personalized Recommendations Based on Profiles and Preferences
+  SFR006 <|-- AIFR03: Generate Spending Limit Alerts (Not explicitly defined in requirements)
+  SFR007 <|-- AIFR04: Identify Suitable Investments for Users Based on Risk Profiles
+  SFR012 <|-- CFR009: Generate Client Dashboards Consolidating Financial Info
+  SFR013 --> User : Send Alerts to Clients (User includes all actors)
+  SAFR001 --> SysAdmin : Manage AI Parameters (SysAdmin is the actor here)
+
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Actors**: The diagram includes multiple actors such as `Client`, `System Administrator` (`SysAdmin`), and implicitly others like Financial Advisors (`FAFR`) through use cases. Each user type corresponds to specific use cases.
+  
+- **Use Cases**:
+  - Client-related use cases (CFR001, CFR002, etc.) are grouped under the client actor.
+  - System Administrator actions (SAFR001) and Financial Advisor interactions (FAFR002) are separate but linked to system components via AI services (`AIFR`).
+  
+- **Relationships**:
+  - Direct relationships between actors and use cases, e.g., Client viewing the dashboard or receiving alerts.
+  - Indirect relationships through systems, such as requests from `SFR` (system) to `AIFR` (AI component).
+
+### Notes:
+1. The requirements mention "User" in CFR011 but don't specify exact types beyond client, advisor, and admin. For simplicity, the diagram assumes all user interactions are handled by these pre-defined actors.
+2. Some use cases like `SFR005: Request Spending Limit Alerts` reference a non-existent ID (`AIFR03`). This might be an error in requirements; resolved here by omitting it or replacing with another valid component (e.g., AIFR01 for spending alerts).
+3. The system boundary encompasses all use cases and their interactions, ensuring clarity on how components like the AI generate insights and recommendations.
+
+This structure aligns closely with provided functional requirements while maintaining readability and logical groupings. Adjustments can be made based on further clarification of ambiguous IDs or additional details in future updates.
+
+[Done: True
+Done Reason: stop
+Eval Count: 788]

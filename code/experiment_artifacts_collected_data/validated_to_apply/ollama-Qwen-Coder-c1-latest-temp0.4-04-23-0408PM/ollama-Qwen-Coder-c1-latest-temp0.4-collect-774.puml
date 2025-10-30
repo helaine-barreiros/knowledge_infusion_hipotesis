@@ -1,0 +1,80 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR005
+  usecase "CFR006: Manage Recommendation Preferences" as SAFR018
+  
+  CFR001 --> SAFR002 : View Alerts about Anomalous Transactions
+  CFR001 --> SAFR004 : Receive Personalized Recommendations
+  CFR001 --> SAFR005 : Manage Recommendation Preferences
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts" as SFR013
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as SAFR019
+  usecase "FAFR005: Generate Predictive Interventions Recommendations" as AIFR008
+  
+  FinancialAdvisor --> FAFR002 : View Client Intervention Alerts
+  FinancialAdvisor --> FAFR004 : Configure Analysis Parameters for Specific Client Segments
+  FinancialAdvisor --> FAFR005 : Generate Predictive Interventions Recommendations
+}
+
+package "System" {
+  actor System as SFR017
+  
+  usecase "SFR002: Deliver Personalized Recommendations to Users" as AIFR002
+  usecase "SFR003: Request Financial Predictions from the AI Component" as AIFR001
+  usecase "SFR004: Request Personalized Recommendations from the AI Component" as AIFR002
+  
+  System --> SFR002 : Deliver Personalized Recommendations to Users
+  System --> SFR003 : Request Financial Predictions from the AI Component
+  System --> SFR004 : Request Personalized Recommendations from the AI Component
+}
+
+rectangle "AI" {
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+  usecase "AIFR005: Generate Anomaly Transaction Alerts by Employing Pattern Recognition" as AIFR006
+  
+  usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as AIFR007
+  usecase "AIFR012: Request Client Dashboards that Present Financial Information in an Intuitive and Actionable Format" as SFR015
+  
+  rectangle AI {
+    AIFR001 --> AIFR003 : Generate Spending Limit Alerts for Users
+    AIFR004 --> AIFR006 : Generate Anomaly Transaction Alerts by Employing Pattern Recognition
+    AIFR007 --> AIFR008 : Generate Predictive Intervention Recommendations
+    
+    AIFR012 <|-- (AIFR003)
+  }
+}
+
+rectangle "System Admin" {
+  actor SystemAdmin as SAFR001
+  
+  usecase "SAFR001: Manage Analysis Parameters for the AI System" as SAFR001
+  usecase "SFR020: Manage User Feedback to Continuously Improve the Quality and Relevance of Financial Insights" as AIFR009
+  
+  SystemAdmin --> SAFR001 : Manage Analysis Parameters for the AI System
+  SystemAdmin --> SFR020 : Manage User Feedback to Continuously Improve the Quality and Relevance of Financial Insights
+}
+
+rectangle "User (Client, Financial Advisor, or System Administrator)" {
+  actor User as CFR011
+  
+  usecase "CFR011: Send Feedback about Recommendations and Insights" as AIFR009
+  
+  User --> CFR011 : Send Feedback about Recommendations and Insights
+}
+@enduml

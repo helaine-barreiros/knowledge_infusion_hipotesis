@@ -1,0 +1,66 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  sysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  financialAdvisor --> FAFR002 : "View Client Intervention Alerts"
+
+  Sys --> SFR013
+  Sys --> AIFR006
+
+}
+
+rectangle "Client" {
+  actor client as c
+  c -> CFR001 : "View Financial Insights Dashboard"
+  c -> SAFR001 : "Manage Analysis Parameters (via System Admin)"
+  
+  c -->> SFR013: "Receive Alerts Based on Predefined Conditions"
+  c -->> AIFR006: "Anomaly Transaction Alerts"
+
+}
+
+rectangle "Financial Advisor" {
+  actor financialAdvisor as fa
+  fa -> FAFR002 : "View Client Intervention Alerts"
+  
+  fa --> SFR013 : "Receive Alerts Based on Predefined Conditions (via System)"
+}
+
+rectangle "System Administrator" {
+  actor sysAdmin as sa
+  sa --> SAFR001 : "Manage Analysis Parameters"
+
+}
+@enduml
+```
+
+### Explanation:
+- **Client**: Represents the end-users, including Clients and Financial Advisors. They interact with use cases like viewing financial dashboards or receiving alerts.
+- **System Administrator (Sys Admin)**: Manages system parameters via `SAFR001`.
+- **Financial Advisor**: Views client-specific alerts (`FAFR002`) through the system.
+- **Use Cases**:
+  - `CFR001` and `SFR013`: Client-related use cases for viewing dashboards/alerts.
+  - `SAFR001`: System Admin manages parameters.
+  - `AIFR006`, `FAFR002`: Financial Advisor-specific alerts.
+
+### Key Relationships:
+- Clients can trigger system-generated alerts (`SFR013`) and anomaly transaction alerts (`AIFR006`).
+- Sys Admin interacts with the system to manage analysis parameters.
+- Financial Advisors view client intervention alerts directly or via the system. 
+
+This structure ensures clarity in actor-to-use case relationships while grouping related use cases under their respective actors/systems. Adjustments can be made if additional requirements are introduced, but based on provided data, this diagram accurately represents all specified interactions and entities.
+
+[Done: True
+Done Reason: stop
+Eval Count: 629]

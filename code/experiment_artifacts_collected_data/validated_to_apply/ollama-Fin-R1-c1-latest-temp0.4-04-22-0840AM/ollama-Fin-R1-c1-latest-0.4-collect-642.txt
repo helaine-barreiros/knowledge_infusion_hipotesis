@@ -1,0 +1,42 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage AML Alerts" as SAFR002
+  usecase "FAFR004: Configure Client-Specific Analysis Parameters" as FAFR004
+  usecase "SFR003: Request Financial Predictions from AI" as SFR003
+  usecase "SFR018: Manage User Financial Goals" as SFR018
+
+  Client --> CFR001 : View financial data and insights  
+  SysAdmin -> SAFR002 : Configure system-wide parameters for AML compliance  
+  FAFD --(Client, Advisor)--> FAFR004 : Customize analysis settings per client segment or profile  
+  System <-- SFR003 : Receive requests for AI-generated predictions  
+  User <- CFR011 : Provide feedback to improve recommendations and insights  
+
+  Client --> SAFR002 : Manage AML-related system parameters
+}
+
+@enduml
+```
+
+**Key Observations:**
+- **Client Actors:** The primary user of the system is represented as "Client," which includes all end-users (e.g., financial clients, advisors). They interact with use cases like viewing dashboards and receiving recommendations.
+- **System Administrator Actor:** This role manages system-wide parameters related to security, compliance (AML), and possibly other administrative tasks. SAFR002 ("Manage AML Alerts") is a direct example of this interaction.
+- **Financial Advisor (FA) Actors:** While not explicitly listed in the requirements as separate actors beyond "Client," there are use cases like FAFR004 which could imply interactions with advisors managing client-specific settings, though their exact role isn't fully defined here. The system assumes they can configure parameters but doesn’t specify a distinct actor for them.
+- **Use Case Grouping:** Use cases are grouped under the "System" boundary to show how different components (Client, SysAdmin) interact with various functionalities like viewing dashboards, managing alerts, or requesting AI-generated predictions.
+
+**Notes:**
+1. The requirement mentions FAFD as a potential role for Financial Advisors in configuring client-specific parameters (FAFR004). However, the exact actor name isn't provided; thus, "User" is used here to represent both Clients and possibly Advisors.
+2. Relationships are established based on direct interactions described in the requirements. For example, Client requests financial predictions from SFR003 via System, which then forwards it to AI (AIFR001).
+3. The SysAdmin uses SAFR002 for AML-related settings, while Clients use CFR001 and others like FAFR004.
+4. Feedback mechanisms are captured in CFR011 but aren't fully expanded here due to the scope of the diagram.
+
+This structure ensures all specified actors and their interactions with key functionalities (use cases) are represented accurately within the constraints provided by the requirements list.
+
+[Done: True
+Done Reason: stop
+Eval Count: 661]

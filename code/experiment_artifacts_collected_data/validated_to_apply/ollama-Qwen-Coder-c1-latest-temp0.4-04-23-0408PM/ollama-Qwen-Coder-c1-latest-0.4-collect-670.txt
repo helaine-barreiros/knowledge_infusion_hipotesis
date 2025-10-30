@@ -1,0 +1,78 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Current Trends" as SFR004
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as SFR012
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as SAFR006
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds in Specific Expense Categories" as SFR007
+  
+  CFR001 --> (SAFR003)
+  CFR001 --> (SFR004)
+  CFR001 --> (SFR012)
+  CFR001 --> (SAFR006)
+  CFR001 --> (SFR007)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations" as SFR014
+  usecase "FAFR002: View Client Intervention Alerts When the System Detects Patterns Requiring Professional Attention to Proactively Assist Clients with Potential Financial Issues" as SAFR007
+  
+  FAFR001 --> (SAFR003)
+  FAFR001 --> (SFR014)
+  FAFR001 --> (SAFR007)
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR002
+  usecase "SAFR005: Configure Analysis Parameters for Specific Client Segments to Customize the System's Behavior According to Different Client Profiles and Regulatory Requirements Such As GDPR or CCPA" as SFR016
+  
+  SAFR002 --> (SFR014)
+  SAFR002 --> (SAFR007)
+}
+
+package "System Components" {
+  usecase "SFR008: Find Contextualized News Relevant to Users' Financial Portfolios from Trusted Financial News Sources" as SFR009
+  usecase "AIFR006: Generate Anomaly Transaction Alerts by Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance with FinCEN Requirements" as AIFR013
+  
+  SAFR002 --> (SFR008)
+  SAFR002 --> (AIFR006)
+}
+
+package "AI System" {
+  usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as AIFR014
+  
+  CFR001 --> (AIFR014)
+  FAFR001 --> (AIFR014)
+}
+
+rectangle "System Boundary" {
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions to Ensure Timely Notification of Important Financial Events" as SFR027
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations by Identifying Patterns That Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR15
+  
+  SAFR002 --> (SFR013)
+  SAFR002 --> (AIFR008)
+}
+
+rectangle "User Feedback Management" {
+  usecase "CFR011: Send Feedback About the System's Recommendations and Insights to Help Improve the Accuracy and Relevance of Future Outputs" as SFR029
+  
+  CFR001 --> (SFR029)
+  FAFR001 --> (SFR029)
+  SAFR002 --> (SFR029)
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 874]

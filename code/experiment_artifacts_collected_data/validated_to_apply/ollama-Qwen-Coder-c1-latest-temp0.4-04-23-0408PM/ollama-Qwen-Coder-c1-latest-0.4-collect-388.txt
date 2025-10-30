@@ -1,0 +1,75 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Trends" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as SAFR004
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as SAFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds in Specific Expense Categories" as SAFR006
+  
+  CFR001 --> (SAFR002)
+  CFR001 --> (SAFR003)
+  CFR001 --> (SAFR004)
+  CFR001 --> (SAFR005)
+  CFR001 --> (SAFR006)
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts When System Detects Patterns Requiring Professional Attention" as SAFR007
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations to Provide Data-Driven Recommendations During Consultations" as SAFR008
+  
+  FAFR001 --> (SAFR002)
+  FAFR001 --> (SAFR007)
+  FAFR001 --> (SAFR008)
+}
+
+package System {
+  actor "System Administrator" as SAFR009
+  usecase "SFR003: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR003
+  
+  rectangle "AI Component" {
+    usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance As Defined by Industry Standards Like FINRA Guidelines" as AIFR002
+    usecase "AIFR006: Generate Anomaly Transaction Alerts By Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance with FinCEN Requirements" as AIFR006
+    
+    SAFR009 --> (SFR003)
+    SFR003 <|-- (AIFR002)
+    SFR003 <|-- (AIFR006)
+  }
+  
+  rectangle "Notification System" {
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions to Ensure Timely Notification of Important Financial Events" as SFR013
+    
+    SAFR009 --> (SFR013)
+  }
+
+  rectangle "Dashboard Generator" {
+    usecase "SFR12: Generate Client Dashboards That Present Financial Information in an Intuitive and Actionable Format" as SFR12
+    
+    CFR001 --> (SFR12)
+    FAFR001 --> (SFR12)
+  }
+
+  rectangle "News Processor" {
+    usecase "SFR10: Request Contextualized News to Extract Relevant Information for Users' Financial Situations" as SFR10
+    
+    SAFR009 --> (SFR10)
+  }
+}
+
+CFR001 --> ("System") : CFR011
+FAFR001 --> ("System") : CFR011
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 785]

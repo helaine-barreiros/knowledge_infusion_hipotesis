@@ -1,0 +1,75 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts Based on Predefined Thresholds" as CFR006
+  usecase "CFR007: Access Investment Opportunities Suitable to Risk Profile" as CFR007
+  usecase "CFR008: Receive News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: View Consolidated Financial Information in a Single Dashboard" as CFR009
+  usecase "SAFR001: Manage Analysis Parameters for AI System Compliance" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Intervention Alerts When Patterns Require Professional Attention" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients' Financial Situations" as FAFR003
+  usecase "SFR001: Deliver Alerts Through Appropriate Notification Channels" as SFR001
+  usecase "AIFR001: Generate Financial Predictions via AI Analysis" as AIFR001
+
+  Client --> CFR001 : View Insights
+  Client --> CFR002 : Receive Alerts on Anomalous Transactions (FATF)
+  Client --> CFR003 : View Predictions Based on Data and Trends
+  Client --> CFR004 : Personalized Recommendations Aligned with Profile
+  Client --> CFR005 : Manage Recommendation Preferences
+  Client --> CFR006 : Spending Limit Alerts for Budget Control
+  Client --> CFR007 : Investment Opportunities Matching Risk Profile (MiFID II)
+  Client --> CFR008 : News Related to Portfolio
+  Client --> CFR009 : Consolidated Financial Dashboard
+  Client --> SAFR001 : Manage Analysis Parameters (Basel III Compliance)
+  Client --> FAFR002 : Manage Mentoring Sessions Based on Insights
+  Client --> FAFR003 : View Intervention Alerts for Proactive Guidance
+
+  SysAdmin --> SAFR001 : Configure AI System Parameters
+
+  FinancialAdvisor --> FAFR001 : Schedule and Track Mentoring Sessions (Client)
+  FinancialAdvisor --> FAFR002 : Review Intervention Alerts
+  FinancialAdvisor --> FAFR003 : Access Predictive Analytics for Clients' Situations
+  FinancialAdvisor --> AIFR008 : Request Client-Specific Predictions
+
+  System --> SFR001 : Deliver Notifications to Users (CFR002, CFR006)
+  System --> SFR002 : Provide Personalized Recommendations (CFR004)
+  System --> SFR003 : Request Financial Predictions from AI Component
+  System --> AIFR001 : Receive and Process Historical Data for Predictions
+
+  AIFR001 <|-- CFR003: Generate Market Trends Analysis
+  AIFR002 <|-- CFR004: Align Recommendations with Profile (FINRA)
+  AIFR005 <|-- CFR007: Identify Investment Instruments Based on Strategies and MPT
+
+  rectangle "Client" {
+    actor Client as C1
+    usecase "CFR009: View Consolidated Financial Dashboard" as DASHBOARD
+    C1 --> DASHBOARD : Access Insights in Single View
+  }
+
+  rectangle "FinancialAdvisor" {
+    actor FinancialAdvisor as FA
+    usecase "FAFR004: Configure Analysis Parameters for Client Segments" as PARAMS_CONFIG
+    usecase "FAFR005: Review and Act on Alerts from System" as ALERT_REVIEW
+    FA --> PARAMS_CONFIG : Customize AI Behavior per Segment
+    FA --> ALERT_REVIEW : Monitor Intervention Alerts (CFR002)
+  }
+
+  rectangle "SysAdmin" {
+    actor SysAdmin as SA
+    usecase "SAFR001: Manage Analysis Parameters for Compliance" as COMPLIANCE_MANAGE
+    SA --> COMPLIANCE_MANAGE : Ensure AI Algos Accurate, Relevant (Basel III)
+
+  }
+  
+}
+
+@enduml

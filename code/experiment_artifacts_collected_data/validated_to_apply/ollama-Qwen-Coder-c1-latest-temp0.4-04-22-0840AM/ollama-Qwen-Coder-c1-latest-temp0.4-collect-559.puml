@@ -1,0 +1,54 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FAFR001
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  Client --> (SFR012) : "Generate client dashboards"
+  SysAdmin --> SAFR001
+}
+
+rectangle "Client Features" {
+  Client --> (CFR009) : "Access personalized dashboard"
+  Client --> (CFR006) : "View spending limit alerts"
+  Client --> (SFR008) : "Find contextualized news relevant to financial portfolio"
+  Client --> (SFR013) : "Generate client alerts based on predefined conditions"
+}
+
+rectangle "Financial Advisor Features" {
+  FinancialAdvisor --> (FAFR002) : "View client intervention alerts"
+  FAFR001 --> (FAFR004) : "Configure analysis parameters for specific client segments"
+  FinancialAdvisor --> (SFR016) : "Request predictive insights from AI component to enhance the value of financial guidance provided to clients"
+}
+
+rectangle "System Features" {
+  SystemAdmin --> SAFR001
+  SystemAdmin --> (FAFR004) : "Configure analysis parameters for specific client segments"
+  
+  Client --> (SFR020) : "Manage user feedback"
+  FinancialAdvisor --> (SFR20) : "Manage users' financial goals to track progress and provide relevant recommendations"
+}
+
+rectangle "AI System Features" {
+  usecase "AIFR001: Generate financial predictions for users" as AIFR001
+  usecase "AIFR002: Generate personalized recommendations for users based on their financial profiles, goals, and risk tolerance" as AIFR002
+  
+  Client --> (SFR03) : "Request financial predictions from AI component"
+  FinancialAdvisor --> (SFR04) : "Request personalized recommendations from the AI component based on each user's financial data and preferences"
+}
+
+rectangle "User Feedback Flow" {
+  usecase "CFR11: Send feedback about system's recommendations and insights" as CFR11
+  
+  Client --> CFR11
+  FinancialAdvisor --> CFR11
+  SysAdmin --> CFR11
+}
+@enduml

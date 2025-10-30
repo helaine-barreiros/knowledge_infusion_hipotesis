@@ -1,0 +1,55 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Risk Parameters" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "SFR014: Generate Client Analytics" as SFR014
+}
+
+rectangle "Client" {
+  actor "User (Client)" as UserClient
+
+  UserClient --> CFR001 : View financial insights dashboard  
+  UserClient --> SAFR002 : Manage risk parameters for system alerts  
+  UserClient --> SFR003 : Request financial predictions  
+  UserClient --> SFR014 : Generate client analytics
+}
+
+rectangle "Financial Advisor" {
+  actor "FAFR001: Financial Advisor" as FAFR001
+
+  FAFR001 --> FAFR005 : Schedule mentoring sessions based on system insights  
+  FAFR001 --> SAFR002 : Manage risk parameters for clients  
+  FAFR001 --> SFR003: Request financial predictions
+}
+
+rectangle "System Administrator" {
+  actor "SysAdmin" as SysAdmin
+
+  SysAdmin --> SAFR002: Configure system analysis parameters to ensure compliance with regulations like Basel III and GDPR
+}
+
+rectangle "AI System" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001  
+  usecase "AIFR003: Send Spending Limit Alerts" as AIFR003 
+  usecase "AIFR004: Recommend Investment Opportunities" as AIFR004
+  usecase "AIFR005: Analyze Portfolio Against ESG Criteria" as AIFR005  
+  usecase "AIFR006: Detect Anomaly Transactions" as AIFR006 
+  usecase "AIFR007: Correlate News with Portfolios" as AIFR007
+  usecase "AIFR008: Recommend Interventions for Advisors" as AIFR008  
+  usecase "AIFR009: Provide Predictive Insights" as AIFR009
+
+  SysAdmin --> SAFR002 <|-- (AIFR001) : Configure system parameters
+}
+
+rectangle "Client Feedback System" {
+  actor "UserFeedback" as UserFeedback
+  
+  UserFeedback --> CFR011: Send feedback to improve recommendations and insights  
+}
+@enduml

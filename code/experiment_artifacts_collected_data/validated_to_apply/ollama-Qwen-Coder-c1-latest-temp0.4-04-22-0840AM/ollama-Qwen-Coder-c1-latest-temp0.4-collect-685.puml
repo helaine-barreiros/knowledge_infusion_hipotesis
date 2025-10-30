@@ -1,0 +1,107 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFD002
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "CFR011: Send Feedback" as CFR011
+  
+  Client --> (SFR002)
+  SysAdmin --> SAFR001
+  FAFD --> FAFD002
+  Client --> SFR003
+  System Admin -> AIFR004
+  Client -> CFR011
+}
+
+rectangle "Client Dashboard" {
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  
+  Client --> CFR009
+}
+  
+package "Financial Insights & Recommendations" {
+    rectangle "Insights" {
+        usecase "CFR002: View Alerts" as CFR002
+        usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+        
+        Client --> (SFR003)
+        SysAdmin -> SAFR001
+    }
+    
+    rectangle "Recommendations" {
+        usecase "CFR004: Receive Personalized Recommendations" as CFR004
+        usecase "SAFR005: Manage Recommendation Preferences" as SAFR005
+        
+        Client --> (SFR002)
+        SysAdmin -> SAFR001
+    }
+}
+
+package "Spending Limits & Alerts" {
+    rectangle "Limits" {
+        usecase "CFR006: View Spending Limit Alerts" as CFR006
+        
+        Client --> CFR006
+    }
+    
+    rectangle "Alerts" {
+        usecase "SFR013: Generate Client Alerts" as SFR013
+        usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+        
+        System Admin --> (SFR013)
+        SysAdmin -> AIFR006
+    }
+}
+
+package "Investments & Opportunities" {
+    rectangle "Opportunities" {
+        usecase "CFR007: View Investment Opportunities" as CFR007
+        usecase "SAFR002: Configure Analysis Parameters for Client Segments" as SAFR002
+        
+        FAFD --> (SFR013)
+    }
+    
+    rectangle "Analysis" {
+        usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+        usecase "FAFR006: View Predictive Analytics about Client Financial Situations" as FAFD006
+        
+        SysAdmin --> (SFR013)
+    }
+}
+
+package "News & Updates" {
+    rectangle "News" {
+        usecase "CFR008: View News Related to Investment Portfolio" as CFR008
+        usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+        
+        Client --> (SFR013)
+    }
+    
+    rectangle "Updates" {
+        usecase "FAFR002: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFD002
+        usecase "AIFR008: Generate Predictive Intervention Recommendations for Clients" as AIFR008
+        
+        SysAdmin --> (SFR013)
+    }
+}
+
+package "Relationship Management" {
+    rectangle "Advisors & Permissions" {
+        usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+        usecase "FAFR002: View Client Intervention Alerts" as FAFD002
+        
+        SysAdmin --> (SFR013)
+    }
+}
+
+@enduml

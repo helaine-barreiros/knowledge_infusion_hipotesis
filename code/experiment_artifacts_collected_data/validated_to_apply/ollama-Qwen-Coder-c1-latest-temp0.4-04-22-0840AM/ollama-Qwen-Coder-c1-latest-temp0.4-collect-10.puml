@@ -1,0 +1,71 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor (FA)" as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+
+  CFR001 --> (View Alerts)
+  FA --> FAFR002 : Mentoring Sessions
+  FA --> FAFR003 : Predictive Analytics
+  FA --> FAFR004 : Configure Analysis Parameters
+}
+
+package System {
+  actor "System" as SFR005
+  
+  usecase "SFR017: Generate Financial Health Reports" as SFR017
+  usecase "SFR020: Manage User Feedback" as SFR020
+
+  CFR001 --> (View Alerts)
+  FA --> FAFR003 : Predictive Analytics
+  FA --> FAFR004 : Configure Analysis Parameters
+  
+  System --> SFR017 : Financial Health Reports
+  System --> SFR020 : User Feedback Management
+}
+
+package AI {
+  actor "AI" as AIFR006
+
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+  usecase "AIFR014: Generate Client Analytics that Provide Meaningful Insights into Financial Behavior and Performance" as AIFR014
+  
+  CFR002 --> (View Predictive Analytics about Clients' Financial Situations)
+  FA --> FAFR003 : Predictive Analytics
+  FA --> FAFR004 : Configure Analysis Parameters
+
+  System --> AIFR006 : Spending Limit Alerts
+  System --> AIFR14 : Client Analytics
+  
+  CFR002 --> (View Financial Health Reports)
+}
+
+package "Client Relationship Management" {
+  usecase "Manage Personalized Recommendations Preferences" as SAFR005
+  usecase "Manage Relationship with Financial Advisors" as CFR010
+
+  CFR001 --> SAFR005 : Manage Preferences
+  FA --> FAFR002 : Mentoring Sessions
+}
+
+package News {
+  usecase "View News Related to Investment Portfolio" as CFR008
+  
+  CFR001 --> (View Alerts)
+  System --> SFR009 : Contextualized News
+  AI --> AIFR07 : Contextualized News Insights
+}
+
+CFR002 <|-- SAFR005
+FAFR003 <|-- FAFR004
+
+@enduml

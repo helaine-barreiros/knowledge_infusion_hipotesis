@@ -1,0 +1,88 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Clients" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts About Anomalous Transactions" as SAFR002 
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Current Market Trends" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as SAFR004
+  usecase "CFR005: Manage Personalized Recommendations Preferences to Ensure the System Provides Insights Relevant to My Financial Objectives and Risk Tolerance" as SAFR005
+  usecase "CFR006: View Spending Limit Alerts When I Exceed Predefined Thresholds in Specific Expense Categories" as SAFR006
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile (as Defined Under MiFID II or Equivalent Standards)" as SAFR007
+  usecase "CFR008: View News Related to My Investment Portfolio to Stay Informed About Market Events That Might Affect My Assets" as SAFR008
+  usecase "CFR009: Access a Personalized Dashboard that Consolidates My Financial Information in a Single View to Efficiently Monitor My Finances" as SAFR009
+  
+  CFR001 --> SAFR002 : "View Alerts"
+  CFR001 --> SAFR003 : "View Predictions"
+  CFR001 --> SAFR004 : "Receive Recommendations"
+  CFR001 --> SAFR005 : "Manage Preferences"
+  CFR001 --> SAFR006 : "Exceed Spending Limits"
+  CFR001 --> SAFR007 : "View Investment Opportunities"
+  CFR001 --> SAFR008 : "View News"
+  CFR001 --> SAFR009 : "Access Dashboard"
+}
+
+package "Financial Advisors" {
+  actor FinancialAdvisor as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations to Provide Data-Driven Recommendations During Consultations" as SAFR007
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments to Customize the System's Behavior According to Different Client Profiles and Regulatory Requirements Such As GDPR or CCPA" as FAFR001
+  
+  FinancialAdvisor --> SAFR003 : "View Predictive Analytics"
+  FinancialAdvisor --> FAFR001 : "Configure Analysis Parameters"
+}
+
+package "System Admins" {
+  actor SystemAdmin as SAFR001
+  
+  usecase "SAFR002: Manage Client Mentoring Sessions Based on System-Generated Insights to Provide More Valuable Guidance Aligned With Each Client's Financial Goals" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based On Predefined Conditions To Ensure Timely Notification of Important Financial Events" as SAFR013
+  
+  SystemAdmin --> FAFR002 : "Manage Sessions"
+  SystemAdmin --> SAFR013 : "Generate Alerts"
+}
+
+package "System Components" {
+  usecase "SFR004: Request Financial Predictions From the AI Component to Provide Users With Forward-Looking Financial Insights" as AIFR001
+  usecase "SFR005: Request Personalized Recommendations From the AI Component Based on Each User's Financial Data and Preferences" as AIFR002
+  usecase "SFR006: Request Spending Limit Alerts From the AI Component When User Spending Patterns Exceed Defined Thresholds" as AIFR003
+  usecase "SFR014: Generate Client Analytics That Provide Meaningful Insights Into Financial Behavior and Performance" as AIFR009
+  
+  rectangle "AI System" {
+    AIFR001 : "Generate Predictions"
+    AIFR002 : "Provide Recommendations"
+    AIFR003 : "Alert Spending Limits"
+    AIFR004 : "Analyze Investments"
+    AIFR005 : "Identify Opportunities"
+    AIFR006 : "Detect Anomalies"
+    AIFR007 : "Provide News Insights"
+    AIFR008 : "Predict Intervention Recommendations"
+    AIFR009 : "Generate Predictive Insights"
+  }
+  
+  CFR001 --> AIFR001
+  SAFR002 <|-- (AIFR006)
+  SAFR003 <|-- (AIFR004) 
+  SAFR005 <|-- (AIFR007)
+  SAFR006 <|-- (AIFR001)
+  SAFR007 --> AIFR002
+  SAFR008 --> AIFR003
+  SAFR009 --> AIFR005 
+}
+
+package "Users" {
+  actor User as CFR011
+  
+  usecase "CFR011: Send Feedback About the System's Recommendations and Insights to Help Improve the Accuracy and Relevance of Future Outputs" as SFR020
+  User --> SFR020 : "Send Feedback"
+}
+
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 1170]

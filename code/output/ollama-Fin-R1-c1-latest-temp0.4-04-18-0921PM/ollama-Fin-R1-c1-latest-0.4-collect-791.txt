@@ -1,0 +1,92 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor SysAdmin as sysadmin
+actor FinancialAdvisor as financialadvisor
+system "System" as system
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as cfr001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as cfr002
+  usecase "CFR003: View Financial Predictions" as cfr003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as cfr004
+  usecase "CFR005: Manage Recommendation Preferences" as cfr005
+  usecase "CFR006: View Spending Limit Alerts" as cfr006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as cfr007
+  usecase "CFR008: Receive Portfolio-Related News" as cfr008
+  usecase "CFR009: Personalized Dashboard for Financial Monitoring" as cfr009
+  usecase "CFR10: Manage Relationship with Advisors" as cfr10
+
+  client --> (cfr001)
+  client --> (cfr002)
+  client --> (cfr003)
+  client --> (cfr004)
+  client --> (cfr005)
+  client --> (cfr006)
+  client --> (cfr007)
+  client --> (cfr008)
+  client --> (cfr009)
+  client --> (cfr10)
+
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as fafr001
+  usecase "FAFR002: View Intervention Alerts for Clients" as fafr002
+  usecase "FAFR003: View Predictive Analytics About Clients" as fafr003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as fafr004
+
+  financialadvisor --> (fafr001)
+  financialadvisor --> (fafr002)
+  financialadvisor --> (fafr003)
+  financialadvisor --> (fafr004)
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as safr001
+
+  sysadmin --> (safr001)
+}
+
+system <|-- (cfr001) : Delivers
+system <|-- (cfr002) : Delivers
+system <|-- (cfr003) : Delivers
+system <|-- (cfr004) : Delivers
+system <|-- (cfr005) : Delivers
+system <|-- (cfr006) : Delivers
+system <|-- (cfr007) : Delivers
+system <|-- (cfr008) : Delivers
+system <|-- (cfr009) : Delivers
+system <|-- (cfr10) : Delivers
+
+system <|-- (fafr001) : Delivers
+system <|-- (fafr002) : Delivers
+system <|-- (fafr003) : Delivers
+system <|-- (fafr004) : Delivers
+
+system <|-- (safr001) : Manages
+
+@enduml
+```
+
+### Explanation:
+- **Client Interface**: Represents all use cases related to the client's interaction with the system. These include viewing dashboards, receiving alerts, making recommendations, etc.
+- **Financial Advisor Interface**: Use cases focused on advisors managing clients, generating insights, and configuring parameters.
+- **System Administrator Interface**: Admin-related tasks like managing analysis parameters for AI systems.
+- Relationships: The "system" component interacts with all client-facing use cases to deliver their requirements. Similarly, it works with financial advisor and admin interfaces as needed.
+
+This structure ensures clarity in separating user roles (Client, Advisor, SysAdmin) while linking them logically through the system's capabilities. Each actor is linked directly or indirectly via the system boundary rectangle. The relationships are defined using `<|--` to show "system manages" for administrative tasks and direct delivery (`Delivers`) for client/advisor use cases. 
+
+### Key Observations:
+- All CFR (Client) requirements are grouped under Client Interface.
+- FAFR (Financial Advisor) and SAFR (System Admin) are separate rectangles, ensuring distinct responsibilities.
+- The system acts as the central entity delivering all services to clients, advisors, or admins based on their roles.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1041]

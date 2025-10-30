@@ -1,0 +1,100 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:User (Client): as User
+:Financial Advisor: as FA
+:System Administrator: as SysAdmin
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  User --> CFR001
+  FA -> (CFR001)
+  SysAdmin --> SAFR001
+}
+
+rectangle "Client Functions" {
+  usecase "CFR002: View Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Preferences for Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  User --> (CFR002)
+  User --> (CFR003)
+  User --> (CFR004)
+  User --> (CFR005)
+  User --> (CFR006)
+  User --> (CFR007)
+  User --> (CFR008)
+  User --> (CFR009)
+  User --> (CFR10)
+}
+
+rectangle "Financial Advisor Functions" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  
+  FA -> (FAFR001)
+  FA --> (FAFR002)
+}
+
+rectangle "System Functions" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts from AI" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from AI" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities from AI" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI" as SFR008
+  usecase "SFR009: Find Contextualized News Relevant to User's Portfolio" as SFR009
+  usecase "SFR010: Process Contextualized News for Users" as SFR010
+  usecase "SFR011: Request Contextualized News Insights from AI" as SFR011
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  
+  SysAdmin --> (SAFR001)
+}
+
+rectangle "AI Functions" {
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunities Based on User's Strategies" as AIFR005
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights for Users" as AIFR007
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+  usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+  
+  SysAdmin --> (SAFR001)
+}
+
+User -> CFR002 : "View Alerts"
+User -> CFR003 : "View Financial Predictions"
+User -> CFR004 : "Receive Personalized Recommendations"
+User -> CFR005 : "Manage Preferences for Recommendations"
+User -> CFR006 : "View Spending Limit Alerts"
+User -> CFR007 : "View Investment Opportunities"
+User -> CFR008 : "View News Related to Portfolio"
+User -> CFR009 : "Access Personalized Dashboard"
+User -> CFR10 : "Manage Relationship with Financial Advisors"
+
+FA --> FAFR001 : "Manage Client Mentoring Sessions"
+FA --> FAFR002 : "View Intervention Alerts"
+
+SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+SysAdmin --> (SFR003)
+SysAdmin --> (AIFR006)
+
+User -> CFR11: "Send Feedback About System's Recommendations and Insights"
+@enduml

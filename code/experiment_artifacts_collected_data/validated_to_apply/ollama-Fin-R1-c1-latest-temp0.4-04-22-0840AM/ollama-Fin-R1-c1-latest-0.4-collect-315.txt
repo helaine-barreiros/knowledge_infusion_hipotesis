@@ -1,0 +1,45 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics About Clients' Finances" as FAFR003
+  usecase "SFR008: Request Anomaly Transaction Alerts From AI Component" as SFR008
+  usecase "AIFR006: Generate Contextualized News Insights For Users Based On Portfolio" as AIFR006
+
+  Client --> CFR001 : "View Financial Dashboard"
+  SysAdmin -> SAFR001 : "Manage Analysis Parameters"
+  FAFR003 <|-- (CFR002) : "View Alerts About Anomalous Transactions"
+  
+  // Relationship between System and AI components
+  SFR008 --> AIFR006 : "Request Anomaly Transaction Alerts"
+  CFR011 -> SFR009 : "Send Feedback"
+
+}
+
+@enduml
+```
+
+### Explanation:
+- **Actors**: The primary actors here are `Client`, `SysAdmin` (System Administrator), and implicitly others like Financial Advisors (`FAFR`). However, the provided requirements focus on specific use cases for Clients. For example, CFR011 is a User who can send feedback.
+  
+- **Use Cases**:
+  - **CFR001**: View financial insights dashboard.
+  - **SAFR001**: Manage analysis parameters (for SysAdmin).
+  - **FAFR003**: Financial Advisors view predictive analytics about clients' finances. This is linked to CFR002's alerts through a generalization relationship (`<|--`), indicating that FAFR003 extends or includes functionality related to viewing alerts.
+  
+- **System and AI Components**:
+  - The system requests services from the AI component (e.g., SFR008 asks AIFR006 for anomaly transaction alerts).
+  - Client feedback is captured via CFR011.
+
+### Notes:
+- Only explicit relationships are drawn. For example, `CFR002` (Alerts) and `FAFR003` (Predictive Analytics) share a common need to view or act on financial data.
+- The system boundary includes all use cases related to the client experience (`Client`, `SFR*`, `AIFR*`). SysAdmin-related operations are isolated in their own space.
+
+[Done: True
+Done Reason: stop
+Eval Count: 561]

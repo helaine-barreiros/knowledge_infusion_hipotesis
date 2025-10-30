@@ -1,0 +1,49 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage AML Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "SAFR003: Configure Analysis Parameters for Clients" as SAFR003
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Consolidated Financial Dashboard" as CFR012
+  usecase "SAFR004: Manage Client Data Sharing Permissions" as SAFR005
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "CFR009: View News Related to Portfolio" as CFR016
+
+  // Clients (User)
+  actor Client as client
+  client --> CFR001 : "View Financial Insights Dashboard"
+  client --> CFR002 : "Receive Alerts about Anomalous Transactions"
+  client --> CFR003 : "View Financial Predictions"
+  client --> CFR004 : "Receive Personalized Recommendations"
+  client --> CFR005 : "Manage Recommendation Preferences"
+  client --> CFR006 : "View Spending Limit Alerts"
+  client --> SAFR002 : "Manage AML Alerts" (SysAdmin)
+  client --> CFR012 : "Access Consolidated Financial Dashboard"
+  
+  // System Administrator
+  actor SysAdmin as sysadmin
+  sysadmin --> SAFR001: Manage Analysis Parameters for AI
+  sysadmin --> SAFR004: Manage Client Data Sharing Permissions
+  
+  // Financial Advisor (FAFR)
+  actor FAFR as financialAdvisor
+  financialAdvisor --> AIFR008 : "Generate Predictive Intervention Recommendations"
+  
+  // System Components (SFR)
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR013: Generate Client Alerts" as SFR013
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+  client --> CFR016 : View News Related to Portfolio (via SFR)
+  
+}
+
+@enduml

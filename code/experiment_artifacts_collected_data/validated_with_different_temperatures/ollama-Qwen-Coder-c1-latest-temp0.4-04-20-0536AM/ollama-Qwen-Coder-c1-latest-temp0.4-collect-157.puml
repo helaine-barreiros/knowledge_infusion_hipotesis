@@ -1,0 +1,67 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:User (Client) : as User
+:System Admin : as SysAdmin
+:Financial Advisor : as FAdvisor
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "AIFR009: Generate Contextualized News Insights" as AIFR009
+  
+  User --> CFR001 : "View"
+  SysAdmin --> SAFR001 : "Manage Parameters"
+  FAdvisor --> FAFR003 : "View Predictive Analytics"
+}
+
+rectangle "Client Features" {
+  usecase "CFR002: Receive Anomaly Alerts" as CFR002
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR017: Generate Financial Health Reports" as CFR017
+  
+  User --> CFR002 : "View"
+  User --> CFR006 : "View"
+  User --> CFR017 : "Generate"
+}
+
+rectangle "Advisor Features" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  
+  Financial Advisor --> FAFR001 : "Manage"
+  Financial Advisor --> FAFR002 : "View"
+}
+
+rectangle "System Features" {
+  usecase "SFR003: Request Predictive Analytics" as SFR003
+  usecase "SFR004: Request Personalized Recommendations" as SFR004
+  usecase "SFR015: Generate Intervention Recommendations" as SFR015
+  
+  System Admin --> SAFR001 : "Manage Parameters"
+  User --> SFR003 : "Request Predictive Analytics"
+  User --> SFR004 : "Request Personalized Recommendations"
+  Financial Advisor --> SFR015 : "Generate Intervention Recommendations"
+}
+
+rectangle "AI Features" {
+  usecase "AIFR001: Generate Predictions" as AIFR001
+  usecase "AIFR002: Generate Recommendations" as AIFR002
+  usecase "AIFR004: Generate Spending Alerts" as AIFR004
+  usecase "AIFR006: Generate Anomaly Alerts" as AIFR006
+  
+  System Admin --> SAFR001 : "Manage Parameters"
+  User --> AIFR001 : "Generate Predictions"
+  User --> AIFR002 : "Generate Recommendations"
+  User --> AIFR004 : "Generate Spending Alerts"
+  User --> AIFR006 : "Generate Anomaly Alerts"
+}
+
+User <|-- System Admin
+System Admin <|-- Financial Advisor
+
+@enduml

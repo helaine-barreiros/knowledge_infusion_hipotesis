@@ -1,0 +1,132 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sa1
+actor FinancialAdvisor as fa1
+system "System" as sys 
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Spending Limit Alerts for Budget Control" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Consolidated Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+
+  c1 --> CFR001 : "View"
+  c1 --> CFR002 : "Receive Alerts for Anomalous Transactions (FATF)"
+  c1 --> CFR003 : "View Predictions"
+  c1 --> CFR004 : "Personalized Recommendations"
+  c1 --> CFR005 : "Manage Preferences"
+  c1 --> CFR006 : "Spending Limit Alerts"
+  c1 --> CFR007 : "Investment Opportunities (Risk Profile)"
+  c1 --> CFR008 : "View News Related to Portfolio"
+  c1 --> CFR009 : "Consolidated Dashboard"
+  c1 --> CFR10 : "Manage Relationship with Advisors"
+
+}
+
+rectangle "System Admin" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  sa1 --> SAFR001 : "Manage"
+}
+sys <|-- SAFR001
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Segment" as FAFR004
+
+  fa1 --> FAFR001 : "Manage"
+  fa1 --> FAFR002 : "View Alerts"
+  fa1 --> FAFR003 : "View Analytics"
+  fa1 --> FAFR004 : "Configure Parameters"
+
+}
+
+rectangle "System" {
+  usecase "SFR001: Deliver Alerts Through Channels" as SFR001
+  usecase "SFR002: Personalized Recommendations Based on Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts from AI" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from AI" as SFR006
+  usecase "SFR007: Request Specific Investments Based on Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI (AML)" as SFR008
+  usecase "SFR009: Find Contextualized News Relevant to Portfolio" as SFR009
+  usecase "SFR010: Generate Client Dashboards" as SFR010
+  usecase "SFR011: Process Contextualized News for Users" as SFR011
+  usecase "SFR012: Request Predictive Intervention Analyses from AI" as SFR012
+  usecase "SFR013: Track Financial Goals and Progress" as SFR013
+  usecase "SFR014: Maintain Historical Record of Insights for Trend Analysis" as SFR014
+
+  sys <|-- SFR001 : "Deliver"
+  sys <|-- SFR002 : "Personalize Recommendations"
+  sys <|-- SFR003 : "Request Predictions from AI"
+  sys <|-- SFR004 : "Request Personalized Recs."
+  sys <|-- SFR005 : "Request Spending Limit Alerts (AI)"
+  sys <|-- SFR006 : "Request Investment Analysis (AI)"
+  sys <|-- SFR007 : "Specific Investments (ESG/Profile)"
+  sys <|-- SFR008 : "Anomaly Alerts (AML) (AI)"
+  sys <|-- SFR009 : "Find News"
+  sys <|-- SFR010 : "Generate Dashboards"
+  sys <|-- SFR011 : "Process Contextualized News"
+  sys <|-- SFR012 : "Request Intervention Analyses (AI)"
+  sys <|-- SFR013 : "Track Goals"
+  sys <|-- SFR014 : "History"
+
+}
+
+rectangle "AI System" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Personalized Recommendations (FINRA)" as AIFR002
+  usecase "AIFR003: Spending Limit Alerts Based on Patterns" as AIFR003
+  usecase "AIFR004: Investment Opportunity Analysis for Users" as AIFR004
+  usecase "AIFR005: Align Investments with Strategies and MPT" as AIFR005
+  usecase "AIFR006: Anomaly Transaction Alerts (FinCEN)" as AIFR006
+  usecase "AIFR007: Contextualized News Insights for Portfolios" as AIFR007
+  usecase "AIFR008: Predictive Intervention Recommendations" as AIFR008
+  usecase "AIFR009: Client Predictive Insights (Forward-Looking)" as AIFR009
+
+  sys <|-- AIFR001 : "Generate"
+  sys <|-- AIFR002 : "Personalized Recs."
+  sys <|-- AIFR003 : "Spending Alerts"
+  sys <|-- AIFR004 : "Investment Analysis (User)"
+  sys <|-- AIFR005 : "ESG/Strategies/MPT Alignments"
+  sys <|-- AIFR006 : "Anomaly Alerts (FinCEN)"
+  sys <|-- AIFR007 : "News Insights for Portfolios"
+  sys <|-- AIFR008 : "Intervention Recs."
+  sys <|-- AIFR009 : "Client Predictive"
+
+}
+
+usecase "CFR11: Send Feedback to System" as CFR11
+c1 --> CFR11 : "Send Feedback"
+
+@enduml
+```
+
+This PlantUML code creates a comprehensive use case diagram based on the provided functional requirements. It includes all actors (Client, SysAdmin, FinancialAdvisor) and their associated use cases with precise IDs and names. The system components are grouped into logical rectangles for clarity, ensuring that relationships between actors and use cases are accurately represented. Special attention is paid to inheritance and grouping rules as per the technical guidelines. Each line represents a valid relationship according to the requirements, such as client interactions or administrative management of parameters. The diagram adheres strictly to PlantUML syntax conventions while maintaining readability through proper indentation and structure. 
+
+**Key Observations:**
+1. **Client Interface:** All Client-related use cases are grouped under "Client Interface," with direct relationships from the `Client` actor.
+2. **System Admin & Financial Advisor Interfaces:** These actors manage specific system components (e.g., analysis parameters, client mentoring).
+3. **Inheritance and Grouping:** Use cases like `CFR10: Manage Relationship with Advisors` are placed under their respective interfaces for clarity.
+4. **AI System Integration:** The AI component is fully integrated into the diagram, showing how it interacts with other system components to generate insights.
+
+This structure ensures that all functional requirements are captured accurately and relationships between actors and use cases are clearly defined. Adjustments can be made based on further analysis or additional requirements if needed. 
+
+**Note:** Ensure PlantUML software supports this version of syntax for full functionality, especially when dealing with nested rectangles and multiple inheritance points. Testing the generated code in a compatible environment is recommended to verify correctness.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1986]

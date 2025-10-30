@@ -1,0 +1,89 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Anomaly Detection Rules" as SAFR002
+  usecase "FAFR005: Schedule Client Interventions" as FAFR005
+  usecase "AIFR009: Generate Predictive Intervention Recommendations" as AIFR009
+
+  client --> CFR001 : View financial data and insights  
+  sysAdmin --> SAFR002 : Manage system parameters for anomaly detection  
+  advisor --> FAFR005 : Schedule interventions based on system alerts  
+}
+
+rectangle "Client" {
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006  
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+
+  client --> CFR003 : Request financial predictions  
+  client --> CFR004 : Receive recommendations based on profile  
+  client --> CFR005 : Adjust preferences for recommendations  
+  client --> CFR006 : Monitor spending limits  
+  client --> CFR007 : Explore investment options  
+  client --> CFR008 : Stay informed about portfolio-related news  
+  client --> CFR010 : Control data sharing with advisors
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: Review Predictive Analytics" as FAFR003  
+  client --> FAFR002 : Receive alerts for proactive support  
+  advisor --> FAFR003 : Analyze data to provide guidance  
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  sysAdmin --> SAFR001 : Configure system settings for accuracy and compliance  
+
+  rectangle "Subsystem AIFR" { 
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001  
+    usecase "AIFR002: Personalized Recommendations Engine" as AIFR002
+    usecase "AIFR003: Spending Limit Alerts System" as AIFR003
+    usecase "AIFR004: Investment Opportunity Analysis" as AIFR004  
+    usecase "AIFR005: ESG-Compliant Investments Finder" as AIFR005
+    usecase "AIFR006: Fraud Detection Engine" as AIFR006
+    usecase "AIFR007: News Correlation Module" as AIFR007  
+    usecase "AIFR008: Client Predictive Intervention Advisor" as AIFR008
+
+    SysAdmin --> SAFR001 : Manage parameters for all AI components  
+
+  }
+}
+
+rectangle "AI System (AIFR)" {
+  usecase "AIFR009: Generate Predictive Insights" as AIFR009  
+  sysAdmin --> AIFR009 : Control predictive analysis capabilities  
+
+  client --> AIFR001 : Analyze historical data for future trends
+  client --> AIFR002 : Get personalized recommendations based on profile and goals
+  client --> AIFR003 : Monitor spending patterns against limits  
+  client --> AIFR004 : Identify investments matching risk tolerance  
+  client --> AIFR005 : Find ESG-aligned investment opportunities  
+  client --> AIFR006 : Detect potential fraud in transactions
+  client --> AIFR007 : Provide news relevant to portfolio health
+  client --> AIFR008 : Recommend actions for advisors based on user data
+
+}
+
+@enduml
+```
+
+**Notes:**
+- The system is structured into multiple rectangles (subsystems) such as "Client," "Financial Advisor," "System Administrator," and the core AI subsystem ("AIFR"). Each use case corresponds to a specific requirement. 
+- Relationships are established between actors, use cases within their respective scopes, and components of the AIFR subsystem.
+- The System Admin role manages parameters across all AI components (e.g., `SAFR001` for anomaly detection rules in AIFR).
+- Clients interact directly with most use cases except those managed by system administrators or advisors. Advisors mainly view alerts (`FAFR002`) and review predictive analytics (`FAFR003`). The System Admin controls the parameters of these components.
+- Inheritance relationships (e.g., `SysAdmin` managing multiple AIFR components) are represented via arrows pointing to use cases within their scope.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1151]

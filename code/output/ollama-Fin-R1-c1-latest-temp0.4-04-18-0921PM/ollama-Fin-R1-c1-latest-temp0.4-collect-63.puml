@@ -1,0 +1,81 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Trends" as CFR003
+  usecase "CFR004: Get Personalized Recommendations Aligned with My Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Receive News Related to My Portfolio" as CFR008
+  usecase "CFR009: View Consolidated Financial Information in a Single Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as CFR10
+
+}
+
+rectangle "Financial Advisor (FA)" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+  usecase "FAFR003: Review Predictive Analytics About Clients' Financial Situations" as FAFR003
+}
+
+rectangle "System Administrator (SA)" {
+  usecase "SAFR001: Manage Analysis Parameters to Ensure Accuracy and Compliance" as SAFR001
+}
+
+rectangle "System (S)" {
+  usecase "SFR002: Deliver Personalized Recommendations Based on Financial Profiles" as SFR002
+  usecase "SFR003: Request Predictive Interventions from AI Component for Client Engagement" as SFR009
+
+  usecase "AIFR001: Generate Financial Predictions by Analyzing Data and Trends" as AIFR001
+}
+
+rectangle "AI System (A)" {
+  usecase "AIFR002: Generate Personalized Recommendations Based on User Profiles" as AIFR002
+  usecase "AIFR003: Identify Spending Limit Alerts for Unusual Activity" as AIFR003
+}
+
+rectangle "Feedback System (F)" {
+  usecase "CFR11: Send Feedback to Improve Future Outputs" as CFR11
+
+}
+  
+Client --> CFR001 : View Financial Insights Dashboard
+Client --> CFR002 : Receive Alerts on Anomalous Transactions
+Client --> CFR003 : View Predictions Based on Historical Data and Trends
+Client --> CFR004 : Get Personalized Recommendations Aligned with Profile
+Client --> CFR005 : Manage Recommendation Preferences
+Client --> CFR006 : View Spending Limit Alerts Exceeding Thresholds
+Client --> CFR007 : Access Investment Opportunities Based on Risk Profile
+Client --> CFR008 : Receive News Related to Portfolio
+Client --> CFR009 : Consolidate Financial Info in Single Dashboard
+Client --> CFR10: Manage Relationship with Advisors
+
+FA --> FAFR001 : Manage Client Mentoring Sessions Using Insights
+FA --> FAFR002 : View Intervention Alerts for Proactive Help
+FA --> FAFR003 : Review Predictive Analytics on Clients' Finances
+
+SA --> SAFR001: Adjust Analysis Parameters for Compliance and Accuracy
+
+S --> SFR002: Send Personalized Recommendations to Client
+S --> AIFR009: Request AI Component's Predictions for Intervention
+
+A --> AIFR001: Generate Financial Predictions Using Data & Trends
+A --> AIFR002: Create Personalized Recommendations Based on Profiles
+A --> AIFR003: Detect Spending Limit Alerts via Pattern Recognition
+
+Client <|-- CFR005 : Manage Preferences for Recos
+Client <|-- SFR009 : Request AI's Predictive Interventions (via System)
+FA <|-- FAFR001 : Use Insights from AI Component
+SA <|-- SAFR001: Control Analysis Parameters via System
+
+S --> AIFR008: Generate Client Intervention Recommendations for Advisors
+AIFR009 --> SFR003: Provide Interventions to System for Requesting Predictions (via S)
+
+CFR11 --> F : Send Feedback Loop from Clients/Advisors/System Admins to Improve AI
+
+@enduml

@@ -1,0 +1,92 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+system "System" as S
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Receive Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Aligned to Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Consolidated Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+
+  C --> CFR001 : View dashboard
+  C --> CFR002 : Receive alerts
+  C --> CFR003 : View predictions
+  C --> CFR004 : Get recommendations
+  C --> CFR005 : Adjust preferences
+  C --> CFR006 : Alerts on spending limits
+  C --> CFR007 : Investment opportunities
+  C --> CFR008 : Portfolio news
+  C --> CFR009 : Consolidated view
+  C --> CFR10 : Manage advisors
+
+}
+
+rectangle "System Administration" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  SA -> SAFR001 : Configure parameters
+}
+S <|-- SAFR001 : System manages parameter changes
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: Analyze Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+
+  FA --> FAFR001 : Manage sessions
+  FA --> FAFR002 : View alerts
+  FA --> FAFR003 : Analyze analytics
+  FA --> FAFR004 : Configure parameters for segments
+}
+
+rectangle "System Functionalities" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  usecase "SFR002: Personalized Recommendations Based on Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI" as SFR004
+  usecase "SFR005: Spending Limit Alerts Based on Thresholds" as SFR005
+  usecase "SFR006: Investment Opportunity Analysis for Users" as SFR006
+  usecase "SFR007: Find Specific Investments Matching Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Anomaly Transaction Alerts Based on AML Regulations" as SFR008
+  usecase "SFR009: Contextualized News for Portfolios" as SFR009
+  usecase "SFR010: Generate Client Dashboards" as SFR010
+  usecase "SFR013: Manage User Feedback to Improve System" as SFR013
+
+  S --> SFR001 : Deliver alerts
+  S --> SFR002 : Provide personalized recommendations
+  S --> SFR003 : Request financial predictions from AI
+  S --> SFR004 : Request personal recommendations from AI
+  S --> SFR005 : Manage spending limit alerts
+  S --> SFR006 : Analyze investment opportunities for users
+  S --> SFR007 : Find investments matching criteria and ESG preferences
+  S --> SFR008 : Detect AML-related anomalies
+  S --> SFR009 : Extract portfolio-relevant news
+  S --> SFR10 : Generate dashboards
+}
+
+rectangle "AI System" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Personalized Recommendations Based on Profiles and Standards" as AIFR002
+  usecase "AIFR003: Spending Limit Alerts for Unusual Patterns" as AIFR003
+  usecase "AIFR004: Investment Opportunity Analysis Aligning with Risk Profile" as AIFR004
+
+  S --> AIFR001 : Receive financial predictions from AI
+  C --> AIFR002 : Get recommendations based on profile and standards
+}
+
+S <|-- CFR001, CFR002, ..., CFR10: System provides client capabilities
+SA <|-- SAFR001: SysAdmin configures system parameters
+
+@enduml

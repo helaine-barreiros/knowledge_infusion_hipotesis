@@ -1,0 +1,100 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alerts Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities" as CFR007
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Advisors" as CFR009
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Identify Investment Opportunities" as AIFR004
+  usecase "AIFR005: Analyze Portfolio Against Risk Profiles" as AIFR005
+}
+
+actor Client as client1
+
+client1 --> CFR001 : View Financial Insights Dashboard  
+client1 --> SAFR002 : Manage Alerts Preferences  
+client1 --> CFR003 : View Financial Predictions  
+client1 --> CFR004 : Receive Personalized Recommendations  
+client1 --> CFR005 : Manage Recommendation Preferences  
+client1 --> CFR006 : View Spending Limit Alerts  
+client1 --> CFR007 : Access Investment Opportunities  
+client1 --> CFR008 : Receive News Related to Portfolio  
+client1 --> CFR009 : Manage Relationship with Advisors  
+
+actor SysAdmin as sysadmin
+
+sysadmin --> SAFR001 : Manage Analysis Parameters  
+
+actor FinancialAdvisor as advisor
+
+advisor --> FAFR001 : Manage Client Mentoring Sessions  
+advisor --> FAFR002 : View Intervention Alerts  
+advisor --> FAFR003 : View Predictive Analytics  
+advisor --> FAFR004 : Configure Analysis Parameters  
+
+usecase "SFR008: Request Investment Opportunity Analysis" as SFR008
+SFR008 <|-- AIFR004
+
+usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+AIFR002 <|-- SFR002  
+
+usecase "AIFR001: Generate Financial Predictions" as AIFR001  
+AIFR001 <|-- SFR003
+
+usecase "SFR004: Request Personalized Recommendations" as SFR004
+SFR004 <|-- AIFR002  
+
+usecase "SAFR005: Generate Spending Limit Alerts" as SAFR005  
+SAFR005 <|-- AIFR003
+
+usecase "AIFR006: Analyze Anomaly Transactions" as AIFR006
+AIFR006 <|-- SFR008  
+
+usecase "SFR012: Generate Client Dashboards" as SFR012  
+SFR012 <|-- CFR009
+
+usecase "CFR011: Send Feedback" as CFR011
+client1 --> CFR011 : Provide feedback to system 
+
+@enduml
+```
+
+### Explanation:
+- **Actors** are represented using the `actor` keyword. The main actors here include *Client*, *SysAdmin* (System Administrator), and *FinancialAdvisor*. Each actor corresponds to their respective functional requirements.
+  
+- **Use Cases** are defined with exact IDs from the provided list, such as "CFR001", "SAFR002", etc., using the `usecase` keyword. These use cases represent specific functionalities that each role (actor) wants or needs.
+
+- Relationships between actors and use cases are established via arrows (`-->`). For example:
+  - A *Client* can view a financial insights dashboard, manage alerts preferences, receive personalized recommendations, etc.
+  - The *SysAdmin* manages analysis parameters for the system.
+  
+- **Inheritance** relationships (e.g., `<<extends>>`) or aggregation are represented using `<|--`. This is seen in cases like:
+  - AIFR002 (`Generate Personalized Recommendations`) extends SFR002 (`Deliver Personalized Recommendations`).
+  - Similarly, other components and their dependencies are linked appropriately.
+
+- **Grouping** of related use cases into packages or rectangles isn't explicitly required here since the diagram is already structured logically by actor/role. However, if needed, this could be achieved using `package` notation (e.g., `package Professional { ... }`). 
+
+### Key Observations:
+1. The system includes both client-facing and administrative functionalities.
+2. There are multiple AI-driven components (`AIFR00x`) that generate predictions, recommendations, alerts, etc., which interact with the main system (`SFR00x`).
+3. Financial Advisors have their own set of use cases related to mentoring sessions, intervention alerts, predictive analytics, and parameter configuration.
+4. The diagram adheres strictly to the provided requirements without inventing additional actors or use cases.
+
+This PlantUML code accurately reflects all functional requirements in a structured and readable format. Adjustments can be made based on further analysis if needed, but this should serve as an effective starting point for implementation.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1281]

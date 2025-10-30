@@ -1,0 +1,75 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor (FA)" as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  CFR001 --> (View Alerts)
+  CFR002 --> FAFR003
+  FA -> FAFR004
+}
+
+package System {
+  actor "System Admin" as SAFR001
+  usecase "SFR001: Deliver Alerts to Users Through Appropriate Notification Channels" as SFR001
+  
+  CFR002 --> (View Predictive Analytics about Clients' Financial Situations)
+  
+  FAFR003 <|-- (FAFR004) : Configures
+}
+
+package AI {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  
+  CFR002 --> (View Alerts)
+  FA -> AIFR001
+}
+
+rectangle "Client Dashboard" {
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  CFR001 --> CFR009
+  SAFR001 -> SFR012
+}
+
+rectangle "Investment Opportunities" {
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+  
+  CFR001 --> (View Alerts)
+  SAFR001 -> SFR006
+}
+
+rectangle "News and Insights" {
+  usecase "CFR008: View News Related to My Investment Portfolio" as CFR008
+  usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR009
+  
+  CFR001 --> (View Alerts)
+  SAFR001 -> SFR009
+}
+
+rectangle "Management and Feedback" {
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+  usecase "SAFR005: Request Spending Limit Alerts from AI Component" as SAFR005
+  
+  CFR002 --> (View Predictive Analytics about Clients' Financial Situations)
+  
+  FAFR003 <|-- (FAFR004) : Configures
+}
+
+rectangle "Feedback and Improvement" {
+  usecase "CFR11: Send Feedback About the System's Recommendations and Insights" as CFR11
+  
+  SAFR005 --> SFR020
+}
+@enduml

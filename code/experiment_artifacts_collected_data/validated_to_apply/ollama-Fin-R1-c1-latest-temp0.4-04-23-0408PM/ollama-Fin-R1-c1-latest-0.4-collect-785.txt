@@ -1,0 +1,92 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Fraud Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Adjust Recommendation Preferences" as CFR005
+  usecase "CFR006: Monitor Spending Limits" as CFR006
+  usecase "CFR007: Discover Investment Opportunities" as CFR007
+  usecase "CFR008: Stay Informed with News" as CFR008
+  usecase "CFR009: Access Consolidated Dashboard" as CFR010
+  usecase "CFR011: Manage Data Sharing Permissions" as CFR011
+}
+
+rectangle "Financial Advisor (FAFR)" {
+  actor FAFR003: View Predictive Analytics for Clients
+  actor FAFR002: View Client Intervention Alerts
+  actor FAFR004: Configure Analysis Parameters by Segment
+  
+  FAFR003 --> SAFR001 : label="Receive predictive insights"
+  
+  FAFR002 <|-- (CFR009) : "Alerts to clients via system notifications"
+}
+
+rectangle "System Administrator (SAFR)" {
+  actor SAFR001: Manage Analysis Parameters
+  usecase "SFR004: Request Personalized Recommendations" as SFR004
+  
+  SAFR001 --> CFR005 : label="Adjust preferences for recommendations"
+  
+  SAFR001 <|-- (CFR009) : "Update system settings and dashboards"
+}
+
+rectangle "Client (User)" {
+  actor Client: View Financial Insights, Alerts, Predictions, etc.
+  
+  Client -> CFR001
+  Client --> CFR002 : label="Receive alerts via system notifications"
+  Client --> CFR003
+  Client --> CFR004
+  Client --> CFR005
+  Client --> CFR006
+  Client --> CFR007
+  Client --> CFR008
+  Client --> CFR009
+  Client --> SAFR002 : label="Adjust spending limits"
+  
+  Client <|-- (CFR011) : "Provide feedback to system improvements"
+}
+
+rectangle "System" {
+  usecase "SFR003: Request Financial Predictions from AI" as SFR003
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  CFR004 <|-- (AIFR005) : label="AI generates investment opportunities"
+  
+  AIFR003 --> SAFR002 : label="Generate spending limit alerts"
+}
+
+rectangle "Financial Advisor Support System (SFAFS)" {
+  actor SFAFS: Manage client mentoring sessions, view system-generated insights
+}
+@enduml
+```
+
+### Key Observations:
+1. **Actors**: The diagram includes multiple actors such as Clients, Financial Advisors, and System Administrators with their specific use cases.
+2. **Use Cases**:
+   - Client-related use cases (CFR001–CFR011) focus on viewing dashboards, receiving alerts/predictions/recommendations, managing preferences, etc.
+   - System Administrator uses SAFR001 and SFR004 to manage analysis parameters and request recommendations.
+3. **Relationships**:
+   - Clients interact with the system through various use cases (e.g., CFR002 for fraud alerts).
+   - Financial Advisors receive predictive insights via FAFR003, view client intervention alerts using FAFR002, and configure analysis parameters in SAFR.
+4. **System Components**:
+   - The AI component (AIFR) generates financial predictions, recommendations, spending limit alerts, investment opportunities, etc., which are requested by the system or clients via specific use cases.
+
+### Notes for Improvement:
+- Ensure all actors and use cases map directly to their respective functional requirements.
+- Verify that relationships between actors and use cases align with the provided descriptions. For example, Clients can adjust recommendation preferences (CFR005) through SAFR001 settings managed by System Administrators.
+- Confirm that system components like AIFR are correctly linked to relevant use cases for generating insights and recommendations.
+
+This diagram provides a comprehensive view of how clients, advisors, administrators, and the AI system interact within the financial analysis framework. Adjustments may be needed based on further clarification or additional requirements not explicitly listed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1063]

@@ -1,0 +1,77 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR002: Deliver Alerts to Users" as SAFR002
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities" as CFR007
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008
+  usecase "SAFR003: Process Contextualized News" as SAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "SAFR004: Configure Analysis Parameters by Segment" as SAFR004
+  usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "CFR011: Send Feedback" as CFR011
+
+  Client --> CFR001 : View financial insights dashboard  
+  SysAdmin -> SAFR001 : Manage analysis parameters for AI system  
+  FAFR002 <|-- (FAFR) : Financial Advisor view client intervention alerts  
+  User --(CFR003): View financial predictions  
+  Client --> CFR004: Receive personalized recommendations  
+  Client --> CFR005: Manage recommendation preferences  
+  SysAdmin -> SAFR002: Deliver alerts to users through system (SFR)  
+  Client --> CFR006: View spending limit alerts when exceeding thresholds  
+  Client --(CFR007): Access investment opportunities suitable for risk profile  
+  Client --> CFR008: Receive news related to portfolio  
+  SysAdmin -> SAFR003: Process contextualized news (AIFR)  
+  User --(SFR012): Generate client dashboards with consolidated info  
+  Client --> CFR009: Access personalized dashboard for efficient monitoring  
+  FAFR004 <|-- (FAFR) : Configure analysis parameters by segment  
+  SysAdmin -> SFR008: Request anomaly transaction alerts from AI system  
+  AIFR001 <|-- (AIFR): Generate financial predictions based on data and trends  
+  Client --> CFR011: Send feedback to improve system outputs  
+
+  rectangle "Professional" {
+    actor FinancialAdvisor as FAFR
+    FAFR --(FAFR002)
+    FAFR --(CFR007)
+    FAFR --(SAFR003)
+  }
+
+  SysAdmin --> SAFR004 : Configure analysis parameters for specific client segments  
+}
+
+@enduml
+```
+
+### Explanation:
+1. **Actors**: Identified actors include `Client`, `SysAdmin` (System Administrator), and `FinancialAdvisor`. The system also includes components like the AI (`AIFR`) which are represented as use cases.
+2. **Use Cases**:
+   - Client-related use cases: Viewing dashboards, receiving recommendations/predictions/alerts, managing preferences, etc.
+   - SysAdmin-related management of analysis parameters and alerts.
+   - FinancialAdvisor-specific interventions (e.g., viewing client alerts).
+3. **Relationships**: Arrows indicate interactions between actors and use cases. For example:
+   - `Client` interacts with multiple use cases like viewing financial insights (`CFR001`), receiving recommendations (`CFR004`), etc.
+   - `SysAdmin` manages analysis parameters (`SAFR001`) and delivers alerts to users through the system (`SFR002`).
+   - Financial Advisors view client intervention alerts (`FAFR002`) and process contextualized news (`SAFR003`).
+
+### Key Observations:
+- The `System` boundary includes all use cases, with clients as primary actors. SysAdmin handles backend management.
+- Inheritance relationships are implied (e.g., `FinancialAdvisor` extends multiple use cases).
+- Logical grouping under "Professional" for Financial Advisors and their specific interactions.
+
+This diagram adheres to the provided requirements while ensuring clarity in actor-to-use case mappings. Adjustments can be made based on further analysis, but this structure meets all specified criteria.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1079]

@@ -1,0 +1,103 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  Client --> CFR001 : "View Financial Insights"
+  
+  SysAdmin --> SAFR001 : "Manage System Parameters"
+  SysAdmin --> FAFR004 : "Configure Analysis Params for Clients"
+}
+
+rectangle "Financial Advisor (FA)" {
+  actor FA as FAdvisors
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as FAFR003
+  
+  FAdvisors --> FAFR002 : "View Alerts"
+  FAdvisors --> FAFR003 : "Analyze Client Data"
+}
+
+rectangle "Client (C)" {
+  actor C as Users
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR011: Send Feedback on Insights and Recommendations" as CFR011
+  
+  Users --> CFR001 : "View Dashboard"
+  Users --> CFR002 : "Receive Alerts"
+  Users --> CFR003 : "Understand Predictions"
+  Users --> CFR004 : "Get Recos"
+  Users --> CFR005 : "Adjust Preferences"
+  Users --> CFR006 : "Monitor Spending Limits"
+  Users --> CFR007 : "Explore Investments"
+  Users --> CFR008 : "Stay Informed on News"
+  Users --> CFR011 : "Provide Feedback"
+}
+
+rectangle "System Administrator (SA)" {
+  actor SA as SysAdmin
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SysAdmin --> SAFR001 : "Adjust System Rules"
+}
+
+rectangle "AI Component (AIC)" {
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Send Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Identify Investment Opportunities" as AIFR004
+  usecase "AIFR005: Analyze Spent Patterns for Anomalies" as AIFR005
+  usecase "AIFR006: Extract Contextualized News Insights" as AIFR006
+  usecase "AIFR007: Generate Client Predictive Interventions" as AIFR007
+  
+  SysAdmin --> SAFR001 <|-- (AIC) : "Tune AI"
+  
+  Users --> CFR004 --(AIC): "Request Recos"
+  Users --> CFR006 --(AIC): "Check Alerts"
+  Users --> CFR003 --(AIC): "Request Predictions"
+}
+
+rectangle "Client-Specific System (CSS)" {
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR014: Produce Client Analytics" as SFR014
+  
+  Users --> CFR009 --(CSS): "View Consolidated Info"
+}
+
+rectangle "Financial Advisor-Specific System (FAS)" {
+  usecase "FAFR005: View Predictive Interventions for Clients" as FAFR005
+  usecase "FAFR006: Access Client Financial Data" as FAFR006
+  
+  FAdvisors --> FAFR002 --(FAS): "Manage Alerts"
+}
+
+@enduml
+```
+
+### Key Observations:
+1. **Actors**: The diagram includes multiple actors like `Client`, `Financial Advisor (FA)`, and `System Administrator (SA)` each with their specific use cases.
+2. **Use Cases**:
+   - Client-related use cases include viewing dashboards, receiving alerts, making predictions, etc., all tied to the AI component via the system boundary.
+   - System Admin handles parameter management for both the main system and the AI components.
+3. **System Boundary**: The `rectangle` notation defines subsystems like "Client-Specific System (CSS)" which generates client dashboards and analytics. Similarly, there's a "Financial Advisor-Specific System (FAS)" to manage advisor-related functionalities.
+4. **Inheritance Relationships**:
+   - The AI component (`AIC`) is extended by the system admin for parameter tuning via `SAFR001`.
+5. **Grouping**: Use cases are logically grouped under their respective actors or subsystems, ensuring clarity and readability.
+
+This structure ensures all functional requirements are represented accurately with precise relationships between actors and use cases. The diagram adheres strictly to provided IDs and names while maintaining a clear flow of interactions within the system.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1267]

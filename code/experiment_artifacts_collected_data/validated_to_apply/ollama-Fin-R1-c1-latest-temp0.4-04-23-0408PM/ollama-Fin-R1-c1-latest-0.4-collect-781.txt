@@ -1,0 +1,98 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Anomaly Detection Parameters" as SAFR002
+  usecase "FAFR005: Schedule Client Mentoring Sessions" as FAFR005
+  usecase "SFR013: Generate Alerts Based on Conditions" as SFR013
+  usecase "AIFR007: Correlate News with Portfolios" as AIFR007
+
+  Client --> CFR001 : View Financial Insights Dashboard  
+  SysAdmin --> SAFR002 : Manage Analysis Parameters for AI  
+  FAFD --> FAFR005 : Schedule Mentoring Sessions  
+
+  rectangle "Client" {
+    actor "User (CFR001)" as User
+    user -> CFR001 : View Financial Insights Dashboard
+    user -> SFR013 : Receive Alerts Based on Conditions  
+  }
+
+  rectangle "Financial Advisor" {
+    actor FAFD as FinancialAdvisor
+    FAFD --> AIFR007 : Correlate News with Portfolios  
+    FAFD --> SAFR002 : Manage Anomaly Detection Parameters  
+  }
+
+  rectangle "System Administrator" {
+    SysAdmin -> SFR013 : Configure System-Wide Alerts  
+  }
+}
+
+@enduml
+```
+
+### Explanation:
+- **Client**: Represents the user (including clients, advisors) who interacts with the system. They can view financial insights dashboards and receive alerts.
+- **Financial Advisor (FAFD)**: A role specifically for advisors to manage mentoring sessions and access predictive analytics.
+- **System Administrator (SysAdmin)**: Manages AI parameters like anomaly detection settings.
+
+### Use Cases:
+1. **CFR001**: View Financial Insights Dashboard – Client can view their financial data in a consolidated format.
+2. **SAFR002**: Manage Anomaly Detection Parameters – SysAdmin adjusts thresholds for transaction alerts (e.g., fraud).
+3. **FAFR005**: Schedule Mentoring Sessions – FAFD organizes client meetings based on system-generated insights.
+4. **SFR013**: Generate Alerts Based on Conditions – System sends notifications when predefined conditions are met (e.g., spending limits, portfolio changes).
+5. **AIFR007**: Correlate News with Portfolios – AI fetches relevant news for the user’s investment holdings.
+
+### Relationships:
+- Clients use `CFR001` and `SFR013`.
+- FAFD uses `FAFR005`, `SAFR002`, and `AIFR007`.
+- SysAdmin uses `SAFR002`.
+
+This structure ensures all actors, their interactions with specific use cases, and the system’s role in managing these are clearly represented. Adjustments can be made based on further details from requirements if needed.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001  
+  usecase "SAFR002: Manage Anomaly Detection Parameters" as SAFR002
+  usecase "FAFR005: Schedule Client Mentoring Sessions" as FAFR005
+  usecase "SFR013: Generate Alerts Based on Conditions" as SFR013  
+  usecase "AIFR007: Correlate News with Portfolios" as AIFR007
+
+  SysAdmin --> SAFR002 : Manage Analysis Parameters for AI
+  FAFD --> FAFR005 : Schedule Mentoring Sessions  
+
+  rectangle "Client" {
+    actor User  
+    user -> CFR001 : View Financial Insights Dashboard  
+    user -> SFR013 : Receive Alerts Based on Conditions  
+  }
+
+  rectangle "Financial Advisor (FAFD)" {
+    actor FAFD as FinancialAdvisor
+    FAFD --> AIFR007 : Correlate News with Portfolios  
+    FAFD --> SAFR002 : Manage Anomaly Detection Parameters  
+  }
+
+  SysAdmin -> SFR013 : Configure System-Wide Alerts  
+
+}
+
+@enduml
+```
+### Key Adjustments:
+- **User (Client)**: Simplified to "user" for clarity, assuming the client is a generic user role.
+- **FAFD**: Explicitly labeled as FinancialAdvisor within its rectangle.
+- **SysAdmin**: Directs `SAFR002` and indirectly through `SFR013`.
+
+This ensures all functional requirements are mapped accurately without redundancy. Further refinements can be applied based on specific implementation details or additional use cases not listed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1049]

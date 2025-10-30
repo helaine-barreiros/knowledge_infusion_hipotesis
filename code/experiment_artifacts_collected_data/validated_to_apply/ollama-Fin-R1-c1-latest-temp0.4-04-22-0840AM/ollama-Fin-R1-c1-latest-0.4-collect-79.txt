@@ -1,0 +1,70 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Fraud Alerts Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Customize Recommendation Preferences" as CFR005
+  usecase "CFR006: Monitor Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Consolidate Financial Information on Dashboard" as CFR010
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+
+  usecase "SAFR003: Configure Analysis Parameters for Compliance" as SAFR003
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  client --> CFR003 : "View Financial Predictions"
+  client --> CFR004 : "Receive Personalized Recommendations"
+  client --> SAFR002 : "Manage Fraud Alerts Preferences"
+  client --> CFR006 : "Monitor Spending Limit Alerts"
+  client --> CFR007 : "View Investment Opportunities"
+  client --> CFR008 : "Access News Related to Portfolio"
+  client --> CFR010 : "Consolidate Financial Information on Dashboard"
+  client --> SAFR003 : "Configure Analysis Parameters for Compliance"
+
+  sysAdmin --> SAFR002
+  sysAdmin --> SAFR003
+
+  financialAdvisor --> FAFR002
+  financialAdvisor --> AIFR008
+
+  system --> CFR001 <|-- (CFR009)
+  system --> CFR004 <|-- (SFR015)
+  system --> CFR006 <|-- (AIFR003)
+  system --> CFR007 <|-- (AIFR005)
+  system --> SAFR002
+  system --> AIFR008
+
+  client <-- system : "Receive Feedback"
+}
+
+@enduml
+```
+
+### Key Observations:
+1. **Actors**: The diagram includes Clients, System Administrators, Financial Advisors, and the AI system itself (AIS). Each actor is represented with their respective use cases.
+2. **Use Cases**:
+   - Client-related use cases include viewing dashboards, receiving recommendations/predictions/alerts/news, etc.
+   - System Administrator focuses on managing analysis parameters for compliance.
+   - Financial Advisor uses case like generating predictive interventions and viewing client alerts.
+3. **Relationships**: 
+   - Clients interact with most of the system’s public features (CFR001–CFR010).
+   - System Administrators manage internal settings (SAFR002, SAFR003).
+   - Financial Advisors leverage predictive tools and advisory insights (FAFR002, AIFR008).
+4. **Inheritance/Extensions**:
+   - Some use cases extend others logically; e.g., `CFR010` consolidates information from multiple sources.
+5. **System Boundaries**: The system encompasses all interactions between actors and internal components (e.g., AI, SFR).
+
+This structure ensures clarity in how different roles interact with the system’s functionalities. Adjustments can be made based on further analysis or additional requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 853]

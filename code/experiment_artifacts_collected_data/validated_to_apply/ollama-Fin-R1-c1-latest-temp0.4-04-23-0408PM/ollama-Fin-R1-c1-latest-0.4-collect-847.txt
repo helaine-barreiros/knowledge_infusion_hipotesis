@@ -1,0 +1,115 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as fa
+actor SysAdmin as sa
+system "System" as sys
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Spending Limit Alerts for Budget Control" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access Portfolio-Related News" as CFR008
+  usecase "CFR009: Consolidated Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+
+  c1 --> CFR001 : View dashboard
+  c1 --> CFR002 : Receive alerts
+  c1 --> CFR003 : Predictions
+  c1 --> CFR004 : Recommendations based on profile
+  c1 --> CFR005 : Manage preferences
+  c1 --> CFR006 : Spending limit alerts
+  c1 --> CFR007 : Investment opportunities
+  c1 --> CFR008 : News access
+  c1 --> CFR009 : Consolidated view
+  c1 --> CFR10 : Manage relationships
+
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Segment" as FAFR004
+
+  fa --> FAFR001 : Manage sessions
+  fa --> FAFR002 : Intervention alerts
+  fa --> FAFR003 : Predictive analytics
+  fa --> FAFR004 : Configure parameters
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+
+  sa --> SAFR001 : Manage params
+}
+
+system sys <<includes>> {
+  
+  // Subsystems and components (e.g., AIFR, SFR)
+  system "AI Component" as aicomp
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Personalized Recommendations Based on Profile" as AIFR002
+  usecase "AIFR003: Spending Limit Alerts for Users" as AIFR003
+  usecase "AIFR004: Investment Opportunity Analysis" as AIFR004
+  usecase "AIFR005: Identify Investment Opportunities Based on Risk Profile" as AIFR005
+  usecase "AIFR006: Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Contextualized News Insights for Portfolios" as AIFR007
+  usecase "AIFR008: Predictive Intervention Recommendations" as AIFR008
+  usecase "AIFR009: Client Predictive Insights" as AIFR009
+
+  aicomp <<includes>> {
+    system "Data Analysis Engine" as dengine
+    system "User Profiling System" as upsys
+    system "Market Trend Analyzer" as mta
+    usecase "AIFR01: Analyze Historical Transactions" in dengine
+    usecase "AIFR02: Apply Market Trends to Predictions" in mta
+
+  }
+
+}
+
+system sys <<includes>> {
+  
+  // Subsystems and components (e.g., SFR)
+  system "Notification System" as notifsys
+  system "Recommendation Engine" as receng
+  usecase "SFR001: Deliver Alerts to Users" in notifsys
+  usecase "SFR002: Personalized Recommendations from AI" in receng
+
+}
+
+// Relationships between components and systems
+Client c1 --> sys : interacts with system through UI
+FinancialAdvisor fa --> sys : uses system for client management, alerts etc.
+SysAdmin sa --> sys : administers analysis parameters via SAFR001 usecase.
+
+@enduml
+```
+
+### Key Observations:
+- **Actors**: The diagram includes three main actors: `Client`, `FinancialAdvisor`, and `SysAdmin`. Each has their respective use cases tied to specific functionalities within the system.
+- **Use Cases**:
+  - Clients (`c1`) can view dashboards, receive alerts, make predictions, get recommendations, manage preferences, etc.
+  - Financial Advisors (`fa`) focus on mentoring sessions, client intervention alerts, predictive analytics, and parameter configuration for segments.
+  - System Administrators (`sa`) handle analysis parameters management via `SAFR001`.
+- **System Components**:
+  - The system is divided into subcomponents like the AI Component (with its own use cases), Notification System, Recommendation Engine, etc. These components are linked to specific functionalities such as generating alerts, delivering recommendations, analyzing data, and more.
+  
+### Notes on Relationships:
+- Use case relationships (`-->`) show direct interactions between actors and system features. For example, a client uses the `CFR001` usecase by interacting with the financial insights dashboard provided through the system.
+- Inheritance is represented using `<|--`. The AI Component includes sub-use cases like generating predictions or analyzing transactions, which are part of its broader functionality.
+
+This structure ensures clarity and alignment with the functional requirements while adhering to PlantUML standards. Each use case corresponds precisely to a requirement ID from the list provided.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1381]

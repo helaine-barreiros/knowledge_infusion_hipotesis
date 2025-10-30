@@ -1,0 +1,105 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  client --> CFR001 : "Client wants to view financial data in a consolidated format."
+  
+  SysAdmin -> SAFR001 : "System Administrator manages analysis parameters for compliance and accuracy."
+
+  FAFR003 <|-- (CFR001) : "Financial Advisor uses system-generated insights to provide guidance."
+}
+
+rectangle "User" {
+  actor Client as client
+  actor FinancialAdvisor as advisor
+
+  client --> CFR001 : "Client requests access to financial dashboards."
+  
+  advisor -> FAFR003 : "Advisors view predictive analytics for clients."
+
+  SysAdmin -- (SFR012) : "System generates and sends client dashboards."
+}
+
+rectangle "Alert System" {
+  usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  SysAdmin -> SAFR001 : "System Administrator configures parameters for anomaly detection."
+
+  client -- (SFR008) : "Client receives alerts about suspicious transactions."
+  
+  AIFR006 <|-- SFR008 : "AI system identifies and reports anomalies to the alert system."
+}
+
+rectangle "Recommendation System" {
+  usecase "SFR004: Request Personalized Recommendations" as SFR004
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+
+  client -- (SFR004) : "Client requests personalized financial advice."
+  
+  advisor -> FAFR003 : "Advisors view and adjust recommendations based on client needs."
+
+  AIFR002 <|-- SFR004 : "AI system provides tailored suggestions to the user."
+}
+
+rectangle "Investment Analysis" {
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+  usecase "AIFR005: Generate Investment Opportunities Based on Risk Profile" as AIFR005
+
+  client -- (SFR006) : "Client seeks investment opportunities aligned with their risk profile."
+
+  advisor -> FAFR003 : "Advisors review and approve recommendations."
+  
+  AIFR005 <|-- SFR006 : "AI system identifies suitable investments for the user."
+}
+
+rectangle "News Service" {
+  usecase "SFR009: Request Contextualized News" as SFR009
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+  client --> SFR009 : "Client wants to stay informed about market events affecting their investments."
+  
+  advisor -> FAFR003 : "Advisors access news insights for clients."
+
+  AIFR007 <|-- SFR012 : "AI system provides relevant financial news to the dashboard generator."
+}
+
+rectangle "Feedback Loop" {
+  usecase "CFR011: Send Feedback on Recommendations/Insights" as CFR011
+  client -- (CFR011) : "Client provides feedback to improve future outputs."
+
+  SysAdmin -> SAFR001 : "System Administrator reviews and updates parameters based on user input."
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The main system is represented as a rectangle containing all use cases, actors, and their relationships.
+- **Actors**:
+  - `Client`: Represents end-users (e.g., individuals or businesses) who interact with the financial insights dashboard.
+  - `FinancialAdvisor` and `SysAdmin` are roles within the system for managing recommendations, alerts, and parameters respectively.
+- **Use Cases Grouped by Functionality**:
+  - **Viewing Financial Data**: CFR001 (Client), SFR012 (System).
+  - **Managing Analysis Parameters**: SAFR001 (SysAdmin).
+  - **Personalized Recommendations**: SFR004, AIFR002.
+  - **Investment Opportunities**: SFR006, AIFR005.
+  - **Anomaly Alerts**: SFR008, AIFR006.
+  - **Contextual News**: SFR009, AIFR007.
+- **Relationships**:
+  - Direct interactions between actors and use cases (e.g., Client -> CFR001).
+  - Inheritance or delegation relationships using `<|--` notation (e.g., FAFR003 uses system-generated insights from AI components).
+
+This diagram ensures all functional requirements are represented accurately, with clear actor-to-use case mappings. Adjustments may be needed based on further analysis of the requirements' nuances.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1143]

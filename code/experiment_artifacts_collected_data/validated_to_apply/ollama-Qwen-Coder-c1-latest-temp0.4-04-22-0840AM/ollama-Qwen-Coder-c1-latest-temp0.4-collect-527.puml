@@ -1,0 +1,71 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts About Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Current Trends" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as CFR004
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds in Specific Expense Categories" as CFR006
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+  usecase "CFR008: View News Related to My Investment Portfolio" as CFR008
+  usecase "CFR009: Access a Personalized Dashboard That Consolidates Financial Information in a Single View" as CFR009
+  usecase "CFR010: Manage Relationship with Financial Advisors, Including Permissions for Sharing Data" as CFR010
+  
+  Client --> (SFR012) : Generate Dashboards
+  Client --> (SFR013) : Generate Alerts Based on Conditions
+  Client --> (AIFR008) : Predictive Intervention Recommendations
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts When Patterns Require Professional Attention" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations" as FAFR003
+  
+  FinancialAdvisor --> (SFR016) : Enhance Value of Guidance Provided to Clients
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters for the AI System" as SAFR001
+  
+  SysAdmin --> (AIFR002) : Generate Personalized Recommendations Based on Industry Standards
+}
+
+rectangle "Financial Advisor & Client" {
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  FinancialAdvisor --> (SFR015) : Request Predictive Intervention Analyses from AI Component
+}
+
+rectangle "System and Components" {
+  usecase "SFR001: Deliver Alerts to Users Through Appropriate Notification Channels" as SFR001
+  usecase "SFR002: Deliver Personalized Recommendations Based on Financial Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts From AI Component" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis From AI Component" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities from AI Component Matching User Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts From AI Component to Detect Potentially Fraudulent Activities in Accordance with AML Regulations" as SFR008
+  usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios from Trusted Financial News Sources" as SFR009
+  usecase "SFR010: Process Contextualized News To Extract Relevant Information for Users' Financial Situations" as SFR010
+  usecase "SFR011: Request Contextualized News Insights From AI Component to Identify Potential Impacts on Users' Investments" as SFR011
+  
+  System --> (AIFR006) : Generate Anomaly Transaction Alerts by Employing Pattern Recognition in Compliance with FinCEN Requirements
+}
+
+rectangle "AI System" {
+  usecase "AIFR001: Generate Financial Predictions for Users By Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations For Users Based on Their Financial Profiles, Goals, and Risk Tolerance As Defined by Industry Standards Like FINRA Guidelines" as AIFR002
+  
+  AI --> (SFR003) : Request Financial Predictions from AI Component
+}
+
+rectangle "User Feedback Loop" {
+  usecase "CFR011: Send Feedback About the System's Recommendations and Insights to Help Improve Future Outputs" as CFR011
+  
+  UserFeedbackLoop --> (AIFR002) : Generate Personalized Recommendations Based on Industry Standards
+}
+@enduml

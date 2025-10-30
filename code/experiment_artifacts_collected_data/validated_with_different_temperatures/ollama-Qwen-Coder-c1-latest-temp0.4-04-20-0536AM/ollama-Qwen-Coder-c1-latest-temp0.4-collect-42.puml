@@ -1,0 +1,59 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System: as Sys
+:Financial Advisor: as FA
+:System Administrator: as SA
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  Client --> SAFR005 : "Manage Recommendation Preferences"
+  Client --> SFR003 : "Request Financial Predictions"
+  Client --> SFR004 : "Request Personalized Recommendations"
+  Client --> SFR006 : "Request Spending Limit Alerts"
+  Client --> SFR012 : "Generate Client Dashboards"
+  Client --> AIFR007 : "Generate Contextualized News Insights"
+  
+  Financial Advisor --> FAFR001
+  Financial Advisor --> SAFR004 : "Configure Analysis Parameters for Specific Segments"
+  Financial Advisor --> SFR003 : "Request Financial Predictions"
+  Financial Advisor --> AIFR002 : "Generate Personalized Recommendations"
+  Financial Advisor --> AIFR008 : "Generate Client Predictive Intervention Recommendations"
+  
+  System Administrator --> SAFR001
+  System Administrator --> SFR019 : "Maintain Historical Record of Insights"
+  System Administrator --> AIFR006 : "Generate Anomaly Transaction Alerts"
+}
+
+rectangle "Client" {
+  usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+  
+  Client --> CFR002 : "View Alerts for Anomalous Transactions"
+  Client --> SAFR005 : "Manage Recommendation Preferences"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as FAFR003
+  usecase "FAFR012: Request Contextualized News Insights for Advisors" as FAFR012
+  
+  Financial Advisor --> FAFR003 : "View Predictive Analytics"
+  Financial Advisor --> AIFR007 : "Generate Contextualized News Insights"
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR005: Manage Recommendation Preferences for Clients" as SAFR005
+  
+  System Administrator --> SAFR001
+  System Administrator --> SAFR004 : "Configure Analysis Parameters for Specific Segments"
+}
+@enduml

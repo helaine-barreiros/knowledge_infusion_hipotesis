@@ -1,0 +1,65 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002  
+  usecase "SFR009: Request Contextualized News" as SFR009
+  usecase "CFR003: View Financial Predictions" as CFR003 
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004  
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SAFR003: Configure Analysis Parameters for Clients" as SAFR003  
+  usecase "CFR006: View Spending Limit Alerts" as CFR006 
+  usecase "FAFR004: Manage Client Segments' Analysis Parameters" as FAFR004
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019  
+  usecase "CFR007: View Investment Opportunities" as CFR007 
+  usecase "AIFR005: Generate Investment Opportunity Analyses" as AIFR005
+  usecase "SFR020: Manage User Feedback" as SFR020  
+  usecase "CFR011: Send System Recommendations/Insights Feedback" as CFR011 
+}
+
+actor "Client" as Client {
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  Client --> SAFR002 : "Manage Alert Preferences"
+  Client --> SFR009 : "Request Contextualized News"
+  Client --> CFR003 : "View Financial Predictions"
+  Client --> CFR004 : "Receive Personalized Recommendations"
+  Client --> CFR005 : "Manage Recommendation Preferences"
+  Client --> CFR006 : "View Spending Limit Alerts"
+  Client --> SFR012 : "Generate Client Dashboards"
+  Client --> SAFR003 : "Configure Analysis Parameters for Clients"
+  Client --> CFR007 : "View Investment Opportunities"
+  Client --> AIFR005 : "Request Investment Opportunity Analyses"
+}
+
+actor "Financial Advisor" as FAdvisor {
+  FAdvisor --> SFR019 : "Maintain Historical Record of Insights"
+  FAdvisor --> SAFR003 : "Configure Analysis Parameters for Clients"
+  FAdvisor --> CFR007 : "View Investment Opportunities"
+  FAdvisor --> AIFR008 : "Request Predictive Intervention Analyses"
+}
+
+actor "System Administrator" as SysAdmin {
+  SysAdmin --> SAFR001 : "Manage System's AI Algorithms and Analysis Parameters for Compliance"
+  SysAdmin --> SFR020 : "Manage User Feedback"
+  SysAdmin --> FAFR004 : "Configure Client Segments' Analysis Parameters"
+}
+
+actor "AI System" as AISystem {
+  AISystem <|-- AIFR001: "Generate Financial Predictions"
+  AISystem <|-- AIFR002: "Generate Personalized Recommendations"
+  AISystem <|-- AIFR003: "Generate Spending Limit Alerts"
+  AISystem <|-- AIFR004: "Identify Suitable Investments Based on Risk Profiles"
+  AISystem <|-- AIFR005: "Analyze Investment Opportunities Against Client Criteria and ESG Preferences"
+  AISystem <|-- AIFR006: "Detect Anomalous Transactions via Pattern Recognition"
+  AISystem <|-- AIFR007: "Correlate Financial News with User Portfolios for Relevance"
+  AISystem <|-- AIFR008: "Identify Patterns For Client Engagement Recommendations"
+}
+
+actor "Client" as Client {
+  Client --> CFR011 : "Send Feedback to System"
+}
+@enduml

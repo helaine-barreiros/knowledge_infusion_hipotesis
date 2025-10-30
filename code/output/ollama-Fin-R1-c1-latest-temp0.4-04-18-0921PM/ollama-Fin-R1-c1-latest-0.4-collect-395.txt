@@ -1,0 +1,59 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "AIFR009: Generate Contextualized News Insights" as AIFR009
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  FAFR003 <|-- (CFR002) : "Client Intervention Alerts for Advisors"
+  
+  rectangle Professional {
+    actor Client as c
+    actor FinancialAdvisor as fadvisors
+    actor SystemAdministrator as sysadmin
+
+    client --> CFR001
+    client --> SFR014 : "View Spending Limit Alerts"
+    client --> AIFR007 : "Receive Anomaly Transaction Alerts"
+
+    financialadvisor --> FAFR003
+    financialadvisor --> AIFR008 : "Generate Client Predictive Intervention Recommendations"
+
+    sysadmin --> SAFR001
+
+  }
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire system is enclosed within a rectangle labeled "System".
+- **Use Cases**:
+  - `CFR001: View Financial Insights Dashboard` (Client)
+  - `SAFR001: Manage Analysis Parameters` (SysAdmin)
+  - `FAFR003: View Predictive Analytics for Clients` (FinancialAdvisor and Client)
+  - `SFR012: Generate Client Dashboards` (System)
+  - `AIFR009: Generate Contextualized News Insights` (AI System)
+- **Actors**:
+  - **Client**: Represents all clients, including those who are Financial Advisors or SysAdmins.
+    - Interacts with use cases like viewing dashboards and receiving alerts.
+  - **FinancialAdvisor**: Manages client mentoring sessions, views predictive analytics, etc.
+  - **SysAdmin**: Handles system-level management tasks like parameter configuration.
+- **Relationships**:
+  - Direct interactions between actors (e.g., Client → CFR001).
+  - Indirect relationships via use cases (e.g., FinancialAdvisor → FAFR003).
+
+This diagram groups related entities under the "Professional" package and ensures all functional requirements are represented accurately. The system boundary clarifies that these components operate within a single, integrated environment. Adjustments may be needed based on further analysis of dependencies or additional use cases not explicitly listed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 612]

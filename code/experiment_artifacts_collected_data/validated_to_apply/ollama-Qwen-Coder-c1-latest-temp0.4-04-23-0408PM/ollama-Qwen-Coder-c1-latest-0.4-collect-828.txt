@@ -1,0 +1,169 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR013: Generate Client Alerts" as SFR013
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  usecase "SFR015: Request Predictive Intervention Analyses" as SFR015
+  usecase "SFR016: Request Predictive Insights" as SFR016
+  usecase "SFR017: Generate Financial Health Reports" as SFR017
+  usecase "SFR018: Manage Users' Financial Goals" as SFR018
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  usecase "SFR020: Manage User Feedback" as SFR020
+  
+  rectangle "Client System" {
+    actor Client as C
+    
+    C --> (CFR001)
+    C --> (CFR002)
+    C --> (CFR003)
+    C --> (CFR004)
+    C --> (CFR005)
+    C --> (CFR006)
+    C --> (CFR007)
+    C --> (CFR008)
+    C --> (CFR009)
+    C --> (CFR10)
+  }
+  
+  rectangle "Financial Advisor System" {
+    actor FinancialAdvisor as FA
+    
+    FA --> (FAFR001)
+    FA --> (FAFR002)
+    FA --> (FAFR003)
+    FA --> (FAFR004)
+    
+    FA <|-- C
+  }
+  
+  rectangle "System Administrator System" {
+    actor SysAdmin as SA
+    
+    SA --> (SAFR001)
+    
+    SA <|-- C
+  }
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunities" as AIFR005
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+  usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+  
+  SFR012 --> (AIFR007)
+  SFR013 --> (AIFR006)
+  SFR014 --> (AIFR008)
+  
+  FA <|-- SA
+}
+
+rectangle "Notification Component" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  
+  C --> (SFR001)
+  FA --> (SFR001)
+  SA --> (SFR001)
+  
+  SFR020 --> (SFR001)
+}
+
+rectangle "Recommendation Component" {
+  usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+  
+  C --> (SFR002)
+  FA --> (SFR002)
+  
+  AIFR004 <|-- SFR002
+}
+
+rectangle "Prediction Component" {
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  
+  C --> (SFR003)
+  FA --> (SFR003)
+  
+  AIFR001 <|-- SFR003
+}
+
+rectangle "Personalized Recommendations Component" {
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  
+  C --> (AIFR002)
+  FA --> (AIFR002)
+  
+  SFR014 <|-- AIFR002
+}
+
+rectangle "Spending Limit Alerts Component" {
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  
+  C --> (SFR005)
+  
+  AIFR003 <|-- SFR005
+}
+
+rectangle "Investment Opportunity Analysis Component" {
+  usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+  
+  C --> (AIFR004)
+  FA --> (AIFR004)
+  
+  SFR016 <|-- AIFR004
+}
+
+rectangle "Anomaly Transaction Alerts Component" {
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as SFR008
+  
+  C --> (SFR008)
+  
+  AIFR006 <|-- SFR008
+}
+
+rectangle "Contextualized News Insights Component" {
+  usecase "AIFR012: Generate Contextualized News Insights for Users" as AIFR012
+  
+  C --> (AIFR012)
+  
+  AIFR007 <|-- SFR014
+}
+
+rectangle "Predictive Intervention Analyses Component" {
+  usecase "SFR015: Request Predictive Intervention Analyses from AI Component" as SFR015
+  
+  C --> (SFR015)
+  FA --> (SFR015)
+  
+  AIFR008 <|-- SFR015
+}
+
+rectangle "Predictive Insights Component" {
+  usecase "AIFR016: Generate Predictive Insights for Users" as AIFR016
+  
+  C --> (AIFR016)
+  FA --> (AIFR016)
+  
+  SFR009 <|-- AIFR016
+}
+
+rectangle "Financial Health Reports Component" {
+  usecase "SFR017: Generate Financial Health Reports for Users" as SFR017
+  
+  C --> (SFR017)
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1468]

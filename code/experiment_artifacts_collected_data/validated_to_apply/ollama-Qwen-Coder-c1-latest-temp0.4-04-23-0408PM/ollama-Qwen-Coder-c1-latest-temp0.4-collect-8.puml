@@ -1,0 +1,98 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FinancialAdvisor
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure analysis parameters for specific client segments" as FAFR004
+  
+  Client --> CFR001
+  SysAdmin --> SAFR001
+  FinancialAdvisor --> FAFR004
+}
+
+rectangle "Client Functions" {
+  usecase "CFR002: View Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Current Trends" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as CFR004
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds in Specific Expense Categories" as CFR006
+  
+  Client --> CFR002
+  Client --> CFR003
+  Client --> CFR004
+  Client --> CFR005
+  Client --> CFR011 : "Send Feedback"
+}
+
+rectangle "Financial Advisor Functions" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts When the System Detects Patterns Requiring Professional Attention" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations to Provide Data-Driven Recommendations During Consultations" as FAFR003
+  
+  FinancialAdvisor --> FAFR001
+  FinancialAdvisor --> FAFR002
+  FinancialAdvisor --> FAFR003
+}
+
+rectangle "System Functions" {
+  usecase "SFR001: Deliver Alerts to Users Through Appropriate Notification Channels" as SFR001
+  usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from the AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from the AI Component Based on Each User's Financial Data and Preferences" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts from the AI Component When User Spending Patterns Exceed Defined Thresholds" as SFR005
+  
+  System --> SFR001
+  System --> SFR002
+  System --> SFR003
+  System --> SFR004
+  System --> SFR005
+}
+
+rectangle "AI Functions" {
+  usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance As Defined By Industry Standards Like FINRA Guidelines" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations From Established Spending Patterns" as AIFR003
+  
+  System --> AIFR001
+  System --> AIFR002
+  System --> AIFR003
+}
+
+rectangle "Investment Functions" {
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile (As Defined Under MiFID II or Equivalent Standards) to Diversify My Portfolio and Maximize Returns" as CFR007
+  usecase "SFR006: Request Investment Opportunity Analysis from the AI Component to Identify Suitable Investments for Users Based on Their Risk Profiles" as SFR006
+  
+  Client --> CFR007
+  System --> SFR006
+}
+
+rectangle "News Functions" {
+  usecase "CFR008: View News Related to My Investment Portfolio to Stay Informed About Market Events That Might Affect My Assets" as CFR008
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions to Ensure Timely Notification of Important Financial Events" as SFR013
+  
+  Client --> CFR008
+  System --> SFR013
+}
+
+rectangle "Dashboard Functions" {
+  usecase "CFR009: Access a Personalized Dashboard That Consolidates My Financial Information in a Single View to Efficiently Monitor My Finances" as CFR009
+  usecase "SFR12: Generate Client Dashboards that Present Financial Information in an Intuitive and Actionable Format" as SFR012
+  
+  Client --> CFR009
+  System --> SFR012
+}
+
+rectangle "Feedback Functions" {
+  usecase "CFR11: Send Feedback About the System's Recommendations and Insights to Help Improve the Accuracy and Relevance of Future Outputs" as CFR011
+  
+  Client --> CFR011 : "Send Feedback"
+}
+@enduml

@@ -1,0 +1,79 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR002: Deliver Alerts Through Notification Channels" as SAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "FAFR002: View Intervention Alerts for Clients" as FAFR002
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+  usecase "AIFR003: Generate Spending Limit Alerts Based on Unusual Patterns" as AIFR003
+}
+
+actor Client {
+    --> CFR001 : View financial insights dashboard  
+    --> CFR002 : Receive alerts about anomalous transactions  
+    --> CFR004 : Get personalized recommendations  
+    --> CFR005 : Manage preferences for recommendations  
+    --> SFR008 : Request investment opportunity analysis from AI component  
+    --> AIFR001 : Generate financial predictions (via system)  
+}
+
+actor FinancialAdvisor {
+    --> FAFR002 : View client intervention alerts  
+    --> FAFR003 : Access predictive analytics about clients' situations  
+    --> SAFR004 : Configure analysis parameters for specific segments  
+}
+
+actor SystemAdministrator {
+    --> SAFR001 : Manage system's analysis parameters (compliance with Basel III)  
+}
+
+actor User {
+    --> CFR011 : Send feedback to the system
+}
+ 
+rectangle "System" as Sys {
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR004: Generate Investment Opportunity Analyses Based on Risk Profiles" as AIFR004  
+  usecase "SAFR003: Request Financial Predictions from AI Component" as SAFR003  
+}
+
+Client --> Sys : Use cases related to client interactions (CFR)
+FinancialAdvisor --> Sys : Use cases for financial advisors (FAFR, FAFR001-2)
+SystemAdministrator --> Sys : System admin use cases (SAFR)
+
+Sys <|-- AIFR004
+Sys <|-- SAFR003
+
+@enduml
+```
+
+### Key Components:
+1. **Actors** are represented as `actor` definitions with their exact names from the requirements.
+2. **Use Cases** are declared using the `usecase` keyword, each tied to specific IDs and descriptions.
+3. Relationships between actors and use cases are drawn using arrows (`-->`). For example, a client interacts with various financial-related use cases (CFR001–6).
+4. The system boundary is defined by a rectangle containing relevant use cases grouped logically.
+
+### Observations:
+- **Client** actor handles most user-facing interactions like viewing dashboards, alerts, and recommendations.
+- **FinancialAdvisor** focuses on client mentoring sessions, intervention alerts, and predictive analytics.
+- **SystemAdministrator** manages compliance-related parameters (e.g., Basel III).
+- The system itself includes components for delivering personalized recommendations (`SFR002`), requesting AI-generated insights (like `AIFR004`), etc.
+
+This structure ensures clarity in the relationships between actors, use cases, and their interactions within the system. Adjustments can be made based on further analysis or additional requirements not listed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 925]

@@ -1,0 +1,78 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+:User (General): as User
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFD002
+  
+  rectangle "Client Use Cases" {
+    Client --> (CFR001)
+    Client --> (SFR009 : Request News)
+    Client --> (SAFR005 : Manage Spending Limits)
+    Client --> (FAFR007 : View Investment Opportunities)
+    Client --> (AIFR004 : Generate Investment Recommendations)
+  }
+  
+  rectangle "System Admin Use Cases" {
+    SysAdmin --> (SFR013 : Deliver Alerts)
+    SysAdmin --> (SAFR005 : Manage Spending Limits)
+    SysAdmin --> (FAFR007 : View Investment Opportunities)
+    SysAdmin --> (AIFR004 : Generate Investment Recommendations)
+  }
+  
+  rectangle "Financial Advisor Use Cases" {
+    FAFD --> (CFR001)
+    FAFD --> (SFR009 : Request News)
+    FAFD --> (FAFR002 : View Client Intervention Alerts)
+    FAFD --> (AIFR004 : Generate Investment Recommendations)
+  }
+  
+  rectangle "User Use Cases" {
+    User --> (CFR001)
+    User --> (SFR009 : Request News)
+    User --> (FAFR002 : View Client Intervention Alerts)
+    User --> (AIFR004 : Generate Investment Recommendations)
+    User --> (SAFR005 : Manage Spending Limits)
+  }
+  
+  rectangle "AI System" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+    
+    CFR001 --> (AIFR002)
+    SAFR005 --> (AIFR003)
+    FAFD002 --> (AIFR008)
+  }
+  
+  rectangle "System Components" {
+    usecase "SFR009: Request News" as SFR009
+    usecase "SAFR005: Manage Spending Limits" as SAFR005
+    
+    CFR001 --> (AIFR002)
+    FAFD002 --> (AIFR008)
+  }
+}
+
+Client -> (CFR001 : View Financial Insights Dashboard)
+SysAdmin -> (SAFR001 : Manage Analysis Parameters)
+FAFD -> (FAFR007 : View Investment Opportunities)
+
+User --(SFR009)--> (AIFR004)
+User --(SAFR005)--> (AIFR003)
+User --(FAFR002)--> (AIFR008)
+@enduml

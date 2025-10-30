@@ -1,0 +1,71 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FinancialAdvisor
+:User: as User
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  Client --> CFR001
+  SysAdmin --> SAFR001
+}
+
+rectangle "Financial Advisor System" {
+  usecase "FAFR001: Manage client mentoring sessions based on system-generated insights" as FAFR001
+  usecase "FAFR002: View client intervention alerts when the system detects patterns requiring professional attention to proactively assist clients with potential financial issues" as FAFR002
+  usecase "FAFR003: View predictive analytics about my clients' financial situations to provide data-driven recommendations during consultations" as FAFR003
+  
+  FinancialAdvisor --> FAFR001
+  FinancialAdvisor --> FAFR002
+  FinancialAdvisor --> FAFR003
+}
+
+rectangle "User System" {
+  usecase "CFR002: Receive alerts about anomalous transactions in my accounts to quickly identify potential fraud or unusual spending patterns according to regulations set by the Financial Action Task Force (FATF)" as CFR002
+  
+  User --> CFR001
+  User --> SAFR001
+  User --> FAFR001
+  User --> FAFR002
+  User --> FAFR003
+}
+
+rectangle "System Functions" {
+  usecase "SFR001: Deliver alerts to users through appropriate notification channels to ensure timely awareness of critical financial events" as SFR001
+  usecase "SFR002: Deliver personalized recommendations to users based on their financial profiles to support better financial decision-making" as SFR002
+  
+  SystemAdmin --> SAFR001
+  User --> SFR001
+  User --> SFR002
+}
+
+rectangle "AI Functions" {
+  usecase "AIFR001: Generate financial predictions for users by analyzing historical transaction data, market trends, and economic indicators" as AIFR001
+  
+  SystemAdmin --> SAFR001
+  Client --> CFR001
+  FinancialAdvisor --> FAFR003
+}
+
+rectangle "News Functions" {
+  usecase "SFR008: Find contextualized news relevant to users' financial portfolios from trusted financial news sources" as SFR008
+  
+  User --> SFR008
+}
+
+rectangle "Feedback System" {
+  usecase "CFR11: Send feedback about the system's recommendations and insights to help improve the accuracy and relevance of future outputs" as CFR11
+
+  Client --> SAFR001
+  FinancialAdvisor --> FAFR003
+  User --> SFR002
+}
+
+@enduml

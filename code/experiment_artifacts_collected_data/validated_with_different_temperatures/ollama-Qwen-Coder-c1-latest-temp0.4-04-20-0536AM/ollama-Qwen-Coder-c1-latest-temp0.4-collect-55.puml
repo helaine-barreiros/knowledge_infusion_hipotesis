@@ -1,0 +1,63 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFD002
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  
+  rectangle "Financial Insights Dashboard Features" {
+    CFR001 --> (View Financial Data)
+    CFR002 --> (Receive Alerts About Anomalous Transactions)
+    SAFR001 <|-- (Manage Analysis Parameters for AI System)
+    FAFD002 --> (View Client Intervention Alerts Based on Patterns)
+  }
+  
+  rectangle "Personalized Recommendations" {
+    CFR004 --> (Receive Personalized Recommendations Aligned with Financial Profile and Goals)
+    CFR005 --> (Manage Preferences for Personalized Recommendations)
+    SFR002 <|-- (Deliver Personalized Recommendations to Users based on Their Profiles)
+    AIFR002 <|-- (Generate Personalized Recommendations Based on User Data and Preferences)
+  }
+  
+  rectangle "Spending Limits" {
+    CFR010 --> (Manage Relationship with Financial Advisors, Including Permissions for Sharing Data)
+    SAFR005 --> (Request Spending Limit Alerts from AI Component When Spending Patterns Exceed Defined Thresholds)
+    SFR005 <|-- (Deliver Spending Limit Alerts to Users Through Appropriate Notification Channels)
+  }
+  
+  rectangle "Investment Opportunities" {
+    CFR012 --> (View News Related to Investment Portfolio)
+    SAFR006 --> (Request Investment Opportunity Analysis from AI Component Based on User Risk Profile)
+    FAFD003 --> (View Predictive Analytics About Client Financial Situations for Recommendations During Consultations)
+    AIFR004 <|-- (Generate Investment Opportunity Analyses for Users by Evaluating Potential Investments Against Their Profiles, Time Horizons, and Goals)
+  }
+  
+  rectangle "System Management" {
+    SysAdmin --> SAFR001
+    FAFD --> FAFD002
+  }
+}
+
+Client --> CFR001 : View Financial Insights Dashboard
+Client --> CFR003 : View Financial Predictions Based on Historical Data and Current Market Trends
+Client --> CFR004 : Receive Personalized Recommendations Aligned with Financial Profile and Goals
+Client --> CFR005 : Manage Preferences for Personalized Recommendations
+Client --> CFR006 : View Spending Limit Alerts When Exceed Predefined Thresholds in Specific Expense Categories
+Client --> CFR012 : View News Related to Investment Portfolio
+Client --> CFR014 : Access a Consolidated Dashboard That Combines Financial Information
+
+Financial Advisor --> FAFD003 : View Predictive Analytics About Client Financial Situations for Recommendations During Consultations
+Financial Advisor --> AIFR008 <|-- (Generate Anomaly Transaction Alerts)
+
+System Admin --> SAFR005 : Manage Analysis Parameters for Specific Client Segments to Customize System's Behavior According to Different Profiles and Regulatory Requirements
+
+@enduml

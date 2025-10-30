@@ -1,0 +1,120 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: View News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  Client --> (SFR02)
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+  
+  FinancialAdvisor --> (SFR06)
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+  SystemAdmin --> (AIFR002)
+}
+
+rectangle "Financial Advisor and Client" {
+  FAFR003 <|-- CFR004 : Provides data-driven recommendations during consultations.
+}
+
+rectangle "System Components" {
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as SFR008
+  usecase "AIFR006: Generate Anomaly Transaction Alerts by Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance with FinCEN Requirements" as AIFR006
+  
+  (SFR02) --> (SFR01)
+}
+
+rectangle "System and Client/Advisor" {
+  usecase "SFR014: Generate Client Analytics That Provide Meaningful Insights into Financial Behavior and Performance" as SFR014
+  usecase "AIFR009: Generate Client Predictive Insights that Provide Forward-Looking Analysis of Financial Situations to Support More Effective Financial Planning" as AIFR009
+  
+  (SFR02) --> (SFR013)
+}
+
+rectangle "System and Advisor" {
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments Based on Different Client Profiles and Regulatory Requirements Such as GDPR or CCPA" as FAFR004
+  FAFR004 <|-- (SFR015)
+}
+
+rectangle "System, Advisor, and Client" {
+  usecase "FAFR002: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR002
+  
+  (CFR004) --> (AIFR002)
+  
+  (SFR015) --> (AIFR002)
+}
+
+rectangle "System and AI" {
+  usecase "SFR03: Request Financial Predictions from the AI Component to Provide Users with Forward-Looking Financial Insights" as SFR03
+  usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+  
+  (SFR02) --> (SFR03)
+  
+  (CFR004) --> (AIFR001)
+}
+
+rectangle "System and Client/Advisor/AI" {
+  usecase "SFR05: Request Spending Limit Alerts from the AI Component When User Spending Patterns Exceed Defined Thresholds" as SFR05
+  usecase "AIFR003: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations From Established Spending Patterns" as AIFR003
+  
+  (SFR02) --> (SFR05)
+  
+  (CFR006) --> (AIFR003)
+}
+
+rectangle "System and Advisor/AI" {
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments Based on Different Client Profiles and Regulatory Requirements Such as GDPR or CCPA" as FAFR004
+  
+  (SFR016) --> (AIFR002)
+  
+  (CFR007) --> (FAFR003)
+}
+
+rectangle "System, Advisor, AI, and Client/Advisor" {
+  usecase "FAFR005: Configure Analysis Parameters for Specific Client Segments Based on Different Client Profiles and Regulatory Requirements Such as GDPR or CCPA" as FAFR005
+  usecase "SFR17: Generate Financial Health Reports That Assess Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as SFR17
+  
+  (CFR009) --> (SFR12)
+  
+  (FAFR003) --> (AIFR005)
+}
+
+rectangle "System, Advisor/AI, Client/Advisor" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+  FAFR004 <|-- (SFR18)
+  
+  (CFR10) --> (FAFR005)
+}
+
+rectangle "System, Advisor/AI, Client/Advisor" {
+  usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as AIFR007
+  
+  (CFR11) --> (SFR19)
+}
+
+rectangle "System, Advisor/AI, Client/Advisor" {
+  usecase "FAFR008: Configure Analysis Parameters for Specific Client Segments Based on Different Client Profiles and Regulatory Requirements Such As GDPR or CCPA" as FAFR008
+  usecase "CFR11: Send Feedback About the System's Recommendations and Insights to Help Improve the Accuracy and Relevance of Future Outputs" as CFR11
+  
+  (SFR20) --> (AIFR005)
+}
+
+@enduml

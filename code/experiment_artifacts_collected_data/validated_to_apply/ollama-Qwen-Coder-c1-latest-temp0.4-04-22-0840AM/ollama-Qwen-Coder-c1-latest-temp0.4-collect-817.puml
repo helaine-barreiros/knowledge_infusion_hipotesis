@@ -1,0 +1,55 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System: as Sys
+:Financial Advisor: as FAdvisor
+:System Administrator: as SA
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  
+  rectangle "Client Functions" {
+    Client --> CFR001 : View Financial Insights Dashboard
+    Client --> SAFR005 : Manage Recommendation Preferences
+    Client --> SFR009 : Access Contextualized News Related to Portfolio
+    Client --> CFR006 : View Spending Limit Alerts
+    Client --> FAFR002 : Receive Intervention Alerts
+  }
+  
+  rectangle "Financial Advisor Functions" {
+    FinancialAdvisor --> SAFR004 : Configure Analysis Parameters for Clients
+    FinancialAdvisor --> FAFR001 : Manage Mentoring Sessions Based on Insights
+    FinancialAdvisor --> SFR003 : View Predictive Analytics About Client Situations
+    FinancialAdvisor --> AIFR009 : Generate Predictive Intervention Recommendations
+  }
+  
+  rectangle "System Functions" {
+    System --> SAFR002 : Deliver Personalized Recommendations
+    System --> SFR014 : Request Client Analytics From AI Component
+    System --> SFR016 : Request Predictive Insights From AI Component
+    System --> AIFR003 : Generate Spending Limit Alerts
+    System --> AIFR005 : Generate Investment Opportunity Analyses For Clients
+  }
+  
+  rectangle "Alerts" {
+    usecase "SFR008: Deliver Anomaly Transaction Alerts" as SFR008
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    
+    Client --> SFR008 : Receive Anomaly Transaction Alerts
+  }
+  
+  rectangle "Feedback Loop" {
+    usecase "CFR11: Send Feedback About Recommendations and Insights" as CFR11
+    
+    Client --> CFR11 : Provide Feedback to Improve Future Outputs
+  }
+}
+
+@enduml

@@ -1,0 +1,82 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR004
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Current Trends" as SAFR005
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as SAFR006
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as SAFR007
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds in Specific Expense Categories" as SAFR012
+  usecase "CFR008: View News Related to My Investment Portfolio" as SAFR013
+  usecase "CFR009: Access a Personalized Dashboard Consolidating Financial Information" as SAFR014
+  
+  CFR001 --> SAFR004 : "Receive"
+  CFR001 --> SAFR005 : "View"
+  CFR001 --> SAFR006 : "Get Recommendations for"
+  CFR001 --> SAFR007 : "Manage Preferences for"
+  CFR001 --> SAFR012 : "Monitor Spending Limits in Categories"
+  CFR001 --> SAFR013 : "Stay Informed About Market Events"
+  CFR001 --> SAFR014 : "Efficiently Monitor Finances Through a Single View"
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as SAFR008
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations" as SAFR009
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as SAFR015
+  
+  FAFR002 --> SAFR008 : "Provide Guidance Based on"
+  FAFR002 --> SAFR009 : "View Predictive Insights For"
+  FAFR002 --> SAFR015 : "Customize System Behavior for Client Segments"
+}
+
+package "System Administrator" {
+  actor SysAdmin as SAFR001
+  
+  usecase "SAFR001: Manage Analysis Parameters for the AI System" as SAFR001
+  usecase "SFR020: Manage User Feedback to Continuously Improve Recommendations and Insights" as SFR020
+  
+  SAFR001 --> SAFR001 : "Manage"
+  SysAdmin --> SFR020 : "Receive and Process"
+}
+
+package "System Components" {
+  usecase "SFR003: Request Financial Predictions from the AI Component" as AIFR001
+  usecase "SFR004: Request Personalized Recommendations from the AI Component Based on Each User's Financial Data and Preferences" as AIFR002
+  usecase "SFR005: Request Spending Limit Alerts from the AI Component When User Spending Patterns Exceed Defined Thresholds" as AIFR003
+  usecase "SFR006: Request Investment Opportunity Analysis from the AI Component to Identify Suitable Investments for Users Based on Their Risk Profiles" as AIFR004
+  usecase "SFR017: Generate Financial Health Reports That Assess Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as AIFR023
+  
+  SFR003 --> AIFR001 : "Request Predictions For"
+  SFR004 --> AIFR002 : "Generate Recommendations Based On"
+  SFR005 --> AIFR003 : "Identify Spending Limit Alerts When Exceeding Thresholds"
+  SFR006 --> AIFR004 : "Provide Investment Opportunities For Users Matching Their Risk Profiles and Goals"
+  SFR017 --> AIFR023 : "Generate Financial Health Reports Based On"
+}
+
+package "AI System" {
+  usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance as Defined By Industry Standards Like FINRA Guidelines" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations from Established Spending Patterns" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses for Users By Evaluating Potential Investments Against Their Risk Profiles, Time Horizons, and Financial Goals" as AIFR004
+  
+  AIFR001 --> SAFR005 : "Provide Predictions For"
+  AIFR002 --> SAFR006 : "Generate Recommendations Based On"
+  AIFR003 --> SAFR012 : "Identify Spending Limit Alerts When Exceeding Thresholds"
+  AIFR004 --> SAFR007 : "Provide Investment Opportunities For Users Matching Their Risk Profiles and Goals"
+}
+
+package "User (Client, Financial Advisor, or System Administrator)" {
+  actor User as CFR011
+  
+  usecase "CFR011: Send Feedback About the System's Recommendations and Insights to Help Improve Future Outputs" as SFR020
+  
+  User --> SAFR020 : "Send"
+}
+
+@enduml

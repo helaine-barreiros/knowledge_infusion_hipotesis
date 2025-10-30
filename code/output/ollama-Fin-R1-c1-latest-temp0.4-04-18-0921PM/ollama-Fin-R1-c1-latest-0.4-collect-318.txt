@@ -1,0 +1,53 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin -> SAFR001 : "Manage Analysis Parameters"
+
+  FAFR002 <|-- (CFR001) : "Client Intervention Alerts from System"
+  
+  SFR013 <|-- (CFR001, AIFR006) : "System-Generated Alerts to Client"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  client --> FAFR002 : "View Client Intervention Alerts from System"
+
+  SysAdmin -> SAFR001 : "Manage Analysis Parameters for Advisors"
+}
+
+rectangle "Client" {
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as CFR005
+
+  CFR005 <|-- (SFR004) : "Adjust preferences affecting recommendations"
+
+}
+@enduml
+```
+
+**Key Observations and Justifications:**
+1. **Actors Defined:** The diagram includes three main actors: `Client`, `SysAdmin` (System Administrator), and implicitly the role of a Financial Advisor through their use cases.
+2. **Use Cases Grouping:** Use cases are categorized under each actor based on functional requirements, ensuring that interactions align with roles.
+3. **Relationships:** Arrows indicate direct relationships between actors and use cases. For example:
+   - `Client` interacts directly with the system to view financial dashboards (CFR001).
+   - The System Administrator manages analysis parameters via SAFR001.
+4. **Inheritance/Extending Use Cases:** Some use cases extend others, such as FAFR002 extending CFR001 for client intervention alerts or SFR013 generating system-generated alerts to clients (CFR001 and AIFR006).
+5. **System Boundary:** The "System" rectangle encapsulates all internal processes related to data analysis, recommendation generation, etc., ensuring clarity in the diagram.
+6. **No Unnecessary Actors/Use Cases:** All use cases from requirements are included without inventing additional ones not present.
+
+This structure ensures a clear and organized representation of interactions within the system as per provided functional requirements. Adjustments can be made based on further analysis or specific needs, but this baseline accurately reflects initial inputs.
+
+[Done: True
+Done Reason: stop
+Eval Count: 643]

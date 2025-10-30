@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  usecase "CFR002: Receive Alerts About Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "SFR019: Manage Users' Financial Goals to Track Progress" as SFR019
+  usecase "AIFR007: Generate Contextualized News Insights Correlated with User Portfolios" as AIFR007
+
+  client --> CFR001 : View financial data in a comprehensive format\nClient wants to understand their overall financial health.
+  
+  Client --> SAFR001 : Manage system parameters for analysis\nClient needs control over the AI's accuracy and relevance.\nSAFR001 is managed by SysAdmin.
+
+  SysAdmin --> FAFR004 : Configure client-specific settings based on regulatory requirements like GDPR or CCPA.\nEnsures compliance with data protection standards.
+  
+  Client --> CFR002 : Receive alerts about unusual transactions\nClient wants to protect against fraud and financial irregularities.\nCFR002 is part of SFR013 (generate client alerts).
+
+  SysAdmin --> AIFR006 : Manage anomaly detection for potential financial crimes like money laundering.\nAIFR006 generates transactional alerts.
+
+  Client --> CFR003 : View forward-looking predictions\nClient wants to plan future expenses and investments based on data-driven insights.
+  
+  FAFR004 <|-- SAFR001 : Extends analysis parameter management with client segment-specific settings.\nFAFR004 is a sub-use case of SysAdmin's responsibilities.
+
+  Client --> AIFR007 : Receive portfolio-relevant news\nClient wants to stay informed about market events affecting their investments.
+  
+  SFR019 <|-- CFR003: Tracks progress towards financial goals.\nSFR019 is part of the system managing user data and preferences.
+
+  SysAdmin --> AIFR008 : Generate predictive insights for client interactions with advisors based on historical patterns.\nAIFR008 enhances advisory services.
+  
+}
+
+@enduml

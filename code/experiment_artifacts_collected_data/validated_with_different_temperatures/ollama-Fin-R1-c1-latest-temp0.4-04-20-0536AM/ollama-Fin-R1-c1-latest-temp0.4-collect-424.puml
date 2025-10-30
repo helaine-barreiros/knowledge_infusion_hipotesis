@@ -1,0 +1,101 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as fa
+actor SysAdmin as sa
+system "System" as sys
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Financial Advisors" as CFR009
+}
+
+rectangle "System Management & Analysis Parameters" {
+  usecase "SAFR001: Manage AI Analysis Parameters" as SAFR001
+  
+  sysAdmin --> (SAFR001)
+}
+
+rectangle "Financial Advisor Tools" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Segment" as FAFR004
+  
+  financialAdvisor --> (FAFR001)
+}
+
+rectangle "System Services & Components" {
+  usecase "SFR001: Deliver Alerts Through Notification Channels" as SFR001
+  usecase "SFR002: Provide Personalized Recommendations Based on Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts Based on User Activity" as SFR005
+  usecase "SFR006: Identify Investment Opportunities Matching Risk Profiles" as SFR006
+  usecase "SFR007: Find Specific Investment Opportunities by Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Detect Anomalous Transactions for Fraud Prevention" as SFR008
+  usecase "SFR009: Extract Relevant News Based on Portfolio Context" as SFR009
+  usecase "SFR010: Generate Client Dashboards with Financial Information" as SFR010
+  usecase "SFR011: Process Contextualized News for Users' Portfolios" as SFR011
+  usecase "SFR012: Analyze Predictive Interventions Based on AI Insights" as SFR012
+  usecase "SFR013: Track Financial Goals and Progress" as SFR013
+  usecase "SFR014: Maintain Historical Record of User Insights for Trend Analysis" as SFR014
+  usecase "SFR015: Request Predictive Interventions from AI Component" as SFR015
+  
+  sys --> (all)
+}
+
+rectangle "AI Components" {
+  usecase "AIFR001: Generate Financial Predictions Based on Data and Trends" as AIFR001
+  usecase "AIFR002: Create Personalized Recommendations for Users" as AIFR002
+  usecase "AIFR003: Identify Spending Limit Alerts from Unusual Activity" as AIFR003
+  usecase "AIFR004: Analyze Investment Opportunities Against Risk Profiles" as AIFR004
+  usecase "AIFR005: Discover Financial Instruments Aligning with Strategies and Portfolio Theory" as AIFR005
+  usecase "AIFR006: Detect Anomalous Transactions Using Pattern Recognition" as AIFR006
+  usecase "AIFR007: Correlate News to User Portfolios for Relevant Insights" as AIFR007
+  usecase "AIFR008: Recommend Timing of Financial Interventions Based on AI Analysis" as AIFR008
+  usecase "AIFR009: Provide Forward-Looking Predictive Insights to Users" as AIFR009
+  
+  aiSystem --> (all)
+}
+
+simplerole Client as c1
+simplerole FinancialAdvisor as fa
+simplerole SysAdmin as sa
+
+c1 -> CFR001 : "View Financial Insights Dashboard"
+c1 -> CFR002 : "Receive Alerts for Anomalous Transactions"
+c1 -> CFR003 : "View Financial Predictions"
+c1 -> CFR004 : "Get Personalized Recommendations"
+c1 -> CFR005 : "Manage Recommendation Preferences"
+c1 -> CFR006 : "Check Spending Limit Alerts"
+c1 -> CFR007 : "Explore Investment Opportunities Based on Risk Profile"
+c1 -> CFR008 : "Access News Related to Portfolio"
+c1 -> CFR009 : "Interact with Financial Advisors"
+
+fa --> FAFR001 : "Manage Client Mentoring Sessions"
+fa --> FAFR002 : "Review Intervention Alerts"
+fa --> FAFR003 : "Analyze Predictive Analytics for Clients"
+fa --> FAFR004 : "Adjust Analysis Parameters by Segment"
+
+sa -> SAFR001 : "Tune AI Analysis Settings"
+
+sysAdmin -- (SAFR001) : "Manage System-Wide Configurations"
+
+system -- sys : "System Operations"
+
+simplerole Client as c
+simplerole FinancialAdvisor as fa
+simplerole SysAdmin as sa
+
+@enduml

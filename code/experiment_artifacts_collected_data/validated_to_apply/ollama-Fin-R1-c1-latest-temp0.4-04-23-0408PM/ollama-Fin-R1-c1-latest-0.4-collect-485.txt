@@ -1,0 +1,74 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR006: Generate Anomaly Transaction Alerts for Users" as AIFR006
+
+  client --> CFR001 : View Financial Insights Dashboard  
+  sysAdmin --> SAFR001 : Manage Analysis Parameters  
+  financialAdvisor --> FAFR002 : View Client Intervention Alerts
+  system --> SFR013 : Generate Client Alerts Based on Predefined Conditions
+  aiSystem --> AIFR006 : Generate Anomaly Transaction Alerts for Users
+
+  client <|-- (CFR001)  
+  sysAdmin <|-- (SAFR001)
+}
+
+rectangle "Client" {
+  actor "User: Client, Financial Advisor, System Administrator"
+  User: Client, Financial Advisor, System Administrator --> CFR001 : View Financial Insights Dashboard
+  User: Client, Financial Advisor, System Administrator --> FAFR002 : View Client Intervention Alerts  
+  User: Client, Financial Advisor, System Administrator --> SFR013 : Generate Client Alerts Based on Predefined Conditions  
+}
+
+rectangle "Financial Advisor" {
+  actor "FAFR001: Manage Client Mentoring Sessions", "FAFR004: Configure Analysis Parameters for Specific Segments"
+  FAFR002 <|-- (Client) 
+  FAFR003 <|-- (Client)
+  FAFR004 <|-- (Client)
+}
+
+rectangle "System Administrator" {
+  actor "SAFR001: Manage Analysis Parameters", "CFR005: Manage Personalized Recommendations Preferences"
+  SAFR001 <|-- (SysAdmin)
+  CFR005 <|-- (User)
+}
+
+@enduml
+```
+
+### Explanation:
+- **Use Case Diagram Structure**: The diagram is divided into three main sections: the System, Client, and Financial Advisor. Each section contains use cases or actors relevant to their role.
+  
+- **System Boundary**: A rectangle labeled "System" groups all system-related use cases (e.g., `CFR001`, `SAFR001`, etc.) and interactions with external entities like clients, financial advisors, and the AI system.
+
+- **Client Interactions**:
+  - Clients can view a Financial Insights Dashboard (`CFR001`), receive alerts about anomalous transactions (`FAFR002` via FAFR003), manage personalized recommendations preferences (`CFR005`), etc.
+  
+- **Financial Advisor Roles**:
+  - Advisors have access to client intervention alerts (`FAFR002`), view predictive analytics (`FAFR003`), and configure analysis parameters for specific segments (`FAFR004`).
+  
+- **System Administrator Actions**:
+  - SysAdmins manage analysis parameters (`SAFR001`) and personalized recommendations preferences (`CFR005`).
+
+### Key Relationships:
+- **Client**: Directly interacts with most use cases (e.g., viewing dashboards, receiving alerts). 
+- **Financial Advisor**: Interacts via FAFR-related use cases.
+- **System Administrator**: Manages system parameters but also indirectly affects client experiences through AI-generated insights.
+
+This structure ensures clarity in how different actors engage with the system and its components. The relationships are defined using arrows (`-->`) to show directionality (e.g., Client initiating a request). Inheritance-like structures like `FAFR004 <|-- (Client)` indicate that this use case is extended by or related to another role’s actions.
+
+### Notes:
+- All actors and use cases adhere strictly to the provided functional requirements IDs.
+- The system boundary (`rectangle "System"`) encapsulates all internal interactions, ensuring a clean separation between external entities and internal processes.
+
+[Done: True
+Done Reason: stop
+Eval Count: 894]

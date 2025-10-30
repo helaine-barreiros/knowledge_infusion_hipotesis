@@ -1,0 +1,54 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System: as Sys
+:Financial Advisor (FA): as FA
+:SysAdmin: as SysAdmin
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  Client --> CFR001
+}
+
+rectangle "Financial Advisor (FA)" {
+  usecase "FAFR001: Manage client mentoring sessions based on system-generated insights" as FAFR001
+  usecase "FAFR002: View client intervention alerts when the system detects patterns requiring professional attention to proactively assist clients with potential financial issues" as FAFR002
+  usecase "FAFR003: View predictive analytics about my clients' financial situations to provide data-driven recommendations during consultations" as FAFR003
+  
+  FA --> FAFR001
+  FA --> FAFR002
+  FA --> FAFR003
+}
+
+rectangle "System Admin (SysAdmin)" {
+  usecase "SAFR001: Manage analysis parameters for the AI system to ensure the algorithms remain accurate, relevant, and compliant with financial regulations such as Basel III for risk management" as SAFR002
+  
+  SysAdmin --> SAFR002
+}
+
+rectangle "Client (User)" {
+  usecase "CFR010: Manage my relationship with Financial Advisors, including permissions for sharing my financial data, to maintain privacy and control over my financial information" as CFR010
+  usecase "SFR013: Generate client alerts based on predefined conditions to ensure timely notification of important financial events" as SFR013
+  
+  Client --> CFR010
+}
+
+rectangle "System (Sys)" {
+  usecase "SFR002: Deliver personalized recommendations to users based on their financial profiles to support better financial decision-making" as SFR004
+  usecase "SFR005: Request financial predictions from the AI component to provide users with forward-looking financial insights" as SFR003
+  
+  Sys --> SFR002
+  Sys --> SFR003
+}
+
+rectangle "AI System (AIFR)" {
+  usecase "AIFR001: Generate financial predictions for users by analyzing historical transaction data, market trends, and economic indicators" as AIFR001
+  
+  Sys --> AIFR001
+}
+@enduml

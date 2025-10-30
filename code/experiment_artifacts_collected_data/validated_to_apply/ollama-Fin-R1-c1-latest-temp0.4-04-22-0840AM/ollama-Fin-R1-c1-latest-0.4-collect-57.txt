@@ -1,0 +1,106 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor FinancialAdvisor as advisor
+actor SysAdmin as sysadmin
+system "System" as system
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as cfr001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as cfr002
+  usecase "CFR003: View Financial Predictions" as cfr003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as cfr004
+  usecase "CFR005: Manage Recommendation Preferences" as cfr005
+  usecase "CFR006: View Spending Limit Alerts" as cfr006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as cfr007
+  usecase "CFR008: Receive News Related to Portfolio" as cfr008
+  usecase "CFR009: Consolidated Financial Dashboard" as cfr009
+  usecase "CFR10: Manage Relationship with Advisors" as cfr10
+
+  client --> cfr001 : View dashboard
+  client --> cfr002 : Receive alerts
+  client --> cfr003 : Predictions
+  client --> cfr004 : Recommendations based on profile
+  client --> cfr005 : Manage preferences
+  client --> cfr006 : Spending limit alerts
+  client --> cfr007 : Investment opportunities
+  client --> cfr008 : News related to portfolio
+  client --> cfr009 : Consolidated dashboard
+  client --> cfr10 : Manage relationship
+
+}
+
+rectangle "Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as fafr001
+  usecase "FAFR002: View Intervention Alerts for Clients" as fafr002
+  usecase "FAFR003: View Predictive Analytics on Clients' Financial Situations" as fafr003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as fafr004
+
+  advisor --> fafr001 : Manage sessions
+  advisor --> fafr002 : View alerts
+  advisor --> fafr003 : Predictive analytics
+  advisor --> fafr004 : Configure parameters
+}
+
+rectangle "SysAdmin Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as safr001
+
+  sysadmin --> safr001 : Manage parameters
+}
+
+system <<-- cfr002, cfr006, cfr008, cfr009, cfr10 : SFR (System Functions)
+system <<-- cfr003: AIFR (AI Financial Recommendations) for predictions
+
+rectangle "SFR - System Functionality" {
+  usecase "SFR002: Deliver Personalized Recommendations" as sfr002
+  usecase "SFR014: Generate Client Analytics" as sfr014
+}
+
+system <<-- cfr003, cfr005 : AIFR for recommendations
+
+rectangle "AIFR - AI Functionality" {
+  usecase "AIFR002: Personalized Recommendations Based on Profile" as aifr002
+}
+
+system <<-- cfr004 : AIFR for personalized recommendations
+
+rectangle "Feedback Management" {
+  usecase "CFR11: Send Feedback to System" as cfr11
+}
+client --> cfr11 : Provide feedback
+
+@enduml
+```
+
+**Explanation of the Diagram Structure:**
+
+- **Client Interface:** Represents all client-related functionalities (e.g., viewing dashboards, receiving alerts). These are linked directly from the `Client` actor.
+  
+- **Advisor Interface:** Includes activities specific to financial advisors, such as managing mentoring sessions and viewing alerts. Linked via the `advisor` role.
+
+- **SysAdmin Interface:** Contains administrative tasks like managing analysis parameters for AI systems (linked through `sysadmin`).
+
+- **System Boundary:** Groups all system functionalities (`SFR`, `AIFR`) under a single rectangle to show interactions with clients, advisors, and internal components.
+
+- **Inheritance Relationships:**
+  - The client can also manage relationships with advisors (CFR10), which is part of the client interface.
+  
+- **System-to-Usecase Relations:** 
+  - `SFR` handles system-level operations like delivering recommendations (`SFR002`) and generating analytics (`SFR014`).
+  - `AIFR` focuses on AI-generated services (e.g., personalized recommendations, predictions).
+
+This structure ensures clarity in separating user roles, their interactions with the system, and internal processing flows. Each use case is tied to its appropriate actor or role within the system hierarchy. The relationships are explicitly defined using arrows (`-->`) between actors/use cases and system components. 
+
+**Key Observations:**
+- The `Client` interacts directly with most services (CFR001–CFR010).
+- Advisors use specific tools like mentoring session management.
+- SysAdmins manage AI parameters via SAFR001.
+- Feedback (`CFR11`) is a separate path for client input.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1191]

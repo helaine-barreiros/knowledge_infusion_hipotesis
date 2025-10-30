@@ -1,0 +1,106 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+' Define actors
+actor Client as CFR001
+actor FinancialAdvisor as FAFR002
+actor SysAdmin as SAFR003
+
+'System boundary and use cases within the system
+rectangle "System" {
+  ' Grouping related use cases under the system rectangle
+  package "Client Use Cases" {
+    usecase "CFR001: View Financial Insights Dashboard" as CFR001_view_dashboard
+    usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002_receive_alerts
+    usecase "CFR003: View Financial Predictions" as CFR003_view_predictions
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004_recieve_recommendations
+    usecase "CFR005: Manage Recommendation Preferences" as CFR005_manage_preferences
+    usecase "CFR006: View Spending Limit Alerts" as CFR006_view_spending_alerts
+    usecase "CFR007: View Investment Opportunities" as CFR007_view_investment_opportunities
+    usecase "CFR008: View News Related to Portfolio" as CFR008_view_news
+    usecase "CFR009: Access Personalized Dashboard" as CFR009_access_dashboard
+    usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10_manage_relationships
+  }
+
+  package "Financial Advisor Use Cases" {
+    usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001_manage_sessions
+    usecase "FAFR002: View Client Intervention Alerts" as FAFR002_view_alerts
+    usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003_view_analytics
+    usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as FAFR004_configure_parameters
+  }
+
+  package "System Use Cases" {
+    usecase "SFR001: Deliver Alerts to Users" as SFR001_deliver_alerts
+    usecase "SFR002: Deliver Personalized Recommendations" as SFR002_personalize_recommendations
+    usecase "SFR003: Request Financial Predictions from AI Component" as SFR003_request_predictions
+    usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004_request_recs
+    usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005_request_spending_alerts
+    usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006_request_investment_analysis
+    usecase "SFR007: Request Specific Investment Opportunities Matching User Criteria and ESG Preferences" as SFR007_request_specific_opportunities
+    usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as SFR008_request_anomaly_alerts
+    usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR009_find_news
+    usecase "SFR010: Process Contextualized News for User's Financial Situations" as SFR010_process_news
+    usecase "SFR011: Request Contextualized News Insights from AI Component" as SFR011_request_insights
+    usecase "SFR012: Generate Client Dashboards with Intuitive and Actionable Format" as SFR012_generate_dashboards
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013_generate_alerts
+    usecase "SFR014: Generate Client Analytics for Meaningful Insights into Financial Behavior and Performance" as SFR014_generate_analytics
+    usecase "SFR015: Request Predictive Intervention Analyses from AI Component" as SFR015_request_intervention_analyses
+    usecase "SFR016: Request Predictive Insights from AI Component to Enhance Financial Guidance" as SFR016_generate_insights
+    usecase "SFR017: Generate Financial Health Reports Assessing Users' Overall Wellbeing" as SFR017_generate_health_reports
+    usecase "SFR018: Manage Users' Financial Goals for Tracking Progress and Recommendations" as SFR018_manage_goals
+    usecase "SFR019: Maintain Historical Record of Users' Insights for Trend Analysis" as SFR019_maintain_history
+    usecase "SFR020: Manage User Feedback to Improve System Outputs" as SFR020_manage_feedback
+  }
+
+  package "AI Component Use Cases" {
+    usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001_generate_predictions
+    usecase "AIFR002: Generate Personalized Recommendations Based on User Profiles and Goals" as AIFR002_generate_recs
+    usecase "AIFR003: Generate Spending Limit Alerts by Identifying Unusual Deviations from Established Patterns" as AIFR003_generate_spending_alerts
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users Based on Risk Profiles and Financial Goals" as AIFR004_generate_investment_analysis
+    usecase "AIFR005: Generate Investment Opportunities Matching User Strategies and Modern Portfolio Theory Principles" as AIFR005_generate_opportunities
+    usecase "AIFR006: Generate Anomaly Transaction Alerts Using Pattern Recognition for Fraud Detection Compliance" as AIFR006_generate_anomaly_alerts
+    usecase "AIFR007: Generate Contextualized News Insights Correlating Financial News with User Portfolios" as AIFR007_generate_news_insights
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations Identifying Patterns Indicating Potential Issues or Opportunities for Advisor Engagement" as AIFR008_generate_intervention_recs
+    usecase "AIFR009: Generate Client Predictive Insights Providing Forward-Looking Analysis to Support Effective Financial Planning" as AIFR009_generate_pred_insights
+  }
+}
+
+' Relationships between actors and system use cases
+CFR001 --> CFR001_view_dashboard : "View Financial Dashboard"
+CFR001 --> CFR002_receive_alerts : "Receive Alerts for Anomalous Transactions"
+CFR001 --> CFR003_view_predictions : "View Financial Predictions"
+CFR001 --> CFR004_recieve_recommendations : "Receive Personalized Recommendations"
+CFR001 --> CFR005_manage_preferences : "Manage Recommendation Preferences"
+CFR001 --> CFR006_view_spending_alerts : "View Spending Limit Alerts"
+CFR001 --> CFR007_view_investment_opportunities : "View Investment Opportunities"
+CFR001 --> CFR008_view_news : "View News Related to Portfolio"
+CFR001 --> CFR009_access_dashboard : "Access Personalized Dashboard"
+CFR001 --> CFR10_manage_relationships : "Manage Relationship with Financial Advisors"
+
+FAFR002 --> FAFR001_manage_sessions : "Manage Client Mentoring Sessions"
+FAFR002 --> FAFR002_view_alerts : "View Client Intervention Alerts"
+FAFR002 --> FAFR003_view_analytics : "View Predictive Analytics for Clients"
+FAFR002 --> FAFR004_configure_parameters : "Configure Analysis Parameters for Specific Segments"
+
+SFR001_deliver_alerts <|-- CFR002_receive_alerts
+SFR002_personalize_recommendations <|-- CFR004_recieve_recommendations
+SFR003_request_predictions --> AIFR001_generate_predictions : "Request Predictions from AI"
+SFR004_request_recs --> AIFR002_generate_recs : "Request Recommendations from AI"
+SFR005_request_spending_alerts --> AIFR003_generate_spending_alerts
+SFR006_request_investment_analysis --> AIFR004_generate_investment_analysis
+SFR007_request_specific_opportunities --> AIFR005_generate_opportunities : "Request Specific Opportunities"
+SFR008_request_anomaly_alerts --> AIFR006_generate_anomaly_alerts : "Request Anomaly Alerts from AI"
+SFR009_find_news <|-- CFR008_view_news
+SFR010_process_news --> SFR009_find_news : "Process News for User Situations"
+SFR011_request_insights --> AIFR007_generate_news_insights : "Request Insights from AI"
+SFR012_generate_dashboards <|-- CFR003_view_predictions
+SFR013_generate_alerts <|-- SFR005_request_spending_alerts
+SFR014_generate_analytics <|-- AIFR009_generate_pred_insights : "Generate Analytics for User Insights"
+SFR015_request
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

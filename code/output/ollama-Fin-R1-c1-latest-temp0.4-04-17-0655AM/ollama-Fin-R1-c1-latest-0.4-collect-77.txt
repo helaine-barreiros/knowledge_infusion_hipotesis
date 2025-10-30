@@ -1,0 +1,71 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "SFR019: Maintain Historical Record of Users' Insights" as SFR019
+
+  Client --> CFR001 : "View Financial Dashboard"
+  
+  SysAdmin -> SAFR001 : "Manage Analysis Parameters"
+
+  FAFR002 <|-- (Client, Advisor) : "Receive Alerts"
+  
+  SFR003 <|-- (System) : "Request Predictions"
+  SFR004 <|-- (System) : "Request Recommendations"
+  
+  SFR019 <|-- (System) : "Manage Historical Insights"
+
+}
+
+rectangle "Financial Advisors" {
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+
+  Advisor --> FAFR002 : "View Alerts"
+  
+}
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+}
+@enduml
+```
+
+### Explanation:
+- **Client**: Interacts with the system to view dashboards, receive alerts, and manage preferences.
+- **Financial Advisor (Advisor)**: Receives client intervention alerts and views predictive analytics for clients.
+- **System Administrator (SysAdmin)**: Manages analysis parameters within the AI component.
+  
+**Use Cases**:
+1. **CFR001**: Client wants to view a financial insights dashboard.
+2. **SAFR001**: SysAdmin manages analysis parameters in the system.
+3. **FAFR002**: Advisor views client intervention alerts (e.g., for fraud detection).
+4. **SFR003 & SFR004**: System requests predictions and recommendations from AI components.
+5. **CFR006**: Client receives spending limit alerts when exceeding thresholds.
+
+**Relationships**:
+- Clients receive dashboards, alerts, etc., directly or via the system.
+- Advisors are notified of client-specific issues through FAFR002.
+- SysAdmin controls parameters affecting all interactions (e.g., ensuring compliance).
+
+This structure ensures clarity and alignment with functional requirements. Adjustments can be made based on further analysis if needed.
+
+[Done: True
+Done Reason: stop
+Eval Count: 688]

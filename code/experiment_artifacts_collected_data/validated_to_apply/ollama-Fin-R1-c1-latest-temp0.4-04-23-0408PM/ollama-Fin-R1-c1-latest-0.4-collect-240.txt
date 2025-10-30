@@ -1,0 +1,45 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+system SFR012: GenerateClientDashboards as GCD
+usecase "CFR001: View Financial Insights Dashboard" as VFD
+usecase "SAFR001: Manage Analysis Parameters" as MAP
+usecase "FAFR003: View Predictive Analytics for Clients" as VPA
+
+rectangle "System Boundary" {
+  usecase "SFR009: Request Contextualized News from AI Component" as RNC
+  GCD --> RNC : Generates client dashboards that include contextualized news.
+
+  rectangle "Client-Related Use Cases" {
+    C -> VFD : Views financial insights dashboard.
+    C -> SFR013: Generate Client Alerts : Receives alerts when spending exceeds thresholds or other critical events.
+    C -> AIFR007: Generate Contextualized News Insights : Accesses relevant news for their portfolio.
+
+  }
+
+  rectangle "Advisor-Related Use Cases" {
+    FA -> FAFR002: View Client Intervention Alerts : Monitors system-generated alerts to proactively assist clients.
+    FA --> VPA : Views predictive analytics about client financial situations during consultations.
+  }
+
+  rectangle "Admin-Related Use Cases" {
+    SA -> MAP : Manages analysis parameters for the AI system, ensuring compliance with regulations like Basel III.
+
+  }
+}
+
+@enduml
+**Note**: This diagram groups use cases by actor type (Client, Advisor, Admin) and includes interactions between actors/usecases within their respective scopes. The system boundary encompasses all components that process requests from clients or advisors.
+**Comments**: 
+- Client (C), SysAdmin (SA), FinancialAdvisor (FA): Actors with specific roles in the system.
+- Use cases like VFD, MAP are directly tied to functional requirements CFR001 and SAFR001 respectively. Other use cases link components such as GCD for dashboards or SFR009 for news requests.
+- The "System Boundary" rectangle groups all internal interactions (e.g., RNC) while maintaining clarity on external actor-use case relationships.
+
+[Done: True
+Done Reason: stop
+Eval Count: 467]

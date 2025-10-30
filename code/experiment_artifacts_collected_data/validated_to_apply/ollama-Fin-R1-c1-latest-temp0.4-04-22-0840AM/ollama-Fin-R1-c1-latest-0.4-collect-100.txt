@@ -1,0 +1,86 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin -> SAFR001 : "Manage Analysis Parameters"
+
+  user --> FAFR002 : "View Client Intervention Alerts"
+}
+
+rectangle "Client" {
+  actor "User (Client)" as User
+  usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Use Personalized Dashboard for Monitoring Finances" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+
+  User --> CFR002 : "View Alerts"
+  User --> CFR003 : "View Predictions"
+  User --> CFR004 : "Receive Recommendations"
+  User --> CFR005 : "Manage Preferences"
+  User --> CFR006 : "View Spending Limits"
+  User --> CFR007 : "View Investment Opportunities"
+  User --> CFR008 : "Access News"
+  User --> CFR009 : "Use Dashboard"
+  User --> CFR10 : "Manage Relationship"
+
+}
+
+rectangle "Financial Advisor" {
+  actor "Financial Advisor (FA)" as FA
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+
+  FA --> FAFR002 : "View Alerts"
+  FA --> FAFR003 : "View Predictive Analytics"
+
+}
+
+rectangle "System Administrator (SysAdmin)" {
+  actor SysAdmin
+  usecase SAFR001: Manage Analysis Parameters as SAFR001
+  
+  SysAdmin -> SAFR001 : "Manage Parameters"
+
+}
+@enduml
+```
+
+### Explanation:
+- **Client**: Represents the user, which could be a client or financial advisor. The system provides various functionalities like viewing dashboards, receiving alerts, etc.
+- **Financial Advisor (FA)**: A separate actor for advisors who need to view specific alerts and predictive analytics about clients.
+- **System Administrator (SysAdmin)**: Manages analysis parameters related to the AI algorithms.
+- **Use Cases**:
+  - Clients can perform actions like viewing financial dashboards, receiving alerts, etc. These are grouped under "Client".
+  - Financial Advisors have their own set of use cases focused on client intervention and predictive analytics.
+  - System Administrator handles system-level tasks such as managing analysis parameters.
+
+### Key Relationships:
+- **User (Client)**: Directly interacts with most use cases except those related to system administration or financial advisor-specific ones.
+- **Financial Advisor**: Interacts primarily with "View Client Intervention Alerts" and "View Predictive Analytics".
+- **System Administrator**: Manages the AI's analysis parameters.
+
+This structure ensures clarity in separating different roles (client, FA, SysAdmin) while grouping their respective use cases logically. The system boundary encapsulates all interactions within the AI-powered financial insights framework. 
+
+---
+
+**Note:** Ensure that each actor and use case is correctly mapped to its requirements ID as per the provided list. Adjustments may be needed based on additional context or implied relationships in future revisions of the requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 932]

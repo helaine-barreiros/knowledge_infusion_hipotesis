@@ -1,0 +1,57 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  sysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  financialAdvisor --> FAFR002 : "View Client Intervention Alerts"
+  
+  system --> SFR013 : "Generate Client Alerts Based on Predefined Conditions"
+  system <|-- AIFR006 : "Request Anomaly Transaction Alerts"
+
+  rectangle "Client" {
+    actor client as c
+    usecase CFR001, CFR002, CFR003, CFR004, CFR005, CFR006, CFR007, CFR008, CFR009, CFR010
+
+  }
+  
+  rectangle "System Administrator" {
+    actor sysAdmin as sa
+    usecase SAFR001
+  }
+
+  rectangle "Financial Advisor" {
+    actor financialAdvisor as faa
+    usecase FAFR002, FAFR003, FAFR004
+
+  }
+  
+  system --> AIFR009 : "Request Client Predictive Insights"
+}
+
+@enduml
+```
+
+**Key Observations:**
+1. **Actors**: The diagram includes three main actors - `Client`, `System Administrator`, and `Financial Advisor`. Each is represented within their respective rectangles.
+2. **Use Cases**: Use cases are categorized under each actor based on the functional requirements provided. For example, clients use cases include viewing dashboards (CFR001), receiving alerts (CFRs 002-010), managing recommendations preferences (CFR005), etc. System administrators manage analysis parameters (SAFR001). Financial advisors view client intervention alerts (FAFR002) and others.
+3. **System Boundary**: The system is represented as a rectangle containing all use cases, with actors interacting with the system through specific use cases.
+4. **Inheritance/Delegation**:
+   - `SFR013` generates alerts based on predefined conditions; this could be seen as an extension relationship from the system to itself (system --> SFR013).
+   - Similarly, AI systems generate various types of alerts (e.g., AIFR006 for anomaly transactions), which are requests made by the system.
+5. **Grouping**: Use cases are grouped logically under their respective actors and the system boundary.
+
+This diagram adheres strictly to the provided requirements while maintaining clarity in actor-to-use case relationships and logical groupings. Adjustments can be made if additional context or dependencies arise from further analysis of the functional requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 692]

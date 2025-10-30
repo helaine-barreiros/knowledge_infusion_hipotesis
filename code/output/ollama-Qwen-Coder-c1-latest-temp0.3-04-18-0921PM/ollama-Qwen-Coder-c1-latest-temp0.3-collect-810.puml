@@ -1,0 +1,75 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+}
+
+package "System Administrator" {
+  actor SysAdmin as SAFR003
+}
+
+rectangle "User Interface" {
+  usecase "CFR009: View Personalized Dashboard" as CFR009
+  usecase "SAFR017: Generate Financial Health Reports" as SAFR017
+  
+  CFR001 --> (View Alerts) : SFR003
+  CFR001 --> (Manage Recommendations Preferences) : CFR005
+  CFR002 --> (Configure Analysis Parameters for Client Segments) : FAFR004
+}
+
+rectangle "Financial Insights" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR003: Generate Predictive Analytics" as SAFR003
+  
+  CFR001 --> (View Spending Limit Alerts) : SFR005
+  CFR002 --> (View Client Intervention Alerts) : FAFR002
+}
+
+rectangle "Recommendations and Opportunities" {
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "FAFR016: Enhance Financial Guidance Insights" as FAFR016
+  
+  CFR004 --> (Manage Relationship with Advisors) : CFR010
+  CFR002 --> (View Predictive Analytics about Client Situations) : FAFR003
+}
+
+rectangle "News and Alerts" {
+  usecase "CFR008: View News Related to Investment Portfolio" as CFR008
+  
+  CFR008 --> (Find Contextualized News Insights) : SFR017
+}
+
+rectangle "System Management" {
+  usecase "SAFR003: Manage Analysis Parameters for AI System" as SAFR003
+  usecase "SFR020: Manage User Feedback to Improve Outputs" as SFR020
+  
+  CFR009 --> (Send Feedback) : CFR011
+}
+
+rectangle "AI Processing" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  
+  SAFR003 --> (Request Predictive Insights) : SFR016
+}
+
+rectangle "Investment Analysis" {
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+  usecase "AIFR004: Generate Personalized Recommendations for Users" as AIFR004
+  
+  SAFR003 --> (Request Investment Opportunity Analysis) : SFR016
+}
+
+rectangle "Anomaly Detection" {
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as SFR008
+  
+  CFR002 --> (View Predictive Intervention Recommendations) : FAFR009
+}
+@enduml

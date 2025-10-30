@@ -1,0 +1,89 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sa
+actor FinancialAdvisor as fa
+system "System" as sys
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Spending Limit Alerts for Budget Control" as CFR006
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Personalized Dashboard for Consolidated Financial Info" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors Including Data Sharing" as CFR10
+
+  c1 --> CFR001 : "View financial data"
+  c1 --> CFR002 : "Receive alerts on transactions"
+  c1 --> CFR003 : "Get predictions"
+  c1 --> CFR004 : "Personalized recommendations based on profile"
+  c1 --> CFR005 : "Manage preferences for recommendations"
+  c1 --> CFR006 : "Spending limit alerts when exceeding thresholds"
+  c1 --> CFR007 : "View investment opportunities aligned with risk profile"
+  c1 --> CFR008 : "Stay informed about market events affecting portfolio"
+  c1 --> CFR009 : "Single view for monitoring finances"
+  c1 --> CFR10 : "Manage data sharing and permissions"
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+
+  sa --> SAFR001
+}
+  
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Segment" as FAFR004
+
+  fa --> FAFR001 : "Manage mentoring sessions"
+  fa --> FAFR002 : "View intervention alerts"
+  fa --> FAFR003 : "Analyze client data"
+  fa --> FAFR004 : "Customize system for segments"
+
+}
+
+rectangle "System Core" {
+  usecase "SFR001: Deliver Alerts to Users via Channels" as SFR001
+  usecase "SFR002: Provide Personalized Recommendations Based on Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts Based on Thresholds" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis for Users" as SFR006
+  usecase "SFR007: Find Specific Investment Opportunities Matching Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts Based on AML Regulations" as SFR008
+  usecase "SFR009: Extract Relevant News for Users' Portfolios from Sources" as SFR009
+  usecase "SFR010: Process Contextualized News to Inform Financial Decisions" as SFR010
+  usecase "SFR012: Generate Client Dashboards with Intuitive Data Presentation" as SFR013
+  usecase "SFR014: Provide Client Analytics for Financial Behavior Insights" as SFR015
+  usecase "SFR016: Enhance Value of Financial Guidance via Predictive Analysis" as SFR017
+
+  sys --> (all above) : "Request and process services"
+
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions Using Historical Data, Market Trends" as AIFR001
+  usecase "AIFR002: Personalized Recommendations Based on Profiles and Industry Standards" as AIFR003
+  usecase "AIFR004: Spending Limit Alerts for Unusual Deviations" as AIFR005
+  usecase "AIFR006: Investment Opportunity Analysis Aligning with Risk Profile" as AIFR007
+  usecase "AIFR008: Contextualized News Insights Correlated to Portfolios" as AIFR012
+
+}
+
+rectangle "Client Feedback Loop" {
+  usecase "CFR11: Send System Recommendations/Insights Feedback for Improvement" as CFR11
+}
+  
+c1 --> CFR11 : "Send feedback"
+
+@enduml

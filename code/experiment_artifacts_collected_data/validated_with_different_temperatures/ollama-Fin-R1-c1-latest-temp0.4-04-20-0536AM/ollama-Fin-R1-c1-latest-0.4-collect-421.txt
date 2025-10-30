@@ -1,0 +1,48 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR009: Generate Client Alerts Based on Predefined Conditions" as SFR009
+  usecase "CFR002: View Alerts About Anomalous Transactions" as CFR002
+  usecase "AIFR006: Generate Anomaly Transaction Alerts for Users" as AIFR006
+
+  Client --> CFR001 : "View Financial Insights"
+  Client --> SFR009 : "Receive Predefined Condition Alerts"
+  Client --> CFR002 : "Review Anomalous Transactions"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  // Relationships between components
+  AIFR006 <|-- (SAFR001) : Extends
+
+}
+
+@enduml
+```
+
+This PlantUML code represents the use case diagram based on the provided functional requirements. Here's a breakdown of how each component is structured:
+
+- **Rectangle "System"**: Contains all system-related use cases and interactions.
+- **Use Cases**:
+  - `CFR001: View Financial Insights Dashboard`: Client can view comprehensive financial data.
+  - `SAFR001: Manage Analysis Parameters`: SysAdmin manages parameters for the AI system.
+  - `SFR009: Generate Client Alerts Based on Predefined Conditions`: System sends alerts based on set conditions (e.g., spending limits).
+  - `CFR002: View Alerts About Anomalous Transactions`: Client views transactional fraud warnings.
+  - `AIFR006: Generate Anomaly Transaction Alerts for Users`: AI system detects and reports anomalies.
+- **Actors**:
+  - `Client` interacts with the dashboard, alerts, and recommendations.
+  - `SysAdmin` manages analysis parameters via SAFR001.
+- **Relationships**:
+  - The Client uses CFR001 to view dashboards, SFR009 for condition-based alerts, and CFR002 for transactional anomalies.
+  - SysAdmin uses SAFR001 to manage AI parameters extended by AIFR006 (via inheritance).
+  
+This structure ensures clarity in the interactions between actors and use cases while adhering strictly to requirement IDs. The diagram also highlights how components like `AIFR006` extend or relate back to other use cases, such as parameter management (`SAFR001`). Adjustments may be needed based on further analysis of requirements, but this captures the core relationships provided here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 597]

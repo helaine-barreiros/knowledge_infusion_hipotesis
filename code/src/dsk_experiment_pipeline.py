@@ -1,14 +1,43 @@
 from datetime import datetime
-from dsk_experiment.dsk_use_case_experiment_controller import DskExperimentController
-from utils.system_parametrization import SYSTEM_CONFIG
-from utils.logger import Logger
+from src.dsk_experiment.dsk_use_case_experiment_controller import (
+    DskExperimentController
+)
+from src.utils.system_parametrization import SYSTEM_CONFIG
+from src.utils.logger import Logger
+
+import argparse
 
 LOGGER = Logger
 
 qtd_iteractions = SYSTEM_CONFIG.get("general.iteractions")
 
 
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='DSK Knowledge Experiment Pipeline')
+
+    parser.add_argument(
+        '--report',
+        type=int,
+        default=-1,
+        help='Generate report (1 for individual, 2 for all)'
+    )
+
+    parser.add_argument(
+        '--reportdir',
+        type=str,
+        default=None,
+        help='Output directory for generated reports'
+    )
+
+    return parser.parse_args()
+
+
 def main():
+
+    args = parse_arguments()
+
+    report = args.report
+    report_dir = args.reportdir
 
     start_time = datetime.now()
     use_case_experiment_controller = DskExperimentController()
@@ -17,14 +46,18 @@ def main():
     LOGGER.info("┃               🚀 DSK KNOWLEDGE EXPERIMENT PIPELINE STARTED         ┃")
     LOGGER.info("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛")
 
-    for i in range(1, qtd_iteractions + 1):
-        LOGGER.info(f"STARTING EXPERIMENTAL COLLECTION {i} OF {qtd_iteractions}")
+    if report == 1:
+        use_case_experiment_controller.collect_individual_diagrams_evaluation_report(report_dir)
+    elif report == 2:
+        use_case_experiment_controller.collect_overall_diagrams_evaluation_report(report_dir)
+    else:
 
-        _print_iteration_log_data_start(qtd_iteractions, i)
+        for i in range(1, qtd_iteractions + 1):
+            LOGGER.info(f"STARTING EXPERIMENTAL COLLECTION {i} OF {qtd_iteractions}")
 
-        use_case_experiment_controller.collect_dsk_treatment_samples_to_use_case_artifacts(i, start_time)
+            _print_iteration_log_data_start(qtd_iteractions, i)
 
-        _print_iteration_log_end(i)
+            use_case_experiment_controller.collect_dsk_treatment_samples_to_use_case_artifacts(i, start_time)
 
     end_time = datetime.now()
     execution_time = end_time - start_time
@@ -45,7 +78,7 @@ def _print_iteration_log_data_start(qtd_iteractions, i):
     percentage = int(100 * i / qtd_iteractions)
 
     LOGGER.info("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓")
-    LOGGER.info(f"┃ 🔄 ITERATION {i}{qtd_iteractions} [{progress_bar}] {percentage}%            ┃")
+    LOGGER.info(f"┃ 🔄 ITERATION {i}/{qtd_iteractions} [{progress_bar}] {percentage}%            ┃")
     LOGGER.info("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛")
 
 

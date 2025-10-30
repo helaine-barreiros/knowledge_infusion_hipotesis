@@ -1,0 +1,70 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FAFR001
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Deliver Personalized Recommendations" as SFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  
+  Client --> CFR001
+  SysAdmin --> SAFR001
+  FAFR001 --> (FAFR002)
+  
+  Client --> SFR003 : "Manage Recommendations Preferences"
+  SystemAdmin --> SAFR001
+  FinancialAdvisor --> FAFR004
+  
+  Client --> AIFR004 : "View Investment Opportunities"
+}
+
+rectangle "Client" {
+  usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "SAFR005: Manage Spending Limit Alerts Preferences" as SAFR005
+  
+  Client --> (CFR002)
+  Client --> (CFR003)
+  Client --> (CFR004)
+  Client --> SAFR005 : "Manage Spending Limits"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR01: Manage Client Mentoring Sessions" as FAFR01
+  usecase "FAFR02: View Predictive Analytics for Clients" as FAFR03
+  
+  FinancialAdvisor --> (FAFR01)
+  FinancialAdvisor --> (FAFR03)
+}
+
+rectangle "System Functions" {
+  usecase "SFR009: Find Contextualized News Relevant to User's Portfolio" as SFR009
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  
+  SystemAdmin --> (SAFR001)
+  
+  Client --> (SFR003) : "Manage Recommendations Preferences"
+  FinancialAdvisor --> (FAFR04)
+  
+  Client --> SFR009
+  FinancialAdvisor --> AIFR007
+  
+  Client --> SAFR005 : "Manage Spending Limits"
+}
+
+rectangle "User Feedback" {
+  usecase "CFR11: Send Feedback about System Recommendations and Insights" as CFR11
+  
+  Client --> (CFR11)
+  FAFR001 --> (CFR11)
+  SysAdmin --> (CFR11)
+}
+@enduml

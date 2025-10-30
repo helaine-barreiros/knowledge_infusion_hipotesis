@@ -1,0 +1,84 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SFR002
+  usecase "CFR005: Manage Recommendation Preferences" as CFR010
+  
+  CFR001 --> SAFR003
+  CFR001 --> SFR002
+  CFR001 --> CFR010
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts" as SAFR004
+  usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as SFR006
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as AIFR012
+  
+  FAFR001 --> SAFR004
+  FAFR001 --> SFR006
+  FAFR001 --> AIFR012
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR005
+  
+  usecase "SAFR001: Manage Analysis Parameters for the AI System" as SAFR001
+  
+  SAFR005 --> SAFR001
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunities Based on Modern Portfolio Theory" as AIFR017
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR018
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR023
+  
+  SAFR004 --> AIFR006
+  SFR006 --> AIFR006
+  FAFR004 --> AIFR018
+  CFR005 --> AIFR029
+}
+
+rectangle "System" {
+  usecase "SFR003: Request Financial Predictions from the AI Component" as SFR007
+  usecase "SFR004: Request Personalized Recommendations from the AI Component" as SFR015
+  usecase "SFR008: Request Spending Limit Alerts from the AI Component" as AIFR026
+  usecase "SFR009: Request Investment Opportunity Analysis from the AI Component" as AIFR034
+  
+  CFR007 --> SFR007
+  SAFR005 --> SFR015
+  FAFR004 --> AIFR026
+}
+
+rectangle "Notifications" {
+  usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR038
+  
+  CFR007 --> SFR038
+}
+
+package "User (Client, Financial Advisor, or System Administrator)" {
+  actor User as CFR011
+  
+  usecase "CFR011: Send Feedback about the System's Recommendations and Insights" as AIFR045
+  
+  CFR011 --> AIFR045
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 847]

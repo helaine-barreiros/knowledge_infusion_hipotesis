@@ -1,0 +1,74 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access Personalized Dashboard" as CFR008
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+  
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Predictive Analytics from AI" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts from AI" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from AI" as SFR006
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+}
+
+actor "Client" as client
+actor "Financial Advisor" as advisor
+actor "System Administrator" as admin
+
+client --> CFR001 : View Financial Insights Dashboard
+admin --> SAFR001 : Manage Analysis Parameters
+advisor --> FAFR001 : Manage Client Mentoring Sessions
+client --> CFR002 : View Alerts for Anomalous Transactions
+client --> CFR003 : View Financial Predictions
+client --> CFR004 : Receive Personalized Recommendations
+client --> CFR005 : Manage Recommendation Preferences
+client --> CFR006 : View Spending Limit Alerts
+advisor --> CFR007 : View Investment Opportunities Based on Risk Profile
+client --> CFR008 : Access Personalized Dashboard
+client --> CFR10: Manage Relationship with Financial Advisors
+
+SFR002 <|-- (CFR004)
+SFR003 <|-- (AIFR001) : Request Predictive Analytics from AI
+SFR004 <|-- (AIFR002) : Request Personalized Recommendations from AI
+SFR005 <|-- (AIFR003) : Request Spending Limit Alerts from AI
+SFR006 <|-- (AIFR004) : Request Investment Opportunity Analysis from AI
+
+@enduml
+```
+
+### Explanation:
+1. **System Boundary**: The entire system is enclosed within a rectangle labeled "System" to denote the context.
+2. **Use Cases**:
+   - Client-related use cases: `CFRXXX` (e.g., viewing dashboards, alerts).
+   - System Administrator (`SAFR001`): managing analysis parameters.
+   - Financial Advisor (`FAFRXX`): mentoring sessions and client intervention alerts.
+3. **Actors**:
+   - **Client**: Represents end-users interacting with the system.
+   - **Financial Advisor**: Interacts via `CFR007`, etc., for investment opportunities.
+   - **System Administrator**: Manages parameters in `SAFR001`.
+4. **Relationships**:
+   - Direct interactions (e.g., Client → CFR003: View Financial Predictions).
+   - Indirect through the AI (`AIFRXX`): E.g., SFR002 requests recommendations from AIFR002.
+5. **Inheritance**: Use cases like `SFR004` and `SFR006` extend specific AI functionalities (e.g., requesting personalized or investment analyses).
+
+This diagram ensures all requirements are mapped accurately, with proper categorization by actor/role. Adjustments can be made based on further analysis of the system's architecture.
+
+[Done: True
+Done Reason: stop
+Eval Count: 990]

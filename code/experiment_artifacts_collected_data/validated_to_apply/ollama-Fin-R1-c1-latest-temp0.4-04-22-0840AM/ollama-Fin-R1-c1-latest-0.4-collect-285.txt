@@ -1,0 +1,89 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Fraud Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities" as CFR007
+  usecase "CFR008: Receive Portfolio News" as CFR008
+  usecase "CFR009: Manage Personalized Dashboards" as CFR009
+  usecase "SAFR003: Share Financial Data with Advisors" as SAFR003
+
+  package Professional {
+    actor Client as C1, FAFR002 as FA2, SystemAdmin as SA
+    client --> (C1) : "Client"
+    user --> (FA2) : "Financial Advisor"
+    SysAdmin --> (SA)
+    
+    usecase "CFR001" <|-- (C1), "View Financial Insights Dashboard"
+    usecase "SAFR003" <|-- (FA2), "Share Financial Data with Advisors"
+
+    usecase "CFR004" <|-- (C1), "Receive Personalized Recommendations"
+  }
+
+  package System {
+    actor Client as C, FAFR001 as FA1
+    client --> (C) : "Client"
+    user --> (FA1) : "Financial Advisor"
+
+    usecase "CFR002" <|-- (C), "Receive Alerts about Anomalous Transactions"
+  }
+
+  package SystemAdmin {
+    actor SysAdmin as SA
+    SysAdmin --> (SA)
+    
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001, "Manage AI Algorithms and Data Compliance"
+
+    user --> (FA1) : "Financial Advisor"
+    client --> (C) : "Client"
+  }
+
+  package FinancialAdvisor {
+    actor FAFR002 as FA
+    usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001, "Mentor Clients Based on System Insights"
+
+    user --> (FA)
+    client --> (C) : "Client"
+  }
+
+  package AI {
+    actor AIFR002 as AI
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004, "Identify Suitable Investments Based on Risk Profiles"
+
+    user --> (AI)
+  }
+}
+
+@enduml
+```
+
+### Explanation:
+1. **System Boundary**: The entire diagram is enclosed within a system boundary to represent the AI-Powered Analysis & Insights System.
+2. **Packages**:
+   - **Professional**: Contains actors related to professional users like Clients, Financial Advisors, and System Administrators.
+   - **Client**, **FinancialAdvisor**, **SystemAdmin**: Individual packages for each role type with their respective use cases.
+3. **Use Cases**:
+   - Each functional requirement is mapped as a use case (e.g., `CFR001`, `SAFR002`).
+4. **Actor-Use Case Relationships**:
+   - Arrows indicate the relationship between actors and use cases, e.g., a Client can view financial insights (`C1 --> CFR001`).
+5. **Inheritance/Extends**: Use case relationships are defined with `<|--`, indicating that one use case extends another (e.g., `CFR004 <|-- C1` implies the client receives personalized recommendations from their system).
+
+### Key Observations:
+- The System Administrator role is isolated in its own package, managing analysis parameters and data compliance.
+- Financial Advisors are grouped under a separate package with mentoring sessions and alerts management.
+- Clients have multiple use cases related to dashboards, predictions, and personalization.
+- AI components (e.g., generating investment analyses) are represented as actors within their respective packages.  
+
+This structure ensures clarity in role-based interactions while adhering strictly to the provided requirements. Adjustments can be made based on further analysis or specific system constraints not covered here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 964]

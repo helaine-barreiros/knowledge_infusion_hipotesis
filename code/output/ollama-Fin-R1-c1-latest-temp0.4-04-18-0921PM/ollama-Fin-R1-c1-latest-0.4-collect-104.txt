@@ -1,0 +1,62 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  sysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  user -> FAFR002 : "Receive Client Intervention Alerts"
+  financialAdvisor --> FAFR002 : "View Client Intervention Alerts for Mentoring Sessions"
+
+  client --> CFR003 : "View Financial Predictions Based on Historical Data and Market Trends"
+  
+  system --> SFR014 : "Request Client Analytics from AI Component"
+
+  user -> AIFR007 : "Receive Contextualized News Insights Related to Portfolio"
+}
+
+rectangle "Client" {
+  actor client as c
+}
+rectangle "System Administrator" {
+  actor sysAdmin as sa
+}
+rectangle "Financial Advisor" {
+  actor financialAdvisor as faa
+}
+
+@enduml
+```
+
+### Explanation:
+1. **Use Cases**:
+   - `CFR001: View Financial Insights Dashboard` is linked to the client.
+   - `SAFR001: Manage Analysis Parameters` is for system administrators.
+   - `FAFR002: View Client Intervention Alerts` and related alerts are accessible by clients, financial advisors, and system admins (via different paths).
+   - Other use cases like viewing predictions (`CFR003`) or generating client analytics (`SFR014`) involve the system requesting data from AI components.
+
+2. **Actors**:
+   - `client`: Represents all user types (Client, Financial Advisor, System Administrator) as they share some interactions.
+   - `sysAdmin`, `financialAdvisor` are distinct roles with specific use cases.
+
+3. **Relationships**:
+   - Direct links between clients and system for dashboard/viewing predictions.
+   - Indirect through the system for analytics requests.
+   - Financial advisors receive alerts but manage them via their role-specific interactions.
+
+This structure ensures clarity in how different actors interact within the system, adhering strictly to provided requirements. Adjustments can be made if more detailed relationships or inheritance are needed based on further analysis of the use cases.
+
+[Done: True
+Done Reason: stop
+Eval Count: 593]

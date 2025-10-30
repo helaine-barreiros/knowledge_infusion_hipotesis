@@ -1,0 +1,59 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Anomaly Alerts Thresholds" as SAFR002
+  usecase "CFR003: View Historical Data Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "SAFR005: Adjust Recommendation Preferences" as SAFR005
+  usecase "CFR006: Monitor Spending Limits Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Portfolio News" as CFR008
+  usecase "SAFR013: Manage Client Dashboards" as SAFR013
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+
+  // Clients (User)
+  actor "Client" as Client {
+    --> CFR001 : View Financial Insights Dashboard
+    --> CFR004 : Receive Personalized Recommendations
+    --> SAFR013 : Manage Client Dashboards
+    --> CFR006 : Monitor Spending Limits Alerts
+    --> CFR007 : View Investment Opportunities
+  }
+
+  // Clients (Financial Advisor)
+  actor "FinancialAdvisor" as FinancialAdvisor {
+    --> AIFR002 : Generate Personalized Recommendations
+    --> FAFR001: Manage Client Mentoring Sessions
+    --> FAFR003: View Predictive Analytics for Clients
+    --> FAFR004: Configure Analysis Parameters by Segment
+  }
+
+  // System Administrators (SysAdmin)
+  actor "SystemAdministrator" as SysAdmin {
+    --> SAFR001 : Manage Analysis Parameters
+    --> AIFR002 : Generate Personalized Recommendations
+  }
+  
+  // Financial Advisors and Clients share some use cases but are separate actors.
+}
+
+@enduml
+```
+
+**Key Observations:**
+- **Actors:** The system has three main actor types: `Client`, `FinancialAdvisor`, and `SystemAdministrator`. Each is represented with their exact names from the requirements. 
+- **Use Cases Grouping:** Use cases related to clients (e.g., viewing dashboards, receiving recommendations) are grouped under the `Client` actor. Similarly, financial advisors have specific use cases like mentoring sessions or generating personalized recommendations.
+- **Inheritance/Delegation:** There's no explicit inheritance between actors in this setup since each has distinct responsibilities. However, some use cases (e.g., generating recommendations) overlap across multiple roles but are handled by different actors based on their context (client vs. system).
+- **System Boundary:** The entire diagram is enclosed within a "System" rectangle to indicate the scope of interactions.
+- **Relationships:** Arrows denote direct relationships between actors and use cases, ensuring clarity in who performs which actions.
+
+This structure aligns with the provided requirements while maintaining readability and adherence to PlantUML standards. Adjustments can be made if additional complexities or dependencies are introduced by specific requirement nuances not covered here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 705]

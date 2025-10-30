@@ -1,0 +1,115 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage AML Alerts" as SAFR002
+  usecase "SFR003: Request Predictive Analytics from AI" as SFR003
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+  Client --> CFR001 : View Financial Dashboard  
+  SysAdmin --> SAFR002 : Manage AML Alerts  
+  FAFR001 --> SFR003 : Request Predictive Analytics for Mentoring Sessions
+  FAFR004 --> AIFR007 : Generate Contextualized News Insights
+
+}
+
+rectangle "Client" {
+  actor Client as c
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002  
+  usecase "CFR003: View Financial Predictions" as CFR003  
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005  
+  usecase "CFR006: Spending Limit Alerts for Budget Control" as CFR006  
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Personalized Dashboard Consolidation" as CFR009  
+
+  c --> CFR002 : Receive AML Alerts  
+  c --> CFR003 : Access Predictive Analytics  
+  c --> CFR004 : Get Recommendations Based on Profile  
+  c --> CFR005 : Adjust Recommendation Preferences  
+  c --> CFR006 : Monitor Spending Limits  
+  c --> CFR008 : View Portfolio News  
+  c --> CFR009 : Consolidate Financial Info  
+
+}
+
+rectangle "Financial Advisor" {
+  actor FAFR001 as f
+  usecase "FAFR002: Manage Client Intervention Alerts" as FAFR002 
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003  
+  usecase "FAFR004: Configure Analysis Parameters by Segments" as FAFR004  
+
+  f --> FAFR002 : Manage Intervention Alerts  
+  f --> FAFR003 : Review Client Predictive Analytics  
+  f --> FAFR004 : Customize System for Specific Segments  
+
+}
+
+rectangle "System Administrator" {
+  actor SysAdmin as s
+  usecase "SAFR001: Manage Analysis Parameters (AI)" as SAFR001 
+  usecase "SFR020: Maintain Historical Record of Insights" as SFR020  
+  usecase "CFR011: Send Feedback to System" as CFR011  
+
+  s --> SAFR001 : Adjust AI Parameters  
+  s --> SFR020 : Track User Insights History  
+  s --> CFR011 : Collect Client Feedback  
+
+}
+
+rectangle "AI Component" {
+  actor AIFR001 as a
+  usecase "AIFR001: Generate Financial Predictions (Historical Data)" as AIFR001 
+  usecase "AIFR002: Personalized Recommendations Based on Profile" as AIFR002  
+  usecase "AIFR003: Spending Limit Alerts for Users" as AIFR003
+  usecase "AIFR004: Investment Opportunity Analysis by Risk Profile" as AIFR004 
+  usecase "AIFR005: Align Investments with Modern Portfolio Theory (MPT)" as AIFR005  
+  usecase "AIFR006: Anomaly Transaction Alerts Based on Patterns" as AIFR006
+  usecase "AIFR007: Contextualized News Insights for Portfolios" as AIFR007  
+
+  a --> AIFR001 : Analyze Historical Data  
+  a --> AIFR002 : Provide Personalized Recos Based on Profile  
+  a --> AIFR003 : Issue Spending Alerts  
+  a --> AIFR004 : Suggest Investments by Risk  
+  a --> AIFR005 : Optimize Portfolios with MPT  
+  a --> AIFR006 : Detect Fraudulent Transactions  
+  a --> AIFR007 : Correlate News to Portfolios  
+
+}
+
+rectangle "Notification System" {
+  actor Notification as n
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+
+  n --> SFR013 : Send Notifications  
+}
+@enduml
+```
+
+### Explanation:
+- **System**: Contains the main system components and their interactions. Use cases like `CFR001` (Client viewing dashboard) are linked to actors (`Client`, `SysAdmin`). The AI component is represented as a separate actor, with its own use cases.
+  
+- **Client**: Represents individual users (Clients). Interacts with various features such as alerts, predictions, and dashboards. For example, receiving AML alerts or viewing financial predictions.
+
+- **Financial Advisor**: Includes actors like `FAFR001` for managing client mentoring sessions and generating insights. They can request predictive analytics from the AI component (`AIFR003`, `SFR003`).
+
+- **System Administrator**: Manages system parameters (e.g., SAFR001), maintains historical records, and collects feedback.
+
+- **AI Component**: Contains subcomponents like `AIFR007` for generating contextualized news insights. This is a critical part of the system that powers many client-facing features through its predictions and recommendations.
+
+### Key Relationships:
+- Clients (`c`) interact directly with use cases in the System boundary.
+- Financial Advisors (`f`, `FAFR001`) request data from both the AI component and other parts of the system (e.g., SFR003).
+- System Administrators (`s`) manage internal parameters via SAFR001, while also handling client feedback through CFR011.
+
+This structure ensures clarity in how different actors use the system’s capabilities, with explicit links between user requests and AI-generated outputs. The PlantUML code adheres strictly to provided IDs and names for consistency. 
+
+**Note**: Some minor adjustments may be needed based on specific interpretation of requirements (e.g., grouping certain use cases under subcomponents like "Notification System"). However, the above structure aligns closely with the given functional descriptions.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1476]

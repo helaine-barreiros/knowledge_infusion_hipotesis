@@ -1,0 +1,93 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as fa
+actor SysAdmin as sa
+system "System" as sys
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Spending Limit Alerts for Exceeding Thresholds" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Consolidated Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+
+  c1 --> CFR001 : "View financial data"
+  c1 --> CFR002 : "Receive alerts for anomalous transactions"
+  c1 --> CFR003 : "Access future predictions"
+  c1 --> CFR004 : "Get personalized recommendations"
+  c1 --> CFR005 : "Adjust recommendation settings"
+  c1 --> CFR006 : "Monitor spending limits"
+  c1 --> CFR007 : "Explore investment options"
+  c1 --> CFR008 : "Stay informed about market news"
+  c1 --> CFR009 : "Single view of financial info"
+  c1 --> CFR10 : "Control data sharing with advisors"
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  sa --> SAFR001 : "Adjust system settings for accuracy and compliance"
+
+}
+
+package FinancialAdvisorInterface { 
+  actor fa as fad
+  rectangle "FAFR Use Cases" {
+    usecase "FAFR001: Schedule Mentoring Sessions Based on Insights" as FAFR001
+    usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+    usecase "FAFR003: Review Predictive Analytics for Clients" as FAFR003
+    usecase "FAFR004: Configure Analysis Parameters by Segment" as FAFR004
+
+    fad --> FAFR001 : "Plan sessions with client data"
+    fad --> FAFR002 : "Act on alerts from system"
+    fad --> FAFR003 : "Analyze client trends for recommendations"
+    fad --> FAFR004 : "Set parameters per segment"
+
+  }
+}
+
+system sys as s
+
+s <|-- CFR001
+s <|-- CFR002
+s <|-- CFR003
+s <|-- CFR004
+s <|-- CFR005
+s <|-- CFR006
+s <|-- CFR007
+s <|-- CFR008
+s <|-- CFR009
+s <|-- CFR10
+
+sys --> SAFR001 : "Manage system parameters"
+
+s <|-- FAFR001
+s <|-- FAFR002
+s <|-- FAFR003
+s <|-- FAFR004
+
+@enduml
+```
+
+**Key Observations:**
+- **Actors**: The diagram includes three main actors - `Client`, `FinancialAdvisor (fad)`, and `SysAdmin`. Each has their respective use cases.
+- **Use Cases**: All client-related requirements are grouped under the "Client Interface" rectangle. System administration is handled by SAFR001, while financial advisors interact with FAFR-use-cases.
+- **System Boundary**: The system (`sys`) aggregates all client and advisor interactions, managing data flows between them and external components like AI systems (AIFR).
+- **Inheritance/Delegation**: Not explicitly shown here but implied by use case relationships. For example, `CFR001` is a core client interaction managed through the system.
+- **Grouping**: Use cases are logically grouped into their respective actor or functional areas.
+
+This structure ensures clarity and adheres to the provided requirements while maintaining readability. Adjustments can be made based on further analysis if needed.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1013]

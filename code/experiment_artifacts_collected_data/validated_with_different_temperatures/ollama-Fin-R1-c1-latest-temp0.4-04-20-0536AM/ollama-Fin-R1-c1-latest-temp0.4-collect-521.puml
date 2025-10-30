@@ -1,0 +1,67 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alerts Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Consolidated Financial Dashboard" as CFR010
+  usecase "SAFR003: Manage Client Mentoring Sessions" as SAFR003
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR004: Configure Analysis Parameters for Segments" as FAFR004
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+
+  Client --> CFR001 : "View Financial Dashboard"
+  SysAdmin -> SAFR002 : "Manage Alerts Preferences (Sys)"
+  Client -> SAFR003 : "Mentor Clients via System"
+  Client -> FAFR004 : "Configure Analysis Params for Segments"
+}
+
+rectangle "Client" {
+  actor "User" as User
+  usercase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "SAFR004: Configure Personalized Recommendations" as SAFR001
+  usecase "CFR006: Manage Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Consolidated Financial Dashboard" as CFR010
+}
+
+rectangle "Financial Advisor (FA)" {
+  actor "FinancialAdvisor" as FA
+  usercase "SAFR003: Manage Client Mentoring Sessions" as SAFR003
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR004: Configure Analysis Parameters for Segments" as FAFR004
+}
+
+rectangle "System Administrator (SA)" {
+  actor "SysAdmin" as SA
+  usercase "CFR011: Send Feedback to System" as CFR011
+  usecase "SFR020: Manage User Feedback" as SFR020
+
+  SysAdmin -> SAFR004 : "Configure Analysis Params (SA)"
+}
+
+rectangle "AI Component (AIC)" {
+  actor "AIFR008: Generate Predictive Insights" as AIC
+  usecase "CFR019: Manage Historical Record of Insights" as SFR019
+
+  Client --> CFR003 : "Request Financial Predictions"
+  Client --> SAFR004 : "Request Personalized Recommendations"
+}
+
+rectangle "News Component (NC)" {
+  actor "AIFR007: Generate Contextual News Insights" as NC
+  usecase "CFR019: Manage Historical Record of Insights"
+
+  Client -> CFR008 : "Request News Related to Portfolio"
+}
+
+@enduml

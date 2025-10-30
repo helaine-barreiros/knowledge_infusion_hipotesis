@@ -1,0 +1,55 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Permissions and Data Sharing with Advisors" as SAFR002
+  usecase "FAFR005: Schedule Client Mentoring Sessions Based on System-Generated Insights" as FAFR005
+  
+  Client --> CFR001 : View Financial Dashboard  
+  SysAdmin -> (CFR001) : Configure system settings for client access  
+  Advisor -> SAFR002 : Manage data sharing with clients and other advisors  
+}
+
+rectangle "AI System" {
+  usecase "AIFR009: Generate Client Predictive Insights Based on Historical Data" as AIFR009
+  usecase "SFR013: Request Contextualized News for Users' Portfolios" as SFR013
+
+  SysAdmin -> (AIFR009) : Adjust AI model parameters  
+}
+
+rectangle "Client-Advisor Communication" {
+  usecase "FAFR004: View Predictive Analytics About Clients to Guide Consultations" as FAFR004
+  usecase "CFR011: Send Feedback on System Recommendations and Insights" as CFR011
+
+  Advisor -> (CFR011) : Collect user feedback  
+}
+
+rectangle "System-Client Interaction" {
+  usecase "SFR012: Generate Client Dashboards with Financial Data" as SFR012
+  usecase "AIFR008: Recommend Interventions When AI Detects Patterns Requiring Advisor Attention" as AIFR008
+
+  System -> (CFR011) : Process user feedback  
+}
+
+@enduml
+```
+
+**Key Observations and Explanations:**
+- The diagram groups related use cases into logical categories such as **System**, **AI System**, **Client-Advisor Communication**, and **System-Client Interaction**.
+- Each actor is represented with their exact ID from the requirements. For example, "Client" corresponds to CFR001's user type, while "SysAdmin", "Advisor" are inferred based on role-specific use cases (e.g., SAFR002 for managing data sharing).
+- Use case relationships reflect direct interactions between actors and system components. For instance:
+  - **CFR001** is linked to the System via a client request.
+  - **SAFR002**, managed by SysAdmin, controls user permissions (inferred from requirement context).
+  - **FAFR005** schedules sessions based on AI insights, involving both Advisor and System components.
+- The "AI System" category includes use cases like generating predictive insights (**AIFR009**) and contextualized news requests (**SFR013**), which are driven by system parameters adjusted via SysAdmin.
+- **Client-Advisor Communication** encompasses feedback mechanisms (e.g., CFR011) where advisors collect user input, while the System processes this data for improvement.
+
+This structure ensures clarity in how different actors and systems interact to deliver financial insights and services. Adjustments may be needed based on further analysis of requirement nuances or additional context not explicitly provided here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 707]

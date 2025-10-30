@@ -1,0 +1,56 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFD001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  
+  rectangle "Client Functions" {
+    Client --> CFR001 : "View Financial Insights Dashboard"
+    Client --> SAFR005 : "Manage Recommendation Preferences"
+    Client --> SFR006 : "Receive Alerts for Spending Limits"
+    Client --> FAFD003 : "Access Investment Opportunities Suitable to Risk Profile"
+    Client --> SFR007 : "View News Related to Portfolio"
+  }
+  
+  rectangle "Financial Advisor Functions" {
+    FinancialAdvisor --> SAFR004 : "Configure Analysis Parameters for Specific Segments"
+    FinancialAdvisor --> FAFD001 : "Manage Client Mentoring Sessions"
+    FinancialAdvisor --> SFR008 : "View Predictive Analytics About Clients' Situations"
+  }
+  
+  rectangle "System Functions" {
+    SystemAdmin --> SAFR001 : "Manage Analysis Parameters"
+    SystemAdmin --> AIFR003 : "Generate Spending Limit Alerts"
+    
+    Client -> (SFR002) : "Receive Personalized Recommendations"
+    FinancialAdvisor -> (AIFR004) : "Configure Analysis Parameters for Specific Segments"
+  }
+  
+  rectangle "AI Functions" {
+    System --> AIFR001 : "Generate Financial Predictions"
+    System --> AIFR002 : "Generate Personalized Recommendations"
+    System --> AIFR003 : "Generate Spending Limit Alerts"
+    System --> AIFR004 : "Generate Investment Opportunity Analyses"
+    System --> AIFR005 : "Generate Investment Opportunities for Users"
+    System --> AIFR006 : "Generate Anomaly Transaction Alerts"
+    System --> AIFR007 : "Generate Contextualized News Insights"
+    System --> AIFR008 : "Generate Client Predictive Intervention Recommendations"
+    System --> AIFR009 : "Generate Client Predictive Insights"
+    
+    FinancialAdvisor -> (AIFR006) : "Identify Potentially Fraudulent Activities"
+  }
+}
+
+Client --> SFR11 : "Send Feedback about Recommendations and Insights"
+
+@enduml

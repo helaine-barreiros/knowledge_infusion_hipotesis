@@ -1,0 +1,77 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+}
+
+package "System Administrator" {
+  actor SysAdmin as SAFR003
+}
+
+rectangle "System" {
+  usecase "CFR004: View Predictive Analytics Based on Historical Data and Trends" as CFR004
+  usecase "SFR016: Request Predictive Insights from AI Component" as SFR016
+  
+  package "Financial Recommendations" {
+    usecase "FAFR002: Manage Client Mentoring Sessions based on System-Generated Insights" as FAFR002
+    usecase "CFR005: Manage Personalized Recommendation Preferences" as CFR005
+    usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+    
+    CFR001 --> (FAFR002)
+    FAFR002 --> (CFR005)
+  }
+  
+  package "Spending Limits and Alerts" {
+    usecase "SFR003: Request Spending Limit Alerts from AI Component" as SFR003
+    usecase "CFR010: Manage Relationship with Financial Advisors Including Permissions for Sharing Data" as CFR010
+    
+    CFR001 --> (SFR003)
+  }
+  
+  package "Investment Opportunities and News" {
+    usecase "FAFR007: View Predictive Analytics About Client's Financial Situations to Provide Recommendations During Consultations" as FAFR007
+    usecase "CFR008: View News Related to Investment Portfolio" as CFR008
+    
+    CFR001 --> (FAFR007)
+  }
+  
+  package "System Management and Alerts" {
+    usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR002
+    usecase "SAFR003: Manage Analysis Parameters for the AI System" as SAFR003
+    
+    SysAdmin --> (SAFR003)
+  }
+  
+  package "Dashboard and Analytics" {
+    usecase "SFR12: Generate Client Dashboards that Present Financial Information in an Intuitive Format" as SFR12
+    usecase "CFR009: Access Personalized Dashboard Consolidating Financial Information" as CFR009
+    
+    CFR001 --> (SFR12)
+  }
+  
+  package "Feedback and Improvement" {
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations by Identifying Patterns that Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR008
+    
+    CFR001 --> (AIFR008)
+  }
+}
+
+CFR001 --> (SFR020: Manage User Feedback to Continuously Improve the Quality and Relevance of Financial Insights)
+
+FAFR003 <|-- FAFR004
+SAFR003 <|-- SAFR006
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 696]

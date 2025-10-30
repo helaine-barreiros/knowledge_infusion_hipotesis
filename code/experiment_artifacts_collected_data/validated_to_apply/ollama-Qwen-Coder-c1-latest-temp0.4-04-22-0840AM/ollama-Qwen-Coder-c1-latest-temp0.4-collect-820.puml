@@ -1,0 +1,70 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor (FA): as FA
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  Client --> (View Alerts) : CFR002
+  Client --> (Manage Preferences) : CFR005
+  Client --> (Access Dashboard) : CFR009
+
+  SysAdmin --> SAFR001
+
+  FA --> FAFR001
+  FA --> (Receive Intervention Alerts) : FAFR002
+}
+
+rectangle "Client" {
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+  
+  Client --> (View Predictions) : CFR003
+  Client --> (Receive Recommendations) : CFR004
+  Client --> (Manage Advisor Permissions) : CFR010
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  
+  FA --> (View Alerts) : FAFR002
+  FA --> (Receive Insights) : FAFR003
+}
+
+rectangle "System Components" {
+  usecase "SFR013: Generate Client Alerts" as SFR013
+  usecase "SFR014: Generate Analytics" as SFR014
+  usecase "AIFR006: Generate Spending Limit Alerts" as AIFR006
+  
+  Sys --> (Deliver Alerts) : SFR013
+  Sys --> (Generate Recommendations) : SFR022
+  Sys --> (Request Predictions) : SFR007
+}
+
+rectangle "AI System" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  
+  Sys --> (Generate Predictions) : AIFR001
+  Sys --> (Provide Recommendations) : AIFR002
+}
+
+rectangle "Notifications and Feedback" {
+  usecase "SFR018: Manage Financial Goals" as SFR018
+  usecase "CFR011: Send Feedback" as CFR011
+  
+  Client --> (Manage Goals) : SFR018
+  User --> (Send Feedback) : CFR011
+}
+
+@enduml

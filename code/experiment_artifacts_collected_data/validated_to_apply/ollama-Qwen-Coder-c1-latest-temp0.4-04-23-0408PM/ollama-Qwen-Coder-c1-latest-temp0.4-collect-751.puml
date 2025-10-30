@@ -1,0 +1,69 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  Client --> (SFR012) : Generate client dashboards that present financial information in an intuitive and actionable format.
+  SysAdmin --> (SAFR001)
+}
+
+rectangle "Client Features" {
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to My Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  
+  Client --> (SFR013) : Generate client alerts based on predefined conditions.
+  SysAdmin --> (SAFR014)
+}
+
+rectangle "Financial Advisor Features" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  Financial Advisor --> (SFR15) : Request predictive intervention analyses from the AI component.
+}
+
+rectangle "System Features" {
+  usecase "SFR020: Manage User Feedback" as SFR020
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  
+  System --> (SAFR013)
+  System --> (FAFR002)
+}
+
+rectangle "AI Features" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunities Based on Modern Portfolio Theory Principles" as AIFR005
+  
+  System --> (SFR16)
+}
+
+rectangle "User Feedback Flow" {
+  usecase "CFR11: Send Feedback about Recommendations and Insights" as CFR11
+}
+  
+Client --> (CFR11) : Send feedback.
+Financial Advisor --> (CFR11) : Send feedback.
+System Admin --> (CFR11) : Send feedback.
+
+@enduml

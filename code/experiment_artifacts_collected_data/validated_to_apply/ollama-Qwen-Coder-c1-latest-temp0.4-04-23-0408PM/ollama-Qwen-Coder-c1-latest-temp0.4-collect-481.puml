@@ -1,0 +1,107 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+:AIFR001: as AIFR
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  
+  Client --> CFR001
+  SysAdmin --> SAFR001
+  FinancialAdvisor --> (FAFR002)
+}
+
+rectangle "Client Dashboard Features" {
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "SAFR005: Manage Recommendations Preferences" as SAFR005
+  
+  Client --> CFR009
+  Client --> SAFR005
+}
+
+rectangle "Client Financial Management Features" {
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+  usecase "SAFR006: Request Spending Limit Alerts" as SAFR006
+  
+  Client --> CFR010
+  SysAdmin --> SAFR006
+}
+
+rectangle "Client Investment Management Features" {
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  
+  Client --> CFR007
+  Client --> CFR008
+}
+
+rectangle "Client Spending Management Features" {
+  usecase "CFR012: Manage Spending Limits" as CFR012
+  usecase "SAFR003: Request Financial Predictions" as SAFR003
+  
+  Client --> CFR012
+  SysAdmin --> SAFR003
+}
+
+rectangle "Client Recommendations Features" {
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "SAFR007: Request Investment Opportunity Analysis" as SAFR007
+  
+  Client --> (FAFR002)
+  FinancialAdvisor --> (AIFR)
+}
+
+rectangle "Client Alerts Features" {
+  usecase "CFR013: View Alerts" as CFR013
+  usecase "SAFR008: Request Anomaly Transaction Alerts" as SAFR008
+  
+  Client --> (FAFR002)
+  FinancialAdvisor --> (AIFR)
+}
+
+rectangle "Financial Advisor Features" {
+  usecase "FAFR001: Manage Mentoring Sessions" as FAFR001
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  
+  FinancialAdvisor --> (FAFR001)
+  FinancialAdvisor --> (AIFR)
+}
+
+rectangle "Financial Advisor Configuration Features" {
+  usecase "SAFR004: Configure Analysis Parameters for Client Segments" as SAFR004
+  usecase "CFR015: Request Predictive Intervention Analyses" as CFR015
+  
+  FinancialAdvisor --> (FAFR003)
+  FinancialAdvisor --> (AIFR)
+}
+
+rectangle "System Features" {
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR009: Find Contextualized News Relevant to Portfolio" as SFR009
+  
+  SystemAdmin --> SAFR001
+  FinancialAdvisor --> (FAFR)
+}
+
+rectangle "AI Features" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  
+  SystemAdmin --> SAFR004
+}
+
+rectangle "User Feedback Features" {
+  usecase "CFR11: Send Feedback about Recommendations and Insights" as CFR11
+  
+  Client -> (FAFR)
+  FinancialAdvisor -> (AIFR)
+  SysAdmin -> (SAFR005)
+}
+@enduml

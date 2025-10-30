@@ -1,0 +1,81 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Customize Recommendation Preferences" as CFR005
+  usecase "SAFR003: Set Spending Limit Alerts" as SAFR003
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Advisors" as CFR009
+
+  rectangle "Client Interface" {
+    actor Client as client
+    client --> CFR001 : View financial data
+    client --> SAFR002 : Adjust alert settings
+    client --> CFR003 : See predictions
+    client --> CFR004 : Get recommendations
+    client --> CFR005 : Customize prefs
+    client --> SAFR003 : Set spending limits
+    client --> CFR007 : Find investments
+    client --> CFR008 : Check portfolio news
+    client --> CFR009 : Manage advisor access
+
+  }
+
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Schedule Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Alerts" as FAFR002
+  usecase "FAFR003: Analyze Predictive Insights" as FAFR003
+  usecase "FAFR004: Configure Analysis Params by Segment" as FAFR004
+
+  rectangle "Financial Advisor Interface" {
+    actor FinancialAdvisor as advisor
+    advisor --> SAFR001 : Adjust analysis settings
+    advisor --> FAFR001 : Plan mentoring sessions
+    advisor --> FAFR002 : Review client alerts
+    advisor --> FAFR003 : Analyze data trends
+    advisor --> FAFR004 : Customize segment params
+
+  }
+
+  usecase "SFR001: Send Alerts" as SFR001
+  usecase "SFR002: Deliver Recommendations" as SFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+
+  rectangle "System Core" {
+    actor SystemCore as syscore
+    syscore --> SAFR001 : Manage analysis params
+    syscore --> CFR004 : Provide recommendations
+    syscore --> SFR002 : Send recs to client
+    syscore --> AIFR003 : Trigger spending alerts
+
+  }
+
+  usecase "CFR011: Submit Feedback" as CFR011
+}
+
+@enduml
+```
+
+**Key Observations and Groupings:**
+- **Client Interface:** All user-related interactions (e.g., viewing dashboards, receiving recommendations) are grouped under the Client actor.
+- **Financial Advisor Interface:** Actions specific to advisors (mentoring sessions, client alerts) are isolated within their own section.
+- **System Core:** System components like alert generation and recommendation delivery are consolidated here. This includes AI systems responsible for generating insights.
+
+**Relationships:**
+1. Clients interact directly with the system through various use cases (CFR001–9).
+2. Advisors manage analysis parameters via SAFR001 and configure segments using FAFR004.
+3. The System Core handles critical functionalities like alert triggering, recommendation delivery, and AI processing.
+
+This structure ensures clarity in roles and responsibilities while maintaining logical groupings for easier maintenance and expansion of the system.
+
+[Done: True
+Done Reason: stop
+Eval Count: 883]

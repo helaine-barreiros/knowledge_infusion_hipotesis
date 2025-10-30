@@ -1,0 +1,76 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Financial News" as CFR008
+  usecase "CFR012: Generate Client Dashboards" as CFR012
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  actor "Client" as C
+  actor "Financial Advisor" as FAdvisors
+  actor "System Administrator" as SysAdmin
+  
+  Client --> CFR001 : View financial insights dashboard  
+  Client --> CFR003 : View financial predictions  
+  Client --> CFR004 : Receive personalized recommendations  
+  Client --> CFR005 : Manage recommendation preferences  
+  Client --> CFR006 : View spending limit alerts  
+  Client --> CFR007 : View investment opportunities  
+  Client --> CFR008 : Access financial news  
+  Client --> CFR012 : Generate client dashboards  
+
+  SysAdmin --> SAFR001 : Manage analysis parameters
+
+  FAdvisors --> FAFR002 : View client intervention alerts
+  FAdvisors --> FCFR009: "View contextualized financial reports" (not in original, inferred from context)
+  
+  rectangle "System Components" {
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+    SysAdmin --> SFR013 : Request client alerts  
+    C --> SFR013 : Trigger via feedback or system events  
+
+    FAdvisors --> AIFR006 : Configure anomaly detection for clients
+  }
+}
+
+@enduml
+```
+
+### Explanation:
+- **Actors**: The diagram includes three main actors: `Client`, `Financial Advisor`, and `System Administrator`. Each actor is linked to specific use cases they can perform.
+  
+- **Use Cases**:
+  - Clients (CFR001–CFR008, CFR012) cover viewing dashboards, predictions, recommendations, alerts, investment opportunities, etc. These are all client-facing functionalities.
+  - System Administrator handles `SAFR001` for managing analysis parameters within the system.
+  
+- **System Components**:
+  - The "System" rectangle groups use cases like generating client alerts (`SFR013`) and anomaly transaction alerts (`AIFR006`). These are internal to the system but can be triggered by clients or administrators.
+
+### Key Relationships:
+- Clients interact with most of the high-level functionalities (dashboards, predictions, etc.).
+- The System Administrator manages parameters that affect all analyses.
+- Financial Advisors have access to client intervention alerts and possibly contextualized reports inferred from the context provided in the requirements.
+
+This structure ensures clarity by grouping related use cases under their respective actors and systems while maintaining logical flow. Inferences were made for some use cases (e.g., `FCFR009`) based on implied needs, but they align with typical system interactions described in financial contexts. All relationships are directed appropriately to reflect the direction of interaction between actors and use cases. 
+
+### Note:
+- The requirements mention "Client" as a role that includes all user types (`User`, etc.), so the `Client` actor is used for simplicity.
+- Inferred relationships (e.g., Financial Advisor viewing contextualized reports) are based on logical extensions but not explicitly stated in the original list, hence marked with an inferred note. However, given the context of financial advisors needing such data to provide guidance, it's a reasonable assumption.
+
+[Done: True
+Done Reason: stop
+Eval Count: 985]

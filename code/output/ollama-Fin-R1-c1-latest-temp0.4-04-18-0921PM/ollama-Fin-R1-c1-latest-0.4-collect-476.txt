@@ -1,0 +1,109 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Notification Preferences" as SAFR002
+  
+  Client --> CFR001 : "View financial data in a consolidated dashboard"
+  
+  SysAdmin -->> SAFR002 : "Configure system parameters, including notification channels and thresholds for alerts."
+}
+
+rectangle "Financial Advisor (FAFR)" {
+  usecase "FAFR001: Manage Mentoring Sessions" as FAFR001
+  usecase "FAFR003: View Client Intervention Alerts" as FAFR003
+  
+  FinancialAdvisor --> FAFR001 : "Schedule and manage mentoring sessions based on system-generated insights."
+  
+  SysAdmin -->> SAFR002 : "Configure analysis parameters for specific client segments, including risk profiles under GDPR/CCPA."
+}
+
+rectangle "Client (User)" {
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR011: Send Feedback to System" as CFR011
+  
+  Client --> CFR004 : "Receive tailored financial advice and investment portfolio recommendations."
+  
+  SysAdmin -->> SAFR002 : "Adjust personalized recommendation preferences in the user's KYC profile."
+}
+
+rectangle "System (SFR)" {
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  
+  System --> AIFR001 : "Request financial predictions from AI component."
+  
+  SysAdmin -->> SAFR002 : "Set up data sources and models for the AI system to ensure compliance with Basel III."
+}
+
+rectangle "AI Component (AIFR)" {
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Identify Suitable Investments Based on Risk Profiles" as AIFR005
+  
+  System --> AIFR001 : "Analyze transaction data and market trends to generate financial predictions."
+  
+  SysAdmin -->> SAFR002 : "Tune AI parameters for accuracy, relevance, and regulatory compliance (e.g., MiFID II)."
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR009: Process Contextualized News" as SFR009
+  
+  SysAdmin --> SAFR001 : "Manage system-wide parameters for AI and notifications."
+  
+  System --> AIFR006 : "Request anomaly transaction alerts from the AI component to comply with AML regulations."
+}
+
+rectangle "Client (User)" {
+  usecase "CFR002: Receive Alerts About Anomalous Transactions" as CFR002
+  usecase "CFR009: Access Consolidated Financial Dashboard" as CFR009
+  
+  Client --> CFR002 : "Get notified of potential fraud or unusual spending."
+  
+  SysAdmin -->> SAFR001 : "Set up thresholds for transaction alerts based on client's risk profile and AML standards."
+}
+
+rectangle "System (SFR)" {
+  usecase "SFR008: Request Investment Opportunity Analysis" as SFR008
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  
+  System --> AIFR004 : "Identify investment opportunities matching user's risk profile."
+  
+  SysAdmin -->> SAFR002 : "Configure alert conditions for spending limits and investments to ensure regulatory compliance (e.g., FATF)."
+}
+
+rectangle "Client (User)" {
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+  
+  Client --> CFR010 : "Control data sharing permissions."
+  
+  SysAdmin -->> SAFR002 : "Set up access controls and data sharing policies for clients' financial information."
+}
+
+rectangle "System (SFR)" {
+  usecase "SFR017: Generate Financial Health Reports" as SFR017
+  usecase "SFR020: Manage User Feedback" as SFR020
+  
+  System --> AIFR009 : "Produce reports on user financial health using AI-generated insights."
+  
+  Client --> CFR011 : "Provide feedback to improve system accuracy and relevance."
+}
+
+@enduml
+```
+
+**Key Observations and Explanations:**
+- The diagram groups actors (e.g., **Client**, **Financial Advisor**, **System Administrator**) into their respective rectangles. Each actor is linked to the use cases they can perform.
+- Use case relationships are established with arrows, such as `User --> CFR001` for viewing a financial dashboard or `SysAdmin --> SAFR002` for managing analysis parameters.
+- Inheritance and aggregation are implied where necessary (e.g., **System** aggregates multiple components like AI systems, notification services).
+- The system boundary is represented by the "System" rectangle to encapsulate all internal use cases and interactions between actors/components within it. 
+
+This structure ensures clarity in how different roles interact with the system’s functionalities while adhering strictly to provided requirement IDs and names.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1187]

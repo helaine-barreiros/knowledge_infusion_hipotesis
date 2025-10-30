@@ -1,0 +1,92 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FAFR001
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  
+  Client --> (CFR001)
+  SysAdmin --> (SAFR001)
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  FinancialAdvisor --> (FAFR002)
+  FinancialAdvisor --> (FAFR003)
+  FinancialAdvisor --> (FAFR004)
+}
+
+rectangle "Client Relationship Management" {
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  Client --> (CFR10)
+}
+
+rectangle "System Alerts and Recommendations" {
+  usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  
+  System --> (SAFR001)
+  System --> (FAFR002)
+  System --> (CFR001)
+  System --> (SFR002)
+  System --> (SFR003)
+}
+
+rectangle "Investment Opportunities and News" {
+  usecase "CFR07: View Investment Opportunities Suitable to My Risk Profile" as CFR07
+  usecase "CFR08: View News Related to My Investment Portfolio" as CFR08
+  
+  Client --> (CFR07)
+  Client --> (CFR08)
+}
+
+rectangle "User Feedback and Improvement" {
+  usecase "AIFR011: Generate Contextualized News Insights for Users' Portfolios" as AIFR011
+  usecase "AIFR012: Request Specific Investment Opportunities Matching User Criteria" as AIFR012
+  
+  System --> (CFR07)
+  System --> (CFR08)
+}
+
+rectangle "AI Component Functions" {
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  usecase "AIFR005: Identify Investment Opportunities Matching User Strategies and MPT Principles" as AIFR005
+  
+  System --> (SAFR001)
+}
+
+rectangle "System Alerts" {
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as SFR008
+  usecase "AIFR006: Generate Anomaly Transaction Alerts for Users in Compliance with FinCEN Requirements" as AIFR006
+  
+  System --> (SAFR001)
+}
+
+rectangle "System Analytics and Reports" {
+  usecase "SFR017: Generate Financial Health Reports Assessing User's Overall Financial Wellbeing" as SFR017
+  usecase "AIFR009: Generate Client Predictive Intervention Recommendations for Users Based on Identified Patterns" as AIFR009
+  
+  System --> (SAFR001)
+}
+
+rectangle "User Feedback Management" {
+  usecase "CFR11: Send Feedback About the System's Recommendations and Insights to Improve Future Outputs" as CFR11
+  Client --> (CFR11)
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 823]

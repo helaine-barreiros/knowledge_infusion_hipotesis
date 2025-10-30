@@ -1,0 +1,116 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as Client
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FA
+}
+
+package SystemAdministrator {
+  actor "System Administrator" as SysAdmin
+}
+
+rectangle "System" {
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile and Goals" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile (MiFID II)" as CFR007
+  usecase "CFR008: Access News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: Consolidate Financial Information in a Personalized Dashboard" as CFR009
+  usecase "CFR010: Manage Relationship with Financial Advisors Including Data Sharing Permissions" as CFR010
+  
+  
+  Client --> CFR001 : View financial insights dashboard
+  SysAdmin -> SAFR001 : Configure analysis parameters for the AI system
+}
+
+rectangle "System Administrator (SAFR)" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+}
+SysAdmin -->> SAFR001
+
+package FinancialAdvisorFunctions {
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  
+}
+
+package SystemFunctions {
+  usecase "SFR001: Deliver Alerts Through Notification Channels" as SFR001
+  usecase "SFR002: Provide Personalized Recommendations Based on Financial Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations From AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts When Exceeding Thresholds" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis for Users Based on Risk Profiles" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities Matching User Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts Compliant with AML Regulations" as SFR008
+  usecase "SFR009: Find Contextualized News Relevant to Users' Portfolios From Trusted Sources" as SFR009
+  usecase "SFR010: Generate Client Dashboards for Financial Monitoring" as SFR010
+  usecase "SFR011: Extract Relevant Information from Contextualized News For User's Portfolio" as SFR011
+  usecase "SFR012: Generate Predictive Intervention Analyses to Identify When Advisors Should Engage Clients" as SFR012
+  usecase "SFR013: Track Financial Goals and Progress for Users" as SFR013
+  usecase "SFR014: Maintain Historical Record of Insights For Trend Analysis" as SFR014
+  usecase "SFR015: Manage User Feedback to Improve System Accuracy" as SFR015
+  
+  
+}
+
+package AISystem {
+  usecase "AIFR001: Generate Financial Predictions Based on Data and Trends" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations Aligned with Profiles" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts for Unusual Activity" as AIFR003
+  usecase "AIFR004: Analyze Investment Opportunities Against Risk Tolerance and Goals" as AIFR004
+  usecase "AIFR005: Identify Financial Instruments Aligning with Investment Strategies" as AIFR005
+  usecase "AIFR006: Detect Anomalous Transactions Using Pattern Recognition" as AIFR006
+  usecase "AIFR007: Correlate News With Portfolios for Relevant Insights" as AIFR007
+  usecase "AIFR008: Identify Patterns Indicating Need For Advisor Intervention" as AIFR008
+  usecase "AIFR009: Provide Forward-Looking Analysis to Enhance Financial Planning" as AIFR009
+  
+}
+
+package ClientFeedback {
+  
+  actor "User (Client, FA or SysAdmin)" as User
+  
+  usecase "CFR011: Send Feedback About System Outputs To Improve Accuracy and Relevance" as CFR011
+}
+User --> CFR011 : Provide feedback
+
+@enduml
+```
+
+### Explanation:
+- **Actors**: The diagram includes clients, financial advisors, system administrators, the AI system itself (AISystem), and a user actor for general interactions.
+- **Use Cases**:
+  - **Client Use Cases (CFR series)**: These are client-related functionalities like viewing dashboards, receiving alerts, personalizing recommendations, etc. They map directly to functional requirements CFR001–CFR010.
+  - **System Administrator Use Case**: SAFR001 for managing analysis parameters.
+  - **Financial Advisor Use Cases (FAFR series)**: FAFR001–FAFR004 relate to mentoring, alerts, predictive analytics, and parameter configuration.
+  - **System Functions (SFR series)**: These are system-level functionalities like delivering recommendations, generating dashboards, etc. They cover SFR001–SFR015.
+  - **AI System Use Cases**: AIFR001–AIFR009 represent the AI’s role in prediction and analysis.
+- **Relationships**:
+  - Clients interact with use cases like viewing dashboards, receiving alerts, etc. (e.g., Client --> CFR001).
+  - Financial Advisors can manage client mentoring sessions via FAFR001.
+  - System Administrators configure parameters through SAFR001.
+- **Packages**: Group related actors and use cases for clarity (Client, FinancialAdvisor, SystemAdministrator, AISystem, etc.).
+- **System Boundary**: The "System" rectangle contains all system-level components.
+
+This structure ensures that each requirement is represented accurately with proper relationships between actors and use cases. Adjustments can be made if additional details or dependencies are introduced in the requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1628]

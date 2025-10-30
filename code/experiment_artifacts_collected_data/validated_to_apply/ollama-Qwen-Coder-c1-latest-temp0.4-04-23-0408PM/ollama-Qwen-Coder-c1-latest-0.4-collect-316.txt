@@ -1,0 +1,93 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor (FA): as FA
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR005: Manage Analysis Parameters Preferences" as SAFR005
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "AIFR009: Generate Contextualized News Insights" as AIFR007
+  
+  CFR001 --> SysAdmin : (SAFR001)
+  
+  SAFR005 <|-- SAFR004
+  SAFR005 <|-- SAFR003
+  SAFR005 <|-- SAFR002
+  SAFR005 <|-- SAFR001
+  
+  SFR012 --> SysAdmin : (SAFR001)
+  
+  AIFR007 --> FA : (FAFR004)
+}
+
+rectangle "Client" {
+  usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR006: Manage Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Consolidated Financial Dashboard" as CFR009
+  
+  Client --> Sys : (SFR012)
+  
+  SAFR005 <|-- SAFR004
+  SAFR005 <|-- SAFR003
+  SAFR005 <|-- SAFR002
+  SAFR005 <|-- SAFR001
+  
+  SFR012 --> Sys : (SFR018)
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  
+  FA --> Sys : (SFR016)
+  
+  SAFR005 <|-- SAFR004
+  SAFR005 <|-- SAFR003
+  SAFR005 <|-- SAFR002
+  SAFR005 <|-- SAFR001
+  
+  SFR012 --> Sys : (SFR018)
+}
+
+rectangle "System Admin" {
+  usecase "SAFR004: Configure Analysis Parameters for Client Segments" as SAFR004
+  
+  SysAdmin --> Sys : (AIFR009)
+  
+  SAFR005 <|-- SAFR004
+  SAFR005 <|-- SAFR003
+  SAFR005 <|-- SAFR002
+  SAFR005 <|-- SAFR001
+  
+  SFR012 --> Sys : (SFR018)
+}
+
+rectangle "User" {
+  usecase "CFR11: Send Feedback About Recommendations and Insights" as CFR11
+  
+  User --> Sys : (AIFR009)
+  
+  SAFR005 <|-- SAFR004
+  SAFR005 <|-- SAFR003
+  SAFR005 <|-- SAFR002
+  SAFR005 <|-- SAFR001
+  
+  SFR012 --> Sys : (SFR018)
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 875]

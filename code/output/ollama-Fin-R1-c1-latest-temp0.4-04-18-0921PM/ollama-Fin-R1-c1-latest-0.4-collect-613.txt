@@ -1,0 +1,81 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Thresholds" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Customize Recommendation Preferences" as CFR005
+  usecase "CFR006: Monitor Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Portfolio News" as CFR008
+  usecase "CFR009: Consolidate Financial Information" as CFR010
+  usecase "SAFR003: Manage Client Permissions" as SAFR004
+
+  package Professional {
+    actor User as U
+    actor SystemAdmin as SA
+    
+    U --> CFR001 : View dashboard\nwith financial data  
+    U --> CFR002 : Receive alerts on anomalous transactions (FATF)\nfor fraud detection  
+    U --> CFR003 : Get future forecasts based on history and trends  
+    U --> CFR004 : Obtain tailored advice aligned with profile goals  
+    U --> CFR005 : Adjust recommendation settings per KYC\npreferences for relevance  
+    U --> CFR006 : Track spending limits when exceeding thresholds\nfor budget control  
+    U --> CFR007 : Explore investment options matching risk profile (MiFID II)  
+    U --> CFR008 : Stay informed about market news affecting investments  
+    U --> CFR010 : Access a single view of all financial info for efficiency  
+
+    SA --> SAFR003 : Manage data sharing\nwith advisors and clients
+  }
+
+  package System {
+    usecase "SFR002: Deliver Alerts" as SFR002
+    usecase "SFR014: Generate Analytics" as SFR014
+
+    U <|-- CFR001  
+    U <|-- SAFR003  
+
+    SFR002 --> User : Send alerts\nabout transactions or spending limits  
+    SFR014 --> User : Provide actionable insights\nbased on financial data and trends  
+
+  }
+
+  package AI {
+    usecase "AIFR008: Generate Intervention Recommendations" as AIFR008
+    U <|-- CFR009 : View consolidated info across accounts
+
+    AIFR008 --> User : Suggest actions\nbased on predictive analyses  
+  }
+}
+
+@enduml
+```
+
+**Key Observations and Explanations:**
+1. **Actors Grouping:** The system categorizes actors into three main groups:
+   - `User` (Client, Financial Advisor, System Administrator)
+   - `SystemAdmin`
+   - `Professional` includes both `User` and `SystemAdmin`, structured under a package for clarity.
+
+2. **Use Cases Allocation:**
+   - Client-related use cases (`CFR001-009`) are grouped within the main system boundary.
+   - System Administrator actions (`SAFR003, SAFR004`) are isolated in their own section but still linked to client interactions for context.
+
+3. **Inheritance and Relationships:**
+   - The `User` actor extends multiple use cases (e.g., viewing dashboards, receiving alerts), reflecting diverse interaction points.
+   - System components (`SFR`, `AIFR`) handle delivery of insights/alerts, with direct relationships to the user for feedback.
+
+4. **System Boundary:** All client-facing interactions are enclosed within a single system boundary rectangle, ensuring clarity on what constitutes external vs internal processes.
+
+5. **Package Structure:** Logical grouping simplifies navigation and highlights different stakeholder perspectives (e.g., professional services).
+
+This diagram adheres strictly to provided requirements while maintaining readability through structured packaging and inheritance relationships. Adjustments may be needed based on further analysis of the system architecture or additional details in future requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 907]

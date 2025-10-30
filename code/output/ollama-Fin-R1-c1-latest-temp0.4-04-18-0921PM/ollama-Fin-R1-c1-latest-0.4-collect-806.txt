@@ -1,0 +1,90 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Anomaly Detection Parameters" as SAFR002
+  usecase "FAFR005: Configure Client Segments for Analysis" as FAFR005
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008
+  usecase "CFR009: View Consolidated Financial Dashboard" as CFR010 (Note: Original requirement was CFR009, but there's a typo here. Assuming it's intended to be CFR010)
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+}
+
+rectangle "Client" {
+  actor Client as C
+  C --> CFR001 : "View Financial Insights Dashboard"
+  C --> CFR003 : "View Financial Predictions"
+  C --> CFR004 : "Receive Personalized Recommendations"
+  C --> CFR005 : "Manage Recommendation Preferences"
+  C --> CFR006 : "View Spending Limit Alerts"
+  C --> CFR007 : "Access Investment Opportunities Based on Risk Profile"
+  C --> CFR008 : "Receive News Related to Portfolio"
+  C --> CFR010 : "View Consolidated Financial Dashboard" (Note: Original requirement was CFR009, but there's a typo here. Assuming it's intended to be CFR010)
+}
+
+rectangle "Financial Advisor" {
+  actor FAF as FA
+  FA --> FAFR003 : "View Predictive Analytics"
+  FA --> FAFR004 : "Configure Analysis Parameters for Client Segments"
+  FA --> FAFR002 : "Manage Client Mentoring Sessions Based on Insights"
+}
+
+rectangle "System Administrator" {
+  actor SysAdmin as SA
+  SA --> SAFR001 : "Manage Analysis Parameters (AI System)"
+  SA --> SAFR002 : "Manage Anomaly Detection Parameters"
+}
+
+rectangle "AI System" {
+  usecase AIFR001: Generate Financial Predictions
+  usecase AIFR002: Generate Personalized Recommendations
+  usecase AIFR003: Generate Spending Limit Alerts
+  usecase AIFR004: Generate Investment Opportunity Analyses
+  usecase AIFR005: Identify Suitable Investments Based on Risk Profile
+  usecase AIFR006: Detect Anomaly Transactions
+  usecase AIFR007: Correlate News with Portfolios
+  usecase AIFR008: Recommend Interventions for Advisors
+  usecase AIFR009: Provide Predictive Insights
+
+  SysAdmin <|-- (AIFR001, AIFR002) : "Configure"
+}
+
+rectangle "System" {
+  usecase SFR001: Deliver Alerts Through Channels
+  usecase SFR003: Request Financial Predictions from AI
+  usecase SFR004: Request Personalized Recommendations
+  usecase SFR005: Request Spending Limit Alerts
+  usecase SFR006: Request Investment Opportunity Analysis
+  usecase SFR007: Request Specific Investments Matching Criteria
+  usecase SFR008: Request Anomaly Transaction Alerts
+  usecase SFR009: Find Contextualized News Relevant to Portfolio
+  usecase SFR010: Generate Client Dashboards
+  usecase SFR012: Manage User Feedback
+
+  SysAdmin <|-- (SFR003, SFR004) : "Request"
+}
+
+rectangle "Client" {
+  C --> CFR009 : "View Consolidated Financial Dashboard" (Note: Original requirement was CFR009 but typo in original list. Assuming intended to be CFR010)
+}
+@enduml
+```
+
+**Key Observations and Adjustments:**
+- **CFR009 vs. CFR010:** The requirements mention both "View Consolidated Financial Dashboard" under CFR009 and CFR010, which seems like a typo (likely intended to be two separate entries). However, since the original list has conflicting IDs ("CFR009: View..." and "CFR010: Manage Relationship..."), I resolved this by assuming that one of them is actually meant as CFR010. The note in parentheses clarifies this assumption.
+- **Inheritance Relationships:** For example, `SysAdmin` can configure both AI-generated recommendations (AIFR002) and system functionalities like alerts (SFR003). This reflects the role's ability to manage multiple components of the system.
+- **Grouping by Actor/Subsystem:** The diagram organizes use cases into logical groups such as "Client," "Financial Advisor," "System Administrator," AI System, and overall System. Each group is enclosed in a rectangle for clarity.
+
+This structure ensures all actors (Client, Financial Advisor, SysAdmin) are represented with their respective use case interactions, while the system components handle backend requests and processing. The relationships between these entities adhere strictly to the provided requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1238]

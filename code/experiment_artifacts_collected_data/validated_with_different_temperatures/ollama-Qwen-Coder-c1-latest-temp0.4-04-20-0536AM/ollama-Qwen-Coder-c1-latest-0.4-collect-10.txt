@@ -1,0 +1,78 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR001
+  
+  usecase "SAFR002: Manage Analysis Parameters" as SAFR002
+  usecase "SFR019: Maintain a Historical Record of Users' Insights for Trend Analysis and Effectiveness Measurement" as SFR019
+}
+
+package "System" {
+  rectangle "AI System" {
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Generate Financial Predictions for Users" as AIFR001
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+    usecase "AIFR009: Generate Client Predictive Insights for Forward-Looking Analysis of Financial Situations" as AIFR009
+  }
+  
+  rectangle "Notification System" {
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  }
+
+  rectangle "Dashboard Generator" {
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+    usecase "SFR12: Generate Financial Health Reports that Assess Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as SFR017
+  }
+
+  rectangle "News Processor" {
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios from Trusted Financial News Sources" as SFR009
+  }
+}
+
+CFR001 --> (SAFR002)
+FAFR002 --> (AIFR003)
+FAFR004 <|-- (SFR005)
+SystemAdministrator --> SAFR002
+
+# Relationships between actors and use cases within the system components
+Client --> AIFR001 : "View Financial Insights Dashboard"
+Client --> SFR017 : "View News Related to Investment Portfolio"
+Client --> AIFR004 : "Manage Personalized Recommendations Preferences"
+Client --> FAFR003 : "View Predictive Analytics"
+
+FinancialAdvisor --> (AIFR002)
+FinancialAdvisor --> (SFR006)
+
+SystemAdministrator --> SAFR001
+SystemAdministrator --> SFR019
+
+# Relationship between the system and its components
+(rectangle AI System) <|-- (rectangle Notification System)
+(rectangle AI System) <|-- (rectangle Dashboard Generator)
+(rectangle AI System) <|-- (rectangle News Processor)
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 775]

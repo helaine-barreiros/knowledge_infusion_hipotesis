@@ -1,0 +1,52 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor (FA): as FA
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  
+  Client --> CFR001
+  Client --> SAFR001
+  SysAdmin --> SAFR001
+  Client --> SFR002 : personalized recommendations based on financial profiles
+  Client --> SFR003 : request financial predictions from AI component
+  Client --> SFR004 : request personalized recommendations from AI component
+  Client --> SFR005 : request spending limit alerts from AI component
+  Client --> SFR006 : request investment opportunity analysis from AI component
+  Client --> AIFR002
+  
+  FA --> FAFR001
+  FA --> FAFR002
+  FA --> FAFR003
+  FA --> FAFR004
+}
+
+Client --> SFR017 : generate financial health reports
+Client --> CFR018 : manage users' financial goals
+
+FA --> AIFR009 : client predictive intervention recommendations
+FA --> AIFR016 : enhance the value of financial guidance provided to clients
+  
+Sys --> SFR003 : request financial predictions from AI component
+Sys --> SFR004 : request personalized recommendations from each user's financial data and preferences
+Sys --> SFR005 : request spending limit alerts when user spending patterns exceed defined thresholds
+Sys --> SFR016 : enhance the value of financial guidance provided to clients
+  
+System Admin --> SAFR002
+
+Client -> (CFR011: Send Feedback) --(Sends feedback about system's recommendations and insights)
+@enduml

@@ -1,0 +1,53 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Anomaly Detection Parameters" as SAFR002
+  usecase "FAFR005: Schedule Client Mentoring Sessions Based on AI Insights" as FAFR005
+
+  Client --> CFR001 : "View Financial Dashboard"
+  
+  SysAdmin <|-- (SAFR002) : "Manage Parameters for Alerts and Predictions"
+
+  rectangle "Client Interface" {
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004
+    Client --> CFR003 : "View Future Projections"
+    Client --> CFR004 : "Get Tailored Advice"
+
+  }
+
+  rectangle "Financial Advisor Interface" {
+    usecase "FAFR001: Manage Mentoring Sessions" as FAFR001
+    usecase "FAFR002: View Intervention Alerts" as FAFR002
+    usecase "FAFR003: Review Predictive Analytics" as FAFR003
+
+  }
+
+  rectangle "System Administrator Interface" {
+    SysAdmin --> SAFR001 : "Adjust AI Analysis Settings"
+  
+  }
+}
+
+@enduml
+```
+
+**Key Observations and Explanations:**
+- **Client:** The primary user of the system, represented by actors like Client (CFR001–4), who interact with use cases such as viewing dashboards, receiving recommendations, etc.
+- **SysAdmin:** Manages administrative tasks via SAFR002 for anomaly detection and analysis parameters. No direct interaction with client-facing use cases except through the system's internal management of AI components (via SysAdmin).
+- **Financial Advisor (FAFR):** Engages in mentoring clients (CFR11, FAFR5), reviews alerts/predictions (CFR02–3, FAFR02–4). No direct use cases but leverages system-generated insights.
+- **Use Case Grouping:** Logical grouping under "Client Interface," "Financial Advisor Interface," and "System Administrator Interface" to organize related functionalities. The SysAdmin's SAFR001 is a standalone administrative task.
+
+**Notes:**
+- Only explicitly mentioned actors (e.g., Client, SysAdmin) are included per requirements.
+- Inheritance relationships not directly implied in the provided list but inferred from role interactions (e.g., SysAdmin managing parameters).
+- All use cases strictly adhere to their respective IDs and descriptions.
+
+[Done: True
+Done Reason: stop
+Eval Count: 589]

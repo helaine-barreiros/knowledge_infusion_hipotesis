@@ -1,0 +1,67 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FA
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  
+  Client --> (CFR001)
+  SysAdmin --> (SAFR001) : manage parameters for AI system
+  FA --> (FAFR002)
+}
+
+rectangle "Client Dashboard Features" {
+  usecase "CFR002: View Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  
+  Client --> (CFR002)
+  Client --> (CFR003)
+  Client --> (CFR004)
+}
+
+rectangle "Client Management Features" {
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+  usecase "SAFR005: Configure Analysis Parameters for Specific Client Segments" as SAFR005
+  
+  Client --> (CFR010)
+  SysAdmin --> (SAFR005) : configure parameters based on client profiles and regulatory requirements
+}
+
+rectangle "Financial Advisor Features" {
+  usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  FA --> (FAFR003)
+  FA --> (FAFR004) : configure parameters based on client profiles and regulatory requirements
+}
+
+rectangle "System Features" {
+  usecase "SFR001: Deliver Alerts to Users through Appropriate Notification Channels" as SFR001
+  usecase "SFR002: Deliver Personalized Recommendations Based on Financial Profiles" as SFR002
+  
+  System Admin --> (SAFR001) : manage alerts delivery
+  Client --> (SFR002)
+}
+
+rectangle "AI Features" {
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+  
+  System Admin --> (SAFR001) : manage alerts delivery
+  Client --> (SFR002)
+}
+
+rectangle "Feedback Management Features" {
+  usecase "CFR011: Send Feedback about the System's Recommendations and Insights" as CFR011
+  
+  User --> (CFR011)
+}
+@enduml

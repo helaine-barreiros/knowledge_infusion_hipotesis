@@ -1,0 +1,95 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:User (Client) : as User
+:Financial Advisor : as FA
+:System Administrator : as SysAdmin
+:System : as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR005: Manage Analysis Parameters Preferences" as SAFR005
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  
+  User --> CFR001 : "View Dashboard"
+  User --> SAFR005 : "Manage Preferences"
+  System --> SFR002 : "Deliver Recommendations"
+  AIFR002 --> Sys : "Generate Recommendations"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  
+  FA --> FAFR001 : "Manage Sessions"
+  FA --> FAFR003 : "View Analytics"
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR020: Manage User Feedback" as SFR020
+  
+  SysAdmin --> SAFR001 : "Manage Parameters"
+  System --> SFR020 : "Process Feedback"
+}
+
+rectangle "Notifications" {
+  usecase "SFR003: Deliver Alerts" as SFR003
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  
+  Sys --> SFR003 : "Deliver Alerts"
+  AIFR006 --> Sys : "Generate Alerts"
+}
+
+rectangle "Investment Opportunities" {
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  
+  System --> SFR006 : "Request Analysis"
+  AIFR004 --> Sys : "Generate Analyses"
+}
+
+rectangle "Spending Limits" {
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  
+  System --> SFR005 : "Request Alerts"
+  AIFR003 --> Sys : "Generate Alerts"
+}
+
+rectangle "News and Analytics" {
+  usecase "SFR012: Request Client Dashboards" as SFR012
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  
+  System --> SFR012 : "Request Dashboards"
+  AIFR007 --> Sys : "Generate Insights"
+}
+
+rectangle "Predictive Interventions" {
+  usecase "SFR015: Request Predictive Intervention Analyses" as SFR015
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+  
+  System --> SFR015 : "Request Analyses"
+  AIFR008 --> Sys : "Generate Recommendations"
+}
+
+rectangle "Financial Health Reports" {
+  usecase "SFR017: Request Financial Health Reports" as SFR017
+  usecase "AIFR019: Generate Financial Health Reports" as AIFR019
+  
+  System --> SFR017 : "Request Reports"
+  AIFR019 --> Sys : "Generate Reports"
+}
+
+rectangle "User Feedback Loop" {
+  usecase "CFR011: Send User Feedback" as CFR011
+  usecase "SFR20: Manage User Feedback" as SFR20
+  
+  User --> CFR011 : "Send Feedback"
+  System --> SFR20 : "Process Feedback"
+}
+
+@enduml

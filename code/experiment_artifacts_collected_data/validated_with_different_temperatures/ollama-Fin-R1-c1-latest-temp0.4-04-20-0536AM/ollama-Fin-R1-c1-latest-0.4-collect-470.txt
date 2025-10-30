@@ -1,0 +1,160 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor SysAdmin as sysadmin
+actor FinancialAdvisor as financialadvisor
+system SFR012: "Generate Client Dashboards" as generate_client_dashboards
+usecase "CFR001: View Financial Insights Dashboard" as view_financial_dashboard (client)
+usecase "CFR002: Receive Alerts for Anomalous Transactions" as receive_alerts_fatf (client, sysadmin)
+usecase "CFR003: View Financial Predictions" as view_predictions (client)
+usecase "CFR004: Personalized Recommendations Based on Profile" as personalized_recommendations (client)
+usecase "CFR005: Manage Recommendation Preferences" as manage_preferences (client, sysadmin)
+usecase "CFR006: View Spending Limit Alerts" as view_spending_alerts (client)
+usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as access_investment_opportunities (client)
+usecase "CFR008: Receive News Related to Portfolio" as receive_news_portfolio (client, financialadvisor)
+usecase "CFR009: Consolidated Financial Information Dashboard" as consolidated_dashboard (client)
+usecase "CFR010: Manage Relationship with Advisors" as manage_relationship_advisors (client)
+
+actor SystemAdministrator as sysadmin
+usecase "SAFR001: Manage Analysis Parameters" as manage_analysis_params (sysadmin, generate_client_dashboards)
+
+actor FinancialAdvisor as financialadvisor
+usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as mentoring_sessions (financialadvisor)
+usecase "FAFR002: View Client Intervention Alerts" as view_intervention_alerts (financialadvisor)
+usecase "FAFR003: Predictive Analytics for Clients" as predictive_analytics_clients (financialadvisor)
+usecase "FAFR004: Configure Analysis Parameters by Segment" as configure_params_segment (financialadvisor, generate_client_dashboards)
+
+system SFR012: Generate Client Dashboards
+rectangle System {
+  usecase "SFR008: Request Investment Opportunity Analysis Based on Risk Profile" as request_investment_analysis (generate_client_dashboards)
+  usecase "SFR009: Find Contextualized News for Portfolio" as find_context_news_portfolio (financialadvisor, generate_client_dashboards)
+  
+  client --> view_financial_dashboard
+  client --> receive_alerts_fatf : SysAdmin
+  client --> view_predictions
+  client --> personalized_recommendations
+  client --> manage_preferences : sysadmin
+  client --> view_spending_alerts
+  client --> access_investment_opportunities (financialadvisor)
+  client --> receive_news_portfolio: financialadvisor, generate_client_dashboards
+  client --> consolidated_dashboard
+  client --> manage_relationship_advisors
+  
+  SysAdmin --> manage_analysis_params (generate_client_dashboards)
+
+  FinancialAdvisor --> mentoring_sessions : sysadmin
+  FinancialAdvisor --> view_intervention_alerts (financialadvisor)
+  FinancialAdvisor --> predictive_analytics_clients: generate_client_dashboards, financialadvisor
+  FinancialAdvisor --> configure_params_segment (sysadmin, financialadvisor): SysAdmin
+  
+  SFR012 <|-- request_investment_analysis
+  SFR012 <|-- find_context_news_portfolio
+
+  // Inheritance relationships between actors
+  client <|-- view_financial_dashboard : Client
+  client <|-- receive_alerts_fatf (SysAdmin)
+  client <|-- view_predictions : Client
+  client <|-- personalized_recommendations: Client
+  client <|-- manage_preferences (Client, SysAdmin): User
+  client <|-- view_spending_alerts : Client
+  client <|-- access_investment_opportunities (FinancialAdvisor) : FinancialAdvisor
+  client <|-- receive_news_portfolio: FinancialAdvisor, SFR012
+  client <|-- consolidated_dashboard: Client
+  client <|-- manage_relationship_advisors: Client
+
+  SysAdmin <|-- manage_analysis_params (SFR012): SystemAdministrator
+
+  FinancialAdvisor <|-- mentoring_sessions : FinancialAdvisor
+  FinancialAdvisor <|-- view_intervention_alerts(FinancialAdvisor) : FinancialAdvisor
+  FinancialAdvisor <|-- predictive_analytics_clients(SFR012,FinancialAdvisor) : SFR012
+  FinancialAdvisor <|-- configure_params_segment (SysAdmin): SysAdmin
+
+}
+@enduml
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor SysAdmin as sysadmin
+actor FinancialAdvisor as financialadvisor
+system SFR012: "Generate Client Dashboards" as generate_client_dashboards
+usecase "CFR001: View Financial Insights Dashboard" as view_financial_dashboard (client)
+usecase "CFR002: Receive Alerts for Anomalous Transactions" as receive_alerts_fatf (client, sysadmin)
+usecase "CFR003: View Financial Predictions" as view_predictions (client)
+usecase "CFR004: Personalized Recommendations Based on Profile" as personalized_recommendations (client)
+usecase "CFR005: Manage Recommendation Preferences" as manage_preferences (client, sysadmin)
+usecase "CFR006: View Spending Limit Alerts" as view_spending_alerts (client)
+usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as access_investment_opportunities (client)
+usecase "CFR008: Receive News Related to Portfolio" as receive_news_portfolio (client, financialadvisor)
+usecase "CFR009: Consolidated Financial Information Dashboard" as consolidated_dashboard (client)
+usecase "CFR010: Manage Relationship with Advisors" as manage_relationship_advisors (client)
+
+actor SystemAdministrator as sysadmin
+usecase "SAFR001: Manage Analysis Parameters" as manage_analysis_params (sysadmin, generate_client_dashboards)
+
+actor FinancialAdvisor as financialadvisor
+usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as mentoring_sessions (financialadvisor)
+usecase "FAFR002: View Client Intervention Alerts" as view_intervention_alerts (financialadvisor)
+usecase "FAFR003: Predictive Analytics for Clients" as predictive_analytics_clients (financialadvisor, generate_client_dashboards)
+usecase "FAFR004: Configure Analysis Parameters by Segment" as configure_params_segment (financialadvisor, sysadmin)
+
+system SFR012: Generate Client Dashboards
+rectangle System {
+  usecase "SFR008: Request Investment Opportunity Analysis Based on Risk Profile" as request_investment_analysis (generate_client_dashboards)
+  usecase "SFR009: Find Contextualized News for Portfolio" as find_context_news_portfolio (financialadvisor, generate_client_dashboards)
+
+  client --> view_financial_dashboard
+  client --> receive_alerts_fatf : SysAdmin
+  client --> view_predictions
+  client --> personalized_recommendations
+  client --> manage_preferences : sysadmin
+  client --> view_spending_alerts
+  client --> access_investment_opportunities (financialadvisor)
+  client --> receive_news_portfolio: financialadvisor, generate_client_dashboards
+  client --> consolidated_dashboard
+  client --> manage_relationship_advisors
+
+  SysAdmin --> manage_analysis_params (generate_client_dashboards)
+
+  FinancialAdvisor --> mentoring_sessions : sysadmin
+  FinancialAdvisor --> view_intervention_alerts (financialadvisor)
+  FinancialAdvisor --> predictive_analytics_clients: generate_client_dashboards, financialadvisor
+  FinancialAdvisor --> configure_params_segment (sysadmin): SysAdmin
+
+  SFR012 <|-- request_investment_analysis
+  SFR012 <|-- find_context_news_portfolio
+
+  client <|-- view_financial_dashboard : Client
+  client <|-- receive_alerts_fatf (SysAdmin)
+  client <|-- view_predictions : Client
+  client <|-- personalized_recommendations: Client
+  client <|-- manage_preferences (Client, SysAdmin): User
+  client <|-- view_spending_alerts : Client
+  client <|-- access_investment_opportunities (FinancialAdvisor) : FinancialAdvisor
+  client <|-- receive_news_portfolio: FinancialAdvisor, SFR012
+  client <|-- consolidated_dashboard: Client
+
+  SysAdmin <|-- manage_analysis_params (SFR012): SystemAdministrator
+
+  FinancialAdvisor <|-- mentoring_sessions : FinancialAdvisor
+  FinancialAdvisor <|-- view_intervention_alerts(FinancialAdvisor) : FinancialAdvisor
+  FinancialAdvisor <|-- predictive_analytics_clients(SFR012,FinancialAdvisor) : SFR012
+  FinancialAdvisor <|-- configure_params_segment (SysAdmin): SysAdmin
+
+}
+@enduml
+```
+
+This PlantUML code represents the use case diagram for an AI-powered analysis and insights system based on the provided functional requirements. The actors include `Client`, `SystemAdministrator`, and `FinancialAdvisor`. Use cases are categorized under their respective functionalities, such as financial dashboards (`CFR001`), alerts (`CFR002`), predictions (`CFR003`), recommendations (`CFR004`), preferences management (`CFR005`), spending limits (`CFR006`), investment opportunities (`CFR007`), news related to portfolios (`CFR008`), consolidated dashboards (`CFR009`), and relationship management with advisors (`CFR010`). 
+
+The system also includes administrative use cases like managing analysis parameters (`SAFR001`) for the AI component. Financial Advisors have specific tasks such as mentoring sessions, viewing intervention alerts, predictive analytics, and configuring parameters by
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

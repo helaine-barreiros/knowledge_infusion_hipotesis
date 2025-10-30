@@ -1,0 +1,78 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C1
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA1
+}
+
+package "System Administrator" {
+  actor SysAdmin as SA1
+}
+
+rectangle "System Boundary" {
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts" as SFR013
+  
+  
+  C1 --> CFR001 : "View Financial Insights Dashboard"
+  SA1 --> SAFR001 : "Manage Analysis Parameters"
+  FA1 --> FAFR002 : "View Client Intervention Alerts"
+}
+
+package "System Components" {
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "SFR005: Request Spelling Limit Alerts from AI Component" as SFR005
+  
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  C1 --> CFR001 : "View Financial Insights Dashboard"
+}
+
+package "System Management" {
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+  
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+}
+
+package "System Operations" {
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "SFR009: Request Contextualized News from AI Component" as SFR009
+  
+  
+  C1 --> CFR008 : "View News Related to Investment Portfolio"
+}
+
+package "User Feedback Management" {
+  usecase "CFR011: Send User Feedback" as CFR011
+}
+  
+
+C1 <|-- (SAFR001) : Extends System Administrator's role in managing parameters
+
+@enduml
+```
+
+### Key Observations:
+- **Client** actors include interactions with `View Financial Insights Dashboard` (`CFR001`) and other system-generated alerts.
+- **Financial Advisor** focuses on viewing client-specific alerts (`FAFR002`) and predictive insights from the AI component.
+- **System Administrator** manages analysis parameters across multiple use cases (e.g., `SAFR001`, extending to others via inheritance).
+- **AI System Components** generate specific types of analyses, which are requested by other actors/systems through intermediate use cases like `SFR005` or direct requests.
+- Inheritance relationships (`<|--`) link system administrators to extended capabilities in managing analysis parameters.
+
+This structure ensures all requirements are represented accurately while maintaining logical groupings and dependencies. Adjustments may be needed based on further clarification of role overlaps or additional interactions not explicitly listed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 684]

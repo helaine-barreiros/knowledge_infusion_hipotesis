@@ -1,0 +1,182 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+
+  Client --> CFR001 : "View financial data, predictions, and recommendations"
+  
+  SysAdmin --> SAFR002 : "Adjust system parameters for alerts"
+
+  FinancialAdvisor --> (FAFR005) : "Schedule mentoring sessions based on client needs"
+
+}
+
+rectangle "Alert System" {
+  usecase "SFR013: Generate Client Alerts" as SFR013
+  SysAdmin --> SFR013 : "Configure alert rules"
+  
+}
+ 
+rectangle "Recommendation Engine" {
+  usecase "AIFR002: Personalized Recommendations" as AIFR002
+  usecase "SFR004: Request Personalized Recs from AI" as SFR004
+
+  Client --> (AIFR002) : "Receive personalized recommendations"
+  
+}
+
+rectangle "Predictive Analytics" {
+  usecase "AIFR001: Financial Predictions" as AIFR001
+  usecase "SFR003: Request Predictions from AI" as SFR003
+
+  Client --> (AIFR001) : "View financial predictions"
+  
+}
+
+rectangle "Investment Analysis" {
+  usecase "AIFR004: Investment Opportunity Analyses" as AIFR004
+  SysAdmin <|-- SAFR002 : "Adjust parameters for investment alerts"
+
+  Client --> (AIFR004) : "View suitable investments"
+  
+}
+
+rectangle "News Aggregator" {
+  usecase "SFR009: Request Contextualized News" as SFR009
+  AIFR007 <|-- SFR009 : "Extract relevant news for clients"
+
+  Client --> (SFR009) : "Access portfolio-related news"
+  
+}
+
+rectangle "User Feedback Management" {
+  usecase "CFR011: Send User Feedback" as CFR011
+  SysAdmin --> CFR011 : "Review and incorporate feedback into system improvements"
+}
+@enduml
+```
+
+### Key Observations:
+- **System Actors**: The primary actors are the *Client*, *SysAdmin* (System Administrator), and *FinancialAdvisor*. Each has specific use cases tied to their roles.
+  
+- **Use Case Grouping**:
+  - **Client Use Cases**: Viewing dashboards, alerts, predictions, recommendations, spending limits, investment opportunities, news, managing relationships with advisors, sending feedback. These are grouped under the "System" boundary since they interact directly with system functionalities.
+  - **SysAdmin Use Cases**: Managing analysis parameters (e.g., SAFR001), configuring alert preferences (SAFR002). SysAdmin also reviews client feedback (CFR011).
+  
+- **FinancialAdvisor Use Cases**: Scheduling mentoring sessions (FAFR005) and viewing intervention alerts (FAFR003, FAFR004). Financial Advisors rely on system-generated insights but do not configure parameters directly.
+  - *Note*: The original requirements mention "FAFR001: Manage client mentoring sessions" which is now represented as **SAFR002** under SysAdmin. This might be a misalignment, so I adjusted it to fit the context.
+
+- **Subsystems**: 
+  - **Alert System (SFR)** handles generation and management of alerts.
+  - **Recommendation Engine (AIFR)** generates personalized recommendations based on client data.
+  - **Predictive Analytics (AIFR)** provides financial forecasts using historical data and market trends.
+  - **Investment Analysis (AIFR)** evaluates investment opportunities relative to risk profiles.
+  
+- **Relationships**:
+  - *Client* interacts with most use cases directly, except for system parameter management which is handled by SysAdmin via SAFR002.
+  - SysAdmin configures alert preferences and reviews client feedback. Financial Advisors schedule mentoring sessions but do not manage parameters or alerts.
+
+### Potential Improvements:
+1. **Clarify Actor Roles**: Ensure that all actors (Client, SysAdmin, FinancialAdvisor) are correctly mapped to their respective use cases without overlap.
+2. **Consistency in Use Case IDs**: Verify that each use case ID matches the requirements exactly and is not duplicated across different components.
+
+This diagram provides a structured view of how clients, system administrators, financial advisors, and the AI systems interact within the proposed framework. Adjustments may be needed based on further analysis or specific implementation details beyond the provided functional requirements.
+```plantuml
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+
+  Client --> (CFR001) : "View financial data, predictions, and recommendations"
+  
+  SysAdmin --> (SAFR002) : "Adjust system parameters for alerts"
+
+  FinancialAdvisor --> (FAFR005) : "Schedule mentoring sessions based on client needs"
+
+}
+
+rectangle "Alert System" {
+  usecase "SFR013: Generate Client Alerts" as SFR013
+  SysAdmin --> (SFR013) : "Configure alert rules"
+  
+}
+ 
+rectangle "Recommendation Engine" {
+  usecase "AIFR002: Personalized Recommendations" as AIFR002
+  usecase "SFR004: Request Personalized Recs from AI" as SFR004
+
+  Client --> (AIFR002) : "Receive personalized recommendations"
+  
+}
+
+rectangle "Predictive Analytics" {
+  usecase "AIFR001: Financial Predictions" as AIFR001
+  usecase "SFR003: Request Predictions from AI" as SFR003
+
+  Client --> (AIFR001) : "View financial predictions"
+  
+}
+
+rectangle "Investment Analysis" {
+  usecase "AIFR004: Investment Opportunity Analyses" as AIFR004
+  SysAdmin <|-- SAFR002 : "Adjust parameters for investment alerts"
+
+  Client --> (AIFR004) : "View suitable investments"
+  
+}
+
+rectangle "News Aggregator" {
+  usecase "SFR009: Request Contextualized News" as SFR009
+  AIFR007 <|-- SFR009 : "Extract relevant news for clients"
+
+  Client --> (SFR009) : "Access portfolio-related news"
+  
+}
+
+rectangle "User Feedback Management" {
+  usecase "CFR011: Send User Feedback" as CFR011
+  SysAdmin --> (CFR011) : "Review and incorporate feedback into system improvements"
+}
+@enduml
+
+### Key Observations:
+- **System Actors**: The primary actors are the *Client*, *SysAdmin* (System Administrator), and *FinancialAdvisor*. Each has specific use cases tied to their roles.
+  
+- **Use Case Grouping**:
+  - **Client Use Cases**: Viewing dashboards, alerts, predictions, recommendations, spending limits, investment opportunities, news, managing relationships with advisors, sending feedback. These are grouped under the "System" boundary since they interact directly with system functionalities.
+  - **SysAdmin Use Cases**: Managing analysis parameters (e.g., SAFR001), configuring alert preferences (SAFR002). SysAdmin also reviews client feedback (CFR011).
+  
+- **FinancialAdvisor Use Cases**: Scheduling mentoring sessions (FAFR005) and viewing intervention alerts. Financial Advisors rely on system-generated insights but do not configure parameters or manage alerts directly.
+  - *Note*: The original requirements mention "FAFR001: Manage client mentoring sessions" which is now represented as **SAFR002** under SysAdmin due to potential role overlaps.
+
+- **Subsystems**: 
+  - **Alert System (SFR)** handles generation and management of alerts.
+  - **Recommendation Engine (AIFR)** generates personalized recommendations based on client data.
+  - **Predictive Analytics (AIFR)** provides financial forecasts using historical data and market trends.
+  - **Investment Analysis (AIFR)** evaluates investment opportunities relative to risk profiles.
+
+- **Relationships**:
+  - *Client* interacts with most use cases directly, except for system parameter management which is handled by SysAdmin via SAFR002.
+  - SysAdmin configures alert preferences and reviews client feedback. Financial Advisors schedule mentoring sessions but do not manage parameters or alerts.
+
+### Potential Improvements:
+1. **Clarify Actor Roles**: Ensure that all actors (Client, SysAdmin, FinancialAdvisor) are correctly mapped to their respective use cases without overlap.
+2. **Consistency in Use Case IDs**: Verify that each use case ID matches the requirements exactly and is not duplicated across different components.
+
+This diagram provides a structured view of how clients, system administrators, financial advisors, and the AI systems interact within the proposed framework. Adjustments may be needed based on
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

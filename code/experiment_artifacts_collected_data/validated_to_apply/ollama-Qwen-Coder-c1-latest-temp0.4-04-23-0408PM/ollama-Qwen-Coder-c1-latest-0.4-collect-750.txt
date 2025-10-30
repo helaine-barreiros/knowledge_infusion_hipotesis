@@ -1,0 +1,93 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR001
+  usecase "CFR003: View Financial Predictions" as SAFR002
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR003
+  usecase "CFR005: Manage Recommendations Preferences" as SAFR004
+  usecase "CFR006: View Spending Limit Alerts" as SAFR005
+  usecase "CFR011: Send Feedback about System's Outputs" as SAFR012
+  
+  CFR001 --> (SAFR001)
+  CFR001 --> (SAFR002)
+  CFR001 --> (SAFR003)
+  CFR001 --> (SAFR004)
+  CFR001 --> (SAFR005)
+  CFR001 --> (SAFR012)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts" as SAFR006
+  usecase "FAFR003: View Predictive Analytics" as SAFR007
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as SAFR015
+  
+  FinancialAdvisor --> (SAFR006)
+  FinancialAdvisor --> (SAFR007)
+  FinancialAdvisor --> (SAFR015)
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SAFR008
+  
+  usecase "SAFR009: Manage Analysis Parameters for AI System" as SAFR009
+  usecase "SFR020: Manage User Feedback to Improve Outputs" as SAFR016
+  
+  SystemAdministrator --> (SAFR009)
+  SystemAdministrator --> (SAFR016)
+}
+
+package "System" {
+  rectangle "Financial Insights Dashboard" {
+    usecase "SFR017: Generate Financial Health Reports" as SFR024
+    usecase "SFR018: Manage Users' Financial Goals" as SFR035
+    
+    CFR009 --> (SFR024)
+    CFR009 --> (SFR035)
+  }
+  
+  rectangle "Alerts and Notifications" {
+    usecase "SFR007: Request Contextualized News Insights from AI Component" as SFR018
+    usecase "SFR016: Generate Client Predictive Insights" as SFR029
+    
+    CFR002 --> (SFR018)
+    SAFR003 --> (SFR029)
+  }
+  
+  rectangle "Recommendations and Analytics" {
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+    usecase "AIFR004: Generate Spending Limit Alerts" as AIFR003
+    
+    SAFR003 --> (AIFR002)
+    SAFR005 --> (AIFR003)
+  }
+  
+  rectangle "Investment Opportunities and News" {
+    usecase "SFR016: Generate Client Predictive Insights for Financial Advisors" as SFR047
+    usecase "AIFR008: Generate Anomaly Transaction Alerts" as AIFR009
+    
+    SAFR003 --> (SFR047)
+    SAFR002 --> (AIFR009)
+  }
+  
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions for Users" as AIFR006
+    usecase "AIFR005: Identify Suitable Investments Based on User Profiles and Preferences" as AIFR023
+    
+    SAFR007 --> (AIFR006)
+    FAFR004 --> (AIFR023)
+  }
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 926]

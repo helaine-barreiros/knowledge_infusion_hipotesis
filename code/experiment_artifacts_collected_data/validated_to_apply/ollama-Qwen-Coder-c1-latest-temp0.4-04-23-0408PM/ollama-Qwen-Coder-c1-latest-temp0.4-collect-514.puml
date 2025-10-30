@@ -1,0 +1,100 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Clients" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001 
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003  
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004 
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005 
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007  
+  usecase "CFR008: View News Related to Portfolio" as CFR008 
+  usecase "CFR009: Access Personalized Dashboard" as CFR009 
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+}
+
+package "Financial Advisors" {
+  actor Advisor as A
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001  
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002 
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Clients" as FAFR004
+}
+
+package "System Administrator" {
+  actor SysAdmin as SA
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001  
+}
+
+rectangle System {
+  package "Notifications and Alerts" {
+    usecase "SFR001: Deliver Alerts to Users" as SFR001
+  }
+  
+  package "Recommendations" {
+    usecase "SFR002: Deliver Personalized Recommendations" as SFR002 
+  }
+
+  package "Predictions and Insights" {
+    usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+    usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004  
+    usecase "SFR016: Request Predictive Insights from AI Component" as SFR016 
+  }
+
+  package "Spending Limits and Alerts" {
+    usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  }
+  
+  package "Investment Opportunities" {
+    usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006 
+    usecase "SFR017: Generate Financial Health Reports" as SFR017
+  }
+
+  package "News and Insights" {
+    usecase "SFR008: Find Contextualized News Relevant to Users' Portfolios" as SFR008  
+    usecase "SFR010: Request Contextualized News Insights from AI Component" as SFR010
+  }
+
+  package "Client Analytics and Predictions" {
+    usecase "SFR014: Generate Client Analytics that Provide Meaningful Insights into Financial Behavior and Performance" as SFR014 
+    usecase "SFR015: Request Predictive Intervention Analyses from AI Component" as SFR015
+  }
+
+  package "User Feedback Management" {
+    usecase "CFR011: Send Feedback about System's Recommendations and Insights" as CFR011  
+  }
+}
+
+C --> (CFR001)
+C --> (CFR002) 
+C --> (CFR003)
+C --> (CFR004)
+C --> (CFR005)
+C --> (CFR006)
+C --> (CFR007)
+C --> (CFR008)
+C --> (CFR009)
+C --> (CFR010)
+
+A --> (FAFR001) 
+A --> (FAFR002)
+A --> (FAFR003)
+A --> (FAFR004)
+
+SA --> (SAFR001)
+
+SFR001 <|-- (CFR002)
+SFR001 <|-- (CFR006) 
+SFR001 <|-- (FAFR002)
+SFR003 <|-- (AIFR004)
+SFR005 <|-- (AIFR003)
+
+@enduml

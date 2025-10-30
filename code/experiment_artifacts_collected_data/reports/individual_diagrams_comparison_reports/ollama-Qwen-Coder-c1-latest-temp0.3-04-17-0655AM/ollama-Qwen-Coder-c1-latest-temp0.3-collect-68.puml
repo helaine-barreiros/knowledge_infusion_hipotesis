@@ -1,0 +1,87 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+}
+
+package "System Administrator" {
+  actor SysAdmin as SAFR003
+}
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR004
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR005
+  
+  Client --> (CFR004)
+  SysAdmin --> (SAFR005)
+}
+
+rectangle "Financial Advisor System" {
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR006
+  usecase "FAFR003: View Predictive Analytics" as FAFR007
+  
+  FinancialAdvisor --> (FAFR006)
+  FinancialAdvisor --> (FAFR007)
+}
+
+rectangle "AI System" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR008
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR009
+  
+  Client --> (AIFR008)
+  Client --> (AIFR009)
+}
+
+rectangle "Notification System" {
+  usecase "SFR013: Request Alerts from AI Component" as SFR014
+  usecase "SFR020: Manage User Feedback" as SFR021
+  
+  Client --> (SFR014)
+  SysAdmin --> (SFR021)
+}
+
+rectangle "Dashboard System" {
+  usecase "SFR12: Generate Client Dashboards" as SFR13
+  usecase "CFR011: Send Feedback about Recommendations and Insights" as CFR012
+  
+  Client --> (SFR13)
+  User --> (CFR012)
+}
+
+rectangle "News System" {
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR008
+  usecase "SFR09: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR10
+  
+  Client --> (AIFR008)
+  User --> (SFR10)
+}
+
+rectangle "Predictive System" {
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR004
+  usecase "AIFR009: Generate Predictive Intervention Recommendations" as AIFR010
+  
+  Client --> (AIFR004)
+  FinancialAdvisor --> (AIFR010)
+}
+
+rectangle "Investment System" {
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR005
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR009
+  
+  Client --> (AIFR005)
+  FinancialAdvisor --> (AIFR009)
+}
+
+rectangle "Goal Management System" {
+  usecase "SFR18: Manage Users' Financial Goals" as SFR19
+  
+  User --> (SFR18)
+}
+@enduml

@@ -1,0 +1,88 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR002
+  
+  usecase "FAFR001: Manage client mentoring sessions based on system-generated insights" as FAFR001
+  usecase "FAFR003: View predictive analytics about my clients' financial situations to provide data-driven recommendations during consultations" as FAFR003
+  usecase "FAFR004: Configure analysis parameters for specific client segments to customize the system's behavior according to different client profiles and regulatory requirements such as GDPR or CCPA." as FAFR004
+  
+  FinancialAdvisor --> FAFR001
+  FinancialAdvisor --> FAFR003
+  FinancialAdvisor --> FAFR004
+}
+
+package System {
+  actor "System" as SFR002
+
+  usecase "SFR001: Deliver alerts to users through appropriate notification channels to ensure timely awareness of critical financial events." as SFR001
+  
+  rectangle "AI Component" {
+    usecase "AIFR006: Generate anomaly transaction alerts by employing pattern recognition to detect potentially fraudulent activities in compliance with FinCEN requirements." as AIFR006
+    usecase "AIFR007: Generate contextualized news insights by correlating financial news with specific user portfolios to identify relevant impacts." as AIFR007
+  }
+  
+  System --> SFR001
+  
+  rectangle "User Interface" {
+    usecase "CFR009: Access a personalized dashboard that consolidates my financial information in a single view to efficiently monitor my finances." as CFR009
+    
+    rectangle "Financial Insights Dashboard" {
+      usecase "AIFR002: Generate personalized recommendations for users based on their financial profiles, goals, and risk tolerance as defined by industry standards like FINRA guidelines." as AIFR002
+      usecase "AIFR017: Generate financial health reports that assess users' overall financial wellbeing according to standard financial ratios and metrics." as AIFR017
+      
+      CFR009 --> CFR002
+      CFR009 --> AIFR017
+    }
+    
+    rectangle "Spending Limit Alerts" {
+      usecase "AIFR003: Generate spending limit alerts for users by identifying unusual deviations from established spending patterns." as AIFR003
+      
+      CFR006 --> AIFR003
+    }
+
+    rectangle "Investment Opportunities" {
+      usecase "FAFR007: View investment opportunities suitable to my risk profile (as defined under MiFID II or equivalent standards) to diversify my portfolio and maximize returns." as FAFR007
+      
+      CFR007 --> FAFR007
+    }
+    
+    rectangle "News" {
+      usecase "CFR008: View news related to my investment portfolio to stay informed about market events that might affect my assets." as CFR008
+      
+      CFR008 --> SFR009
+    }
+
+    rectangle "Recommendations and Insights" {
+      usecase "AIFR012: Generate client dashboards that present financial information in an intuitive and actionable format." as AIFR012
+      usecase "SFR003: Request financial predictions from the AI component to provide users with forward-looking financial insights." as SFR003
+      
+      CFR004 --> AIFR012
+      CFR005 --> AIFR017
+    }
+  }
+
+  rectangle "System Functions" {
+    usecase "SFR006: Deliver personalized recommendations to users based on their financial profiles to support better financial decision-making." as SFR006
+    
+    System --> SFR002
+  }
+}
+
+rectangle "User Feedback" {
+  actor "User (Client, Financial Advisor, or System Administrator)" as CFR011
+  
+  usecase "CFR011: Send feedback about the system's recommendations and insights to help improve the accuracy and relevance of future outputs." as CFR011
+}
+  
+CFR009 --> SFR002
+SFR006 --> FAFR003
+
+@enduml

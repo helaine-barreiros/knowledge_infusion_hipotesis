@@ -1,0 +1,94 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System: as Sys
+:Financial Advisor: as FAFR001
+:System Administrator: as SAFR002
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  
+  Client --> CFR001
+  Client --> SAFR001
+  FAFR001 --> FAFR003
+  System Administrator --> SAFR001
+}
+
+rectangle "Client Dashboard" {
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  
+  Client --> CFR009
+}
+
+rectangle "Alerts and Notifications" {
+  usecase "SFR013: Generate Client Alerts" as SFR013
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  System Administrator --> SFR013
+  FAFR001 --> SFR013
+}
+
+rectangle "Recommendations and Insights" {
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "FAFR002: Manage Client Mentoring Sessions" as FAFR002
+  
+  Client --> CFR004
+  Financial Advisor --> FAFR002
+}
+
+rectangle "Spending Limits and Budget Control" {
+  usecase "CFR016: View Spending Limit Alerts" as CFR016
+
+  System Administrator --> SFR013
+  FAFR001 --> SFR013
+  
+  Client --> CFR016
+}
+
+rectangle "Investment Opportunities and News" {
+  usecase "CFR017: View Investment Opportunities" as CFR017
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  System Administrator --> SFR013
+  Financial Advisor --> FAFR002
+
+  Client --> CFR017
+}
+
+rectangle "Relationship Management and Feedback" {
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  usecase "FAFR04: Configure Analysis Parameters for Specific Client Segments" as FAFR04
+  
+  System Administrator --> SAFR002
+  Financial Advisor --> FAFR04
+
+  Client --> CFR10
+}
+
+rectangle "AI Component Operations" {
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR005: Generate Investment Opportunity Analyses" as AIFR005
+  
+  System Administrator --> SFR013
+  Financial Advisor --> FAFR04
+
+}
+
+Client --> CFR011 : Send Feedback
+Financial Advisor --> CFR011 : Send Feedback
+System Administrator --> SAFR002 : Send Feedback
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 752]

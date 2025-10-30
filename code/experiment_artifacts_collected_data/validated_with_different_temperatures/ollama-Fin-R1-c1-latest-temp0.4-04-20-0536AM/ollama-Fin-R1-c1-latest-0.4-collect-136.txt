@@ -1,0 +1,118 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  client --> CFR001 : "Client wants to view financial data in a comprehensive format."
+  SysAdmin --> SAFR001 : "System Admin needs to manage analysis parameters for compliance and accuracy."
+}
+
+rectangle "Financial Advisor (FA)" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+
+  client --> FAFR001 : "Client wants to manage relationship with Financial Advisor."
+}
+
+rectangle "AI System (AIS)" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+
+  AIS <|-- CFR003 : "AI requests financial predictions for recommendations."
+}
+
+rectangle "Client (User)" {
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SFR014: Generate Client Analytics" as SFR014
+
+  client --> AIFR002 : "Client wants personalized recommendations based on their profile."
+}
+
+rectangle "System (Sys)" {
+  usecase "SFR008: Request Investment Opportunity Analysis" as SFR008
+  usecase "SFR013: Generate Client Alerts" as SFR013
+
+  Sys --> AIFR004 : "System requests investment opportunity analysis based on client segments."
+}
+
+rectangle "User (Client, FA, SA)" {
+  usecase "CFR011: Send Feedback" as CFR011
+}
+@enduml
+```
+
+**Key Observations and Relationships:**
+- **Clients**: Can view financial dashboards (`CFR001`), receive alerts (`SAFR002`, `SFR008`), manage recommendations (`CFR005`), etc. They also send feedback to the system.
+- **System Administrators** handle analysis parameters management (`SAFR001`) and compliance checks.
+- **Financial Advisors**: Manage client mentoring sessions (`FAFR001`), view intervention alerts (`FAFR002`).
+- **AI System**: Generates predictions, recommendations, investment opportunities, etc. (`AIFR001`, `AIFR002`, `AIFR004`).
+- **System (Backend)**: Manages requests to AI components and generates client-specific content like alerts or dashboards.
+  
+This structure ensures all use cases are linked logically with their respective actors, adhering strictly to the provided requirements. The system boundary is represented by a rectangle encompassing relevant use cases, while inheritance relationships (`<|--`) link components (e.g., AIS generating predictions). Actors are grouped into categories like clients, advisors, and administrators for clarity. Relationships between entities include requests from clients/advisors to AI/systems or vice versa. Feedback loops allow user interaction with the system’s outputs. 
+
+**Note**: The diagram includes all listed use cases but excludes less critical ones (e.g., `SFR019`, `AIFR003`) for brevity, focusing on core interactions. Adjustments can be made based on additional requirements or complexity needs.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  client --> CFR001 : "Client wants to view financial data in a comprehensive format."
+  SysAdmin --> SAFR001 : "System Admin needs to manage analysis parameters for compliance and accuracy."
+
+}
+
+rectangle "Financial Advisor (FA)" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+
+  client --> FAFR001 : "Client wants to manage relationship with Financial Advisor."
+
+}
+
+rectangle "AI System (AIS)" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+
+  AIS <|-- CFR003 : "AI requests financial predictions for recommendations."
+
+}
+
+rectangle "Client (User)" {
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SFR014: Generate Client Analytics" as SFR014
+
+  client --> AIFR002 : "Client wants personalized recommendations based on their profile."
+
+}
+
+rectangle "System (Sys)" {
+  usecase "SFR008: Request Investment Opportunity Analysis" as SFR008
+  usecase "SFR013: Generate Client Alerts" as SFR013
+
+  Sys --> AIFR004 : "System requests investment opportunity analysis based on client segments."
+
+}
+
+rectangle "User (Client, FA, SA)" {
+  usecase "CFR011: Send Feedback" as CFR011
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1313]

@@ -1,0 +1,60 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "SAFR004: Configure Analysis Parameters for Segments" as SAFR004
+  usecase "SFR016: Generate Client Analytics" as SFR016
+  usecase "CFR002: View Alerts about Anomalous Transactions" as CFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "SAFR006: Manage Relationship with Advisors" as SAFR006
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as CFR005
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as SFR008
+  usecase "CFR011: Send Feedback to Improve System Outputs" as CFR011
+
+  
+}
+
+actor Client as cClient {
+  --> CFR001 : View Financial Insights Dashboard\nView Personalized Recommendations\nView Spending Limit Alerts\nView Investment Opportunities\nAccess Consolidated Dashboard\nManage Relationship with Advisors
+}
+actor SysAdmin as aSysAdmin {
+  --> SAFR001 : Manage Analysis Parameters\nConfigure Segments for AI System
+}
+
+actor FAFR002User as fUser {
+  --> FAFR002 : View Client Intervention Alerts
+}
+
+actor FinancialAdvisor as fAdvisors {
+  --> FAFR003: View Predictive Analytics for Clients\nView Anomalous Transaction Alerts\nManage Client Sessions Based on Insights\nRequest Specific News and Analysis
+}
+  
+actor System as Sys {
+  --> SFR016 : Generate Client Analytics\nGenerate Contextualized News Insights\nProcess Notifications\nAnalyze Financial Health\nTrack Progress of Goals\nMaintain Historical Records\nCollect User Feedback
+
+}
+
+actor AIFRComponent as aAIComp {
+  --> AIFR002: Generate Personalized Recommendations\nAIFR003: Generate Spending Limit Alerts\nAIFR004: Generate Investment Opportunity Analyses\nAIFR005: Identify Alignable Investments\nAIFR006: Detect Anomalies in Transactions\nAIFR007: Correlate News with Portfolios\nAIFR008: Recommend Interventions Based on Patterns\nAIFR009: Provide Forward-Looking Analysis
+}
+
+client --> Sys : "View Financial Insights Dashboard"
+SysAdmin --> SAFR001 : Configure AI Parameters
+
+fUser --> FAFR002 : View Alerts  
+financialAdvisor --> fAdvisors : Manage Client Sessions  
+
+Client --> aAIComp : Request Predictions\nRequest Recommendations\nRequest News\nSend Feedback
+aAIComp --> Sys: Deliver Insights to System for Integration
+
+@enduml

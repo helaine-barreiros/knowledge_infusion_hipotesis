@@ -1,0 +1,85 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities" as CFR007
+  usecase "CFR008: View Portfolio News" as CFR008
+  usecase "CFR009: Manage Relationship with Advisors" as CFR009
+
+  rectangle "Client Interface" {
+    actor Client as C1, C2, C3
+    Client --> CFR001 : "View Financial Insights Dashboard"
+    Client --> CFR006 : "Receive Spending Limit Alerts"
+    Client --> CFR007 : "Access Investment Opportunities"
+    Client --> CFR008 : "Read Portfolio News"
+  }
+
+  rectangle "Client Management" {
+    usecase "CFR002: Receive Anomaly Alerts" as CFR002
+    usecase "SAFR003: Manage Analysis Parameters" as SAFR003
+
+    SysAdmin --> SAFR003 : "Adjust AI Algorithms"
+  }
+
+  rectangle "Financial Advisor Interface" {
+    actor FinancialAdvisor1, FinancialAdvisor2
+    FinancialAdvisor1 -> FAFR001 : "Schedule Mentoring Sessions"
+    FinancialAdvisor1 -> FAFR002 : "View Client Alerts"
+    FinancialAdvisor1 -> FAFR003 : "Review Predictive Analytics"
+
+    SysAdmin --> SAFR004 : "Configure Analysis Parameters for Segments"
+  }
+
+  rectangle "System Operations" {
+    usecase "SFR001: Deliver Notifications" as SFR001
+    usecase "SFR002: Provide Personalized Recommendations" as SFR002
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+
+    SysAdmin --> SAFR005 : "Set Spending Thresholds"
+  }
+
+  rectangle "AI Processing" {
+    usecase "AIFR006: Detect Anomalies" as AIFR006
+    usecase "AIFR007: Analyze News Contextually" as AIFR007
+
+    SysAdmin --> SAFR008 : "Request Investment Analysis"
+  }
+
+  rectangle "User Feedback Loop" {
+    actor UserFeedback1, UserFeedback2
+    Client --> CFR011 : "Provide System Feedback"
+
+    SysAdmin --> SFR020 : "Improve Insights Based on Feedback"
+  }
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Client Actors**: Represented as `Client` with multiple instances (`C1`, `C2`, etc.) to indicate different user types (e.g., Client, Financial Advisor).
+- **Use Cases Grouping**:
+  - **Client Interface**: Use cases related directly to client interactions.
+  - **Client Management**: System-administrator-related use cases for managing analysis parameters and alerts.
+  - **Financial Advisor Interface**: Use cases specific to financial advisors like mentoring sessions or viewing predictive analytics.
+  - **System Operations**: Core system functionalities such as delivering recommendations, generating predictions, etc.
+  - **AI Processing**: AI-specific tasks like anomaly detection, contextual news analysis.
+  - **User Feedback Loop**: Handling user feedback for continuous improvement.
+- **Inheritance and Relationships**:
+  - SysAdmin extends `SAFR003` (Manage Analysis Parameters) to adjust AI algorithms.
+  - Financial Advisors extend use cases related to their role-specific tasks.
+
+This structure ensures all functional requirements are mapped accurately, with clear relationships between actors and use cases. Adjustments can be made based on further analysis or specific interactions not explicitly listed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 907]

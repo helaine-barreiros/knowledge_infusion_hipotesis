@@ -1,0 +1,69 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR002
+  
+  usecase "FAFR001: Manage client mentoring sessions" as FAFR001
+  usecase "FAFR003: View predictive analytics about my clients' financial situations" as FAFR003
+  usecase "FAFR004: Configure analysis parameters for specific client segments" as FAFR004
+  
+  FinancialAdvisor --> (FAFR001)
+  FinancialAdvisor --> (FAFR003)
+  FinancialAdvisor --> (FAFR004)
+}
+
+package System {
+  actor "System Administrator" as SAFR002
+  actor "AI system" as AIFR001
+  
+  usecase "SAFR001: Manage analysis parameters for the AI system" as SAFR001
+  usecase "AIFR003: Generate personalized recommendations based on each user's financial data and preferences" as AIFR003
+  usecase "SFR002: Deliver personalized recommendations to users based on their financial profiles" as SFR002
+  
+  System --> (SAFR001)
+  System --> (AIFR003)
+  System --> (SFR002)
+}
+
+package User {
+  actor "User (Client, Financial Advisor, or System Administrator)" as CFR011
+  
+  usecase "CFR011: Send feedback about the system's recommendations and insights" as CFR011
+  usecase "SAFR005: Manage users' financial goals to track progress and provide relevant recommendations" as SAFR005
+  
+  User --> (CFR011)
+  User --> (SAFR005)
+}
+
+rectangle "System Boundary" {
+  Client --> CFR002
+  Client --> CFR003
+  Client --> CFR004
+  Client --> CFR005
+  Client --> CFR006
+  Client --> CFR007
+  Client --> CFR008
+  Client --> CFR009
+  
+  FinancialAdvisor --> FAFR002
+  FinancialAdvisor --> FAFR001
+  FinancialAdvisor --> (FAFR003)
+  FinancialAdvisor --> (FAFR004)
+  
+  System --> SAFR005
+  System --> SFR006
+  System --> SFR007
+  System --> SFR008
+  System --> SFR009
+  
+  User --> CFR012
+}
+
+@enduml

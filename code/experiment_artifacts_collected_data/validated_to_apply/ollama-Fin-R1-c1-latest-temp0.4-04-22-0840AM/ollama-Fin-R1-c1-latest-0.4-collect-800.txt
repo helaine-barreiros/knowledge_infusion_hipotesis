@@ -1,0 +1,194 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Customize Recommendation Preferences" as CFR005
+  usecase "CFR006: Monitor Spending Limits" as CFR006
+  usecase "SAFR003: View Investment Opportunities" as SAFR003
+  usecase "CFR008: Access Consolidated Financial Dashboard" as CFR012
+  usecase "CFR009: Manage Relationship with Advisors" as CFR014
+
+  rectangle "Client" {
+    actor Client as c
+    client --> (CFR001)
+    client --> (SAFR002)
+    client --> (CFR003)
+    client --> (CFR004)
+    client --> (CFR005)
+    client --> (CFR006)
+    client --> (SAFR003)
+    client --> (CFR012)
+    client --> (CFR014)
+  }
+
+  rectangle "Financial Advisor" {
+    actor FinancialAdvisor as fa
+    fa --> (FAFR001)
+    fa --> (FAFR002)
+    fa --> (FAFR003)
+    fa --> (FAFR004)
+  }
+
+  rectangle "System Administrator" {
+    actor SysAdmin as sa
+    sa --> (SAFR001)
+  }
+}
+
+@enduml
+```
+
+**Key Observations:**
+- **Client Actors**: All client-related use cases are grouped under the Client role. This includes viewing financial insights, alerts, predictions, recommendations, spending limits, investment opportunities, consolidated dashboards, and managing relationships with advisors.
+- **Financial Advisor Actors**: Use cases related to mentoring sessions, intervention alerts, predictive analytics for clients, customizing analysis parameters (specifically FAFR004), are grouped under the FinancialAdvisor role.
+- **System Administrator Actor**: Only SAFR001 is assigned here as it pertains to managing system-wide analysis parameters.
+- **Use Case Grouping**:
+  - `CFR` use cases focus on client interactions, such as viewing dashboards (CFR001), receiving alerts (CFRs 2–6 & 8–9), personalized recommendations (CFRs 4–5), and managing relationships with advisors (CFR014).
+  - `SAFR` uses are system-administrator focused on parameter management.
+- **Inheritance/Extends Relationships**: Not explicitly required here as each actor is directly linked to their respective use cases without subcategories.
+
+This structure ensures clarity in associating actors with specific functionalities, adhering strictly to the provided requirements. The "System" boundary encapsulates all use cases and actors for a comprehensive view of interactions within the system.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "Client" {
+  actor Client as c
+
+  client --> (CFR001: View Financial Insights Dashboard)
+  client --> (SAFR002: Manage Alert Preferences)
+  client --> (CFR003: View Financial Predictions)
+  client --> (CFR004: Receive Personalized Recommendations)
+  client --> (CFR005: Customize Recommendation Preferences)
+  client --> (CFR006: Monitor Spending Limits)
+  client --> (SAFR003: View Investment Opportunities)
+  client --> (CFR012: Access Consolidated Financial Dashboard)
+  client --> (CFR014: Manage Relationship with Advisors)
+}
+
+rectangle "Financial Advisor" {
+  actor FinancialAdvisor as fa
+
+  fa --> (FAFR001: Manage Client Mentoring Sessions)
+  fa --> (FAFR002: View Intervention Alerts)
+  fa --> (FAFR003: View Predictive Analytics for Clients)
+  fa --> (FAFR004: Configure Analysis Parameters by Segment)
+}
+
+rectangle "System Administrator" {
+  actor SysAdmin as sa
+
+  sa --> (SAFR001: Manage Analysis Parameters)
+}
+
+@enduml
+```
+
+**Detailed Explanation of the Diagram Structure:**
+
+### System Boundary:
+- The entire diagram is enclosed within a rectangle labeled **"System,"** which represents the scope of interactions for all actors and use cases.
+
+### Client Role:
+- **Client (c)** interacts with multiple use cases, including viewing financial insights, managing alerts/preferences, receiving recommendations, customizing preferences, monitoring spending limits, viewing investment opportunities, accessing consolidated dashboards, and managing relationships with advisors.
+  
+  - **CFR001: View Financial Insights Dashboard** – Client requests a comprehensive view of their financial data to understand overall health.
+  - **SAFR002: Manage Alert Preferences** – Adjusts alert settings for transactions or spending limits.
+  - **CFR003: View Financial Predictions** – Sees future projections based on historical and market trends.
+  - **CFR004: Receive Personalized Recommendations** – Gets tailored financial advice aligned with their profile.
+  - **CFR005: Customize Recommendation Preferences** – Adjusts the system’s recommendation parameters (e.g., risk tolerance).
+  - **CFR006: Monitor Spending Limits** – Tracks spending against predefined thresholds for budget control.
+  - **SAFR003: View Investment Opportunities** – Identifies investment options matching their risk profile and goals.
+  - **CFR012: Access Consolidated Financial Dashboard** – A single view of all financial information.
+  - **CFR014: Manage Relationship with Advisors** – Controls data sharing permissions for advisors.
+
+### Financial Advisor Role:
+- **FinancialAdvisor (fa)** handles client interactions, including mentoring sessions, alerts, predictive analytics, and parameter configuration by segment.
+  
+  - **FAFR001: Manage Client Mentoring Sessions** – Plans and tracks advisory meetings based on system-generated insights.
+  - **FAFR002: View Intervention Alerts** – Receives notifications for clients needing immediate attention (e.g., unusual transactions).
+  - **FAFR003: View Predictive Analytics for Clients** – Analyzes client financial data to provide guidance during consultations.
+  - **FAFR004: Configure Analysis Parameters by Segment** – Customizes system behavior based on specific client profiles or regulatory requirements.
+
+### System Administrator Role:
+- **SysAdmin (sa)** focuses solely on managing analysis parameters across the entire system, ensuring compliance and accuracy in algorithms.
+  
+  - **SAFR001: Manage Analysis Parameters** – Adjusts global settings for all AI components to maintain relevance and regulation adherence.
+
+---
+
+This structure ensures that each actor is clearly linked to their respective use cases without overlap or ambiguity. The categorization by role (Client, FinancialAdvisor, SysAdmin) helps isolate different stakeholder interactions within the system.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  package Client {
+    actor Client as c
+    
+    client --> CFR001: View Financial Insights Dashboard
+    client --> SAFR002: Manage Alert Preferences
+    client --> CFR003: View Financial Predictions
+    client --> CFR004: Receive Personalized Recommendations
+    client --> CFR005: Customize Recommendation Preferences
+    client --> CFR006: Monitor Spending Limits
+    client --> SAFR003: View Investment Opportunities
+    client --> CFR012: Access Consolidated Financial Dashboard
+    client --> CFR014: Manage Relationship with Advisors
+  }
+
+  package FinancialAdvisor {
+    actor FinancialAdvisor as fa
+    
+    fa --> FAFR001: Manage Client Mentoring Sessions
+    fa --> FAFR002: View Intervention Alerts
+    fa --> FAFR003: View Predictive Analytics for Clients
+    fa --> FAFR004: Configure Analysis Parameters by Segment
+  }
+
+  package SystemAdministrator {
+    actor SysAdmin as sa
+    
+    sa --> SAFR001: Manage Analysis Parameters
+  }
+}
+
+@enduml
+```
+
+**Detailed Breakdown of the Diagram Structure with Packages and Grouping:**  
+
+### Main Components:
+- The entire system is enclosed within a **"System"** rectangle.
+- Three main packages are defined for clarity:
+  - **Client**
+  - **FinancialAdvisor**
+  - **SystemAdministrator**
+
+---
+
+#### Client Package:
+- Represents interactions from end-users (clients).
+- Contains the following use cases and their relationships with the client actor (`c`):
+  - **CFR001: View Financial Insights Dashboard** – Directly linked to `Client`.
+  - **SAFR002: Manage Alert Preferences** – Adjusts alert settings for transactions or spending limits.
+  - **CFR003: View Financial Predictions** – Sees future projections based on historical and market trends.
+  - **CFR004: Receive Personalized Recommendations** – Gets tailored financial advice aligned with their profile.
+  - **CFR005: Customize Recommendation Preferences** – Adjusts the system’s recommendation parameters (e.g., risk tolerance).
+  - **CFR006: Monitor Spending Limits** – Tracks spending against predefined thresholds for budget control.
+  - **SAFR00
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

@@ -1,0 +1,42 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+  usecase "CFR006: Manage Spending Limit Alerts Thresholds" as CFR006
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+
+  Client --> CFR001 : View financial insights dashboard  
+  SysAdmin --> SAFR001 : Manage analysis parameters  
+  User --> FAFR003 : View predictive analytics for clients (User includes Client, Advisor, SA)  
+  System --> AIFR001 <|-- SFR002 : Deliver personalized recommendations to users via AI component  
+  SysAdmin --> CFR006 : Manage spending limit alerts thresholds  
+  User --> SFR003 : Request financial predictions from system (User includes Client, Advisor, SA)  
+
+}
+
+@enduml
+```
+
+**Explanation:**
+- **System Boundary**: The entire diagram is enclosed within a rectangle labeled "System" to represent the AI-Powered Analysis & Insights System.
+- **Use Cases**:
+  - `CFR001` and `SAFR001`: These are client-related use cases. They are directly related to clients (`Client`) or system administrators (`SysAdmin`). 
+  - `FAFR003`, which is a financial advisor's view of predictive analytics, links the user (financial advisors) with the system.
+  - Other use cases like `SFR002` and `AIFR001` represent interactions between users or components within the system. For example, delivering personalized recommendations involves the AI component (`AIFR001`) through a request from the system (`System --> AIFR001`).  
+- **Actors**:
+  - The main actors are `Client`, `SysAdmin`, and implicitly any user (financial advisor or client). These roles map directly to their respective use cases.
+- **Relationships**: Arrows indicate directed relationships. For example, a client requests the financial insights dashboard (`CFR001`), while a system administrator manages analysis parameters (`SAFR001`). The AI component generates predictions and recommendations based on user requests or internal processes.
+
+This structure ensures clarity in how different actors interact with various use cases within the system. Each relationship is clearly defined, adhering to the provided functional requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 623]

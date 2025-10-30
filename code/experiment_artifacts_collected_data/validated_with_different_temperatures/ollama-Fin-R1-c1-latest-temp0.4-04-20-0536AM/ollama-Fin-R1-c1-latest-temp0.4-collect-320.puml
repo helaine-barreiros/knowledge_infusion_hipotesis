@@ -1,0 +1,51 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+system System as S
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as VFD
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as RAT
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Trends" as FPT
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile" as PRP
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as MPR
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as VSLA
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as IOP
+  usecase "CFR008: Access News Related to Portfolio" as ANP
+  usecase "CFR009: Consolidated Financial Dashboard" as CFD
+  usecase "CFR10: Manage Relationship with Advisors Including Data Sharing Permissions" as MAR
+
+  SysAdmin --> VFD : Configure system parameters
+  SA <|-- VFD : System Admin can manage dashboards
+
+  Client --> RAT : Receive alerts based on transactions
+  FA --> RAT : Financial Advisor receives client-specific alerts
+
+  Client --> FPT : View predictions with data and trends
+  FA --> FPT : Use for advisory purposes
+
+  Client --> PRP : Get personalized recommendations
+  SA --> MPR : Administer preferences (CFR05)
+  
+  Client --> VSLA : Monitor spending limits
+  S <|-- VSLA : System generates alerts
+  
+  Client --> IOP : View investment opportunities
+  FA --> IOP : Use for client advice
+
+  Client --> ANP : Access portfolio-related news
+  SA --> ANP : Administer access to financial information (CFR10)
+
+  Client --> CFD : Consolidated view of all data
+  S <|-- CFD : System generates dashboards
+  
+  Client ->> MAR: Manage relationships with advisors, including sharing permissions
+
+}
+
+@enduml

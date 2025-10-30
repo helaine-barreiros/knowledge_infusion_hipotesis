@@ -1,0 +1,55 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:User (Client): as Client
+:User (Financial Advisor): as FAdvisor
+:System Administrator: as SysAdmin
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Deliver Personalized Recommendations" as SFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "CFR011: Send Feedback" as CFR011
+
+  Client --> (View Financial Insights Dashboard)
+  FAdvisor --> (Manage Analysis Parameters)
+  SysAdmin --> SAFR001
+  Client --> FAFR002 : Receive alerts about anomalous transactions
+  Client --> SFR003 : View financial predictions based on historical data and current market trends
+  Client --> AIFR004 : View investment opportunities suitable to my risk profile
+  SysAdmin --> (Deliver Personalized Recommendations)
+  FAdvisor --> (View Predictive Analytics about client's financial situations)
+  Client --> CFR011 : Send feedback
+}
+
+rectangle "Client" {
+  actor "CFR002: View Alerts" as CFR002
+  actor "SAFR005: Manage Recommendation Preferences" as SAFR005
+  actor "CFR006: View Spending Limit Alerts" as CFR006
+
+  Client --> (View Alerts)
+  Client --> SAFR005 : Manage personalized recommendations preferences
+  Client --> CFR006 : View spending limit alerts when exceeding predefined thresholds in specific expense categories
+}
+
+rectangle "Financial Advisor" {
+  actor "FAFR01: Manage Client Mentoring Sessions" as FAFR01
+  actor "FAFR03: View Predictive Analytics" as FAFR03
+
+  FAdvisor --> (Manage Client Mentoring Sessions)
+  FAdvisor --> FAFR03 : View predictive analytics about client's financial situations
+}
+
+rectangle "System Admin" {
+  usecase "SFR019: Maintain Historical Record of Users' Insights" as SFR019
+  usecase "CFR020: Manage User Feedback" as CFR020
+
+  SysAdmin --> (Maintain Historical Record of Users' Insights)
+  SysAdmin --> CFR020 : Manage user feedback to continuously improve the quality and relevance of financial insights
+}
+
+@enduml

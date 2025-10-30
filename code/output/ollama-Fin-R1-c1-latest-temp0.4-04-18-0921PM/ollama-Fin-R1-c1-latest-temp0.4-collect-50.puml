@@ -1,0 +1,44 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Anomaly Transaction Alerts" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as CFR005
+  usecase "SAFR006: Configure Analysis Parameters for Specific Segments" as SAFR006
+
+  rectangle "Client Interactions" {
+    actor Client as c1
+    client --> CFR001 : "View Financial Insights Dashboard"
+    client --> SFR014 : "Generate Client Analytics"
+    client --> CFR003 : "View Financial Predictions"
+    client --> SAFR002 : "Manage Anomaly Transaction Alerts"
+  }
+
+  rectangle "Client Management" {
+    actor SystemAdmin as sa
+    systemadmin --> SAFR006 : "Configure Analysis Parameters for Specific Segments"
+  }
+
+  rectangle "Financial Advisor Interactions" {
+    actor FinancialAdvisor as fa
+    financialadvisor --> FAFR001: "Manage Client Mentoring Sessions"
+    financialadvisor --> FAFR002: "View Client Intervention Alerts"
+    financialadvisor --> FAFR003: "View Predictive Analytics for Clients"
+  }
+
+  rectangle "System Operations" {
+    actor Sys as s
+    system --> SFR014 : "Generate Client Analytics"
+    system --> CFR005 : "Manage Personalized Recommendations Preferences"
+    system --> SAFR002 : "Manage Anomaly Transaction Alerts"
+    system --> AIFR008: "Generate Predictive Intervention Recommendations"
+  }
+
+}
+
+@enduml

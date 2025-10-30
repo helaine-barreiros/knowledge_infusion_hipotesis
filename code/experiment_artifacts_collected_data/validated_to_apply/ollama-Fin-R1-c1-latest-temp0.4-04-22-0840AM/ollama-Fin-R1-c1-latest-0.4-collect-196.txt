@@ -1,0 +1,77 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Risk Parameters" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "CFR006: Manage Spending Limit Preferences" as CFR006
+  usecase "SAFR004: Configure Client-Specific Parameters" as SAFR004
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+  usecase "CFR008: Access Consolidated Dashboard" as CFR008
+  usecase "SAFR015: Generate Client Analytics" as SAFR015
+  usecase "FAFR004: View Financial Health Reports" as FAFR004
+  usecase "SFR020: Manage User Feedback" as SFR020
+
+  clientUser --> CFR001 : "View Financial Insights Dashboard"
+  clientUser --> SAFR002 : "Manage Risk Parameters"
+  clientUser --> FAFR005 : "Schedule Mentoring Sessions"
+  clientUser --> CFR003 : "View Financial Predictions"
+  clientUser --> CFR004 : "Receive Personalized Recommendations"
+  clientUser --> SAFR001 : "Manage Analysis Parameters"
+  clientUser --> FAFR002 : "View Intervention Alerts"
+  clientUser --> SFR003 : "Request Financial Predictions"
+  clientUser --> CFR006 : "Manage Spending Limit Preferences"
+  clientUser --> SAFR004 : "Configure Client-Specific Parameters"
+  clientUser --> FAFR001 : "Manage Client Mentoring Sessions"
+  clientUser --> SFR005 : "Request Spending Limit Alerts"
+  clientUser --> CFR007 : "View Investment Opportunities"
+  clientUser --> FAFR003 : "View Predictive Analytics"
+  clientUser --> SFR006 : "Request Investment Opportunity Analysis"
+  clientUser --> CFR008 : "Access Consolidated Dashboard"
+  clientUser --> SAFR015 : "Generate Client Analytics"
+  clientUser --> FAFR004 : "View Financial Health Reports"
+  clientUser --> SFR020 : "Manage User Feedback"
+
+  sysAdmin --> SAFR001
+  financialAdvisor --> FAFR001 : "FAFR001: Manage Client Mentoring Sessions"
+  financialAdvisor --> FAFR002 : "View Intervention Alerts"
+  financialAdvisor --> FAFR003 : "View Predictive Analytics"
+  
+  system --> SAFR004
+  system --> SFR005
+  system --> SFR006
+  system --> SFR015
+  system --> AIFR002
+}
+
+actor clientUser as Client
+actor sysAdmin as System Administrator
+actor financialAdvisor as Financial Advisor
+
+@enduml
+```
+
+**Key Observations:**
+- **Client (CFR):** All use cases related to viewing, managing personal preferences, and receiving recommendations are tied directly to the `clientUser` actor. These include dashboard views (`CFR001`, `CFR008`), financial predictions (`CFR003`), personalized recommendations (`CFR004`), spending limit management (`CFR006`), investment opportunities (`CFR007`), and consolidated dashboards (`CFR009`). The system also handles requests for these services.
+- **System Administrator (SAFR):** Manages analysis parameters (`SAFR001`, `SAFR002`) and client-specific configurations (`SAFR004`). These are critical for ensuring the AI's accuracy, compliance with regulations like Basel III or GDPR, and maintaining system integrity. The system itself requests data from these components.
+- **Financial Advisor (FAFR):** Engages in mentoring sessions (`FAFR001`), views client alerts (`FAFR002`, `SAFR003`), and predictive analytics (`FAFR003`). These use cases are specific to advisory services, where advisors need real-time data for proactive guidance. The system supports these activities by delivering relevant insights.
+- **System (SFR):** Acts as the central hub coordinating all requests from clients and advisors. It handles interactions with the AI components (`AIFR`) like requesting predictions, alerts, investment analyses, etc., ensuring timely delivery of financial services.
+
+This structure ensures a clear separation between user roles and their corresponding use cases while highlighting dependencies on system-administrative controls for regulatory compliance and customization. The relationships are bidirectional where appropriate (e.g., client requests from the system), reflecting how data flows within the architecture.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1258]

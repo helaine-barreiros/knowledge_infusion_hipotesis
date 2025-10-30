@@ -1,0 +1,100 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+  usecase "SFR002: Deliver Personalized Recommendations Based on User Profiles" as SFR002
+  usecase "AIFR001: Generate Financial Predictions Using Historical Data and Market Trends" as AIFR001
+
+  rectangle "System" {
+    client --> CFR001 : "View dashboard"
+    sysAdmin --> SAFR001 : "Manage parameters"
+    financialAdvisor --> FAFR003 : "View analytics"
+
+    system --> SFR002 : "Deliver recommendations"
+    system --> AIFR001 : "Generate predictions"
+  }
+}
+
+package "Client" {
+  actor Client as client
+  usecase CFR001: View Financial Insights Dashboard
+
+  client ->> CFR001 : "Request dashboard"
+
+  package "User Types" {
+    user (client) as clientType
+  }
+
+  system --> CFR002: Deliver alerts about anomalous transactions
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as financialAdvisor
+  usecase FAFR003: View Predictive Analytics About Clients' Financial Situations
+
+  financialAdvisor ->> FAFR003 : "Request analytics"
+
+  system --> AIFR008: Deliver predictive intervention recommendations
+}
+
+package "System Administrator" {
+  actor SystemAdmin as sysAdmin
+  usecase SAFR001: Manage Analysis Parameters
+
+  sysAdmin ->> SAFR001 : "Adjust parameters"
+}
+
+package "AI Component" {
+  component AIComponent as AIFR002 to AIFR009
+  usecases AIFR001, AIFR003 to AIFR006, AIFR008 to AIFR009
+
+  system --> AIFR002: Generate financial predictions
+  system --> AIFR004: Generate investment opportunities analyses
+  system --> AIFR005: Generate suitable investments based on risk profiles
+  system --> AIFR006: Generate spending limit alerts for unusual deviations
+  system --> AIFR007: Generate contextualized news insights
+}
+
+package "News Component" {
+  component NewsComponent as SFR019 to SFR20
+  usecases SFR019, SFR020
+
+  system --> SFR019: Process and extract relevant financial news for users
+  system --> SFR020: Maintain historical records of insights for trend analysis
+}
+
+package "Client-System Communication" {
+  client -->> system : "Send requests"
+  system -->> client : "Provide responses"
+
+  sysAdmin -->> system : "Configure parameters"
+  system -->> sysAdmin : "Report status"
+
+  financialAdvisor -->> system : "Request data"
+  system -->> financialAdvisor : "Deliver insights"
+}
+
+@enduml
+```
+
+### Explanation:
+1. **System Packages**: The main components of the system are grouped into packages for clarity.
+2. **Client Interactions**:
+   - `CFR001` (View Financial Insights Dashboard) is directly linked to the client actor.
+3. **Financial Advisor Interactions**:
+   - `FAFR003` (View Predictive Analytics About Clients' Financial Situations) and related AI components (`AIFR008`) are tied to financial advisors.
+4. **System Administrator Actions**:
+   - `SAFR001` (Manage Analysis Parameters) is for system admins.
+5. **AI Components**: Various use cases like generating predictions, alerts, etc., are linked to the AI component package.
+6. **News Component**: Handles contextualized news extraction and historical records.
+
+This structure ensures all actors and their interactions with specific use cases are accurately represented according to the provided requirements. Adjustments can be made based on further analysis or additional details in future updates.
+
+[Done: True
+Done Reason: stop
+Eval Count: 917]

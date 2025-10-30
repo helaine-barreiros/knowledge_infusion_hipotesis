@@ -1,0 +1,89 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System: as Sys
+:Financial Advisor: as FAdvisor
+:System Administrator: as SysAdmin
+:AIFR001: as AIFR001
+
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure analysis parameters for specific client segments" as FAFR004
+  
+  Client --> CFR001
+  SysAdmin --> SAFR001
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR002: View client intervention alerts" as FAFR002
+  usecase "FAFR003: View predictive analytics about my clients' financial situations" as FAFR003
+  
+  FinancialAdvisor --> FAFR002
+  FinancialAdvisor --> FAFR003
+}
+
+rectangle "Client Interface" {
+  usecase "CFR002: Receive alerts about anomalous transactions in my accounts" as CFR002
+  usecase "FAFR001: Manage client mentoring sessions based on system-generated insights" as FAFR001
+  
+  Client --> CFR002
+  FinancialAdvisor --> FAFR001
+}
+
+rectangle "Investment Interface" {
+  usecase "CFR003: View financial predictions based on my historical data and current market trends" as CFR003
+  usecase "FAFR007: Configure analysis parameters for specific client segments to customize the system's behavior according to different client profiles and regulatory requirements such as GDPR or CCPA." as FAFR004
+  
+  Client --> CFR003
+}
+
+rectangle "Recommendation Interface" {
+  usecase "CFR004: Receive personalized recommendations aligned with my financial profile and goals" as CFR004
+  usecase "FAFR002: Manage client mentoring sessions based on system-generated insights to provide more valuable guidance aligned with each client's financial goals." as FAFR001
+  
+  Client --> CFR004
+}
+
+rectangle "Spending Limit Interface" {
+  usecase "CFR006: View spending limit alerts when I exceed predefined thresholds in specific expense categories" as CFR006
+  
+  Client --> CFR006
+}
+
+rectangle "Investment Opportunity Interface" {
+  usecase "CFR007: View investment opportunities suitable to my risk profile (as defined under MiFID II or equivalent standards) to diversify my portfolio and maximize returns." as CFR007
+  
+  Client --> CFR007
+}
+
+rectangle "News Interface" {
+  usecase "CFR008: View news related to my investment portfolio to stay informed about market events that might affect my assets." as CFR008
+  
+  Client --> CFR008
+}
+
+rectangle "Personalized Dashboard Interface" {
+  usecase "CFR009: Access a personalized dashboard that consolidates my financial information in a single view to efficiently monitor my finances." as CFR009
+  
+  Client --> CFR009
+}
+
+rectangle "Relationship Management Interface" {
+  usecase "CFR10: Manage my relationship with Financial Advisors, including permissions for sharing my financial data, to maintain privacy and control over my financial information." as CFR10
+  
+  Client --> CFR10
+}
+
+rectangle "Feedback Interface" {
+  usecase "CFR11: Send feedback about the system's recommendations and insights to help improve the accuracy and relevance of future outputs." as CFR11
+  
+  Client --> CFR11
+  FinancialAdvisor --> CFR11
+  SystemAdministrator --> CFR11
+}
+@enduml

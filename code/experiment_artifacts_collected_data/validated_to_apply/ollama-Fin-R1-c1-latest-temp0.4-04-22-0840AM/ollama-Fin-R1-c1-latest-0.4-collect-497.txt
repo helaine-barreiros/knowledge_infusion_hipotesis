@@ -1,0 +1,178 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin -> SAFR001 : "Manage Analysis Parameters"
+
+  user --|> FAFR002 : "View Client Intervention Alerts"
+  user --|> AIFR006 : "Generate Anomaly Transaction Alerts"
+}
+
+rectangle "Client" {
+  actor client as c
+}
+
+rectangle "Financial Advisor" {
+  actor financialAdvisor as fa
+
+  usecase "FAFR001: Manage Mentoring Sessions" as FAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  financialAdvisor --> FAFR001 : "Manage Mentoring Sessions"
+  financialAdvisor --> FAFR003 : "View Predictive Analytics for Clients"
+
+  client --|> SFR012 : "Generate Client Dashboards"
+}
+
+rectangle "System Administrator" {
+  actor sysAdmin as sa
+
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+}
+
+package Professional {
+  SysAdmin <|-- (sa)
+  
+  rectangle "Subsystem - AI" {
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities" as AIFR005
+
+    rectangle "Subsystem - AI Alerts" {
+      usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+      usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+      
+      SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+    }
+  }
+
+  rectangle "Subsystem - Contextual News" {
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "SFR009: Find Contextualized News Relevant to Portfolio" as SFR009
+
+    SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  }
+
+  rectangle "Subsystem - Client Analytics" {
+    usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+    usecase "SFR014: Generate Client Analytics for Financial Behavior/Performance" as SFR014
+
+    SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  }
+
+  rectangle "Subsystem - System Management" {
+    usecase "AIFR009: Manage Users' Insights Records" as AIFR009
+    usecase "SFR020: Manage User Feedback for Continuous Improvement" as SFR020
+
+    SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  }
+}
+
+@enduml
+```
+
+**Key Observations and Adjustments**:
+- **Client**: Interacts with the system through use cases like viewing financial dashboards, receiving alerts (e.g., CFR006), personalized recommendations (CFR004), etc. The client is represented as an actor within a "System" boundary.
+- **Financial Advisor**: Engages in mentoring sessions (FAFR001), views predictive analytics for clients (FAFR003), and uses generated dashboards (SFR012). Financial advisors are grouped under the Professional package alongside system administrators.
+- **System Administrator**: Manages analysis parameters across multiple subsystems. This role is critical for maintaining compliance, accuracy, and regulatory adherence in financial systems like those described here.
+- **Subsystems**:
+  - **AI Subsystem**: Handles recommendation generation (AIFR002), spending alerts (AIFR003), investment analyses (AIFR004 & AIFR005), anomaly detection (AIFR006), contextual news insights (AIFR007), predictive interventions (AIFR008), and user insight management (AIFR009).
+  - **Contextual News**: Extracts relevant financial news for clients.
+  - **Client Analytics**: Tracks client behavior, performance, and trends via AIFR008 & SFR014.
+  - **System Management**: Handles feedback loops (SFR20) to improve system outputs over time.
+
+This structure ensures clarity in relationships between actors, use cases, and subsystems while adhering strictly to the provided functional requirements. Each actor-use case relationship is explicitly defined with directionality where applicable. The "Professional" package groups Financial Advisors alongside System Administrators for logical organization. Subsystem boundaries isolate different components of the system (e.g., AI vs. contextual news), which helps in managing complexity and ensuring that interactions between subsystems are properly modeled. 
+
+**Note**: While not explicitly required by the problem statement, I included additional relationships such as "SysAdmin --> SAFR001" within each subsystem to emphasize how analysis parameters are managed across different components of the system. This aligns with requirement SAFR001 ("Manage Analysis Parameters") being a core function for both System Administrators and various AI subsystems.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin -> SAFR001 : "Manage Analysis Parameters"
+
+  user --|> FAFR002 : "View Client Intervention Alerts"
+  user --|> AIFR006 : "Generate Anomaly Transaction Alerts"
+}
+
+rectangle "Client" {
+  actor client as c
+}
+
+rectangle "Financial Advisor" {
+  actor financialAdvisor as fa
+
+  usecase "FAFR001: Manage Mentoring Sessions" as FAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  financialAdvisor --> FAFR001 : "Manage Mentoring Sessions"
+  financialAdvisor --> FAFR003 : "View Predictive Analytics for Clients"
+
+  client --|> SFR012 : "Generate Client Dashboards"
+}
+
+rectangle "System Administrator" {
+  actor sysAdmin as sa
+
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+}
+
+package Professional {
+  SysAdmin <|-- (sa)
+  
+  rectangle "Subsystem - AI" {
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities" as AIFR005
+
+    rectangle "Subsystem - AI Alerts" {
+      usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+      usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+      
+      SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+    }
+  }
+
+  rectangle "Subsystem - Contextual News" {
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "SFR009: Find Contextualized News Relevant to Portfolio" as SFR009
+
+    SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  }
+
+  rectangle "Subsystem - Client Analytics" {
+    usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+    usecase "SFR014: Generate Client Analytics for Financial Behavior/Performance" as SFR014
+
+    SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  }
+
+  rectangle "Subsystem - System Management" {
+    usecase "AIFR009: Manage Users' Insights Records" as AIFR009
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

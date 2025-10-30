@@ -1,0 +1,121 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Data and Trends" as CFR003
+  usecase "CFR004: Personalized Recommendations Aligned with Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts for Budget Control" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Receive News Related to Portfolio" as CFR008
+  usecase "CFR009: Personalized Dashboard for Financial Information" as CFR009
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Segment" as FAFR004
+
+  usecase "SFR001: Deliver Alerts Through Notification Channels" as SFR001
+  usecase "SFR002: Provide Personalized Recommendations Based on Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations From AI" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts From AI" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from AI" as SFR006
+  usecase "SFR007: Find Specific Investments Matching Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Detect Anomalous Transactions for AML Compliance" as SFR008
+  usecase "SFR009: Extract Relevant News Based on Portfolio Context" as SFR009
+  usecase "SFR010: Generate Client Dashboards with Financial Information" as SFR010
+  usecase "SFR011: Manage Historical Record of Insights for Trend Analysis" as SFR011
+  usecase "SFR012: Process User Feedback to Improve System Quality" as SFR012
+
+  usecase "AIFR001: Generate Financial Predictions by Analyzing Data and Trends" as AIFR001
+  usecase "AIFR002: Create Personalized Recommendations Based on Profiles" as AIFR002
+  usecase "AIFR003: Identify Spending Limit Alerts via Pattern Recognition" as AIFR003
+  usecase "AIFR004: Analyze Investment Opportunities Against Risk Profiles" as AIFR004
+  usecase "AIFR005: Find Financial Instruments Aligning with Investment Strategies" as AIFR005
+  usecase "AIFR006: Detect Anomalous Transactions in Compliance With FinCEN Rules" as AIFR006
+  usecase "AIFR007: Correlate News to Portfolios for Relevant Insights" as AIFR007
+
+  actor Client as client1, client2, client3
+  actor FinancialAdvisor as advisor1, advisor2
+  actor SystemAdministrator as admin1
+}
+
+client1 --> CFR001 : "View Financial Insights Dashboard"
+client1 --> CFR002 : "Receive Alerts on Anomalous Transactions"
+client1 --> CFR003 : "View Financial Predictions Based on Data and Trends"
+client1 --> CFR004 : "Personalized Recommendations Aligned with Profile"
+client1 --> CFR005 : "Manage Recommendation Preferences"
+client1 --> CFR006 : "View Spending Limit Alerts for Budget Control"
+client1 --> CFR007 : "Access Investment Opportunities Based on Risk Profile"
+client1 --> CFR008 : "Receive News Related to Portfolio"
+client1 --> CFR009 : "Personalized Dashboard for Financial Information"
+client1 --> CFR010 : "Manage Relationship with Advisors"
+
+advisor1 --> FAFR001 : "Manage Client Mentoring Sessions Based on Insights"
+advisor1 --> FAFR002 : "View Client Intervention Alerts for Proactive Assistance"
+advisor1 --> FAFR003 : "View Predictive Analytics About Clients' Situations"
+advisor1 --> FAFR004 : "Configure Analysis Parameters by Segment"
+
+admin1 --> SAFR001 : "Manage Analysis Parameters"
+
+client1, advisor1 <|-- SFR002
+SFR002 --> AIFR002
+
+CFR003 --> AIFR001
+AIFR001 --> SFR003
+
+CFR004 --> AIFR002
+AIFR002 --> SFR004, AIFR005
+
+CFR006 --> AIFR003
+AIFR003 --> SFR005
+
+CFR007 --> AIFR004, AIFR005
+SFR006 --> AIFR004, AIFR005
+
+CFR008 --> AIFR007
+AIFR007 --> SFR009
+
+CFR010 --> SFR012
+
+client1 <|-- CFR003 : "View Financial Predictions Based on Data and Trends"
+advisor1 <|-- FAFR004 : "Configure Analysis Parameters by Segment"
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire system is enclosed within a rectangle labeled as the System. This includes all use cases, actors (Client, FinancialAdvisor, SystemAdministrator), and their relationships.
+  
+- **Actors**:
+  - Clients (`client1`, `client2`, etc.) are represented for CFR-related requirements.
+  - Financial Advisors (`advisor1`) handle FAFR-related interactions.
+  - System Administrator (`admin1`) manages SAFR001.
+
+- **Use Cases**: Each requirement is mapped to a use case with its exact ID and description. For example:
+  - `CFR003: View Financial Predictions Based on Data and Trends` corresponds to the AIFR001 use case.
+  
+- **Relationships**:
+  - Clients interact directly with system-level use cases (e.g., viewing dashboards, receiving alerts).
+  - Advisors manage mentoring sessions and client-specific analysis parameters via FAFR-related use cases.
+  - System Administrator configures global settings like analysis parameters.
+
+This structure ensures all requirements are accurately represented in the UML diagram. Relationships between actors and use cases follow the defined interactions from the functional requirements. The PlantUML code adheres to the provided guidelines, using proper indentation, notation, and relationships. 
+
+### Key Observations:
+- Inheritance is not implied here since each actor's role is distinct (Client vs. Advisor vs. Admin).
+- Grouping by subsystem or logical categories could be considered but isn't strictly necessary given the scope.
+- The diagram maintains clarity with a single system boundary encompassing all components, ensuring readability and adherence to technical guidelines.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1738]

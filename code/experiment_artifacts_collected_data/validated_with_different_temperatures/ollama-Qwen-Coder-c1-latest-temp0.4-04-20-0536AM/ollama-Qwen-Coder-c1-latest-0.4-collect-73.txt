@@ -1,0 +1,106 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Anomaly Transaction Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Monitor Spending Limits" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Financial News" as CFR008
+  usecase "CFR009: Consolidate Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+  
+  C --> (CFR001)
+  C --> (CFR002)
+  C --> (CFR003)
+  C --> (CFR004)
+  C --> (CFR005)
+  C --> (CFR006)
+  C --> (CFR007)
+  C --> (CFR008)
+  C --> (CFR010)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: Receive Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  FA --> (FAFR001)
+  FA --> (FAFR002)
+  FA --> (FAFR003)
+  FA --> (FAFR004)
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SA
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SA --> (SAFR001)
+}
+
+package "AI Component" {
+  rectangle AIComponent {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Identify Suitable Investments Based on Risk Profile and Modern Portfolio Theory" as AIFR005
+    usecase "AIFR006: Detect Anomaly Transactions in Compliance with FinCEN Requirements" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "AIFR008: Recommend Predictive Intervention Actions for Financial Advisors" as AIFR008
+    usecase "AIFR009: Provide Forward-Looking Analysis of Financial Situations" as AIFR009
+    
+    SA <|-- (SAFR001)
+    
+    C --> (CFR002) : SFR008
+    FA --> (FAFR002) : SFR008
+    C --> (AIFR003) : CFR006
+  }
+}
+
+package "System" {
+  rectangle System {
+    usecase "SFR017: Generate Financial Health Reports" as SFR017
+    usecase "SFR020: Manage Users' Financial Goals and Feedback" as SFR020
+    
+    C --> (CFR003) : SFR003
+    FA --> (FAFR004) : SFR016
+    SA --> (SAFR001)
+  }
+}
+
+package "Notifications" {
+  rectangle Notifications {
+    usecase "SFR012: Generate Client Dashboards" as SFR012
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+    
+    C --> (CFR002) : SFR013
+    FA --> (FAFR002) : SFR013
+  }
+}
+
+package "Analytics" {
+  rectangle Analytics {
+    usecase "SFR014: Generate Client Analytics That Provide Meaningful Insights into Financial Behavior and Performance" as SFR014
+    
+    C --> (CFR009)
+  }
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1103]

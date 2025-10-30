@@ -47,6 +47,9 @@ class OllamaStrategy(LLMStrategy):
                                                "Qwen2.5-Coder-7B-Instruct:latest")
         self.temperature = SYSTEM_CONFIG.get("general.models.default_ollama_temperature", 0.7)
         self.default_ollama_top_p = SYSTEM_CONFIG.get("general.models.default_ollama_top_p", 0.8)
+        self.default_ollama_top_k = SYSTEM_CONFIG.get("general.models.default_ollama_top_k", 40)
+        self.default_ollama_presence_penalty = SYSTEM_CONFIG.get("general.models.default_ollama_presence_penalty", 0.1)
+        self.default_ollama_frequency_penalty = SYSTEM_CONFIG.get("general.models.default_ollama_frequency_penalty", 0.4)
         self.default_ollama_num_predict = SYSTEM_CONFIG.get("general.models.default_ollama_num_predict", 1024)
         self.timeout = SYSTEM_CONFIG.get("general.models.default_ollama_timeout", 60)
         self.logger = Logger
@@ -63,7 +66,9 @@ class OllamaStrategy(LLMStrategy):
         api_url = params.get("api_url", self.api_url)
         top_p = params.get("top_p", self.default_ollama_top_p)
         num_predict = params.get("num_predict", self.default_ollama_num_predict)
-
+        top_k = params.get("top_k", self.default_ollama_top_k)
+        presence_penalty = params.get("presence_penalty", self.default_ollama_presence_penalty)
+        frequency_penalty = params.get("frequency_penalty", self.default_ollama_frequency_penalty)
         client = Client(host=api_url)
 
         try:
@@ -73,8 +78,8 @@ class OllamaStrategy(LLMStrategy):
                 prompt=prompt,
                 options={
                     'temperature': temperature,
-                    'top_p': top_p,
                     'num_predict': num_predict,
+                    'top_p': top_p
                 },
                 stream=False
             )

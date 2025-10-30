@@ -1,0 +1,80 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as Client
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Preferences for Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Consolidated Financial Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  Client --> (SFR02)
+}
+
+package System {
+  rectangle "System" {
+    usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+    
+    usecase "SFR03: Deliver Alerts to Users" as SFR03
+    usecase "SFR04: Deliver Personalized Recommendations" as SFR04
+    usecase "SFR05: Request Financial Predictions from AI Component" as SFR05
+    usecase "SFR06: Request Personalized Recommendations from AI Component" as SFR06
+    usecase "SFR07: Request Spending Limit Alerts from AI Component" as SFR07
+    usecase "SFR08: Request Investment Opportunity Analysis from AI Component" as SFR08
+    usecase "SFR09: Request Specific Investment Opportunities from AI Component" as SFR09
+    usecase "SFR10: Request Anomaly Transaction Alerts from AI Component" as SFR10
+    usecase "SFR11: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR11
+    usecase "SFR12: Process Contextualized News for Users" as SFR12
+    usecase "SFR13: Request Contextualized News Insights from AI Component" as SFR13
+    usecase "SFR14: Generate Client Dashboards with Financial Information" as SFR14
+    usecase "SFR15: Generate Client Alerts Based on Predefined Conditions" as SFR15
+    usecase "SFR16: Generate Client Analytics for Meaningful Insights" as SFR16
+    usecase "SFR17: Generate Financial Health Reports Assessing Users' Wellbeing" as SFR17
+    usecase "SFR18: Manage Users' Financial Goals to Track Progress and Provide Recommendations" as SFR18
+    usecase "SFR19: Maintain Historical Record of Insights for Trend Analysis" as SFR19
+    usecase "SFR20: Manage User Feedback to Improve System Outputs" as SFR20
+    
+    SAFR001 --> (AIFR01)
+  }
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Professional Attention" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  FAFR --> (SFR15)
+}
+
+package AI {
+  rectangle "AI System" {
+    usecase "AIFR002: Generate Personalized Recommendations Based on Financial Profiles and Goals" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts by Identifying Unusual Deviations from Established Patterns" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses Based on Risk Profiles, Time Horizons, and Financial Goals" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities Aligning with User Strategies and Modern Portfolio Theory Principles" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts by Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance with FinCEN Requirements" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights Correlating Financial News with User Portfolios to Identify Relevant Impacts" as AIFR007
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations by Identifying Patterns Indicating Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR008
+    usecase "AIFR009: Generate Client Predictive Insights Providing Forward-Looking Analysis of Financial Situations to Support More Effective Planning" as AIFR009
+    
+    AIFR002 --> (SFR04)
+  }
+}
+
+Client --> CFR11 : Send Feedback
+FAFR --> FAFR001 : Manage Client Sessions Based on Insights
+FAFR --> FAFR003 : View Predictive Analytics for Clients
+
+@enduml

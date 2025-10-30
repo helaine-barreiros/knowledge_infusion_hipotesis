@@ -1,0 +1,104 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  C --> (SAFR002)
+  C --> (SFR003)
+  C --> (AIFR004)
+  C --> (FAFR007)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA
+
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  FA --> (SAFR001)
+}
+
+package "System Administrator" {
+  actor SysAdmin as SA
+
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+}
+
+rectangle System {
+    package "User Interface" {
+      usecase "SFR012: Generate Client Dashboards" as SFR012
+    }
+    
+    rectangle NotificationSystem{
+        usecase "SFR0013: Deliver Alerts to Users" as SFR0013
+    }
+
+    rectangle RecommendationEngine {
+      usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+      
+      package AIComponents {
+          usecase "AIFR004: Generate Spending Limit Alerts" as AIFR004
+          usecase "AIFR005: Generate Investment Opportunity Analyses" as AIFR005
+          usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+          usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+          usecase "AIFR012: Generate Client Predictive Intervention Recommendations" as AIFR012
+      }
+    }
+
+    rectangle AnalyticsEngine {
+        usecase "SFR014: Generate Client Analytics" as SFR014
+      
+        package AIComponents {
+            usecase "AIFR016: Generate Client Predictive Insights" as AIFR016
+        }
+    } 
+
+    rectangle ReportingSystem {
+      usecase "SFR017: Generate Financial Health Reports" as SFR017
+
+      package AIComponents {
+          usecase "AIFR025: Generate ESG-Compliant Investment Opportunities" as AIFR025
+      }
+    }
+
+}
+
+package "Data Management System"{
+  rectangle DataStore {
+      usecase "SFR018: Manage Users' Financial Goals and Feedback" as SFR018
+      
+      package AIComponents {
+          usecase "AIFR036: Generate Client Predictive Intervention Recommendations based on ESG Criteria" as AIFR036
+      }
+  }
+
+  rectangle HistoricalDataStore{
+    usecase "SFR019: Maintain a Historical Record of Users' Insights" as SFR019
+      
+    package AIComponents {
+        usecase "AIFR047: Generate Predictive Analytics based on Historical Data and Trends" as AIFR047
+    }
+  }
+
+}
+
+CFR002 --> (SFR008)
+CFA003 --> (SFR016)
+
+@enduml

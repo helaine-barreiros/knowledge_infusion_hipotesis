@@ -1,0 +1,89 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Spent Limit Alerts for Budget Control" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access Consolidated Financial Dashboard" as CFR008
+  usecase "CFR009: Manage Relationship with Advisors Including Data Sharing Permissions" as CFR009
+  usecase "SFR012: Generate Client Dashboards for Intuitive Monitoring" as SFR012
+  usecase "SAFR003: View Predictive Analytics on Clients' Financial Situations" as SAFR003
+
+  
+  actor "Client" as C1 {
+    CFR001 --> (CFR001)
+    CFR002 --> (CFR002)
+    CFR003 --> (CFR003)
+    CFR004 --> (CFR004)
+    CFR005 --> (CFR005)
+    CFR006 --> (CFR006)
+    CFR007 --> (CFR007)
+    CFR008 --> (CFR008)
+    CFR009 --> (CFR009)
+  }
+
+  actor "Financial Advisor" as F1 {
+    FAFR001 --> (FAFR001)
+    SAFR003 --> (SAFR003)
+  }
+  
+  actor "System Administrator" as SAdmin {
+    SAFR001 --> (SAFR001)
+  }
+
+  usecase "AIFR002: Generate Personalized Recommendations Based on Financial Profiles and Goals" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts for Unusual Deviations" as AIFR003
+  usecase "AIFR004: Identify Investment Opportunities Matching Risk Tolerance" as AIFR004
+
+  system boundary {
+    C1 <|-- (CFR001)
+    C1 <|-- (CFR002)
+    C1 <|-- (CFR003)
+    C1 <|-- (CFR004)
+    C1 <|-- (CFR005)
+    C1 <|-- (CFR006)
+    C1 <|-- (CFR007)
+    C1 <|-- (CFR008)
+    C1 <|-- (CFR009)
+
+    F1 <|-- (FAFR001)
+    F1 <|-- (SAFR003)
+
+    SAdmin <|-- (SAFR001)
+
+    AIFR002 --> (SFR004) : Generate Personalized Recommendations
+    AIFR003 --> (SFR005) : Generate Spending Limit Alerts
+    AIFR004 --> (SFR006) : Identify Investment Opportunities
+
+  }
+}
+
+@enduml
+```
+
+**Key Observations:**
+1. **Actors:** The diagram includes three main actors - Client, Financial Advisor, and System Administrator.
+2. **Use Cases Grouping by Actor/Functionality:**
+   - **Client (C1):** Use cases related to viewing dashboards, receiving alerts, making predictions, managing preferences, etc., are grouped under the client actor.
+   - **Financial Advisor (F1):** Includes use cases for mentoring sessions and predictive analytics.
+   - **System Administrator (SAdmin):** Manages analysis parameters.
+3. **Inheritance/Delegation:**
+   - The system boundary groups all use cases related to generating recommendations, alerts, etc., which are handled by the AI components like AIFR002–AIFR004 and their corresponding system requests (e.g., SFR004 for personalized recommendations).
+4. **Relationships:** Use case arrows indicate dependencies between actors and systems, such as clients requesting dashboards/alerts from the system.
+5. **System Boundary:** Encapsulates all internal components like AI systems (AIFR*) that process data requests.
+
+This structure ensures clarity in associating each use case with its respective actor or role while maintaining logical groupings within the diagram. Adjustments can be made based on further analysis, but this initial model should cover most requirements provided.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1119]

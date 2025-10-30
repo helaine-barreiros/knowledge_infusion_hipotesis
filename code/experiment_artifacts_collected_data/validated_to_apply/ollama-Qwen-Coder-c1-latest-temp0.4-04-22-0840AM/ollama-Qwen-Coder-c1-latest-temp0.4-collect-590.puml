@@ -1,0 +1,61 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+
+  rectangle "Client Functions" {
+    Client --> CFR001 : View Financial Insights Dashboard
+    Client --> FAFD : Manage Relationship with Financial Advisors
+    Client --> SAFR005 : Manage Preferences for Personalized Recommendations
+    Client --> SFR009 : Access Contextualized News Related to Investment Portfolio
+  }
+
+  rectangle "Financial Advisor Functions" {
+    FAFD --> CFR012 : Generate Client Dashboards
+    FAFD --> FAFR003 : View Predictive Analytics for Clients' Financial Situations
+    FAFD --> SAFR005 : Manage Preferences for Personalized Recommendations
+    FAFD --> SFR016 : Enhance Value of Financial Guidance Provided to Clients
+  }
+
+  rectangle "System Functions" {
+    SysAdmin --> SAFR001 : Manage Analysis Parameters
+    Sys --> CFR012 : Generate Client Dashboards
+    Sys --> SFR003 : Request Financial Predictions from AI Component
+    Sys --> AIFR004 : Generate Investment Opportunity Analyses for Users
+  }
+}
+
+rectangle "Notifications and Alerts" {
+  usecase "SFR007: Deliver Alerts to Users Through Appropriate Notification Channels" as SFR007
+
+  rectangle "Alert Types" {
+    Client --> SFR008 : Anomaly Transaction Alerts
+    Client --> SFR013 : Spending Limit Alerts
+    FAFD --> SFR009 : Predictive Intervention Recommendations for Clients
+    SysAdmin --> SAFR005 : Manage Preferences for Personalized Recommendations
+  }
+}
+
+rectangle "Recommendations and Insights" {
+  usecase "SFR020: Manage User Feedback to Continuously Improve the Quality of Financial Insights" as SFR020
+
+  rectangle "Feedback Management" {
+    Client --> SFR020 : Send Feedback About System's Recommendations and Insights
+    FAFD --> SFR020 : Send Feedback About System's Recommendations and Insights
+    SysAdmin --> SFR020 : Send Feedback About System's Recommendations and Insights
+  }
+}
+
+@enduml

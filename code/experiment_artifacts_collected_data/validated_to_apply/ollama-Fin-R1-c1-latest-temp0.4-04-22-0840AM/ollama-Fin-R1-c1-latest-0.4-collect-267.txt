@@ -1,0 +1,67 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+  user --> CFR001 : "Client"
+  
+  SysAdmin -> SAFR001 : "System Administrator"
+  SysAdmin -> FAFR004 : "Financial Advisor"
+
+  rectangle "User Interface" {
+    usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004
+    usecase "CFR005: Manage Recommendation Preferences" as CFR005
+    usecase "CFR006: View Spending Limit Alerts" as CFR006
+    usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+    usecase "CFR008: Receive News Related to Portfolio" as CFR008
+    usecase "CFR009: View Consolidated Financial Dashboard" as CFR009
+    user --> * : "Client"
+  }
+
+  rectangle "System Functions" {
+    usecase "SFR012: Generate Client Dashboards" as SFR012
+    usecase "SFR013: Deliver Alerts Based on Predefined Conditions" as SFR013
+    usecase "SFR014: Provide Financial Analytics" as SFR014
+
+    SysAdmin -> SFR012 : "System Administrator"
+  }
+
+  rectangle "AI System" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR003: Identify Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Analyze Investment Opportunities" as AIFR004
+
+    SysAdmin -> * : "System Administrator"
+  }
+
+  user --> CFR011 : "Client, Financial Advisor, System Administrator"
+
+}
+
+@enduml
+```
+
+### Explanation:
+- **Actors** are represented using the `user` keyword. The main clients (e.g., Client) and system administrators/financial advisors are included.
+- **Use Cases** for each requirement ID are defined within their respective categories: User Interface, System Functions, AI System.
+- Relationships between actors and use cases are established with arrows (`-->`). For example:
+  - `user --> CFR001` indicates that the Client can view a financial insights dashboard.
+  - `SysAdmin -> SAFR001` shows that the System Administrator manages analysis parameters for the system.
+
+### Key Observations:
+- The diagram groups related use cases under "User Interface," "System Functions," and "AI System" rectangles to logically organize functionalities. This helps in understanding how different components of the system interact.
+- Inheritance relationships (e.g., `SysAdmin -> SAFR001`) are used where a user type has access or responsibility for specific actions, such as managing analysis parameters.
+
+This structure ensures clarity and adherence to the provided functional requirements while maintaining readability. Adjustments may be needed based on further details in the system architecture or additional requirements not listed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 777]

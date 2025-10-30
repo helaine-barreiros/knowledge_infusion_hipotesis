@@ -1,0 +1,80 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as fa1
+actor SysAdmin as sa1
+system ProfessionalSystem as sys
+
+rectangle "ProfessionalSystem" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001  
+  usecase "FAFR002: Manage Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  c1 --> CFR001 : "View Financial Insights Dashboard"
+  sa1 --> SAFR001 : "Manage Analysis Parameters"
+  fa1 --> FAFR002 : "Manage Client Intervention Alerts"
+  
+  sys <|-- CFR001
+  sys <|-- SAFR001
+  sys <|-- SFR013
+  sys <|-- AIFR006
+
+}
+
+rectangle "Client" {
+  usecase "CFR002: View Financial Predictions Based on Historical Data and Market Trends" as CFR002
+  usecase "CFR004: Receive Personalized Recommendations Aligned with Financial Profile" as CFR004  
+  usecase "CFR011: Send Feedback for System Improvement" as CFR011
+
+  c1 --> CFR002 : "View Financial Predictions"
+  c1 --> CFR004 : "Receive Personalized Recommendations"
+  c1 --> CFR011 : "Send Feedback"
+
+}
+
+rectangle "FinancialAdvisor" {
+  usecase "FAFR003: View Client Intervention Alerts" as FAFR003
+  usecase "FAFR005: Configure Analysis Parameters for Specific Segments" as FAFR005
+
+  fa1 --> FAFR003 : "View Alerts"
+  fa1 --> FAFR005 : "Configure Parameters"
+
+}
+
+rectangle "SysAdmin" {
+  usecase "SAFR002: Manage System Notifications and Alert Channels" as SAFR002
+  usecase "SFR009: Request Contextualized News for Users' Portfolios" as SFR009
+
+  sa1 --> SAFR002 : "Manage Alerts"
+  sa1 --> SFR009 : "Request Contextualized News"
+
+}
+
+@enduml
+```
+
+### Explanation:
+- **ProfessionalSystem**: Represents the main system boundary encompassing all use cases and actors.
+- **Client (c1)**: Interacts with multiple use cases, including viewing dashboards, receiving recommendations, and providing feedback.
+- **FinancialAdvisor (fa1)**: Manages client alerts and customizes analysis parameters for specific segments.
+- **SysAdmin (sa1)**: Handles system-level management like notifications and news requests.
+
+### Key Relationships:
+- All user-facing use cases (`CFR00x`) are linked to the `Client` actor.  
+- System administrators interact with administrative tasks (`SAFR002`, `SFR009`).  
+- Financial advisors manage client-specific alerts (`FAFR003`, `FAFR005`).  
+
+### Inheritance:
+- The system boundary contains all use cases, ensuring they are part of the ProfessionalSystem.  
+
+This structure aligns with the provided requirements and ensures clarity in actor-to-use case relationships. Adjustments can be made based on further details or evolving requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 784]

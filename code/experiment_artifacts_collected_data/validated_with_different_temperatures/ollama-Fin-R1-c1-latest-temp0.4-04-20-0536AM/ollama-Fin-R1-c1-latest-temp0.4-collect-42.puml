@@ -1,0 +1,86 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C1
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA1, FA2
+}
+
+package "System Administrator" {
+  actor SysAdmin as SA1
+}
+
+rectangle "System Boundary" {
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+
+  usecase "CFR004: Receive Personalized Recommendations Aligned with Financial Profile" as CFR004
+
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile (MiFID II)" as CFR007
+
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+
+  usecase "CFR009: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as CFR009
+  
+  
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+  
+
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+
+  usecase "FAFR002: View Client Intervention Alerts from System" as FAFR002
+
+  usecase "FAFR003: View Predictive Analytics for Clients' Financial Situations" as FAFR003
+
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+  
+
+  
+  usecase "SFR001: Deliver Alerts Through Notification Channels" as SFR001
+
+  usecase "SFR002: Generate Personalized Recommendations Based on Financial Profiles" as SFR002
+
+  usecase "SFR003: Request Predictive Interventions from AI Component" as SFR003
+
+  usecase "AIFR001: Generate Financial Predictions by Analyzing Data and Market Trends" as AIFR001
+  
+
+  
+}
+
+Client C1 --> CFR001 : "View Financial Insights Dashboard"
+Client C1 --> CFR002 : "Receive Alerts for Anomalous Transactions (FATF)"
+Client C1 --> CFR003 : "View Financial Predictions Based on Historical Data and Market Trends"
+Client C1 --> CFR004 : "Receive Personalized Recommendations Aligned with Financial Profile"
+Client C1 --> CFR005 : "Manage Preferences for Personalized Recommendations"
+Client C1 --> CFR006 : "View Spending Limit Alerts When Exceeding Thresholds"
+Client C1 --> CFR007 : "View Investment Opportunities Based on Risk Profile (MiFID II)"
+Client C1 --> CFR008 : "Access News Related to Portfolio"
+Client C1 --> CFR009 : "Manage Relationship with Financial Advisors, Including Data Sharing Permissions"
+
+SysAdmin SA1 --> SAFR001 : "Manage Analysis Parameters for AI System"
+
+FinancialAdvisor FA1 --> FAFR001: "Manage Client Mentoring Sessions Based on Insights"
+FinancialAdvisor FA2 --> FAFR002: "View Client Intervention Alerts from System"
+FinancialAdvisor FA2 --> FAFR003: "View Predictive Analytics for Clients' Financial Situations"
+FinancialAdvisor FA2 --> FAFR004: "Configure Analysis Parameters by Client Segment"
+
+SFR001 <|-- CFR002 : "Deliver Anomaly Transaction Alerts via System"
+AIFR006 <|-- SAFR001 : "Generate Spending Limit Alerts Based on AI Component's Output"
+CFR003 --> AIFR007: "Request Contextualized News Insights for Portfolio Management"
+
+@enduml

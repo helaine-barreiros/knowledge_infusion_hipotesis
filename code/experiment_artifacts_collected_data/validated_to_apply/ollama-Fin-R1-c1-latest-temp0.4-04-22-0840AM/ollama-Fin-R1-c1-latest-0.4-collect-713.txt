@@ -1,0 +1,143 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+system System as S
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  C1 --> CFR001 : "View Financial Insights Dashboard"
+  SA --> SAFR001 : "Manage Analysis Parameters"
+  FA --> FAFR003 : "View Predictive Analytics for Clients"
+}
+
+rectangle "Client & Advisor Interactions" {
+  usecase "CFR002: View Alerts on Anomalous Transactions" as CFR002
+  usecase "SFR014: Generate Client Analytics" as SFR014
+
+  C1 --> CFR002 : "View Alerts on Anomalous Transactions"
+}
+
+rectangle "Client Management & Preferences" {
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as CFR005
+
+  C1 --> CFR003 : "View Financial Predictions"
+}
+
+rectangle "Client Relationship Management" {
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+  C1 --> CFR010 : "Manage Relationship with Advisors"
+
+  FA --> SFR014 : "Generate Client Analytics for Advisor Use"
+}
+
+rectangle "System Operations & Alerts" {
+  usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+
+  System <|-- (CFR002)
+  System <|-- (SAFR001)
+  System <|-- (FAFR003)
+}
+
+rectangle "AI Component Interactions" {
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "SFR009: Request Contextualized News" as SFR009
+
+  System <|-- (AIFR007)
+}
+
+rectangle "User Feedback Loop" {
+  usecase "CFR011: Send Feedback to Improve Recommendations" as CFR011
+  C1 --> CFR011 : "Send Feedback"
+}
+@enduml
+```
+
+### Key Observations:
+- **Client (C1)** interacts with the system through various use cases like viewing dashboards, alerts, and predictions.
+- **SysAdmin** manages analysis parameters via `SAFR001`.
+- **FinancialAdvisor (FA)** views predictive analytics for clients (`CFR003`) and receives client intervention alerts (`SFR014`).
+- The system itself handles requests from other components to generate reports/alerts, such as dashboards (`SFR012`), personalized recommendations (`AIFR005`), etc.
+- Inheritance relationships are established where the `System` component extends use cases like managing alerts and parameters. For example:
+  - The system automatically handles anomaly transaction requests (`SFR008`) which extend from client interactions (`CFR002`).
+  - Similarly, other components (AI or systems) generate insights that the main system aggregates.
+
+This structure ensures all functional requirements are represented accurately with their respective actors and relationships. Adjustments can be made based on further analysis if needed.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor SysAdmin as SA
+actor FinancialAdvisor as FA
+system System as S
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  C1 --> CFR001 : "View Financial Insights Dashboard"
+  SA --> SAFR001 : "Manage Analysis Parameters"
+  FA --> FAFR003 : "View Predictive Analytics for Clients"
+
+}
+
+rectangle "Client & Advisor Interactions" {
+  usecase "CFR002: View Alerts on Anomalous Transactions" as CFR002
+  usecase "SFR014: Generate Client Analytics" as SFR014
+
+  C1 --> CFR002 : "View Alerts on Anomalous Transactions"
+}
+
+rectangle "Client Management & Preferences" {
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR005: Manage Personalized Recommendations Preferences" as CFR005
+
+  C1 --> CFR003 : "View Financial Predictions"
+}
+
+rectangle "Client Relationship Management" {
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+  C1 --> CFR010 : "Manage Relationship with Advisors"
+
+  FA --> SFR014 : "Generate Client Analytics for Advisor Use"
+}
+
+rectangle "System Operations & Alerts" {
+  usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+
+  System <|-- (CFR002)
+  System <|-- (SAFR001)
+  System <|-- (FAFR003)
+}
+
+rectangle "AI Component Interactions" {
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "SFR009: Request Contextualized News" as SFR009
+
+  System <|-- (AIFR007)
+}
+
+rectangle "User Feedback Loop" {
+  usecase "CFR011: Send Feedback to Improve Recommendations" as CFR011
+  C1 --> CFR011 : "Send Feedback"
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1364]

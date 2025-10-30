@@ -1,0 +1,187 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Clients" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Anomaly Transaction Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View Financial News" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+  
+  C --> CFR001
+  C --> CFR002
+  C --> CFR003
+  C --> CFR004
+  C --> CFR005
+  C --> CFR006
+  C --> CFR007
+  C --> CFR008
+  C --> CFR009
+  C --> CFR10
+  
+}
+
+package "Financial Advisors" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as FAFR004
+  
+  FA --> FAFR001
+  FA --> FAFR002
+  FA --> FAFR003
+  FA --> FAFR004
+}
+
+package "System Administrator" {
+  actor SysAdmin as SA
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SA --> SAFR001
+}
+
+rectangle System {
+  
+  package "Financial Insights & Predictions" {
+    usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+    
+    C <|-- (C)
+    FA <|-- (FA)
+    SA <|-- (SA)
+    
+    C --> SFR003
+    FA --> SFR003
+    SA --> SFR003
+  }
+  
+  package "Personalized Recommendations" {
+    usecase "SFR002: Request Personalized Recommendations from AI Component" as SFR002
+    
+    C <|-- (C)
+    FA <|-- (FA)
+    
+    C --> SFR002
+    FA --> SFR002
+  }
+  
+  package "Spending Limit Alerts" {
+    usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+    
+    C <|-- (C)
+    
+    C --> SFR005
+  }
+  
+  package "Investment Opportunities" {
+    usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+    usecase "SFR007: Request Specific Investment Opportunities Matching User Criteria and ESG Preferences" as SFR007
+    
+    C <|-- (C)
+    
+    C --> SFR006
+    C --> SFR007
+  }
+  
+  package "Anomaly Transaction Alerts" {
+    usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as SFR008
+    
+    C <|-- (C)
+    
+    C --> SFR008
+  }
+  
+  package "Financial News" {
+    usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR009
+    usecase "SFR10: Process Contextualized News to Extract Relevant Information for Users' Financial Situations" as SFR10
+    
+    C <|-- (C)
+    
+    C --> SFR009
+    C --> SFR10
+  }
+  
+  package "Client Alerts and Dashboards" {
+    usecase "SFR13: Generate Client Alerts Based on Predefined Conditions" as SFR13
+    usecase "SFR12: Generate Client Dashboards Presenting Financial Information in an Intuitive Format" as SFR12
+    
+    C <|-- (C)
+    
+    C --> SFR13
+    C --> SFR12
+  }
+  
+  package "Client Analytics and Reporting" {
+    usecase "SFR014: Generate Client Analytics Providing Meaningful Insights into Financial Behavior and Performance" as SFR014
+    usecase "SFR17: Generate Financial Health Reports Assessing Users' Overall Financial Wellbeing According to Standard Ratios and Metrics" as SFR17
+    
+    C <|-- (C)
+    
+    C --> SFR014
+    C --> SFR17
+  }
+  
+  package "Predictive Interventions and Insights" {
+    usecase "SFR15: Request Predictive Intervention Analyses from AI Component Identifying When Advisors Should Engage with Clients" as SFR15
+    usecase "SFR09: Generate Client Predictive Insights Providing Forward-Looking Analysis of Financial Situations to Support More Effective Planning" as SFR09
+    
+    C <|-- (C)
+    
+    C --> SFR15
+    C --> SFR09
+  }
+  
+  package "Feedback Management" {
+    usecase "SFR20: Manage User Feedback Continuously Improving the Quality and Relevance of Financial Insights" as SFR20
+    
+    C <|-- (C)
+    
+    C --> SFR20
+  }
+}
+
+rectangle AISystem {
+  usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts by Identifying Unusual Deviations from Established Spending Patterns" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses for Users Evaluating Potential Investments Against Their Risk Profiles, Time Horizons, and Financial Goals" as AIFR004
+  usecase "AIFR005: Generate Investment Opportunities by Identifying Financial Instruments Aligning with User Investment Strategies and Modern Portfolio Theory Principles" as AIFR005
+  usecase "AIFR006: Generate Anomaly Transaction Alerts Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance With FinCEN Requirements" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights Correlating Financial News with Specific User Portfolios Identifying Relevant Impacts" as AIFR007
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations by Identifying Patterns Indicating Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR008
+  usecase "AIFR009: Generate Client Predictive Insights Providing Forward-Looking Analysis of Financial Situations to Support More Effective Planning" as AIFR009
+  
+  C --> (C)
+  FA --> (FA)
+  SA --> (SA)
+  
+  C --> AIFR001
+  C --> AIFR002
+  C --> AIFR003
+  C --> AIFR004
+  C --> AIFR005
+  C --> AIFR006
+  C --> AIFR007
+  C --> AIFR008
+  C --> AIFR009
+  
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1813]

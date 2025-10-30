@@ -1,0 +1,61 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Personalized Dashboard" as CFR008
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+
+  rectangle "Client Interactions" {
+    actor Client as C
+    client --> (CFR001)
+    client --> (CFR002) : "Receive Alerts"
+    client --> (CFR003)
+    client --> (CFR004)
+    client --> (CFR005)
+    client --> (CFR006)
+    client --> (CFR007)
+    client --> (CFR008)
+    client --> (CFR010) : "Manage Relationship"
+  }
+
+  rectangle "Advisor Interactions" {
+    actor FinancialAdvisor as FA
+    financialadvisor --> (FAFR002)
+    financialadvisor --> (FAFR003)
+    financialadvisor --> (FAFR004)
+  }
+
+  rectangle "Administrator Interactions" {
+    actor SysAdmin as SA
+    sysadmin --> (SAFR001) : "Manage Parameters"
+  }
+}
+
+@enduml
+```
+
+**Key Observations:**
+- **Client Actors**: Represented by the `Client` alias, this includes interactions with all client-related use cases.
+- **FinancialAdvisor Actor**: Represents interactions specific to financial advisors, such as viewing intervention alerts and predictive analytics.
+- **SysAdmin Actor**: Manages system parameters via SAFR001.
+- **Use Case Grouping**:
+  - Client Interactions: Consolidates all user-facing features (CFRs).
+  - Advisor Interactions: Features related to mentoring sessions, client analysis, etc.
+  - Administrator Interactions: System parameter management.
+
+This structure ensures clarity in distinguishing between different stakeholder roles and their respective use cases. The system boundary encapsulates the core functionalities while segregating actors based on their role-specific interactions. Each relationship is explicitly defined with labels where necessary for additional context.
+
+[Done: True
+Done Reason: stop
+Eval Count: 616]

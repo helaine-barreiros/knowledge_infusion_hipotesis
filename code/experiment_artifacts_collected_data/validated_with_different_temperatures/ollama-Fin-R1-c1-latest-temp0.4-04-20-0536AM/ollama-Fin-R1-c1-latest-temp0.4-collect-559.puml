@@ -1,0 +1,50 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  rectangle "Client" {
+    actor Client as c
+    client c -> (CFR001)
+    client c -> (SFR013) : "Receive Alerts for Anomalous Transactions"
+    client c -> (SAFR002) : "Configure Personalized Recommendations Preferences"
+    client c -> (FAFR004) : "View Predictive Analytics Based on Client Segments"
+  }
+
+  rectangle "Financial Advisor" {
+    actor FinancialAdvisor as fa
+    financialadvisor fa -> (CFR010: Manage Relationship with Advisors)
+    financialadvisor fa -> (SAFR003: View Client Intervention Alerts)
+    financialadvisor fa -> (FAFR002: View Anomaly Transaction Alerts)
+  }
+
+  rectangle "System Administrator" {
+    actor SysAdmin as sa
+    sysadmin sa -> (CFR010) : "Manage Relationship with Advisors"
+    sysadmin sa -> (SAFR003)
+  }
+
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+
+  rectangle "AI System" {
+    actor AISystem as ai
+    aiseystem ai -> (SFR013) : "Deliver Alerts to Users"
+    aiseystem ai -> (CFR004: Receive Feedback on Recommendations)
+    aiseystem ai -> (AIFR002) : "Generate Personalized Recommendations Based On Financial Profiles"
+
+  }
+
+}
+
+@enduml

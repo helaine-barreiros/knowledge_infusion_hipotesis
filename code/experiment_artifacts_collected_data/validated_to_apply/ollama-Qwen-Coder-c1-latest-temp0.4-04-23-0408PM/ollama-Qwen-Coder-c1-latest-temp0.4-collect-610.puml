@@ -1,0 +1,85 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FAFR001
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions from AI" as SFR003
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  
+  rectangle "Client Features" {
+    Client --> CFR001 : View Dashboard
+    Client --> SAFR001 : Manage Analysis Parameters
+    Client --> FAFR002 : Receive Alerts
+    Client --> SFR003 : Request Predictions
+    Client --> AIFR001 : Get Recommendations
+  }
+
+  rectangle "System Features" {
+    SystemAdmin --> SAFR001 : Configure Parameters
+    FinancialAdvisor --> FAFR002 : View Alerts
+    FinancialAdvisor --> FAFR004 : Manage Segment Parameters
+    FinancialAdvisor --> SFR003 : Request Predictions
+    FinancialAdvisor --> AIFR001 : Get Recommendations
+    
+    SystemAdmin <|-- SAFR001
+    FinancialAdvisor <|-- FAFR002
+  }
+
+  rectangle "Notification" {
+    usecase "SFR005: Deliver Alerts to Users" as SFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    
+    Client --> SFR005 : Receive Notifications
+    FinancialAdvisor --> SFR005 : Receive Notifications
+    SystemAdmin --> SFR005 : Configure Notification Channels
+
+    Client --> AIFR006 : Get Alerts
+  }
+
+  rectangle "Recommendations" {
+    usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+    
+    Client --> SFR002 : Receive Recommendations
+    FinancialAdvisor --> SFR002 : Provide Guidance
+  }
+
+  rectangle "Investment Opportunities" {
+    usecase "SFR006: Request Investment Opportunity Analysis from AI" as SFR006
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+    
+    Client --> SFR006 : View Opportunities
+    FinancialAdvisor --> SFR006 : Get Insights
+
+  }
+
+  rectangle "News and Analytics" {
+    usecase "SFR008: Request Contextualized News from AI" as SFR008
+    usecase "AIFR007: Generate Contextualized News Insights for Users" as AIFR007
+    
+    Client --> SFR008 : View News
+  }
+
+  rectangle "Financial Health and Goals" {
+    usecase "SFR12: Request Financial Dashboards from AI" as SFR12
+    usecase "AIFR09: Generate Financial Health Reports for Users" as AIFR09
+    
+    Client --> SFR12 : View Dashboard
+  }
+
+  rectangle "Feedback and Improvement" {
+    usecase "CFR11: Send Feedback to Improve Recommendations" as CFR11
+
+    Client --> CFR11 : Provide Feedback
+  }
+}
+
+@enduml

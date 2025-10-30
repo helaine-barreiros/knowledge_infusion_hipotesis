@@ -1,0 +1,92 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  FinancialAdvisor --> FAFR003
+  FinancialAdvisor --> FAFR004
+}
+
+package System {
+  actor "System Administrator" as SAFR001
+  usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  
+  System --> SAFR001
+  System --> SFR002
+  System --> FAFR003
+  System --> FAFR004
+  System --> SFR005
+}
+
+package "AI System" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  
+  CFR001 --> SFR002 : "View Alerts"
+  FAFR003 --> AIFR009 : "Generate Predictive Insights"
+  
+  System --> AIFR001
+  System --> AIFR002
+}
+
+rectangle Client {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Suitable for Risk Profile" as CFR007
+  usecase "CFR008: View News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  Client --> CFR001 : "View Insights"
+  Client --> CFR002 : "Receive Alerts"
+  Client --> CFR003 : "View Predictions"
+  Client --> CFR004 : "Receive Recommendations"
+  Client --> CFR005 : "Manage Preferences"
+  Client --> CFR006 : "View Spending Limits"
+  Client --> CFR007 : "View Opportunities"
+  Client --> CFR008 : "View News"
+  Client --> CFR009 : "Access Dashboard"
+  Client --> CFR10 : "Manage Relationships"
+}
+
+rectangle FinancialAdvisor {
+  usecase "FAFR005: View Predictive Intervention Alerts" as FAFR005
+  usecase "FAFR006: Configure Analysis Parameters for Specific Clients" as FAFR006
+  
+  FinancialAdvisor --> CFR011 : "Send Feedback"
+}
+
+rectangle System {
+  usecase "SFR003: Deliver Predictive Analytics to Users" as SFR003
+  usecase "SFR007: Request Investment Opportunity Analysis from AI Component" as SFR007
+  
+  FinancialAdvisor --> FAFR005 : "View Intervention Alerts"
+  FinancialAdvisor --> FAFR006 : "Configure Parameters for Specific Clients"
+  
+  System --> SAFR001
+  System --> SFR003
+  System --> CFR011 : "Receive Feedback"
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 890]

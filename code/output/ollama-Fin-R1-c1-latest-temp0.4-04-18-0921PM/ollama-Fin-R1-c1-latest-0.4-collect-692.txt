@@ -1,0 +1,77 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage System-Wide Analysis Parameters"
+  SysAdmin --> FAFR004 : "Configure Analysis Parameters"
+
+  rectangle "Client Interface" {
+    usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Personalized Recommendations Alignment" as CFR004
+    usecase "CFR005: Manage Recommendation Preferences" as CFR005
+    usecase "CFR006: Spent Limit Alerts Management" as CFR006
+    usecase "CFR007: Investment Opportunities Based on Risk Profile" as CFR007
+    usecase "CFR008: View Portfolio-Related News" as CFR008
+    usecase "CFR009: Consolidated Financial Dashboard Access" as CFR010
+
+    client --> CFR002 : "View Alerts"
+    client --> CFR003 : "View Predictions"
+    client --> CFR004 : "Receive Recommendations"
+    client --> CFR005 : "Manage Preferences"
+    client --> CFR006 : "Monitor Spending Limits"
+    client --> CFR007 : "Explore Investment Opportunities"
+    client --> CFR008 : "Read News"
+    client --> CFR010 : "Access Dashboard"
+
+  }
+
+  rectangle "Financial Advisor Interface" {
+    usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+    usecase "FAFR002: View Intervention Alerts for Clients" as FAFR002
+    usecase "FAFR003: Analyze Predictive Analytics of Clients' Finances" as FAFR003
+
+    financialAdvisor --> FAFR001 : "Schedule Mentoring Sessions"
+    financialAdvisor --> FAFR002 : "Review Alerts"
+    financialAdvisor --> FAFR003 : "Analyze Client Data"
+
+  }
+
+  rectangle "System Administrator Interface" {
+    usecase "SAFR002: Manage System-Wide Notifications" as SAFR002
+    usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+
+    sysAdmin --> SAFR002 : "Configure Notification Channels"
+    sysAdmin --> SFR019 : "Update Historical Data"
+
+  }
+
+}
+
+@enduml
+```
+
+**Key Observations and Explanations:**
+- The system includes multiple actors (Client, Financial Advisor, System Administrator) with their respective use cases.
+- Use case relationships are established between the system components and user interactions. For example:
+  - **CFR001**: Clients can view a financial insights dashboard through direct interaction (`client --> CFR001`).
+  - **SAFR001**: SysAdmins manage analysis parameters, which involves configuring specific settings for compliance or performance.
+- The `rectangle "System"` groups all system-related use cases (e.g., SAFR002: Manage System-Wide Notifications) and their interactions with other components like Financial Advisors (`financialAdvisor --> FAFR001`).
+- Logical grouping ensures clarity, such as separating client-specific uses from advisor or admin tasks.
+- Inheritance relationships are implied where a single actor (e.g., Client) interacts across multiple use cases. For instance:
+  - A Client can receive alerts for anomalous transactions (`CFR002`) and view financial predictions (`CFR003`), both under the client interface.
+
+This diagram adheres strictly to provided requirements, ensuring no extraneous actors or use cases are introduced. All interactions align with the functional needs outlined in the text.
+
+[Done: True
+Done Reason: stop
+Eval Count: 926]

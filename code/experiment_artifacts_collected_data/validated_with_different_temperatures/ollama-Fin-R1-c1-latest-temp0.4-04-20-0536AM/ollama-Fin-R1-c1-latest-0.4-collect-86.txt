@@ -1,0 +1,115 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  Client --> CFR001 : "View financial data"
+  
+  SysAdmin --> SAFR001 : "Manage parameters for AI system"
+
+}
+
+rectangle "Client (User)" {
+  actor "Client" as C
+  usecase "CFR002: View Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Financial Advisors" as CFR009
+  
+  C --> SAFR001 : "Request parameter management"
+  
+}
+
+rectangle "Financial Advisor (User)" {
+  actor "FAFR002: Financial Advisor" as FAFR002
+  usecase "CFR007: View Client Intervention Alerts" as CFR007A
+  usecase "CFR011: Send Feedback on System Outputs" as CFR011
+  
+}
+
+rectangle "System Administrator (User)" {
+  actor "SysAdmin" as SysAdm
+  usecase "SAFR002: Manage AI Components" as SAFR002
+  SysAdm --> SAFR002 : "Configure system components"
+  
+}
+
+rectangle "AI System" {
+  component "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "CFR003: View Financial Predictions" as CFR003
+  
+  SysAdm --> AIFR001 : "Set up predictive models"
+  
+}
+
+rectangle "Notification System (Subsystem)" {
+  component "SFR002: Personalized Recommendations" as SFR002
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  
+  SysAdm --> SFR002 : "Set up recommendation generation"
+  
+}
+
+rectangle "Alert System (Subsystem)" {
+  component "SFR005: Spending Limit Alerts" as SFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  
+  SysAdm --> SFR005 : "Set up threshold management"
+  
+}
+
+rectangle "Investment Opportunity System (Subsystem)" {
+  component "AIFR004: Investment Opportunity Analysis" as AIFR004
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  
+  SysAdm --> AIFR004 : "Configure investment criteria"
+  
+}
+
+rectangle "News System (Subsystem)" {
+  component "SFR013: Contextualized News Insights" as SFR013
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  
+  SysAdm --> SFR013 : "Set up news sources"
+  
+}
+
+rectangle "Client Relationship Management (Subsystem)" {
+  component "SFR009: Client Dashboards" as SFR009
+  usecase "CFR009: Manage Relationship with Financial Advisors" as CFR009
+  
+  SysAdm --> SFR009 : "Set up dashboards"
+  
+}
+
+rectangle "User Feedback System (Subsystem)" {
+  component "SFR21: User Feedback Processing" as SFR21
+  usecase "CFR011: Send Feedback on System Outputs" as CFR011
+  
+  SysAdm --> SFR21 : "Set up feedback collection"
+  
+}
+
+@enduml
+```
+
+**Key Observations and Explanations:**
+- The diagram includes all functional requirements provided, categorized by actors (Client/User, Financial Advisor/FAFR002, System Administrator/SysAdmin) and system components.
+- Each use case is linked to its corresponding actor or component through relationships. For example, the Client can view financial predictions via CFR003, while SysAdmin manages AI parameters with SAFR001.
+- Subsystems like Notification (SFR), Alert (SFR), Investment Opportunity (AIFR), News System (SFR), and Relationship Management (SFR) are grouped to show their interactions within the system architecture.
+- Inheritance or extension relationships aren't explicitly shown here since most use cases directly relate actors/components. However, SysAdmin extends control over multiple components like SAFR001, AIFR004, etc., through configuration actions.
+
+This structure ensures clarity in how different entities (actors) interact with the system and its various subsystems to fulfill their requirements. Adjustments can be made based on further analysis of requirement nuances or additional context not explicitly covered here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1162]

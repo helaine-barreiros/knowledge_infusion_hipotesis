@@ -1,0 +1,85 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FinancialAdvisor
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics about My Clients' Financial Situations" as FAFR003
+  usecase "SFR002: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR002
+  usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+
+  Client --> CFR001 : "View Alerts"
+  Client --> SAFR001 : "Manage Analysis Parameters"
+  Client --> FAFR003
+  Client --> SFR002
+  Client --> AIFR001
+  
+  SysAdmin --> SAFR001
+
+  FinancialAdvisor --> FAFR001
+  FinancialAdvisor --> FAFR004 : "Configure Analysis Parameters for Specific Client Segments"
+  
+  System --> CFR001 : "Deliver Alerts to Users Through Appropriate Notification Channels"
+  System --> SFR002
+  System --> AIFR001
+  
+}
+
+rectangle "Client Dashboards" {
+  usecase "CFR009: Access a Personalized Dashboard That Consolidates My Financial Information in a Single View" as CFR009
+
+  Client --> CFR009
+}
+
+rectangle "Spending Limits and Alerts" {
+  usecase "CFR006: View Spending Limit Alerts When I Exceed Predefined Thresholds in Specific Expense Categories" as CFR006
+  
+  System --> CFR006 : "Request Spending Limit Alerts from the AI Component"
+  
+  Client --> CFR006
+}
+
+rectangle "Investment Opportunities and Recommendations" {
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile (as Defined Under MiFID II or Equivalent Standards)" as CFR007
+  usecase "FAFR002: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR002
+  
+  Client --> CFR007 : "View Investment Opportunities"
+  
+  FinancialAdvisor --> FAFR002
+}
+
+rectangle "News and Updates" {
+  usecase "CFR008: View News Related to My Investment Portfolio to Stay Informed About Market Events That Might Affect My Assets" as CFR008
+  
+  System --> CFR008 : "Request Contextualized News Insights from the AI Component"
+  
+  Client --> CFR008
+}
+
+rectangle "Client Relationship Management" {
+  usecase "CFR10: Manage My Relationship with Financial Advisors, Including Permissions for Sharing My Financial Data, to Maintain Privacy and Control Over My Financial Information" as CFR10
+  
+  System --> CFR10 : "Manage Users' Financial Goals"
+  
+  Client --> CFR10
+}
+
+rectangle "Feedback Management" {
+  usecase "CFR11: Send Feedback About the System's Recommendations and Insights to Help Improve the Accuracy and Relevance of Future Outputs" as CFR11
+
+  Client --> CFR11
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 752]

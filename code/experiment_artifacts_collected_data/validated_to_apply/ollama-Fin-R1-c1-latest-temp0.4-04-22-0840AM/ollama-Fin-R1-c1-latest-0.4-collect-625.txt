@@ -1,0 +1,98 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002  
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Adjust Recommendation Preferences" as CFR005
+  usecase "CFR006: Monitor Spending Limits" as CFR006  
+  usecase "CFR007: View Investment Opportunities" as CFR007  
+  usecase "CFR008: Access Portfolio News" as CFR008 
+  usecase "CFR009: Consolidate Financial Data" as CFR009
+  usecase "CFR10: Manage Client-Advisor Relationship" as CFR10
+
+  SysAdmin --> SAFR002 : Configure system parameters  
+}
+
+rectangle "Financial Advisor (FAFR)" {
+  actor FAFR001: "Manage Mentoring Sessions"
+  actor FAFR002: "View Intervention Alerts"
+  actor FAFR003: "Analyze Predictive Analytics" 
+  actor FAFR004: "Adjust Analysis Parameters for Segments"
+
+  Sys --> FAFR001 : Provide system-generated insights
+}
+
+rectangle "System Functions (SFR)" {
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002  
+  usecase "SFR003: Request Financial Predictions" as SFR003 
+  usecase "SFR004: Request AI-Generated Recs" as SFR004
+  usecase "SFR005: Send Spending Alerts" as SFR005  
+  usecase "SFR006: Analyze Investment Opportunities" as SFR006 
+  usecase "SFR007: Find Specific Investments" as SFR007  
+  usecase "SFR008: Detect Anomaly Transactions" as SFR008
+  usecase "SFR009: Request Contextual News" as SFR009 
+  usecase "SFR012: Generate Client Dashboards" as SFR012  
+  usecase "SFR013: Notify Based on Predefined Conditions" as SFR013
+  usecase "SFR014: Produce Analytics Reports" as SFR014 
+  usecase "SFR015: Request Intervention Analyses" as SFR015  
+  usecase "SFR016: Enhance Client Guidance" as SFR016
+}
+
+rectangle "AI Component (AIFR)" {
+  actor AIFR001: "Generate Financial Predictions"
+  actor AIFR002: "Create Personalized Recommendations"
+  actor AIFR003: "Issue Spending Limit Alerts"
+  actor AIFR004: "Identify Investment Opportunities"  
+  actor AIFR005: "Match Investments to Profiles"
+  actor AIFR006: "Spot Anomaly Transactions"
+  actor AIFR007: "Extract News Insights"
+  actor AIFR008: "Recommend Intervention Actions"
+  actor AIFR009: "Provide Predictive Insights"
+
+  SFR --> AIFR001 : Request predictions
+}
+
+actor Client as CFR002, CFR004, CFR005, CFR006, CFR007, CFR008, CFR009, CFR10
+
+Client --> CFR001: View dashboard  
+Client --> SFR003 : Get financial predictions
+Client --> AIFR002 : Receive recommendations  
+
+SysAdmin --> SAFR002 : Configure alert preferences  
+FAFR004 --> FAFR001 : Manage parameters for segments
+
+SFR005 <|-- CFR006: Send spending alerts when thresholds exceeded  
+AIFR003 <|-- SFR008: Detect anomalies and trigger alerts  
+
+Client <-- AIFR007 : Receive contextualized news
+Client --> SFR012 : Access consolidated dashboard
+
+SFR015 <|-- AIFR008: Request intervention analyses for clients  
+AIFR009 <|-- SFR016: Enhance guidance with predictive insights  
+
+@enduml
+```
+
+### Explanation:
+- **System**: Contains core functionalities like delivering recommendations, generating dashboards, and managing alerts. It also includes interactions with the AI component.
+- **Financial Advisor (FAFR)**: Actors responsible for client mentoring, viewing intervention alerts, analyzing predictive analytics, adjusting parameters for specific segments.
+- **AI Component (AIFR)**: Generates financial predictions, personalized recommendations, spending limit alerts, investment opportunities, anomaly transactions, contextualized news insights, etc. 
+- **Client**: Represents various user types (Client, Financial Advisor, System Administrator) and their interactions with the system.
+
+### Key Relationships:
+1. **Client** interacts directly with use cases like viewing dashboards (`CFR001`), receiving recommendations (`AIFR002`), managing preferences (`SFR004`), etc.
+2. **System Admin**: Manages alert preferences via `SAFR002`.
+3. **Financial Advisor (FAFR)** uses system-generated insights and requests adjustments to parameters from the AI component.
+4. **AI Component (AIFR)** processes data, generates outputs (`CFR001`, `SFR006`), and provides inputs back to the system for further actions.
+
+This structure ensures all functional requirements are mapped accurately with their respective actors and use cases while maintaining clarity in relationships between them.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1288]

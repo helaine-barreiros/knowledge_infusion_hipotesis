@@ -1,0 +1,90 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Analysis Parameters for AI System" as SAFR002
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  
+  rectangle "Client Dashboard Features" {
+    Client --> CFR001
+    Client --> SAFR002
+    Client --> FAFR004
+    Client --> SFR003
+    Client --> AIFR001
+  }
+  
+  rectangle "Financial Advisor Functions" {
+    Financial Advisor --> FAFR004
+    Financial Advisor --> SFR006
+    Financial Advisor --> AIFR002
+    
+    rectangle "Client Mentoring Sessions" {
+      Financial Advisor --> FAFR001
+    }
+
+    rectangle "Predictive Analytics for Clients" {
+      Financial Advisor --> FAFR03
+    }
+  }
+  
+  rectangle "System Functions" {
+    System Admin --> SAFR002
+    System Admin --> SFR005
+    
+    rectangle "Alerts Management" {
+      System Admin --> SFR013
+      System Admin --> AIFR006
+      
+      rectangle "Anomaly Transaction Alerts" {
+        System Admin --> AIFR006
+      }
+      
+      rectangle "Spending Limit Alerts" {
+        System Admin --> AIFR003
+      }
+    }
+
+    rectangle "Personalized Recommendations Management" {
+      System Admin --> SFR012
+      System Admin --> AIFR004
+      
+      rectangle "Investment Opportunity Analysis" {
+        System Admin --> AIFR005
+      }
+      
+      rectangle "ESG Investment Opportunities" {
+        System Admin --> AIFR007
+      }
+    }
+
+    rectangle "News Management" {
+      System Admin --> SFR019
+      System Admin --> AIFR008
+      
+      rectangle "Contextualized News Insights" {
+        System Admin --> AIFR007
+      }
+      
+      rectangle "Client Predictive Intervention Recommendations" {
+        System Admin --> AIFR009
+      }
+
+      rectangle "Predictive Insights for Financial Guidance" {
+        System Admin --> AIFR16
+      }
+    }
+  }
+  
+  Client --(SFR020)--> CFR011
+}
+
+@enduml

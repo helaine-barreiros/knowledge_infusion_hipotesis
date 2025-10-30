@@ -1,0 +1,79 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as fa
+actor SysAdmin as sa
+system SFR023: "System" as sys
+
+package Professional {
+  rectangle "Professional Services" {
+    actor FinancialAdvisor as fa
+    usecase "FAFR001: Manage client mentoring sessions based on system-generated insights" as FAFR001
+    usecase "FAFR002: View client intervention alerts when the system detects patterns requiring professional attention" as FAFR002
+    usecase "FAFR003: View predictive analytics about clients' financial situations to provide data-driven recommendations during consultations" as FAFR003
+  }
+  
+  package System {
+    rectangle "System Functions" {
+      sys --> (SFR019: Maintain historical record of users' insights)
+      usecase "SFR024: Generate client analytics that provide meaningful insights into financial behavior and performance" as SFR024
+      usecase "SFR025: Manage user feedback to continuously improve the quality and relevance of financial insights" as SFR025
+    }
+  }
+
+  package AI {
+    rectangle "AI Components" {
+      system AIFR017: "AI System" as aifrsys
+      usecase "AIFR018: Generate financial health reports that assess users' overall financial wellbeing according to standard metrics" as AIFR018
+      usecase "AIFR023: Manage user relationships with Financial Advisors, including permissions for sharing data" as AIFR023
+    }
+  }
+
+}
+
+client c1 --> (SFR019)
+sysAdmin sa --> (SAFR001)
+
+Client <|-- (c1)
+FinancialAdvisor <|-- (fa)
+SysAdmin <|-- (sa)
+System <|-- sys
+
+usecase "CFR001: View financial insights dashboard" as CFR001
+usecase "CFR002: Receive alerts about anomalous transactions" as CFR002
+usecase "CFR003: View financial predictions based on historical data and market trends" as CFR003
+usecase "CFR004: Receive personalized recommendations aligned with financial profile" as CFR004
+usecase "CFR005: Manage preferences for personalized recommendations" as CFR005
+usecase "CFR006: View spending limit alerts when exceeding thresholds" as CFR006
+usecase "CFR007: View investment opportunities suitable to risk profile" as CFR007
+usecase "CFR008: Access consolidated financial information dashboard" as CFR008
+usecase "CFR010: Manage relationship with Financial Advisors, including data sharing permissions" as CFR010
+
+Client --> (CFR001)
+Client --> (CFR002)
+Client --> (CFR003)
+Client --> (CFR004)
+Client --> (CFR005)
+Client --> (CFR006)
+Client --> (CFR007)
+Client --> (CFR008)
+Client <|-- (c1)
+
+usecase "SAFR001: Manage analysis parameters for AI system" as SAFR001
+SysAdmin --> (SAFR001)
+
+usecase "SFR024: Generate client analytics" as SFR024
+sys --> (SFR024)
+system sys <|-- (SFR024)
+
+usecase "AIFR018: Generate financial health reports" as AIFR018
+aifrsys --> (AIFR018)
+AI system aifrsys <|-- (AIFR018)
+
+Client --> SFR023 : "System"
+SFR023 --> Client
+
+@enduml

@@ -1,0 +1,120 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sa
+actor FinancialAdvisor as faa
+system "System" as sys
+
+rectangle Professional {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Spent Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Consolidated Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+
+  c1 --> CFR001 : "View"
+  c1 --> CFR002 : "Receive Alerts for Anomalous Transactions (FATF)"
+  c1 --> CFR003 : "View Predictions"
+  c1 --> CFR004 : "Personalized Recommendations"
+  c1 --> CFR005 : "Manage Preferences"
+  c1 --> CFR006 : "Spent Limit Alerts"
+  c1 --> CFR007 : "Investment Opportunities Based on Risk Profile (MiFID II)"
+  c1 --> CFR008 : "View News Related to Portfolio"
+  c1 --> CFR009 : "Consolidated Dashboard"
+  sa -> CFR005 : "Manage Preferences" 
+}
+
+rectangle Professional {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  faa --> SAFR001 : "Configure for Specific Segments (GDPR, CCPA)"
+  
+  sys <|-- SAFR001 : "System Admin"
+}
+sys --> CFR002 : "Deliver Alerts to Users via Channels"
+sys --> CFR003 : "Request Predictions from AI Component"
+sys --> CFR004 : "Request Personalized Recommendations (FINRA)"
+sys --> CFR005: "Manage Preferences for User"
+sys --> CFR006 : "Generate Spent Limit Alerts Based on Thresholds"
+sys --> CFR007 : "Identify Investment Opportunities via Risk Profile"
+sys --> CFR008 : "Extract Relevant News from AI Component"
+sys --> CFR009 : "Create Client Dashboards (Intuitive & Actionable)"
+sys --> SAFR001: "Manage Analysis Parameters"
+
+rectangle Professional {
+  usecase "AIFR003: Generate Spent Limit Alerts" as AIFR003
+  sys <|-- AIFR003 : "AI System"
+}
+
+rectangle Professional {
+  usecase "AIFR004: Identify Investment Opportunities Based on Risk Profile" as AIFR004
+  sys <|-- AIFR004 : "AI System"
+}
+sys --> CFR007 : "Identify Investment Opportunities via AI"
+
+rectangle Professional {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  sys <|-- AIFR001 : "AI System"
+}
+
+sys --> CFR003 : "Request Predictions from AI Component (Historical, Market Trends)"
+
+rectangle Professional {
+  usecase "AIFR005: Identify Investment Opportunities via MPT" as AIFR005
+  sys <|-- AIFR005 : "AI System"
+}
+
+sys --> CFR007 : "Identify Investment Opportunities via AI (MPT-based)"
+
+rectangle Professional {
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  sys <|-- AIFR006 : "AI System"
+}
+sys --> CFR002 : "Generate Anomaly Alerts Based on Patterns"
+
+rectangle Professional {
+  usecase "AIFR007: Correlate News with Portfolios for Insights" as AIFR007
+  sys <|-- AIFR007 : "AI System"
+}
+
+sys --> CFR008 : "Extract Relevant News from AI Component (Contextualized)"
+
+rectangle Professional {
+  usecase "AIFR009: Generate Predictive Intervention Recs for Advisors" as AIFR009
+  sys <|-- AIFR009 : "AI System"
+}
+
+sys --> CFR10 : "Engage Financial Advisors via AI"
+
+@enduml
+```
+
+### Key Observations:
+- **Actors**: The diagram includes three main actors: `Client`, `SysAdmin`, and `FinancialAdvisor`. Each has specific use cases they interact with.
+- **Use Cases**:
+  - Client-related use cases (CFR001–CFR10) cover viewing dashboards, receiving alerts, making predictions, etc. These are grouped under the "Professional" package for clients.
+  - System Administrator (`SysAdmin`) manages analysis parameters via `SAFR001`.
+  - Financial Advisor (`FinancialAdvisor`) uses use cases like managing client mentoring sessions and viewing predictive analytics (FAFR series).
+- **System**: The central system handles requests from all actors, including delivering alerts, generating recommendations, processing news, etc. It also interacts with the AI components.
+- **Inheritance/Delegation**:
+  - `SysAdmin` extends `SAFR001`, meaning they can manage analysis parameters for the system.
+  - Various use cases (e.g., AIFR series) are handled by the system and its associated AI components, ensuring that each component's role is clear.
+
+### Diagram Structure:
+- The diagram starts with a title and specifies left-to-right direction. It uses rectangles to group related actors or subsystems (`Professional`, `System`).
+- Each use case is defined precisely using their IDs (e.g., CFR001) within the appropriate actor/subsystem context.
+- Relationships are established via arrows, indicating interactions between actors/use cases/system components.
+
+This structure ensures clarity and alignment with the provided functional requirements. Adjustments can be made if additional relationships or groupings become necessary based on further analysis of the system's architecture.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1412]

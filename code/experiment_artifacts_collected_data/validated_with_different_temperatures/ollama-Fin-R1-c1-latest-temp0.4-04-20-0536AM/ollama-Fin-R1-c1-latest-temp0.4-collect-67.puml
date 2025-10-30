@@ -1,0 +1,80 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor FinancialAdvisor as FA1
+actor SysAdmin as SA1
+system "System" as Syst
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Access Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile (MiFID II)" as CFR007
+  usecase "CFR008: Receive News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: View Consolidated Personalized Dashboard for Monitoring Finances" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as CFR10
+
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts from AI for Proactive Assistance" as FAFR002
+  usecase "FAFR003: Review Predictive Analytics About Clients' Financial Situations" as FAFR003
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters to Ensure AI Accuracy and Compliance with Basel III/Risk Management" as SAFR001
+
+}
+
+package "AI System Components" {
+  
+  system Syst --> CFR002 : Deliver Alerts (SFR008)
+  system Syst --> CFR004 : Provide Personalized Recommendations (SFR004)
+  system Syst --> CFR005 : Update Preferences for Recommendations (AIFR001)
+  system Syst --> CFR006 : Send Spending Limit Alerts (AIFR003)
+  system Syst --> CFR007 : Present Investment Opportunities Based on Risk Profile (AIFR004)
+  system Syst --> CFR008 : Fetch News for Portfolio (SFR009)
+  
+}
+
+package "Client-Specific Use Cases" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+}
+
+package "Financial Advisor-Specific Use Cases" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts from AI for Proactive Assistance" as FAFR002
+}
+
+package "System Administrator-Specific Use Cases" {
+  usecase "SAFR001: Manage Analysis Parameters to Ensure AI Accuracy and Compliance with Basel III/Risk Management" as SAFR001
+
+}
+
+C1 --> CFR001 : View Financial Insights Dashboard
+C1 --> CFR002 : Receive Alerts for Anomalous Transactions
+C1 --> CFR003 : View Financial Predictions Based on Historical Data and Market Trends
+C1 --> CFR004 : Access Personalized Recommendations Aligned with Financial Profile
+C1 --> CFR005 : Manage Preferences for Personalized Recommendations
+C1 --> CFR006 : View Spending Limit Alerts When Exceeding Thresholds
+C1 --> CFR007 : Access Investment Opportunities Based on Risk Profile (MiFID II)
+C1 --> CFR008 : Receive News Related to Investment Portfolio
+C1 --> CFR009 : View Consolidated Personalized Dashboard for Monitoring Finances
+C1 --> CFR10: Manage Relationship with Financial Advisors, Including Data Sharing Permissions
+
+FA1 --> FAFR001 : Manage Client Mentoring Sessions Based on System-Generated Insights
+FA1 --> FAFR002 : View Client Intervention Alerts from AI for Proactive Assistance
+FA1 --> FAFR003 : Review Predictive Analytics About Clients' Financial Situations
+
+SA1 --> SAFR001 : Manage Analysis Parameters to Ensure AI Accuracy and Compliance with Basel III/Risk Management
+
+@enduml

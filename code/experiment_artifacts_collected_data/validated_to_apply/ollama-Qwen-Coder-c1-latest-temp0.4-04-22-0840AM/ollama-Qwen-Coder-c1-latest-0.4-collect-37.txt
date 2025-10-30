@@ -1,0 +1,72 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:User (Client) as UserC
+:Financial Advisor as FA
+:System Administrator as SA
+:AI System as AIFR001
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "AIFR009: Generate Contextualized News Insights" as AIFR007
+  
+  UserC --> CFR001 : "View Financial Insights Dashboard"
+  UserC --> FAFR003 : "View Predictive Analytics"
+  
+  FA --> SAFR001
+  FA --> FAFR003
+  FA --> FAFR004 : "Configure Analysis Parameters for Client Segments"
+  
+  SA --> SAFR001
+  
+  UserC --> SFR012 : "Generate Client Dashboards"
+  AIFR007 <|-- (SFR012)
+}
+
+rectangle "Client" {
+  usecase "CFR002: View Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  
+  UserC --> CFR002 : "View Alerts about Anomalous Transactions"
+  UserC --> CFR003 : "View Financial Predictions"
+  UserC --> CFR004 : "Receive Personalized Recommendations"
+  UserC --> CFR005 : "Manage Preferences for Personalized Recommendations"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR01: Manage Client Mentoring Sessions" as FAFR01
+  usecase "FAFR02: View Client Intervention Alerts" as FAFR02
+  
+  FA --> FAFR01 : "Manage Client Mentoring Sessions"
+  FA --> FAFR02 : "View Client Intervention Alerts"
+}
+
+rectangle "System Administrator" {
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  
+  SA --> SAFR001 : "Manage Analysis Parameters"
+  SA --> SFR003 : "Request Financial Predictions from AI Component"
+  
+  AIFR001 <|-- (SFR003)
+}
+
+rectangle "User Feedback Loop" {
+  usecase "CFR11: Send Feedback about Recommendations and Insights" as CFR11
+  
+  UserC --> CFR11
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 677]

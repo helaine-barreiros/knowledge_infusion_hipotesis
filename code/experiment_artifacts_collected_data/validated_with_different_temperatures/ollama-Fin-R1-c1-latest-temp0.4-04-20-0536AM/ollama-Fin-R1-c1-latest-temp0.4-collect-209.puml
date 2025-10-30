@@ -1,0 +1,66 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  
+  rectangle "Client Interface" {
+    actor Client
+    client -> CFR001 : View Financial Data, News, Recommendations
+  
+    client -> AIFR006 : Request Anomaly Alerts
+    AIFR006 -->> client : Send Alert
+
+    client -> FAFR002 : Check Intervention Alerts
+  }
+
+  rectangle "System Management" {
+    actor SysAdmin as SA
+    SA --> SAFR001 : Configure Parameters, Ensure Compliance
+  
+    SysAdmin -> AIFR008 : Request Predictive Interventions for Advisors
+    AIFR008 -->> SysAdmin : Provide Recommendations
+
+    SysAdmin -> FAFR003: View Predictive Analytics
+  }
+
+  rectangle "Financial Advisor Interface" {
+    actor FinancialAdvisor as FA
+    FA --> FAFR001: Manage Mentoring Sessions, Share Insights
+  
+    client <- FA : Receive Guidance, Review Progress
+    FA -->> AIFR007: Request Contextualized News
+
+    FA -> FAFR002: View Alerts for Clients in Need of Help
+  }
+
+  rectangle "AI System" {
+    actor AI as AIComp
+    AI --> AIFR001 : Generate Predictions, Financial Insights
+  
+    client <- AI : Receive Recommendations, Dashboards
+    client -->> AIFR003: Request Market Trends for Prediction
+
+    SysAdmin -> AI : Adjust Parameters Based on Feedback
+  }
+
+  rectangle "System Operations" {
+    actor System as Syst
+    Syst --> SFR012: Generate Client Dashboards
+  
+    client <- Syst : Receive Alerts, Predictions, News
+    Syst -->> AIFR006: Request Anomaly Detection
+
+    SysAdmin -> Syst : Manage Notifications, Feedback Loop
+  }
+}
+
+@enduml

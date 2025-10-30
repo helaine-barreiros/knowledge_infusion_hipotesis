@@ -1,0 +1,114 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Anomalous Transaction Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  C --> CFR001
+  C --> CFR002
+  C --> CFR003
+  C --> CFR004
+  C --> CFR005
+  C --> CFR006
+  C --> CFR007
+  C --> CFR008
+  C --> CFR009
+  C --> CFR10
+  
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as FAFR004
+  
+  FA --> FAFR001
+  FA --> FAFR002
+  FA --> FAFR003
+  FA --> FAFR004
+  
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SA
+  
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+  
+  SA --> SAFR001
+  
+}
+
+rectangle "AI Components" {
+  
+  package "Financial Insights Engine" {
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+    
+    C --> AIFR002 : receives personalized recommendations
+    FA --> AIFR002 : receives personalized recommendations for clients
+  }
+  
+  package "Predictive Analytics Engine" {
+    usecase "AIFR016: Generate Predictive Insights" as AIFR016
+    
+    C --> AIFR016 : receives predictive insights
+    FA --> AIFR016 : receives predictive insights for clients
+  }
+  
+  package "Anomaly Detection Engine" {
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    
+    C --> AIFR003 : receives spending limit alerts
+  }
+
+  package "News Analysis Engine" {
+    usecase "AIFR017: Generate Contextualized News Insights" as AIFR017
+
+    C --> AIFR017 : receives contextualized news insights
+  }
+  
+}
+
+package "Notification System" {
+  usecase "SFR001: Deliver Alerts to Users" as SFR001
+  
+  C --> SFR001
+  FA --> SFR001
+  SA --> SFR001
+
+}
+
+package "System Management" {
+  usecase "AIFR020: Generate Financial Health Reports" as AIFR020
+  usecase "SFR018: Manage Users' Financial Goals" as SFR018
+  
+  C --> AIFR020 : receives financial health reports
+  FA --> AIFR020 : generates client predictive intervention recommendations for clients
+  SA --> SFR018 : manages users' financial goals
+
+}
+
+package "User Feedback Management" {
+  usecase "CFR11: Send Feedback about Recommendations and Insights" as CFR11
+  
+  C --> CFR11
+  FA --> CFR11
+  SA --> CFR11
+}
+@enduml

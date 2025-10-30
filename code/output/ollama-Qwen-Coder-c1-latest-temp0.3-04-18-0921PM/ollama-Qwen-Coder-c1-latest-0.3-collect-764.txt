@@ -1,0 +1,95 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+}
+
+package "System Administrator" {
+  actor SysAdmin as SAFR003
+}
+
+rectangle "User Interface" {
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "SFR12: Generate Client Dashboards" as SFR12
+  
+  CFR001 --> (CFR009)
+  FAFR002 --> (CFR009)
+  SAFR003 --> (CFR009)
+}
+
+rectangle "Alerts and Notifications" {
+  usecase "SFR08: Request Anomaly Transaction Alerts" as SFR08
+  usecase "SAFR01: Deliver Alerts to Users" as SAFR01
+  
+  CFR001 --> (SFR08)
+  FAFR002 --> (SFR08)
+  SAFR003 --> (SFR08)
+  
+  SFR08 --> (SAFR01)
+}
+
+rectangle "Personalized Recommendations" {
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "FAFR002: Manage Client Mentoring Sessions" as FAFR002
+  
+  CFR001 --> (CFR004)
+  FAFR002 --> (SFR02) : "Provide Data-Driven Recommendations"
+}
+
+rectangle "Spending Limits and Alerts" {
+  usecase "SAFR05: Request Spending Limit Alerts" as SAFR05
+  usecase "AIFR03: Generate Spending Limit Alerts" as AIFR03
+  
+  CFR001 --> (SFR05)
+  
+  SFR05 --> (AIFR03)
+}
+
+rectangle "Investment Opportunities and Insights" {
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+  usecase "FAFR002: Manage Client Mentoring Sessions" as FAFR002
+  
+  CFR001 --> (CFR007)
+  FAFR002 --> (SFR06) : "Identify Suitable Investments"
+}
+
+rectangle "Financial Predictions and Insights" {
+  usecase "SAFR03: Request Financial Predictions from AI Component" as SAFR03
+  usecase "AIFR01: Generate Financial Predictions for Users" as AIFR01
+  
+  CFR001 --> (SFR03)
+  
+  SFR03 --> (AIFR01)
+}
+
+rectangle "News and Information" {
+  usecase "CFR008: View News Related to My Investment Portfolio" as CFR008
+  usecase "SAFR09: Find Contextualized News Relevant to Users' Financial Portfolios" as SAFR09
+  
+  CFR001 --> (SFR09)
+  
+  SFR09 --> (CFR008)
+}
+
+rectangle "Feedback and Improvement" {
+  usecase "AIFR02: Generate Personalized Recommendations for Users" as AIFR02
+  usecase "SAFR05: Request Spending Limit Alerts" as SAFR05
+  
+  CFR011 --> (SFR03) : "Recommendations"
+  CFR011 --> (SAFR08) : "Alerts"
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 789]

@@ -1,0 +1,94 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Fraud Alerts Thresholds" as SAFR002
+  usecase "CFR003: View Historical Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Monitor Spending Limits Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Consolidated Financial Data" as CFR012
+  usecase "CFR009: Manage Client-Advisor Relationship" as CFR009
+
+  rectangle "Client Interface" {
+    actor User as U
+    user --> CFR001 : View dashboard\nwith financial data
+    user --> SAFR002 : Adjust fraud alert thresholds\nfor specific categories
+    user --> CFR003 : Review historical predictions\nbased on past trends and market indicators
+    user --> CFR004 : Get personalized recommendations\ntailored to their profile goals
+    user --> CFR005 : Customize recommendation settings\naligning with personal financial objectives
+    user --> CFR006 : Track spending limits alerts\nwhen exceeding set thresholds
+    user --> CFR007 : Explore investment opportunities\nmatching risk profiles and ESG criteria
+    user --> CFR012 : Access consolidated view of all\nfinancial information in one place
+  }
+
+  rectangle "System Administrator Interface" {
+    actor SysAdmin as SA
+    sysadmin --> SAFR001: Configure AI analysis parameters\nto ensure regulatory compliance (e.g., Basel III)
+  }
+
+  rectangle "Financial Advisor Interface" {
+    actor FAFR as FA
+    fapr --> FAFR002 : Schedule client mentoring sessions\nbased on system-generated insights
+    fapr --> FAFR003 : Review client intervention alerts\nto address potential financial issues proactively
+    fapr --> FAFR004 : Customize analysis parameters for\nspecific client segments (e.g., GDPR, CCPA)
+  }
+
+  rectangle "AI System" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Personalized Recommendations Engine" as AIFR002
+    usecase "SAFR003: Spending Limit Alert Generation" as SAFR003
+    usecase "AIFR004: Investment Opportunity Analysis" as AIFR004
+    usecase "AIFR005: Align Recommendations with ESG" as AIFR005
+    usecase "SAFR008: Anomaly Transaction Alerts" as SAFR008
+    usecase "AIFR007: Contextualized News Insights" as AIFR007
+
+    system --> AIFR001 : Analyze historical data\nand market trends for predictions
+    system --> AIFR002 : Provide personalized recommendations\ntailored to user profiles and goals
+    system --> SAFR003 : Detect spending deviations\nvia pattern recognition in transaction history
+    system --> AIFR004 : Identify investments matching client risk profile\nand portfolio strategies
+    system --> AIFR005 : Ensure ESG compliance for investment recommendations
+    system --> SAFR008 : Monitor transactions against fraud patterns\nto trigger alerts as needed
+  }
+
+  rectangle "System Management" {
+    usecase "SFR019: Maintain Historical Records of Insights" as SFR019
+    sysadmin --> SFR019 : Track the effectiveness\nof generated insights over time
+
+    system --> SFR013 : Generate client alerts based on conditions like spending limits or market changes
+  }
+
+  rectangle "User Feedback Loop" {
+    usecase "CFR011: Send System Feedback" as CFR011
+    user --> cfr011 : Provide input to improve\nfuture recommendations and insights
+
+    system --> SFR020 : Process feedback\nto refine the AI's output quality
+  }
+
+  SysAdmin <|-- SAFR001, AIFR003, AIFR008, FAFR004, SAFR005, SAFR006
+
+  FAFR --> FAFR002 : Schedule mentoring\nbased on system insights
+  FAFR --> FAFR003 : Review client intervention alerts\nto proactively assist clients
+  FAFR --> FAFR004 : Customize analysis parameters for segments
+
+  AIFR001 <|-- CFR003, SAFR008, AIFR007, AIFR009, AIFR002, AIFR005
+}
+
+@enduml
+```
+
+**Key Observations:**
+- The diagram includes all actors and use cases from the provided requirements.
+- Relationships between actors (e.g., Client/User) are established with directed arrows indicating their interactions with specific use cases.
+- Use case inheritance is shown where applicable, such as System Admin managing multiple system-related use cases like SAFR001 for analysis parameters or AIFR003 for spending limit alerts.
+- Logical grouping of actors and subsystems (e.g., Client Interface, Financial Advisor Interface) simplifies the diagram’s structure.
+- The AI System is represented with its detailed components (AIFR series), ensuring clarity on how it interacts with other parts of the system.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1267]

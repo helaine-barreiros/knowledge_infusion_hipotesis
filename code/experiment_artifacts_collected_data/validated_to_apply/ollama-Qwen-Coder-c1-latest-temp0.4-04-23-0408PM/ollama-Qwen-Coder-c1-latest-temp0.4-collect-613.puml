@@ -1,0 +1,94 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics about My Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+}
+
+package System {
+  actor "System Administrator" as SAFR001
+  
+  rectangle "AI Component" {
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities for Users by Identifying Financial Instruments that Align with Their Investment Strategies and Modern Portfolio Theory Principles" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as AIFR007
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+    usecase "AIFR009: Generate Client Predictive Insights that Provide Forward-Looking Analysis of Financial Situations to Support More Effective Financial Planning" as AIFR009
+  }
+  
+  rectangle "Notification System" {
+    usecase "SFR013: Request Client Alerts Based on Predefined Conditions" as SFR013
+  }
+}
+
+rectangle "System" {
+  usecase "CFR002: Receive Alerts about Anomalous Transactions in My Accounts" as CFR002
+  usecase "CFR006: View Spending Limit Alerts When I Exceed Defined Thresholds in Specific Expense Categories" as CFR006
+  usecase "SFR017: Generate Financial Health Reports that Assess Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as SFR017
+  
+  rectangle "Personalized Recommendations System" {
+    usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals to Optimize My Financial Strategies and Investment Portfolio" as CFR004
+    usecase "SFR020: Manage User Feedback to Continuously Improve the Quality and Relevance of Financial Insights" as SFR020
+  }
+  
+  rectangle "Investment Opportunities System" {
+    usecase "CFR010: View Investment Opportunities Suitable to My Risk Profile (as Defined Under MiFID II or Equivalent Standards) to Diversify My Portfolio and Maximize Returns" as CFR010
+    usecase "SFR016: Request Predictive Insights from the AI Component to Enhance the Value of Financial Guidance Provided to Clients" as SFR016
+  }
+  
+  rectangle "News System" {
+    usecase "CFR008: View News Related to My Investment Portfolio to Stay Informed About Market Events That Might Affect My Assets" as CFR008
+    usecase "SFR009: Request Contextualized News Insights from the AI Component to Identify Potential Impacts on Users' Investments" as SFR009
+  }
+  
+  rectangle "Dashboards System" {
+    usecase "CFR012: Generate Client Dashboards that Present Financial Information in an Intuitive and Actionable Format" as CFR012
+    usecase "SFR014: Request Predictive Insights from the AI Component to Enhance the Value of Financial Guidance Provided to Clients" as SFR014
+  }
+  
+  rectangle "Predictive Intervention System" {
+    usecase "CFR015: Manage My Relationship with Financial Advisors, Including Permissions for Sharing My Financial Data, to Maintain Privacy and Control Over My Financial Information" as CFR015
+    usecase "SFR018: Request Predictive Intervention Analyses from the AI Component to Identify When Financial Advisors Should Engage With Clients" as SFR018
+  }
+}
+
+CFR002 --> System
+SAFR001 --> (AIFR003)
+FAFR004 --> (AIFR005)
+
+CFR006 --> (AIFR003)
+SFR017 --> (AIFR009)
+
+CFR008 --> (SFR009)
+
+CFR012 --> (SFR014)
+
+FAFR003 --> (AIFR005)
+
+SAFR001 --> System
+CFR004 --> PersonalizedRecommendationsSystem
+
+PersonalizedRecommendationsSystem --> SFR020
+
+InvestmentOpportunitiesSystem --> SFR016
+
+NewsSystem --> SFR009
+
+DashboardsSystem --> (SFR018)
+
+PredictiveInterventionSystem --> System
+CFR015 --> FinancialAdvisor
+
+@enduml

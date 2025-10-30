@@ -1,0 +1,82 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  
+  Client --> CFR001 : "View Financial Insights"
+  
+  SysAdmin --> SAFR001 : "Manage System Parameters"
+  
+  // Relationship between System and Use Cases
+  (Client) <|-- (CFR001)
+  (SysAdmin) <|-- (SAFR001)
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR004: Configure Analysis Parameters for Segments" as FAFR004
+  
+  FinancialAdvisor --> (CFR001) : "Access Insights"
+  
+  // Relationship between Financial Advisor and Use Cases
+  (FinancialAdvisor) <|-- (FAFR002)
+}
+
+rectangle "Client" {
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+  
+  Client --> (CFR003) : "View Predictions"
+  
+  // Relationships within the client's scope
+  (Client) <|-- (CFR002)
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR005: Manage System Notifications" as SAFR005
+  
+  SysAdmin --> (SFR013) : "Generate Alerts"
+  
+  // Relationship between System Admin and Use Cases
+  (SysAdmin) <|-- (SAFR005)
+}
+
+rectangle "AI Component" {
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  
+  // Relationships between AI and Use Cases
+  (Client) <|-- (CFR004)
+  
+}
+
+rectangle "System Functions" {
+  usecase "SFR008: Request Investment Opportunity Analysis" as SFR008
+  usecase "SFR009: Find Contextualized News for Portfolios" as SFR009
+  
+  // Relationships between System and Use Cases
+  (Client) <|-- (CFR007)
+}
+
+@enduml
+```
+
+**Key Observations:**
+1. **Actors Grouping**: The system is divided into four main actors/roles: Client, Financial Advisor, System Administrator, and AI Component.
+2. **Use Case Assignments**: Each functional requirement corresponds to a specific use case in the diagram.
+3. **Relationships**: Direct relationships are established between actors/use cases (e.g., `Client --> CFR001`), system components (`(Client) <|-- (CFR004)` for personalized recommendations via AI).
+4. **System Boundaries**: The "System" rectangle groups core functionalities like financial insights, alerts management, and client interactions.
+5. **Inheritance/Extends**: Not explicitly used here but implied by role-specific use cases.
+
+This structure ensures clarity in mapping requirements to their respective actors and system components while maintaining readability through logical grouping and relationships. Adjustments can be made based on further analysis or specific nuances from the original requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 792]

@@ -1,0 +1,91 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+  usecase "CFR011: Send Feedback to Improve System Outputs" as CFR011
+
+  Client --> CFR001 : View Financial Insights Dashboard
+  SysAdmin --> SAFR001 : Manage Analysis Parameters
+  User --> FAFR002 : View Client Intervention Alerts (Financial Advisor or System Administrator)
+  
+  // Relationships between system components and clients/advisors
+  SFR003 <|-- AIFR001: Generate Financial Predictions for Users
+  SFR004 <|-- AIFR002: Generate Personalized Recommendations Based on Profiles
+  SFR005 <|-- AIFR003: Generate Spending Limit Alerts When Exceeding Thresholds
+  SFR006 <|-- AIFR004: Identify Investment Opportunities Matching Risk Profiles and Goals
+  CFR011 --> (AIFR002|SFR007) : Send Feedback to Improve System Outputs
+  
+}
+
+@enduml
+```
+
+### Explanation:
+- **Actors**: The main actors are "Client", "SysAdmin" (System Administrator), and "User". These correspond directly to the functional requirements.
+- **Use Cases**:
+  - `CFR001` is for viewing a financial insights dashboard.
+  - `SAFR001` manages analysis parameters as per SysAdmin needs.
+  - Other use cases like `FAFR002`, `SFR003`, etc., are derived from the requirements and grouped under their respective categories (Client, System Admin).
+- **Relationships**:
+  - Clients interact with the system through dashboards (`CFR001`), receive alerts (`SAFR005` for spending limits or `FAFR002` for client intervention alerts), etc.
+  - SysAdmin manages parameters (`SAFR001`) and possibly other components like AI settings via `AIFR004`.
+- **System Components**:
+  - The system includes components like AIFR (AI Functionality) which generates predictions, recommendations, spending limit alerts, investment opportunities, etc.
+- **Grouping**: Use cases are logically grouped under their respective actors or functional areas. For example, all client-related use cases (`CFR001`, `SFR003`) fall within the "Client" interactions.
+
+This diagram ensures that each requirement is represented accurately with its ID and name while maintaining clear relationships between actors and use cases. The system boundary encompasses all components involved in delivering financial insights to clients, advisors, or administrators as per their roles. 
+
+### Key Observations:
+- **Inheritance**: Not explicitly shown here since the requirements don’t imply hierarchical actor relationships beyond direct interactions.
+- **Grouping**: Use cases are organized by functional area (Client vs. System Admin) rather than inheritance from actors.
+- **Feedback Loop (`CFR011`)**: Represents user feedback to improve system outputs, which is critical for iterative improvement but not directly tied to a specific actor in the requirements.
+
+This structure aligns with the provided functional requirements and ensures clarity in how different entities interact within the system. The PlantUML code follows all specified guidelines, including proper indentation and use of IDs from the requirements. 
+
+**Note**: This diagram assumes that "User" is an umbrella term encompassing Clients, Financial Advisors (FA), or System Administrators as per their context. Adjustments may be needed if further granularity on user types is required beyond what’s explicitly stated in the original requirements. However, based on the given text, a general "User" category suffices for this representation.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+  usecase "CFR011: Send Feedback to Improve System Outputs" as CFR011
+
+  Client --> CFR001 : View Financial Insights Dashboard
+  SysAdmin --> SAFR001 : Manage Analysis Parameters
+  User --> FAFR002 : View Client Intervention Alerts (Financial Advisor or System Administrator)
+  
+  SFR003 <|-- AIFR001: Generate Financial Predictions for Users
+  SFR004 <|-- AIFR002: Generate Personalized Recommendations Based on Profiles
+  SFR005 <|-- AIFR003: Generate Spending Limit Alerts When Exceeding Thresholds
+  SFR006 <|-- AIFR004: Identify Investment Opportunities Matching Risk Profiles and Goals
+  CFR011 --> (AIFR002|SFR007) : Send Feedback to Improve System Outputs
+  
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1396]

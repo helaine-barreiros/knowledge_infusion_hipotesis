@@ -1,0 +1,132 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  C --> (CFR001)
+  C --> (CFR002)
+  C --> (CFR003)
+  C --> (CFR004)
+  C --> (CFR005)
+  C --> (CFR006)
+  C --> (CFR007)
+  C --> (CFR008)
+  C --> (CFR009)
+  C --> (CFR10)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  FA --> (FAFR001)
+  FA --> (FAFR002)
+  FA --> (FAFR003)
+  FA --> (FAFR004)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SA
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+  
+  SA --> (SAFR001)
+}
+
+rectangle "AI Component" {
+  package "Financial Insights & Predictions" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+    
+    (CFR003) --> (AIFR001)
+    (SAFR001) --> (AIFR001)
+  }
+  
+  package "Personalized Recommendations" {
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+    
+    (CFR004) --> (AIFR002)
+  }
+  
+  package "Spending Limit Alerts" {
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+    
+    (CFR006) --> (AIFR003)
+  }
+  
+  package "Investment Opportunities Analysis" {
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "SFR007: Request Investment Opportunity Analysis from AI Component" as SFR007
+    
+    (CFR007) --> (AIFR004)
+  }
+  
+  package "Anomaly Transaction Alerts" {
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as SFR008
+    
+    (CFR002) --> (AIFR006)
+  }
+  
+  package "Contextualized News Insights" {
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "SFR013: Request Contextualized News from AI Component" as SFR013
+    
+    (CFR008) --> (AIFR007)
+  }
+  
+  package "Predictive Intervention Recommendations" {
+    usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+    usecase "SFR015: Request Predictive Intervention Analyses from AI Component" as SFR015
+    
+    (FAFR002) --> (AIFR008)
+  }
+  
+  package "Predictive Insights for Financial Guidance" {
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+    usecase "SFR16: Request Predictive Insights from AI Component" as SFR16
+    
+    (FAFR003) --> (AIFR009)
+  }
+}
+
+package "System" {
+  actor System as Sys
+  
+  usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  usecase "SFR017: Generate Financial Health Reports" as SFR017
+  
+  Sys --> (CFR003)
+  Sys --> (FAFR003)
+  Sys --> (AIFR002)
+}
+
+package "Notifications & Feedback" {
+  usecase "SFR019: Maintain a Historical Record of Users' Insights" as SFR019
+  usecase "CFR11: Send System Recommendations and Insights Feedback" as CFR11
+  
+  Sys --> (AIFR002)
+  C --> (CFR11)
+}
+
+@enduml

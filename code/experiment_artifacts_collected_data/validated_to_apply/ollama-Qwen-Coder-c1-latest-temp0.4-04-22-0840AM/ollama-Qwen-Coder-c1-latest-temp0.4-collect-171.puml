@@ -1,0 +1,63 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as SAFR004
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as SAFR005
+  usecase "CFR006: Manage Personalized Recommendations Preferences to Ensure Relevance" as SAFR012
+  usecase "CFR007: View Investment Opportunities Suitable for My Risk Profile" as SAFR013
+  usecase "CFR008: View News Related to My Investment Portfolio" as SAFR014
+  usecase "CFR009: Access a Personalized Dashboard That Consolidates Financial Information" as SAFR015
+  
+  CFR001 --> SAFR003
+  CFR001 --> SAFR004
+  CFR001 --> SAFR005
+  CFR001 --> SAFR012
+  CFR001 --> SAFR013
+  CFR001 --> SAFR014
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts When Patterns Require Professional Attention" as SAFR006
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations to Provide Data-Driven Recommendations During Consultations" as SAFR007
+  
+  FAFR001 --> SAFR002
+  FAFR001 --> SAFR006
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR001
+  
+  usecase "SAFR001: Manage Analysis Parameters for the AI System to Ensure Compliance with Financial Regulations" as SAFR008
+  
+  SAFR001 --> SAFR008
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations Based on My Financial Profiles, Goals, and Risk Tolerance" as AIFR002
+  
+  SAFR004 --> AIFR001
+  SAFR005 --> AIFR002
+}
+
+rectangle "Notification System" {
+  usecase "SFR001: Deliver Alerts to Users Through Appropriate Notification Channels" as SFR001
+  
+  CFR003 --> SFR001
+  FAFR006 --> SFR001
+}
+
+package "System" {
+  usecase "SFR002: Deliver Personalized Recommendations Based on Each User's Financial Profiles to Support Better Decision-Making" as SAFR005
+  
+  CFR004 --> SAFR005
+}
+@enduml

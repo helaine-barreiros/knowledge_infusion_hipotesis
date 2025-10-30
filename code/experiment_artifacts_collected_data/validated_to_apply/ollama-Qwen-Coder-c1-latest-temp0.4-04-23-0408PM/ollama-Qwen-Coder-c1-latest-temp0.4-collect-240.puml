@@ -1,0 +1,46 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+' Actors
+actor Client as CFR001
+actor FinancialAdvisor as FAFR002
+actor SysAdmin as SAFR003
+
+rectangle "Client" {
+  usecase "CFR004: Receive Personalized Recommendations Aligned with My Financial Profile and Goals" as CFR004
+  usecase "CFR005: Manage Personalized Recommendations Preferences to Ensure the System Provides Insights Relevant to My Financial Objectives and Risk Tolerance" as CFR005
+  usecase "CFR012: View Client Dashboards that Present Financial Information in an Intuitive and Actionable Format" as CFR012
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations to Provide Data-Driven Recommendations During Consultations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments to Customize the System's Behavior According to Different Client Profiles and Regulatory Requirements Such As GDPR or CCPA" as FAFR004
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters for the AI System to Ensure the Algorithms Remain Accurate, Relevant, and Compliant with Financial Regulations Such as Basel III for Risk Management" as SAFR001
+  usecase "SFR020: Manage User Feedback to Continuously Improve the Quality and Relevance of Financial Insights" as SFR020
+}
+
+' Relationships
+CFR004 --> CFR005 : manages preferences
+FAFR003 --> FAFR004 : configures parameters
+
+rectangle "System Components" {
+  usecase "SFR018: Manage Users' Financial Goals to Track Progress and Provide Relevant Recommendations" as SFR018
+}
+
+CFR002 --> CFR009 : views news related to investment portfolio
+FAFR003 --> FAFR007 : correlates financial news with specific user portfolios
+
+rectangle "Notifications & Alerts" {
+  usecase "SFR006: Request Spending Limit Alerts from the AI Component When User Spending Patterns Exceed Defined Thresholds" as SFR006
+}
+
+CFR012 <|-- CFR004 : extends
+FAFR003 <|-- FAFR007 : extends
+
+@enduml

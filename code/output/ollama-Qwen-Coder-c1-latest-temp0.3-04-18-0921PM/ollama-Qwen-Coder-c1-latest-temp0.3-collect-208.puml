@@ -1,0 +1,121 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Anomalous Transaction Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  C --> (View)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as FAFR004
+  
+  FA --> (Manage)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SA
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFAFR002: Send Feedback about Recommendations and Insights" as SFAFR002
+  
+  SA --> (Manage)
+}
+
+package "System Components" {
+  rectangle "Notifications" {
+    usecase "SFR001: Deliver Alerts to Users" as SFR001
+  }
+  
+  rectangle "Recommendations" {
+    usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  }
+  
+  rectangle "Predictions and Insights" {
+    usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+    usecase "SFR016: Request Predictive Insights from the AI Component" as SFR016
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+  }
+  
+  rectangle "Spending Limits and Alerts" {
+    usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+    usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+  }
+  
+  rectangle "Investment Opportunities" {
+    usecase "SFR006: Request Investment Opportunity Analysis from the AI Component" as SFR006
+    usecase "SFR015: Request Predictive Intervention Analyses from the AI Component" as SFR015
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+  }
+  
+  rectangle "News and Insights" {
+    usecase "SFR007: Request Contextualized News from the AI Component" as SFR007
+    usecase "AIFR007: Generate Contextualized News Insights for Users" as AIFR007
+  }
+  
+  rectangle "Dashboards and Reports" {
+    usecase "SFR12: Request Client Dashboards from the AI Component" as SFR12
+    usecase "SFR17: Generate Financial Health Reports" as SFR17
+  }
+}
+
+C --> CFR001 : View
+C --> CFR002 : Receive Alerts
+C --> CFR003 : Predictions
+C --> CFR004 : Recommendations
+C --> CFR005 : Manage Preferences
+C --> CFR006 : Spending Limits
+C --> CFR007 : Opportunities
+C --> CFR008 : News
+C --> CFR009 : Dashboard
+C --> CFR10 : Relationship
+
+FA --> FAFR001 : Manage Sessions
+FA --> FAFR002 : Intervention Alerts
+FA --> FAFR003 : Predictive Analytics
+FA --> FAFR004 : Configure Parameters
+
+SA --> SAFR001 : Manage Parameters
+SA --> SFAFR002 : Send Feedback
+
+SFR001 <|-- (Deliver)
+SFR002 <|-- (Deliver)
+
+SFR003 <|-- (Request Predictive Insights from the AI Component)
+AIFR009 <|-- (Generate Client Predictive Insights)
+
+SFR005 <|-- (Request Spending Limit Alerts from AI Component)
+AIFR003 <|-- (Generate Spending Limit Alerts for Users)
+
+SFR006 <|-- (Request Investment Opportunity Analysis from the AI Component)
+AIFR004 <|-- (Generate Investment Opportunity Analyses for Users)
+
+SFR015 <|-- (Request Predictive Intervention Analyses from the AI Component)
+AIFR008 <|-- (Generate Client Predictive Intervention Recommendations)
+
+SFR007 <|-- (Request Contextualized News from the AI Component)
+AIFR007 <|-- (Generate Contextualized News Insights for Users)
+
+SFR12 <|-- (Request Client Dashboards from the AI Component)
+SFR17 <|-- (Generate Financial Health Reports)
+
+@enduml

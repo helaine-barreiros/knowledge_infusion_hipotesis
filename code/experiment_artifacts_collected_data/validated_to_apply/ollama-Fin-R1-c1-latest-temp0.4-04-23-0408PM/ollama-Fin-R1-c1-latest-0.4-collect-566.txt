@@ -1,0 +1,77 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Anomaly Detection Parameters" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SAFR001: Set Spending Limit Alerts" as SAFR001
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Advisors" as CFR009
+
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  SysAdmin --> SAFR002 : "Manage Anomaly Detection Parameters"
+  User --> SAFR001 : "Set Spending Limit Alerts"
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SAFR004: Configure Analysis Parameters by Client Segment" as SAFR004
+
+  FinancialAdvisor --> FAFR001 : "Manage Client Mentoring Sessions"
+  SysAdmin --> SAFR004 : "Configure Analysis Parameters for Specific Segments"
+}
+
+rectangle "System" {
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Identify Investment Opportunities" as AIFR004
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+
+  Sys --> SFR002 : "Request Personalized Recommendations"
+  SysAdmin --> SAFR003 : "Manage System Parameters for Alerts"
+}
+
+rectangle "Client" {
+  Client --> CFR004 : "Receive Personalized Recommendations"
+  Client --> CFR005 : "Manage Recommendation Preferences"
+  Client --> CFR007 : "View Investment Opportunities"
+  Client --> SFR019 : "Access Historical Insights"
+
+  SysAdmin --> SAFR002 : "Set Anomaly Detection Parameters"
+}
+
+rectangle "Financial Advisor" {
+  FinancialAdvisor --> FAFR003 : "View Predictive Analytics for Clients"
+  FinancialAdvisor --> AIFR008 : "Receive Client Intervention Alerts"
+  
+  SysAdmin --> SAFR004 : "Configure Analysis Parameters by Segment"
+}
+@enduml
+```
+
+### Explanation:
+1. **System Actors** (Client, SysAdmin):
+   - `CFR001` and related use cases are linked to the client for viewing dashboards.
+   - `SAFR002`, `SFR003`, etc., involve system administrators managing parameters.
+
+2. **Financial Advisor Actors**:
+   - Use cases like `FAFR003` (viewing predictive analytics) and `AIFR008` (receiving client alerts) are linked to financial advisors.
+   
+3. **System Components** (`SFR`, `AIFR`):
+   - These represent the system’s internal processes, e.g., delivering recommendations or generating insights.
+
+4. **Relationships**:
+   - Dashed lines indicate optional relationships; solid lines show direct interactions between actors and use cases.
+
+This structure ensures all requirements are represented accurately with proper categorization by actor type (Client, SysAdmin, Financial Advisor) and system components. Adjustments may be needed based on further analysis of the functional requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 850]

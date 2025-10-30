@@ -1,0 +1,75 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR003: View Financial Predictions" as SAFR004
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR005
+  usecase "CFR006: Manage Recommendation Preferences" as CFR012
+  usecase "CFR007: View Investment Opportunities" as SAFR008
+  usecase "CFR009: Access Consolidated Financial Dashboard" as SFR012
+  
+  Client --> (SAFR003)
+  Client --> (SAFR004)
+  Client --> (SAFR005)
+  Client --> (SFR012)
+}
+
+package "Financial Advisor" {
+  actor "Financial Advisor" as FAFR001
+  
+  usecase "FAFR002: View Intervention Alerts" as SAFR006
+  usecase "FAFR003: View Predictive Analytics" as SFR014
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as AIFR007
+  
+  Financial Advisor --> (SAFR002)
+  Financial Advisor --> (SFR014)
+}
+
+package "System Administrator" {
+  actor SysAdmin as SAFR001
+  
+  usecase "SAFR009: Manage Analysis Parameters for AI System" as SAFR001
+  usecase "CFR011: Send Feedback about Recommendations and Insights" as AIFR008
+  
+  SysAdmin --> (SFR020)
+}
+
+package "System" {
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions" as SFR03
+    usecase "AIFR002: Generate Personalized Recommendations" as SFR04
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR005
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR006
+    usecase "AIFR007: Generate Investment Opportunities Based on Strategies and Modern Portfolio Theory" as AIFR010
+    usecase "AIFR008: Generate Anomaly Transaction Alerts" as SFR05
+    usecase "AIFR009: Generate Contextualized News Insights" as AIFR07
+  }
+  
+  rectangle "Notification Component" {
+    usecase "SFR013: Deliver Client Alerts through Appropriate Channels" as SAFR002
+  }
+
+  rectangle "Dashboard Generator" {
+    usecase "SFR012: Generate Financial Health Reports" as SFR07
+    usecase "SFR019: Maintain Historical Record of Insights" as AIFR05
+    usecase "AIFR08: Request Predictive Intervention Analyses from AI Component" as SAFR016
+  }
+  
+  rectangle "Recommendation Engine" {
+    usecase "SFR020: Manage Users' Financial Goals and Provide Recommendations" as SFR04
+  }
+
+  Client --> (AIFR03)
+  Financial Advisor --> (AIFR07)
+  SysAdmin --> (SAFR019)
+
+  System --> (AIFR01)
+  System --> (SFR020)
+}
+
+@enduml

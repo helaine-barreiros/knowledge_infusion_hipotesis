@@ -1,0 +1,88 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage System Parameters" as SAFR002
+  
+  Client --> CFR001 : "Client requests financial insights dashboard"
+  
+  SysAdmin -> (SFR019) : label="Manage system parameters for trend analysis", direction=none, align=center
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters" as FAFR004
+  
+  FinancialAdvisor --> (FAFR003) : label="Review client's financial situation", direction=none, align=center
+}
+
+rectangle "Client" {
+  usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  
+  Client --> (CFR002) : label="Receive alerts for suspicious transactions"
+  
+  SysAdmin -> (SAFR001) : label="Manage analysis parameters", direction=none, align=center
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SysAdmin --> (SAFR001)
+  
+  Client --> (SFR020) : label="Send feedback to improve system", direction=none, align=center
+}
+
+rectangle "System" {
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  
+  SysAdmin -> (AIFR003)
+  
+  Client --> (SAFR001) : label="Adjust spending limits", direction=none, align=center
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  
+  FinancialAdvisor -> (FAFR002)
+  
+  SysAdmin --> (SAFR001) : label="Manage system parameters", direction=none, align=center
+}
+
+rectangle "Client" {
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  
+  Client --> (CFR003)
+  
+  SysAdmin -> (SAFR001) : label="Manage analysis parameters", direction=none, align=center
+}
+
+rectangle "System Administrator" {
+  usecase "SFR020: Manage User Feedback" as SFR020
+  
+  SysAdmin --> (SFR020)
+  
+  Client --> (CFR011) : label="Provide feedback for system improvements", direction=none, align=center
+}
+
+@enduml
+```
+
+**Key Observations and Explanations:**
+- The diagram groups actors into categories like "Client," "Financial Advisor," "System Administrator," and the central "System" to maintain clarity.
+- Each use case is directly linked to its corresponding actor or system component. For example, `CFR001` (View Financial Insights Dashboard) is associated with the Client.
+- Inheritance relationships are not explicitly defined here since each requirement specifies a direct relationship between an actor and their desired action.
+- The System Administrator role manages parameters across multiple use cases (`SAFR001`, `AIFR003`) to ensure compliance and accuracy in financial analysis.
+- Financial Advisors access predictive analytics (`FAFR003`), while Clients receive personalized recommendations (`CFR004`). Both are part of the broader system's functionality. 
+
+This structure ensures that all functional requirements are represented accurately, with clear relationships between actors and their use cases within the AI-powered system framework.
+
+[Done: True
+Done Reason: stop
+Eval Count: 877]

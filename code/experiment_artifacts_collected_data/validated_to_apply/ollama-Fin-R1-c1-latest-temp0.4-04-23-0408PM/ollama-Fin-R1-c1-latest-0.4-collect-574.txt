@@ -1,0 +1,72 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor FinancialAdvisor as fa
+actor SysAdmin as sa
+system "System" as sys
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as cfr001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as cfr002
+  usecase "CFR003: Access Historical Data and Market Trends Predictions" as cfr003
+  usecase "CFR004: Get Personalized Financial Recommendations" as cfr004
+  usecase "CFR005: Manage Recommendation Preferences" as cfr005
+  usecase "CFR006: Monitor Spending Limits via Alerts" as cfr006
+  usecase "CFR007: Discover Investment Opportunities Based on Risk Profile" as cfr007
+  usecase "CFR008: Stay Informed with Portfolio-Related News" as cfr008
+  usecase "CFR009: Consolidate Financial Information in a Single Dashboard" as cfr009
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as fafr001
+  usecase "FAFR002: View Intervention Alerts for Proactive Assistance" as fafr002
+  usecase "FAFR003: Review Predictive Analytics to Guide Consultations" as fafr003
+}
+
+rectangle "System Admin Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI Accuracy and Compliance" as safr001
+}
+
+system sys --> cfr001 : Delivers financial insights via client interface.
+sys --> cfr002 : Sends alerts to clients about anomalous transactions.
+sys --> cfr003 : Provides market trends predictions for historical data analysis.
+sys --> cfr004 : Generates personalized recommendations aligned with user profiles and goals.
+sys --> cfr005 : Adjusts recommendation preferences based on KYC details.
+sys --> cfr006 : Sends spending limit alerts when thresholds are exceeded.
+sys --> cfr007 : Identifies investment opportunities matching risk profile (e.g., MiFID II).
+sys --> cfr008 : Fetches and presents news related to the user's portfolio investments.
+sys --> cfr009 : Consolidates financial data into a single view for easy monitoring.
+
+sa --> safr001 : Configures AI parameters under Basel III or other regulations.
+
+client --> sys
+fa --> sys
+sa --> sys
+
+@enduml
+```
+
+### Explanation:
+- **Actors**: The diagram includes three main actors: `Client`, `FinancialAdvisor` (FA), and `SysAdmin`. Each represents different user types interacting with the system.
+  
+- **Use Cases**:
+  - Clients can view financial dashboards, receive alerts, access predictions, get recommendations, manage preferences, monitor spending limits, discover investments, stay informed about portfolio news, consolidate data, etc. These are grouped under "Client Interface."
+  - Financial Advisors have specific use cases like managing mentoring sessions based on insights and viewing predictive analytics.
+  - SysAdmins handle system-level tasks such as managing analysis parameters for AI accuracy.
+
+- **System**: The central system (`sys`) interacts with all clients through its components (e.g., generating recommendations, delivering alerts). It also handles requests from advisors and admins. 
+
+### Key Relationships:
+1. Clients interact directly with the system via various use cases.
+2. Financial Advisors and SysAdmins indirectly influence the system’s behavior by configuring parameters or managing user data but do not perform direct actions on financial data (those are handled by the system).
+3. The system processes all client requests, ensuring compliance with regulations like Basel III for risk management.
+
+This structure ensures clarity in how different actors engage with the system and its components, adhering strictly to provided functional requirements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 870]

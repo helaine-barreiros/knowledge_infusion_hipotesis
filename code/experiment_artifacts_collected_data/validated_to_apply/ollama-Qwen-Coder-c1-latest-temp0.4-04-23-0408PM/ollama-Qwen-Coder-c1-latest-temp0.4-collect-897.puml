@@ -1,0 +1,58 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+' Actors
+actor Client as CFR001
+actor FinancialAdvisor as FAFR002
+actor SysAdmin as SAFR003
+actor User as CFR011
+
+package "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as CFR007
+  usecase "CFR008: View News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard of Financial Information" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR010
+}
+
+package "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+}
+
+package "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+}
+
+package "User (Client, Financial Advisor, SysAdmin)" {
+  usecase "CFR011: Send Feedback about Recommendations and Insights to Improve Future Outputs" as CFR011
+}
+
+' Relationships
+CFR001 --> SFR012 : "View"
+CFR002 --> SFR013 : "Receive Alerts on Anomalous Transactions"
+CFR003 --> AIFR004 : "Request Financial Predictions from AI Component"
+CFR004 --> AIFR002 : "Generate Personalized Recommendations for Users Based on Their Profiles and Goals"
+CFR005 --> SFR018 : "Manage Recommendation Preferences"
+CFR006 --> AIFR003 : "Request Spending Limit Alerts from AI Component"
+CFR007 --> AIFR004 : "Generate Investment Opportunity Analyses for Users Based on Their Risk Profiles and Goals"
+CFR008 --> SFR019 : "Find Contextualized News Relevant to User Financial Portfolios"
+CFR009 --> SFR12 : "Access Personalized Dashboard of Financial Information"
+CFR010 --> SAFR003 : "Manage Relationship with Financial Advisors, Including Permissions for Sharing Data"
+FAFR001 --> AIFR004 : "Generate Predictive Analytics About Clients' Financial Situations Based on AI Component"
+FAFR002 --> SFR015 : "View Client Intervention Alerts from System to Proactively Assist Clients"
+FAFR003 --> AIFR009 : "Request Predictive Insights From the AI Component During Consultations"
+FAFR004 --> SAFR001 : "Configure Analysis Parameters for Specific Client Segments Based on Regulatory Requirements"
+SAFR001 --> AIFR005 : "Manage Analysis Parameters to Ensure Algorithms Remain Accurate and Relevant"
+
+@enduml

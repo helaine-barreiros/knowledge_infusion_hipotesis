@@ -1,0 +1,114 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR005: Manage Recommendations Preferences" as SAFR005
+  usecase "SFR009: Request Contextualized News" as SFR009
+  
+  C --> (CFR001)
+  C --> (SAFR005)
+  C --> (SFR009)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  
+  FA --> (FAFR002)
+  FA --> (FAFR003)
+  FA --> (AIFR004)
+}
+
+package "System Administrator" {
+  actor SystemAdministrator as SA
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR020: Request User Feedback Management" as SFR020
+  
+  SA --> (SAFR001)
+  SA --> (SFR020)
+}
+
+package "System" {
+  rectangle SystemBoundary {
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    useusecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    usecase "SFR12: Request Client Dashboards" as SFR12
+    
+    C --> (AIFR003)
+    FA --> (AIFR006)
+  }
+}
+
+package "AI System" {
+  rectangle AIComponentBoundary {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    useusecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR005: Generate Investment Opportunities" as AIFR005
+    
+    C --> (AIFR001)
+    FA --> (AIFR002)
+  }
+}
+
+rectangle SystemBoundary {
+  rectangle AIComponentBoundary {
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    useusecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+    
+    C --> (AIFR007)
+  }
+}
+
+rectangle SystemBoundary {
+  rectangle AIComponentBoundary {
+    usecase "AIFR016: Enhance Financial Guidance Insights" as AIFR016
+    useusecase "SFR14: Request Client Analytics" as SFR14
+    
+    FA --> (AIFR016)
+  }
+}
+
+rectangle SystemBoundary {
+  rectangle AIComponentBoundary {
+    usecase "AIFR017: Generate Financial Health Reports" as AIFR017
+    useusecase "SFR18: Manage Users' Financial Goals" as SFR18
+    
+    C --> (AIFR017)
+  }
+}
+
+rectangle SystemBoundary {
+  rectangle AIComponentBoundary {
+    usecase "AIFR020: Generate Predictive Insights for Advisors" as AIFR020
+    useusecase "SFR19: Maintain Historical Record of User Insights" as SFR19
+    
+    FA --> (AIFR020)
+  }
+}
+
+rectangle SystemBoundary {
+  rectangle AIComponentBoundary {
+    usecase "CFR011: Send Feedback About Recommendations and Insights" as CFR011
+    useusecase "SFR20: Manage User Feedback for Continuous Improvement" as SFR20
+    
+    C --> (CFR011)
+    SA --> (SFR20)
+  }
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 911]

@@ -1,0 +1,85 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Spending Limit Alerts Exceeding Thresholds" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Consolidated Personalized Dashboard" as CFR010
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+  
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Segment" as FAFR004
+  
+  usecase "SFR001: Deliver Alerts Through Notification Channels" as SFR001
+  usecase "SFR002: Personalized Recommendations Based on Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts from AI" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from AI" as SFR006
+  usecase "SFR007: Find Contextualized News Based on Portfolio" as SFR007
+  usecase "SFR008: Process Contextualized News for Users" as SFR008
+  usecase "SFR009: Request Contextualized News Insights from AI" as SFR009
+  usecase "SFR010: Generate Client Dashboards Intuitively" as SFR010
+  usecase "SFR011: Manage User Feedback to Improve System" as SFR011
+  
+  usecase "AIFR001: Generate Financial Predictions Based on Data and Trends" as AIFR001
+  usecase "AIFR002: Personalized Recommendations Aligning with Profiles" as AIFR002
+  usecase "AIFR003: Spending Limit Alerts for Unusual Activity" as AIFR003
+  usecase "AIFR004: Investment Opportunity Analyses Based on Risk Profile" as AIFR004
+  usecase "AIFR005: Align Investments with Modern Portfolio Theory Principles" as AIFR005
+  usecase "AIFR006: Anomaly Transaction Alerts Compliant with FinCEN Rules" as AIFR006
+  usecase "AIFR007: Contextualized News Insights Correlated to Portfolios" as AIFR007
+  usecase "AIFR008: Predictive Intervention Recommendations for Advisors" as AIFR008
+  usecase "AIFR009: Client Predictive Insights for Forward-Looking Analysis" as AIFR009
+  
+  
+actor "Client" as C1
+actor "Financial Advisor (FA)" as FAD
+actor "System Administrator (SA)" as SAADM
+
+C1 --> CFR001 : View Financial Insights Dashboard
+C1 --> CFR002 : Receive Alerts on Anomalous Transactions
+C1 --> CFR003 : View Financial Predictions
+C1 --> CFR004 : Personalized Recommendations Based on Profile
+C1 --> CFR005 : Manage Recommendation Preferences
+C1 --> CFR006 : Spending Limit Alerts Exceeding Thresholds
+C1 --> CFR007 : View Investment Opportunities Based on Risk Profile
+C1 --> CFR008 : Access News Related to Portfolio
+C1 --> CFR009 : Consolidated Personalized Dashboard
+C1 --> CFR010 : Manage Relationship with Financial Advisors
+
+FAD --> FAFR001 : Manage Client Mentoring Sessions Based on Insights
+FAD --> FAFR002 : View Client Intervention Alerts
+FAD --> FAFR003 : View Predictive Analytics for Clients
+FAD --> FAFR004 : Configure Analysis Parameters by Segment
+
+SAADM --> SAFR001 : Manage Analysis Parameters for AI System
+
+SFR001 <|-- SFR002, SFR003, SFR005, SFR006, SFR007, SFR008, SFR009, SFR010
+SFR004 <|-- SFR002
+
+AIFR001 <|-- AIFR002, AIFR003, AIFR004, AIFR005, AIFR006, AIFR007, AIFR008, AIFR009
+SFR002 --> AIFR001
+
+' Relationship between system components and clients/advisors
+C1 <|-- SFR003 : Request Financial Predictions from AI
+C1 <|-- SFR004 : Request Personalized Recommendations from AI
+C1 <|-- SFR005 : Request Spending Limit Alerts from AI
+C1 <|-- SFR006 : Request Investment Opportunity Analysis from AI
+
+FAD <|-- AIFR008, AIFR009 : Financial Advisor uses predictive insights and client dashboards
+
+SAADM --> SAFR001 : System Administrator manages analysis parameters to ensure compliance with regulations like Basel III.
+
+@enduml

@@ -1,0 +1,59 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SFR002
+  usecase "CFR005: Manage Preferences for Recommendations" as CFR011
+  
+  CFR001 --> (SAFR003)
+  CFR001 --> (SFR002)
+  CFR001 --> (CFR011)
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR001
+  usecase "FAFR007: View Investment Opportunities Suitable for Risk Profile" as SAFR006
+  
+  FAFR001 --> (SAFR006)
+  
+  rectangle "Client Management" {
+    usecase "FAFR002: Manage Client Mentoring Sessions" as SFR008
+    usecase "FAFR003: View Predictive Analytics for Clients" as SAFR005
+    
+    FAFR001 --> (SFR008)
+    FAFR001 --> (SAFR005)
+  }
+}
+
+package System {
+  actor "System Administrator" as SAFR002
+  
+  usecase "SFR003: Request Financial Predictions from AI Component" as AIFR001
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as AIFR002
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as AIFR003
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as AIFR004
+  
+  SAFR002 --> (AIFR001)
+  SAFR002 --> (AIFR002)
+  SAFR002 --> (AIFR003)
+  SAFR002 --> (AIFR004)
+  
+  rectangle "Notification and Analytics" {
+    usecase "SFR009: Request Contextualized News Relevant to Users' Financial Portfolios" as AIFR007
+    usecase "SFR10: Process Contextualized News for Users' Financial Situations" as SFR020
+    
+    SAFR002 --> (AIFR007)
+    SAFR002 --> (SFR020)
+  }
+}
+
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 573]

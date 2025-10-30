@@ -1,0 +1,53 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  client --> CFR001 : "Client wants to view financial data in a consolidated format."
+  
+  SysAdmin --> SAFR001 : "System Administrator manages analysis parameters for compliance and accuracy."
+  
+  user --> SFR012 : "User requests personalized dashboards based on their profile."
+}
+
+rectangle "AI System" {
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  
+  SFR012 <|-- AIFR001 : "Uses financial predictions for dashboards."
+  
+  CFR006 <|-- AIFR003 : "Client receives alerts when spending exceeds thresholds."
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  
+  SFR013 <|-- AIFR006 : "Advisor receives transaction alerts."
+  
+  SysAdmin --> SAFR004 : "Administrator configures parameters for client segments."
+}
+
+rectangle "Client" {
+  usecase "CFR002: View Alerts About Anomalous Transactions" as CFR002
+  usecase "CFR011: Send Feedback on Recommendations/Insights" as CFR011
+  
+  AIFR006 --> client : "Alerts are generated for clients."
+  
+  SysAdmin <|-- SAFR005 : "Administrator requests spending limit alerts from AI system."
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR002: Manage System Notifications" as SAFR002
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  
+  SysAdmin --> AIFR008 : "Administrator requests predictive insights."
+}
+
+@enduml

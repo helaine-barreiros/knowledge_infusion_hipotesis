@@ -1,0 +1,63 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAdvisor
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+
+  rectangle "Client Dashboard Features" {
+    Client --> CFR001
+    Client --> SAFR001
+    SysAdmin --> SAFR001
+    FAdvisor --> FAFR002
+    SFR003 <|-- (CFR001)
+    AIFR001 <|-- (SFR003)
+  }
+
+  rectangle "Client Alerts and Recommendations" {
+    Client --> CFR001 : "View Alerts"
+    SysAdmin --> SAFR001 : "Manage Parameters"
+    FAdvisor --> FAFR002 : "Intervention Alerts"
+    SFR004 <|-- (CFR001)
+    AIFR006 <|-- (SFR008)
+  }
+
+  rectangle "Financial Predictions and Insights" {
+    Client --> CFR003
+    SysAdmin --> SAFR001 : "Configure Parameters"
+    FAdvisor --> FAFR002 : "Predictive Analytics"
+    SFR005 <|-- (CFR006)
+    AIFR004 <|-- (SFR007)
+  }
+
+  rectangle "Investment Opportunities and News" {
+    Client --> CFR007
+    SysAdmin --> SAFR001 : "Configure Parameters"
+    FAdvisor --> FAFR002 : "View Insights"
+    SFR006 <|-- (CFR008)
+    AIFR005 <|-- (SFR010)
+  }
+
+  rectangle "User Feedback" {
+    Client --> CFR011
+    SysAdmin --> SAFR001
+    FAdvisor --> FAFR002
+  }
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 531]

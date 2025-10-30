@@ -1,0 +1,106 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR003: View Financial Predictions" as SAFR004
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR005
+  usecase "CFR005: Manage Recommendation Preferences" as SAFR006
+  usecase "CFR006: View Spending Limit Alerts" as SAFR007
+  usecase "CFR007: View Investment Opportunities Suitable to Risk Profile" as SAFR012
+  usecase "CFR008: View News Related to Investment Portfolio" as SFR009
+  usecase "CFR009: Access Personalized Dashboard" as SAFR013
+  
+  CFR001 --> (SAFR003)
+  CFR001 --> (SAFR004)
+  CFR001 --> (SAFR005)
+  CFR001 --> (SAFR006)
+  CFR001 --> (SAFR007)
+  CFR001 --> (SAFR012)
+  CFR001 --> (SFR009)
+  CFR001 --> (SAFR013)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts" as SAFR008
+  usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as SAFR009
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as AIFR016
+  
+  FAFR001 --> (SAFR008)
+  FAFR001 --> (SAFR003)
+  FAFR001 --> (AIFR016)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR001
+  
+  usecase "SAFR002: Manage Analysis Parameters for the AI System" as SAFR001
+  usecase "SFR020: Manage User Feedback to Continuously Improve Recommendations and Insights" as AIFR019
+  
+  SAFR001 --> (SAFR001)
+  SAFR001 --> (AIFR019)
+}
+
+package "System Components" {
+  usecase "SFR002: Deliver Personalized Recommendations to Users Based on Financial Profiles" as AIFR007
+  usecase "SFR003: Request Financial Predictions from the AI Component" as AIFR005
+  usecase "SFR004: Request Personalized Recommendations from the AI Component Based on Each User's Data and Preferences" as AIFR012
+  usecase "SFR005: Request Spending Limit Alerts from the AI Component When Spending Patterns Exceed Defined Thresholds" as AIFR003
+  usecase "SFR006: Request Investment Opportunity Analysis from the AI Component to Identify Suitable Investments for Users Based on Their Risk Profiles" as AIFR014
+  usecase "SFR007: Request Specific Investment Opportunities from the AI Component That Match User Criteria and ESG Preferences" as AIFR023
+  usecase "SFR008: Request Anomaly Transaction Alerts From the AI Component to Detect Potentially Fraudulent Activities in Accordance with AML Regulations" as AIFR016
+  usecase "SFR010: Process Contextualized News to Extract Relevant Information for Users' Financial Situations" as AIFR025
+  
+  rectangle "Notification System" {
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SAFR009
+  }
+  
+  rectangle "Dashboard Generation System" {
+    usecase "SFR012: Generate Client Dashboards that Present Financial Information in an Intuitive and Actionable Format" as AIFR024
+  }
+
+  rectangle "Predictive Analysis System" {
+    usecase "SFR015: Request Predictive Intervention Analyses from the AI Component to Identify When Advisors Should Engage with Clients" as SAFR016
+    usecase "SFR017: Generate Financial Health Reports that Assess Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as AIFR028
+  }
+  
+  rectangle "AI System Components" {
+    usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as SAFR017
+    usecase "AIFR003: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations from Established Spending Patterns" as AIFR026
+  }
+
+}
+
+rectangle "System Boundary" {
+  package "Client" --> (CFR001)
+  package "Financial Advisor" --> (FAFR001)
+  package "System Administrator" --> (SAFR001)
+
+  usecase "SFR020: Manage User Feedback to Continuously Improve Recommendations and Insights" as AIFR019
+
+  rectangle "Notification System" {
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SAFR009
+  }
+  
+  rectangle "Dashboard Generation System" {
+    usecase "SFR012: Generate Client Dashboards that Present Financial Information in an Intuitive and Actionable Format" as AIFR024
+  }
+
+  rectangle "Predictive Analysis System" {
+    usecase "SFR015: Request Predictive Intervention Analyses from the AI Component to Identify When Advisors Should Engage with Clients" as SAFR016
+    usecase "SFR017: Generate Financial Health Reports that Assess Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as AIFR028
+  }
+  
+  rectangle "AI System Components" {
+    usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as SAFR017
+    usecase "AIFR003: Generate Spending Limit Alerts for Users by Identifying Unusual Deviations from Established Spending Patterns" as AIFR026
+  }
+}
+
+@enduml

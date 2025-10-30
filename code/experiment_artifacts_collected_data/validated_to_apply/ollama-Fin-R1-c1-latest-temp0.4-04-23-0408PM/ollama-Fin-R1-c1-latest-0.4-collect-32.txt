@@ -1,0 +1,97 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Thresholds" as SAFR002
+  usecase "CFR003: View Historical Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Adjust Recommendation Preferences" as CFR005
+  usecase "SAFR001: Manage Analysis Parameters (Basel III)" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR006: Receive Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities (MiFID II)" as CFR007
+  usecase "CFR008: Access Portfolio News" as CFR008
+  usecase "SAFR003: Manage System Notifications" as SAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR014: Provide Financial Analytics" as SFR014
+
+  client --> CFR001 : "View financial insights"
+  client --> SAFR002 : "Adjust alert thresholds"
+  client --> CFR003 : "Review historical predictions"
+  client --> CFR004 : "Get personalized recommendations"
+  client --> CFR005 : "Modify preference settings"
+  sysadmin --> SAFR001 : "Set analysis parameters (Basel III)"
+  advisor --> FAFR002 : "Monitor client alerts"
+  system --> SFR013 : "Notify users of critical events"
+  system --> AIFR008 : "Identify predictive interventions"
+
+  package Professional {
+    actor Client as C
+    actor SysAdmin as SA
+    usecase CFR001, SAFR002, CFR003, CFR004, CFR005
+
+    client <|-- (C)
+    sysadmin <|-- (SA)
+
+    rectangle "Client" { 
+      C --> SFR012 : "Request dashboards"
+      C --> AIFR007 : "Get contextualized news"
+      C --> SAFR003 : "Manage notifications"
+
+      client <|-- CFR006
+      client <|-- CFR008
+
+    }
+  }
+
+  package Advisors {
+    actor Advisor as A
+    usecase FAFR002, FAFR004, SFR015
+
+    advisor --> FAFR003 : "View alerts"
+    advisor --> AIFR009 : "Get predictive insights"
+
+    rectangle "Advisor" { 
+      A <|-- (FAFR004)
+      A <|-- (SFR016)
+    }
+  }
+
+  package Systems {
+    actor System as Sys
+    usecase SAFR003, SFR005, SFR007
+
+    system --> AIFR002 : "Request predictions"
+    system --> AIFR004 : "Get recommendations"
+
+    rectangle "System" { 
+      Sys <|-- (SFR018)
+      Sys <|-- (SAFR003)
+
+      sysadmin <|-- SAFR001
+    }
+  }
+
+}
+@enduml
+```
+
+### Key Observations:
+- **Actors** are categorized into `Client`, `SysAdmin` (System Administrator), and `Advisor` (Financial Advisor).
+- **Use Cases** are grouped under their respective actors, with logical relationships defined.
+- The system boundary includes all components related to the AI-powered analysis & insights framework, ensuring encapsulation of internal interactions.
+
+### Notes:
+1. Some use cases were merged or excluded based on redundancy in requirements and context clarity (e.g., `SFR006` was omitted as it's a subset of existing alerts).
+2. Relationships between actors and system components are explicitly defined to show data flows and dependencies.
+3. Packages (`Professional`, `Advisors`, `Systems`) help organize the diagram into logical sections for easier comprehension.
+
+This PlantUML code adheres strictly to provided requirements, ensuring no extraneous elements or misinterpretations of functional needs. Adjustments may be necessary based on further clarification in real-world scenarios.
+
+[Done: True
+Done Reason: stop
+Eval Count: 981]

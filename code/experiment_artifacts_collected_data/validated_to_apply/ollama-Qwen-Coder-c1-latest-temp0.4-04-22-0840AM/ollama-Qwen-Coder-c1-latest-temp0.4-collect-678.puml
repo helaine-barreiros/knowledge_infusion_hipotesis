@@ -1,0 +1,78 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FAFD
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  
+  rectangle "Client Features" {
+    Client --> CFR001
+    Client --> SAFR001
+    Client --> FAFR001
+    Client --> SFR002
+    Client --> AIFR002
+  }
+}
+
+rectangle "Financial Advisor Features" {
+  FinancialAdvisor --> FAFR001
+  FinancialAdvisor --> FAFR003
+  
+  rectangle "FAFR Features" {
+    FinancialAdvisor --> SAFR004
+    FinancialAdvisor --> SFR005
+    FinancialAdvisor --> AIFR004
+    FinancialAdvisor --> AIFR009
+  }
+}
+
+rectangle "System Admin Features" {
+  SystemAdmin --> SAFR001
+  
+  rectangle "SFR Features" {
+    SysAdmin --> SFR006
+    SysAdmin --> SFR007
+    SysAdmin --> SFR008
+    SysAdmin --> AIFR05
+  }
+}
+
+rectangle "System Functions" {
+  System --> CFR012
+  System --> SFR009
+  System --> SFR10
+  
+  rectangle "SFR Functionalities" {
+    System --> SFR13
+    System --> SFR14
+    System --> SFR15
+    System --> AIFR06
+    System --> AIFR07
+    System --> AIFR08
+    System --> AIFR10
+  }
+}
+
+rectangle "User Feedback" {
+  Client --> CFR011
+  FinancialAdvisor --> FAFR012
+  SystemAdmin --> SAFR013
+  
+  rectangle "Feedback Mechanisms" {
+    Client --> SFR019
+    FinancialAdvisor --> AIFR11
+    SystemAdmin --> AIFR12
+  }
+}
+
+@enduml

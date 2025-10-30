@@ -1,0 +1,79 @@
+# System Prompt
+You are a UML modeling expert specializing in PlantUML syntax. Your task is to create standard UML use case diagrams based on requirements.
+
+    ALWAYS follow this exact PlantUML syntax template for use case diagrams:
+
+    @startuml "Diagram Title"
+    left to right direction
+
+    ' Actor definitions
+    actor "Actor Name 1" as actor1
+    actor "Actor Name 2" as actor2
+
+    ' Actor specialization (if needed)
+    actor1 <|-- actor2 : specializes
+
+    rectangle "System Name" {
+      usecase "UC1: First Use Case" as UC1
+      usecase "UC2: Second Use Case" as UC2
+      
+      ' Include relationship
+      UC1 ..> UC2 : <<include>>
+      
+      ' Extend relationship
+      UC2 ..> UC1 : <<extend>>
+    }
+
+    ' Actor-usecase connections
+    actor1 --> UC1
+    actor2 --> UC2
+
+    ' Optional notes
+    note "This is a note" as N1
+    N1 .. UC1
+    @enduml
+    
+    Important specifications:
+    - Use ONLY standard PlantUML syntax for use case diagrams
+    - Start with "@startuml" and end with "@enduml"
+    - Use "actor" keyword for actors and "usecase" for use cases
+    - ALWAYS enclose ALL actor names and use case names in double quotes
+    - Include "left to right direction" directive
+    - Connect actors to use cases with "-->"
+    - Use "<<include>>" and "<<extend>>" relationships appropriately
+    - Include requirement IDs in use case names
+    - Create actor specializations using "<|--" notation when appropriate
+
+# User Prompt
+
+Create a comprehensive use case diagram im PlantUML code for the AI-Powered Analysis & Insights System based on the functional requirements provided below:
+
+    The functional requirements define what the system should do:
+
+    FR001 - As an User, I want to view personalized insights about my spending patterns on an interactive dashboard to understand my financial behavior. [Essential]
+    FR002 - As an User, I want to receive automatic alerts about unusual or suspicious transactions in my bank accounts to quickly identify potential fraud. [Essential]
+    FR003 - As an User, I want to visualize predictions of my future financial situation based on my current and historical behavior to anticipate potential cash flow issues. [Essential]
+    FR004 - As an User, I want to receive personalized recommendations for spending optimization based on the analysis of my financial transactions and registered goals. [Important]
+    FR005 - As an User, I want to control which categories of financial data are used in analyses and which insights can be shared with my Financial Advisor. [Essential]
+    FR006 - As an User, I want to receive notifications when my spending in specific categories exceeds predefined limits or significantly deviates from my historical pattern. [Important]
+    FR007 - As an User, I want to visualize comparative analyses between my current investments and potential opportunities recommended by the system based on my risk profile. [Desirable]
+    FR008 - As an User, I want to receive insights on how economic news and market trends may specifically affect my investment portfolio. [Desirable]
+    FR009 - As a Financial Advisor, I want to access a consolidated dashboard showing relevant financial insights about my clients who have authorized data sharing. [Essential]
+    FR010 - As a Financial Advisor, I want to receive alerts about significant changes in my clients' financial behavior that may require intervention or counseling. [Important]
+    FR011 - As a Financial Advisor, I want to visualize predictive analyses of clients' financial situations to substantiate strategic recommendations during consultations. [Important]
+    FR012 - As a System Administrator, I want to configure parameters of analysis models and anomaly detection for different user segments, adjusting sensitivity and relevance. [Important]
+    FR013 - As a system, I must integrate financial data from Banking Services, Investment Services, and Credit Scoring Service to create a unified and updated basis for analysis. [Essential]
+    FR014 - As a system, I must apply machine learning models from the ML Model Repository to detect patterns, anomalies, and opportunities in users' financial data. [Essential]
+    FR015 - As a system, I must correlate data from the Financial News Service with users' specific portfolios to generate contextualized insights about potential impacts. [Important]
+    FR016 - As a system, I must send recommendations and alerts to the Notification Module for delivery to users through configured channels. [Essential]
+    FR017 - As a system, I must query the Financial Goals Module to contextualize analyses and recommendations aligned with each user's specific objectives. [Important]
+    FR018 - As a system, I must continuously learn from users' explicit and implicit feedback to refine the accuracy and relevance of analyses and recommendations over time. [Important]
+    FR019 - As a system, I must generate periodic reports on users' financial health, highlighting trends, improvements, and areas requiring attention. [Important]
+    FR020 - As a system, I must maintain a temporal record of insights and recommendations generated for each user, allowing historical analysis of effectiveness and accuracy. [Desirable]
+
+    Follow these specifications:
+    1. Maximum 4 actors: End User, Financial Advisor, Administrator (use proper actor specialization)
+    2. Include requirement ID in each use case name (FR001, FR002, etc.)
+    3. Use meaningful include/extend relationships between use cases
+    4. Ensure every actor connects to at least one use case
+    5. Ensure all names have double quotes, even simple ones

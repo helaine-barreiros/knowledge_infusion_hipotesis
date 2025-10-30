@@ -1,0 +1,55 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  client --> CFR001 : "Client wants to view financial data consolidated."
+  
+  SysAdmin --> SAFR001 : "Sys Admin needs to manage analysis parameters for compliance and accuracy."
+  
+  FinancialAdvisor --> FAFR003 : "Financial Advisor seeks predictive analytics on clients' financial situations."
+  
+  System --> SFR012 : "System generates dashboards based on client data."
+}
+
+rectangle "Client" {
+  actor Client as C
+  usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  
+  C --> CFR002 : "Client wants to receive alerts about unusual transactions."
+  
+  C --> CFR003 : "Client seeks forward-looking financial insights."
+  
+  C --> CFR004 : "Client desires personalized investment advice aligned with their profile."
+  
+  SysAdmin --> SFR013 : "Sys Admin configures alert conditions for clients."
+}
+
+rectangle "FinancialAdvisor" {
+  actor FinancialAdvisor as FA
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR004: Configure Analysis Parameters by Segment" as FAFR004
+  
+  FA --> FAFR002 : "Financial Advisor needs to act on alerts indicating client issues."
+  
+  SysAdmin --> FAFR004 : "Sys Admin adjusts parameters for specific advisor segments."
+}
+
+rectangle "SystemAdministrator" {
+  actor SystemAdministrator as SA
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  SA --> SAFR001 : "SysAdmin manages system-wide analysis settings to ensure compliance and accuracy."
+}
+
+@enduml

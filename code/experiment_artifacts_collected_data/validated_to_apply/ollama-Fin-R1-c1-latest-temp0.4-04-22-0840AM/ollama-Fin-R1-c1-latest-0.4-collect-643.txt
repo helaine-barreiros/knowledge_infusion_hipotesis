@@ -1,0 +1,101 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Alert Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities" as CFR007
+  usecase "CFR008: View Portfolio News" as CFR008
+  usecase "CFR009: Manage Relationship with Advisors" as CFR009
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Manage Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Segments" as FAFR004
+  usecase "SFR001: Deliver Alerts Through Channels" as SFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "SFR003: Request Financial Predictions" as SFR003
+  usecase "SFR004: Request Personalized Recommendations" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts" as SFR008
+  usecase "SFR009: Find Contextualized News for Portfolios" as SFR009
+  usecase "SFR010: Process Contextualized News" as SFR010
+  usecase "SFR011: Request Insights from AI Component" as SFR011
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "SFR013: Generate Client Alerts Based on Conditions" as SFR013
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  usecase "SFR015: Request Predictive Intervention Analyses" as SFR015
+  usecase "SFR016: Request Predictive Insights from AI Component" as SFR016
+  usecase "SFR017: Generate Financial Health Reports" as SFR017
+  usecase "SFR018: Manage Users' Financial Goals" as SFR018
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR020
+  usecase "SFR020: Manage User Feedback for Improvements" as SFR020
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  usecase "AIFR005: Identify Financial Instruments for Investments" as AIFR005
+  usecase "AIFR006: Detect Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  usecase "AIFR008: Recommend Intervention Based on Predictions" as AIFR008
+  usecase "AIFR009: Provide Forward-Looking Analysis for Clients" as AIFR009
+
+  actor Client as c1 {
+    CFR001 --> SAFR002 : "View Alerts"
+    CFR003 --> SFR004 : "Request Predictions"
+    CFR004 --> AIFR002 : "Receive Recommendations"
+    CFR005 --> AIFR009 : "Manage Preferences"
+    CFR006 --> SAFR001 : "Set Spending Limits"
+    CFR007 --> SFR003 : "Request Opportunities"
+    CFR008 --> SFR009 : "Find News for Portfolio"
+  }
+  
+  actor FinancialAdvisor as fa {
+    FAFR002 --> AIFR006 : "View Alerts"
+    FAFR001 --> AIFR003 : "Manage Mentoring Sessions"
+    FAFR004 --> AIFR005 : "Configure Parameters for Segments"
+  }
+  
+  actor SysAdmin as sa {
+    SAFR001 --> SFR002 : "Set System Alerts"
+    SAFR001 <|-- (Client) : "Manage User Preferences"
+  }
+
+  rectangle Professional {
+    client c1
+    financialAdvisor fa
+    sysAdmin sa
+  }
+  
+}
+@enduml
+```
+
+### Key Observations:
+- **Actors**: The diagram includes three main actors: `Client`, `Financial Advisor` (`fa`), and `Sys Admin`. Each actor is linked to specific use cases.
+- **Use Cases Grouping**:
+  - Financial-related use cases (e.g., viewing dashboards, predictions) are grouped under the client role.
+  - System administration tasks like managing analysis parameters are handled by SysAdmin.
+  - Predictive analyses and advisory services fall under both clients and financial advisors but are driven primarily through AI components (`AIFR...`).
+- **Inheritance**:
+  The `Sys Admin` has a relationship with `Client`, indicating they manage client preferences. This is represented as `(SysAdmin) <|-- (Client)` in the PlantUML.
+  
+### Notes for Improvement:
+1. Ensure all use cases are correctly linked to their respective actors and systems. For example, `CFR002: View Alerts` should be directed from Client to SAFR002 (`SFR008`?), but based on requirements, it's more likely related to system alerts managed by SysAdmin or AI.
+2. Verify the correct use case-to-actor relationships (e.g., `AIFR001: Generate Financial Predictions` is a system component, not an actor).
+3. Adjust any mislabeling of components and ensure all references align with requirements.
+
+This diagram provides a structured view of how clients, advisors, administrators interact within the AI-powered financial insights system, focusing on key use cases defined in the functional requirements. Each relationship reflects the flow from user intent to system processing and output.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1625]

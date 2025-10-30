@@ -1,0 +1,70 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+:System: as Sys
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR005: Manage Analysis Parameters Preferences" as SAFR005
+  
+  Client --> (SFR012) : "View Alerts"
+  Client --> (SFR013) : "Manage Relationship with Advisors"
+  SysAdmin --> (SAFR001)
+  
+  rectangle "Financial Advisor Functions" {
+    usecase "FAFR001: Manage Mentoring Sessions" as FAFR001
+    usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+    
+    FinancialAdvisor --> (SFR014) : "View Predictive Analytics"
+  }
+  
+  rectangle "Client Functions" {
+    usecase "CFR002: Receive Anomaly Transaction Alerts" as CFR002
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004
+    
+    Client --> (SFR015) : "Manage Recommendation Preferences"
+  }
+  
+  rectangle "Spending Limits and Categories" {
+    usecase "CFR006: View Spending Limit Alerts" as CFR006
+    usecase "SAFR002: Configure Analysis Parameters for Specific Segments" as SAFR002
+    
+    Client --> (SFR015) : "Manage Recommendation Preferences"
+  }
+  
+  rectangle "Investment Opportunities and Risk Profiles" {
+    usecase "CFR007: View Investment Opportunities" as CFR007
+    usecase "FAFR003: Configure Analysis Parameters for Specific Segments" as FAFR003
+    
+    FinancialAdvisor --> (SFR016) : "Enhance Predictive Insights"
+  }
+  
+  rectangle "News and Information" {
+    usecase "CFR008: View News Related to Portfolio" as CFR008
+    usecase "SAFR004: Request Contextualized News Insights from AI Component" as SAFR004
+    
+    Client --> (SFR017) : "Generate Financial Health Reports"
+  }
+  
+  rectangle "System Functions" {
+    usecase "SFR020: Manage User Feedback" as SFR020
+    usecase "AIFR009: Generate Predictive Insights for Users" as AIFR009
+    
+    System --> (SAFR001)
+    FinancialAdvisor --> (FAFR004) : "Configure Analysis Parameters"
+  }
+  
+}
+
+rectangle "User Feedback Loop" {
+  usecase "CFR11: Send Feedback" as CFR11
+  
+  Client --> (SFR20) : "Send Feedback about Recommendations and Insights"
+}
+@enduml

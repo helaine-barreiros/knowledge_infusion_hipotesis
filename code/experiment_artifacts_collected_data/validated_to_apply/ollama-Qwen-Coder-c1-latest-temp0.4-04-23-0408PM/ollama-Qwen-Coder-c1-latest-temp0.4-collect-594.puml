@@ -1,0 +1,106 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+}
+
+package "System Administrator" {
+  actor SysAdmin as SAFR003
+}
+
+rectangle "User Interface" {
+  package "Dashboard Views" {
+    usecase "CFR009: View Personalized Dashboard" as CFR010
+    usecase "View Financial Insights Dashboard" as CFR001
+    usecase "View Investment Opportunities" as CFR007
+    usecase "View News Related to Portfolio" as CFR008
+  }
+
+  package "Alerts and Notifications" {
+    usecase "SFR003: Deliver Alerts" as SFR003
+    usecase "CFR012: Send Feedback about Recommendations" as CFR011
+  }
+}
+
+rectangle "AI System Component" {
+  package "Recommendations" {
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  }
+
+  package "Predictive Analytics" {
+    usecase "AIFR009: Predict Client Intervention Needs" as AIFR009
+    usecase "SFR16: Request Predictive Insights from AI Component" as SFR16
+  }
+}
+
+rectangle "AI Data Analysis Component" {
+  package "Predictions and Forecasting" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "SFR03: Request Financial Predictions from AI Component" as SFR03
+  }
+
+  package "Spending Limits" {
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "SFR05: Request Spending Limit Alerts from AI Component" as SFR05
+  }
+}
+
+rectangle "AI Investment Analysis Component" {
+  package "Investment Opportunities" {
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "SFR06: Request Investment Opportunity Analysis from AI Component" as SFR06
+  }
+
+  package "ESG Considerations" {
+    usecase "AIFR005: Identify ESG-Compliant Investments" as AIFR005
+  }
+}
+
+rectangle "AI Anomaly Detection Component" {
+  package "Fraud Alerts" {
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR06
+    usecase "SFR08: Request Anomaly Transaction Alerts from AI Component" as SFR08
+  }
+}
+
+rectangle "AI News Processing Component" {
+  package "Contextualized Insights" {
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "SFR10: Request Contextualized News from AI Component" as SFR10
+  }
+}
+
+rectangle "AI Predictive Intervention Component" {
+  package "Client Engagement Recommendations" {
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+    usecase "SFR15: Request Predictive Intervention Analyses from AI Component" as SFR15
+  }
+}
+
+rectangle "AI Health Reporting Component" {
+  package "Financial Wellbeing Reports" {
+    usecase "AIFR017: Generate Financial Health Reports" as AIFR017
+  }
+}
+
+CFR001 --> CFR009 : 
+CFR002 --> FAFR002 : 
+SAFR003 --> SAFR003 : 
+
+rectangle "System Boundary" {
+  usecase "SFR04: Request Personalized Recommendations from AI Component" as SFR04
+  usecase "SFR19: Maintain Historical Record of Insights" as SFR19
+  
+  CFR002 --|> FAFR002 : 
+  SAFR003 --> SAFR001 : 
+}
+
+@enduml

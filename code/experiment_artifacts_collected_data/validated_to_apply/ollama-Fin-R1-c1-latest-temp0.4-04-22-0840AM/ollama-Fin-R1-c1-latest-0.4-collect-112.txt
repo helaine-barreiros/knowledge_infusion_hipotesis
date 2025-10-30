@@ -1,0 +1,165 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  client --> CFR001 : "As a Client, I want to view my financial data."
+  
+  SysAdmin -> SAFR001 : "As a System Administrator, manage analysis parameters."
+  SysAdmin -> FAFR004 : "Configure parameters for specific clients."
+}
+
+rectangle "Client" {
+  actor Client as client
+}
+
+rectangle "Financial Advisor (FA)" {
+  actor FinancialAdvisor as fa
+  usecase "FAFR001: Manage Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  
+  client -> fa : "Share data and receive guidance."
+}
+
+rectangle "System Administrator (SA)" {
+  actor SysAdmin as sa
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Client Segments" as FAFR004
+  
+  client -> sa : "Manage system settings."
+}
+
+rectangle "AI Component (AIC)" {
+  actor AIC as aic
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Investment Opportunity Analysis" as AIFR004
+  usecase "AIFR005: Align with Risk Profiles" as AIFR005
+  usecase "AIFR006: Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Contextualized News Insights" as AIFR007
+  usecase "AIFR008: Predictive Intervention Recommendations" as AIFR008
+  usecase "AIFR009: Client Predictive Insights" as AIFR009
+  
+  client -> aic : "Request data and insights."
+}
+
+client --> CFR001 : "View dashboard"
+SysAdmin --> SAFR001 : "Manage parameters"
+SA --> FAFR004 : "Configure segments"
+
+FA --> FAFR002 : "Receive alerts"
+FA --> FAFR003 : "Analyze trends"
+FA --> AIC: "Request recommendations and insights"
+
+AIC --> CFR001: "Provide data for dashboards"
+AIC --> SAFR001: "Adjust parameters based on feedback"
+AIC --> FAFR004: "Personalize client segments"
+AIC --> SFR012: "Generate dashboards"
+AIC --> SFR013: "Create alerts"
+
+client --(SFR019): "Track progress and goals"
+client --(CFR011): "Send feedback to improve system"
+
+@enduml
+```
+
+**Explanation of the Diagram Structure:**
+- **System Boundary:** The main rectangle represents the AI-Powered Analysis & Insights System, containing all use cases.
+- **Actors:** 
+  - `Client`: Represents end-users (financial clients).
+  - `FinancialAdvisor` and `SysAdmin` are specialized actors within the system.
+- **Use Cases:**
+  - Client-related use cases like viewing dashboards (`CFR001`) or receiving alerts (`SAFR002`, `SFR008`).
+  - System Administrator tasks such as managing analysis parameters (`SAFR001`), configuring client segments for advisors (`FAFR004`).
+- **Interactions:**
+  - Clients interact with the system through various use cases (e.g., viewing dashboards, receiving alerts).
+  - Advisors and SysAdmins manage backend systems to ensure compliance and personalization.
+- **AI Component:** The `AIC` represents automated processes like generating predictions or recommendations.
+
+This structure ensures all functional requirements are mapped accurately while maintaining readability. Adjustments can be made based on further analysis if needed. 
+
+\boxed{UseCaseDiagram}
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  client --> CFR001 : "As a Client, I want to view my financial data."
+  
+  SysAdmin -> SAFR001 : "As a System Administrator, manage analysis parameters."
+  SysAdmin -> FAFR004 : "Configure parameters for specific clients."
+}
+
+rectangle "Client" {
+  actor client
+}
+
+rectangle "FinancialAdvisor (FA)" {
+  actor fa
+  usecase "FAFR001: Manage Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  
+  client -> fa : "Share data and receive guidance."
+}
+
+rectangle "SystemAdministrator (SA)" {
+  actor sa
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Client Segments" as FAFR004
+  
+  client -> sa : "Manage system settings."
+}
+
+rectangle "AIC (AI Component)" {
+  actor aic
+  usecase "AIFR001: Generate Financial Predictions" as AIFR001
+  usecase "AIFR002: Personalized Recommendations" as AIFR002
+  usecase "AIFR003: Spending Limit Alerts" as AIFR003
+  usecase "AIFR004: Investment Opportunity Analysis" as AIFR004
+  usecase "AIFR005: Align with Risk Profiles" as AIFR005
+  usecase "AIFR006: Anomaly Transaction Alerts" as AIFR006
+  usecase "AIFR007: Contextualized News Insights" as AIFR007
+  usecase "AIFR008: Predictive Intervention Recommendations" as AIFR008
+  usecase "AIFR009: Client Predictive Insights" as AIFR009
+  
+  client -> aic : "Request data and insights."
+}
+
+client --> CFR001 : "View dashboard"
+SysAdmin --> SAFR001 : "Manage parameters"
+SA --> FAFR004 : "Configure segments"
+
+FA --> FAFR002 : "Receive alerts"
+FA --> FAFR003 : "Analyze trends"
+FA --> aic: "Request recommendations and insights"
+
+AIC --> CFR001: "Provide data for dashboards"
+AIC --> SAFR001: "Adjust parameters based on feedback"
+AIC --> FAFR004: "Personalize client segments"
+AIC --> SFR012: "Generate dashboards"
+AIC --> SFR013: "Create alerts"
+
+client --(SFR019): "Track progress and goals"
+client --(CFR011): "Send feedback to improve system"
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1759]

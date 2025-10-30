@@ -1,0 +1,94 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:SystemAdmin: as SysAdmin
+:FinancialAdvisor: as FAFR001
+:SFR001: as SFR001
+:AIFR002: as AIFR002
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+
+  Client --> CFR001
+  SysAdmin --> SAFR001
+  FAFR001 --> (FAFR001)
+  
+  SFR002 <|-- (SFR003)
+  SFR002 <|-- (AIFR002)
+
+  AIFR002 --> CFR004
+  AIFR002 --> CFR005
+  AIFR002 --> CFR010
+  
+  Client -> SAFR005 : "Manage Preferences"
+  
+  SysAdmin --> SFR003 : "Configure Analysis Parameters"
+
+}
+
+rectangle "Client Dashboard" {
+  usecase "CFR009: View Consolidated Financial Information" as CFR009
+  usecase "SFR12: Generate Client Dashboards" as SFR12
+  
+  Client -> (CFR009)
+  SysAdmin --> (SFR12)
+
+}
+
+rectangle "Spending Limits" {
+  usecase "SAFR005: Request Spending Limit Alerts" as SAFR005
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+  
+  Client -> SAFR005 : "Set Thresholds"
+  
+}
+
+rectangle "Investment Opportunities" {
+  usecase "SAFR006: Request Investment Opportunity Analysis" as SAFR006
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  
+  Client -> (FAFR007)
+}
+
+rectangle "News and Insights" {
+  usecase "SFR10: Find Contextualized News Relevant to User's Portfolio" as SFR10
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+  
+  Client --> (FAFR008)
+}
+
+rectangle "Alerts and Predictions" {
+  usecase "SFR13: Deliver Client Alerts Based on Predefined Conditions" as SFR13
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  
+  SysAdmin --> (FAFR009)
+}
+
+rectangle "Health Reports and Goals" {
+  usecase "SFR17: Generate Financial Health Reports" as SFR17
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+  
+  SysAdmin --> (FAFR09)
+}
+
+rectangle "Feedback Management" {
+  usecase "CFR11: Send Feedback About System's Recommendations and Insights" as CFR11
+  usecase "SFR20: Manage User Feedback to Continuously Improve Outputs" as SFR20
+
+  Client -> (AIFR009)
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 808]

@@ -1,0 +1,75 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor: as FAFD
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  Client --> (SFR012) : "View Financial Insights Dashboard"
+}
+
+rectangle "Client Features" {
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  Client --> (SFR003) : "View Financial Predictions"
+  Client --> (SFR004) : "Receive Personalized Recommendations"
+  Client --> (SFR005) : "Manage Recommendation Preferences"
+  Client --> (SFR006) : "View Spending Limit Alerts"
+  Client --> (SFR007) : "View Investment Opportunities"
+  Client --> (SFR013) : "Receive Alerts for Anomalous Transactions"
+  Client --> (CFR002)
+}
+
+rectangle "Financial Advisor Features" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFD_001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFD_002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFD_003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as FAFD_004
+  
+  Financial Advisor --> (SFR015) : "Manage Client Mentoring Sessions"
+  Financial Advisor --> (SFR016) : "View Predictive Analytics for Clients"
+}
+
+rectangle "System Features" {
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as SFR_008
+  usecase "SFR009: Find Contextualized News Relevant to User's Portfolio" as SFR_009
+  
+  System Admin --> (SAFR001)
+  
+  Financial Advisor --> (FAFR002) : "View Client Intervention Alerts"
+}
+
+rectangle "AI Features" {
+  usecase "AIFR006: Generate Anomaly Transaction Alerts by Employing Pattern Recognition" as AIF_006
+  usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios" as AIF_007
+  
+  System --> (SFR_008) : "Request Anomaly Transaction Alerts from AI Component"
+  System --> (SFR_009) : "Find Contextualized News Relevant to User's Portfolio"
+}
+
+rectangle "User Feedback Loop" {
+  usecase "CFR11: Send Feedback about Recommendations and Insights" as CFR11
+  
+  Client --> (AIFR002)
+  Financial Advisor --> (AIFR003)
+  System Admin --> (SAFR001)
+  
+  AIF_006 --> (SFR_008) : "Generate Anomaly Transaction Alerts"
+  AIF_007 --> (SFR_009) : "Find Contextualized News Insights"
+}
+
+@enduml

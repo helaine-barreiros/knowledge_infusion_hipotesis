@@ -1,0 +1,165 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor SysAdmin as sysadmin
+actor FinancialAdvisor as financialadvisor
+system "System" as system
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as cfr001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as cfr002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as cfr003
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile & Goals" as cfr004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as cfr005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds in Expense Categories" as cfr006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile (e.g., MiFID II)" as cfr007
+  usecase "CFR008: View News Related to Investment Portfolio for Market Awareness" as cfr008
+  usecase "CFR009: Consolidated Financial Dashboard" as cfr009
+  usecase "CFR10: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as cfr10
+
+}
+
+rectangle "System Admin Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as safr001
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as fafra001
+  usecase "FAFR002: View Client Intervention Alerts" as fafra002
+  usecase "FAFR003: View Predictive Analytics for Clients" as ffafr003
+}
+
+rectangle "System Core Components" {
+  system "SFR001: Deliver Alerts Through Notification Channels" as sfr001
+  system "SFR002: Personalized Recommendations Based on Financial Profiles" as sfr002
+  system "SFR003: Request Financial Predictions from AI Component" as sfr003
+  system "AIFR001: Generate Financial Predictions via Historical Data & Market Trends" as aifr001
+}
+
+rectangle "AI System Components" {
+  usecase "AIFR002: Personalized Recommendations Based on Risk Tolerance and Profiles" as aifra002
+  system "AIFR003: Spending Limit Alerts via Pattern Recognition" as aifr003
+  system "AIFR004: Investment Opportunity Analyses Matching Risk Profiles" as aifr004
+}
+
+client --> cfr001 : "View Financial Insights Dashboard"
+client --> cfr002 : "Receive Anomalous Transaction Alerts (FATF)"
+client --> cfr003 : "Financial Predictions Based on Data & Trends"
+client --> cfr004 : "Personalized Recommendations Aligned with Goals"
+client --> cfr005 : "Manage Recommendation Preferences via KYC"
+client --> cfr006 : "View Spending Limit Alerts Exceeding Thresholds"
+client --> cfr007 : "Investment Opportunities Based on Risk Profile (MiFID II)"
+client --> cfr008 : "News Related to Investment Portfolio for Market Awareness"
+client --> cfr009 : "Consolidated Financial Dashboard"
+client --> cfr10 : "Manage Relationship with Advisors, Data Sharing"
+
+sysadmin --> safr001 : "Manage Analysis Parameters (Basel III)"
+
+financialadvisor --> fafra001 : "Client Mentoring Sessions Based on Insights"
+financialadvisor --> fafra002 : "View Client Intervention Alerts"
+financialadvisor --> ffafr003 : "Predictive Analytics for Clients"
+
+sfr001 <|-- sfr002
+sfr002 <|-- aifr002
+
+system --> cfr004 : "Request Personalized Recommendations (SFR002)"
+cfr004 --> system : "Receive Recommendations"
+aifra002 <|-- cfr004
+
+client --> sfr003 : "Request Financial Predictions from AI Component (AIFR001)"
+sfr003 --> aifr001
+aifr001 --> client : "Provide Financial Predictions"
+
+system --> safr001 : "Manage Analysis Parameters for AI System"
+sysadmin -> safr001 : "Configure Parameters via SysAdmin Interface"
+
+client --> cfr005 : "Update Recommendation Preferences (SFR002)"
+sfr002 <|-- aifra002
+
+financialadvisor --> ffafr003 : "Request Predictive Analytics from AI Component"
+aifr001 -> financialadvisor
+financialadvisor -->> sfr004: "Receive Predictions"
+
+system --> cfr006 : "Generate Spending Limit Alerts (AIFR003)"
+sfr002 <|-- aifra003
+
+client --> cfr007 : "Request Investment Opportunities Based on Risk Profile"
+aifr004 -> client
+cfr007 -->> sfr016: "Receive Matching Investments"
+
+system --> cfr008 : "Extract Contextualized News (AIFR007)"
+sfr002 <|-- aifra007
+
+client --> cfr009 : "View Consolidated Dashboard"
+system --> client : "Provide Consolidated Data via SFR12"
+
+financialadvisor --> ffafr003 : "Identify Patterns for Client Interventions (AIFR008)"
+aifr008 -> financialadvisor
+financialadvisor -->> sfr015: "Receive Intervention Recommendations"
+
+client --> cfr10 : "Manage Data Sharing with Advisors"
+system --> client : "Process Permissions via SFR20"
+
+@enduml
+```plantuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor SysAdmin as sysadmin
+actor FinancialAdvisor as financialadvisor
+system "System" as system
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as cfr001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as cfr002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as cfr003
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile & Goals" as cfr004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as cfr005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds in Expense Categories" as cfr006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile (e.g., MiFID II)" as cfr007
+  usecase "CFR008: View News Related to Investment Portfolio for Market Awareness" as cfr008
+  usecase "CFR009: Consolidated Financial Dashboard" as cfr009
+  usecase "CFR10: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as cfr10
+
+}
+
+rectangle "System Admin Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as safr001
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as fafra001
+  usecase "FAFR002: View Client Intervention Alerts" as ffafr002
+  usecase "FAFR003: View Predictive Analytics for Clients" as ffafr003
+}
+
+rectangle "System Core Components" {
+  system "SFR001: Deliver Alerts Through Notification Channels" as sfr001
+  system "SFR002: Personalized Recommendations Based on Financial Profiles" as sfr002
+  system "SFR003: Request Financial Predictions from AI Component" as sfr003
+}
+
+rectangle "AI System Components" {
+  usecase "AIFR001: Generate Financial Predictions via Historical Data & Market Trends" as aifr001
+  system "AIFR002: Personalized Recommendations Based on Risk Tolerance and Profiles" as aifra002
+}
+
+client --> cfr001 : "View Financial Insights Dashboard"
+client --> cfr002 : "Receive Anomalous Transaction Alerts (FATF)"
+client --> cfr003 : "Financial Predictions Based on Data & Trends"
+client --> cfr004 : "Personalized Recommendations Aligned with Goals"
+client --> cfr005 : "Manage Recommendation Preferences via KYC"
+client --> cfr006 : "View Spending Limit Alerts Exceeding Thresholds"
+client --> cfr007 : "Investment Opportunities Based on Risk Profile (MiFID II)"
+client --> cfr008 : "News Related
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

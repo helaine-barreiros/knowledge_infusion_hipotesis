@@ -1,0 +1,71 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "SAFR004: Configure Analysis Parameters for Segments" as SAFR004
+  usecase "SFR010: Generate Client Alerts Based on Predefined Conditions" as SFR010
+  usecase "CFR002: View Anomalous Transaction Alerts" as CFR002
+  usecase "SAFR005: Deliver Spending Limit Alerts" as SAFR005
+  usecase "SFR006: Request Investment Opportunity Analysis" as SFR006
+  usecase "CFR011: Send Feedback to System" as CFR011
+}
+
+actor Client as client
+actor FinancialAdvisor as advisor
+actor SysAdmin as sysadmin
+
+client --> CFR001 : View financial insights dashboard  
+advisor -> FAFR002 : Monitor clients for alerts  
+sysadmin -->> SAFR004 : Manage segment-specific parameters  
+
+rectangle "AI System" {
+  usecase AIFR003: Generate Spending Limit Alerts
+  usecase AIFR006: Detect Anomalous Transactions
+}
+
+advisor --> AIFR007: Request contextualized news  
+client -->> SFR012 : Access consolidated dashboards  
+
+SysAdmin -> SAFR004 : Configure parameters for segments  
+CFR005: Manage preferences <|-- client  
+CFR006: View spending limits <|-- client  
+SFR008: Deliver investment opportunities <|-- advisor  
+
+rectangle "System" {
+  usecase SFR013: Generate Client Analytics
+}
+
+advisor --> AIFR004: Request personalized recommendations  
+client -->> CFR004 : Receive personalization
+
+SysAdmin -> SAFR005 : Set spending limits  
+CFR009: View investment opportunities <|-- advisor  
+
+SFR018: Track financial goals <|-- client
+AIFR002: Generate predictions <|-- client,advisor,sysadmin  
+
+client --> AIFR007: Request predictive interventions
+
+' Grouping actors and use cases logically by role or system component  
+package "Client Interactions" {
+  Client -> CFR001 : View dashboard  
+  SysAdmin -->> SAFR004 : Configure parameters  
+}
+
+package "Advisor Actions" {
+  advisor --> FAFR002 : Monitor clients  
+  advisor --> AIFR007: Request news insights  
+  advisor --> AIFR008: Receive predictive insights  
+}
+
+package "System Operations" {
+  SysAdmin -> SAFR001 : Manage analysis parameters  
+  SysAdmin -->> SFR009 : Deliver investment opportunities  
+}
+@enduml

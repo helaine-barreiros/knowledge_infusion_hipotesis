@@ -1,0 +1,108 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Risk Parameters" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+  usecase "SFR009: Request Contextualized News Insights" as SFR009
+
+  Client --> CFR001 : "View Financial Dashboard"
+  
+  SysAdmin --> SAFR002 : "Manage Analysis Parameters"
+
+  FinancialAdvisor --> (FAFR005) : Schedule Mentoring Sessions
+}
+
+rectangle "AI Component" {
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+
+  Client --> AIFR003 : Exceeds Threshold in Expense Categories
+  
+  SysAdmin <|-- (SFR019) : Manage Historical Records
+}
+
+rectangle "News Component" {
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+  Client --> AIFR007 : View Portfolio-Specific News
+  
+  System <|-- (SFR019) : Maintain Historical Records
+}
+
+rectangle "Client Feedback Loop" {
+  usecase "CFR011: Send User Feedback" as CFR011
+
+  Client --> CFR011 : Provide Improvements for AI Outputs
+}
+@enduml
+```
+
+**Key Observations and Relationships in the Diagram**
+
+- **System Boundary**: The main system includes actors (Client, SysAdmin, FinancialAdvisor) and use cases related to financial insights.
+  
+- **Use Cases Grouping**:
+  - `CFR001` is for viewing a comprehensive financial dashboard. This requires interaction with the AI component via the client.
+  - `SAFR002` handles risk parameter management by SysAdmin, which affects system calculations (e.g., spending limits).
+  
+- **Inheritance and Delegation**:
+  - The FinancialAdvisor role extends from Client for actions like scheduling mentoring sessions (`FAFR005`). This implies a hierarchy where advisors can perform client-specific tasks.
+  
+- **AI Component**: 
+  - `AIFR003` generates spending limit alerts when clients exceed expense thresholds. These are directly tied to the client's financial data and system parameters managed by SysAdmin via SAFR002.
+  - News insights (`AIFR007`) are contextualized based on user portfolios, requiring interaction with both the news component (AI) and storage/history management.
+
+- **Client Feedback**: `CFR011` allows clients to provide feedback, closing the loop for continuous improvement of AI outputs. This is a critical path ensuring iterative refinement.
+  
+**Conclusion**
+The diagram effectively maps out all actors, use cases, their interactions within the system boundary, and key components like the AI engine and news processing. It adheres strictly to requirement IDs while maintaining logical groupings and relationships. Adjustments could be made for further granularity (e.g., splitting client types or adding more detailed sub-use-cases), but this structure provides a robust foundation.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage Risk Parameters" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+  usecase "SFR009: Request Contextualized News Insights" as SFR009
+
+  Client --> CFR001 : "View Financial Dashboard"
+  
+  SysAdmin --> SAFR002 : "Manage Analysis Parameters"
+
+  FinancialAdvisor --> (FAFR005) : Schedule Mentoring Sessions
+}
+
+rectangle "AI Component" {
+  usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+
+  Client --> AIFR003 : Exceeds Threshold in Expense Categories
+  
+  SysAdmin <|-- (SFR019) : Manage Historical Records
+}
+
+rectangle "News Component" {
+  usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+  Client --> AIFR007 : View Portfolio-Specific News
+  
+  System <|-- (SFR019) : Maintain Historical Records
+}
+
+rectangle "Client Feedback Loop" {
+  usecase "CFR011: Send User Feedback" as CFR011
+
+  Client --> CFR011 : Provide Improvements for AI Outputs
+}
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1041]

@@ -1,0 +1,142 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+' Atores
+:Client: as Client
+:Financial Advisor: as FinancialAdvisor
+:System Administrator: as SysAdmin
+:AI-System: as AISystem
+:System: as System
+:User: as User
+
+ rectangle "AI-Powered Analysis & Insights System" {
+
+    usecase "CFR001: View Financial Insights Dashboard" as CFR001
+    usecase "CFR002: View Anomaly Transactions Alerts" as CFR002 
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: View Personalized Recommendations" as CFR004
+    usecase "CFR005: Manage Personalized Recommendations Preferences" as CFR005
+    usecase "CFR006: View Spending Limit Alerts" as CFR006
+    usecase "CFR007: View Investment Opportunities" as CFR007
+    usecase "CFR008: View Portfolio News" as CFR008
+    usecase "CFR009: View Dashboard" as CFR009
+    usecase "CFR010: Manage Financial Advisors" as CFR010
+
+    ' Associações entre atores e casos de uso
+    Client --> CFR001
+    Client --> CFR002
+    Client --> CFR003
+    Client --> CFR004
+    Client --> CFR005
+    Client --> CFR006
+    Client --> CFR007
+    Client --> CFR008
+    Client --> CFR009
+    Client --> CFR010
+    
+
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+    
+    SysAdmin --> SAFR001
+
+    usecase "FAFR001: Manage Client Mentoring" as FAFR001
+    usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+    usecase "FAFR003: View Client Predictive Analytics" as FAFR003
+    usecase "FAFR004: Configure Analysis Parameters" as FAFR004
+
+    FinancialAdvisor --> FAFR001
+    FinancialAdvisor --> FAFR002
+    FinancialAdvisor --> FAFR003
+    FinancialAdvisor --> FAFR004
+
+    package "System" as pkgsys {
+        
+        usecase "SFR001: Deliver Alerts for Users" AS SFR001
+        usecase "SFR002: Deliver Recomendations for Users" AS SFR002
+
+        usecase "SFR003: Request Financial Predictions for Users" as SFR003
+        usecase "SFR004: Request Personalized Recommendations for Users" as SFR004
+        usecase "SFR005: Request Spending Limit Alerts for Users" as SFR005
+        usecase "SFR006: Request Investment Opportunity Analysis for Users" as SFR006
+        usecase "SFR007: Request Investment Opportunities for Users" as SFR007
+        usecase "SFR008: Request Anomaly Transactions Alerts" as SFR008
+
+        usecase "SFR009: Find Contextualized News" as SFR009
+        usecase "SFR010: Proccess Contextualized News" as SFR010 
+        usecase "SFR011: Request Contextualized News Insights" as SFR011 
+
+        usecase "SFR012: Generate Client Dashboard" as SFR012
+
+        usecase "SFR013: Generate Clients Alerts" as SFR013
+        usecase "SFR014: Generate Clients Analytics" as SFR014
+
+        usecase "SFR015: Request Clients Preditive Intervention" as SFR015
+        usecase "SFR016: Request Clients Preditive Insights" as SFR016  
+
+        usecase "SFR017: Generate Users Financial Health Reports" as SFR017  
+        usecase "SFR018: Manage Users Financial Goals" as SFR018
+        usecase "SFR019: Maintain Users Insights" as SFR019
+        usecase "SFR020: Manage Users Feedbacks" as SFR020
+
+        System --> SFR001
+        System --> SFR002
+        System --> SFR003
+        System --> SFR004
+        System --> SFR005
+        System --> SFR006
+        System --> SFR007
+        System --> SFR008
+        System --> SFR009
+        System --> SFR010
+        System --> SFR011
+        System --> SFR012
+        System --> SFR013
+        System --> SFR014
+        System --> SFR015
+        System --> SFR016
+        System --> SFR017
+        System --> SFR018
+        System --> SFR019
+        System --> SFR020
+
+    }
+
+    package "AI System" as aipkg{
+
+        usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+        usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+        usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+        usecase "AIFR004: Generate Investment Opportunity Analysis for Users" as AIFR004
+        usecase "AIFR005: Generate Investment Opportunities for Users" as AIFR005
+        usecase "AIFR006: Generate Anomaly Transactions Alerts" as AIFR006
+
+        usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+
+        usecase "AIFR008: Generate Clients Preditive Intervention" as AIFR008
+        usecase "AIFR009: Generate Clients Preditive Insights" as AIFR009
+
+        AISystem --> AIFR001
+        AISystem --> AIFR002
+        AISystem --> AIFR003
+        AISystem --> AIFR004
+        AISystem --> AIFR005
+        AISystem --> AIFR006
+        AISystem --> AIFR007
+        AISystem --> AIFR008
+        AISystem --> AIFR009
+    }
+
+    usecase "CFR011: Send Feedback" as CFR011
+
+    User <|-up- Client
+    User <|-down- FinancialAdvisor
+    User <|-left- SysAdmin
+
+    User --> CFR011
+
+}
+
+@enduml

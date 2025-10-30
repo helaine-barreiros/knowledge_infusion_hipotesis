@@ -1,0 +1,62 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sa1
+actor FinancialAdvisor as fa1
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  
+  c1 --> CFR001 : "View Financial Insights Dashboard"
+  sa1 --> SAFR001 : "Manage Analysis Parameters"
+  fa1 --> FAFR002 : "View Client Intervention Alerts"
+  
+}
+
+rectangle "AI System" {
+  usecase "AIFR003: Generate Spending Limit Alerts for Users" as AIFR003
+  usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+  
+  SFR013 <|-- (CFR001) : Sends alerts to client dashboard
+}
+
+rectangle "Client Feedback Loop" {
+  usecase "CFR011: Send User Feedback for System Improvements" as CFR011
+
+  c1 --> CFR011 : "Send feedback about recommendations and insights"
+}
+@enduml
+```
+
+This PlantUML code represents the Use Case Diagram based on the provided functional requirements. The system includes interactions between clients, financial advisors, system administrators, and various use cases within the AI-powered analysis framework. Here's a breakdown of how each component is structured:
+
+1. **Actors**: 
+   - `Client` (`c1`) interacts with the "View Financial Insights Dashboard" (CFR001) and other related functionalities.
+   - `SysAdmin` (`sa1`) manages system parameters via SAFR001.
+   - `FinancialAdvisor` (`fa1`) views client intervention alerts through FAFR002.
+
+2. **System Use Cases**:
+   - CFR001: Client requests the financial insights dashboard for comprehensive data viewing.
+   - SAFR001: SysAdmin configures analysis parameters ensuring regulatory compliance and accuracy.
+   - FAFR002: FinancialAdvisor receives alerts about clients needing intervention, possibly due to unusual spending or other metrics.
+
+3. **AI System Use Cases**:
+   - AIFR003: Generates spending limit alerts based on user data (linked to SFR013 for delivery).
+   - AIFR004: Produces investment opportunity analyses aligned with risk profiles and market trends.
+   
+4. **Client Feedback Loop**: Allows users to provide feedback, improving system accuracy over time.
+
+The diagram emphasizes logical groupings within the system boundaries (`System`), AI components (`AI System`), and client interactions (`Client Feedback Loop`). Relationships are established using arrows (e.g., `c1 --> CFR001`) to show actor-use case associations. The structure adheres strictly to requirement IDs and names, ensuring precision in representation. 
+
+**Note**: This diagram assumes certain implicit relationships based on the requirements but does not include all possible interactions for brevity. For a fully detailed model, additional use cases or extensions could be added as needed. Also, ensure alignment with system architecture principles when interpreting these diagrams further.
+
+[Done: True
+Done Reason: stop
+Eval Count: 736]

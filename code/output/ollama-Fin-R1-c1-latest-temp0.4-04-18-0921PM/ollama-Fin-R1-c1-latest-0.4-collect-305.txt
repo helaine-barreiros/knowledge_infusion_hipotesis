@@ -1,0 +1,101 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as faa
+actor SysAdmin as sa
+system "System" as sys
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Get Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile (MiFID II)" as CFR007
+  usecase "CFR008: View News Related to Portfolio Management" as CFR008
+  usecase "CFR009: Manage Relationship with Financial Advisors Including Data Sharing Permissions" as CFR009
+
+  c1 --> CFR001 : "View Dashboard"
+  c1 --> CFR002 : "Receive Alerts"
+  c1 --> CFR003 : "View Predictions"
+  c1 --> CFR004 : "Get Recommendations"
+  c1 --> CFR005 : "Manage Preferences"
+  c1 --> CFR006 : "View Spending Limits"
+  c1 --> CFR007 : "Access Investment Opportunities"
+  c1 --> CFR008 : "View News"
+  c1 --> CFR009 : "Manage Relationship"
+
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as FAFR004
+
+  faa --> FAFR001 : "Manage Mentoring"
+  faa --> FAFR002 : "View Alerts"
+  faa --> FAFR003 : "Analyze Predictions"
+  faa --> FAFR004 : "Configure Parameters"
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System Compliance with Basel III" as SAFR001
+
+  sa --> SAFR001 : "Manage Parameters"
+
+}
+
+rectangle "System (SFR)" {
+  usecase "SFR002: Deliver Personalized Recommendations to Users Based on Financial Profiles" as SFR002
+  usecase "SFR003: Request Financial Predictions from AI Component for Insights" as SFR003
+  usecase "SFR004: Request Personalized Recommendations From AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts When Exceeding Thresholds" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis Based on Risk Profiles" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities Matching User Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Request Anomaly Transaction Alerts for AML Compliance" as SFR008
+  usecase "SFR009: Find Contextualized News Relevant to Portfolio Management" as SFR009
+  usecase "SFR012: Generate Client Dashboards in Intuitive Format" as SFR012
+
+  sys --> (SFR002)
+  sys --> (SFR003)
+  sys --> (SFR004)
+  sys --> (SFR005)
+  sys --> (SFR006)
+  sys --> (SFR007)
+  sys --> (SFR008)
+  sys --> (SFR009)
+  sys --> SFR012
+
+}
+
+rectangle "AI Component" {
+  usecase "AIFR001: Generate Financial Predictions Using Historical Data and Market Trends" as AIFR001
+  usecase "AIFR004: Generate Investment Opportunity Analyses Based on Risk Profiles" as AIFR004
+
+}
+
+rectangle "Client Feedback System (CFS)" {
+  usecase "CFR011: Send User Feedback to Improve Recommendations and Insights" as CFR011
+}
+@enduml
+```
+
+**Key Observations:**
+- **Actors**: The system includes three main actors - `Client`, `FinancialAdvisor`, and `SysAdmin`. Each has specific use cases tied to their roles.
+- **Use Cases**: Use cases are categorized under each actor's interface. For example, clients can view dashboards, receive alerts, etc., while financial advisors manage mentoring sessions or review predictive analytics.
+- **System Components**: The system itself handles requests from the client (e.g., delivering recommendations), interacting with AI components for predictions and analyses, generating reports/dashboards, and managing user feedback.
+- **AI Component**: This subsystem provides critical services like financial predictions, investment opportunity analysis, anomaly detection, etc. It serves as a core engine driving many of the use cases.
+- **Inheritance/Delegation**: While not explicitly shown here due to PlantUML limitations (e.g., no direct inheritance relationships between actors), each actor's responsibilities are clearly defined and linked through their respective use cases.
+
+This diagram ensures all functional requirements from the provided list are represented accurately, with clear associations between users, system functionalities, and AI services. Adjustments can be made based on further analysis or specific business rules not covered in this initial model.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1335]

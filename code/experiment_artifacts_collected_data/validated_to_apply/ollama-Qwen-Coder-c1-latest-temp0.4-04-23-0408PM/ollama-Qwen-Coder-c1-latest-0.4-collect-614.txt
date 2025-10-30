@@ -1,0 +1,83 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+}
+
+package "System Administrator" {
+  actor SysAdmin as SAFR003
+}
+
+rectangle "User Interface" {
+  usecase "CFR009: View Personalized Dashboard" as CFR009
+  usecase "SFR12: Generate Client Dashboards" as SFR12
+  
+  CFR001 --> (CFR009)
+  FAFR002 --> (CFR009)
+}
+
+rectangle "Financial Insights and Recommendations" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SFR03: Request Financial Predictions from AI Component" as SFR03
+  usecase "SFR02: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR02
+  
+  CFR001 --> (CFR009)
+  FAFR002 --> (FAFR004)
+}
+
+rectangle "Alerts and Notifications" {
+  usecase "SAFR005: Request Spending Limit Alerts from AI Component" as SAFR005
+  usecase "SFR08: Generate Anomaly Transaction Alerts by Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance with FinCEN Requirements" as SFR08
+  
+  CFR001 --> (SAFR005)
+}
+
+rectangle "Investment Opportunities and News" {
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+  usecase "SFR06: Request Investment Opportunity Analysis from AI Component" as SFR06
+  
+  CFR001 --> (SAFR005)
+}
+
+rectangle "Client Mentoring and Intervention" {
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations to Provide Data-Driven Recommendations During Consultations" as FAFR003
+  usecase "SFR16: Request Predictive Insights from the AI Component to Enhance the Value of Financial Guidance Provided to Clients" as SFR16
+  
+  CFR001 --> (FAFR003)
+}
+
+rectangle "System Operations and Management" {
+  usecase "SAFR004: Configure Analysis Parameters for Specific Client Segments to Customize the System's Behavior According to Different Client Profiles and Regulatory Requirements Such As GDPR or CCPA" as SAFR004
+  usecase "SFR15: Request Predictive Intervention Analyses from the AI Component to Identify When Financial Advisors Should Engage with Clients" as SFR15
+  
+  SysAdmin --> (SAFR004)
+}
+
+rectangle "AI System Functions" {
+  usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance As Defined By Industry Standards Like FINRA Guidelines" as AIFR002
+  
+  CFR001 --> (SAFR005)
+}
+
+rectangle "Feedback Mechanism" {
+  usecase "CFR11: Send Feedback About the System's Recommendations and Insights to Help Improve the Accuracy and Relevance of Future Outputs" as CFR11
+  
+  CFR001 --> (AIFR002)
+  FAFR003 --> (SAFR005)
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 804]

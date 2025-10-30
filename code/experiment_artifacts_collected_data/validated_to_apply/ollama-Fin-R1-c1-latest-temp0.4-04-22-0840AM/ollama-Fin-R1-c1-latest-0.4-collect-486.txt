@@ -1,0 +1,74 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "SAFR004: Configure Analysis Parameters for Segments" as SAFR004
+  usecase "SFR018: Manage Users' Financial Goals" as SFR018
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "CFR008: Access Portfolio News" as CFR008
+  usecase "SAFR005: Request Spending Limit Alerts from AI" as SAFR005
+  usecase "SFR006: Request Personalized Recommendations for Users" as SFR006
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+  usecase "AIFR003: Generate Spending Limit Alerts Based on Patterns" as AIFR003
+  usecase "FAFR004: View Predictive Analytics for Client Segments" as FAFR004
+
+  rectangle "Client" {
+    actor "User (Client)" as UserClient
+    userClient --> CFR001 : "View Financial Insights Dashboard"
+    userClient --> SAFR005 : "Receive Spending Limit Alerts"
+    userClient --> SFR006 : "Request Personalized Recommendations"
+    userClient --> AIFR003 : "Get Spent Limit Alerts Based on Patterns"
+  }
+
+  rectangle "Financial Advisor" {
+    actor "FAFRA01: Financial Advisor" as FAFRA01
+    FAFRA01 --> FAFR002 : "View Client Intervention Alerts"
+    FAFRA01 --> AIFR008 : "Get Predictive Intervention Recommendations"
+  }
+
+  rectangle "System Administrator" {
+    actor "SysAdmin" as SysAdminUser
+    SysAdminUser --> SAFR004 : "Configure Analysis Parameters for Segments"
+  }
+
+  rectangle "AI System" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts Based on Patterns" as AIFR003
+  }
+
+  SysAdminUser <|-- SAFR001 : "Manage Analysis Parameters"
+  userClient --> CFR007 : "View Investment Opportunities Suitable to Risk Profile"
+  FAFRA01 --> FAFR004 : "View Predictive Analytics for Client Segments"
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Actors**: The diagram includes three primary actors: `User (Client)`, `Financial Advisor` (`FAFRA01`), and `System Administrator`. Each actor is associated with specific use cases.
+- **Use Cases**:
+  - Client-related use cases include viewing dashboards, financial predictions, spending limit alerts, personalized recommendations, portfolio news access, etc. These are grouped under the "Client" rectangle.
+  - Financial Advisor-specific uses involve client intervention alerts and predictive analytics for segments or clients. They also manage their relationship with advisors via `CFR010`.
+  - System Administrator handles analysis parameter management (`SAFR004`).
+- **System**: The AI system generates various insights (e.g., predictions, recommendations) through use cases like `AIFR002`, `AIFR003`. These are linked to client and advisor interactions.
+  
+### Notes:
+1. Ensure all actors correspond exactly to the requirement names (e.g., "User" vs. "Client", etc.). Adjustments may be needed based on exact terminology in requirements.
+2. Use case relationships reflect dependencies between system components, users, and advisors. For example, the AI generates recommendations that clients can view or act upon through their dashboards (`SFR012`).
+3. The structure groups related use cases under appropriate actors/systems to maintain clarity.
+
+This diagram adheres strictly to provided requirements while ensuring logical groupings and relationships between entities. Adjustments may be necessary based on further analysis of the functional descriptions.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1041]

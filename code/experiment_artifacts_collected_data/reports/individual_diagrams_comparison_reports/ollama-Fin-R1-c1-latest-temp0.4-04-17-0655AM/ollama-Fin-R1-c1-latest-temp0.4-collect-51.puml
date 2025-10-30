@@ -1,0 +1,67 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Preferences (Client)" as SAFR002
+  usecase "SFR009: Generate Client Alerts Based on Predefined Conditions" as SFR009
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "SAFR004: Configure Analysis Parameters for Specific Segments (Client)" as SAFR004
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "SAFR003: Manage System-Wide Analysis Parameters (Sys Admin)" as SAFR003
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "AIFR005: Generate Investment Opportunity Analyses for Users (AI)" as AIFR005
+  usecase "SFR008: Request Specific Investment Opportunities from AI Component" as SFR008
+  usecase "CFR010: Manage Relationship with Financial Advisors" as CFR010
+}
+
+actor "Client" as Client
+actor "Financial Advisor (FA)" as FA
+actor "System Administrator (SA)" as SA
+
+Client --> SAFR002 : Configure preferences for financial insights and alerts
+Client --> SFR014 : Request client analytics to understand spending or investment trends over time
+Client --> CFR003 : View future predictions based on historical data and market trends
+Client --> AIFR005 : Receive personalized investment opportunities aligned with risk profile
+Client --> SAFR002 <|-- Client : Extends relationship for managing individual user settings
+
+FA --> SFR014 : Request client analytics to support advisory services during meetings
+FA --> FAFR003 : View predictive insights about clients' financial situations before consultations
+FA --> AIFR008 : Receive recommendations on when to intervene with clients based on system patterns
+FA --> SAFR002 <|-- FA : Extends relationship for managing client-specific analysis parameters
+
+SA --> SFR014 : Manage historical data and performance metrics across all users
+SA --> CFR009: View consolidated financial information in a single dashboard (system-wide)
+SA --> AIFR007: Request contextualized news relevant to user portfolios from the AI component
+SA --> SAFR003 <|-- SA : Extends relationship for managing system-level parameters
+
+Client --> SFR014 : System generates client-specific analytics based on individual data and requests (direct interaction)
+FA --> SFR014 : Receives aggregated or segment-based analytics to tailor advice (system-to-advisor)
+
+rectangle "System" {
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+}
+
+Client -> CFR009: View consolidated financial information in a single dashboard
+
+SA --> SAFR003 : Manage system-wide analysis parameters to ensure compliance and accuracy (e.g., regulatory updates like Basel III)
+
+rectangle "AI Component" {
+  usecase "AIFR004: Generate Personalized Recommendations for Users (Client)" as AIFR004
+}
+
+Client --> AIFR004 : Receive personalized recommendations based on financial profiles
+
+FA --> SFR015 : Request predictive intervention analyses from the AI component to determine when advisors should engage clients proactively.
+
+rectangle "User Feedback" {
+  usecase "CFR011: Send System Recommendations/Insights Feedback (Client)" as CFR011
+}
+
+Client -> CFR011 : Provide feedback on system outputs for continuous improvement
+
+@enduml

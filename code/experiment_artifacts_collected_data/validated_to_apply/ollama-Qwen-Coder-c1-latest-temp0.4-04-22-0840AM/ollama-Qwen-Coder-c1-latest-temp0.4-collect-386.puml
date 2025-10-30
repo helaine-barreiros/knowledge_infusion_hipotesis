@@ -1,0 +1,87 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics about My Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  FinancialAdvisor --> FAFR002 : manages mentoring sessions based on system-generated insights
+  FinancialAdvisor --> FAFR003 : views predictive analytics about clients' financial situations
+  FinancialAdvisor --> FAFR004 : configures analysis parameters for specific client segments
+}
+
+package System {
+  actor "System" as SFR012
+  
+  usecase "SFR005: Request Spending Limit Alerts from the AI Component" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from the AI Component" as SFR006
+  usecase "SFR007: Request Specific Investment Opportunities from the AI Component that Match User Investment Criteria and ESG Preferences" as SFR007
+  
+  System --> CFR001 : delivers alerts to users through appropriate notification channels
+  System --> FAFR002 : views client intervention alerts when system detects patterns requiring professional attention
+  System --> SFR005 : requests spending limit alerts from the AI component
+  System --> SFR006 : requests investment opportunity analysis from the AI Component
+  System --> SFR007 : requests specific investment opportunities from the AI Component that match user investment criteria and ESG preferences
+  
+}
+
+package "AI System" {
+  usecase "AIFR001: Generate Financial Predictions for Users by Analyzing Historical Transaction Data, Market Trends, and Economic Indicators" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance as Defined by Industry Standards like FINRA Guidelines" as AIFR002
+  
+  System --> AIFR001 : generates financial predictions for users
+  System --> AIFR002 : generates personalized recommendations based on user profiles, goals, and risk tolerance
+  
+}
+
+package "Client Dashboard & Alerts" {
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions to Ensure Timely Notification of Important Financial Events" as SFR013
+  usecase "SFR020: Manage User Feedback to Continuously Improve the Quality and Relevance of Financial Insights" as SFR020
+  
+  System --> CFR001 : generates client alerts based on predefined conditions
+  System --> CFR011 : sends feedback about system's recommendations and insights
+}
+
+package "Predictive Interventions & Insights" {
+  usecase "SFR015: Request Predictive Intervention Analyses from the AI Component to Identify When Financial Advisors Should Engage with Clients" as SFR015
+  
+  System --> FAFR002 : generates predictive intervention recommendations
+}
+
+package "Financial Health Reports & Goals Management" {
+  usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News With Specific User Portfolios to Identify Relevant Impacts" as AIFR007
+  
+  System --> CFR018 : manages users' financial goals
+}
+
+package "System Admin & Parameter Management" {
+  usecase "SAFR001: Manage Analysis Parameters for the AI System to Ensure the Algorithms Remain Accurate, Relevant, and Compliant with Financial Regulations Such as Basel III for Risk Management" as SAFR001
+  
+  System --> SAFR001 : manages analysis parameters
+}
+
+rectangle "System Boundary" {
+  Client
+  FAFR002
+  SFR012
+  AIFR001
+  AIFR002
+  CFR001
+  FAFR003
+  FAFR004
+  SAFR001
+  
+  System --> CFR001 : delivers personalized recommendations to users based on their financial profiles
+  System --> SFR005 : requests spending limit alerts from the AI component
+  System --> SFR020 : manages user feedback to continuously improve the quality and relevance of financial insights
+}
+
+@enduml

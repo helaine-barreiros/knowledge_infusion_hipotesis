@@ -1,0 +1,117 @@
+# C1 - Context Diagram: AI-Enhanced Personal Finance Management System
+
+This context diagram provides a high-level overview of the AI-Enhanced Personal Finance Management System, showing boundaries, external dependencies and how it interacts with users and external systems.
+
+```plantuml
+
+@startuml "AI-Enhanced Personal Finance Management System - Context Diagram"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+'Define SPRITE for custom icons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include FONTAWESOME/users.puml
+!include FONTAWESOME/user_tie.puml
+!include FONTAWESOME/server.puml
+!include FONTAWESOME/brain.puml
+!include FONTAWESOME/newspaper.puml
+!include FONTAWESOME/university.puml
+!include FONTAWESOME/chart_line.puml
+!include FONTAWESOME/lock.puml
+!include FONTAWESOME/graduation_cap.puml
+!include FONTAWESOME/shield_alt.puml
+!include FONTAWESOME/money_bill_alt.puml
+
+'Define custom colors
+!define CUSTOMER_COLOR #08427B
+!define SYSTEM_COLOR #1168BD
+!define EXTERNAL_SYSTEM_COLOR #999999
+!define INTERNAL_SYSTEM_COLOR #438DD5
+
+LAYOUT_WITH_LEGEND()
+
+'Primary Actors (End Users)
+Person(individual, "Individual Customer", "Seeks unified view of finances, personalized insights, and goal management tools", $sprite="users")
+Person(advisor, "Financial Advisor", "Accesses shared data to provide expert financial guidance", $sprite="user_tie")
+
+'Core System (Business Value)
+System(pfm_system, "AI-Enhanced Personal Finance Management System", "Business Value: Delivers financial clarity through unified view, AI-driven insights, personalized recommendations, goal tracking, and financial education", $sprite="server")
+
+'Internal Systems/Components (Development Scope)
+System_Boundary(internal_boundary, "Internal Systems (In-house Development)") {
+    System(auth_service, "Authentication Service", "Secures access to financial data through multi-factor authentication", $sprite="lock")
+    System(ai_engine, "AI Reasoning Engine", "Core intelligence: Analyzes patterns, generates insights, and creates personalized recommendations", $sprite="brain")
+}
+
+'External Dependencies (Cost/Integration Points)
+System_Boundary(external_boundary, "External Services (Third-party Dependencies)") {
+    System_Ext(banking_api, "Banking APIs", "Data Source: Multiple financial institutions (requires API contracts)", $sprite="university")
+    System_Ext(investment_api, "Investment APIs", "Data Source: Market data and portfolio information (subscription required)", $sprite="chart_line")
+    System_Ext(credit_service, "Credit Scoring Service", "Data Source: Credit information (pay-per-use model)", $sprite="server")
+    System_Ext(news_service, "Financial News Service", "Data Source: Market news and indicators (subscription required)", $sprite="newspaper")
+    System_Ext(education_content, "Financial Education Content", "Data Source: Learning resources (licensing costs)", $sprite="graduation_cap")
+    System_Ext(regulatory_systems, "Regulatory Compliance", "Required Integration: Ensures legal compliance (mandatory)", $sprite="shield_alt")
+}
+
+'Key Interactions
+Rel(individual, pfm_system, "Receives value: Unified view, insights, goal tracking")
+Rel(pfm_system, individual, "Delivers value: Notifications, alerts, recommendations")
+Rel(advisor, pfm_system, "Analyzes: Customer financial situation and history")
+Rel(pfm_system, advisor, "Enables: Data-driven financial advice")
+
+'External Data Consumption (Cost Centers)
+Rel_D(pfm_system, banking_api, "Consumes: Account data, transactions, balances")
+Rel_D(pfm_system, investment_api, "Consumes: Portfolio data, market information")
+Rel_D(pfm_system, credit_service, "Consumes: Credit scores, history")
+Rel_D(pfm_system, news_service, "Consumes: Financial news, market updates")
+Rel_D(pfm_system, education_content, "Consumes: Educational materials")
+Rel_D(pfm_system, regulatory_systems, "Reports: Compliance information")
+
+'Internal Component Usage
+Rel_U(pfm_system, auth_service, "Relies on: User authentication and data protection")
+Rel_U(pfm_system, ai_engine, "Relies on: Data analysis and recommendation generation")
+
+@enduml
+
+```
+
+## Primary Users
+
+**Individual Customer:** Seeks a unified view of their finances, personalized insights, and goal management tools to improve their financial health.
+**Financial Advisor:** Accesses shared financial data (with customer permission) to provide expert guidance and personalized recommendations.
+
+## Core System Value Proposition
+The AI-Enhanced Personal Finance Management System addresses key challenges in personal finance:
+
+**Financial Fragmentation:** Unifies multiple accounts from different institutions
+**Decision Complexity:** Simplifies financial decisions through AI-powered analysis
+**Personalization Gap:** Tailors recommendations to individual circumstances
+**Financial Literacy:** Delivers contextual financial education
+
+## Internal Components (In-house Development)
+
+**Authentication Service:** Secures access to financial data through multi-factor authentication, ensuring data privacy and regulatory compliance.
+**AI Reasoning Engine:** Core intelligence that analyzes patterns, generates insights, and creates personalized recommendations based on customer data.
+
+## External Dependencies (Third-party Services)
+
+**Banking APIs:** Data source for transactions, account balances, and banking information from multiple financial institutions (requires API contracts).
+**Investment APIs:** Data source for portfolio information and market data (subscription-based).
+**Credit Scoring Service:** Provides credit scores and history (pay-per-use model).
+**Financial News Service:** Delivers market news and economic indicators (subscription-based).
+**Financial Education Content:** Repository of educational materials (licensing costs).
+**Regulatory Compliance Systems:** Ensures adherence to financial regulations and data protection standards (mandatory integration).
+
+## Key Interactions
+
+- **Individual customers** receive unified financial views, insights, and goal tracking
+- **System delivers** notifications, alerts, and personalized recommendations to customers
+- **Financial advisors analyze** customer situations and provide data-driven advice
+- **System consumes** data from multiple external sources to enable comprehensive analysis
+
+## Business & Development Considerations
+
+**Value Delivery:** The core system transforms fragmented financial data into actionable insights and recommendations.
+**Development Focus:** Key components include secure authentication and AI reasoning capabilities.
+**Cost Centers:** External APIs and services represent ongoing operational costs through subscriptions or usage fees.
+**Integration Complexity:** Multiple third-party dependencies require careful management of API contracts and data flows.

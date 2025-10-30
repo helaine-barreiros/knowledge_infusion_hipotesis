@@ -1,0 +1,86 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sas
+actor FinancialAdvisor as faa
+system "System" as sys
+
+rectangle Professional {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile and Goals" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Predefined Thresholds" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile (MiFID II)" as CFR007
+  usecase "CFR008: Access News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: Consolidated Personalized Dashboard for Financial Information" as CFR009
+  usecase "CFR010: Manage Relationship with Financial Advisors Including Data Sharing Permissions" as CFR010
+
+  sas --> SAFR001 : Configure Analysis Parameters (Basel III, etc.)
+}
+
+rectangle FinancialAdvisor {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations" as FAFR003
+}
+
+rectangle System {
+  usecase "SFR001: Deliver Alerts Through Notification Channels (AML, etc.)" as SFR001
+  usecase "SFR002: Personalized Recommendations Based on Financial Profiles" as SFR002
+  usecase "SFR003: Request Predictive Insights from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations From AI" as SFR004
+  usecase "SFR005: Spending Limit Alerts When Exceeding Thresholds" as SFR005
+  usecase "SFR006: Investment Opportunity Analysis Based on Risk Profile (ESG)" as SFR006
+  usecase "SFR007: Specific Investment Opportunities Matching User Criteria and ESG Preferences" as SFR007
+  usecase "SFR008: Anomaly Transaction Alerts According to AML Regulations" as SFR008
+  usecase "SFR009: Contextualized News Relevant to Portfolio" as SFR009
+  usecase "SFR010: Generate Client Dashboards Intuitively" as SFR010
+}
+
+rectangle AI {
+  usecase "AIFR001: Financial Predictions Based on Historical Data and Market Trends" as AIFR001
+  usecase "AIFR002: Personalized Recommendations Aligning with User Profiles (FINRA)" as AIFR002
+  usecase "AIFR003: Spending Limit Alerts for Unusual Deviations from Patterns" as AIFR003
+  usecase "AIFR004: Investment Opportunity Analyses Against Risk Tolerance and MPT Principles" as AIFR004
+}
+
+sas <|-- SAFR001 : Manage Analysis Parameters (Basel III, etc.)
+
+c1 --> CFR001 : View Financial Insights Dashboard
+c1 --> CFR002 : Receive Alerts for Anomalous Transactions
+c1 --> CFR003 : View Predictions Based on Historical Data and Market Trends
+c1 --> CFR004 : Personalized Recommendations Aligned with Goals
+c1 --> CFR005 : Manage Preferences for Recs.
+c1 --> CFR006 : Spending Limit Alerts Exceeding Thresholds
+c1 --> CFR007 : View Investment Opportunities Based on Risk Profile (MiFID II)
+c1 --> CFR008 : Access News Related to Portfolio
+c1 --> CFR009 : Consolidated Personalized Dashboard
+c1 --> CFR010 : Manage Relationship with Advisors
+
+faa --> FAFR001 : Mentoring Sessions via Insights
+faa --> FAFR002 : View Client Intervention Alerts (Proactive)
+faa --> FAFR003 : Predictive Analytics for Clients' Finances
+
+sas --> sys : Configure Analysis Params
+sys --> SFR001 : Deliver AML/Regulatory Alerts
+sys --> SFR002 : Personalized Recs Based on Profiles
+sys --> SFR003: Request Pred. Insights from AI
+sys --> SFR004: Req. Personalized Recs From AI
+sys --> SFR005: Spending Limit Alerts Exceeding Thresholds
+sys --> SFR006: Investment Opportunity Analysis (Risk Profile)
+sys --> SFR007: Specific Invts Matching User Criteria and ESG
+sys --> SFR008: Anomaly Transaction Alerts AML Compliance
+sys --> SFR009: Contextualized News for Portfolio
+sys --> SFR010: Generate Client Dashboards
+
+AI <|-- AIFR001 : Financial Predictions (Hist, Market)
+AI <|-- AIFR002 : Personalized Recs Aligning Profiles(FINRA)
+AI <|-- AIFR003 : Spending Limit Alerts (Unusual Deviations)
+AI <|-- AIFR004: Inv. Opportunity Analyses(MPT)
+
+@enduml

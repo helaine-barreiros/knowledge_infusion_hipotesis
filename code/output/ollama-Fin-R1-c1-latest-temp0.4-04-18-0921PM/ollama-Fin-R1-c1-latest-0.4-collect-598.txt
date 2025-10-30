@@ -1,0 +1,69 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile (MiFID II)" as CFR007
+  usecase "CFR008: Receive News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: View Consolidated Financial Information in a Personalized Dashboard" as CFR009
+  usecase "CFR010: Manage Relationship with Financial Advisors, Including Data Sharing Permissions" as CFR010
+
+  actor Client as C
+  SysAdmin as SA
+  FAFR as FA
+
+  C --> CFR001 : View financial insights dashboard
+  C --> CFR002 : Receive alerts for anomalous transactions (FATF)
+  C --> CFR003 : View financial predictions based on data and trends
+  C --> CFR004 : Receive personalized recommendations aligned with profile
+  C --> CFR005 : Manage preferences for recommendations
+  C --> CFR006 : View spending limit alerts when exceeding thresholds
+  C --> CFR007 : Access investment opportunities (MiFID II)
+  C --> CFR008 : Receive news related to portfolio
+  C --> CFR009 : View consolidated financial information in dashboard
+  C --> CFR010 : Manage relationship with advisors
+
+  SA --> SAFR001 : Manage analysis parameters for compliance (Basel III)
+
+  FA --> FAFR002 : View client intervention alerts from system-generated insights
+  FA --> FAFR003 : View predictive analytics about clients' financial situations during consultations
+  FA --> FAFR004 : Configure analysis parameters for specific segments
+
+  Sys --> SFR019 : Maintain historical record of user insights for trend analysis and improvement.
+
+  AIFR as AI
+
+  AI <|-- (CFR003)
+  AI <|-- (CFR006)
+  AI <|-- (CFR007)
+  AI <|-- (CFR008)
+  AI <|-- (SAFR001)
+
+  Sys --> SFR020 : Manage user feedback to improve system outputs.
+
+}
+
+@enduml
+```
+
+### Key Observations:
+- **Actors** include `Client`, `SysAdmin`, and `FA` (Financial Advisor).
+- **Use Cases** are categorized under the client, system administrator, financial advisor, and AI components.
+- Relationships between actors and use cases are established with arrows indicating interactions. For example, clients can view various dashboards/alerts/recommendations, while the system handles data processing through its subcomponents like `AIFR` (AI Functionality).
+- The diagram groups related functionalities into logical packages or sections within the "System" boundary.
+- Inheritance is applied where appropriate; for instance, AI-related use cases are linked to their respective components. 
+
+This structure ensures clarity in mapping functional requirements onto a visual model that aligns with technical specifications and user interactions. Adjustments may be needed based on further analysis of dependencies or additional requirements not explicitly listed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 840]

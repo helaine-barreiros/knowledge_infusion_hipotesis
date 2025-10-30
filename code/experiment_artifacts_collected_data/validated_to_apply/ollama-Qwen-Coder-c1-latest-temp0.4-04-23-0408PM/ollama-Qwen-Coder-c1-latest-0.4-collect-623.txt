@@ -1,0 +1,73 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Clients" {
+  actor Client as CFR001
+}
+
+package "Financial Advisors" {
+  actor FinancialAdvisor as FAFR002
+  
+  usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+}
+
+package "System Administrators" {
+  actor SystemAdmin as SAFR001
+  
+  usecase "SAFR002: Manage Analysis Parameters for the AI System" as SAFR002
+}
+
+package "Users (Client, Financial Advisor, or System Administrator)" {
+  actor User as CFR011
+  
+  usecase "CFR011: Send Feedback about Recommendations and Insights to Improve Future Outputs" as CFR011
+}
+
+rectangle "System Components" {
+  
+  rectangle "Financial Services" {
+    usecase "SFR012: Generate Client Dashboards that Present Financial Information in an Intuitive Format" as SFR012
+    
+    package "Alerts & Notifications" {
+      usecase "SFR013: Deliver Alerts to Users through Appropriate Notification Channels" as SFR013
+    }
+    
+    rectangle "Predictive Analytics" {
+      
+      usecase "AIFR004: Generate Investment Opportunity Analyses for Users by Evaluating Potential Investments Against Their Risk Profiles, Time Horizons, and Financial Goals" as AIFR004
+      
+      package "Anomaly Detection" {
+        usecase "SFR006: Request Anomaly Transaction Alerts from the AI Component to Detect Potentially Fraudulent Activities in Accordance with AML Regulations" as SFR006
+        usecase "AIFR006: Generate Anomaly Transaction Alerts by Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance with FinCEN Requirements" as AIFR006
+      }
+      
+    }
+    
+  }
+
+  rectangle "Recommendations & Insights" {
+  
+    package "Personalized Recommendations" {
+      usecase "SFR012: Deliver Personalized Recommendations to Users Based on Their Financial Profiles" as SFR012
+      
+      usecase "AIFR005: Generate Investment Opportunities for Users by Identifying Financial Instruments That Align with Their Investment Strategies and Modern Portfolio Theory Principles" as AIFR005
+    }
+    
+  }
+
+}
+
+CFR001 --> (SFR012)
+FAFR003 --> (AIFR004)
+SAFR002 --> (SFR012)
+
+User --> CFR011
+
+@enduml
+
+[Done: True
+Done Reason: stop
+Eval Count: 589]

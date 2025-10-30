@@ -1,0 +1,249 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as c
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts about Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  c --> CFR001
+  c --> CFR002
+  c --> CFR003
+  c --> CFR004
+  c --> CFR005
+  c --> CFR006
+  c --> CFR007
+  c --> CFR008
+  c --> CFR009
+  c --> CFR10
+  
+  c --> (SFR02)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as fa
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  fa --> FAFR001
+  fa --> FAFR002
+  fa --> FAFR003
+  fa --> FAFR004
+  
+  fa --> (SFR06)
+}
+
+package "System Administrator" {
+  actor SystemAdmin as sa
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  sa --> SAFR001
+  
+  sa --> (SFR02)
+}
+
+rectangle "AI System" {
+  package "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+    
+    c --> (AIFR001)
+    fa --> (AIFR002)
+    sa --> (AIFR003)
+  }
+  
+  package "Notification System" {
+    usecase "SFR001: Deliver Alerts to Users" as SFR001
+    
+    c --> (SFR001)
+    fa --> (SFR001)
+    sa --> (SFR001)
+    
+    rectangle "Channels" {
+      usecase "SMS Notification" as SMS
+      usecase "Email Notification" as Email
+      
+      SFR001 --> SMS
+      SFR001 --> Email
+    }
+  }
+  
+  package "Recommendation System" {
+    usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+    
+    c --> (SFR002)
+    fa --> (SFR002)
+    
+    rectangle "Sources" {
+      usecase "User Financial Data" as UserData
+      usecase "AI Predictions" as AIPredictions
+      
+      SFR002 --> UserData
+      SFR002 --> AIPredictions
+    }
+  }
+  
+  package "Prediction System" {
+    usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+    
+    c --> (SFR003)
+    
+    rectangle "Sources" {
+      usecase "Historical Transaction Data" as HistoryData
+      usecase "Market Trends" as MarketTrends
+      
+      SFR003 --> HistoryData
+      SFR003 --> MarketTrends
+    }
+  }
+  
+  package "Recommendation Request System" {
+    usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+    
+    c --> (SFR004)
+    
+    rectangle "Sources" {
+      usecase "User Financial Data" as UserData
+      usecase "AI Predictions" as AIPredictions
+      
+      SFR004 --> UserData
+      SFR004 --> AIPredictions
+    }
+  }
+  
+  package "Spending Limit Alert System" {
+    usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+    
+    c --> (SFR005)
+    
+    rectangle "Sources" {
+      usecase "User Spending Patterns" as SpendPatterns
+      usecase "Thresholds" as Thresholds
+      
+      SFR005 --> SpendPatterns
+      SFR005 --> Thresholds
+    }
+  }
+  
+  package "Investment Opportunity Analysis System" {
+    usecase "SFR006: Request Investment Opportunity Analyses from AI Component" as SFR006
+    
+    c --> (SFR006)
+    
+    rectangle "Sources" {
+      usecase "User Risk Profile" as RiskProfile
+      usecase "Time Horizons" as TimeHorizons
+      
+      SFR006 --> RiskProfile
+      SFR006 --> TimeHorizons
+    }
+  }
+  
+  package "Specific Investment Opportunity System" {
+    usecase "SFR007: Request Specific Investment Opportunities from AI Component" as SFR007
+    
+    c --> (SFR007)
+    
+    rectangle "Sources" {
+      usecase "User Investment Criteria" as InvestCriteria
+      usecase "ESG Preferences" as ESGPrefs
+      
+      SFR007 --> InvestCriteria
+      SFR007 --> ESGPrefs
+    }
+  }
+  
+  package "Anomaly Transaction Alert System" {
+    usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as SFR008
+    
+    c --> (SFR008)
+    
+    rectangle "Sources" {
+      usecase "User Spending Patterns" as SpendPatterns
+      usecase "AML Requirements" as AMLReqs
+      
+      SFR008 --> SpendPatterns
+      SFR008 --> AMLReqs
+    }
+  }
+  
+  package "Contextualized News System" {
+    usecase "SFR009: Request Contextualized News from AI Component" as SFR009
+    
+    c --> (SFR009)
+    
+    rectangle "Sources" {
+      usecase "User Portfolio" as UserPortfolio
+      usecase "Financial News Sources" as NewsSrc
+      
+      SFR009 --> UserPortfolio
+      SFR009 --> NewsSrc
+    }
+  }
+  
+  package "News Processing System" {
+    usecase "SFR10: Process Contextualized News to Extract Relevant Information for Users' Financial Situations" as SFR10
+    
+    c --> (SFR10)
+    
+    rectangle "Sources" {
+      usecase "Contextualized News Insights" as NewsInsights
+      usecase "User Portfolio" as UserPortfolio
+      
+      SFR10 --> NewsInsights
+      SFR10 --> UserPortfolio
+    }
+  }
+  
+  package "News Insight Request System" {
+    usecase "SFR11: Request Contextualized News Insights from AI Component" as SFR11
+    
+    c --> (SFR11)
+    
+    rectangle "Sources" {
+      usecase "User Portfolio" as UserPortfolio
+      usecase "Financial News Sources" as NewsSrc
+      
+      SFR11 --> UserPortfolio
+      SFR11 --> NewsSrc
+    }
+  }
+  
+  package "Client Dashboard System" {
+    usecase "SFR12: Generate Client Dashboards that Present Financial Information in an Intuitive and Actionable Format" as SFR12
+    
+    c --> (SFR12)
+    
+    rectangle "Sources" {
+      usecase "User Financial Data" as UserData
+      usecase "AI Predictions" as AIPredictions
+      
+      SFR12 --> UserData
+      SFR12 -->
+
+[Done: True
+Done Reason: length
+Eval Count: 2048]

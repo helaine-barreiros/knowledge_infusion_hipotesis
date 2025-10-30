@@ -1,0 +1,82 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SFR002
+  usecase "CFR005: Manage Recommendation Preferences" as CFR010
+  
+  CFR001 --> (View Financial Insights Dashboard)
+  CFR001 --> SAFR003
+  CFR001 --> SFR002
+  CFR001 --> CFR010
+}
+
+package Advisor {
+  actor "Financial Advisor" as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts" as SAFR004
+  usecase "FAFR003: View Predictive Analytics" as SFR006
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as AIFR004
+  
+  FAFR001 --> (Manage Client Mentoring Sessions)
+  FAFR001 --> SAFR004
+  FAFR001 --> SFR006
+  FAFR001 --> AIFR004
+}
+
+package System {
+  actor "System" as Sys
+  
+  usecase "SFR003: Request Financial Predictions from AI Component" as AIFR001
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as AIFR003
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as AIFR004
+  usecase "SFR007: Request Specific Investment Opportunities from AI Component that Match User Criteria and ESG Preferences" as AIFR015
+  usecase "SFR008: Request Anomaly Transaction Alerts from AI Component" as AIFR006
+  usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR013
+  usecase "SFR012: Generate Client Dashboards that Present Financial Information in an Intuitive and Actionable Format" as AIFR014
+  usecase "SFR017: Generate Financial Health Reports That Assess Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as SFR018
+  
+  Sys --> (Deliver Alerts to Users)
+  Sys --> (Deliver Personalized Recommendations Based on User Profiles)
+  Sys --> AIFR001
+  Sys --> AIFR003
+  Sys --> AIFR004
+  Sys --> AIFR015
+  Sys --> AIFR006
+  Sys --> SFR013
+  Sys --> AIFR014
+  Sys --> SFR018
+}
+
+rectangle "System" {
+  usecase "SFR019: Maintain a Historical Record of Users' Insights to Enable Trend Analysis and Effectiveness Measurement" as SFR019
+  usecase "SFR20: Manage User Feedback to Continuously Improve the Quality and Relevance of Financial Insights" as AIFR007
+  
+  Sys --> (Manage Users' Financial Goals)
+  Sys --> SFR019
+  Sys --> AIFR007
+}
+
+rectangle "AI System" {
+  usecase "AIFR02: Generate Personalized Recommendations for Users Based on Their Financial Profiles, Goals, and Risk Tolerance as Defined by Industry Standards Like FINRA Guidelines" as AIFR002
+  
+  Sys <|-- (Generate Predictive Insights)
+  
+  AIFR001 --> SFR03
+  AIFR002 --> SFR04
+}
+
+rectangle "Notifications" {
+  usecase "SFR016: Request Predictive Insights from the AI Component to Enhance the Value of Financial Guidance Provided to Clients" as AIFR009
+  
+  Sys <|-- (Generate Client Alerts Based on Predefined Conditions)
+  
+  SFR03 --> (Send Feedback About System's Recommendations and Insights)
+}
+
+@enduml

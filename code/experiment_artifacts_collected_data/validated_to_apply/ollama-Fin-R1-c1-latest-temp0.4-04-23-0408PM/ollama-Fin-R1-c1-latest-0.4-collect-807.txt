@@ -1,0 +1,102 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR009: Request Contextualized News Insights" as SFR009
+
+  // Clients (User)
+  actor User as U {
+    --> CFR001 : "View Financial Insights Dashboard"
+    --> SFR003 : "Request Financial Predictions"
+    --> SFR004 : "Request Personalized Recommendations"
+    --> SFR005 : "Request Spending Limit Alerts"
+    --> SFR006 : "Request Investment Opportunity Analysis"
+    --> SFR012 : "Generate Client Dashboards"
+  }
+
+  // Clients (Financial Advisor)
+  actor FinancialAdvisor as FA {
+    --> FAFR002 : "View Client Intervention Alerts"
+    --> FAFR003 : "View Predictive Analytics for Clients"
+    --> AIFR008 : "Request Client Predictive Intervention Recommendations"
+  }
+
+  // System Administrators
+  actor SysAdmin as SA {
+    --> SAFR001 : "Manage Analysis Parameters"
+  }
+
+  // Financial Advisors and Users (Client)
+  user U <|-- FA
+
+}
+
+@enduml
+```
+
+**Description of the Diagram:**
+- The system includes multiple actors such as **User**, **FinancialAdvisor**, and **SysAdmin**.
+- Use cases are organized into categories based on their functionality. For example, client-related use cases like viewing dashboards or requesting recommendations fall under "Client" interactions, while administrative tasks (e.g., managing analysis parameters) are handled by SysAdmin.
+
+1. **User Actor**: Represents clients (both individual and financial advisors). It has relationships with several system-use case pairs:
+   - Viewing the Financial Insights Dashboard (`CFR001`).
+   - Requesting financial predictions (`SFR003`), personalized recommendations (`SFR004`), spending limit alerts (`SFR005`), investment opportunity analysis (`SFR006`), and client dashboards (`SFR012`).
+
+2. **FinancialAdvisor Actor**: Represents advisors who can view intervention alerts (`FAFR002`), predictive analytics for clients (`FAFR003`), or request specific AI-generated recommendations like predictive interventions (`AIFR008`).
+
+3. **SysAdmin Actor**: Handles administrative tasks such as managing analysis parameters (`SAFR001`).
+
+4. **Inheritance/Delegation**:
+   - The `User` actor is extended by the `FinancialAdvisor`, meaning all client-related interactions (except those explicitly labeled for advisors) apply to both.
+
+This structure ensures clarity in associating actors with their respective use cases while adhering strictly to the provided requirements. All relationships are bidirectional where appropriate, such as feedback loops or requests from clients to systems. The system boundary is represented by a rectangle encompassing all relevant components and interactions.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR009: Request Contextualized News Insights" as SFR009
+
+  // Clients (User)
+  actor User as U {
+    --> CFR001 : "View Financial Insights Dashboard"
+    --> SFR003 : "Request Financial Predictions"
+    --> SFR004 : "Request Personalized Recommendations"
+    --> SFR005 : "Request Spending Limit Alerts"
+    --> SFR006 : "Request Investment Opportunity Analysis"
+    --> SFR012 : "Generate Client Dashboards"
+  }
+
+  // Clients (Financial Advisor)
+  actor FinancialAdvisor as FA {
+    --> FAFR002 : "View Client Intervention Alerts"
+    --> FAFR003 : "View Predictive Analytics for Clients"
+    --> AIFR008 : "Request Client Predictive Intervention Recommendations"
+  }
+
+  // System Administrators
+  actor SysAdmin as SA {
+    --> SAFR001 : "Manage Analysis Parameters"
+  }
+
+  user U <|-- FA
+
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1005]

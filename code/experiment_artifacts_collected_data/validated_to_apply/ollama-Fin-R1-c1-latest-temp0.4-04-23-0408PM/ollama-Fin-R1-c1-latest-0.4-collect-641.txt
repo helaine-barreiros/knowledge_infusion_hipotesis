@@ -1,0 +1,128 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  usecase "SAFR004: Configure Analysis Parameters by Client Segment" as SAFR004
+
+  // Clients (Users)
+  client --> CFR001 : "View Financial Insights Dashboard"
+  client --> CFR003 : "View Financial Predictions"
+  client --> SFR019 : "Maintain Historical Record of Insights"
+
+  SysAdmin --> SAFR002 : "Manage User Preferences"
+  SysAdmin --> SAFR004 : "Configure Analysis Parameters by Client Segment"
+
+  // System (SFR)
+  Sys --> CFR003 : "Request Financial Predictions from AI Component"
+  Sys --> SFR019 : "Maintain Historical Record of Insights"
+}
+
+// Actors
+actor client as cClient {
+  name: "Client"
+}
+actor SysAdmin as aSysAdmin {
+  name: "System Administrator"
+}
+actor Sys as sSys {
+  name: "System"
+}
+actor FAFR as fAdvisor {
+  name: "Financial Advisor"
+}
+actor AIFR as AIComponent {
+  name: "AI System"
+}
+
+// Relationships
+cClient --> CFR001 : "View Financial Insights Dashboard"
+cClient --> CFR003 : "View Financial Predictions"
+cClient --> SFR019 : "Maintain Historical Record of Insights"
+
+aSysAdmin --> SAFR002 : "Manage User Preferences"
+aSysAdmin --> SAFR004 : "Configure Analysis Parameters by Client Segment"
+
+sSys --> AIFR : "Request Financial Predictions from AI Component"
+sSys --> SFR019 : "Maintain Historical Record of Insights"
+
+@enduml
+```
+
+**Key Observations:**
+- **Actors**: The system includes multiple actors such as `Client`, `System Administrator`, and `Financial Advisor`. Each actor corresponds to the functional requirements provided.
+- **Use Cases**: Use cases are categorized under their respective actors. For example, clients can view financial insights dashboards or predictions, while administrators manage user preferences and analysis parameters.
+- **Inheritance/Delegation**: The system (SFR) delegates tasks like requesting AI-generated recommendations or maintaining historical records to the `AI Component` and itself (`SFR019`). This is represented using arrows pointing from SFR to AIFR for requests and internal management.
+- **Grouping**: Use cases are grouped under their relevant actors, ensuring clarity. For instance, all client-related use cases (CFR) are together with the `Client` actor.
+
+This diagram adheres strictly to the provided requirements, avoiding any assumptions or extraneous elements not explicitly stated in the functional descriptions. The structure is designed for readability and maintainability.
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage User Preferences" as SAFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "SFR019: Maintain Historical Record of Insights" as SFR019
+  usecase "SAFR004: Configure Analysis Parameters by Client Segment" as SAFR004
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  client --> CFR003 : "View Financial Predictions"
+  client --> SFR019 : "Maintain Historical Record of Insights"
+
+  SysAdmin --> SAFR002 : "Manage User Preferences"
+  SysAdmin --> SAFR004 : "Configure Analysis Parameters by Client Segment"
+
+  sSys --> AIFR : "Request Financial Predictions from AI Component"
+  sSys --> SFR019 : "Maintain Historical Record of Insights"
+}
+
+actor client as cClient {
+  name: "Client"
+}
+actor SysAdmin as aSysAdmin {
+  name: "System Administrator"
+}
+actor Sys as sSys {
+  name: "System"
+}
+actor FAFR as fAdvisor {
+  name: "Financial Advisor"
+}
+actor AIFR as AIComponent {
+  name: "AI System"
+}
+
+@enduml
+```
+
+### Key Components:
+1. **Actors**:
+   - `Client`: Represents end-users (e.g., clients, financial advisors).
+   - `System Administrator` (`SysAdmin`): Manages system settings and parameters.
+   - `Financial Advisor` (`fAdvisor`): Interacts with the system for advisory purposes.
+
+2. **Use Cases**:
+   - Client-related use cases like viewing dashboards, predictions, or historical records (CFR001–3, SFR019).
+   - System Administrator tasks such as managing user preferences and parameters (SAFR002–4).
+
+3. **System (`sSys`)**: Central entity that orchestrates interactions with the AI component (`AIFR`) for requests like financial predictions or maintaining historical records.
+
+### Relationships:
+- Clients interact directly with system functionalities via use cases.
+- System Administrators manage internal settings (e.g., user preferences, parameters).
+- The `System` delegates external requests to the `AI Component` and handles its own maintenance tasks.
+
+This structure ensures all requirements are captured accurately without redundancy. Adjustments can be made if additional details or relationships emerge from further analysis.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1238]

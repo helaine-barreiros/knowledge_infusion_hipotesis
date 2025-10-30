@@ -1,0 +1,101 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR002
+}
+
+package "System Administrator" {
+  actor SysAdmin as SAFR003
+}
+
+rectangle "User Interface" {
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "SFR12: Generate Client Dashboards" as SFR12
+  
+  CFR001 --> CFR009 : "View"
+  FAFR002 --> CFR009 : "View"
+  SAFR003 --> CFR009 : "Manage"
+}
+
+rectangle "Financial Insights" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SFR17: Generate Financial Health Reports" as SFR17
+  
+  CFR001 --> CFR001 : "View"
+  FAFR002 --> CFR001 : "View"
+}
+
+rectangle "Alerts and Notifications" {
+  usecase "CFR002: View Alerts about Anomalous Transactions" as CFR002
+  usecase "SFR8: Request Anomaly Transaction Alerts" as SFR8
+  
+  CFR001 --> CFR002 : "View"
+  FAFR002 --> CFR002 : "Receive"
+}
+
+rectangle "Recommendations and Insights" {
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "SFR3: Deliver Personalized Recommendations to Users" as SFR3
+  
+  CFR001 --> CFR004 : "View"
+  FAFR002 --> CFR004 : "Receive"
+}
+
+rectangle "Spending Limits and Budgeting" {
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "SFR5: Request Spending Limit Alerts from AI Component" as SFR5
+  
+  CFR001 --> CFR006 : "View"
+}
+
+rectangle "Investment Opportunities and Diversification" {
+  usecase "CFR007: View Investment Opportunities Suitable to My Risk Profile" as CFR007
+  usecase "SFR6: Request Investment Opportunity Analysis from AI Component" as SFR6
+  
+  CFR001 --> CFR007 : "View"
+}
+
+rectangle "News and Market Updates" {
+  usecase "CFR008: View News Related to My Investment Portfolio" as CFR008
+  usecase "SFR9: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR9
+  
+  CFR001 --> CFR008 : "View"
+}
+
+rectangle "Relationship Management and Permissions" {
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  usecase "SFR24: Request Client Feedback to Improve System Outputs" as SFR24
+  
+  CFR001 --> CFR10 : "Manage"
+}
+
+rectangle "System Administration and Management" {
+  usecase "SAFR001: Manage Analysis Parameters for the AI System" as SAFR001
+  usecase "FAFR003: View Predictive Analytics About My Clients' Financial Situations" as FAFR003
+  
+  SAFR001 --> SAFR001 : "Manage"
+}
+
+rectangle "AI Component and Algorithms" {
+  usecase "AIFR001: Generate Financial Predictions for Users" as AIFR001
+  usecase "AIFR002: Generate Personalized Recommendations for Users Based on Their Profiles" as AIFR002
+  
+  SAFR003 --> AIFR001 : "Request"
+  FAFR002 --> AIFR002 : "Request"
+}
+
+rectangle "AI System Outputs and Actions" {
+  usecase "SFR4: Request Financial Predictions from AI Component" as SFR4
+  usecase "SFR7: Generate Client Alerts Based on Predefined Conditions" as SFR7
+  
+  SAFR003 --> SFR4 : "Request"
+}
+
+@enduml

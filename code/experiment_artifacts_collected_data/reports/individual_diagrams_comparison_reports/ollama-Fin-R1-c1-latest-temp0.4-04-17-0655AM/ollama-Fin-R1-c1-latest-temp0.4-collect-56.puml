@@ -1,0 +1,59 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "AIFR009: Generate Client Predictive Intervention Recommendations" as AIFR009
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin -> SAFR001 : "Manage Analysis Parameters"
+
+  financialAdvisor --> FAFR003 : "View Predictive Analytics for Clients"
+  
+  system --> SFR002 : "Deliver Personalized Recommendations"
+  system --> AIFR007 : "Generate Contextualized News Insights"
+}
+
+rectangle "Client" {
+  actor Client as client
+}
+system -- (client) : "Request Financial Data"
+
+rectangle "Financial Advisor" {
+  actor FAFR001: Manage Client Mentoring Sessions 
+  actor FAFR002: View Client Intervention Alerts  
+  actor FAFR004: Configure Analysis Parameters for Client Segments
+
+  FAFR003 <|-- (system) : "Use System Insights"
+
+  SysAdmin -> SAFR001 : "Manage Analysis Parameters"
+}
+
+rectangle "System Administrator" {
+  actor SysAdmin
+}
+SysAdmin -- (SAFR001) : "Set Up AI Algorithms and Compliance Settings"
+
+rectangle "AI System" {
+  usecase AIFR002: Generate Personalized Recommendations 
+  usecase AIFR003: Generate Spending Limit Alerts  
+  usecase AIFR004: Generate Investment Opportunity Analyses
+  usecase AIFR005: Generate Investment Opportunities Based on Strategies
+  usecase AIFR006: Generate Anomaly Transaction Alerts  
+  usecase AIFR007: Generate Contextualized News Insights 
+  usecase AIFR008: Generate Client Predictive Intervention Recommendations
+
+  system -- (AIFR002) : "Analyze Data for Recom"
+}
+
+rectangle "Contextualized News" {
+  actor SFR019
+}
+SFR019 --> AIFR007 : "Provide Relevant Financial News"
+
+@enduml

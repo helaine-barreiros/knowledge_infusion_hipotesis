@@ -1,0 +1,58 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR002: Deliver Personalized Recommendations Based on Profiles" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  // Relationships between system components and clients
+  Client <|-- (CFR001) : "Interacts with AI System via UI"
+  Client <|-- AIFR002 : "Receives recommendations from the system"
+  
+  SysAdmin --> SAFR001 : "Configures parameters for algorithm accuracy"
+
+  // Relationships between advisors and clients
+  FinancialAdvisor --> FAFR003: "View Predictive Analytics About Clients' Situations"
+  Client <|-- (FAFR002) : "Receive alerts from the system when needed"
+  
+  System <|-- SFR014: "Generate client analytics for performance tracking"
+
+  // Relationship between AI and clients
+  AIFR007 --> Client : "Provide contextualized news insights relevant to portfolio"
+
+  // Feedback loop involving all actors
+  Client <|-- CFR011: "Send feedback about system outputs"
+  
+}
+
+@enduml
+```
+
+### Explanation:
+- **Client**: Interacts with the AI-powered system through various use cases like viewing financial dashboards, receiving recommendations, and managing personal preferences.
+- **SysAdmin**: Manages analysis parameters to ensure compliance and accuracy of algorithms (e.g., SAFR001).
+- **FinancialAdvisor**: Receives alerts and predictive insights from the system for client guidance (e.g., FAFR003).
+- **AI System**: Generates recommendations, predictions, spending limits, investment opportunities, etc. (AIFR series).
+
+### Key Relationships:
+1. **Client** uses "CFR001" to view dashboards and interacts with AIFR components for recommendations.
+2. **SysAdmin** configures parameters via SAFR use cases.
+3. The system itself handles internal flows like generating insights, alerts (SFR), and requests from clients/advisors.
+
+### Diagram Structure:
+- Grouped actors by their primary interactions: Clients, SysAdmins, Advisors.
+- Used inheritance where applicable (e.g., Client > CFR011 for feedback).
+- Ensured all use cases are linked to appropriate actors.
+
+[Done: True
+Done Reason: stop
+Eval Count: 585]

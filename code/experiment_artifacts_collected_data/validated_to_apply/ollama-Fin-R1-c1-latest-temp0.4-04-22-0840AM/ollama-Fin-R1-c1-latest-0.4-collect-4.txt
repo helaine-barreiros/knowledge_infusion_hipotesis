@@ -1,0 +1,64 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+  
+  // Relationships between system and actors
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  
+  // Additional relationships for FAFR use cases (assuming they are part of the System)
+}
+
+rectangle "Client" {
+  actor "User" as User
+  
+  user -> CFR002: "Receive Alerts on Anomalous Transactions" 
+  user -> CFR003: "View Financial Predictions"
+  user -> CFR004: "Receive Personalized Recommendations"
+  user -> CFR005: "Manage Preferences for Recommendations"
+  user -> CFR006: "View Spending Limit Alerts"
+  user -> CFR007: "View Investment Opportunities Based on Risk Profile"
+  user -> CFR008: "Access News Related to Portfolio"
+  user -> CFR009: "Use Personalized Dashboard"
+  
+}
+
+rectangle "Financial Advisor" {
+  actor "Advisor" as Advisor
+  advisor --> FAFR001: "Manage Client Mentoring Sessions Based on System-Generated Insights"
+  advisor --> FAFR002: "View Intervention Alerts for Clients"
+  advisor --> FAFR003: "View Predictive Analytics About Clients' Financial Situations"
+}
+
+rectangle "System Administrator" {
+  actor "SysAdmin" as SysAdmin
+  sysadmin --> SAFR001 : "Manage Analysis Parameters"
+  
+}
+@enduml
+```
+
+### Explanation:
+- **Client**: Represents the User (including Client, Financial Advisor, or System Admin). The relationships are directed towards specific use cases they can perform.
+- **System**: Contains core system functionalities like generating dashboards (`SFR012`), managing analysis parameters (`SAFR001`), and providing predictive analytics (`FAFR003`). These are grouped within the "System" rectangle to show their internal interactions.
+- **User (Client)**: Directly interacts with use cases such as viewing financial insights, receiving alerts, etc. The relationships here map each requirement's user action back to its corresponding system feature.
+- **Financial Advisor**: Engages in activities like managing mentoring sessions (`FAFR001`), viewing client intervention alerts (`FAFR002`), and predictive analytics (`FAFR003`). These are also part of the "System" but separated by role for clarity.
+
+This structure ensures all actors (User, SysAdmin, Advisor) relate to their respective use cases within a logical grouping. The system itself is represented as a container encompassing all its components. Adjustments may be needed based on further clarifications in requirements or inferred relationships not explicitly stated here. 
+
+### Note:
+- Ensure that each actor and use case ID matches exactly with the provided functional requirements.
+- Relationships are directional (e.g., `User --> CFR001` implies "the user can perform this action").
+- The system's internal interactions might need additional modeling if more detailed dependencies exist, but based on given data, these relationships suffice.
+
+[Done: True
+Done Reason: stop
+Eval Count: 748]

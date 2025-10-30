@@ -1,0 +1,50 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as client
+actor SysAdmin as sysadmin
+actor FinancialAdvisor as advisor
+system SFR012: Generate Client Dashboards as system_dashboards
+usecase "CFR001: View Financial Insights Dashboard" as CFR001
+usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+usecase "CFR003: View Financial Predictions" as CFR003
+usecase "CFR004: Personalized Recommendations Based on Profile" as CFR004
+usecase "CFR005: Manage Recommendation Preferences" as CFR005
+usecase "CFR006: Spending Limit Alerts Exceeding Thresholds" as CFR006
+usecase "CFR007: Investment Opportunities Matching Risk Profile" as CFR007
+usecase "CFR008: Access Portfolio-Related News" as CFR008
+usecase "CFR009: Consolidated Financial Dashboard" as CFR009
+usecase "CFR10: Manage Relationship with Advisors" as CFR10
+
+actor AIFR003: Generate Spending Limit Alerts as alerts_gen
+usecase "AIFR006: Anomaly Transaction Alert Generation" as AIFR006
+
+system SFR020: Maintain User Feedback Records as feedback_system
+
+package Professional {
+  actor SysAdmin as sysadmin
+}
+
+rectangle "System Boundary" {
+  
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "SFR014: Provide Financial Analytics for Users" as SFR014
+  usecase "AIFR002: Personalized Recommendations Generation" as AIFR002
+  
+  
+  client --> CFR001 : view financial insights dashboard
+  sysadmin --> SAFR001 : manage analysis parameters (SAFR)
+  
+  advisor --> FAFR003 : view predictive analytics about clients' situations
+  advisor --> FAFR004 : configure analysis params for segments
+  
+  system_dashboards <|-- CFR009 : generate consolidated dashboards
+
+  SFR020 <|-- CFR10: manage user feedback on recommendations and insights
+  
+  
+}
+
+@enduml

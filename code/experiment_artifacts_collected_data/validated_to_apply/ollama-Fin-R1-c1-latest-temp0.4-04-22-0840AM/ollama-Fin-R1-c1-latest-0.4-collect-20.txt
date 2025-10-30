@@ -1,0 +1,53 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR006: Generate Anomaly Transaction Alerts for Users" as AIFR006
+
+  client --> CFR001 : View Financial Insights Dashboard  
+  SysAdmin --> SAFR001 : Manage Analysis Parameters
+  Client --> FAFR002 : View Client Intervention Alerts 
+  System --> SFR013 : Generate Client Alerts Based on Predefined Conditions
+  AI --> AIFR006 : Generate Anomaly Transaction Alerts for Users
+
+}
+
+rectangle "Client" {
+  actor "Client" as client  
+}
+rectangle "System Administrator" {
+  actor "SysAdmin" as SysAdmin 
+}
+rectangle "Financial Advisor" {
+  actor "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR003: View Predictive Analytics about Clients' Financial Situations" as FAFR003  
+}
+
+client <|-- (CFR001)
+SysAdmin <|-- (SAFR001)
+Client <|-- (FAFR002)
+System <|-- (SFR013)
+AI <|-- (AIFR006)
+
+@enduml
+```
+
+**Description of the Diagram:**
+- The system is represented as a rectangle containing various use cases and actors.
+- **Clients** can view financial insights dashboards, receive alerts about anomalous transactions, manage their recommendations preferences, etc. These interactions are managed through use cases like `CFR001`, `SAFR005` (not listed here but implied), etc., which are linked to the client actor.
+- The **System Administrator** can manage analysis parameters (`SAFR001`) and other system-related tasks not explicitly detailed in this example. This role is separate from clients and financial advisors, focusing on backend management of AI systems.
+- Financial Advisors (represented as a single use case `FAFR001` here) have access to client mentoring sessions based on insights (`FAFR002`) but can also view predictive analytics about their clients' situations (`FAFR003`). These are distinct from the system’s role in generating alerts or recommendations.
+- The **AI System** (represented by `AIFR006` and others) handles tasks like anomaly detection, which is linked to client interactions through use case relationships.
+
+This structure ensures that each actor's responsibilities align with their functional requirements while maintaining clarity about how they interact within the system. Additional use cases from the list could be added similarly if required.
+
+[Done: True
+Done Reason: stop
+Eval Count: 650]

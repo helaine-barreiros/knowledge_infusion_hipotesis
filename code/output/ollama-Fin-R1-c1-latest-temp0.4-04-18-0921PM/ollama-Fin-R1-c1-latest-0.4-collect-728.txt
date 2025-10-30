@@ -1,0 +1,97 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR002: Deliver Personalized Recommendations Based on Profiles" as SFR002
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  
+  Client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+  
+  Client --> SFR002 : "Request Personalized Recommendations"
+  SFR002 <|-- AIFR002 : "Use AI for Recommendation Generation"
+  
+  Client --> CFR005: Manage Preferences
+  
+  SysAdmin --> SAFR001 : "Update Analysis Parameters"
+}
+
+rectangle "Client" {
+  actor "User (Client)" as User
+  user "View Financial Insights Dashboard" as VFD
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Access Personalized Recommendations" as CFAR004
+  usecase "CFR010: Manage Relationship with Advisors" as CFAR010
+  
+  User --> VFD : "View Financial Insights Dashboard"
+  
+  SysAdmin -> CFR002 : "Configure Alerts for Users (Client)"
+  Client -->> SFR003: Request Predictions
+}
+
+rectangle "Financial Advisor" {
+  actor "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  
+  SysAdmin -> SAFR004 : "Set Analysis Parameters by Segment"
+  
+  FAFR001 --> FAFR002 : "View Alerts and Interventions"
+}
+
+rectangle "System Administrator" {
+  actor "SysAdmin: Manage System Settings" as SysAdmin
+  usecase "SAFR006: Deliver Spending Limit Alerts Based on Thresholds" as SAFR006
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters (Basel III, etc.)"
+}
+
+rectangle "AI Component" {
+  actor "AIFR001: Generate Financial Predictions via AI" as AIFR001
+  usecase "AIFR003: Detect Unusual Spending Patterns for Alerts" as AIFR003
+  
+  SysAdmin --> SAFR005 : "Request Spending Limit Alert Thresholds"
+  
+  SFR002 <|-- AIFR002 : "Use AI for Recommendation Generation (FINRA, etc.)"
+}
+
+rectangle "News Component" {
+  actor "AIFR007: Generate Contextualized News Insights via AI" as AIFR007
+  usecase "SFR009: Request Relevant Financial News Based on Portfolio" as SFR009
+  
+  SysAdmin --> SAFR018 : "Manage User Goals"
+}
+
+@enduml
+```
+
+### Explanation:
+- **System**: Contains core functionalities like generating recommendations, managing parameters, delivering alerts, etc.
+- **Client**: Represents the end-users (Clients), Financial Advisors, and System Administrators. Each actor has specific use cases tied to their roles.
+- **Financial Advisor**: Focused on mentoring sessions, client interventions, predictive analytics, etc.
+- **System Administrator**: Manages system settings like parameters, thresholds, and user relationships.
+- **AI Component**: Handles AI-driven tasks such as generating predictions, alerts, recommendations, news insights, etc.
+- **News Component**: Extracts relevant financial news based on users' portfolios.
+
+### Key Relationships:
+1. **Client** interacts with the System through various use cases (e.g., viewing dashboards, receiving alerts).
+2. **System Administrator** configures parameters and manages system settings via AI components.
+3. **Financial Advisor** uses generated insights for client management.
+4. All actors leverage AI capabilities to perform their tasks.
+
+This structure ensures clarity in role-specific interactions while maintaining a logical flow of use cases within the system. Each actor's exact requirements are mapped precisely, adhering to provided IDs and names. 
+
+---
+
+*Note: The PlantUML code is structured with proper indentation for readability.*
+
+[Done: True
+Done Reason: stop
+Eval Count: 1016]

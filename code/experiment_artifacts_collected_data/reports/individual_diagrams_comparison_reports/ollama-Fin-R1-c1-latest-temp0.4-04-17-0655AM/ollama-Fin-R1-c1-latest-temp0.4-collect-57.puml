@@ -1,0 +1,44 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor SysAdmin as sa
+actor FinancialAdvisor as fa
+system SFR021 as sfr21  { 
+    usecase "CFR001: View Financial Insights Dashboard" as CFR001
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+    usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+    usecase "CFR002: View Alerts for Anomalous Transactions" as CFR002
+    usecase "CFR003: View Financial Predictions" as CFR003
+    usecase "CFR004: Receive Personalized Recommendations" as CFR004
+    usecase "CFR005: Manage Recommendation Preferences" as CFR005
+    usecase "CFR006: View Spending Limit Alerts" as CFR006
+    usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+    usecase "CFR008: Access Portfolio-Related News" as CFR008
+    usecase "CFR009: Manage Relationship with Financial Advisors" as CFR009
+    usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+    usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+
+    c1 --> CFR001 : "View Financial Insights Dashboard"
+    sa -> SAFR001 : "Manage Analysis Parameters"
+    fa -- FAFR001 : "Manage Client Mentoring Sessions"
+
+    client --> SFR013
+}
+
+actor System as sfr {
+    usecase "SFR020: Maintain Historical Record of User Insights" as SFR020
+    usecase "AIFR009: Generate Contextualized News Insights for Users" as AIFR009
+
+    sfr --> SFR013 : "Request Alerts"
+}
+
+actor ClientFeedback as cf {
+    usecase "CFR011: Send Feedback to System" as CFR011
+}
+
+cf -> SFR21 : "Send Feedback"
+
+@enduml

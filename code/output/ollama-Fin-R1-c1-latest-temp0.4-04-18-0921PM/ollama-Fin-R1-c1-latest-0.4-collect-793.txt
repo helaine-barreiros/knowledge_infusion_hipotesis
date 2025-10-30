@@ -1,0 +1,100 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Financial News" as CFR008
+  usecase "CFR009: Consolidated Personalized Dashboard" as CFR009
+  usecase "CFR010: Manage Relationship with Advisors" as CFR010
+  
+  
+  rectangle "System Administrator" {
+    usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  }
+  
+  rectangle "Financial Advisor" {
+    usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+    usecase "FAFR002: View Intervention Alerts" as FAFR002
+    usecase "FAFR003: Predictive Analytics for Clients" as FAFR003
+  }
+  
+  rectangle "System Components" {
+    usecase "SFR001: Deliver User Notifications" as SFR001
+    usecase "SFR002: Personalized Recommendations" as SFR002
+    usecase "SFR003: Request Financial Predictions" as SFR003
+    usecase "SFR004: Request Personalized Recommendations" as SFR004
+    usecase "SFR005: Spending Limit Alerts" as SFR005
+    usecase "SFR006: Investment Opportunity Analysis" as SFR006
+    usecase "SFR007: Specific Investment Opportunities" as SFR007
+    usecase "SFR008: Anomaly Transaction Alerts" as SFR008
+    usecase "SFR009: Contextualized News Extraction" as SFR009
+    usecase "SFR010: Client Dashboards Generation" as SFR010
+  }
+  
+  rectangle "AI System Components" {
+    usecase "AIFR001: Financial Predictions" as AIFR001
+    usecase "AIFR002: Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Investment Opportunities Identification" as AIFR005
+    usecase "AIFR006: Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR007: Contextualized News Insights" as AIFR007
+    usecase "AIFR008: Predictive Intervention Recommendations" as AIFR008
+  }
+  
+  rectangle "User (Client, Advisor)" {
+    actor Client as c1 extends CFR001, CFR002, ..., CFR009, CFR010
+    actor FinancialAdvisor as fa extends FAFR001, FAFR002, FAFR003
+  }
+  
+  rectangle "System" {
+    usecase SFR001 --> Client : Deliver Notifications to c1
+    usecase SFR002 --> Client : Provide Personalized Recommendations (c1)
+    usecase SFR003 --> AIFR001: Request Predictions from AI
+    usecase SFR004 --> AIFR002: Request Recommendations from AI
+    usecase SFR005 --> AIFR003: Request Spending Alerts (c1)
+    usecase SFR006 --> AIFR004: Analyze Investment Opportunities for c1
+    usecase SFR007 --> AIFR005: Identify Specific Investments (c1)
+    usecase SFR008 --> AIFR006: Detect Anomalies in Transactions (c1)
+    usecase SFR009 --> AIFR007: Extract News for c1
+    usecase SFR010 --> Client : Generate Dashboards (c1)
+  }
+  
+  rectangle "AI System" {
+    usecase AIFR001 --> SFR003, SFR004: Provide Predictions and Recommendations to System Components
+    usecase AIFR002 --> SFR004: Deliver Personalized Recs (c1)
+    usecase AIFR003 --> SFR005: Generate Spending Alerts for c1
+    usecase AIFR004 --> SFR006, SFR007: Analyze Investments and Opportunities (c1)
+  }
+  
+}
+
+@enduml
+```
+
+**Key Observations:**
+- The diagram groups actors by their roles (Client, Financial Advisor, System Administrator) within the "System" boundary.
+- Use cases are categorized under appropriate actor or system components. For example:
+  - **CFR001–CFR010**: Client-related use cases.
+  - **SAFR001**: System Admin-specific management of analysis parameters.
+  - **FAFR001–FAFR004**: Financial Advisor-specific activities like mentoring, alerts, and predictive analytics.
+- The "System Components" package includes use cases that represent system functionalities (e.g., delivering notifications, requesting data from AI).
+- The "AI System Components" include the actual processing logic of the AI in generating predictions, recommendations, etc.
+- Relationships are drawn between actors/usecases to show interactions. For example:
+  - Clients receive personalized recommendations and alerts via the system.
+  - Financial Advisors manage client sessions using system-generated insights.
+
+This structure ensures clarity while adhering strictly to functional requirements provided. Each use case is linked logically through the defined relationships, reflecting real-world interaction flows within the system.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1429]

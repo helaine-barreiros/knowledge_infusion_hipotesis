@@ -1,0 +1,64 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Investment Portfolio" as CFR008
+  usecase "CFR009: Manage Relationship with Financial Advisors Including Data Sharing Permissions" as CFR009
+
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts for Proactive Assistance" as FAFR002
+  usecase "FAFR003: View Predictive Analytics About Clients' Financial Situations During Consultations" as FAFR003
+
+  usecase "SFR001: Deliver Alerts Through Appropriate Notification Channels" as SFR001
+  usecase "SFR002: Provide Personalized Recommendations Based on User Profiles" as SFR002
+  usecase "SFR004: Request Financial Predictions from AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts When Exceeding Thresholds" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis Based on Risk Profiles" as SFR006
+  usecase "SFR007: Find Specific Investment Opportunities Matching User Criteria and ESG Preferences" as SFR007
+  usecase "SFR012: Generate Client Dashboards for Financial Information Consolidation" as SFR012
+
+  usecase "AIFR001: Generate Financial Predictions by Analyzing Historical Data, Market Trends, Economic Indicators" as AIFR001
+  usecase "AIFR004: Identify Unusual Spending Patterns for Alerts Based on Established Spent Patterns" as AIFR003
+
+  Client --> CFR001 : View Financial Insights Dashboard
+  SysAdmin --> SAFR001 : Manage Analysis Parameters
+  User --> (CFR002, CFR006) : Receive Alerts for Anomalous Transactions and Spending Limit Exceedances
+  User --> (CFR003, AIFR004) : View Financial Predictions Based on Historical Data and Market Trends; Generate Spent Limit Alerts
+  User --> (CFR007, SFR012) : Access Investment Opportunities and Manage Relationship with Advisors via Dashboards
+
+  FAFR001 <|-- (Client)
+  FAFR003 <|-- (User)
+
+  SysAdmin --+> SAFR001
+}
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The entire diagram is enclosed within a rectangle labeled "System" to represent the system's components.
+- **Use Cases**:
+  - Client-related use cases include viewing financial dashboards, receiving alerts (e.g., CFR002), personalized recommendations (CFR004).
+  - Financial Advisor and System Administrator roles are represented by FAFR and SAFR use cases respectively. For example, managing client mentoring sessions (FAFR001) or system parameters (SAFR001).
+- **Actors**:
+  - `Client`, `SysAdmin` (`User` is a placeholder here but likely refers to the same role as Client in this context), and `Financial Advisor`.
+- **Relationships**: Arrows indicate interactions between actors and use cases. For example, Clients interact with CFR001 (view dashboard) or SFR012 (dashboards). SysAdmin manages analysis parameters via SAFR001.
+- **Inheritance/Extends**:
+  - FAFR003 extends User for predictive analytics during consultations.
+
+This structure ensures all requirements are mapped accurately to their respective use cases and actors. Adjustments may be needed based on further clarification of role overlaps or system components not explicitly listed here.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1045]

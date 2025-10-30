@@ -1,0 +1,84 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  usecase "CFR002: Receive Alerts About Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Historical Data and Market Trends" as CFR003
+  usecase "CFR004: Personalized Recommendations Aligned with Financial Profile" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts When Exceeding Thresholds" as CFR006
+  usecase "CFR007: View Investment Opportunities Based on Risk Profile (MiFID II)" as CFR007
+  usecase "CFR008: Access Personalized Dashboard Consolidating Financial Information" as CFR008
+  usecase "CFR009: Manage Relationship with Financial Advisors Including Data Sharing Permissions" as CFR009
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002
+  usecase "AIFR006: Generate Anomaly Transaction Alerts (AML)" as AIFR006
+  usecase "SFR008: Request Investment Opportunity Analysis from AI Component" as SFR008
+  usecase "CFR011: Send Feedback About System Outputs for Improvement" as CFR011
+
+  rectangle "Client" {
+    actor Client as c
+    client --> CFR001 : "View Financial Insights Dashboard"
+    client --> CFR002 : "Receive Alerts About Anomalous Transactions (FATF)"
+    client --> CFR003 : "Financial Predictions Based on Historical Data and Market Trends"
+    client --> CFR004 : "Personalized Recommendations Aligned with Financial Profile"
+    client --> CFR005 : "Manage Preferences for Personalized Recommendations"
+    client --> CFR006 : "View Spending Limit Alerts When Exceeding Thresholds"
+    client --> CFR007 : "Investment Opportunities Based on Risk Profile (MiFID II)"
+    client --> CFR008 : "Personalized Dashboard Consolidating Financial Information"
+    client --> CFR009 : "Manage Relationship with Financial Advisors, Including Data Sharing Permissions"
+  }
+
+  rectangle "Financial Advisor" {
+    actor FAFR as f
+    fafr --> SFR013 : "Client Alerts Based on Predefined Conditions (GDPR)"
+    fafr --> FAFR004 : "Configure Analysis Parameters for Client Segments"
+    fafr --> AIFR008 : "Predictive Intervention Recommendations"
+  }
+
+  rectangle "System Administrator" {
+    actor SysAdmin as s
+    sysadmin --> SAFR001 : "Manage Analysis Parameters (Basel III)"
+  }
+
+  rectangle "AI System" {
+    usecase AIFR002 : Generate Personalized Recommendations for Users
+    usecase AIFR006 : Anomaly Transaction Alerts (AML)
+    usecase AIFR007 : Contextualized News Insights Based on Portfolios
+    usecase AIFR009 : Client Predictive Intervention Recommendations
+
+    aifr002 <|-- client : "Deliver Personalized Recommendations"
+    aifr006 <|-- client : "Anomaly Transaction Alerts (AML)"
+  }
+
+  rectangle "System" {
+    usecase SFR013 : Generate Client Alerts Based on Predefined Conditions
+    sfr013 --> client : "Client Alerts"
+
+    usecase AIFR008 : Predictive Intervention Analysis for Advisors
+    aifr008 <|-- fafr : "Intervention Recommendations"
+  }
+
+  rectangle "AI and System Integration" {
+    usecase SFR002 : Deliver Personalized Recommendations to Users (SFR)
+    sfr002 --> client : "Personalized Recommendations"
+
+    usecase AIFR001 : Generate Financial Predictions
+    aifr001 <|-- client : "Financial Predictions"
+  }
+
+}
+
+@enduml
+
+This PlantUML code represents the functional requirements provided, mapping each actor (Client, System Administrator, and Financial Advisor) to their respective use cases. The system components are grouped into logical categories such as AI systems, clients, financial advisors, and administrative tasks. Relationships between actors and use cases are established with arrows indicating interactions. Use case inheritance is shown where applicable, for example, the "AI System" uses its own use cases (AIFR002 to AIFR009) which then relate back to client or advisor actors. The structure ensures clarity in how different entities interact within the system.
+**Note:** Ensure that PlantUML syntax is correctly formatted and indented for readability, as per guidelines. Adjustments may be needed based on specific PlantUML parser requirements if this code does not render properly elsewhere.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1160]

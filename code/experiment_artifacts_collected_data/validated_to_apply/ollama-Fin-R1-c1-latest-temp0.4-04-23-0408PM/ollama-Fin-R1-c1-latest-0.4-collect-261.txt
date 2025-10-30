@@ -1,0 +1,79 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as c1
+actor FinancialAdvisor as fadvisors
+actor SysAdmin as sadmin
+system "System" as sys
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Spending Limit Alerts" as CFR006
+  usecase "CFR007: Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Consolidated Financial Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+
+  c1 --> CFR001 : View dashboard
+  c1 --> CFR002 : Receive alerts
+  c1 --> CFR003 : Predictions
+  c1 --> CFR004 : Recommendations
+  c1 --> CFR005 : Manage prefs
+  c1 --> CFR006 : Spending limits
+  c1 --> CFR007 : Investment opportunities
+  c1 --> CFR008 : News
+  c1 --> CFR009 : Consolidated view
+  c1 --> CFR10 : Manage relationship
+
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: Predictive Analytics for Clients" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters by Client Segment" as FAFR004
+
+  fadvisors --> FAFR001 : Manage sessions
+  fadvisors --> FAFR002 : View alerts
+  fadvisors --> FAFR003 : Predictive analytics
+  fadvisors --> FAFR004 : Configure params
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+  
+  sadmin --> SAFR001 : Manage parameters
+}
+
+system sys <<extends>> ClientInterface, FinancialAdvisorInterface, SysAdminInterface
+
+@enduml
+```
+
+### Explanation:
+- **Client Interface**: All client-related use cases are grouped under this rectangle. The actors `Client` (c1) interact with these use cases.
+  
+- **Financial Advisor Interface**: Use cases specific to financial advisors (`FAFR001`, etc.) and their interactions.
+
+- **System Administrator Interface**: Only the system admin's task of managing analysis parameters is included here.
+
+- Relationships: Arrows indicate which actors perform each action. For example, `Client` uses all client-related use cases (CFR series), while financial advisors handle mentoring sessions (`FAFR001`) and predictive analytics (`FAFR003`). The system admin manages AI parameter settings (`SAFR001`).
+
+- **System Boundary**: Encapsulates the entire system with components extending from it. This ensures that all use cases are part of the overall system.
+
+### Key Notes:
+- Each actor is explicitly defined and linked to their respective use cases.
+- Inheritance relationships (e.g., `SysAdminInterface`) ensure logical grouping without duplicating code or actors.
+- The structure adheres strictly to provided requirements, avoiding any extraneous elements.
+
+[Done: True
+Done Reason: stop
+Eval Count: 860]

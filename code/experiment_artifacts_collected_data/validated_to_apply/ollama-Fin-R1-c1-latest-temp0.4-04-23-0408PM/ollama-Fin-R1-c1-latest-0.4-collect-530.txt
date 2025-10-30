@@ -1,0 +1,83 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+actor Client as C1
+actor FinancialAdvisor as FA
+actor SysAdmin as SA
+system "System" as S
+
+rectangle "Client Interface" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts for Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions Based on Data and Trends" as CFR003
+  usecase "CFR004: Access Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Preferences for Personalized Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: Access Investment Opportunities Based on Risk Profile" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Use Personalized Dashboard for Financial Monitoring" as CFR009
+  usecase "CFR11: Send Feedback on System Outputs" as CF
+
+  C1 --> CFR001 : "View"
+  C1 --> CFR002 : "Receive Alerts"
+  C1 --> CFR003 : "Predictions"
+  C1 --> CFR004 : "Recommendations"
+  C1 --> CFR005 : "Manage Preferences"
+  C1 --> CFR006 : "Spending Limit Alerts"
+  C1 --> CFR007 : "Investment Opportunities"
+  C1 --> CFR008 : "News Related to Portfolio"
+  C1 --> CF     : "Feedback"
+
+}
+
+rectangle "Financial Advisor Interface" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: Review Predictive Analytics for Clients" as FAFR003
+
+  FA --> FAFR001 : "Manage"
+  FA --> FAFR002 : "View Alerts"
+  FA --> FAFR003 : "Review"
+
+}
+
+rectangle "System Administrator Interface" {
+  usecase "SAFR001: Manage Analysis Parameters for AI System" as SAFR001
+
+  SA --> SAFR001
+}
+  
+S <|-- CFR001
+S <|-- CFR002
+S <|-- CFR003
+S <|-- CFR004
+S <|-- CFR005
+S <|-- CFR006
+S <|-- CFR007
+S <|-- CFR008
+S <|-- CF
+
+S <|-- FAFR001
+S <|-- FAFR002
+S <|-- FAFR003
+
+S <|-- SAFR001
+
+@enduml
+```
+
+**Key Observations:**
+- **Client Actors**: All client-related use cases (CFRs) are grouped under the "Client Interface" rectangle. These include viewing dashboards, receiving alerts, making predictions, accessing recommendations and more.
+- **Financial Advisor Actors**: Use cases related to mentoring sessions, intervention alerts, and predictive analytics are organized within their respective interface groupings.
+- **System Administrator Actor**: Only one use case (SAFR001) is assigned here for managing AI parameters. 
+- **Inheritance Relationships**: The system boundary (`S`) extends all client-related use cases, ensuring that the underlying logic of the system supports these interactions. Similarly, it links to financial advisor and admin interfaces.
+- **Directional Flows**: All actors point towards their respective use cases, adhering strictly to the directionality defined in requirements (e.g., clients initiating actions like viewing dashboards or receiving alerts). 
+
+This structure ensures clarity by logically segmenting user roles and system interactions while maintaining alignment with provided functional requirements. Adjustments can be made if additional relationships or components are introduced later based on further analysis.
+
+[Done: True
+Done Reason: stop
+Eval Count: 904]

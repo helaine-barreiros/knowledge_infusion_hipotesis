@@ -1,0 +1,106 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "SFR012: Generate Client Dashboards" as SFR012
+
+  client --> CFR001 : "View Financial Insights Dashboard"
+  
+  SysAdmin --> SAFR001 : "Manage Analysis Parameters"
+
+  user --> FAFR003 : "View Predictive Analytics for Clients"
+  user --> SFR012 : "Generate Client Dashboards"
+
+  // Relationship between System and Use Cases
+  (System) <|-- CFR001, SAFR001, FAFR003, SFR012
+
+}
+
+rectangle "Client" {
+  actor client as c
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Preferences for Recommendations" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access News Related to Portfolio" as CFR008
+  usecase "CFR009: Manage Personalized Dashboard" as CFR009
+
+}
+
+rectangle "Financial Advisor (FA)" {
+  actor financialAdvisor as fa
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on Insights" as FAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+
+}
+
+rectangle "System Administrator (SysAdmin)" {
+  actor sysAdmin as sa
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR020: Maintain Historical Record of Insights" as SFR020
+  usecase "CFR011: Send Feedback to System" as CFR011
+
+}
+
+rectangle "System (Sys)" {
+  actor system as s
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  usecase "SFR005: Request Spending Limit Alerts from AI Component" as SFR005
+  usecase "SFR006: Request Investment Opportunity Analysis from AI Component" as SFR006
+  usecase "SFR012: Generate Client Dashboards Based on Data" as SFR012
+
+}
+
+rectangle "AI System (AIFR)" {
+  actor aiSystem as aifr
+  usecase "AIFR007: Generate Contextualized News Insights for Users" as AIFR007
+  usecase "AIFR008: Generate Predictive Intervention Recommendations Based on Patterns" as AIFR008
+
+}
+
+// Relationships between actors and system components
+client --> s : "Request Financial Predictions"
+financialAdvisor --> aifr : "Receive Insights for Client Consultations"
+sysAdmin --> safr001 : "Manage System Parameters"
+
+@enduml
+```
+
+### Explanation:
+- **System Boundary**: The main `rectangle` represents the entire AI-Powered Analysis & Insights System.
+- **Actors**:
+  - **Client (c)**: Represents all client-related use cases, including viewing dashboards and receiving recommendations.
+  - **Financial Advisor (fa)**: Handles mentoring sessions, intervention alerts, and predictive analytics for clients.
+  - **System Administrator (sa)**: Manages system parameters like analysis settings.
+- **Use Cases**:
+  - Client-specific uses include viewing financial insights, managing preferences, etc. These are grouped under the client actor.
+  - Financial Advisor-related use cases involve generating mentoring sessions based on AI-generated insights and viewing alerts/predictions.
+  - System Administrator handles parameter management and historical data maintenance.
+  - The system itself requests various services from the AI component (e.g., financial predictions).
+- **Relationships**:
+  - Clients interact with the system via dashboards, recommendations, etc.
+  - Financial Advisors receive insights and generate personalized guidance.
+  - SysAdmin manages parameters within the system.
+
+This structure ensures all functional requirements are represented accurately while maintaining readability. Each actor-use case relationship is clearly defined to reflect real-world interactions. The use of nested rectangles helps group related components logically. 
+
+### Key Observations:
+- **Inheritance**: No explicit inheritance relationships were required here, as each role (Client, FA, SA) has distinct responsibilities.
+- **Grouping**: Use cases are grouped by actor type for clarity.
+
+This diagram should serve as a comprehensive visual representation of the system's functionality based on provided requirements. Adjustments can be made if additional details or interactions become apparent during further analysis.
+
+[Done: True
+Done Reason: stop
+Eval Count: 1203]

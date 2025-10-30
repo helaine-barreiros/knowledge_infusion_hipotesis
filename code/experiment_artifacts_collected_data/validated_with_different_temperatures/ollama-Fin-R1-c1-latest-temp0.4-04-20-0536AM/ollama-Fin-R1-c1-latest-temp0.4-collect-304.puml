@@ -1,0 +1,45 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage AML Alerts" as SAFR002
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  
+  Client --> (CFR001)
+  
+  SysAdmin <|-- (SAFR002) : manages parameters for compliance checks
+}
+
+rectangle "Client & System Administrator" {
+  actor "User" as User
+  usecase "SFR009: Find Contextualized News Relevant to Portfolio" as SFR009
+  
+  User --> CFR001
+  SysAdmin -> SAFR002 : configures AML settings
+
+}
+
+rectangle "Financial Advisor & System Administrator" {
+  actor "FAFR003: Financial Advisor" as FAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  
+  FAFR003 --> (SAFR002)
+}
+
+rectangle "System & AI Components" {
+  actor "SFR019: System" as SFR019
+  usecase "AIFR005: Generate Investment Opportunities Based on Strategies and MPT Principles" as AIFR005
+  
+  SFR019 <|-- (CFR004)
+}
+
+rectangle "User Feedback Loop" {
+  actor "Client/FAFR/SysAdmin" as Client
+  usecase "CFR011: Send Feedback to Improve Recommendations and Insights" as CFR011
+
+  Client --> CFR011 : provides input for system improvement
+}
+@enduml

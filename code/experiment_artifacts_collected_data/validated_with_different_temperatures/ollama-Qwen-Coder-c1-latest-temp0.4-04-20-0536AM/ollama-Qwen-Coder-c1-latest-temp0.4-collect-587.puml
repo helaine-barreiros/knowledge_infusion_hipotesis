@@ -1,0 +1,60 @@
+@startuml
+
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:User (Client) : as User
+:System Admin : as SysAdmin
+:Financial Advisor : as FAdvisor
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "SFR003: Request Financial Predictions from AI Component" as SFR003
+  usecase "AIFR009: Generate Contextualized News Insights" as AIFR009
+  
+  User --> CFR001
+  SysAdmin --> SAFR001
+  FAdvisor --> (FAFR002)
+  
+  User --> SFR003 : Request Predictive Analytics
+  System Admin --> SFR003 : Configure Analysis Parameters
+  Financial Advisor --> AIFR009 : Generate Insights
+  
+}
+
+rectangle "Client" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR005: Manage Personalized Recommendations Preferences" as SAFR005
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as FAFR004
+  
+  User --> CFR001 : View Dashboard
+  SysAdmin --> (SAFR005)
+  Financial Advisor --> (FAFR004)
+}
+
+rectangle "Financial Advisor" {
+  usecase "FAFR002: View Client Intervention Alerts" as FAFR002
+  usecase "FAFR03: View Predictive Analytics About Clients' Financial Situations" as FAFR03
+  
+  User --> (FAFR02)
+  SysAdmin --> (SAFR001) : Manage Analysis Parameters for Specific Client Segments
+}
+
+rectangle "System Administrator" {
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+  
+  User --> (SAFR001)
+  SysAdmin --> (SFR003) : Configure Analysis Parameters for Specific Client Segments
+}
+
+rectangle "User Feedback Loop" {
+  usecase "CFR011: Send Feedback About System's Recommendations and Insights" as CFR011
+  
+  User --> (CFR011)
+}
+
+@enduml

@@ -1,0 +1,63 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package Client {
+  actor "Client" as CFR001
+}
+
+package FinancialAdvisor {
+  actor "Financial Advisor" as FAFR002
+}
+
+package SystemAdministrator {
+  actor "System Administrator" as SAFR003
+}
+
+rectangle "User Interface" {
+  usecase "CFR009: View Personalized Dashboard" as CFR009
+  usecase "SAFR005: Manage Recommendations Preferences" as SAFR010
+  
+  CFR001 --> (View Financial Insights Dashboard) : CFR001
+  CFR002 --> (Manage Client Mentoring Sessions)
+  SAFR003 --> (Manage Analysis Parameters) : SAFR004
+
+  rectangle "Financial Information Management" {
+    usecase "CFR006: View Spending Limit Alerts"
+    
+    CFR001 --> (View Spending Limit Alerts) : CFR006
+  }
+
+  rectangle "Investment Insights and Opportunities" {
+    usecase "CFR007: View Investment Opportunities"
+    usecase "FAFR003: View Predictive Analytics"
+    usecase "AIFR004: Generate Investment Opportunity Analyses"
+
+    CFR001 --> (View Investment Opportunities) : CFR007
+    FAFR002 --> (View Predictive Analytics)
+  }
+
+  rectangle "News and Alerts" {
+    usecase "CFR008: View News Related to Portfolio"
+    usecase "SFR009: Request Contextualized News Insights"
+
+    CFR001 --> (View News Related to Portfolio) : CFR008
+  }
+}
+
+rectangle "System Components" {
+  usecase "AIFR002: Generate Personalized Recommendations"
+  usecase "SAFR005: Manage Recommendations Preferences"
+  
+  SAFR003 --> AIFR001 : SFR004
+  SAFR003 --> AIFR002 : SFR006
+}
+
+rectangle "Notifications and Alerts" {
+  usecase "SFR008: Request Anomaly Transaction Alerts"
+  
+  CFR001 --> (Receive Anomaly Transaction Alerts) : SFR008
+  FAFR002 --> (View Client Intervention Alerts)
+}
+@enduml

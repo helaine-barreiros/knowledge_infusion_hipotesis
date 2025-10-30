@@ -1,0 +1,55 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "FAFR003: View Predictive Analytics for Clients" as FAFR003
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "SAFR006: Manage Alert Preferences" as SAFR006
+  usecase "SFR014: Generate Client Analytics" as SFR014
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "FAFR002: Receive Alerts on Intervention Needed" as FAFR002
+  usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+  usecase "SFR018: Manage Financial Goals" as SFR018
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+  usecase "SFR013: Deliver Client Alerts Based on Conditions" as SFR013
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "AIFR004: Generate Spending Limit Alerts" as AIFR004
+  usecase "SFR020: Maintain User Feedback Record" as SFR020
+  usecase "CFR011: Send System Feedback" as CFR011
+}
+
+actor Client as C
+actor FinancialAdvisor as F
+actor SysAdmin as SA
+
+C --> CFR001 : View financial insights dashboard  
+F --> FAFR003, FAFR002 : View predictive analytics, receive intervention alerts  
+SA --> SAFR001: Manage analysis parameters  
+
+Client <|-- (CFR006) : Receive spending limit alerts when exceeding thresholds
+Client <|-- (SFR018): Access financial goals management
+
+SysAdmin <|-- (SAFR006): Configure alert preferences for clients
+SysAdmin <|-- (AIFR005): Manage investment opportunity generation based on risk profiles
+
+rectangle "System" {
+  usecase SFR002: Deliver personalized recommendations  
+  usecase AIFR001: Generate financial predictions  
+  usecase AIFR003: Generate spending limit alerts  
+  usecase AIFR004: Generate investment opportunities  
+  usecase AIFR005: Manage client segments' analysis parameters
+}
+
+SFR002 <|-- (AIFR001, AIFR002): Request recommendations and personalized insights  
+
+CFR006 --> SFR003 : Receive financial predictions for alerts
+
+SAFR001 <|-- (AIFR005)  
+FAFR004 <|-- (SFR009)
+
+@enduml

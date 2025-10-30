@@ -1,0 +1,88 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+:Client: as Client
+:System Admin: as SysAdmin
+:Financial Advisor (FA): as FA
+:AIFR001: as AIFR001
+:SFR020: as SFR020
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR005: Manage Analysis Parameters Preferences" as SAFR005
+  
+  Client --> (SFR019) : maintains historical record of users' insights
+  Client --> (CFR002) : receive alerts about anomalous transactions
+  Client --> (CFR003) : view financial predictions based on data and trends
+  Client --> (CFR004) : receive personalized recommendations aligned with goals
+  Client --> (SAFR005) : manage preferences for personalized recommendations
+  
+  rectangle "Client Dashboards" {
+    usecase "CFR012: Generate Personalized Dashboard" as CFR012
+    
+    Client --> CFR012
+  }
+  
+  rectangle "Spending Limits" {
+    usecase "SAFR005: Manage Analysis Parameters Preferences" as SAFR005
+    usecase "SFR006: Request Spending Limit Alerts from AI Component" as SFR006
+    
+    Client --> (SFR006) : view spending limit alerts when thresholds exceeded
+  }
+  
+  rectangle "Investment Opportunities" {
+    usecase "SAFR005: Manage Analysis Parameters Preferences" as SAFR005
+    usecase "AIFR004: Generate Investment Opportunity Analyses for Users" as AIFR004
+    
+    Client --> (SFR016) : view investment opportunities suitable to risk profile
+  }
+  
+  rectangle "News and Insights" {
+    usecase "SAFR005: Manage Analysis Parameters Preferences" as SAFR005
+    usecase "AIFR007: Generate Contextualized News Insights by Correlating Financial News with Specific User Portfolios to Identify Relevant Impacts" as AIFR007
+    
+    Client --> (SFR018) : view news related to investment portfolio
+  }
+  
+  rectangle "Financial Health and Goals" {
+    usecase "AIFR017: Generate Financial Health Reports that Assess Users' Overall Financial Wellbeing According to Standard Financial Ratios and Metrics" as AIFR017
+    
+    Client --> (SFR023) : manage financial goals
+  }
+}
+
+rectangle "Financial Advisor Functions" {
+  usecase "FAFR001: Manage Client Mentoring Sessions Based on System-Generated Insights" as FAFR001
+  
+  FA --> CFR004 : receive personalized recommendations aligned with each client's financial goals
+  FA --> (SFR023) : manage financial goals of clients
+}
+
+rectangle "System Functions" {
+  usecase "AIFR006: Generate Anomaly Transaction Alerts by Employing Pattern Recognition to Detect Potentially Fraudulent Activities in Compliance With FinCEN Requirements" as AIFR006
+  
+  System Admin --> (SAFR015) : request predictive intervention analyses from AI component
+  System Admin --> (SFR023) : manage users' financial goals and track progress
+}
+
+rectangle "AI Functions" {
+  usecase "AIFR008: Generate Client Predictive Intervention Recommendations by Identifying Patterns That Indicate Potential Financial Difficulties or Opportunities Requiring Advisor Engagement" as AIFR008
+  
+  FA --> (SFR023) : manage financial goals of clients
+}
+
+Client --> CFR011 : send feedback about system's recommendations and insights
+
+FA --> FAFR001 : manage client mentoring sessions based on system-generated insights
+
+System Admin --> SAFR005 : manage analysis parameters preferences for users
+  
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 862]

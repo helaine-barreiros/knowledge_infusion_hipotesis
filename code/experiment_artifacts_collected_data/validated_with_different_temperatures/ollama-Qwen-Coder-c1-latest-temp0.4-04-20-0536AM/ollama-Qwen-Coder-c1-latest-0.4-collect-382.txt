@@ -1,0 +1,125 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Alerts on Anomalous Transactions" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Get Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: Receive Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: Access Financial News" as CFR008
+  usecase "CFR009: View Consolidated Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Advisors" as CFR10
+  
+  C --> (SAFR002)
+  C --> (SFR003)
+  C --> (SFR004)
+  C --> (AIFR005)
+  
+  C --> CFR001
+  C --> CFR002
+  C --> CFR003
+  C --> CFR004
+  C --> CFR006
+  C --> CFR007
+  C --> CFR008
+  C --> CFR009
+  C --> CFR10
+  
+  rectangle "Client System" {
+    usecase "SFR02: Request Financial Predictions" as SFR03
+    usecase "SFR04: Request Personalized Recommendations" as SFR04
+    usecase "SFR05: Request Spending Limit Alerts" as SFR05
+    usecase "SFR06: Request Investment Opportunity Analysis" as SFR06
+    
+    C --> (AIFR01)
+    C --> (AIFR02)
+    C --> (AIFR03)
+    C --> (AIFR04)
+  }
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA
+  
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  FA --> (SFR07)
+  
+  rectangle "Financial Advisor System" {
+    usecase "AIFR05: Generate Investment Opportunities" as AIFR05
+    usecase "AIFR06: Request Anomaly Transaction Alerts" as AIFR06
+    
+    FA --> (FAFR01)
+    FA --> (FAFR02)
+    FA --> (FAFR03)
+    FA --> (FAFR04)
+  }
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SA
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  
+  rectangle "System Admin System" {
+    usecase "SFR08: Request Alerts Delivery" as SFR09
+    
+    SA --> (AIFR06)
+    SA --> (SFR08)
+  }
+}
+
+package "AI Component" {
+  actor AIComponent as AIC
+  
+  usecase "AIFR01: Generate Financial Predictions" as AIFR07
+  usecase "AIFR02: Generate Personalized Recommendations" as AIFR08
+  usecase "AIFR03: Generate Spending Limit Alerts" as AIFR09
+  usecase "AIFR04: Generate Investment Opportunity Analysis" as AIFR10
+  
+  rectangle "AI System" {
+    usecase "AIFR05: Generate Investment Opportunities Matching ESG Preferences" as AIFR11
+    usecase "AIFR06: Generate Contextualized News Insights" as AIFR12
+    
+    AIC --> (SFR03)
+    AIC --> (SFR04)
+    AIC --> (SFR05)
+    AIC --> (SFR06)
+  }
+}
+
+package "System Components" {
+  usecase "SFR07: Request Investment Opportunity Analysis Matching User Criteria and ESG Preferences" as SFR12
+  usecase "SFR08: Generate Client Predictive Intervention Recommendations" as SFR13
+  
+  rectangle "System Integration" {
+    AIC --> (AIFR05)
+    C --> (SAFR002)
+    
+    FA --> (FAFR04)
+    
+    SA --> (AIFR06)
+    SA --> (SFR08)
+    
+    C --> (CFR11)
+    FA --> (FAFR03)
+  }
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1121]

@@ -1,0 +1,102 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR004
+  usecase "CFR003: View Financial Predictions" as SAFR005
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR006
+  usecase "CFR005: Manage Recommendation Preferences" as SAFR007
+  usecase "CFR006: View Spending Limit Alerts" as SAFR012
+  usecase "CFR008: View Investment Opportunities" as SAFR013
+  usecase "CFR009: Access Personalized Dashboard" as SFR014
+  
+  CFR001 --> SAFR004 : "View Alerts"
+  CFR001 --> SAFR005 : "View Predictions"
+  CFR001 --> SAFR006 : "Receive Recommendations"
+  CFR001 --> SAFR007 : "Manage Preferences"
+  CFR001 --> SAFR012 : "Spending Alerts"
+  CFR001 --> SAFR013 : "Investment Opportunities"
+  CFR001 --> SFR014 : "Access Dashboard"
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts" as SAFR008
+  usecase "FAFR003: View Predictive Analytics" as SAFR009
+  usecase "FAFR004: Configure Analysis Parameters for Specific Segments" as AIFR016
+  
+  FinancialAdvisor --> SAFR002 : "View Alerts"
+  FinancialAdvisor --> SAFR003 : "Predictive Analytics"
+  FinancialAdvisor --> AIFR016 : "Configure Parameters"
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR001
+  
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFR020: Manage User Feedback" as AIFR017
+  
+  SystemAdmin --> SAFR001 : "Manage Parameters"
+  SystemAdmin --> AIFR017 : "Feedback Management"
+}
+
+package "System Components" {
+  rectangle "AI Component" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "AIFR008: Generate Client Predictive Intervention Recommendations" as AIFR008
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+    
+    CFR001 --> (SAFR004) : "View Alerts"
+    SAFR002 --> (SFR005) : "Predictive Analytics"
+    FinancialAdvisor --> (FAFR002) : "Client Intervention Alerts"
+    SystemAdmin --> (SAFR001) : "Manage Parameters"
+  }
+  
+  rectangle "Notification Component" {
+    usecase "SFR003: Deliver Personalized Recommendations" as SFR003
+    usecase "SFR004: Request Financial Predictions from AI" as AIFR001
+    usecase "SFR005: Request Spending Limit Alerts from AI" as AIFR003
+    
+    CFR001 --> (SAFR006) : "Receive Recommendations"
+  }
+  
+  rectangle "Dashboard Component" {
+    usecase "SFR012: Generate Client Dashboards" as SFR012
+    usecase "SFR014: Request Predictive Insights from AI" as AIFR009
+    
+    CFR001 --> (SAFR007) : "Manage Preferences"
+  }
+  
+  rectangle "News Component" {
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "SFR008: Request Contextualized News from AI" as AIFR010
+    
+    CFR001 --> (SAFR009) : "View News"
+  }
+  
+  rectangle "Feedback Component" {
+    usecase "AIFR017: Generate Financial Health Reports" as AIFR017
+    usecase "SFR20: Manage User Feedback" as AIFR018
+    
+    CFR011 --> (SAFR019) : "Send Feedback"
+  }
+}
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1176]

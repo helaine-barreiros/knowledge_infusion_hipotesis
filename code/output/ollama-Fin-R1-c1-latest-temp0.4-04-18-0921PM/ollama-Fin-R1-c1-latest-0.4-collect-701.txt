@@ -1,0 +1,79 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+rectangle "System" {
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "SAFR002: Manage System Parameters" as SAFR002
+  usecase "FAFR005: Schedule Mentoring Sessions" as FAFR005
+  usecase "SFR013: Generate Client Alerts Based on Predefined Conditions" as SFR013
+  usecase "CFR011: Send Feedback to System Improvements" as CFR011
+
+  client --> CFR001 : View Financial Insights Dashboard  
+  sysAdmin --> SAFR002 : Manage Analysis Parameters  
+  financialAdvisor --> FAFR005 : Schedule Mentoring Sessions
+  system --> SFR013 : Generate Client Alerts Based on Predefined Conditions
+  user --> CFR011 : Send Feedback to System Improvements
+
+}
+
+rectangle "AI Component" {
+  usecase "AIFR002: Generate Personalized Recommendations for Users" as AIFR002  
+  usecase "AIFR003: Generate Spending Limit Alerts Based on Unusual Patterns" as AIFR003
+  usecase "AIFR004: Identify Investment Opportunities Aligning with Risk Profiles" as AIFR004
+
+  system --> AIFR002 : Request Personalized Recommendations  
+  client --> AIFR002 : Receive Personalized Recommendations  
+  system --> AIFR003 : Request Spending Limit Alerts
+  user --> AIFR003 : Trigger Alert When Exceeding Thresholds
+  system --> AIFR004 : Request Investment Opportunities Based on Risk Profiles
+}
+
+rectangle "Client" {
+  actor client as Client
+
+  client --> CFR001  
+  client --> SFR013  
+  client --> AIFR002  
+  client --> AIFR003  
+  client --> AIFR004  
+
+  'Client uses the system to view dashboards, receive alerts, and get recommendations
+}
+
+rectangle "Financial Advisor" {
+  actor financialAdvisor as FinancialAdvisor
+
+  financialAdvisor --> FAFR005 : Schedule Mentoring Sessions  
+  financialAdvisor --> SFR013 : Review Client Alerts  
+  financialAdvisor --> AIFR008 : Receive Predictive Intervention Recommendations  
+
+  'Financial Advisors use the system to manage client interactions, alerts, and predictive insights
+}
+
+rectangle "System Administrator" {
+  actor sysAdmin as SystemAdministrator
+
+  sysAdmin --> SAFR002 : Manage Analysis Parameters  
+  sysAdmin --> SFR013 : Configure Alert Settings  
+
+  'Sys Admin manages parameters for accuracy and compliance
+}
+
+@enduml
+```
+
+**Explanation:**
+- The system is divided into three main components: **Client**, **AI Component**, and **System Administrator & Financial Advisor**.
+- Each use case corresponds to the functional requirements provided. For example, "CFR001" (view financial insights) links directly to a client actor, while "SAFR002" (manage analysis parameters) is for system administrators.
+- Relationships are established using arrows (`-->`) indicating interactions between actors and use cases. 
+- The AI component includes its own set of use cases related to generating recommendations, alerts, etc., which are triggered by the main system or clients/advisors as needed.
+- Logical grouping ensures clarity: Clients interact with dashboards/alerts/recommendations; Financial Advisors schedule sessions/interact via predictive insights; System Admin manages parameters/settings. 
+
+This structure aligns all actors and use cases precisely according to their descriptions in the requirements, ensuring completeness and accuracy.
+
+[Done: True
+Done Reason: stop
+Eval Count: 803]

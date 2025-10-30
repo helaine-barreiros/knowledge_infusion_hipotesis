@@ -1,0 +1,134 @@
+```plantuml
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Client" {
+  actor Client as C
+  
+  usecase "CFR001: View Financial Insights Dashboard" as CFR001
+  usecase "CFR002: Receive Anomaly Transaction Alerts" as CFR002
+  usecase "CFR003: View Financial Predictions" as CFR003
+  usecase "CFR004: Receive Personalized Recommendations" as CFR004
+  usecase "CFR005: Manage Recommendation Preferences" as CFR005
+  usecase "CFR006: View Spending Limit Alerts" as CFR006
+  usecase "CFR007: View Investment Opportunities" as CFR007
+  usecase "CFR008: View News Related to Portfolio" as CFR008
+  usecase "CFR009: Access Personalized Dashboard" as CFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as CFR10
+  
+  C --> (View Alerts)
+  C --> (Manage Preferences)
+}
+
+package "Financial Advisor" {
+  actor FinancialAdvisor as FA
+    
+  usecase "FAFR001: Manage Client Mentoring Sessions" as FAFR001
+  usecase "FAFR002: View Intervention Alerts" as FAFR002
+  usecase "FAFR003: View Predictive Analytics" as FAFR003
+  usecase "FAFR004: Configure Analysis Parameters for Client Segments" as FAFR004
+  
+  FA --> (Manage Sessions)
+}
+
+package "System Administrator" {
+  actor SysAdmin as SA
+    
+  usecase "SAFR001: Manage Analysis Parameters" as SAFR001
+  usecase "SFAFR002: Send Feedback to AI System" as SFAFR002
+  
+  SA --> (Manage Parameters)
+}
+
+package "System Components" {
+  rectangle "Notification Channel" {
+    usecase "SFR001: Deliver Alerts" as SFR001
+  }
+  
+  rectangle "Recommendation Engine" {
+    usecase "SFR002: Deliver Personalized Recommendations" as SFR002
+  }
+  
+  rectangle "AI Component" {
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    usecase "AIFR005: Generate Investment Opportunities" as AIFR005
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    usecase "AIFR008: Generate Predictive Intervention Recommendations" as AIFR008
+    usecase "AIFR009: Generate Client Predictive Insights" as AIFR009
+    
+    rectangle "Prediction Engine" {
+      usecase "SFR003: Request Financial Predictions" as SFR003
+    }
+    
+    rectangle "Recommendation Generation" {
+      usecase "SFR004: Request Personalized Recommendations from AI Component" as SFR004
+    }
+  }
+  
+  rectangle "Dashboard Generator" {
+    usecase "SFR12: Generate Client Dashboards" as SFR12
+    
+    rectangle "News Processor" {
+      usecase "SFR09: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR09
+      usecase "SFR10: Process Contextualized News to Extract Information for Users' Situations" as SFR10
+      
+      rectangle "Insight Generator" {
+        usecase "AIFR007: Generate Client Predictive Insights" as AIFR007
+        
+        rectangle "News Correlation Engine" {
+          usecase "SFR11: Request Contextualized News Insights from AI Component to Identify Potential Impacts on Users' Investments" as SFR11
+        }
+      }
+    }
+  }
+  
+  rectangle "Alert Generator" {
+    usecase "SFR08: Generate Client Alerts Based on Predefined Conditions" as SFR08
+    
+    rectangle "Intervention Engine" {
+      usecase "AIFR008: Generate Predictive Intervention Recommendations for Clients" as AIFR008
+      
+      rectangle "Predictive Insights Generator" {
+        usecase "SFR16: Request Predictive Insights from AI Component to Enhance Financial Guidance Provided to Clients" as SFR16
+      }
+    }
+  }
+  
+  rectangle "Health Report Generator" {
+    usecase "AIFR017: Generate Financial Health Reports" as AIFR017
+    
+    rectangle "Goal Manager" {
+      usecase "SFR18: Manage Users' Financial Goals to Track Progress and Provide Relevant Recommendations" as SFR18
+      
+      rectangle "Feedback Processor" {
+        usecase "AIFR020: Generate Client Predictive Insights Based on User Feedback for Continuous Improvement of Future Outputs" as AIFR020
+        
+        rectangle "Historical Record Manager" {
+          usecase "SFR19: Maintain a Historical Record of Users' Insights to Enable Trend Analysis and Effectiveness Measurement" as SFR19
+          
+          rectangle "Feedback Manager" {
+            usecase "AIFR020: Generate Client Predictive Insights Based on User Feedback for Continuous Improvement of Future Outputs" as AIFR020
+            
+            C --> (Send Feedback)
+            
+            SA --> (SFAFR002)
+          }
+        }
+      }
+    }
+  }
+}
+
+C --> CFR011
+SA --> SAFR001
+
+@enduml
+```
+
+[Done: True
+Done Reason: stop
+Eval Count: 1296]

@@ -1,0 +1,134 @@
+@startuml
+left to right direction
+
+title Use Case Diagram for AI-Powered Analysis & Insights System
+
+package "Clients" {
+  actor Client as CFR001
+  
+  usecase "CFR002: View Alerts about Anomalous Transactions" as SAFR002
+  usecase "CFR003: View Financial Predictions" as SAFR003
+  usecase "CFR004: Receive Personalized Recommendations" as SAFR004
+  usecase "CFR005: Manage Recommendation Preferences" as SAFR005
+  usecase "CFR006: View Spending Limit Alerts" as SAFR006
+  usecase "CFR007: View Investment Opportunities" as SAFR007
+  usecase "CFR008: View News Related to Portfolio" as SAFR008
+  usecase "CFR009: Access Personalized Dashboard" as SAFR009
+  usecase "CFR10: Manage Relationship with Financial Advisors" as SAFR10
+  
+  CFR001 --> SAFR002
+  CFR001 --> SAFR003
+  CFR001 --> SAFR004
+  CFR001 --> SAFR005
+  CFR001 --> SAFR006
+  CFR001 --> SAFR007
+  CFR001 --> SAFR008
+  CFR001 --> SAFR009
+  CFR001 --> SAFR10
+  
+}
+
+package "Financial Advisors" {
+  actor FinancialAdvisor as FAFR001
+  
+  usecase "FAFR002: View Client Intervention Alerts" as SAFR007
+  usecase "FAFR003: View Predictive Analytics for Clients" as SAFR008
+  usecase "FAFR004: Configure Analysis Parameters for Specific Client Segments" as SAFR010
+  
+  FAFR001 --> SAFR002
+  FAFR001 --> SAFR003
+  FAFR001 --> SAFR004
+  
+}
+
+package "System Administrator" {
+  actor SystemAdmin as SAFR001
+  
+  usecase "SAFR001: Manage Analysis Parameters for the AI System" as SAFR001
+  
+  SAFR001 --> SAFR001
+}
+
+rectangle "AI Component" {
+  package "Financial Insights & Predictions" {
+    usecase "AIFR001: Generate Financial Predictions" as AIFR001
+    
+    CFR003 <|-- AIFR001
+    FAFR002 <|-- AIFR001
+    SAFR007 <|-- AIFR001
+  }
+  
+  package "Personalized Recommendations & Insights" {
+    usecase "AIFR002: Generate Personalized Recommendations" as AIFR002
+    
+    CFR004 <|-- AIFR002
+    FAFR003 <|-- AIFR002
+    SAFR015 <|-- AIFR002
+  }
+  
+  package "Spending Limit Alerts & Fraud Detection" {
+    usecase "AIFR003: Generate Spending Limit Alerts" as AIFR003
+    
+    CFR006 <|-- AIFR003
+    SAFR014 <|-- AIFR003
+  }
+  
+  package "Investment Opportunities & ESG Considerations" {
+    usecase "AIFR004: Generate Investment Opportunity Analyses" as AIFR004
+    
+    CFR007 <|-- AIFR004
+    FAFR005 <|-- AIFR004
+  }
+  
+  package "Anomaly Detection & News Insights" {
+    usecase "AIFR006: Generate Anomaly Transaction Alerts" as AIFR006
+    
+    SAFR008 <|-- AIFR006
+  }
+  
+  package "Predictive Intervention Recommendations" {
+    usecase "AIFR007: Generate Contextualized News Insights" as AIFR007
+    
+    CFR008 <|-- AIFR007
+    FAFR002 <|-- AIFR007
+  }
+  
+  package "Client Predictive Insights & Engagement" {
+    usecase "AIFR009: Generate Client Predictive Intervention Recommendations" as AIFR009
+    
+    SAFR015 <|-- AIFR009
+  }
+}
+
+package "System Operations" {
+  usecase "SFR002: Deliver Personalized Recommendations to Users" as SFR002
+  
+  CFR004 --> SFR002
+  FAFR003 --> SFR002
+  SAFR015 --> SFR002
+  
+}
+
+package "System Alerts & Notifications" {
+  usecase "SFR009: Find Contextualized News Relevant to Users' Financial Portfolios" as SFR009
+  
+  CFR008 <|-- SFR009
+  FAFR003 <|-- SFR009
+}
+
+package "System Dashboards & Analytics" {
+  usecase "SFR12: Generate Client Dashboards that Present Financial Information in an Intuitive and Actionable Format" as SFR12
+  
+  CFR009 --> SFR12
+  FAFR003 <|-- SFR12
+}
+
+package "System Feedback & Improvement" {
+  usecase "CFR11: Send Feedback about System's Recommendations and Insights to Improve Future Outputs" as SAFR11
+  
+  SAFR11 --> CFR004
+  SAFR11 --> FAFR003
+  SAFR11 --> SAFR007
+}
+
+@enduml
